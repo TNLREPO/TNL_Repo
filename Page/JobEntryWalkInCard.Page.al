@@ -1,0 +1,295 @@
+page 70084 "Job Entry Walk In Card"
+{
+    PageType = Card;
+    SourceTable = Table50114;
+
+    layout
+    {
+        area(content)
+        {
+            group("Vehicle Details")
+            {
+                field("Service Item"; "Service Item")
+                {
+                }
+                field("Service Code"; "Service Code")
+                {
+                }
+                field(Description; Description)
+                {
+                }
+                field("Global Dimension 1 Code"; "Global Dimension 1 Code")
+                {
+                    Caption = 'Department';
+                }
+                field("Global Dimension 2 Code"; "Global Dimension 2 Code")
+                {
+                    Caption = 'Branch';
+                }
+                field("Service Due Projected Date"; "Service Due Projected Date")
+                {
+                }
+                field("Service Expected Duration"; "Service Expected Duration")
+                {
+                }
+                field("Next Call Date."; "Next Call Date.")
+                {
+                }
+                field("Engine No."; "Engine No.")
+                {
+                }
+                field("Chasis No."; "Chasis No.")
+                {
+                }
+                field(VDS; VDS)
+                {
+                }
+                field(VMI; VMI)
+                {
+                }
+                field(VIS; VIS)
+                {
+                }
+                field("Model Code"; "Model Code")
+                {
+                }
+                field("Model Year"; "Model Year")
+                {
+                }
+                field("Contact E-Mail"; "Contact E-Mail")
+                {
+                }
+                field("Send Appointment Reminder"; "Send Appointment Reminder")
+                {
+                }
+                field("Walk-In"; "Walk-In")
+                {
+                }
+            }
+            group("Customer Details")
+            {
+                field("Customer No."; "Customer No.")
+                {
+                }
+                field("Customer Name"; "Customer Name")
+                {
+                }
+                field(Address; Address)
+                {
+                }
+                field("Contact Person"; "Contact Person")
+                {
+                }
+                field("Phone No 1."; "Phone No 1.")
+                {
+                }
+                field("Phone No. 2."; "Phone No. 2.")
+                {
+                }
+                field("E-Mail"; "E-Mail")
+                {
+                }
+                field("Send Appointment Message"; "Send Appointment Message")
+                {
+                }
+            }
+            group("Service History")
+            {
+                Caption = 'Service History';
+                grid()
+                {
+                    GridLayout = Rows;
+                    group()
+                    {
+                        field(Date1; Date1)
+                        {
+                            Caption = 'Date';
+                        }
+                        field("Job No.1"; "Job No.1")
+                        {
+                            Caption = 'Job No.';
+                        }
+                        field(Odometer1; Odometer1)
+                        {
+                            Caption = 'Odometer Reading';
+                        }
+                        field("Job Description1"; "Job Description1")
+                        {
+                            Caption = 'Description';
+                        }
+                    }
+                    group()
+                    {
+                        field(Date2; Date2)
+                        {
+                            ShowCaption = false;
+                        }
+                        field("Job No.2"; "Job No.2")
+                        {
+                            ShowCaption = false;
+                        }
+                        field(Odometer2; Odometer2)
+                        {
+                            ShowCaption = false;
+                        }
+                        field("Job Description2"; "Job Description2")
+                        {
+                            ShowCaption = false;
+                        }
+                    }
+                    group()
+                    {
+                        field(Date3; Date3)
+                        {
+                            ShowCaption = false;
+                        }
+                        field("Job No.3"; "Job No.3")
+                        {
+                            ShowCaption = false;
+                        }
+                        field(Odometer3; Odometer3)
+                        {
+                            ShowCaption = false;
+                        }
+                        field("Job Description3"; "Job Description3")
+                        {
+                            ShowCaption = false;
+                        }
+                    }
+                }
+                field("Expected Reception Date"; "Expected Reception Date")
+                {
+                }
+                field("Expected Reception Time"; "Expected Reception Time")
+                {
+                }
+                field("Response Action"; "Response Action")
+                {
+                }
+                field("Call Type"; "Call Type")
+                {
+                }
+                field("Appointment Status"; "Appointment Status")
+                {
+                }
+                field("Customer Order Form No."; "Customer Order Form No.")
+                {
+                }
+            }
+            group("Other Details")
+            {
+                field("Customer Order Form Date"; "Customer Order Form Date")
+                {
+                }
+                field("Customer's Preferred Date"; "Customer's Preferred Date")
+                {
+                }
+                field("Customer's Preferred Time"; "Customer's Preferred Time")
+                {
+                }
+                field("Man Hour Per Day"; "Man Hour Per Day")
+                {
+                }
+                field("Service Slot"; "Service Slot")
+                {
+                }
+                field("Serving Store"; "Serving Store")
+                {
+                }
+                field("Service Type"; "Service Type")
+                {
+                }
+                field("Remaining Hours"; "Remaining Hours")
+                {
+                }
+                field("Total Appointment Time"; "Total Appointment Time")
+                {
+                }
+                field("Total Rem Appt Time"; "Total Rem Appt Time")
+                {
+                }
+                field("Total Walk in Time"; "Total Walk in Time")
+                {
+                }
+                field("Total Rem W/I Time"; "Total Rem W/I Time")
+                {
+                }
+                field("Vehicle Driven by"; "Vehicle Driven by")
+                {
+                }
+                field("For Appt Confirmation"; "For Appt Confirmation")
+                {
+                }
+                field("Starting Hour"; "Starting Hour")
+                {
+                }
+                field("Ending Hour"; "Ending Hour")
+                {
+                }
+                field("Appointment Allocated Hr"; "Appointment Allocated Hr")
+                {
+                }
+                field("Walk-In Allocated Hr"; "Walk-In Allocated Hr")
+                {
+                }
+                field("Total Hour Available 4 day"; "Total Hour Available 4 day")
+                {
+                }
+                field(Remaining; Remaining)
+                {
+                }
+                field("Technician Code"; "Technician Code")
+                {
+                }
+                field("Technician Name"; "Technician Name")
+                {
+                }
+                field("Check SSC"; "Check SSC")
+                {
+                }
+            }
+        }
+    }
+
+    actions
+    {
+        area(navigation)
+        {
+            action("Generate COF")
+            {
+                Caption = 'Generate COF';
+                Image = GetEntries;
+                Promoted = true;
+
+                trigger OnAction()
+                begin
+
+                    TESTFIELD("Expected Reception Date");
+                    TESTFIELD("Expected Reception Time");
+                    /*
+                    SerAppSch.GET(CustOrderLine."Customer Order Form No.");  //Dada: To prevent the error msg.
+                    CustOrderLine.SETFILTER("Customer Order Form No.",'%1','');
+                    IF CustOrderLine.FINDFIRST THEN REPEAT
+                    CustOrderLine.DELETE;
+                    UNTIL
+                    CustOrderLine.NEXT =0;
+                    */
+                    IF "Appointment Status" = 1 THEN
+                        GenCOF
+                    ELSE
+                        ERROR('Please Confirm This Appointment Before Generating Customer Order Form');
+                    MESSAGE('Indicate if you need to confirm this Appointment later!');
+
+                end;
+            }
+        }
+    }
+
+    trigger OnInsertRecord(BelowxRec: Boolean): Boolean
+    begin
+        "Walk-In" := TRUE;
+        "Customer's Requests" := "Customer's Requests"::"Walk-In";
+        "For Appt Confirmation" := FALSE;
+    end;
+}
+

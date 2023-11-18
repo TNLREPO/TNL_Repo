@@ -6,10 +6,15 @@ table 50101 "Stores Requisition Header."
         field(1; "No."; Code[10])
         {
         }
-        field(2; Type; Enum "Item Ledger Entry Type")
+        /* field(2; Type; Enum "Item Ledger Entry Type")
         {
             Editable = false;
             //OptionMembers = Issue,Return,"Posted Issue","Posted Return";
+        } */
+        field(2; Type; Option)
+        {
+            Editable = false;
+            OptionMembers = Issue,Return,"Posted Issue","Posted Return";
         }
         field(3; Date; Date)
         {
@@ -366,12 +371,12 @@ table 50101 "Stores Requisition Header."
                 BEGIN
                     ItemJnlTemplate.INIT;
                     ItemJnlTemplate.Recurring := FALSE;
-                    CASE StoreReqLine."Document Type" OF
+                    /* CASE StoreReqLine."Document Type" OF
                         "Item Ledger Entry Type"::Purchase:
                             ItemJnlTemplate.VALIDATE(Type, ItemJnlTemplate.Type::Item);
                         "Item Ledger Entry Type"::Sale:
                             ItemJnlTemplate.VALIDATE(Type, ItemJnlTemplate.Type::Item);
-                    END;
+                    END; */
                     ItemJnlTemplate.Name := FORMAT(ItemJnlTemplate.Type, MAXSTRLEN(ItemJnlTemplate.Name));
                     ItemJnlTemplate.Description := STRSUBSTNO('%1 journal', ItemJnlTemplate.Type);
                     ItemJnlTemplate."Requisition No." := "No.";
@@ -408,9 +413,9 @@ table 50101 "Stores Requisition Header."
             ItemJnlLine."Journal Template Name" := ItemJnlBatch."Journal Template Name";
             ItemJnlLine."Journal Batch Name" := ItemJnlBatch.Name;
             CASE StoreReqLine."Document Type" OF
-                "Item Ledger Entry Type"::Sale:
+                StoreReqLine."Document Type"::Issue:
                     ItemJnlLine.VALIDATE("Entry Type", ItemJnlLine."Entry Type"::"Negative Adjmt.");
-                "Item Ledger Entry Type"::Purchase:
+                StoreReqLine."Document Type"::Return:
                     ItemJnlLine.VALIDATE("Entry Type", ItemJnlLine."Entry Type"::"Positive Adjmt.");
             END;
             ItemJnlLine.VALIDATE(ItemJnlLine."Item No.", StoreReqLine."Item No.");
@@ -503,9 +508,9 @@ table 50101 "Stores Requisition Header."
         ItemJnlTemplate.INIT;
         ItemJnlTemplate.Recurring := FALSE;
         CASE StoreReqLine."Document Type" OF
-            "Item Ledger Entry Type"::Purchase:
+            StoreReqLine."Document Type"::Issue:
                 ItemJnlTemplate.VALIDATE(Type, ItemJnlTemplate.Type::Item);
-            "Item Ledger Entry Type"::Sale:
+            StoreReqLine."Document Type"::Return:
                 ItemJnlTemplate.VALIDATE(Type, ItemJnlTemplate.Type::Item);
         END;
         ItemJnlTemplate.Name := 'ISSUE';
@@ -537,9 +542,9 @@ table 50101 "Stores Requisition Header."
             ItemJnlLine."Journal Template Name" := ItemJnlBatch."Journal Template Name";
             ItemJnlLine."Journal Batch Name" := ItemJnlBatch.Name;
             CASE StoreReqLine."Document Type" OF
-                "Item Ledger Entry Type"::Sale:
+                StoreReqLine."Document Type"::Issue:
                     ItemJnlLine.VALIDATE("Entry Type", ItemJnlLine."Entry Type"::"Negative Adjmt.");
-                "Item Ledger Entry Type"::Purchase:
+                StoreReqLine."Document Type"::Return:
                     ItemJnlLine.VALIDATE("Entry Type", ItemJnlLine."Entry Type"::"Positive Adjmt.");
             END;
             ItemJnlLine.VALIDATE(ItemJnlLine."Item No.", StoreReqLine."Item No.");
@@ -603,7 +608,6 @@ table 50101 "Stores Requisition Header."
         IF LineCount = LineCount2 THEN;
     end;
 
-
     procedure TestForValidity()
     begin
         StoreReqLine.RESET;
@@ -614,14 +618,12 @@ table 50101 "Stores Requisition Header."
             ERROR('Quantity must not be zero on SRV %1, Line %2', "No.", StoreReqLine."Line No.");
     end;
 
-
     procedure ValidateShortcutDimCode(FieldNo: Integer; var ShortcutDimCode: Code[20])
     begin
         DimMgt.ValidateDimValueCode(FieldNo, ShortcutDimCode);
         DimMgt.SaveDefaultDim(DATABASE::"Stores Requisition Header.", "No.", FieldNo, ShortcutDimCode);
         MODIFY;
     end;
-
 
     procedure PostMaintenancEntry()
     var

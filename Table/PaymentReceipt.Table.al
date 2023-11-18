@@ -32,65 +32,74 @@ table 50103 "Payment/Receipt."
             OptionCaption = 'G/L Account,Customer,Supplier,Bank,Fixed Asset,Staff,LC';
             OptionMembers = "G/L Account",Customer,Supplier,Bank,"Fixed Asset",Staff,LC;
 
-            /*  trigger OnValidate()
-             begin
-                 IF xRec."Account Type" <> "Account Type" THEN BEGIN
-                     "Account No." := '';
-                     "Account Description" := '';
-                 END;
-             end;
-         }
-         field(5; "Account No."; Code[20])
-         {
-             TableRelation = IF (Account Type=CONST(G/L Account)) "G/L Account".No. WHERE (Blocked=FILTER(No),
-                                                                                           Account Type=CONST(Posting))
-                                                                                           ELSE IF (Account Type=CONST(Customer)) Customer.No. WHERE (Blocked=FILTER(<>All),
-                                                                                                                                                      Customer Posting Group=FILTER(<>STAFF))
-                                                                                                                                                      ELSE IF (Cash/Cheque=CONST(Cheque),
-                                                                                                                                                               Account Type=CONST(Bank)) "Bank Account".No. WHERE (Blocked=CONST(No))
-                                                                                                                                                               ELSE IF (Account Type=CONST(Supplier)) Vendor.No. WHERE (Blocked=FILTER(<>All))
-                                                                                                                                                               ELSE IF (Account Type=CONST(Fixed Asset)) "Fixed Asset".No. WHERE (Blocked=CONST(No))
-                                                                                                                                                               ELSE IF (Account Type=CONST(Staff)) Customer.No. WHERE (Blocked=FILTER(<>All))
-                                                                                                                                                               ELSE IF (Account Type=CONST(LC)) Vendor.No. WHERE (Blocked=FILTER(<>All),
-                                                                                                                                                                                                                  Vendor Posting Group=FILTER(LC*));
+            trigger OnValidate()
+            begin
+                IF xRec."Account Type" <> "Account Type" THEN BEGIN
+                    "Account No." := '';
+                    "Account Description" := '';
+                END;
+            end;
+        }
+        field(5; "Account No."; Code[20])
+        {
+            TableRelation = IF ("Account Type" = filter("G/L Account")) "G/L Account"."No." WHERE(Blocked = FILTER(false),
+                "Account Type" = filter(Posting))
+            ELSE
+            IF ("Account Type" = filter(Customer)) Customer."No." WHERE(Blocked = FILTER(<> 'All'),
+                         "Customer Posting Group" = FILTER(<> 'STAFF'))
+            ELSE
+            IF ("Cash/Cheque" = filter(Cheque), "Account Type" = filter(Bank)) "Bank Account"."No." WHERE(Blocked = filter(false))
+            ELSE
+            IF ("Account Type" = filter(Supplier)) Vendor."No." WHERE(Blocked = FILTER(<> 'All'))
+            ELSE
+            IF ("Account Type" = filter("Fixed Asset")) "Fixed Asset"."No." WHERE(Blocked = filter(false))
+            ELSE
+            IF ("Account Type" = filter(Staff)) Customer."No." WHERE(Blocked = FILTER(<> 'All'))
+            ELSE
+            IF ("Account Type" = filter(LC)) Vendor."No." WHERE(Blocked = FILTER(<> 'All'), "Vendor Posting Group" = FILTER('LC*'));
 
-             trigger OnValidate()
-             begin
-                 IF "Account No." <> '' THEN BEGIN
-                   CASE "Account Type" OF
-                   0: BEGIN
-                        "g/lacc".GET("Account No.");
-                        "Account Description" := "g/lacc".Name;
-                        "Global Dimension 1 Code":="g/lacc"."Global Dimension 1 Code";
-                        "Global Dimension 2 Code" := "g/lacc"."Global Dimension 2 Code";
-                      END;
-                   1,5: BEGIN
-                        custrec.GET("Account No.");
-                        "Account Description" := custrec.Name;
-                        "Global Dimension 1 Code" := custrec."Global Dimension 1 Code";
-                       "Global Dimension 2 Code":= custrec."Global Dimension 2 Code";
-                      END;
-                    2,6: BEGIN
-                       vendrec.GET("Account No.");
-                       "Account Description" := vendrec.Name;
-                       "Global Dimension 1 Code":= vendrec."Global Dimension 1 Code";
-                       "Global Dimension 2 Code":= vendrec."Global Dimension 2 Code";
-                       END;
-                    3: BEGIN
-                       bankrec.GET("Account No.");
-                       "Account Description" := bankrec.Name;
-                       "Global Dimension 1 Code":= bankrec."Global Dimension 1 Code";
-                       "Global Dimension 2 Code" := bankrec."Global Dimension 2 Code";
-                      END;
-                    4: BEGIN
-                       fixedrec.GET("Account No.");
-                       "Account Description" := fixedrec.Description;
-                       "Global Dimension 1 Code" := fixedrec."Global Dimension 1 Code";
-                       "Global Dimension 2 Code":=fixedrec."Global Dimension 2 Code";
-                      END;
-                   END;
-                 END;
-             end; */
+            trigger OnValidate()
+            begin
+                IF "Account No." <> '' THEN BEGIN
+                    CASE "Account Type" OF
+                        0:
+                            BEGIN
+                                "g/lacc".GET("Account No.");
+                                "Account Description" := "g/lacc".Name;
+                                "Global Dimension 1 Code" := "g/lacc"."Global Dimension 1 Code";
+                                "Global Dimension 2 Code" := "g/lacc"."Global Dimension 2 Code";
+                            END;
+                        1, 5:
+                            BEGIN
+                                custrec.GET("Account No.");
+                                "Account Description" := custrec.Name;
+                                "Global Dimension 1 Code" := custrec."Global Dimension 1 Code";
+                                "Global Dimension 2 Code" := custrec."Global Dimension 2 Code";
+                            END;
+                        2, 6:
+                            BEGIN
+                                vendrec.GET("Account No.");
+                                "Account Description" := vendrec.Name;
+                                "Global Dimension 1 Code" := vendrec."Global Dimension 1 Code";
+                                "Global Dimension 2 Code" := vendrec."Global Dimension 2 Code";
+                            END;
+                        3:
+                            BEGIN
+                                bankrec.GET("Account No.");
+                                "Account Description" := bankrec.Name;
+                                "Global Dimension 1 Code" := bankrec."Global Dimension 1 Code";
+                                "Global Dimension 2 Code" := bankrec."Global Dimension 2 Code";
+                            END;
+                        4:
+                            BEGIN
+                                fixedrec.GET("Account No.");
+                                "Account Description" := fixedrec.Description;
+                                "Global Dimension 1 Code" := fixedrec."Global Dimension 1 Code";
+                                "Global Dimension 2 Code" := fixedrec."Global Dimension 2 Code";
+                            END;
+                    END;
+                END;
+            end;
         }
         field(6; "Account Description"; Text[50])
         {
@@ -113,16 +122,16 @@ table 50103 "Payment/Receipt."
         }
         field(9; "Balance Account No."; Code[20])
         {
-            /* TableRelation = IF (Balance Account Type=CONST(G/L Account)) "G/L Account".No. WHERE (Blocked=CONST(No),
-                                                                                                  Account Type=CONST(Posting))
-                                                                                                  ELSE IF (Cash/Cheque=CONST(Cheque),
-                                                                                                           Balance Account Type=CONST(Bank)) "Bank Account".No. WHERE (Blocked=CONST(No))
-                                                                                                           ELSE IF (Balance Account Type=CONST(Customer)) Customer.No. WHERE (Blocked=FILTER(<>All))
-                                                                                                           ELSE IF (Balance Account Type=CONST(Supplier)) Vendor.No. WHERE (Blocked=FILTER(<>All))
-                                                                                                           ELSE IF (Balance Account Type=CONST(Fixed Asset)) "Fixed Asset".No. WHERE (Blocked=CONST(No))
-                                                                                                           ELSE IF (Cash/Cheque=CONST(Cash),
-                                                                                                                    Balance Account Type=CONST(Bank)) "Bank Account".No. WHERE (Blocked=CONST(No),
-                                                                                                                                                                                Cashier=CONST(Yes));
+            /* TableRelation = IF (Balance Account Type=filter(G/L Account)) "G/L Account".No. WHERE (Blocked=filter(No),
+                                                                                                  Account Type=filter(Posting))
+                                                                                                  ELSE IF (Cash/Cheque=filter(Cheque),
+                                                                                                           Balance Account Type=filter(Bank)) "Bank Account".No. WHERE (Blocked=filter(No))
+                                                                                                           ELSE IF (Balance Account Type=filter(Customer)) Customer.No. WHERE (Blocked=FILTER(<>All))
+                                                                                                           ELSE IF (Balance Account Type=filter(Supplier)) Vendor.No. WHERE (Blocked=FILTER(<>All))
+                                                                                                           ELSE IF (Balance Account Type=filter(Fixed Asset)) "Fixed Asset".No. WHERE (Blocked=filter(No))
+                                                                                                           ELSE IF (Cash/Cheque=filter(Cash),
+                                                                                                                    Balance Account Type=filter(Bank)) "Bank Account".No. WHERE (Blocked=filter(No),
+                                                                                                                                                                                Cashier=filter(Yes));
 
             trigger OnValidate()
             begin
@@ -164,11 +173,11 @@ table 50103 "Payment/Receipt."
         }
         field(10; "Global Dimension 1 Code"; Code[20])
         {
-            TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(1));
+            TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = filter(1));
         }
         field(11; "Global Dimension 2 Code"; Code[20])
         {
-            TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(2));
+            TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = filter(2));
         }
         field(12; Amount; Decimal)
         {
@@ -353,11 +362,11 @@ table 50103 "Payment/Receipt."
         }
         field(32; "Balance Department Code"; Code[20])
         {
-            TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(1));
+            TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = filter(1));
         }
         field(33; "Balance Branch Code"; Code[20])
         {
-            TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(2));
+            TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = filter(2));
         }
         field(34; "Bank Name"; Text[50])
         {
@@ -1309,30 +1318,30 @@ table 50103 "Payment/Receipt."
         }
         field(91; "Apply Entry"; Integer)
         {
-            /*     TableRelation = IF (Account Type=CONST(Customer),
+            /*     TableRelation = IF (Account Type=filter(Customer),
                                     Credit Amount=FILTER(<>0)) "Cust. Ledger Entry"."Entry No." WHERE (Customer No.=FIELD(Account No.),
-                                                                                                       Open=CONST(Yes),
-                                                                                                       Positive=CONST(Yes))
-                                                                                                       ELSE IF (Account Type=CONST(Customer),
+                                                                                                       Open=filter(Yes),
+                                                                                                       Positive=filter(Yes))
+                                                                                                       ELSE IF (Account Type=filter(Customer),
                                                                                                                 Debit Amount=FILTER(<>0)) "Cust. Ledger Entry"."Entry No." WHERE (Customer No.=FIELD(Account No.),
-                                                                                                                                                                                  Open=CONST(Yes),
-                                                                                                                                                                                  Positive=CONST(No))
-                                                                                                                                                                                  ELSE IF (Account Type=CONST(Supplier),
+                                                                                                                                                                                  Open=filter(Yes),
+                                                                                                                                                                                  Positive=filter(No))
+                                                                                                                                                                                  ELSE IF (Account Type=filter(Supplier),
                                                                                                                                                                                            Debit Amount=FILTER(<>0)) "Vendor Ledger Entry"."Entry No." WHERE (Vendor No.=FIELD(Account No.),
-                                                                                                                                                                                                                                                              Open=CONST(Yes),
-                                                                                                                                                                                                                                                              Positive=CONST(No))
-                                                                                                                                                                                                                                                              ELSE IF (Account Type=CONST(Supplier),
+                                                                                                                                                                                                                                                              Open=filter(Yes),
+                                                                                                                                                                                                                                                              Positive=filter(No))
+                                                                                                                                                                                                                                                              ELSE IF (Account Type=filter(Supplier),
                                                                                                                                                                                                                                                                        Credit Amount=FILTER(<>0)) "Vendor Ledger Entry"."Entry No." WHERE (Vendor No.=FIELD(Account No.),
-                                                                                                                                                                                                                                                                                                                                           Open=CONST(Yes),
-                                                                                                                                                                                                                                                                                                                                           Positive=CONST(Yes))
-                                                                                                                                                                                                                                                                                                                                           ELSE IF (Account Type=CONST(Staff),
+                                                                                                                                                                                                                                                                                                                                           Open=filter(Yes),
+                                                                                                                                                                                                                                                                                                                                           Positive=filter(Yes))
+                                                                                                                                                                                                                                                                                                                                           ELSE IF (Account Type=filter(Staff),
                                                                                                                                                                                                                                                                                                                                                     Credit Amount=FILTER(<>0)) "Cust. Ledger Entry"."Entry No." WHERE (Customer No.=FIELD(Account No.),
-                                                                                                                                                                                                                                                                                                                                                                                                                       Positive=CONST(Yes),
-                                                                                                                                                                                                                                                                                                                                                                                                                       Open=CONST(Yes))
-                                                                                                                                                                                                                                                                                                                                                                                                                       ELSE IF (Account Type=CONST(Staff),
+                                                                                                                                                                                                                                                                                                                                                                                                                       Positive=filter(Yes),
+                                                                                                                                                                                                                                                                                                                                                                                                                       Open=filter(Yes))
+                                                                                                                                                                                                                                                                                                                                                                                                                       ELSE IF (Account Type=filter(Staff),
                                                                                                                                                                                                                                                                                                                                                                                                                                 Debit Amount=FILTER(<>0)) "Cust. Ledger Entry"."Entry No." WHERE (Customer No.=FIELD(Account No.),
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  Positive=CONST(No),
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  Open=CONST(Yes));
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  Positive=filter(No),
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  Open=filter(Yes));
 
                 trigger OnValidate()
                 begin
@@ -1569,78 +1578,78 @@ table 50103 "Payment/Receipt."
 
     procedure AssistEdit("OldP/R": Record 50103): Boolean
     begin
-       /* WITH "OldP/R" DO BEGIN
-            "OldP/R" := Rec;
-            GenSetup.GET;
-            CASE "Document Type" OF
-                "Document Type"::Receipt:
-                    BEGIN
-                        IF Rec."Cash/Cheque" = "Cash/Cheque"::Cash THEN BEGIN
-                            IF NoSeriesMgt.SelectSeries(GenSetup."Cash Receipt No.", "OldP/R"."No. Series", "No. Series") THEN BEGIN
-                                GenSetup.GET;
-                                NoSeriesMgt.SetSeries("No.");
-                                Rec := "OldP/R";
-                                EXIT(TRUE);
-                            END;
-                        END
-                        ELSE BEGIN
-                            IF NoSeriesMgt.SelectSeries(GenSetup."Cheque Receipt No.", "OldP/R"."No. Series", "No. Series") THEN BEGIN
-                                GenSetup.GET;
-                                NoSeriesMgt.SetSeries("No.");
-                                Rec := "OldP/R";
-                                EXIT(TRUE);
-                            END;
-                        END;
-                    END;
+        /* WITH "OldP/R" DO BEGIN
+             "OldP/R" := Rec;
+             GenSetup.GET;
+             CASE "Document Type" OF
+                 "Document Type"::Receipt:
+                     BEGIN
+                         IF Rec."Cash/Cheque" = "Cash/Cheque"::Cash THEN BEGIN
+                             IF NoSeriesMgt.SelectSeries(GenSetup."Cash Receipt No.", "OldP/R"."No. Series", "No. Series") THEN BEGIN
+                                 GenSetup.GET;
+                                 NoSeriesMgt.SetSeries("No.");
+                                 Rec := "OldP/R";
+                                 EXIT(TRUE);
+                             END;
+                         END
+                         ELSE BEGIN
+                             IF NoSeriesMgt.SelectSeries(GenSetup."Cheque Receipt No.", "OldP/R"."No. Series", "No. Series") THEN BEGIN
+                                 GenSetup.GET;
+                                 NoSeriesMgt.SetSeries("No.");
+                                 Rec := "OldP/R";
+                                 EXIT(TRUE);
+                             END;
+                         END;
+                     END;
 
-                "Document Type"::Requisition:
-                    BEGIN
-                        IF "Cash/Cheque" = "Cash/Cheque"::Cash THEN BEGIN
-                            IF NoSeriesMgt.SelectSeries(GenSetup."Cash Requisition No.", "OldP/R"."No. Series", "No. Series") THEN BEGIN
-                                GenSetup.GET;
-                                NoSeriesMgt.SetSeries("No.");
-                                Rec := "OldP/R";
-                                EXIT(TRUE);
-                            END;
-                        END
-                        ELSE BEGIN
-                            IF NoSeriesMgt.SelectSeries(GenSetup."Cheque Requisition No.", "OldP/R"."No. Series", "No. Series") THEN BEGIN
-                                GenSetup.GET;
-                                NoSeriesMgt.SetSeries("No.");
-                                Rec := "OldP/R";
-                                EXIT(TRUE);
-                            END;
-                        END;
-                    END;
-                "Document Type"::Journal:
-                    BEGIN
-                        IF NoSeriesMgt.SelectSeries(GenSetup."Journal Voucher No.", "OldP/R"."No. Series", "No. Series") THEN BEGIN
-                            GenSetup.GET;
-                            NoSeriesMgt.SetSeries("No.");
-                            Rec := "OldP/R";
-                            EXIT(TRUE);
-                        END;
-                    END;
-                "Document Type"::"e-Pay":
-                    BEGIN
-                        IF NoSeriesMgt.SelectSeries(GenSetup."E-Payment Voucher No.", "OldP/R"."No. Series", "No. Series") THEN BEGIN
-                            GenSetup.GET;
-                            NoSeriesMgt.SetSeries("No.");
-                            Rec := "OldP/R";
-                            EXIT(TRUE);
-                        END;
-                    END;
-                "Document Type"::"e-Receipt":
-                    BEGIN
-                        IF NoSeriesMgt.SelectSeries(GenSetup."E-Receipt Voucher No.", "OldP/R"."No. Series", "No. Series") THEN BEGIN
-                            GenSetup.GET;
-                            NoSeriesMgt.SetSeries("No.");
-                            Rec := "OldP/R";
-                            EXIT(TRUE);
-                        END;
-                    END
-            END;
-        END; */
+                 "Document Type"::Requisition:
+                     BEGIN
+                         IF "Cash/Cheque" = "Cash/Cheque"::Cash THEN BEGIN
+                             IF NoSeriesMgt.SelectSeries(GenSetup."Cash Requisition No.", "OldP/R"."No. Series", "No. Series") THEN BEGIN
+                                 GenSetup.GET;
+                                 NoSeriesMgt.SetSeries("No.");
+                                 Rec := "OldP/R";
+                                 EXIT(TRUE);
+                             END;
+                         END
+                         ELSE BEGIN
+                             IF NoSeriesMgt.SelectSeries(GenSetup."Cheque Requisition No.", "OldP/R"."No. Series", "No. Series") THEN BEGIN
+                                 GenSetup.GET;
+                                 NoSeriesMgt.SetSeries("No.");
+                                 Rec := "OldP/R";
+                                 EXIT(TRUE);
+                             END;
+                         END;
+                     END;
+                 "Document Type"::Journal:
+                     BEGIN
+                         IF NoSeriesMgt.SelectSeries(GenSetup."Journal Voucher No.", "OldP/R"."No. Series", "No. Series") THEN BEGIN
+                             GenSetup.GET;
+                             NoSeriesMgt.SetSeries("No.");
+                             Rec := "OldP/R";
+                             EXIT(TRUE);
+                         END;
+                     END;
+                 "Document Type"::"e-Pay":
+                     BEGIN
+                         IF NoSeriesMgt.SelectSeries(GenSetup."E-Payment Voucher No.", "OldP/R"."No. Series", "No. Series") THEN BEGIN
+                             GenSetup.GET;
+                             NoSeriesMgt.SetSeries("No.");
+                             Rec := "OldP/R";
+                             EXIT(TRUE);
+                         END;
+                     END;
+                 "Document Type"::"e-Receipt":
+                     BEGIN
+                         IF NoSeriesMgt.SelectSeries(GenSetup."E-Receipt Voucher No.", "OldP/R"."No. Series", "No. Series") THEN BEGIN
+                             GenSetup.GET;
+                             NoSeriesMgt.SetSeries("No.");
+                             Rec := "OldP/R";
+                             EXIT(TRUE);
+                         END;
+                     END
+             END;
+         END; */
     end;
 
 
@@ -1710,275 +1719,275 @@ table 50103 "Payment/Receipt."
         GenJournalLine: Record 81;
     begin
 
-      /*  IF "Created By" = COPYSTR(USERID, 15) THEN
-            ERROR('You cannot post!');
-        GlJour.LOCKTABLE;
-        DelResidualJnl(reqrec."Document Type", reqrec."Cash/Cheque");
-        ValidateMultipleAcc(reqrec);
+        /*  IF "Created By" = COPYSTR(USERID, 15) THEN
+              ERROR('You cannot post!');
+          GlJour.LOCKTABLE;
+          DelResidualJnl(reqrec."Document Type", reqrec."Cash/Cheque");
+          ValidateMultipleAcc(reqrec);
 
-        //suspended temporarily for Abanum, Dada.
-        GlJour.INIT;
-        CASE reqrec."Document Type" OF
-            reqrec."Document Type"::Receipt:
-                GlJour."Journal Template Name" := 'CASHRCPT';
-            reqrec."Document Type"::Requisition:
-                GlJour."Journal Template Name" := 'Payments';
-            2, 3, 4:
-                GlJour."Journal Template Name" := 'General';
-        END;
+          //suspended temporarily for Abanum, Dada.
+          GlJour.INIT;
+          CASE reqrec."Document Type" OF
+              reqrec."Document Type"::Receipt:
+                  GlJour."Journal Template Name" := 'CASHRCPT';
+              reqrec."Document Type"::Requisition:
+                  GlJour."Journal Template Name" := 'Payments';
+              2, 3, 4:
+                  GlJour."Journal Template Name" := 'General';
+          END;
 
-        IF reqrec."Cash/Cheque" = reqrec."Cash/Cheque"::Cash THEN
-            GlJour."Journal Batch Name" := 'Cash'
-        ELSE
-            GlJour."Journal Batch Name" := 'Cheque';
-        IF reqrec."Document Type" > 1 THEN
-            GlJour."Journal Batch Name" := 'Voucher';
+          IF reqrec."Cash/Cheque" = reqrec."Cash/Cheque"::Cash THEN
+              GlJour."Journal Batch Name" := 'Cash'
+          ELSE
+              GlJour."Journal Batch Name" := 'Cheque';
+          IF reqrec."Document Type" > 1 THEN
+              GlJour."Journal Batch Name" := 'Voucher';
 
-        //added by santus - begin
-        //check and delete existing entries on the journal line
-        GenJnlLine.SETRANGE("Journal Template Name", GlJour."Journal Template Name");
-        GenJnlLine.SETRANGE("Journal Batch Name", GlJour."Journal Batch Name");
-        IF GenJnlLine.FINDSET THEN
-            GenJnlLine.DELETEALL;
-        //added by santus - end
+          //added by santus - begin
+          //check and delete existing entries on the journal line
+          GenJnlLine.SETRANGE("Journal Template Name", GlJour."Journal Template Name");
+          GenJnlLine.SETRANGE("Journal Batch Name", GlJour."Journal Batch Name");
+          IF GenJnlLine.FINDSET THEN
+              GenJnlLine.DELETEALL;
+          //added by santus - end
 
-        GlJour."Line No." := 10000;
-        CASE reqrec."Account Type" OF
-            1, 5:
-                GlJour."Account Type" := GlJour."Account Type"::Customer;
-            2, 6:
-                GlJour."Account Type" := GlJour."Account Type"::Vendor;
-            ELSE
-                GlJour."Account Type" := reqrec."Account Type";
-        END;
-        GlJour.VALIDATE(GlJour."Posting Date", reqrec."Posting Date");
-        GlJour.VALIDATE(GlJour."Account No.", reqrec."Account No.");
-        IF reqrec."Document Type" = reqrec."Document Type"::Requisition THEN
-            GlJour."Document Type" := GlJour."Document Type"::" ";
-        GlJour.VALIDATE(GlJour."Document No.", reqrec."No.");
-        GlJour.Description := COPYSTR(reqrec."Transaction Description", 1, 50);
-        GlJour.VALIDATE(GlJour."Shortcut Dimension 1 Code", reqrec."Global Dimension 1 Code");
-        GlJour.VALIDATE(GlJour."Shortcut Dimension 2 Code", reqrec."Global Dimension 2 Code");
-        GlJour.VALIDATE(GlJour."Currency Code", reqrec."Currency Code");
-        GlJour.VALIDATE(GlJour."Currency Factor", reqrec."Currency Factor");
-        GlJour."Procurement No." := "Procurement No."; //codeware
-        GlJour."Job No." := reqrec."Job Code";
-        GlJour."Job Task No." := reqrec."Job Task code";
-        GlJour."Job Line Type" := reqrec."Job Line Type";
-        GlJour."Loan ID" := reqrec."Loan ID";
-        GlJour."Loan Type" := reqrec."Loan Type";
-        GlJour."Applies-to Doc. Type" := reqrec."Applies-to Doc. Type";
-        GlJour.VALIDATE(GlJour."Applies-to Doc. No.", reqrec."Applies-to Doc. No.");
-        //GlJour."Form M No.":= reqrec."Form M No.";
-        IF GlJour."Account Type" <> GlJour."Account Type"::"Fixed Asset" THEN BEGIN
-            GlJour."Depreciation Book Code" := '';
-            GlJour."Maintenance Code" := '';
-            GlJour."FA Posting Type" := 0;
-        END
-        ELSE BEGIN
-            GlJour.VALIDATE(GlJour."FA Posting Type", reqrec."FA Posting Type");
-            GlJour.VALIDATE(GlJour."Maintenance Code", reqrec."Maintenance Code");
-        END;
-        //TO GENERATE POSTING FIRST LEG LINE FOR MULTIPLE BALANCE LINES
-        IF reqrec."Multiple Balance Account" = TRUE THEN BEGIN
-            GlJour."Bal. Account Type" := 0;
-            GlJour.VALIDATE(GlJour."Bal. Account No.", '');
-        END;
-        IF "Multiple Account" = TRUE THEN BEGIN
-            GlJour."Account Type" := reqrec."Balance Account Type";
-            GlJour.VALIDATE(GlJour."Account No.", reqrec."Balance Account No.");
-            GlJour.VALIDATE(GlJour."Currency Code", reqrec."Currency Code");
-            GlJour.VALIDATE(GlJour."Currency Factor", reqrec."Currency Factor");
-            GlJour.Description := COPYSTR(reqrec."Transaction Description", 1, 50);
-            GlJour.VALIDATE(GlJour."Shortcut Dimension 1 Code", reqrec."Balance Department Code");
-            GlJour.VALIDATE(GlJour."Shortcut Dimension 2 Code", reqrec."Balance Branch Code");
-            IF GlJour."Account Type" <> GlJour."Account Type"::"Fixed Asset" THEN BEGIN
-                GlJour."Depreciation Book Code" := '';
-                GlJour."Maintenance Code" := '';
-                GlJour."FA Posting Type" := 0;
-            END
-            ELSE BEGIN
-                GlJour.VALIDATE(GlJour."FA Posting Type", reqrec."FA Posting Type");
-                GlJour.VALIDATE(GlJour."Maintenance Code", reqrec."Maintenance Code");
-            END;
-            GlJour."Bal. Account Type" := 0;
-            GlJour.VALIDATE(GlJour."Bal. Account No.", '');
-        END;
-        GlJour.VALIDATE(GlJour.Amount, reqrec.Amount);
-        GlJour.VALIDATE(GlJour."Job Quantity", reqrec."Job Quantity");
-        IF GlJour."Account Type" = 0 THEN BEGIN
-            GlJour."Gen. Prod. Posting Group" := '';
-            GlJour."Gen. Bus. Posting Group" := '';
-            GlJour."VAT Bus. Posting Group" := '';
-            GlJour."VAT Prod. Posting Group" := '';
-            GlJour."Gen. Posting Type" := 0;
-        END;
-        GlJour."External Document No." := reqrec."External Document No.";
-        GlJour."Document Date" := reqrec."Document Date";
-        IF GlJour."Account Type" = 0 THEN BEGIN
-            GlJour."Gen. Prod. Posting Group" := '';
-            GlJour."Gen. Bus. Posting Group" := '';
-            GlJour."VAT Bus. Posting Group" := '';
-            GlJour."VAT Prod. Posting Group" := '';
-        END;
-        IF GlJour.Amount <> 0 THEN BEGIN
-            IF NOT GlJour.INSERT THEN GlJour.MODIFY;
-            GlJour.VALIDATE(GlJour."Shortcut Dimension 1 Code", reqrec."Global Dimension 1 Code");
-            GlJour.VALIDATE(GlJour."Shortcut Dimension 2 Code", reqrec."Global Dimension 2 Code");
-            GlJour.MODIFY(TRUE);
-        END;
-        // Generate the Second Leg for straight Transaction
-        IF (reqrec."Multiple Balance Account" = FALSE) AND (reqrec."Multiple Account" = FALSE) THEN BEGIN
-            "GlJou 2" := GlJour;
-            "GlJou 2"."Line No." := GlJour."Line No." + 10000;
-            "GlJou 2"."Account Type" := reqrec."Balance Account Type";
-            "GlJou 2".VALIDATE("GlJou 2"."Account No.", reqrec."Balance Account No.");
-            "GlJou 2".Description := COPYSTR(reqrec."Transaction Description", 1, 50);
-            IF "GlJou 2"."Account Type" = 0 THEN BEGIN
-                "GlJou 2"."Gen. Prod. Posting Group" := '';
-                "GlJou 2"."Gen. Bus. Posting Group" := '';
-                "GlJou 2"."VAT Bus. Posting Group" := '';
-                "GlJou 2"."VAT Prod. Posting Group" := '';
-                "GlJou 2"."Gen. Posting Type" := 0;
-            END;
-            "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 1 Code", reqrec."Balance Department Code");
-            "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 2 Code", reqrec."Balance Branch Code");
-            "GlJou 2"."Bal. Account Type" := 0;
-            "GlJou 2".VALIDATE("GlJou 2".Amount, -reqrec."Amount (LCY)");
+          GlJour."Line No." := 10000;
+          CASE reqrec."Account Type" OF
+              1, 5:
+                  GlJour."Account Type" := GlJour."Account Type"::Customer;
+              2, 6:
+                  GlJour."Account Type" := GlJour."Account Type"::Vendor;
+              ELSE
+                  GlJour."Account Type" := reqrec."Account Type";
+          END;
+          GlJour.VALIDATE(GlJour."Posting Date", reqrec."Posting Date");
+          GlJour.VALIDATE(GlJour."Account No.", reqrec."Account No.");
+          IF reqrec."Document Type" = reqrec."Document Type"::Requisition THEN
+              GlJour."Document Type" := GlJour."Document Type"::" ";
+          GlJour.VALIDATE(GlJour."Document No.", reqrec."No.");
+          GlJour.Description := COPYSTR(reqrec."Transaction Description", 1, 50);
+          GlJour.VALIDATE(GlJour."Shortcut Dimension 1 Code", reqrec."Global Dimension 1 Code");
+          GlJour.VALIDATE(GlJour."Shortcut Dimension 2 Code", reqrec."Global Dimension 2 Code");
+          GlJour.VALIDATE(GlJour."Currency Code", reqrec."Currency Code");
+          GlJour.VALIDATE(GlJour."Currency Factor", reqrec."Currency Factor");
+          GlJour."Procurement No." := "Procurement No."; //codeware
+          GlJour."Job No." := reqrec."Job Code";
+          GlJour."Job Task No." := reqrec."Job Task code";
+          GlJour."Job Line Type" := reqrec."Job Line Type";
+          GlJour."Loan ID" := reqrec."Loan ID";
+          GlJour."Loan Type" := reqrec."Loan Type";
+          GlJour."Applies-to Doc. Type" := reqrec."Applies-to Doc. Type";
+          GlJour.VALIDATE(GlJour."Applies-to Doc. No.", reqrec."Applies-to Doc. No.");
+          //GlJour."Form M No.":= reqrec."Form M No.";
+          IF GlJour."Account Type" <> GlJour."Account Type"::"Fixed Asset" THEN BEGIN
+              GlJour."Depreciation Book Code" := '';
+              GlJour."Maintenance Code" := '';
+              GlJour."FA Posting Type" := 0;
+          END
+          ELSE BEGIN
+              GlJour.VALIDATE(GlJour."FA Posting Type", reqrec."FA Posting Type");
+              GlJour.VALIDATE(GlJour."Maintenance Code", reqrec."Maintenance Code");
+          END;
+          //TO GENERATE POSTING FIRST LEG LINE FOR MULTIPLE BALANCE LINES
+          IF reqrec."Multiple Balance Account" = TRUE THEN BEGIN
+              GlJour."Bal. Account Type" := 0;
+              GlJour.VALIDATE(GlJour."Bal. Account No.", '');
+          END;
+          IF "Multiple Account" = TRUE THEN BEGIN
+              GlJour."Account Type" := reqrec."Balance Account Type";
+              GlJour.VALIDATE(GlJour."Account No.", reqrec."Balance Account No.");
+              GlJour.VALIDATE(GlJour."Currency Code", reqrec."Currency Code");
+              GlJour.VALIDATE(GlJour."Currency Factor", reqrec."Currency Factor");
+              GlJour.Description := COPYSTR(reqrec."Transaction Description", 1, 50);
+              GlJour.VALIDATE(GlJour."Shortcut Dimension 1 Code", reqrec."Balance Department Code");
+              GlJour.VALIDATE(GlJour."Shortcut Dimension 2 Code", reqrec."Balance Branch Code");
+              IF GlJour."Account Type" <> GlJour."Account Type"::"Fixed Asset" THEN BEGIN
+                  GlJour."Depreciation Book Code" := '';
+                  GlJour."Maintenance Code" := '';
+                  GlJour."FA Posting Type" := 0;
+              END
+              ELSE BEGIN
+                  GlJour.VALIDATE(GlJour."FA Posting Type", reqrec."FA Posting Type");
+                  GlJour.VALIDATE(GlJour."Maintenance Code", reqrec."Maintenance Code");
+              END;
+              GlJour."Bal. Account Type" := 0;
+              GlJour.VALIDATE(GlJour."Bal. Account No.", '');
+          END;
+          GlJour.VALIDATE(GlJour.Amount, reqrec.Amount);
+          GlJour.VALIDATE(GlJour."Job Quantity", reqrec."Job Quantity");
+          IF GlJour."Account Type" = 0 THEN BEGIN
+              GlJour."Gen. Prod. Posting Group" := '';
+              GlJour."Gen. Bus. Posting Group" := '';
+              GlJour."VAT Bus. Posting Group" := '';
+              GlJour."VAT Prod. Posting Group" := '';
+              GlJour."Gen. Posting Type" := 0;
+          END;
+          GlJour."External Document No." := reqrec."External Document No.";
+          GlJour."Document Date" := reqrec."Document Date";
+          IF GlJour."Account Type" = 0 THEN BEGIN
+              GlJour."Gen. Prod. Posting Group" := '';
+              GlJour."Gen. Bus. Posting Group" := '';
+              GlJour."VAT Bus. Posting Group" := '';
+              GlJour."VAT Prod. Posting Group" := '';
+          END;
+          IF GlJour.Amount <> 0 THEN BEGIN
+              IF NOT GlJour.INSERT THEN GlJour.MODIFY;
+              GlJour.VALIDATE(GlJour."Shortcut Dimension 1 Code", reqrec."Global Dimension 1 Code");
+              GlJour.VALIDATE(GlJour."Shortcut Dimension 2 Code", reqrec."Global Dimension 2 Code");
+              GlJour.MODIFY(TRUE);
+          END;
+          // Generate the Second Leg for straight Transaction
+          IF (reqrec."Multiple Balance Account" = FALSE) AND (reqrec."Multiple Account" = FALSE) THEN BEGIN
+              "GlJou 2" := GlJour;
+              "GlJou 2"."Line No." := GlJour."Line No." + 10000;
+              "GlJou 2"."Account Type" := reqrec."Balance Account Type";
+              "GlJou 2".VALIDATE("GlJou 2"."Account No.", reqrec."Balance Account No.");
+              "GlJou 2".Description := COPYSTR(reqrec."Transaction Description", 1, 50);
+              IF "GlJou 2"."Account Type" = 0 THEN BEGIN
+                  "GlJou 2"."Gen. Prod. Posting Group" := '';
+                  "GlJou 2"."Gen. Bus. Posting Group" := '';
+                  "GlJou 2"."VAT Bus. Posting Group" := '';
+                  "GlJou 2"."VAT Prod. Posting Group" := '';
+                  "GlJou 2"."Gen. Posting Type" := 0;
+              END;
+              "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 1 Code", reqrec."Balance Department Code");
+              "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 2 Code", reqrec."Balance Branch Code");
+              "GlJou 2"."Bal. Account Type" := 0;
+              "GlJou 2".VALIDATE("GlJou 2".Amount, -reqrec."Amount (LCY)");
 
-            IF "GlJou 2"."Account Type" = 0 THEN BEGIN
-                "GlJou 2"."Gen. Prod. Posting Group" := '';
-                "GlJou 2"."Gen. Bus. Posting Group" := '';
-                "GlJou 2"."VAT Bus. Posting Group" := '';
-                "GlJou 2"."VAT Prod. Posting Group" := '';
-            END;
-            IF "GlJou 2"."Account Type" <> "GlJou 2"."Account Type"::"Fixed Asset" THEN BEGIN
-                "GlJou 2"."Depreciation Book Code" := '';
-                "GlJou 2"."Maintenance Code" := '';
-                "GlJou 2"."FA Posting Type" := 0;
-            END
-            ELSE BEGIN
-                "GlJou 2".VALIDATE("GlJou 2"."FA Posting Type", reqrec."FA Posting Type");
-                "GlJou 2".VALIDATE("GlJou 2"."Maintenance Code", reqrec."Maintenance Code");
-            END;
-            IF "GlJou 2".Amount <> 0 THEN BEGIN
-                IF NOT "GlJou 2".INSERT THEN "GlJou 2".MODIFY;
-                "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 1 Code", reqrec."Balance Department Code");
-                "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 2 Code", reqrec."Balance Branch Code");
-                "GlJou 2".MODIFY(TRUE);
-            END;
-        END
-        ELSE
-        //TO GENERATE POSTING LINES FOR MULTIPLE SECOND LEGS
-        BEGIN
-            "GlJou 2" := GlJour;
-            LineNo := "GlJou 2"."Line No.";
-            ReqReptLine.SETRANGE(ReqReptLine.Type, reqrec."Document Type");
-            ReqReptLine.SETRANGE(ReqReptLine."Cash/Cheque", reqrec."Cash/Cheque");
-            ReqReptLine.SETRANGE(ReqReptLine."No.", reqrec."No.");
-            IF ReqReptLine.FIND('-') THEN
-                REPEAT
-                    LineNo := LineNo + 10000;
-                    ReqReptLine.TESTFIELD(ReqReptLine.Amount);
-                    ReqReptLine.TESTFIELD(ReqReptLine."Account No.");
-                    "GlJou 2"."Line No." := LineNo;
-                    CASE ReqReptLine."Account Type" OF
-                        1, 5:
-                            "GlJou 2"."Account Type" := ReqReptLine."Account Type"::Customer;
-                        2, 6:
-                            "GlJou 2"."Account Type" := ReqReptLine."Account Type"::Supplier;
-                        ELSE
-                            "GlJou 2"."Account Type" := ReqReptLine."Account Type";
-                    END;
-                    "GlJou 2".VALIDATE("GlJou 2"."Account No.", ReqReptLine."Account No.");
-                    "GlJou 2".VALIDATE("GlJou 2"."Currency Code", ReqReptLine."Currency Code");
-                    "GlJou 2".VALIDATE("GlJou 2"."Currency Factor", ReqReptLine."Currency Factor");
-                    "GlJou 2".Description := COPYSTR(ReqReptLine."Transaction Description", 1, 50);
-                    "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 1 Code", ReqReptLine."Department Code");
-                    "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 2 Code", ReqReptLine."Branch Code");
-                    "GlJou 2".VALIDATE("GlJou 2".Amount, ReqReptLine.Amount);
-                    "GlJou 2"."Loan ID" := ReqReptLine."Loan ID";
-                    "GlJou 2"."Loan Type" := ReqReptLine."Loan Type";
-                    "GlJou 2"."Applies-to Doc. Type" := ReqReptLine."Applies-to Doc. Type";
-                    "GlJou 2".VALIDATE("GlJou 2"."Applies-to Doc. No.", ReqReptLine."Applies-to Doc. No.");
-                    //"GlJou 2"."Form M No."   := ReqReptLine."Form M No.";
-                    "GlJou 2".VALIDATE("GlJou 2"."Job No.", ReqReptLine."Job Code");
-                    "GlJou 2".VALIDATE("GlJou 2"."Job Task No.", ReqReptLine."Job Task code");
-                    "GlJou 2"."Job Line Type" := ReqReptLine."Job Line Type"::Contract;
-                    IF ReqReptLine."Job Code" <> '' THEN BEGIN
-                        //"GlJou 2".VALIDATE("GlJou 2"."Job Unit Cost",ReqReptLine."Amount (LCY)");
-                        "GlJou 2".VALIDATE("GlJou 2"."Job Quantity", 1);
-                    END;
-                    "GlJou 2"."Bal. Account Type" := 0;
-                    IF "GlJou 2"."Account Type" = 0 THEN BEGIN
-                        "GlJou 2"."Gen. Prod. Posting Group" := '';
-                        "GlJou 2"."Gen. Bus. Posting Group" := '';
-                        "GlJou 2"."VAT Bus. Posting Group" := '';
-                        "GlJou 2"."VAT Prod. Posting Group" := '';
-                        "GlJou 2"."Gen. Posting Type" := 0;
-                    END;
-                    IF "GlJou 2"."Account Type" <> "GlJou 2"."Account Type"::"Fixed Asset" THEN BEGIN
-                        "GlJou 2"."Depreciation Book Code" := '';
-                        "GlJou 2"."Maintenance Code" := '';
-                        "GlJou 2"."FA Posting Type" := 0;
-                    END
-                    ELSE BEGIN
-                        "GlJou 2".VALIDATE("GlJou 2"."FA Posting Type", ReqReptLine."FA Posting Type");
-                        "GlJou 2".VALIDATE("GlJou 2"."Maintenance Code", ReqReptLine."Maintenance Code");
-                    END;
-                    IF "GlJou 2".Amount <> 0 THEN BEGIN
-                        IF NOT "GlJou 2".INSERT THEN "GlJou 2".MODIFY;
-                        "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 1 Code", ReqReptLine."Department Code");
-                        "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 2 Code", ReqReptLine."Branch Code");
-                        "GlJou 2".MODIFY(TRUE);
-                    END;
-                UNTIL ReqReptLine.NEXT = 0;
-        END;
-        COMMIT;
+              IF "GlJou 2"."Account Type" = 0 THEN BEGIN
+                  "GlJou 2"."Gen. Prod. Posting Group" := '';
+                  "GlJou 2"."Gen. Bus. Posting Group" := '';
+                  "GlJou 2"."VAT Bus. Posting Group" := '';
+                  "GlJou 2"."VAT Prod. Posting Group" := '';
+              END;
+              IF "GlJou 2"."Account Type" <> "GlJou 2"."Account Type"::"Fixed Asset" THEN BEGIN
+                  "GlJou 2"."Depreciation Book Code" := '';
+                  "GlJou 2"."Maintenance Code" := '';
+                  "GlJou 2"."FA Posting Type" := 0;
+              END
+              ELSE BEGIN
+                  "GlJou 2".VALIDATE("GlJou 2"."FA Posting Type", reqrec."FA Posting Type");
+                  "GlJou 2".VALIDATE("GlJou 2"."Maintenance Code", reqrec."Maintenance Code");
+              END;
+              IF "GlJou 2".Amount <> 0 THEN BEGIN
+                  IF NOT "GlJou 2".INSERT THEN "GlJou 2".MODIFY;
+                  "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 1 Code", reqrec."Balance Department Code");
+                  "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 2 Code", reqrec."Balance Branch Code");
+                  "GlJou 2".MODIFY(TRUE);
+              END;
+          END
+          ELSE
+          //TO GENERATE POSTING LINES FOR MULTIPLE SECOND LEGS
+          BEGIN
+              "GlJou 2" := GlJour;
+              LineNo := "GlJou 2"."Line No.";
+              ReqReptLine.SETRANGE(ReqReptLine.Type, reqrec."Document Type");
+              ReqReptLine.SETRANGE(ReqReptLine."Cash/Cheque", reqrec."Cash/Cheque");
+              ReqReptLine.SETRANGE(ReqReptLine."No.", reqrec."No.");
+              IF ReqReptLine.FIND('-') THEN
+                  REPEAT
+                      LineNo := LineNo + 10000;
+                      ReqReptLine.TESTFIELD(ReqReptLine.Amount);
+                      ReqReptLine.TESTFIELD(ReqReptLine."Account No.");
+                      "GlJou 2"."Line No." := LineNo;
+                      CASE ReqReptLine."Account Type" OF
+                          1, 5:
+                              "GlJou 2"."Account Type" := ReqReptLine."Account Type"::Customer;
+                          2, 6:
+                              "GlJou 2"."Account Type" := ReqReptLine."Account Type"::Supplier;
+                          ELSE
+                              "GlJou 2"."Account Type" := ReqReptLine."Account Type";
+                      END;
+                      "GlJou 2".VALIDATE("GlJou 2"."Account No.", ReqReptLine."Account No.");
+                      "GlJou 2".VALIDATE("GlJou 2"."Currency Code", ReqReptLine."Currency Code");
+                      "GlJou 2".VALIDATE("GlJou 2"."Currency Factor", ReqReptLine."Currency Factor");
+                      "GlJou 2".Description := COPYSTR(ReqReptLine."Transaction Description", 1, 50);
+                      "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 1 Code", ReqReptLine."Department Code");
+                      "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 2 Code", ReqReptLine."Branch Code");
+                      "GlJou 2".VALIDATE("GlJou 2".Amount, ReqReptLine.Amount);
+                      "GlJou 2"."Loan ID" := ReqReptLine."Loan ID";
+                      "GlJou 2"."Loan Type" := ReqReptLine."Loan Type";
+                      "GlJou 2"."Applies-to Doc. Type" := ReqReptLine."Applies-to Doc. Type";
+                      "GlJou 2".VALIDATE("GlJou 2"."Applies-to Doc. No.", ReqReptLine."Applies-to Doc. No.");
+                      //"GlJou 2"."Form M No."   := ReqReptLine."Form M No.";
+                      "GlJou 2".VALIDATE("GlJou 2"."Job No.", ReqReptLine."Job Code");
+                      "GlJou 2".VALIDATE("GlJou 2"."Job Task No.", ReqReptLine."Job Task code");
+                      "GlJou 2"."Job Line Type" := ReqReptLine."Job Line Type"::Contract;
+                      IF ReqReptLine."Job Code" <> '' THEN BEGIN
+                          //"GlJou 2".VALIDATE("GlJou 2"."Job Unit Cost",ReqReptLine."Amount (LCY)");
+                          "GlJou 2".VALIDATE("GlJou 2"."Job Quantity", 1);
+                      END;
+                      "GlJou 2"."Bal. Account Type" := 0;
+                      IF "GlJou 2"."Account Type" = 0 THEN BEGIN
+                          "GlJou 2"."Gen. Prod. Posting Group" := '';
+                          "GlJou 2"."Gen. Bus. Posting Group" := '';
+                          "GlJou 2"."VAT Bus. Posting Group" := '';
+                          "GlJou 2"."VAT Prod. Posting Group" := '';
+                          "GlJou 2"."Gen. Posting Type" := 0;
+                      END;
+                      IF "GlJou 2"."Account Type" <> "GlJou 2"."Account Type"::"Fixed Asset" THEN BEGIN
+                          "GlJou 2"."Depreciation Book Code" := '';
+                          "GlJou 2"."Maintenance Code" := '';
+                          "GlJou 2"."FA Posting Type" := 0;
+                      END
+                      ELSE BEGIN
+                          "GlJou 2".VALIDATE("GlJou 2"."FA Posting Type", ReqReptLine."FA Posting Type");
+                          "GlJou 2".VALIDATE("GlJou 2"."Maintenance Code", ReqReptLine."Maintenance Code");
+                      END;
+                      IF "GlJou 2".Amount <> 0 THEN BEGIN
+                          IF NOT "GlJou 2".INSERT THEN "GlJou 2".MODIFY;
+                          "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 1 Code", ReqReptLine."Department Code");
+                          "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 2 Code", ReqReptLine."Branch Code");
+                          "GlJou 2".MODIFY(TRUE);
+                      END;
+                  UNTIL ReqReptLine.NEXT = 0;
+          END;
+          COMMIT;
 
-        IF NOT PreviewMode THEN BEGIN
-            GenJournalLinex.RESET;
-            GenJournalLinex.SETFILTER("Journal Template Name", GlJour."Journal Template Name");
-            GenJournalLinex.SETFILTER("Journal Batch Name", GlJour."Journal Batch Name");
-            IF GenJournalLinex.FINDSET THEN
-                GenJnlPost.RUN(GenJournalLinex)
-        END ELSE BEGIN
-            GenJournalLinex.RESET;
-            GenJournalLinex.SETFILTER("Journal Template Name", GlJour."Journal Template Name");
-            GenJournalLinex.SETFILTER("Journal Batch Name", GlJour."Journal Batch Name");
-            IF GenJournalLinex.FINDSET THEN BEGIN
-                COMMIT;
-                GenJnlPost.Preview(GenJournalLinex);
-            END;
-        END;
+          IF NOT PreviewMode THEN BEGIN
+              GenJournalLinex.RESET;
+              GenJournalLinex.SETFILTER("Journal Template Name", GlJour."Journal Template Name");
+              GenJournalLinex.SETFILTER("Journal Batch Name", GlJour."Journal Batch Name");
+              IF GenJournalLinex.FINDSET THEN
+                  GenJnlPost.RUN(GenJournalLinex)
+          END ELSE BEGIN
+              GenJournalLinex.RESET;
+              GenJournalLinex.SETFILTER("Journal Template Name", GlJour."Journal Template Name");
+              GenJournalLinex.SETFILTER("Journal Batch Name", GlJour."Journal Batch Name");
+              IF GenJournalLinex.FINDSET THEN BEGIN
+                  COMMIT;
+                  GenJnlPost.Preview(GenJournalLinex);
+              END;
+          END;
 
 
-        //Update as posted
-        GLENTRY.SETCURRENTKEY("Document No.", "Posting Date");
-        GLENTRY.SETRANGE("Document No.", "No.");
-        GLENTRY.SETRANGE("Posting Date", "Posting Date");
-        IF GLENTRY.FINDFIRST THEN BEGIN
-            Posted := TRUE;
-            MODIFY;
-        END
-        */
+          //Update as posted
+          GLENTRY.SETCURRENTKEY("Document No.", "Posting Date");
+          GLENTRY.SETRANGE("Document No.", "No.");
+          GLENTRY.SETRANGE("Posting Date", "Posting Date");
+          IF GLENTRY.FINDFIRST THEN BEGIN
+              Posted := TRUE;
+              MODIFY;
+          END
+          */
     end;
 
 
     procedure ValidateMultipleAcc(recpReq: Record 50103)
     begin
-        
-       /* IF (recpReq."Multiple Balance Account") OR (recpReq."Multiple Account") THEN BEGIN
-            //recpReq.TESTFIELD(recpReq."Balance Account No.",'');
-            recpReq.CALCFIELDS(recpReq."Balance Amount");
-            IF ABS(recpReq."Amount (LCY)") <> ABS(recpReq."Balance Amount") THEN
-                ERROR('Transaction Not Balanced check Your values');
-        END;
-        //recpReq.TESTFIELD(recpReq."Transaction Description");
-        recpReq.TESTFIELD(recpReq."Account No.");
-        IF recpReq."Document Type" <> recpReq."Document Type"::Journal THEN
-            recpReq.TESTFIELD(recpReq.Amount);
-            */
+
+        /* IF (recpReq."Multiple Balance Account") OR (recpReq."Multiple Account") THEN BEGIN
+             //recpReq.TESTFIELD(recpReq."Balance Account No.",'');
+             recpReq.CALCFIELDS(recpReq."Balance Amount");
+             IF ABS(recpReq."Amount (LCY)") <> ABS(recpReq."Balance Amount") THEN
+                 ERROR('Transaction Not Balanced check Your values');
+         END;
+         //recpReq.TESTFIELD(recpReq."Transaction Description");
+         recpReq.TESTFIELD(recpReq."Account No.");
+         IF recpReq."Document Type" <> recpReq."Document Type"::Journal THEN
+             recpReq.TESTFIELD(recpReq.Amount);
+             */
     end;
 
 
@@ -2012,8 +2021,8 @@ table 50103 "Payment/Receipt."
         IF DocType > 1 THEN
             deljnl.SETRANGE(deljnl."Journal Batch Name", 'voucher');
 
-      /*   IF deljnl.FINDSET(TRUE, FALSE) THEN
-            deljnl.DELETEALL(TRUE); */
+        /*   IF deljnl.FINDSET(TRUE, FALSE) THEN
+              deljnl.DELETEALL(TRUE); */
     end;
 
 
@@ -2025,7 +2034,7 @@ table 50103 "Payment/Receipt."
         GenJnlLine: Record 81;
         GenJournalLine: Record 81;
     begin
-        
+
         /* IF "Created By" = COPYSTR(USERID, 15) THEN
             ERROR('You cannot post!');
 

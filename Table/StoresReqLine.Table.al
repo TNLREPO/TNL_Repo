@@ -3,9 +3,9 @@ table 50102 "Stores Req. Line."
 
     fields
     {
-        field(1; "Document Type"; Enum "Item Ledger Entry Type")
+        field(1; "Document Type"; Option)
         {
-            //OptionMembers = Issue,Return,"Posted Issue","Posted Return";
+        OptionMembers = Issue,Return,"Posted Issue","Posted Return";
         }
         field(2; "Document No."; Code[20])
         {
@@ -241,7 +241,7 @@ table 50102 "Stores Req. Line."
     begin
         ItJnlrec.VALIDATE(ItJnlrec."Item No.", "Item No.");
         ItJnlrec.VALIDATE(ItJnlrec."Posting Date", TODAY);
-        ItJnlrec."Entry Type" := "Document Type";
+        //ItJnlrec."Entry Type" := ItJnlrec."Entry Type"::
         ItJnlrec."Location Code" := Rec."Location Code";
         ItJnlrec."Variant Code" := "Variant Code";
         ItJnlrec.Quantity := Quantity;

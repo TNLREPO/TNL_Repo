@@ -104,60 +104,22 @@ table 50072 Applicants
         {
             TableRelation = "Country/Region";
         }
-        /*
+        
         field(31;"Application Status";Option)
         {
             OptionMembers = " ","Under Interview","Short Listed",Accepted,Rejected;
-
-            trigger OnValidate()
-            begin
-                EmployeeQualification.SETRANGE("Employee No.","No.");
-                EmployeeQualification.MODIFYALL("Employee Status","Application Status");
-                IF (("Application Status"= "Application Status"::Accepted) OR
-                   ("Application Status"= "Application Status"::Accepted)) AND
-                   ("Date Accepted/Rejected"=0D) THEN
-                   BEGIN
-                     "Date Accepted/Rejected" := WORKDATE;
-                     ApplicantRec."Date Offer Made" := WORKDATE;
-                   END;
-                IF ("Application Status"= "Application Status"::Accepted) THEN
-                IF CONFIRM('Do you want to convert this applicant to staff?',TRUE) THEN
-                  BEGIN
-                    "Application Status" := "Application Status"::Accepted;
-                    MODIFY;
-                    Applicantsr.SETRANGE("No.","No.");
-                    REPORT.RUN(REPORT::Report50095,TRUE,TRUE,Applicantsr);
-                  END;
-            end;
+          
         }
         field(36;"Global Dimension 1 Code";Code[20])
         {
-            CaptionClass = '1,1,1';
-            TableRelation = "Dimension Value".Code WHERE (Global Dimension No.=CONST(1));
-
-            trigger OnValidate()
-            begin
-                ValidateShortcutDimCode(1,"Global Dimension 1 Code");
-                MODIFY;
-            end;
+            
         }
         field(37;"Global Dimension 2 Code";Code[20])
         {
-            CaptionClass = '1,1,2';
-            TableRelation = "Dimension Value".Code WHERE (Global Dimension No.=CONST(2));
-
-            trigger OnValidate()
-            begin
-                ValidateShortcutDimCode(2,"Global Dimension 2 Code");
-                MODIFY;
-            end;
         }
         field(39;Comment;Boolean)
         {
-            CalcFormula = Exist("Human Resource Comment Line" WHERE ("Table Name"=CONST(7),
-                                                                     "No."=FIELD("No.")));
-            Editable = false;
-            FieldClass = FlowField;
+            
         }
         field(40;"Last Date Modified";Date)
         {
@@ -177,7 +139,7 @@ table 50072 Applicants
         }
         field(52;"Salespers./Purch. Code";Code[10])
         {
-            TableRelation = Salesperson/Purchaser;
+            TableRelation = "Salesperson/Purchaser";
         }
         field(53;"No. Series";Code[10])
         {
@@ -194,7 +156,7 @@ table 50072 Applicants
         }
         field(50016;"Employee Group";Code[20])
         {
-            TableRelation = IF (Posting Group=FILTER(<>'')) "Payroll-Employee Group Header.".Code WHERE (Posting Group Code=FIELD("Posting Group"));
+            
         }
         field(50071;Blocked;Boolean)
         {
@@ -212,17 +174,7 @@ table 50072 Applicants
         }
         field(50088;"Position Applied For";Code[10])
         {
-            TableRelation = "Employment Contract".Code;
-
-            trigger OnValidate()
-            begin
-                IF "Position Applied For"<>'' THEN BEGIN
-                IF EmplContract.GET("Position Applied For") THEN
-                  "Position Description" := EmplContract.Description;
-                END
-                ELSE
-                "Position Description" := '';
-            end;
+            
         }
         field(50089;"Position Description";Text[30])
         {
@@ -248,11 +200,7 @@ table 50072 Applicants
         }
         field(50095;"Next of Kin";Text[30])
         {
-            CalcFormula = Lookup("Employee Relative"."First Name" WHERE (Employee No.=FIELD(No.),
-                                                                         Source=CONST(Applicant),
-                                                                         Relative Code=CONST(NEXT)));
-            Editable = false;
-            FieldClass = FlowField;
+            
         }
         field(50096;Staffed;Boolean)
         {
@@ -332,7 +280,7 @@ table 50072 Applicants
         field(53012;"Advert Ref No";Code[20])
         {
         }
-        */
+        
     }
 
     keys
@@ -344,15 +292,7 @@ table 50072 Applicants
         key(Key2;Surname,"First Name","Middle Name")
         {
         }
-      /*   key(Key3;"Assigned Employee No")
-        {
-        }
-        key(Key4;"Application Status")
-        {
-        }
-        key(Key5;"Advert Ref No")
-        {
-        } */
+      
     }
 
     fieldgroups
@@ -361,26 +301,7 @@ table 50072 Applicants
 
     trigger OnDelete()
     begin
-        /* AlternativeAddr.SETRANGE("Employee No.","No.");
-        AlternativeAddr.DELETEALL;
-
-        EmployeeQualification.SETRANGE("Employee No.","No.");
-        EmployeeQualification.DELETEALL;
-
-        Relative.SETRANGE("Employee No.","No.");
-        Relative.DELETEALL;
-
-        EmployeeAbsence.SETRANGE("Employee No.","No.");
-        EmployeeAbsence.DELETEALL;
-
-        MiscArticleInformation.SETRANGE("Employee No.","No.");
-        MiscArticleInformation.DELETEALL;
-
-        ConfidentialInformation.SETRANGE("Employee No.","No.");
-        ConfidentialInformation.DELETEALL;
-
-        HumanResComment.SETRANGE("No.","No.");
-        HumanResComment.DELETEALL; */
+        
     end;
 
     trigger OnInsert()
@@ -394,17 +315,7 @@ table 50072 Applicants
 
     trigger OnModify()
     begin
-        /* "Last Date Modified" := TODAY;
-        ApplicantRec."Modified By" := USERID;
         
-        IF Staffed THEN ERROR('You canot modify a STAFFED Applicant Record!!!'); */
-        
-        /*
-        IF Res.READPERMISSION THEN
-          EmployeeResUpdate.HumanResToRes(xRec,Rec);
-        IF SalespersonPurchaser.READPERMISSION THEN
-          EmployeeSalespersonUpdate.HumanResToSalesPerson(xRec,Rec);
-        */
 
     end;
 

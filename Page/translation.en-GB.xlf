@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="en-GB" original="Please update this value">
+    <body>
+      <group id="body">
+        <trans-unit id="Page 245107540 - Control 3558769889 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Department</source>
+          <target>Global Dimention 1 code</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TNL-Work Order Card - Control Global Dimension 1 code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 245107540 - Control 28094271 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Action</source>
+          <target>1st Approval Satues</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TNL-Work Order Card - Control 1st Approval Status - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2552169832 - Control 3558769889 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Department</source>
+          <target>Global Dimention 1 code</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Motor-Show Repair Card - Control Global Dimension 1 code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2552169832 - Control 28094271 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Action</source>
+          <target>1st Approval Satues</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Motor-Show Repair Card - Control 1st Approval Status - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1967360995 - Control 3558769889 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Department</source>
+          <target>Global Dimention 1 code</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Payment Confirmation Card - Control Global Dimension 1 code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1967360995 - Control 28094271 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Action</source>
+          <target>1st Approval Satues</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Payment Confirmation Card - Control 1st Approval Status - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 50498620 - Control 3558769889 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Department</source>
+          <target>Global Dimention 1 code</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Request Approval. - Control Global Dimension 1 code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 50498620 - Control 28094271 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Action</source>
+          <target>1st Approval Satues</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Request Approval. - Control 1st Approval Status - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4121179133 - Control 3558769889 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Department</source>
+          <target>Global Dimention 1 code</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Approved Request-Card - Control Global Dimension 1 code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4121179133 - Control 28094271 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Action</source>
+          <target>1st Approval Satues</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Approved Request-Card - Control 1st Approval Status - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1585875785 - Control 3558769889 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Department</source>
+          <target>Global Dimention 1 code</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Job Satisfactory - Control Global Dimension 1 code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1585875785 - Control 28094271 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Action</source>
+          <target>1st Approval Satues</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Job Satisfactory - Control 1st Approval Status - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3129383643 - Control 3558769889 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Department</source>
+          <target>Global Dimention 1 code</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TNL-Work Order M_S Card - Control Global Dimension 1 code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3129383643 - Control 28094271 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Action</source>
+          <target>1st Approval Satues</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TNL-Work Order M_S Card - Control 1st Approval Status - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 520745923 - Control 3558769889 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Department</source>
+          <target>Global Dimention 1 code</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Pool Car Request Card - Control Global Dimension 1 code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 520745923 - Control 28094271 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Action</source>
+          <target>1st Approval Satues</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Pool Car Request Card - Control 1st Approval Status - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3986665990 - Control 3558769889 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Department</source>
+          <target>Global Dimention 1 code</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Approved Pool Car Request Card - Control Global Dimension 1 code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3986665990 - Control 28094271 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Action</source>
+          <target>1st Approval Satues</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Approved Pool Car Request Card - Control 1st Approval Status - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1638784722 - Control 3558769889 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Department</source>
+          <target>Global Dimention 1 code</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Leave Request Card - Control Global Dimension 1 code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1638784722 - Control 28094271 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Action</source>
+          <target>1st Approval Satues</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Leave Request Card - Control 1st Approval Status - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3580668628 - Control 3558769889 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Department</source>
+          <target>Global Dimention 1 code</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Leave Request List - Control Global Dimension 1 code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1680956315 - Control 3558769889 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Department</source>
+          <target>Global Dimention 1 code</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Approve Leave request card - Control Global Dimension 1 code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1680956315 - Control 28094271 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Action</source>
+          <target>1st Approval Satues</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Approve Leave request card - Control 1st Approval Status - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2275078248 - Control 3558769889 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Department</source>
+          <target>Global Dimention 1 code</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page MD Approval List - Control Global Dimension 1 code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3407319910 - Control 3558769889 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Department</source>
+          <target>Global Dimention 1 code</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Approved Leave List - Control Global Dimension 1 code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2549881770 - Control 3558769889 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Department</source>
+          <target>Global Dimention 1 code</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Approval Leave List - Control Global Dimension 1 code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 941801149 - Control 3558769889 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Department</source>
+          <target>Global Dimention 1 code</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page HOD HR/ADMIN LIST - Control Global Dimension 1 code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 914810555 - Control 3558769889 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Department</source>
+          <target>Global Dimention 1 code</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Motor Show Repair Card - Control Global Dimension 1 code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1662225734 - Control 3558769889 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Department</source>
+          <target>Global Dimention 1 code</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TNL_Work Order Card - Control Global Dimension 1 code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1662225734 - Control 28094271 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Action</source>
+          <target>1st Approval Satues</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page TNL_Work Order Card - Control 1st Approval Status - Property Caption</note>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>
