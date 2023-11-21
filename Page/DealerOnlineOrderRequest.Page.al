@@ -1,7 +1,7 @@
 page 50156 "Dealer Online Order Request"
 {
     PageType = Card;
-    SourceTable = Table50099;
+    SourceTable = "Dealer Online Order Header";
 
     layout
     {
@@ -10,49 +10,49 @@ page 50156 "Dealer Online Order Request"
             group(General)
             {
                 Caption = 'General';
-                field("Order No."; "Order No.")
+                field("Order No."; Rec."Order No.")
                 {
 
                     trigger OnAssistEdit()
                     begin
-                        AssistEdit(xRec);
+                        Rec.AssistEdit(xRec);
                         CurrPage.UPDATE;
                     end;
                 }
-                field("Dealer No."; "Dealer No.")
+                field("Dealer No."; Rec."Dealer No.")
                 {
                 }
-                field("Dealer Name"; "Dealer Name")
+                field("Dealer Name"; Rec."Dealer Name")
                 {
                 }
-                field("Dealer Address"; "Dealer Address")
+                field("Dealer Address"; Rec."Dealer Address")
                 {
                 }
-                field("Transaction Date"; "Transaction Date")
+                field("Transaction Date"; Rec."Transaction Date")
                 {
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                 }
-                field("User Id"; "User Id")
+                field("User Id"; Rec."User Id")
                 {
                 }
-                field("No. Series"; "No. Series")
+                field("No. Series"; Rec."No. Series")
                 {
                 }
-                field("Process date"; "Process date")
+                field("Process date"; Rec."Process date")
                 {
                 }
-                field(Processed; Processed)
+                field(Processed; Rec.Processed)
                 {
                 }
-                field(Submit; Submit)
+                field(Submit; Rec.Submit)
                 {
                 }
             }
-            part(; 50157)
+            part(Lines; "Dealer Online order subform")
             {
-                SubPageLink = Claim No.=FIELD(Order No.);
+                SubPageLink = "Claim No." = FIELD("Order No.");
             }
         }
     }

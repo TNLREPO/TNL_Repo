@@ -1,24 +1,24 @@
 page 50352 "Hour Slot"
 {
     PageType = Card;
-    SourceTable = Table50048;
+    SourceTable = "Hour Slot";
 
     layout
     {
         area(content)
         {
-            repeater()
+            repeater(Group)
             {
-                field(Code; Code)
+                field(Code; Rec.Code)
                 {
                 }
-                field("Slot Duration"; "Slot Duration")
+                field("Slot Duration"; Rec."Slot Duration")
                 {
                 }
-                field("Hour Map"; "Hour Map")
+                field("Hour Map"; Rec."Hour Map")
                 {
                 }
-                field("Duration Units"; "Duration Units")
+                field("Duration Units"; Rec."Duration Units")
                 {
                 }
             }

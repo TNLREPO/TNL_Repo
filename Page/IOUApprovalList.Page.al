@@ -1,35 +1,35 @@
 page 50434 "IOU Approval List"
 {
     PageType = Card;
-    SourceTable = Table50105;
-    SourceTableView = SORTING (IOU No.)
-                      WHERE (Posted = CONST (No),
-                            Treated = CONST (No),
-                            Final Apprv. Status=FILTER(<>Approved));
+    SourceTable = "IOU Register";
+    SourceTableView = SORTING("IOU No.")
+                      WHERE(Posted = FILTER(false),
+                            Treated = FILTER(false),
+                            "Final Apprv. Status" = FILTER(<> 'Approved'));
 
     layout
     {
         area(content)
         {
-            repeater()
+            repeater(Group)
             {
                 Editable = false;
-                field("Entry Date";"Entry Date")
+                field("Entry Date"; Rec."Entry Date")
                 {
                 }
-                field("IOU No.";"IOU No.")
+                field("IOU No."; Rec."IOU No.")
                 {
                 }
-                field("Account Name";"Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                 }
-                field(Description;Description)
+                field(Description; Rec.Description)
                 {
                 }
-                field("Global Dimension 1 Code";"Global Dimension 1 Code")
+                field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
                 {
                 }
-                field("Global Dimension 2 Code";"Global Dimension 2 Code")
+                field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
                 {
                 }
             }
@@ -52,12 +52,14 @@ page 50434 "IOU Approval List"
 
     trigger OnAfterGetRecord()
     begin
-        OnAfterGetCurrRecord;
+        xRec := Rec;
+        UserSetUp.GET(USERID);
     end;
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
-        OnAfterGetCurrRecord;
+        xRec := Rec;
+        UserSetUp.GET(USERID);
     end;
 
     trigger OnOpenPage()
@@ -67,13 +69,7 @@ page 50434 "IOU Approval List"
     end;
 
     var
-        UserSetUp: Record "91";
+        UserSetUp: Record "User Setup";
 
-    local procedure OnAfterGetCurrRecord()
-    begin
-        xRec := Rec;
-        UserSetUp.GET(USERID);
-        //SETRANGE("Current pending Person",USERID);
-    end;
 }
 

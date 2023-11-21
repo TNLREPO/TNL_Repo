@@ -5,13 +5,13 @@ page 70140 "Balance Payment"
     InsertAllowed = false;
     ModifyAllowed = false;
     PageType = List;
-    SourceTable = Table70008;
-    SourceTableView = WHERE (Compliance = CONST (Yes),
-                            Balance Paymt.=CONST(Yes),
-                            Voucher Raised=CONST(No),
-                            Closed=CONST(No),
-                            Document Type=CONST(Opex),
-                            Reject=CONST(No));
+    SourceTable = "Procurement Header";
+    SourceTableView = WHERE(Compliance = filter(true),
+                            "Balance Paymt." = filter(true),
+                            "Voucher Raised" = filter(false),
+                            Closed = filter(false),
+                            "Document Type" = filter('Opex'),
+                            Reject = filter(false));
 
     layout
     {
@@ -19,23 +19,23 @@ page 70140 "Balance Payment"
         {
             repeater(Group)
             {
-                field(Date; Date)
+                field(Date; Rec.Date)
                 {
                 }
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     Caption = 'Opex No.';
                 }
-                field("Requester Name"; "Requester Name")
+                field("Requester Name"; Rec."Requester Name")
                 {
                 }
-                field("Purchase Justification"; "Purchase Justification")
+                field("Purchase Justification"; Rec."Purchase Justification")
                 {
                 }
-                field("Proposed Purchase Amount"; "Proposed Purchase Amount")
+                field("Proposed Purchase Amount"; Rec."Proposed Purchase Amount")
                 {
                 }
-                field(Vendor; Vendor)
+                field(Vendor; Rec.Vendor)
                 {
                 }
             }

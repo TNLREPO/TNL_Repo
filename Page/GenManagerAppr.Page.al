@@ -2,13 +2,13 @@ page 70132 "Gen. Manager Appr."
 {
     CardPageID = "Opex Card";
     PageType = List;
-    SourceTable = Table70008;
-    SourceTableView = WHERE (ListGM = FILTER (Yes),
-                            Head of Audit=CONST(Approved),
-                            General Manager=FILTER(<>Approved|Rejected),
-                            Managing Director=CONST(" "),
-                            Reject=CONST(No),
-                            Document Type=CONST(Opex));
+    SourceTable = "Procurement Header";
+    SourceTableView = WHERE(ListGM = FILTER('Yes'),
+                            "Head of Audit" = FILTER(Approved),
+                            "General Manager" = FILTER(<> Approved | Rejected),
+                            "Managing Director" = FILTER(" "),
+                            Reject = FILTER('No'),
+                            "Document Type" = FILTER(Opex));
 
     layout
     {
@@ -16,23 +16,23 @@ page 70132 "Gen. Manager Appr."
         {
             repeater(Group)
             {
-                field(Date;Date)
+                field(Date; Rec.Date)
                 {
                 }
-                field("No.";"No.")
+                field("No."; Rec."No.")
                 {
                     Caption = 'Opex No.';
                 }
-                field("Requester Name";"Requester Name")
+                field("Requester Name"; Rec."Requester Name")
                 {
                 }
-                field("Purchase Justification";"Purchase Justification")
+                field("Purchase Justification"; Rec."Purchase Justification")
                 {
                 }
-                field("Proposed Purchase Amount";"Proposed Purchase Amount")
+                field("Proposed Purchase Amount"; Rec."Proposed Purchase Amount")
                 {
                 }
-                field(Vendor;Vendor)
+                field(Vendor; Rec.Vendor)
                 {
                 }
             }

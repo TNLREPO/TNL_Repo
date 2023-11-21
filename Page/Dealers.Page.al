@@ -1,18 +1,18 @@
 page 50436 Dealers
 {
     PageType = Card;
-    SourceTable = Table18;
+    SourceTable = Customer;
 
     layout
     {
         area(content)
         {
-            repeater()
+            repeater(group)
             {
-                field("No."; "No.")
+                field("No.";Rec."No.")
                 {
                 }
-                field(Name; Name)
+                field(Name;Rec.Name)
                 {
                 }
             }

@@ -2,24 +2,24 @@ page 50453 "HR Work Oder List"
 {
     CardPageID = "HR Work Order";
     PageType = List;
-    SourceTable = Table50169;
+    SourceTable = "HR Work Order";
 
     layout
     {
         area(content)
         {
-            repeater()
+            repeater(Group)
             {
-                field("Order No."; "Order No.")
+                field("Order No."; Rec."Order No.")
                 {
                 }
-                field("Issued Date"; "Issued Date")
+                field("Issued Date"; Rec."Issued Date")
                 {
                 }
-                field(Approval; Approval)
+                field(Approval; Rec.Approval)
                 {
                 }
-                field("COF Ref Code"; "COF Ref Code")
+                field("COF Ref Code"; Rec."COF Ref Code")
                 {
                 }
             }

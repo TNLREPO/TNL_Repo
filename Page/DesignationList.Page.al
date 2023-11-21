@@ -1,21 +1,21 @@
 page 50043 "Designation List"
 {
     PageType = Card;
-    SourceTable = Table50079;
+    SourceTable = "Designation";
 
     layout
     {
         area(content)
         {
-            repeater()
+            repeater(Group)
             {
-                field(Code; Code)
+                field(Code;Rec. Code)
                 {
                 }
-                field(Description; Description)
+                field(Description;Rec. Description)
                 {
                 }
-                field(Manager; Manager)
+                field(Manager;Rec. Manager)
                 {
                 }
             }

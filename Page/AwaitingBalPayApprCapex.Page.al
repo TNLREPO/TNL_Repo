@@ -2,10 +2,10 @@ page 70167 "Awaiting Bal. Pay. Appr.-Capex"
 {
     CardPageID = "Approved Capex Card2";
     PageType = List;
-    SourceTable = Table70008;
-    SourceTableView = WHERE (Document Type=CONST(Capex),
-                            Advance Voucher=CONST(Yes),
-                            Compliance=CONST(No));
+    SourceTable = "Procurement Header";
+    SourceTableView = WHERE("Document Type" = filter('Capex'),
+                            "Advance Voucher" = filter(true),
+                            Compliance = filter(false));
 
     layout
     {
@@ -13,26 +13,26 @@ page 70167 "Awaiting Bal. Pay. Appr.-Capex"
         {
             repeater(Group)
             {
-                field(Date; Date)
+                field(Date; Rec.Date)
                 {
                 }
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     Caption = 'Capex No.';
                 }
-                field("Requester Name"; "Requester Name")
+                field("Requester Name"; Rec."Requester Name")
                 {
                 }
-                field("Department Code"; "Department Code")
+                field("Department Code"; Rec."Department Code")
                 {
                 }
-                field("Purchase Justification"; "Purchase Justification")
+                field("Purchase Justification"; Rec."Purchase Justification")
                 {
                 }
-                field("Proposed Purchase Amount"; "Proposed Purchase Amount")
+                field("Proposed Purchase Amount"; Rec."Proposed Purchase Amount")
                 {
                 }
-                field(Vendor; Vendor)
+                field(Vendor; Rec.Vendor)
                 {
                 }
             }

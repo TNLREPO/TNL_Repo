@@ -1,18 +1,18 @@
 page 50317 Holidays
 {
     PageType = List;
-    SourceTable = Table50070;
+    SourceTable = "Holidays";
 
     layout
     {
         area(content)
         {
-            repeater()
+            repeater(Group)
             {
-                field(Date; Date)
+                field(Date; Rec.Date)
                 {
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                 }
             }

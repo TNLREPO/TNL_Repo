@@ -2,7 +2,7 @@ page 50351 "Appointment Scheduling Card"
 {
     DelayedInsert = true;
     PageType = Card;
-    SourceTable = Table50047;
+    SourceTable = "Appointment Scheduling";
 
     layout
     {

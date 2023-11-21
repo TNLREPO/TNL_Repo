@@ -1,11 +1,11 @@
 page 70239 "IOU Appr. General"
 {
     PageType = List;
-    SourceTable = Table50105;
-    SourceTableView = WHERE (Send for Approval=CONST(Yes),
-                            Global Dimension 1 Code=FILTER(<>08AUDSYS),
-                            2nd Apprv. Status=FILTER(' '),
-                            2nd Approval to=FILTER(TOYOTANIGERIA\ADEWUMI));
+    SourceTable = "IOU Register";
+    SourceTableView = WHERE("Send for Approval" = FILTER('Yes'),
+                            "Global Dimension 1 Code" = FILTER(<> '08AUDSYS'),
+                            "2nd Apprv. Status" = FILTER(' '),
+                            "2nd Approval to" = FILTER('TOYOTANIGERIA\ADEWUMI'));
 
     layout
     {
@@ -13,25 +13,25 @@ page 70239 "IOU Appr. General"
         {
             repeater(Group)
             {
-                field("IOU No.";"IOU No.")
+                field("IOU No."; Rec."IOU No.")
                 {
                 }
-                field("Entry Date";"Entry Date")
+                field("Entry Date"; Rec."Entry Date")
                 {
                 }
-                field(Description;Description)
+                field(Description; Rec.Description)
                 {
                 }
-                field(Amount;Amount)
+                field(Amount; Rec.Amount)
                 {
                 }
-                field("Payment Date";"Payment Date")
+                field("Payment Date"; Rec."Payment Date")
                 {
                 }
-                field("Collected By";"Collected By")
+                field("Collected By"; Rec."Collected By")
                 {
                 }
-                field("Staff Name";"Staff Name")
+                field("Staff Name"; Rec."Staff Name")
                 {
                 }
             }

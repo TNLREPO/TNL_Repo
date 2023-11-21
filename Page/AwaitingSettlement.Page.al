@@ -2,13 +2,13 @@ page 70219 "Awaiting Settlement"
 {
     CardPageID = "Warranty Claim card";
     PageType = List;
-    SourceTable = Table50038;
-    SourceTableView = WHERE (Labour Claim Approved=CONST(Yes),
-                            Material Claim Approved=CONST(Yes),
-                            Claim Refund by TMC=CONST(No),
-                            Refund Dealer Labour Claim=CONST(No),
-                            Replace Dealer Material Claim=CONST(Yes),
-                            Claim Materials Posted=CONST(Yes));
+    SourceTable = "Warranty Claim Header";
+    SourceTableView = WHERE("Labour Claim Approved" = filter('Yes'),
+                            "Material Claim Approved" = filter('Yes'),
+                            "Claim Refund by TMC" = filter('No'),
+                            "Replace Dealer Material Claim" = filter('No'),
+                            "Refund Dealer Labour Claim" = filter('Yes'),
+                            "Claim Materials Posted" = filter('Yes'));
 
     layout
     {
@@ -16,49 +16,49 @@ page 70219 "Awaiting Settlement"
         {
             repeater(Group)
             {
-                field("Claim No."; "Claim No.")
+                field("Claim No."; Rec."Claim No.")
                 {
                 }
-                field("Invoice No."; "Invoice No.")
+                field("Invoice No."; Rec."Invoice No.")
                 {
                 }
-                field("TWC No."; "TWC No.")
+                field("TWC No."; Rec."TWC No.")
                 {
                 }
-                field("Dealer Code"; "Dealer Code")
+                field("Dealer Code"; Rec."Dealer Code")
                 {
                 }
-                field("Dealer Name"; "Dealer Name")
+                field("Dealer Name"; Rec."Dealer Name")
                 {
                 }
-                field("Process Date"; "Process Date")
+                field("Process Date"; Rec."Process Date")
                 {
                 }
-                field("Vehicle Identification No."; "Vehicle Identification No.")
+                field("Vehicle Identification No."; Rec."Vehicle Identification No.")
                 {
                 }
-                field("Vehicle Engine No."; "Vehicle Engine No.")
+                field("Vehicle Engine No."; Rec."Vehicle Engine No.")
                 {
                 }
-                field("Delivery Date"; "Delivery Date")
+                field("Delivery Date"; Rec."Delivery Date")
                 {
                 }
-                field("Odometer Reading"; "Odometer Reading")
+                field("Odometer Reading"; Rec."Odometer Reading")
                 {
                 }
-                field("Owners Name"; "Owners Name")
+                field("Owners Name"; Rec."Owners Name")
                 {
                 }
-                field("Warranty Claim Exist"; "Warranty Claim Exist")
+                field("Warranty Claim Exist"; Rec."Warranty Claim Exist")
                 {
                 }
-                field("Under Warranty"; "Under Warranty")
+                field("Under Warranty"; Rec."Under Warranty")
                 {
                 }
-                field("Warranty Expired"; "Warranty Expired")
+                field("Warranty Expired"; Rec."Warranty Expired")
                 {
                 }
-                field("Warranty Expired Date"; "Warranty Expired Date")
+                field("Warranty Expired Date"; Rec."Warranty Expired Date")
                 {
                 }
             }

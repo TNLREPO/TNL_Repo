@@ -429,7 +429,7 @@ page 70079 "Appointment Preparation Card"
 
                 trigger OnAction()
                 begin
-                    Rec.CreatePurchaseRequisition;
+                    CreatePurchaseRequisition;
                 end;
             }
             action("Get Estimate Info")

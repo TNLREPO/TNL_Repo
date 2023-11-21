@@ -1,8 +1,8 @@
 page 70512 "Back Order List"
 {
     PageType = List;
-    SourceTable = Table70036;
-    SourceTableView = WHERE (Stock Status=FILTER(Not Available|Not Established|Local Part Purch));
+    SourceTable = "Customer Order LineX";
+    SourceTableView = WHERE("Stock Status" = FILTER('Not Available' | 'Not Established' | 'Local Part Purch'));
 
     layout
     {
@@ -10,34 +10,34 @@ page 70512 "Back Order List"
         {
             repeater(Group)
             {
-                field("Document No.";"Document No.")
+                field("Document No."; Rec."Document No.")
                 {
                 }
-                field("No.";"No.")
+                field("No."; Rec."No.")
                 {
                 }
-                field(Description;Description)
+                field(Description; Rec.Description)
                 {
                 }
-                field("Quantity Received";"Quantity Received")
+                field("Quantity Received"; Rec."Quantity Received")
                 {
                 }
-                field("Unit Price";"Unit Price")
+                field("Unit Price"; Rec."Unit Price")
                 {
                 }
-                field("Location Code";"Location Code")
+                field("Location Code"; Rec."Location Code")
                 {
                 }
-                field("Quantity Available";"Quantity Available")
+                field("Quantity Available"; Rec."Quantity Available")
                 {
                 }
-                field("Stock Status";"Stock Status")
+                field("Stock Status"; Rec."Stock Status")
                 {
                 }
-                field("Job Instruction No.";"Job Instruction No.")
+                field("Job Instruction No."; Rec."Job Instruction No.")
                 {
                 }
-                field("Quantity Requested";"Quantity Requested")
+                field("Quantity Requested"; Rec."Quantity Requested")
                 {
                 }
             }

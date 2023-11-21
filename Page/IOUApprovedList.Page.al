@@ -1,9 +1,9 @@
 page 70032 "IOU Approved List"
 {
     PageType = List;
-    SourceTable = Table50105;
-    SourceTableView = WHERE (Final Apprv. Status=CONST(Approved),
-                            Treated=CONST(No));
+    SourceTable = "IOU Register";
+    SourceTableView = WHERE("Final Apprv. Status" = filter('Approved'),
+                            Treated = filter(false));
 
     layout
     {
@@ -11,32 +11,32 @@ page 70032 "IOU Approved List"
         {
             repeater(Group)
             {
-                field("Entry Date"; "Entry Date")
+                field("Entry Date"; Rec."Entry Date")
                 {
                 }
-                field("IOU No."; "IOU No.")
+                field("IOU No."; Rec."IOU No.")
                 {
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     Caption = 'Staff  Name';
                 }
-                field("Payment Date"; "Payment Date")
+                field("Payment Date"; Rec."Payment Date")
                 {
                 }
-                field("Global Dimension 1 Code"; "Global Dimension 1 Code")
+                field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
                 {
                 }
-                field("Global Dimension 2 Code"; "Global Dimension 2 Code")
+                field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
                 {
                 }
-                field("Expected Retirement Date"; "Expected Retirement Date")
+                field("Expected Retirement Date"; Rec."Expected Retirement Date")
                 {
                 }
             }

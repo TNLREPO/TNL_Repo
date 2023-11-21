@@ -2,12 +2,12 @@ page 70218 "Awaiting Part to be Issue"
 {
     CardPageID = "Warranty Claim card";
     PageType = List;
-    SourceTable = Table50038;
-    SourceTableView = WHERE (Labour Claim Approved=CONST(Yes),
-                            Material Claim Approved=CONST(Yes),
-                            Claim Refund by TMC=CONST(No),
-                            Replace Dealer Material Claim=CONST(No),
-                            Refund Dealer Labour Claim=CONST(No));
+    SourceTable = "Warranty Claim Header";
+    SourceTableView = WHERE("Labour Claim Approved" = filter('Yes'),
+                            "Material Claim Approved" = filter('Yes'),
+                            "Claim Refund by TMC" = filter('No'),
+                            "Replace Dealer Material Claim" = filter('No'),
+                            "Refund Dealer Labour Claim" = filter('No'));
 
     layout
     {
@@ -15,37 +15,37 @@ page 70218 "Awaiting Part to be Issue"
         {
             repeater(Group)
             {
-                field("Claim No."; "Claim No.")
+                field("Claim No."; Rec."Claim No.")
                 {
                 }
-                field("Invoice No."; "Invoice No.")
+                field("Invoice No."; Rec."Invoice No.")
                 {
                 }
-                field("TWC No."; "TWC No.")
+                field("TWC No."; Rec."TWC No.")
                 {
                 }
-                field("Dealer Code"; "Dealer Code")
+                field("Dealer Code"; Rec."Dealer Code")
                 {
                 }
-                field("Dealer Name"; "Dealer Name")
+                field("Dealer Name"; Rec."Dealer Name")
                 {
                 }
-                field("Process Date"; "Process Date")
+                field("Process Date"; Rec."Process Date")
                 {
                 }
-                field("Vehicle Identification No."; "Vehicle Identification No.")
+                field("Vehicle Identification No."; Rec."Vehicle Identification No.")
                 {
                 }
-                field("Vehicle Engine No."; "Vehicle Engine No.")
+                field("Vehicle Engine No."; Rec."Vehicle Engine No.")
                 {
                 }
-                field("Vehicle Model"; "Vehicle Model")
+                field("Vehicle Model"; Rec."Vehicle Model")
                 {
                 }
-                field("Delivery Date"; "Delivery Date")
+                field("Delivery Date"; Rec."Delivery Date")
                 {
                 }
-                field("Odometer Reading"; "Odometer Reading")
+                field("Odometer Reading"; Rec."Odometer Reading")
                 {
                 }
             }

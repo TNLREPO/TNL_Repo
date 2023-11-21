@@ -2,11 +2,11 @@ page 70129 "Head of Audit Appr."
 {
     CardPageID = "Opex Card";
     PageType = List;
-    SourceTable = Table70008;
-    SourceTableView = WHERE (Head of Department=CONST(Approved),
-                            Head of Audit=FILTER(<>Approved),
-                            Reject=CONST(No),
-                            Document Type=CONST(Opex));
+    SourceTable = "Procurement Header";
+    SourceTableView = WHERE("Head of Department" = FILTER(Approved),
+                            "Head of Audit" = FILTER(<> Approved),
+                            Reject = FILTER('No'),
+                           "Document Type" = FILTER(Opex));
 
     layout
     {
@@ -14,23 +14,23 @@ page 70129 "Head of Audit Appr."
         {
             repeater(Group)
             {
-                field("No.";"No.")
+                field("No."; Rec."No.")
                 {
                     Caption = 'Opex No.';
                 }
-                field(Date;Date)
+                field(Date; Rec.Date)
                 {
                 }
-                field("Requester Name";"Requester Name")
+                field("Requester Name"; Rec."Requester Name")
                 {
                 }
-                field("Requester Department";"Requester Department")
+                field("Requester Department"; Rec."Requester Department")
                 {
                 }
-                field("Head of Department";"Head of Department")
+                field("Head of Department"; Rec."Head of Department")
                 {
                 }
-                field("Department Code";"Department Code")
+                field("Department Code"; Rec."Department Code")
                 {
                 }
             }

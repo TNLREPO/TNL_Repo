@@ -1,69 +1,69 @@
 page 50182 "Dealer Request Process Subform"
 {
     PageType = Card;
-    SourceTable = Table50033;
+    SourceTable = "Dealer Mth. Vehicle Request";
 
     layout
     {
         area(content)
         {
-            repeater()
+            repeater(control5)
             {
-                field("Item No."; "Item No.")
+                field("Item No.";Rec."Item No.")
                 {
                 }
-                field("Model No."; "Model No.")
+                field("Model No.";Rec."Model No.")
                 {
                 }
-                field("Model Name"; "Model Name")
+                field("Model Name";Rec."Model Name")
                 {
                 }
-                field(Body; Body)
+                field(Body;Rec.Body)
                 {
                 }
-                field(Type; Type)
+                field(Type;Rec.Type)
                 {
                 }
-                field(Transmission; Transmission)
+                field(Transmission;Rec.Transmission)
                 {
                 }
-                field("A/C"; "A/C")
+                field("A/C";Rec."A/C")
                 {
                 }
-                field("Fuel Type"; "Fuel Type")
+                field("Fuel Type";Rec."Fuel Type")
                 {
                 }
-                field("Seat Options"; "Seat Options")
+                field("Seat Options";Rec."Seat Options")
                 {
                 }
-                field(Rim; Rim)
+                field(Rim;Rec.Rim)
                 {
                 }
-                field(Colour; Colour)
+                field(Colour;Rec.Colour)
                 {
                 }
-                field("Colour Description"; "Colour Description")
+                field("Colour Description";Rec."Colour Description")
                 {
                 }
-                field(Quantity; Quantity)
+                field(Quantity;Rec.Quantity)
                 {
                 }
-                field("Total By Item"; "Total By Item")
+                field("Total By Item";Rec."Total By Item")
                 {
                 }
-                field("Allocated Quantity"; "Allocated Quantity")
+                field("Allocated Quantity";Rec."Allocated Quantity")
                 {
                 }
-                field("Available Quantity"; "Available Quantity")
+                field("Available Quantity";Rec."Available Quantity")
                 {
                 }
-                field(Allocated; Allocated)
+                field(Allocated;Rec.Allocated)
                 {
                 }
-                field(Approved; Approved)
+                field(Approved;Rec.Approved)
                 {
                 }
-                field("Approved By."; "Approved By.")
+                field("Approved By.";Rec."Approved By.")
                 {
                 }
             }

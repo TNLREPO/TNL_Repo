@@ -2,54 +2,54 @@ page 50310 "Disciplinary Document"
 {
     AutoSplitKey = true;
     PageType = Card;
-    SourceTable = Table50146;
+    SourceTable = "Employee Disciplinary Document";
 
     layout
     {
         area(content)
         {
-            repeater()
+            repeater(Group)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                 }
-                field("Line No."; "Line No.")
+                field("Line No."; Rec."Line No.")
                 {
                 }
-                field(Name; Name)
+                field(Name; Rec.Name)
                 {
                 }
-                field(Date; Date)
+                field(Date; Rec.Date)
                 {
                 }
-                field("Issue date"; "Issue date")
+                field("Issue date"; Rec."Issue date")
                 {
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                 }
-                field("Effective Date"; "Effective Date")
+                field("Effective Date"; Rec."Effective Date")
                 {
                 }
-                field("Suspension Duration"; "Suspension Duration")
+                field("Suspension Duration"; Rec."Suspension Duration")
                 {
                 }
-                field("Expected Resumption Date"; "Expected Resumption Date")
+                field("Expected Resumption Date"; Rec."Expected Resumption Date")
                 {
                 }
-                field("Warning/Query Response Time"; "Warning/Query Response Time")
+                field("Warning/Query Response Time"; Rec."Warning/Query Response Time")
                 {
                 }
-                field("Expected Response Date"; "Expected Response Date")
+                field("Expected Response Date"; Rec."Expected Response Date")
                 {
                 }
-                field("Response Date"; "Response Date")
+                field("Response Date"; Rec."Response Date")
                 {
                 }
-                field("Resumption Date"; "Resumption Date")
+                field("Resumption Date"; Rec."Resumption Date")
                 {
                 }
-                field(Remark; Remark)
+                field(Remark; Rec.Remark)
                 {
                 }
             }

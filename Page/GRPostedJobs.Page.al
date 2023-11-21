@@ -4,131 +4,131 @@ page 80064 "GR Posted Jobs"
     CardPageID = "Posted Service Invoice";
     Editable = false;
     PageType = List;
-    SourceTable = Table5992;
+    SourceTable = "Service Invoice Header";
 
     layout
     {
         area(content)
         {
-            repeater()
+            repeater(Group)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                 }
-                field("Customer No."; "Customer No.")
+                field("Customer No."; Rec."Customer No.")
                 {
                 }
-                field(Name; Name)
+                field(Name; Rec.Name)
                 {
                 }
-                field("Currency Code"; "Currency Code")
+                field("Currency Code"; Rec."Currency Code")
                 {
                 }
-                field("Post Code"; "Post Code")
-                {
-                    Visible = false;
-                }
-                field("Country/Region Code"; "Country/Region Code")
+                field("Post Code"; Rec."Post Code")
                 {
                     Visible = false;
                 }
-                field("Contact Name"; "Contact Name")
+                field("Country/Region Code"; Rec."Country/Region Code")
                 {
                     Visible = false;
                 }
-                field("Bill-to Customer No."; "Bill-to Customer No.")
+                field("Contact Name"; Rec."Contact Name")
                 {
                     Visible = false;
                 }
-                field("Bill-to Name"; "Bill-to Name")
+                field("Bill-to Customer No."; Rec."Bill-to Customer No.")
                 {
                     Visible = false;
                 }
-                field("Ship-to Name"; "Ship-to Name")
+                field("Bill-to Name"; Rec."Bill-to Name")
                 {
                     Visible = false;
                 }
-                field("Ship-to Post Code"; "Ship-to Post Code")
+                field("Ship-to Name"; Rec."Ship-to Name")
                 {
                     Visible = false;
                 }
-                field("Ship-to Country/Region Code"; "Ship-to Country/Region Code")
+                field("Ship-to Post Code"; Rec."Ship-to Post Code")
                 {
                     Visible = false;
                 }
-                field("Ship-to Contact"; "Ship-to Contact")
+                field("Ship-to Country/Region Code"; Rec."Ship-to Country/Region Code")
                 {
                     Visible = false;
                 }
-                field("Posting Date"; "Posting Date")
-                {
-                }
-                field("Salesperson Code"; "Salesperson Code")
+                field("Ship-to Contact"; Rec."Ship-to Contact")
                 {
                     Visible = false;
                 }
-                field("Shortcut Dimension 1 Code"; "Shortcut Dimension 1 Code")
+                field("Posting Date"; Rec."Posting Date")
+                {
+                }
+                field("Salesperson Code"; Rec."Salesperson Code")
                 {
                     Visible = false;
                 }
-                field("Shortcut Dimension 2 Code"; "Shortcut Dimension 2 Code")
+                field("Shortcut Dimension 1 Code"; Rec."Shortcut Dimension 1 Code")
                 {
                     Visible = false;
                 }
-                field("Location Code"; "Location Code")
+                field("Shortcut Dimension 2 Code"; Rec."Shortcut Dimension 2 Code")
+                {
+                    Visible = false;
+                }
+                field("Location Code"; Rec."Location Code")
                 {
                     Visible = true;
                 }
-                field("Document Date"; "Document Date")
+                field("Document Date"; Rec."Document Date")
                 {
                     Visible = false;
                 }
-                field("Due Date"; "Due Date")
+                field("Due Date"; Rec."Due Date")
                 {
                     Visible = false;
                 }
-                field("Order No."; "Order No.")
+                field("Order No."; Rec."Order No.")
                 {
                 }
-                field("Customer Order No."; "Customer Order No.")
+                field("Customer Order No."; Rec."Customer Order No.")
                 {
                 }
-                field("Registration No."; "Registration No.")
+                field("Registration No."; Rec."Registration No.")
                 {
                 }
-                field("Total Line Amount"; "Total Line Amount")
+                field("Total Line Amount"; Rec."Total Line Amount")
                 {
                 }
-                field("Total Line Amount Incl. (VAT)"; "Total Line Amount Incl. (VAT)")
+                field("Total Line Amount Incl. (VAT)"; Rec."Total Line Amount Incl. (VAT)")
                 {
                 }
-                field("Total Discount Amount"; "Total Discount Amount")
+                field("Total Discount Amount"; Rec."Total Discount Amount")
                 {
                 }
-                field("Total Labour Cost"; "Total Labour Cost")
+                field("Total Labour Cost"; Rec."Total Labour Cost")
                 {
                     Caption = 'Total labour Amount';
                 }
-                field("Total Item Cost"; "Total Item Cost")
+                field("Total Item Cost"; Rec."Total Item Cost")
                 {
                     Caption = 'Total Item Amount';
                 }
-                field("Received Date"; "Received Date")
+                field("Received Date"; Rec."Received Date")
                 {
                 }
-                field("Delivery Date"; "Delivery Date")
+                field("Delivery Date"; Rec."Delivery Date")
                 {
                 }
-                field("Model Name"; "Model Name")
+                field("Model Name"; Rec."Model Name")
                 {
                 }
-                field("Vehicle Classification"; "Vehicle Classification")
+                field("Vehicle Classification"; Rec."Vehicle Classification")
                 {
                 }
-                field(Brand; Brand)
+                field(Brand; Rec.Brand)
                 {
                 }
-                field("Customer Type"; "Customer Type")
+                field("Customer Type"; Rec."Customer Type")
                 {
                 }
             }
@@ -150,7 +150,7 @@ page 80064 "GR Posted Jobs"
                     Promoted = true;
                     PromotedCategory = Process;
                     RunObject = Page 6033;
-                    RunPageLink = No.=FIELD(No.);
+                    RunPageLink = "No." = FIELD("No.");
                     ShortCutKey = 'F7';
                 }
                 action("Co&mments")
@@ -158,20 +158,20 @@ page 80064 "GR Posted Jobs"
                     Caption = 'Co&mments';
                     Image = ViewComments;
                     RunObject = Page 5911;
-                                    RunPageLink = Table Name=CONST(Service Invoice Header),
-                                  No.=FIELD(No.),
-                                  Type=CONST(General);
+                    RunPageLink = "Table Name" = FILTER("Service Invoice Header"),
+                                  "No." = FIELD("No."),
+                                  Type = CONST(General);
                 }
                 action(Dimensions)
                 {
-                    AccessByPermission = TableData 348=R;
+                    AccessByPermission = TableData 348 = R;
                     Caption = 'Dimensions';
                     Image = Dimensions;
                     ShortCutKey = 'Shift+Ctrl+D';
 
                     trigger OnAction()
                     begin
-                        ShowDimensions;
+                        Rec.ShowDimensions;
                         CurrPage.SAVERECORD;
                     end;
                 }
@@ -202,7 +202,7 @@ page 80064 "GR Posted Jobs"
 
                 trigger OnAction()
                 begin
-                    Navigate;
+                    Rec.Navigate;
                 end;
             }
         }
@@ -210,10 +210,10 @@ page 80064 "GR Posted Jobs"
 
     trigger OnOpenPage()
     begin
-        SetSecurityFilterOnRespCenter;
+        Rec.SetSecurityFilterOnRespCenter;
     end;
 
     var
-        ServiceInvHeader: Record "5992";
+        ServiceInvHeader: Record "Service Invoice Header";
 }
 

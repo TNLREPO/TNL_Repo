@@ -1,7 +1,7 @@
 page 50219 "Approved Request-Card"
 {
     PageType = Card;
-    SourceTable = Table70026;
+    SourceTable = "Motor Show Repair";
 
     layout
     {
@@ -9,72 +9,72 @@ page 50219 "Approved Request-Card"
         {
             group(General)
             {
-                field("Current Pending Person"; "Current Pending Person")
+                field("Current Pending Person"; Rec."Current Pending Person")
                 {
                     Editable = false;
                 }
-                field("Request No."; "Request No.")
+                field("Request No."; Rec."Request No.")
                 {
                 }
-                field("Entry Date"; "Entry Date")
+                field("Entry Date"; Rec."Entry Date")
                 {
                 }
-                field("Requester Name"; "Requester Name")
+                field("Requester Name"; Rec."Requester Name")
                 {
                     Editable = false;
                 }
-                field("Global Dimension 1 code"; "Global Dimension 1 code")
+                field("Global Dimension 1 code"; Rec."Global Dimension 1 code")
                 {
                     Caption = 'Department';
                     Editable = false;
                 }
-                field(Reason; Reason)
+                field(Reason; Rec.Reason)
                 {
                     ShowMandatory = true;
                 }
-                field("Request Type"; "Request Type")
+                field("Request Type"; Rec."Request Type")
                 {
                     Visible = false;
                 }
-                field("Auto Show Location"; "Auto Show Location")
+                field("Auto Show Location"; Rec."Auto Show Location")
                 {
                 }
-                field(Make; Make)
+                field(Make; Rec.Make)
                 {
                 }
-                field(Model; Model)
+                field(Model; Rec.Model)
                 {
                 }
-                field("Registration No."; "Registration No.")
+                field("Registration No."; Rec."Registration No.")
                 {
                     Visible = false;
                 }
-                field("KM Covered"; "KM Covered")
+                field("KM Covered"; Rec."KM Covered")
                 {
                 }
-                field("Reference No."; "Reference No.")
+                field("Reference No."; Rec."Reference No.")
                 {
                 }
-                field("Responsible Dealer"; "Responsible Dealer")
+                field("Responsible Dealer"; Rec."Responsible Dealer")
                 {
                 }
             }
             group("Event Manager's Action")
             {
-                field("1st Approval"; "1st Approval")
+                field("1st Approval"; Rec."1st Approval")
                 {
                     Caption = 'Send To PDI';
                 }
-                field("1st Approver"; "1st Approver")
+                field("1st Approver"; Rec."1st Approver")
                 {
                     Caption = 'Name';
                     Editable = false;
                 }
-                field("Send for Approval"; "Send for Approval")
+                field("Send for Approval"; Rec."Send for Approval")
                 {
                     Caption = 'Send';
                 }
-                field("Sent Time"; "Sent Time")
+                field("Sent Time"; Rec."Sent Time")
                 {
                     Caption = 'Time';
                     Editable = false;
@@ -82,25 +82,25 @@ page 50219 "Approved Request-Card"
             }
             group("PDI Section Action")
             {
-                field("Related Job"; "Related Job")
+                field("Related Job"; Rec."Related Job")
                 {
                 }
-                field("2nd Approval"; "2nd Approval")
+                field("2nd Approval"; Rec."2nd Approval")
                 {
                     Caption = 'Send To Event Mngr.';
                     Visible = true;
                 }
-                field("2nd Approver"; "2nd Approver")
+                field("2nd Approver"; Rec."2nd Approver")
                 {
                     Caption = 'Name';
                     Editable = false;
                     Visible = true;
                 }
-                field("1st Approval Status"; "1st Approval Status")
+                field("1st Approval Status"; Rec."1st Approval Status")
                 {
                     Caption = 'Action';
                 }
-                field("1st Approval Time"; "1st Approval Time")
+                field("1st Approval Time"; Rec."1st Approval Time")
                 {
                     Caption = 'Time';
                     Editable = false;
@@ -109,33 +109,33 @@ page 50219 "Approved Request-Card"
             group("Event Mngr's Action on Repair")
             {
                 Visible = true;
-                field("Job Done"; "Job Done")
+                field("Job Done"; Rec."Job Done")
                 {
                     Caption = 'Job Done';
                 }
-                field("Job Done Time"; "Job Done Time")
+                field("Job Done Time"; Rec."Job Done Time")
                 {
                 }
-                field("Job Done Id"; "Job Done Id")
+                field("Job Done Id"; Rec."Job Done Id")
                 {
                 }
-                field("Job Done Name"; "Job Done Name")
+                field("Job Done Name"; Rec."Job Done Name")
                 {
                 }
             }
             group("Payment Confirmation")
             {
                 Caption = 'Payment Confirmation';
-                field("Send for Payment Approval"; "Send for Payment Approval")
+                field("Send for Payment Approval"; Rec."Send for Payment Approval")
                 {
                     Caption = 'Payment Approved';
                 }
-                field("Payment Approval"; "Payment Approval")
+                field("Payment Approval"; Rec."Payment Approval")
                 {
                     Caption = 'Payment Approver';
                     Editable = false;
                 }
-                field("Payment Approval Time"; "Payment Approval Time")
+                field("Payment Approval Time"; Rec."Payment Approval Time")
                 {
                     Caption = 'Payment Approval Date';
                     Editable = false;
@@ -144,13 +144,13 @@ page 50219 "Approved Request-Card"
             group("`")
             {
                 Caption = 'Job Closure';
-                field(Close; Close)
+                field(Close; Rec.Close)
                 {
                 }
-                field("Job Closing Officer"; "Job Closing Officer")
+                field("Job Closing Officer"; Rec."Job Closing Officer")
                 {
                 }
-                field("Close Date"; "Close Date")
+                field("Close Date"; Rec."Close Date")
                 {
                 }
             }

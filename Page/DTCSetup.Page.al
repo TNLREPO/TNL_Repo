@@ -1,24 +1,24 @@
 page 50361 "DTC Setup"
 {
     PageType = List;
-    SourceTable = Table50051;
+    SourceTable = "DTC";
 
     layout
     {
         area(content)
         {
-            repeater()
+            repeater(Group)
             {
-                field("DT Code"; "DT Code")
+                field("DT Code";Rec. "DT Code")
                 {
                 }
-                field("DT Symptoms"; "DT Symptoms")
+                field("DT Symptoms";Rec. "DT Symptoms")
                 {
                 }
-                field("Freeze Frame Data Saved"; "Freeze Frame Data Saved")
+                field("Freeze Frame Data Saved";Rec. "Freeze Frame Data Saved")
                 {
                 }
-                field(Status; Status)
+                field(Status;Rec. Status)
                 {
                 }
             }

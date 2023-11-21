@@ -1,30 +1,30 @@
 page 50157 "Dealer Online order subform"
 {
     PageType = Card;
-    SourceTable = Table50038;
+    SourceTable = "Warranty Claim Header";
 
     layout
     {
         area(content)
         {
-            repeater()
+            repeater(control3)
             {
-                field("Dealer Name"; "Dealer Name")
+                field("Dealer Name";Rec."Dealer Name")
                 {
                 }
-                field("Process Date"; "Process Date")
+                field("Process Date";Rec."Process Date")
                 {
                 }
-                field("Vehicle Identification No."; "Vehicle Identification No.")
+                field("Vehicle Identification No.";Rec."Vehicle Identification No.")
                 {
                 }
-                field("Vehicle Engine No."; "Vehicle Engine No.")
+                field("Vehicle Engine No.";Rec."Vehicle Engine No.")
                 {
                 }
-                field("Vehicle Model"; "Vehicle Model")
+                field("Vehicle Model";Rec."Vehicle Model")
                 {
                 }
-                field("Model Year"; "Model Year")
+                field("Model Year";Rec."Model Year")
                 {
                 }
             }

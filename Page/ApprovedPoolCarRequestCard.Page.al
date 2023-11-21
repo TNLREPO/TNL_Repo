@@ -3,7 +3,7 @@ page 50595 "Approved Pool Car Request Card"
     DeleteAllowed = false;
     Editable = false;
     ModifyAllowed = false;
-    SourceTable = Table70002;
+    SourceTable = "Pool Car Register";
 
     layout
     {
@@ -11,67 +11,67 @@ page 50595 "Approved Pool Car Request Card"
         {
             group(General)
             {
-                field("Request No."; "Request No.")
+                field("Request No."; Rec."Request No.")
                 {
                 }
-                field("Entry Date"; "Entry Date")
+                field("Entry Date"; Rec."Entry Date")
                 {
                 }
-                field(Destination; Destination)
+                field(Destination; Rec.Destination)
                 {
                 }
-                field("Request Type"; "Request Type")
+                field("Request Type"; Rec."Request Type")
                 {
                     Caption = 'Purpose';
                 }
-                field(Requester; Requester)
+                field(Requester; Rec.Requester)
                 {
                 }
-                field("Requester Name"; "Requester Name")
+                field("Requester Name"; Rec."Requester Name")
                 {
                 }
-                field("Global Dimension 1 code"; "Global Dimension 1 code")
+                field("Global Dimension 1 code"; Rec."Global Dimension 1 code")
                 {
                     Caption = 'Department';
                 }
-                field("Pickup Date"; "Pickup Date")
+                field("Pickup Date"; Rec."Pickup Date")
                 {
                 }
-                field("Return Date"; "Return Date")
+                field("Return Date"; Rec."Return Date")
                 {
                 }
-                field("Pickup Time"; "Pickup Time")
+                field("Pickup Time"; Rec."Pickup Time")
                 {
                 }
-                field("Return Time"; "Return Time")
+                field("Return Time"; Rec."Return Time")
                 {
                 }
-                field(Reason; Reason)
+                field(Reason; Rec.Reason)
                 {
                 }
-                field(Hours; Hours)
+                field(Hours; Rec.Hours)
                 {
                 }
             }
             group(Send)
             {
-                field("1st Approval"; "1st Approval")
+                field("1st Approval"; Rec."1st Approval")
                 {
                     Caption = 'To';
                 }
-                field("1st Approver"; "1st Approver")
+                field("1st Approver"; Rec."1st Approver")
                 {
                     Caption = 'Name';
                 }
-                field("Send for Approval"; "Send for Approval")
+                field("Send for Approval"; Rec."Send for Approval")
                 {
                     Caption = 'Send';
                 }
-                field(Sender; Sender)
+                field(Sender; Rec.Sender)
                 {
                     Caption = 'Sent by';
                 }
-                field("Sent Time"; "Sent Time")
+                field("Sent Time"; Rec."Sent Time")
                 {
                     Caption = 'Time';
                 }
@@ -79,38 +79,38 @@ page 50595 "Approved Pool Car Request Card"
             group("Level 1")
             {
                 Caption = 'Level 1';
-                field("2nd Approval"; "2nd Approval")
+                field("2nd Approval"; Rec."2nd Approval")
                 {
                     Caption = 'To';
                 }
-                field("2nd Approver"; "2nd Approver")
+                field("2nd Approver"; Rec."2nd Approver")
                 {
                     Caption = 'Name';
                 }
-                field("1st Approval Status"; "1st Approval Status")
+                field("1st Approval Status"; Rec."1st Approval Status")
                 {
                     Caption = 'Action';
                 }
-                field("1st Approval Time"; "1st Approval Time")
+                field("1st Approval Time"; Rec."1st Approval Time")
                 {
                     Caption = 'Time';
                 }
             }
             group("Level 2")
             {
-                field("Final Approval"; "Final Approval")
+                field("Final Approval"; Rec."Final Approval")
                 {
                     Caption = 'To';
                 }
-                field("Final Approver"; "Final Approver")
+                field("Final Approver"; Rec."Final Approver")
                 {
                     Caption = 'Name';
                 }
-                field("2nd Approval Status"; "2nd Approval Status")
+                field("2nd Approval Status"; Rec."2nd Approval Status")
                 {
                     Caption = 'Action';
                 }
-                field(Time; "2nd Approval Time")
+                field(Time; Rec."2nd Approval Time")
                 {
                     Caption = 'Time';
                 }

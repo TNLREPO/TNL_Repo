@@ -2,9 +2,9 @@ page 70040 "Approved Stock Capital List"
 {
     CardPageID = "Approved Stock Capitalisation";
     PageType = List;
-    SourceTable = Table50135;
-    SourceTableView = WHERE (Stock Capitalisation Approval=CONST(Yes),
-                            Processed=CONST(No));
+    SourceTable = "Stock Capitalisation";
+    SourceTableView = WHERE("Stock Capitalisation Approval" = filter(true),
+                            Processed = filter(false));
 
     layout
     {
@@ -12,88 +12,88 @@ page 70040 "Approved Stock Capital List"
         {
             repeater(Group)
             {
-                field(Code; Code)
+                field(Code; Rec.Code)
                 {
                 }
-                field("Transaction Date"; "Transaction Date")
+                field("Transaction Date"; Rec."Transaction Date")
                 {
                 }
-                field("Global Dimension 1"; "Global Dimension 1")
+                field("Global Dimension 1"; Rec."Global Dimension 1")
                 {
                 }
-                field("Global Dimension 2"; "Global Dimension 2")
+                field("Global Dimension 2"; Rec."Global Dimension 2")
                 {
                 }
-                field("Item No."; "Item No.")
+                field("Item No."; Rec."Item No.")
                 {
                 }
-                field("Item Description"; "Item Description")
+                field("Item Description"; Rec."Item Description")
                 {
                 }
-                field(Location; Location)
+                field(Location; Rec.Location)
                 {
                 }
-                field("Variant Code"; "Variant Code")
+                field("Variant Code"; Rec."Variant Code")
                 {
                 }
-                field("Asset No."; "Asset No.")
+                field("Asset No."; Rec."Asset No.")
                 {
                 }
-                field("Asset Description"; "Asset Description")
+                field("Asset Description"; Rec."Asset Description")
                 {
                 }
-                field("Asset Aquisition Date"; "Asset Aquisition Date")
+                field("Asset Aquisition Date"; Rec."Asset Aquisition Date")
                 {
                 }
-                field(Processed; Processed)
+                field(Processed; Rec.Processed)
                 {
                 }
-                field(Quantity; Quantity)
+                field(Quantity; Rec.Quantity)
                 {
                 }
-                field("Process date"; "Process date")
+                field("Process date"; Rec."Process date")
                 {
                 }
-                field("Process Time"; "Process Time")
+                field("Process Time"; Rec."Process Time")
                 {
                 }
-                field("Process By"; "Process By")
+                field("Process By"; Rec."Process By")
                 {
                 }
-                field("Stock Capitalisation Account"; "Stock Capitalisation Account")
+                field("Stock Capitalisation Account"; Rec."Stock Capitalisation Account")
                 {
                 }
-                field("No. Series"; "No. Series")
+                field("No. Series"; Rec."No. Series")
                 {
                 }
-                field("Stock Capitalisation Approval"; "Stock Capitalisation Approval")
+                field("Stock Capitalisation Approval"; Rec."Stock Capitalisation Approval")
                 {
                 }
-                field("Capitalisation Approved By"; "Capitalisation Approved By")
+                field("Capitalisation Approved By"; Rec."Capitalisation Approved By")
                 {
                 }
-                field("Capitalisation Approved Time"; "Capitalisation Approved Time")
+                field("Capitalisation Approved Time"; Rec."Capitalisation Approved Time")
                 {
                 }
-                field("Capitalisation Approved Date"; "Capitalisation Approved Date")
+                field("Capitalisation Approved Date"; Rec."Capitalisation Approved Date")
                 {
                 }
-                field("Chasis No."; "Chasis No.")
+                field("Chasis No."; Rec."Chasis No.")
                 {
                 }
-                field(Color; Color)
+                field(Color; Rec.Color)
                 {
                 }
-                field("Engine No."; "Engine No.")
+                field("Engine No."; Rec."Engine No.")
                 {
                 }
-                field("Key No."; "Key No.")
+                field("Key No."; Rec."Key No.")
                 {
                 }
-                field("Entry No"; "Entry No")
+                field("Entry No"; Rec."Entry No")
                 {
                 }
-                field("Item Cost (LCY)"; "Item Cost (LCY)")
+                field("Item Cost (LCY)"; Rec."Item Cost (LCY)")
                 {
                 }
             }

@@ -2,9 +2,9 @@ page 50240 "Awaiting Payment Confirmations"
 {
     CardPageID = "TNL-Work Order Card";
     PageType = List;
-    SourceTable = Table70025;
-    SourceTableView = WHERE (Invoice Received=FILTER(Yes),
-                            Payment Confirmed=FILTER(Yes));
+    SourceTable = "TNL Work Order";
+    SourceTableView = WHERE("Invoice Received" = FILTER('Yes'),
+                            "Payment Confirmed" = FILTER('Yes'));
 
     layout
     {
@@ -12,19 +12,19 @@ page 50240 "Awaiting Payment Confirmations"
         {
             repeater(Group)
             {
-                field("Request No.";"Request No.")
+                field("Request No."; Rec."Request No.")
                 {
                 }
-                field("Entry Date";"Entry Date")
+                field("Entry Date"; Rec."Entry Date")
                 {
                 }
-                field("Requester Name";"Requester Name")
+                field("Requester Name"; Rec."Requester Name")
                 {
                 }
-                field("Global Dimension 1 code";"Global Dimension 1 code")
+                field("Global Dimension 1 code"; Rec."Global Dimension 1 code")
                 {
                 }
-                field("Request Type";"Request Type")
+                field("Request Type"; Rec."Request Type")
                 {
                     Caption = 'Pupose';
                 }

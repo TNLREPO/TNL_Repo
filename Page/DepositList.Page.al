@@ -3,49 +3,49 @@ page 50223 "Deposit List"
     DeleteAllowed = false;
     ModifyAllowed = false;
     PageType = Card;
-    SourceTable = Table50108;
+    SourceTable = "Deposit Management";
 
     layout
     {
         area(content)
         {
-            repeater()
+            repeater(Group)
             {
                 Editable = false;
-                field("Deposit No."; "Deposit No.")
+                field("Deposit No.";Rec. "Deposit No.")
                 {
                 }
-                field(Description; Description)
+                field(Description;Rec. Description)
                 {
                 }
-                field(Type; Type)
+                field(Type;Rec. Type)
                 {
                 }
-                field("No."; "No.")
+                field("No.";Rec. "No.")
                 {
                 }
-                field("Original Amount"; "Original Amount")
+                field("Original Amount";Rec. "Original Amount")
                 {
                 }
-                field("Amount Deposited"; "Amount Deposited")
+                field("Amount Deposited";Rec. "Amount Deposited")
                 {
                 }
-                field("Balance Amount"; "Balance Amount")
+                field("Balance Amount";Rec. "Balance Amount")
                 {
                 }
-                field("Ref. Order No."; "Ref. Order No.")
+                field("Ref. Order No.";Rec. "Ref. Order No.")
                 {
                 }
-                field("Bal. Account No."; "Bal. Account No.")
+                field("Bal. Account No.";Rec. "Bal. Account No.")
                 {
                 }
-                field("Document Date"; "Document Date")
+                field("Document Date";Rec. "Document Date")
                 {
                 }
-                field("Cheque No."; "Cheque No.")
+                field("Cheque No.";Rec. "Cheque No.")
                 {
                 }
-                field("Cash Confirmation"; "Cash Confirmation")
+                field("Cash Confirmation";Rec. "Cash Confirmation")
                 {
                 }
             }

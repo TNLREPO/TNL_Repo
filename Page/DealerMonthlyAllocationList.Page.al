@@ -4,39 +4,39 @@ page 50185 "Dealer Monthly Allocation List"
     Editable = false;
     ModifyAllowed = false;
     PageType = Card;
-    SourceTable = Table50034;
+    SourceTable = "Vehicle Mth. Allocation Header";
 
     layout
     {
         area(content)
         {
-            repeater()
+            repeater(control1)
             {
-                field("Allocation Code"; "Allocation Code")
+                field("Allocation Code"; Rec."Allocation Code")
                 {
                 }
-                field("Transaction Date"; "Transaction Date")
+                field("Transaction Date"; Rec."Transaction Date")
                 {
                 }
-                field("Customer No."; "Customer No.")
+                field("Customer No."; Rec."Customer No.")
                 {
                 }
-                field("Customer Name"; "Customer Name")
+                field("Customer Name"; Rec."Customer Name")
                 {
                 }
-                field("Amount Paid"; "Amount Paid")
+                field("Amount Paid"; Rec."Amount Paid")
                 {
                 }
-                field("Teller No."; "Teller No.")
+                field("Teller No."; Rec."Teller No.")
                 {
                 }
-                field(Bank; Bank)
+                field(Bank; Rec.Bank)
                 {
                 }
-                field("Teller Date"; "Teller Date")
+                field("Teller Date"; Rec."Teller Date")
                 {
                 }
-                field("Amount Allocated"; "Amount Allocated")
+                field("Amount Allocated"; Rec."Amount Allocated")
                 {
                 }
             }

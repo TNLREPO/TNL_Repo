@@ -1,24 +1,24 @@
 page 50021 "Banks."
 {
     PageType = List;
-    SourceTable = Table50012;
+    SourceTable = "Payroll-Banks.";
 
     layout
     {
         area(content)
         {
-            repeater()
+            repeater(Control1)
             {
-                field(Code; Code)
+                field(Code; Rec.Code)
                 {
                 }
-                field(Name; Name)
+                field(Name; Rec.Name)
                 {
                 }
-                field("Main Bank Code"; "Main Bank Code")
+                field("Main Bank Code"; Rec."Main Bank Code")
                 {
                 }
-                field("Search Name"; "Search Name")
+                field("Search Name"; Rec."Search Name")
                 {
                 }
             }

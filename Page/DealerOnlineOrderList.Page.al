@@ -4,42 +4,42 @@ page 50158 "Dealer Online Order List"
     Editable = false;
     ModifyAllowed = false;
     PageType = Card;
-    SourceTable = Table50099;
+    SourceTable = "Dealer Online Order Header";
 
     layout
     {
         area(content)
         {
-            repeater()
+            repeater(control2)
             {
-                field("Order No."; "Order No.")
+                field("Order No."; Rec."Order No.")
                 {
                 }
-                field("Dealer No."; "Dealer No.")
+                field("Dealer No."; Rec."Dealer No.")
                 {
                 }
-                field("Dealer Name"; "Dealer Name")
+                field("Dealer Name"; Rec."Dealer Name")
                 {
                 }
-                field("Dealer Address"; "Dealer Address")
+                field("Dealer Address"; Rec."Dealer Address")
                 {
                 }
-                field("Transaction Date"; "Transaction Date")
+                field("Transaction Date"; Rec."Transaction Date")
                 {
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                 }
-                field("User Id"; "User Id")
+                field("User Id"; Rec."User Id")
                 {
                 }
-                field("Process date"; "Process date")
+                field("Process date"; Rec."Process date")
                 {
                 }
-                field(Processed; Processed)
+                field(Processed; Rec.Processed)
                 {
                 }
-                field(Submit; Submit)
+                field(Submit; Rec.Submit)
                 {
                 }
             }

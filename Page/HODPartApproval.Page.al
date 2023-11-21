@@ -2,10 +2,10 @@ page 70194 "HOD Part Approval"
 {
     CardPageID = "LPP Card2";
     PageType = List;
-    SourceTable = Table70018;
-    SourceTableView = WHERE (HoDPartApproval = CONST (Yes),
-                            ComplianceCheck = CONST (No),
-                            Rejected = CONST (No));
+    SourceTable = "Local Part Purchase Register";
+    SourceTableView = WHERE(HoDPartApproval = FILTER('Yes'),
+                            ComplianceCheck = FILTER('No'),
+                            Rejected = FILTER('No'));
 
     layout
     {
@@ -13,22 +13,22 @@ page 70194 "HOD Part Approval"
         {
             repeater(Group)
             {
-                field("LPP No."; "LPP No.")
+                field("LPP No."; Rec."LPP No.")
                 {
                 }
-                field("Requester Name"; "Requester Name")
+                field("Requester Name"; Rec."Requester Name")
                 {
                 }
-                field("Requester Department"; "Requester Department")
+                field("Requester Department"; Rec."Requester Department")
                 {
                 }
-                field("Supplier's Name"; "Supplier's Name")
+                field("Supplier's Name"; Rec."Supplier's Name")
                 {
                 }
-                field("Justification for purchase"; "Justification for purchase")
+                field("Justification for purchase"; Rec."Justification for purchase")
                 {
                 }
-                field("Total Purchase Value"; "Total Purchase Value")
+                field("Total Purchase Value"; Rec."Total Purchase Value")
                 {
                 }
             }

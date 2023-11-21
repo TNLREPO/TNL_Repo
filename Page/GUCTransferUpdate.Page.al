@@ -1,7 +1,7 @@
 page 50377 "GUC Transfer Update"
 {
     PageType = List;
-    SourceTable = Table32;
+    SourceTable = "Item Ledger Entry";
 
     layout
     {
@@ -9,304 +9,304 @@ page 50377 "GUC Transfer Update"
         {
             repeater(Group)
             {
-                field("Entry No."; "Entry No.")
+                field("Entry No."; Rec."Entry No.")
                 {
                 }
-                field("Item No."; "Item No.")
+                field("Item No."; Rec."Item No.")
                 {
                 }
-                field("Posting Date"; "Posting Date")
+                field("Posting Date"; Rec."Posting Date")
                 {
                 }
-                field("Entry Type"; "Entry Type")
+                field("Entry Type"; Rec."Entry Type")
                 {
                 }
-                field("Source No."; "Source No.")
+                field("Source No."; Rec."Source No.")
                 {
                 }
-                field("Document No."; "Document No.")
+                field("Document No."; Rec."Document No.")
                 {
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                 }
-                field("Location Code"; "Location Code")
+                field("Location Code"; Rec."Location Code")
                 {
                 }
-                field(Quantity; Quantity)
+                field(Quantity; Rec.Quantity)
                 {
                 }
-                field("Remaining Quantity"; "Remaining Quantity")
+                field("Remaining Quantity"; Rec."Remaining Quantity")
                 {
                 }
-                field("Invoiced Quantity"; "Invoiced Quantity")
+                field("Invoiced Quantity"; Rec."Invoiced Quantity")
                 {
                 }
-                field("Applies-to Entry"; "Applies-to Entry")
+                field("Applies-to Entry"; Rec."Applies-to Entry")
                 {
                 }
-                field(Open; Open)
+                field(Open; Rec.Open)
                 {
                 }
-                field("Global Dimension 1 Code"; "Global Dimension 1 Code")
+                field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
                 {
                 }
-                field("Global Dimension 2 Code"; "Global Dimension 2 Code")
+                field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
                 {
                 }
-                field(Positive; Positive)
+                field(Positive; Rec.Positive)
                 {
                 }
-                field("Source Type"; "Source Type")
+                field("Source Type"; Rec."Source Type")
                 {
                 }
-                field("Drop Shipment"; "Drop Shipment")
+                field("Drop Shipment"; Rec."Drop Shipment")
                 {
                 }
-                field("Transaction Type"; "Transaction Type")
+                field("Transaction Type"; Rec."Transaction Type")
                 {
                 }
-                field("Transport Method"; "Transport Method")
+                field("Transport Method"; Rec."Transport Method")
                 {
                 }
-                field("Country/Region Code"; "Country/Region Code")
+                field("Country/Region Code"; Rec."Country/Region Code")
                 {
                 }
-                field("Entry/Exit Point"; "Entry/Exit Point")
+                field("Entry/Exit Point"; Rec."Entry/Exit Point")
                 {
                 }
-                field("Document Date"; "Document Date")
+                field("Document Date"; Rec."Document Date")
                 {
                 }
-                field("External Document No."; "External Document No.")
+                field("External Document No."; Rec."External Document No.")
                 {
                 }
-                field(Area;Area)
-        {
-        }
-                field("Transaction Specification";"Transaction Specification")
+                field("Area"; Rec.Area)
                 {
                 }
-                field("No. Series";"No. Series")
+                field("Transaction Specification"; Rec."Transaction Specification")
                 {
                 }
-                field("Reserved Quantity";"Reserved Quantity")
+                field("No. Series"; Rec."No. Series")
                 {
                 }
-                field("Document Type";"Document Type")
+                field("Reserved Quantity"; Rec."Reserved Quantity")
                 {
                 }
-                field("Document Line No.";"Document Line No.")
+                field("Document Type"; Rec."Document Type")
                 {
                 }
-                field("Order Type";"Order Type")
+                field("Document Line No."; Rec."Document Line No.")
                 {
                 }
-                field("Order No.";"Order No.")
+                field("Order Type"; Rec."Order Type")
                 {
                 }
-                field("Order Line No.";"Order Line No.")
+                field("Order No."; Rec."Order No.")
                 {
                 }
-                field("Dimension Set ID";"Dimension Set ID")
+                field("Order Line No."; Rec."Order Line No.")
                 {
                 }
-                field("Assemble to Order";"Assemble to Order")
+                field("Dimension Set ID"; Rec."Dimension Set ID")
                 {
                 }
-                field("Job No.";"Job No.")
+                field("Assemble to Order"; Rec."Assemble to Order")
                 {
                 }
-                field("Job Task No.";"Job Task No.")
+                field("Job No."; Rec."Job No.")
                 {
                 }
-                field("Job Purchase";"Job Purchase")
+                field("Job Task No."; Rec."Job Task No.")
                 {
                 }
-                field("Variant Code";"Variant Code")
+                field("Job Purchase"; Rec."Job Purchase")
                 {
                 }
-                field("Qty. per Unit of Measure";"Qty. per Unit of Measure")
+                field("Variant Code"; Rec."Variant Code")
                 {
                 }
-                field("Unit of Measure Code";"Unit of Measure Code")
+                field("Qty. per Unit of Measure"; Rec."Qty. per Unit of Measure")
                 {
                 }
-                field("Derived from Blanket Order";"Derived from Blanket Order")
+                field("Unit of Measure Code"; Rec."Unit of Measure Code")
                 {
                 }
-                field("Cross-Reference No.";"Cross-Reference No.")
+                field("Derived from Blanket Order"; Rec."Derived from Blanket Order")
                 {
                 }
-                field("Originally Ordered No.";"Originally Ordered No.")
+                field("Cross-Reference No."; Rec."Cross-Reference No.")
                 {
                 }
-                field("Originally Ordered Var. Code";"Originally Ordered Var. Code")
+                field("Originally Ordered No."; Rec."Originally Ordered No.")
                 {
                 }
-                field("Out-of-Stock Substitution";"Out-of-Stock Substitution")
+                field("Originally Ordered Var. Code"; Rec."Originally Ordered Var. Code")
                 {
                 }
-                field("Item Category Code";"Item Category Code")
+                field("Out-of-Stock Substitution"; Rec."Out-of-Stock Substitution")
                 {
                 }
-                field(Nonstock;Nonstock)
+                field("Item Category Code"; Rec."Item Category Code")
                 {
                 }
-                field("Purchasing Code";"Purchasing Code")
+                field(Nonstock; Rec.Nonstock)
                 {
                 }
-                field("Product Group Code";"Product Group Code")
+                field("Purchasing Code"; Rec."Purchasing Code")
                 {
                 }
-                field("Completely Invoiced";"Completely Invoiced")
+                field("Product Group Code"; Rec."Product Group Code")
                 {
                 }
-                field("Last Invoice Date";"Last Invoice Date")
+                field("Completely Invoiced"; Rec."Completely Invoiced")
                 {
                 }
-                field("Applied Entry to Adjust";"Applied Entry to Adjust")
+                field("Last Invoice Date"; Rec."Last Invoice Date")
                 {
                 }
-                field("Cost Amount (Expected)";"Cost Amount (Expected)")
+                field("Applied Entry to Adjust"; Rec."Applied Entry to Adjust")
                 {
                 }
-                field("Cost Amount (Actual)";"Cost Amount (Actual)")
+                field("Cost Amount (Expected)"; Rec."Cost Amount (Expected)")
                 {
                 }
-                field("Cost Amount (Non-Invtbl.)";"Cost Amount (Non-Invtbl.)")
+                field("Cost Amount (Actual)"; Rec."Cost Amount (Actual)")
                 {
                 }
-                field("Cost Amount (Expected) (ACY)";"Cost Amount (Expected) (ACY)")
+                field("Cost Amount (Non-Invtbl.)"; Rec."Cost Amount (Non-Invtbl.)")
                 {
                 }
-                field("Cost Amount (Actual) (ACY)";"Cost Amount (Actual) (ACY)")
+                field("Cost Amount (Expected) (ACY)"; Rec."Cost Amount (Expected) (ACY)")
                 {
                 }
-                field("Cost Amount (Non-Invtbl.)(ACY)";"Cost Amount (Non-Invtbl.)(ACY)")
+                field("Cost Amount (Actual) (ACY)"; Rec."Cost Amount (Actual) (ACY)")
                 {
                 }
-                field("Purchase Amount (Expected)";"Purchase Amount (Expected)")
+                field("Cost Amount (Non-Invtbl.)(ACY)"; Rec."Cost Amount (Non-Invtbl.)(ACY)")
                 {
                 }
-                field("Purchase Amount (Actual)";"Purchase Amount (Actual)")
+                field("Purchase Amount (Expected)"; Rec."Purchase Amount (Expected)")
                 {
                 }
-                field("Sales Amount (Expected)";"Sales Amount (Expected)")
+                field("Purchase Amount (Actual)"; Rec."Purchase Amount (Actual)")
                 {
                 }
-                field("Sales Amount (Actual)";"Sales Amount (Actual)")
+                field("Sales Amount (Expected)"; Rec."Sales Amount (Expected)")
                 {
                 }
-                field(Correction;Correction)
+                field("Sales Amount (Actual)"; Rec."Sales Amount (Actual)")
                 {
                 }
-                field("Shipped Qty. Not Returned";"Shipped Qty. Not Returned")
+                field(Correction; Rec.Correction)
                 {
                 }
-                field("Prod. Order Comp. Line No.";"Prod. Order Comp. Line No.")
+                field("Shipped Qty. Not Returned"; Rec."Shipped Qty. Not Returned")
                 {
                 }
-                field("Serial No.";"Serial No.")
+                field("Prod. Order Comp. Line No."; Rec."Prod. Order Comp. Line No.")
                 {
                 }
-                field("Lot No.";"Lot No.")
+                field("Serial No."; Rec."Serial No.")
                 {
                 }
-                field("Warranty Date";"Warranty Date")
+                field("Lot No."; Rec."Lot No.")
                 {
                 }
-                field("Expiration Date";"Expiration Date")
+                field("Warranty Date"; Rec."Warranty Date")
                 {
                 }
-                field("Item Tracking";"Item Tracking")
+                field("Expiration Date"; Rec."Expiration Date")
                 {
                 }
-                field("Return Reason Code";"Return Reason Code")
+                field("Item Tracking"; Rec."Item Tracking")
                 {
                 }
-                field("Registration No.";"Registration No.")
+                field("Return Reason Code"; Rec."Return Reason Code")
                 {
                 }
-                field("Chassis No.";"Chassis No.")
+                field("Registration No."; Rec."Registration No.")
                 {
                 }
-                field("Exterior Colour Name";"Exterior Colour Name")
+                field("Chassis No."; Rec."Chassis No.")
                 {
                 }
-                field(Binlocation;Binlocation)
+                field("Exterior Colour Name"; Rec."Exterior Colour Name")
                 {
                 }
-                field("Issuing Department";"Issuing Department")
+                field(Binlocation; Rec.Binlocation)
                 {
                 }
-                field("Depart.";"Depart.")
+                field("Issuing Department"; Rec."Issuing Department")
                 {
                 }
-                field("Prod. Gr.";"Prod. Gr.")
+                field("Depart."; Rec."Depart.")
                 {
                 }
-                field("Vouch GL";"Vouch GL")
+                field("Prod. Gr."; Rec."Prod. Gr.")
                 {
                 }
-                field("Old Value";"Old Value")
+                field("Vouch GL"; Rec."Vouch GL")
                 {
                 }
-                field("xRemain Qty Val";"xRemain Qty Val")
+                field("Old Value"; Rec."Old Value")
                 {
                 }
-                field("Serial no. TNL";"Serial no. TNL")
+                field("xRemain Qty Val"; Rec."xRemain Qty Val")
                 {
                 }
-                field("Invoice No.";"Invoice No.")
+                field("Serial no. TNL"; Rec."Serial no. TNL")
                 {
                 }
-                field("Qty. Demanded";"Qty. Demanded")
+                field("Invoice No."; Rec."Invoice No.")
                 {
                 }
-                field("Inventory Posting Group";"Inventory Posting Group")
+                field("Qty. Demanded"; Rec."Qty. Demanded")
                 {
                 }
-                field(Reference;Reference)
+                field("Inventory Posting Group"; Rec."Inventory Posting Group")
                 {
                 }
-                field("Item Order Type";"Item Order Type")
+                field(Reference; Rec.Reference)
                 {
                 }
-                field("Gen. Bus. Posting Group";"Gen. Bus. Posting Group")
+                field("Item Order Type"; Rec."Item Order Type")
                 {
                 }
-                field("Original Purch Customer No.";"Original Purch Customer No.")
+                field("Gen. Bus. Posting Group"; Rec."Gen. Bus. Posting Group")
                 {
                 }
-                field("New Location Code";"New Location Code")
+                field("Original Purch Customer No."; Rec."Original Purch Customer No.")
                 {
                 }
-                field("Chasis Number";"Chasis Number")
+                field("New Location Code"; Rec."New Location Code")
                 {
                 }
-                field("Engine No.";"Engine No.")
+                field("Chasis Number"; Rec."Chasis Number")
                 {
                 }
-                field("Exterior Colour Code";"Exterior Colour Code")
+                field("Engine No."; Rec."Engine No.")
                 {
                 }
-                field("Key No.";"Key No.")
+                field("Exterior Colour Code"; Rec."Exterior Colour Code")
                 {
                 }
-                field("Service Item Registered";"Service Item Registered")
+                field("Key No."; Rec."Key No.")
                 {
                 }
-                field("On Transfer Line";"On Transfer Line")
+                field("Service Item Registered"; Rec."Service Item Registered")
                 {
                 }
-                field("From Service";"From Service")
+                field("On Transfer Line"; Rec."On Transfer Line")
                 {
                 }
-                field("From Service Line No.";"From Service Line No.")
+                field("From Service"; Rec."From Service")
                 {
                 }
-                field("Purchase Date";"Purchase Date")
+                field("From Service Line No."; Rec."From Service Line No.")
+                {
+                }
+                field("Purchase Date"; Rec."Purchase Date")
                 {
                 }
             }

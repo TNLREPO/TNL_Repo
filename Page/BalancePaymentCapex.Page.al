@@ -2,13 +2,13 @@ page 70163 "Balance Payment-Capex"
 {
     CardPageID = BalanceCapexCard;
     PageType = List;
-    SourceTable = Table70008;
-    SourceTableView = WHERE (Document Type=CONST(Capex),
-                            Compliance=CONST(Yes),
-                            Balance Paymt.=CONST(Yes),
-                            Voucher Raised=CONST(No),
-                            Closed=CONST(No),
-                            Reject=CONST(No));
+    SourceTable = "Procurement Header";
+    SourceTableView = WHERE("Document Type" = filter('Capex'),
+                            Compliance = filter('Yes'),
+                            "Balance Paymt." = filter('Yes'),
+                            "Voucher Raised" = filter('No'),
+                            Closed = filter('No'),
+                            Reject = filter('No'));
 
     layout
     {
@@ -16,23 +16,23 @@ page 70163 "Balance Payment-Capex"
         {
             repeater(Group)
             {
-                field(Date; Date)
+                field(Date; Rec.Date)
                 {
                 }
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     Caption = 'Opex No.';
                 }
-                field("Requester Name"; "Requester Name")
+                field("Requester Name"; Rec."Requester Name")
                 {
                 }
-                field("Purchase Justification"; "Purchase Justification")
+                field("Purchase Justification"; Rec."Purchase Justification")
                 {
                 }
-                field("Proposed Purchase Amount"; "Proposed Purchase Amount")
+                field("Proposed Purchase Amount"; Rec."Proposed Purchase Amount")
                 {
                 }
-                field(Vendor; Vendor)
+                field(Vendor; Rec.Vendor)
                 {
                 }
             }

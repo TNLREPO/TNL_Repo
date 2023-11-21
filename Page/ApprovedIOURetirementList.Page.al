@@ -2,39 +2,39 @@ page 70033 "Approved IOU Retirement List"
 {
     CardPageID = "Approved IOU Retirement";
     PageType = List;
-    SourceTable = Table50107;
-    SourceTableView = WHERE (Posted = CONST (No),
-                            Final Apprv. Status=CONST(Approved));
+    SourceTable = "IOU Retirement Header";
+    SourceTableView = WHERE(Posted = filter('No'),
+                            "Final Apprv. Status" = filter('Approved'));
 
     layout
     {
         area(content)
         {
-            repeater()
+            repeater(Control1)
             {
                 Editable = false;
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                 }
-                field("IOU No."; "IOU No.")
+                field("IOU No."; Rec."IOU No.")
                 {
                 }
-                field("Staff No."; "Staff No.")
+                field("Staff No."; Rec."Staff No.")
                 {
                 }
-                field("Staff Name"; "Staff Name")
+                field("Staff Name"; Rec."Staff Name")
                 {
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                 }
-                field("Entry Date"; "Entry Date")
+                field("Entry Date"; Rec."Entry Date")
                 {
                 }
-                field("Original IOU Amount"; "Original IOU Amount")
+                field("Original IOU Amount"; Rec."Original IOU Amount")
                 {
                 }
-                field("Amount To Retire"; "Amount To Retire")
+                field("Amount To Retire"; Rec."Amount To Retire")
                 {
                 }
                 field(BalAmt; BalAmt)
@@ -51,8 +51,8 @@ page 70033 "Approved IOU Retirement List"
     trigger OnAfterGetRecord()
     begin
         BalAmt := 0;
-        CALCFIELDS("Amount To Retire");
-        BalAmt := "Original IOU Amount" - "Amount To Retire";
+        Rec.CALCFIELDS(Rec."Amount To Retire");
+        BalAmt := Rec."Original IOU Amount" - Rec."Amount To Retire";
     end;
 
     var

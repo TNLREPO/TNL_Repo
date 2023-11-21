@@ -2,44 +2,43 @@ page 70186 "Balance/Full Payment Opex-MD"
 {
     CardPageID = "Opex Card";
     PageType = List;
-    SourceTable = Table70008;
-    SourceTableView = WHERE (ListMD = FILTER (Yes),
-                            Compliance = CONST (Yes),
-                            Balance Paymt. Appr.=CONST(Yes),
-                            Balance Paymt.=CONST(No),
-                            Closed=CONST(No),
-                            Document Type=CONST(Opex),
-                            Reject=CONST(No),
-                            Bal. Paymt. Audit=CONST(Approved),
-                            Bal. Paymt. MD=FILTER(<>Approved|Rejected),
-                            Voucher Raised=CONST(No));
-
+    SourceTable = "Procurement Header";
+    SourceTableView = WHERE(ListMD = FILTER(true),
+                            Compliance = filter(true),
+                            "Balance Paymt. Appr." = filter(true),
+                            "Balance Paymt." = filter(False),
+                            Closed = filter(False),
+                            "Document Type" = filter('Opex'),
+                            Reject = filter(False),
+                            "Bal. Paymt. Audit" = filter('Approved'),
+                            "Bal. Paymt. GM" = FILTER(<> 'Approved|Rejected'),
+                           "Voucher Raised" = filter(False));
     layout
     {
         area(content)
         {
             repeater(Group)
             {
-                field(Date;Date)
+                field(Date; Rec.Date)
                 {
                 }
-                field("No.";"No.")
+                field("No."; Rec."No.")
                 {
                     Caption = 'Opex No.';
                 }
-                field("Requester Name";"Requester Name")
+                field("Requester Name"; Rec."Requester Name")
                 {
                 }
-                field("Purchase Justification";"Purchase Justification")
+                field("Purchase Justification"; Rec."Purchase Justification")
                 {
                 }
-                field("Proposed Purchase Amount";"Proposed Purchase Amount")
+                field("Proposed Purchase Amount"; Rec."Proposed Purchase Amount")
                 {
                 }
-                field(Vendor;Vendor)
+                field(Vendor; Rec.Vendor)
                 {
                 }
-                field("Opex Type";"Opex Type")
+                field("Opex Type"; Rec."Opex Type")
                 {
                 }
             }

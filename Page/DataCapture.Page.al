@@ -2,33 +2,33 @@ page 50141 "Data Capture"
 {
     Editable = false;
     PageType = Card;
-    SourceTable = Table50123;
+    SourceTable = "Data Capture";
 
     layout
     {
         area(content)
         {
-            repeater()
+            repeater(control1)
             {
-                field("Terminal ID"; "Terminal ID")
+                field("Terminal ID"; Rec."Terminal ID")
                 {
                 }
-                field("TnA ID"; "TnA ID")
+                field("TnA ID"; Rec."TnA ID")
                 {
                 }
-                field("Attendance Time"; "Attendance Time")
+                field("Attendance Time"; Rec."Attendance Time")
                 {
                 }
-                field("Attendance Date"; "Attendance Date")
+                field("Attendance Date"; Rec."Attendance Date")
                 {
                 }
-                field("Attendance Date Time"; "Attendance Date Time")
+                field("Attendance Date Time"; Rec."Attendance Date Time")
                 {
                 }
-                field(Name; Name)
+                field(Name; Rec.Name)
                 {
                 }
-                field(Processed; Processed)
+                field(Processed; Rec.Processed)
                 {
                 }
             }

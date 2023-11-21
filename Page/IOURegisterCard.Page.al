@@ -1,7 +1,11 @@
-page 70031 "IOU Register Card"
+page 70037 "IOU Register Card."
 {
     PageType = Card;
-    SourceTable = Table50105;
+    SourceTable = "IOU Register";
+    SourceTableView = SORTING("IOU No.")
+                      WHERE(Posted = FILTER(false),
+                            Treated = FILTER(false),
+                            "Final Apprv. Status" = FILTER(<> 'Approved'));
 
     layout
     {
@@ -9,200 +13,182 @@ page 70031 "IOU Register Card"
         {
             group(General)
             {
-                Editable = "1st Approval toEditable";
-                field("Current pending Person"; "Current pending Person")
-                {
-                    Editable = false;
-                }
-                field("IOU No."; "IOU No.")
-                {
-                    Editable = false;
-                }
-                field("Entry Date"; "Entry Date")
+                field("IOU No."; Rec."IOU No.")
                 {
                 }
-                field(Purpose; Description)
+                field("Entry Date"; Rec."Entry Date")
                 {
                 }
-                field(Amount; Amount)
+                field(Description; Rec.Description)
                 {
                 }
-                field("Account Type"; "Account Type")
+                field(Amount; Rec.Amount)
                 {
                 }
-                field("Staff No."; "Account No.")
+                field("Payment Date"; Rec."Payment Date")
                 {
                 }
-                field("Staff Name"; "Account Name")
+                field("Collected By"; Rec."Collected By")
                 {
                 }
-                field("Payment Date"; "Payment Date")
+                field("Staff Name"; Rec."Staff Name")
                 {
                 }
-                field("Global Dimension 1 Code"; "Global Dimension 1 Code")
-                {
-                    ShowMandatory = true;
-                }
-                field("Global Dimension 2 Code"; "Global Dimension 2 Code")
-                {
-                    ShowMandatory = true;
-                }
-                field("120Isolo"; "120Isolo")
-                {
-
-                    trigger OnValidate()
-                    begin
-                        IF "120Isolo" = "120Isolo"::"1" THEN
-                            JobDetails_Visible := TRUE
-                        ELSE
-                            JobDetails_Visible := FALSE;
-                    end;
-                }
-            }
-            group("Job Details ")
-            {
-                Caption = 'Job Details';
-                Visible = JobDetails_Visible;
-                field("No."; "No.")
+                field(Retired; Rec.Retired)
                 {
                 }
-                field("Customer Approved Amount"; "Customer Approved Amount")
+                field("Amount Retired"; Rec."Amount Retired")
                 {
                 }
-                field("Markup Amount"; "Markup Amount")
+                field(Paid; Rec.Paid)
                 {
                 }
-                field("Cost Amount"; "Cost Amount")
+                field("Paid By"; Rec."Paid By")
+                {
+                }
+                field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
+                {
+                }
+                field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
                 {
                 }
             }
-            group(Sender)
+            group("1st Approval")
             {
-                Caption = 'Sender';
-                field("1st Approval to"; "1st Approval to")
+                field("1st Approver"; Rec."1st Approver")
                 {
-                    Caption = 'To';
-                    Editable = "1st Approval toEditable";
                 }
-                field("1st Approver"; "1st Approver")
+                field("1st Apprv. Status"; Rec."1st Apprv. Status")
                 {
-                    Caption = 'Name';
-                    Editable = "1st Approval toEditable";
                 }
-                field("Send for Approval"; "Send for Approval")
+                field("1st Approval Time"; Rec."1st Approval Time")
                 {
-                    Caption = 'Send';
-                    Editable = "1st Approval toEditable";
-
-                    trigger OnValidate()
-                    begin
-                        IF "Send for Approval" THEN
-                            "1st Approval toEditable" := FALSE
-                        ELSE
-                            "1st Approval toEditable" := TRUE;
-                    end;
                 }
-                field("Sent By"; Sender)
+                field("1st Approver's Comment"; Rec."1st Approver's Comment")
                 {
-                    Caption = 'Sent By';
-                    Editable = false;
                 }
-                field("Sent Time"; "Sent Time")
+                field("1st Approval to"; Rec."1st Approval to")
+                {
+                }
+                field("Account Type"; Rec."Account Type")
+                {
+                }
+                field("Account No."; Rec."Account No.")
+                {
+                }
+                field("Bal. Account Type"; Rec."Bal. Account Type")
+                {
+                }
+                field("Bal. Account No."; Rec."Bal. Account No.")
+                {
+                }
+                field("No. Printed"; Rec."No. Printed")
+                {
+                }
+                field("Retirement Date"; Rec."Retirement Date")
+                {
+                }
+                field("Converted to Loan"; Rec."Converted to Loan")
+                {
+                }
+                field(Approved; Rec.Approved)
                 {
                 }
             }
-            group("Level 1")
+            group("2nd Approval")
             {
-                Caption = 'Level 1';
-                Visible = "1st ApprovalVisible";
-                field("2nd Approval to"; "2nd Approval to")
+                field("Send for 2nd Apprv."; Rec."Send for 2nd Apprv.")
                 {
-                    Caption = 'To';
-                    Editable = "2nd Approval toEditable";
                 }
-                field("2nd Approver"; "2nd Approver")
+                field("Approved By"; Rec."Approved By")
                 {
-                    Caption = 'Name';
-                    Editable = "2nd Approval toEditable";
                 }
-                field("1st Apprv. Status"; "1st Apprv. Status")
+                field("Account Name"; Rec."Account Name")
                 {
-                    Caption = 'Action';
-                    Editable = "2nd Approval toEditable";
-
-                    trigger OnValidate()
-                    begin
-                        IF "1st Apprv. Status" = "1st Apprv. Status"::Approved THEN BEGIN
-
-                            "2nd Approval toEditable" := FALSE;
-                            "Send for ApprovalEditable" := FALSE
-                        END ELSE BEGIN
-                            "2nd Approval toEditable" := TRUE;
-                            "Send for ApprovalEditable" := TRUE
-                        END;
-                    end;
                 }
-                field("1st Approval Time"; "1st Approval Time")
+                field("Send for Approval"; Rec."Send for Approval")
                 {
-                    Caption = 'Time';
-                    Editable = "2nd Approval toEditable";
+                }
+                field(Sender; Rec.Sender)
+                {
+                }
+                field("Sent Time"; Rec."Sent Time")
+                {
+                }
+                field("2nd Approval to"; Rec."2nd Approval to")
+                {
+                }
+                field("2nd Apprv. Status"; Rec."2nd Apprv. Status")
+                {
+                }
+                field("2nd Approver"; Rec."2nd Approver")
+                {
                 }
             }
-            group("Level 2")
+            group("3rd Approval")
             {
-                Caption = 'Level 2';
-                Visible = "2nd ApprovalVisible";
-                field("3rd Approval to"; "3rd Approval to")
+                field("2nd Approval Time"; Rec."2nd Approval Time")
                 {
-                    Caption = 'To';
-                    Editable = "3rd Approval toEditable";
                 }
-                field("3rd Approver"; "3rd Approver")
+                field("2nd Approver's Comment"; Rec."2nd Approver's Comment")
                 {
-                    Caption = 'Name';
                 }
-                field("2nd Apprv. Status"; "2nd Apprv. Status")
+                field("3rd Approval to"; Rec."3rd Approval to")
                 {
-                    Caption = 'Action';
-
-                    trigger OnValidate()
-                    begin
-                        IF "2nd Apprv. Status" = "2nd Apprv. Status"::Approved THEN BEGIN
-                            "3rd Approval toEditable" := TRUE;
-                            "1st Apprv. StatusEditable" := FALSE;
-                            "Final ApprovalVisible" := FALSE
-
-                        END ELSE BEGIN
-                            "3rd Approval toEditable" := TRUE;
-                            "1st Apprv. StatusEditable" := TRUE;
-                            "Final ApprovalVisible" := FALSE
-                        END;
-                    end;
                 }
-                field("2nd Approval Time"; "2nd Approval Time")
+                field("3rd Approver"; Rec."3rd Approver")
                 {
-                    Caption = 'Time';
+                }
+                field("3rd Apprv.Status"; Rec."3rd Apprv.Status")
+                {
+                }
+                field("Send for 3rd Apprv."; Rec."Send for 3rd Apprv.")
+                {
+                }
+                field("3rd Approval Time"; Rec."3rd Approval Time")
+                {
+                }
+                field("3rd Approver's Comment"; Rec."3rd Approver's Comment")
+                {
                 }
             }
-            group("Level 3")
+            group("Final Approval")
             {
-                Caption = 'Level 3';
-                Visible = "Final ApprovalVisible";
-                field("Final Apprv. Status"; "Final Apprv. Status")
+                field("Final Approval to"; Rec."Final Approval to")
                 {
-                    Caption = 'Action';
-
-                    trigger OnValidate()
-                    begin
-                        IF "Final Apprv. Status" = "Final Apprv. Status"::Approved THEN
-                            "2nd Apprv. StatusEditable" := FALSE
-                        ELSE
-                            "2nd Apprv. StatusEditable" := TRUE;
-                    end;
                 }
-                field("Final Approval Time"; "Final Approval Time")
+                field("Final Approver's Name"; Rec."Final Approver's Name")
                 {
-                    Caption = 'Time';
+                }
+                field("Final Apprv. Status"; Rec."Final Apprv. Status")
+                {
+                }
+                field("Final Approval Time"; Rec."Final Approval Time")
+                {
+                }
+                field("Final Approver's Comment"; Rec."Final Approver's Comment")
+                {
+                }
+                field("General Comment"; Rec."General Comment")
+                {
+                }
+                field("Mail Body"; Rec."Mail Body")
+                {
+                }
+                field("Current pending Person"; Rec."Current pending Person")
+                {
+                }
+                field(Attachment; Rec.Attachment)
+                {
+                }
+                field(Comment; Rec.Comment)
+                {
+                }
+                field(Treated; Rec.Treated)
+                {
+                }
+                field("Expected Time of Payment"; Rec."Expected Time of Payment")
+                {
                 }
             }
         }
@@ -210,110 +196,6 @@ page 70031 "IOU Register Card"
 
     actions
     {
-        area(navigation)
-        {
-            action(Print)
-            {
-                Caption = 'Print';
-                Image = "Report";
-
-                trigger OnAction()
-                begin
-
-                    IOURec.SETRANGE(IOURec."IOU No.", "IOU No.");
-                    IF IOURec.FINDFIRST THEN BEGIN
-                        IOUReport.SETTABLEVIEW(IOURec);
-                        IOUReport.RUN;
-                    END;
-                end;
-            }
-        }
     }
-
-    trigger OnAfterGetRecord()
-    begin
-
-        OnAfterGetCurrRecord;
-    end;
-
-    trigger OnOpenPage()
-    begin
-        IF "120Isolo" = "120Isolo"::"1" THEN
-            JobDetails_Visible := TRUE
-        ELSE
-            JobDetails_Visible := FALSE;
-
-
-        IF "Send for Approval" THEN
-            "1st Approval toEditable" := FALSE
-        ELSE
-            "1st Approval toEditable" := TRUE;
-        IF "1st Apprv. Status" = "1st Apprv. Status"::Approved THEN BEGIN
-            "2nd Approval toEditable" := FALSE;
-            "Send for ApprovalEditable" := FALSE
-        END ELSE BEGIN
-            "2nd Approval toEditable" := TRUE;
-            "Send for ApprovalEditable" := TRUE
-        END;
-        IF "2nd Apprv. Status" = "2nd Apprv. Status"::Approved THEN BEGIN
-            "3rd Approval toEditable" := FALSE;
-            "1st Apprv. StatusEditable" := FALSE
-        END ELSE BEGIN
-            "3rd Approval toEditable" := TRUE;
-            "1st Apprv. StatusEditable" := TRUE
-        END;
-        IF "Final Apprv. Status" = "Final Apprv. Status"::Approved THEN
-            "2nd Apprv. StatusEditable" := FALSE
-        ELSE
-            "2nd Apprv. StatusEditable" := TRUE;
-    end;
-
-    var
-        IOURec: Record 50105;
-        IOUReport: Report "50299";
-        GPC: Codeunit "50004";
-        [InDataSet]
-        "1st ApprovalVisible": Boolean;
-        [InDataSet]
-        "2nd ApprovalVisible": Boolean;
-        [InDataSet]
-        "Final ApprovalVisible": Boolean;
-        [InDataSet]
-        "No.Editable": Boolean;
-        [InDataSet]
-        "1st Approval toEditable": Boolean;
-        [InDataSet]
-        "2nd Approval toEditable": Boolean;
-        [InDataSet]
-        "Send for ApprovalEditable": Boolean;
-        [InDataSet]
-        "3rd Approval toEditable": Boolean;
-        [InDataSet]
-        "1st Apprv. StatusEditable": Boolean;
-        [InDataSet]
-        "2nd Apprv. StatusEditable": Boolean;
-        [InDataSet]
-        "Entry DateEditable": Boolean;
-        JobDetails_Visible: Boolean;
-
-    local procedure OnAfterGetCurrRecord()
-    begin
-        xRec := Rec;
-        IF "1st Apprv. Status" = "1st Apprv. Status"::Approved THEN
-            "No.Editable" := FALSE;
-
-        IF "Send for Approval" THEN
-            "1st ApprovalVisible" := TRUE
-        ELSE
-            "1st ApprovalVisible" := FALSE;
-        IF "1st Apprv. Status" = "1st Apprv. Status"::Approved THEN
-            "2nd ApprovalVisible" := TRUE
-        ELSE
-            "2nd ApprovalVisible" := FALSE;
-        IF "2nd Apprv. Status" = "2nd Apprv. Status"::Approved THEN
-            "Final ApprovalVisible" := TRUE
-        ELSE
-            "Final ApprovalVisible" := FALSE;
-    end;
 }
 

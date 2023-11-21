@@ -1,6 +1,6 @@
 page 70120 BalanceCapexCard
 {
-    SourceTable = Table70008;
+    SourceTable = "Procurement Header";
 
     layout
     {
@@ -9,70 +9,70 @@ page 70120 BalanceCapexCard
             group("Capex Details")
             {
                 Editable = EditSend;
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     Caption = 'Capex No.';
                 }
-                field(Date; Date)
+                field(Date; Rec.Date)
                 {
                     Editable = false;
                 }
-                field("Requester Name"; "Requester Name")
+                field("Requester Name"; Rec."Requester Name")
                 {
                     Editable = false;
                 }
-                field("Requester Department"; "Requester Department")
+                field("Requester Department"; Rec."Requester Department")
                 {
                     Editable = false;
                 }
-                field("Capex Type"; "Capex Type")
+                field("Capex Type"; Rec."Capex Type")
                 {
                 }
-                field("Budget Amount"; "Budget Amount")
+                field("Budget Amount"; Rec."Budget Amount")
                 {
                 }
-                field("Proposed Purchase Amount"; "Proposed Purchase Amount")
+                field("Proposed Purchase Amount"; Rec."Proposed Purchase Amount")
                 {
 
                     trigger OnValidate()
                     begin
-                        IF "Proposed Purchase Amount" >= 100000 THEN
-                            "Capex Type" := "Capex Type"::"Fixed Asset";
+                        IF Rec."Proposed Purchase Amount" >= 100000 THEN
+                            Rec."Capex Type" := Rec."Capex Type"::"Fixed Asset";
 
-                        IF "Proposed Purchase Amount" < 100000 THEN
-                            "Capex Type" := "Capex Type"::"Sundry Asset";
+                        IF Rec."Proposed Purchase Amount" < 100000 THEN
+                            Rec."Capex Type" := Rec."Capex Type"::"Sundry Asset";
 
-                        IF "Proposed Purchase Amount" >= 100000 THEN
+                        IF Rec."Proposed Purchase Amount" >= 100000 THEN
                             MESSAGE(Text002);
                     end;
                 }
-                field("Purchase Justification"; "Purchase Justification")
+                field("Purchase Justification"; Rec."Purchase Justification")
                 {
                     Caption = 'Justification';
                 }
-                field("Asset Description"; "Asset Description")
+                field("Asset Description"; Rec."Asset Description")
                 {
                 }
-                field("Asset User Code"; "Asset User Code")
+                field("Asset User Code"; Rec."Asset User Code")
                 {
                 }
-                field("Asset User Name"; "Asset User Name")
+                field("Asset User Name"; Rec."Asset User Name")
                 {
                 }
-                field("User Department Code"; "User Department Code")
+                field("User Department Code"; Rec."User Department Code")
                 {
                     Editable = false;
                 }
-                field("Payment No."; "Payment No.")
+                field("Payment No."; Rec."Payment No.")
                 {
                 }
-                field("Mode of Payment"; "Mode of Payment")
+                field("Mode of Payment"; Rec."Mode of Payment")
                 {
                 }
-                field("Send To"; "Send To")
+                field("Send To"; Rec."Send To")
                 {
                 }
-                field(Send; Send)
+                field(Send; Rec.Send)
                 {
                     Editable = EditSend;
                 }
@@ -81,54 +81,54 @@ page 70120 BalanceCapexCard
             {
                 Caption = 'Vendor Details';
                 Editable = EditVendorDetails;
-                SubPageLink = Document Type=FIELD(Document Type),
-                              Document No.=FIELD(No.);
+                SubPageLink = "Document Type" = FIELD("Document Type"),
+                              "Document No." = FIELD("No.");
             }
             group("Procurement Approval")
             {
                 Visible = CapexAppr;
-                grid()
+                grid(Control1)
                 {
-                    group()
+                    group(Control2)
                     {
-                        field("Head of Department";"Head of Department")
+                        field("Head of Department"; Rec."Head of Department")
                         {
                             Caption = 'Head of Department';
                             Editable = EditHOD2;
                             Style = StrongAccent;
                             StyleExpr = TRUE;
                         }
-                        field("Name HOD";"Name HOD")
+                        field("Name HOD"; Rec."Name HOD")
                         {
                             ShowCaption = false;
                         }
-                        field(TimeDate1;TimeDate1)
+                        field(TimeDate1; Rec.TimeDate1)
                         {
                             ShowCaption = false;
                         }
                     }
-                    group()
+                    group(Control3)
                     {
-                        field("Head of Audit";"Head of Audit")
+                        field("Head of Audit"; Rec."Head of Audit")
                         {
                             Caption = 'Head of Audit';
                             Editable = EditHOA2;
                             Style = StrongAccent;
                             StyleExpr = TRUE;
                         }
-                        field("Name Head of Audit";"Name Head of Audit")
+                        field("Name Head of Audit"; Rec."Name Head of Audit")
                         {
                             ShowCaption = false;
                         }
-                        field(TimeDate2;TimeDate2)
+                        field(TimeDate2; Rec.TimeDate2)
                         {
                             Editable = false;
                             ShowCaption = false;
                         }
                     }
-                    group()
+                    group(Control4)
                     {
-                        field("General Manager";"General Manager")
+                        field("General Manager"; Rec."General Manager")
                         {
                             Caption = 'General Manager';
                             Editable = EditGM2;
@@ -136,20 +136,20 @@ page 70120 BalanceCapexCard
                             StyleExpr = TRUE;
                             Visible = GMAppr;
                         }
-                        field("Name GM";"Name GM")
+                        field("Name GM"; Rec."Name GM")
                         {
                             ShowCaption = false;
                             Visible = NameGM;
                         }
-                        field(TimeDate3;TimeDate3)
+                        field(TimeDate3; Rec.TimeDate3)
                         {
                             ShowCaption = false;
                             Visible = Date3;
                         }
                     }
-                    group()
+                    group(Control5)
                     {
-                        field("Managing Director";"Managing Director")
+                        field("Managing Director"; Rec."Managing Director")
                         {
                             Caption = 'Managing Director';
                             Editable = EditMD2;
@@ -157,13 +157,13 @@ page 70120 BalanceCapexCard
                             StyleExpr = TRUE;
                             Visible = MDAppr;
                         }
-                        field("Name MD";"Name MD")
+                        field("Name MD"; Rec."Name MD")
                         {
                             Editable = false;
                             ShowCaption = false;
                             Visible = NameMD;
                         }
-                        field(TimeDate4;TimeDate4)
+                        field(TimeDate4; Rec.TimeDate4)
                         {
                             ShowCaption = false;
                             Visible = Date4;
@@ -174,40 +174,40 @@ page 70120 BalanceCapexCard
             group("Advance Payment Approval")
             {
                 Visible = AdvPay;
-                grid()
+                grid(Control6)
                 {
-                    group()
+                    group(Control7)
                     {
-                        field("Adv. Paymt. HOD";"Adv. Paymt. HOD")
+                        field("Adv. Paymt. HOD"; Rec."Adv. Paymt. HOD")
                         {
                             Caption = 'Head of Department';
                             Editable = EditAdvanceHOD;
                             Style = StrongAccent;
                             StyleExpr = TRUE;
                         }
-                        field("Authorized by HOD";"Authorized by HOD")
+                        field("Authorized by HOD"; Rec."Authorized by HOD")
                         {
                             ShowCaption = false;
                         }
-                        field(TimeDate5;TimeDate5)
+                        field(TimeDate5; Rec.TimeDate5)
                         {
                             ShowCaption = false;
                         }
                     }
-                    group()
+                    group(Control8)
                     {
-                        field("Adv. Paymt. Audit";"Adv. Paymt. Audit")
+                        field("Adv. Paymt. Audit"; Rec."Adv. Paymt. Audit")
                         {
                             Caption = 'Head of Audit';
                             Editable = EditAdvanceHOA;
                             Style = StrongAccent;
                             StyleExpr = TRUE;
                         }
-                        field("Authorized by Audit";"Authorized by Audit")
+                        field("Authorized by Audit"; Rec."Authorized by Audit")
                         {
                             ShowCaption = false;
                         }
-                        field(TimeDate6;TimeDate6)
+                        field(TimeDate6; Rec.TimeDate6)
                         {
                             ShowCaption = false;
                         }
@@ -217,43 +217,43 @@ page 70120 BalanceCapexCard
             group("Service/Item Delivery Check")
             {
                 Visible = Check;
-                grid()
+                grid(Control9)
                 {
-                    group()
+                    group(Control10)
                     {
-                        field("Service Delivery1";"Service Delivery1")
+                        field("Service Delivery1"; Rec."Service Delivery1")
                         {
                             Caption = 'Requester';
                             Editable = EditServiceCheckRequester;
                             Style = StrongAccent;
                             StyleExpr = TRUE;
                         }
-                        field("Confirmed By1";"Confirmed By1")
+                        field("Confirmed By1"; Rec."Confirmed By1")
                         {
                             Caption = 'Checked by Requester';
                             Editable = false;
                             ShowCaption = false;
                         }
-                        field(TimeDate7;TimeDate7)
+                        field(TimeDate7; Rec.TimeDate7)
                         {
                             ShowCaption = false;
                         }
                     }
-                    group()
+                    group(Control11)
                     {
-                        field("Service Delivery2";"Service Delivery2")
+                        field("Service Delivery2"; Rec."Service Delivery2")
                         {
                             Caption = 'Auditor';
                             Editable = EditServiceCheckAudit;
                             Style = StrongAccent;
                             StyleExpr = TRUE;
                         }
-                        field("Confirmed By2";"Confirmed By2")
+                        field("Confirmed By2"; Rec."Confirmed By2")
                         {
                             Caption = 'Checked by Audit';
                             ShowCaption = false;
                         }
-                        field(TimeDate9;TimeDate9)
+                        field(TimeDate9; Rec.TimeDate9)
                         {
                             ShowCaption = false;
                         }
@@ -263,83 +263,83 @@ page 70120 BalanceCapexCard
             group("Balance Payment  Approval")
             {
                 Visible = CHECK;
-                grid()
+                grid(Control12)
                 {
-                    group()
+                    group(Control13)
                     {
-                        field("Bal. Paymt. HOD";"Bal. Paymt. HOD")
+                        field("Bal. Paymt. HOD"; Rec."Bal. Paymt. HOD")
                         {
                             Caption = 'Head of Department';
                             Editable = EditBalanceHOD;
                             Style = StrongAccent;
                             StyleExpr = TRUE;
                         }
-                        field("Bal. Paymt. by HOD";"Bal. Paymt. by HOD")
+                        field("Bal. Paymt. by HOD"; Rec."Bal. Paymt. by HOD")
                         {
                             Caption = 'Payment Approved by';
                             ShowCaption = false;
                         }
-                        field(TimeDate8;TimeDate8)
+                        field(TimeDate8; Rec.TimeDate8)
                         {
                             ShowCaption = false;
                         }
                     }
-                    group()
+                    group(Control14)
                     {
-                        field("Bal. Paymt. Audit";"Bal. Paymt. Audit")
+                        field("Bal. Paymt. Audit"; Rec."Bal. Paymt. Audit")
                         {
                             Caption = 'Head of Audit';
                             Editable = EditBalanceHOA;
                             Style = StrongAccent;
                             StyleExpr = TRUE;
                         }
-                        field("Bal. Paymt. by Audit";"Bal. Paymt. by Audit")
+                        field("Bal. Paymt. by Audit"; Rec."Bal. Paymt. by Audit")
                         {
                             Caption = 'Payment Approved by';
                             ShowCaption = false;
                         }
-                        field(TimeDate10;TimeDate10)
+                        field(TimeDate10; Rec.TimeDate10)
                         {
                             ShowCaption = false;
                         }
                     }
-                    group()
+                    group(Control15)
                     {
                         Visible = BalGM;
-                        field("Bal. Paymt. GM";"Bal. Paymt. GM")
+                        field("Bal. Paymt. GM"; Rec."Bal. Paymt. GM")
                         {
                             Caption = 'General Manager';
                             Editable = EditBalanceGM;
                             Style = StrongAccent;
                             StyleExpr = TRUE;
                         }
-                        field("Bal. Paymt. by GM";"Bal. Paymt. by GM")
+                        field("Bal. Paymt. by GM"; Rec."Bal. Paymt. by GM")
                         {
                             Caption = 'Payment Approved by';
                             ShowCaption = false;
                         }
-                        field(TimeDate11;TimeDate11)
+                        field(TimeDate11; Rec.TimeDate11)
                         {
                             ShowCaption = false;
                         }
                     }
-                    group()
+                    group(Control16)
                     {
                         Visible = BalMD;
-                        field("Bal. Paymt. MD";"Bal. Paymt. MD")
+                        field("Bal. Paymt.   MD"; Rec."Bal. Paymt. MD")
                         {
                             Caption = 'Managing Director';
                             Editable = EditBalanceMD;
                             Style = StrongAccent;
                             StyleExpr = TRUE;
                         }
-                        field("Bal. Paymt. by MD";"Bal. Paymt. by MD")
+                        field("Bal. Paymt. by MD"; Rec."Bal. Paymt. by MD")
                         {
                             Caption = 'Payment Approved by';
                             Editable = false;
                             ShowCaption = false;
                         }
-                        field(TimeDate12;TimeDate12)
+                        field(TimeDate12; Rec.TimeDate12)
                         {
                             Editable = false;
                             ShowCaption = false;
@@ -350,10 +350,10 @@ page 70120 BalanceCapexCard
         }
         area(factboxes)
         {
-            part(;70130)
+            part(Lines; 70130)
             {
-                SubPageLink = Document Type=FIELD(Document Type),
-                              No.=FIELD(No.);
+                SubPageLink = "Document Type" = FIELD("Document Type"),
+                              "No." = FIELD("No.");
             }
         }
     }
@@ -372,13 +372,13 @@ page 70120 BalanceCapexCard
 
                 trigger OnAction()
                 begin
-                    IF "Document Type" ="Document Type" :: Opex THEN BEGIN
-                        TESTFIELD("Bal. Paymt. HOD",1);
-                    TESTFIELD("Bal. Paymt. Audit",1);
-                    IF "Proposed Purchase Amount" > 350000 THEN
-                        TESTFIELD("Bal. Paymt. MD", 1);
-                    IF "Proposed Purchase Amount" <= 350000 THEN
-                        TESTFIELD("Bal. Paymt. GM",1);
+                    IF Rec."Document Type" = Rec."Document Type"::Opex THEN BEGIN
+                        Rec.TESTFIELD("Bal. Paymt. HOD", 1);
+                        Rec.TESTFIELD("Bal. Paymt. Audit", 1);
+                        IF Rec."Proposed Purchase Amount" > 350000 THEN
+                            Rec.TESTFIELD("Bal. Paymt. MD", 1);
+                        IF Rec."Proposed Purchase Amount" <= 350000 THEN
+                            Rec.TESTFIELD("Bal. Paymt. GM", 1);
                     END;
 
                     //IF "Document Type" ="Document Type"::Capex THEN BEGIN
@@ -388,28 +388,28 @@ page 70120 BalanceCapexCard
                     //IF ("Capex Type" = "Capex Type"::"Fixed Asset") OR ("Proposed Purchase Amount" > 100000) THEN
                     //   TESTFIELD("Bal. Paymt. MD", 1);
                     //IF ("Capex Type" = "Capex Type"::"Sundry Asset") OR ("Proposed Purchase Amount" < 100000) THEN
-                        //TESTFIELD("Bal. Paymt. GM",1);
+                    //TESTFIELD("Bal. Paymt. GM",1);
                     //END;
 
-                    IF NOT CONFIRM(Text003,FALSE) THEN BEGIN
-                      PaymentRec2.SETRANGE("Procurement No.","No.");
-                      IF PaymentRec2.FINDFIRST THEN
-                        PAGE.RUNMODAL(70097,PaymentRec2)
+                    IF NOT CONFIRM(Text003, FALSE) THEN BEGIN
+                        PaymentRec2.SETRANGE("Procurement No.", Rec."No.");
+                        IF PaymentRec2.FINDFIRST THEN
+                            PAGE.RUNMODAL(70097, PaymentRec2)
                     END ELSE BEGIN
-                      PaymentRec.INIT;
-                      PaymentRec."Document Type" := PaymentRec."Document Type"::"e-Pay";
-                      PaymentRec."Cash/Cheque" := PaymentRec."Cash/Cheque"::Cheque;
-                      PaymentRec."Account Type" := PaymentRec."Account Type"::Supplier;
-                      PaymentRec."Procurement No." := "No.";
-                      PaymentRec.INSERT(TRUE);
-                      COMMIT;
+                        PaymentRec.INIT;
+                        PaymentRec."Document Type" := PaymentRec."Document Type"::"e-Pay";
+                        PaymentRec."Cash/Cheque" := PaymentRec."Cash/Cheque"::Cheque;
+                        PaymentRec."Account Type" := PaymentRec."Account Type"::Supplier;
+                        PaymentRec."Procurement No." := Rec."No.";
+                        PaymentRec.INSERT(TRUE);
+                        COMMIT;
 
-                      MESSAGE(Text015);
-                      PaymentRec2.SETRANGE("Procurement No.","No.");
-                      IF PaymentRec2.FINDFIRST THEN
-                        PAGE.RUNMODAL(70097,PaymentRec2);
-                    "Voucher Raised" := TRUE ;
-                        MODIFY;
+                        MESSAGE(Text015);
+                        PaymentRec2.SETRANGE("Procurement No.", Rec."No.");
+                        IF PaymentRec2.FINDFIRST THEN
+                            PAGE.RUNMODAL(70097, PaymentRec2);
+                        Rec."Voucher Raised" := TRUE;
+                        Rec.MODIFY;
 
                     END;
                 end;
@@ -431,24 +431,24 @@ page 70120 BalanceCapexCard
                     //IF "Proposed Purchase Amount" <= 350000 THEN
                     //TESTFIELD("Bal. Paymt. GM",1);
 
-                    IF NOT CONFIRM(Text016,FALSE) THEN BEGIN
-                      PaymentRec2.SETRANGE("Procurement No.","No.");
-                      IF PaymentRec2.FINDFIRST THEN
-                        PAGE.RUNMODAL(70097,PaymentRec2)
+                    IF NOT CONFIRM(Text016, FALSE) THEN BEGIN
+                        PaymentRec2.SETRANGE("Procurement No.", Rec."No.");
+                        IF PaymentRec2.FINDFIRST THEN
+                            PAGE.RUNMODAL(70097, PaymentRec2)
                     END ELSE BEGIN
-                      PaymentRec.INIT;
-                      PaymentRec."Document Type" := PaymentRec."Document Type"::Requisition;
-                      PaymentRec."Cash/Cheque" := PaymentRec."Cash/Cheque"::Cheque;
-                      PaymentRec."Account Type" := PaymentRec."Account Type"::Supplier;
-                      PaymentRec."Procurement No." := "No.";
-                      PaymentRec.INSERT(TRUE);
-                      COMMIT;
-                      MESSAGE(Text017);
-                      PaymentRec2.SETRANGE("Procurement No.","No.");
-                      IF PaymentRec2.FINDFIRST THEN
-                        PAGE.RUNMODAL(70010,PaymentRec2);
-                       "Voucher Raised"  := TRUE;
-                        MODIFY;
+                        PaymentRec.INIT;
+                        PaymentRec."Document Type" := PaymentRec."Document Type"::Requisition;
+                        PaymentRec."Cash/Cheque" := PaymentRec."Cash/Cheque"::Cheque;
+                        PaymentRec."Account Type" := PaymentRec."Account Type"::Supplier;
+                        PaymentRec."Procurement No." := Rec."No.";
+                        PaymentRec.INSERT(TRUE);
+                        COMMIT;
+                        MESSAGE(Text017);
+                        PaymentRec2.SETRANGE("Procurement No.", Rec."No.");
+                        IF PaymentRec2.FINDFIRST THEN
+                            PAGE.RUNMODAL(70010, PaymentRec2);
+                        Rec."Voucher Raised" := TRUE;
+                        Rec.MODIFY;
                     END;
                 end;
             }
@@ -457,39 +457,41 @@ page 70120 BalanceCapexCard
 
     trigger OnOpenPage()
     begin
-        IF Send THEN BEGIN
-          CapexAppr := TRUE END
-        ELSE CapexAppr := FALSE;
+        IF Rec.Send THEN BEGIN
+            CapexAppr := TRUE
+        END
+        ELSE
+            CapexAppr := FALSE;
 
 
 
-        IF ("Capex Type" = "Capex Type"::"Fixed Asset") //OR ("Proposed Purchase Amount" > 100000)
+        IF (Rec."Capex Type" = Rec."Capex Type"::"Fixed Asset") //OR ("Proposed Purchase Amount" > 100000)
         THEN BEGIN
-          GMAppr := FALSE;
-          NameGM := FALSE;
-          Date3  := FALSE;
-          MDAppr := TRUE;
-          NameMD := TRUE;
-          Date4  := TRUE;
+            GMAppr := FALSE;
+            NameGM := FALSE;
+            Date3 := FALSE;
+            MDAppr := TRUE;
+            NameMD := TRUE;
+            Date4 := TRUE;
         END ELSE BEGIN
-          GMAppr := TRUE;
-          NameGM := TRUE;
-          Date3  := TRUE;
-          MDAppr := FALSE;
-          NameMD := FALSE;
-          Date4  := FALSE
+            GMAppr := TRUE;
+            NameGM := TRUE;
+            Date3 := TRUE;
+            MDAppr := FALSE;
+            NameMD := FALSE;
+            Date4 := FALSE
         END;
 
-        ProcurementLine.SETRANGE("Document No.","No.");
-        ProcurementLine.SETRANGE(Preferred,TRUE);
+        ProcurementLine.SETRANGE("Document No.", Rec."No.");
+        ProcurementLine.SETRANGE(Preferred, TRUE);
         IF ProcurementLine.FINDFIRST THEN
-          IF (ProcurementLine."Payment Terms" <> ProcurementLine."Payment Terms":: "100% after delivery") AND
-             (ProcurementLine."Payment Terms" <> ProcurementLine."Payment Terms":: "100% before delivery")THEN
-           IF ("General Manager" = "General Manager"::Approved) OR ("Managing Director" = "Managing Director"::Approved) THEN
-              AdvPay := TRUE;
+            IF (ProcurementLine."Payment Terms" <> ProcurementLine."Payment Terms"::"100% after delivery") AND
+               (ProcurementLine."Payment Terms" <> ProcurementLine."Payment Terms"::"100% before delivery") THEN
+                IF (Rec."General Manager" = Rec."General Manager"::Approved) OR (Rec."Managing Director" = Rec."Managing Director"::Approved) THEN
+                    AdvPay := TRUE;
 
-        IF Compliance = TRUE THEN
-          Check := TRUE;
+        IF Rec.Compliance = TRUE THEN
+            Check := TRUE;
 
         //IF "Service Delivery2" = "Service Delivery2"::Satisfactory THEN  BEGIN
         //IF ("Capex Type" = "Capex Type"::"Fixed Asset") OR ("Proposed Purchase Amount" > 100000)
@@ -501,19 +503,19 @@ page 70120 BalanceCapexCard
         //END;
         //END;
 
-        IF "Service Delivery2" = "Service Delivery2"::Satisfactory THEN  BEGIN
-        IF "Proposed Purchase Amount" > 100000 THEN   //("Capex Type" = "Capex Type"::"Fixed Asset")
-            BalMD := TRUE
-         ELSE
-             BalGM := TRUE
+        IF Rec."Service Delivery2" = Rec."Service Delivery2"::Satisfactory THEN BEGIN
+            IF Rec."Proposed Purchase Amount" > 100000 THEN   //("Capex Type" = "Capex Type"::"Fixed Asset")
+                BalMD := TRUE
+            ELSE
+                BalGM := TRUE
         END;
 
         EditApproval;
     end;
 
     var
-        OpexLine: Record "70001";
-        Mail: Codeunit "397";
+        OpexLine: Record 70001;
+        Mail: Codeunit 397;
         ToAddresses: Text;
         CcAddresses: Text;
         BccAddresses: Text;
@@ -521,28 +523,28 @@ page 70120 BalanceCapexCard
         Body: Text;
         AttachFilename: Text;
         ShowNewMailDialogOnSend: Boolean;
-        UserSetup: Record "91";
-        UserSetup2: Record "91";
-        IOUReg: Record "50105";
-        OpexRec: Record "70008";
-        OpexRec2: Record "70008";
+        UserSetup: Record 91;
+        UserSetup2: Record 91;
+        IOUReg: Record 50105;
+        OpexRec: Record 70008;
+        OpexRec2: Record 70008;
         Url: Text[500];
-        PaymentRec: Record "50103";
-        PaymentRec2: Record "50103";
+        PaymentRec: Record 50103;
+        PaymentRec2: Record 50103;
         EditHOD: Boolean;
         EditAudit: Boolean;
         EditGM: Boolean;
         EditMD: Boolean;
         VisibleGM: Boolean;
         VisibleMD: Boolean;
-        ProcurementLine: Record "70001";
-        ProcurementLine2: Record "70001";
-        PurchSetup: Record "312";
+        ProcurementLine: Record 70001;
+        ProcurementLine2: Record 70001;
+        PurchSetup: Record 312;
         CRLF: Text[2];
         VendName: Text[70];
         VendAddr: Text[100];
         VendAmt: Decimal;
-        UserSetup4: Record "91";
+        UserSetup4: Record 91;
         SendersName: Text[50];
         Addressee: Text[50];
         GMAppr: Boolean;

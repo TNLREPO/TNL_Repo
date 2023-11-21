@@ -2,11 +2,11 @@ page 70131 "Head of Dept. Appr."
 {
     CardPageID = "Opex Card";
     PageType = List;
-    SourceTable = Table70008;
-    SourceTableView = WHERE (Send = CONST (Yes),
-                            Head of Department=FILTER(<>Approved),
-                            Reject=CONST(No),
-                            Document Type=CONST(Opex));
+    SourceTable = "Procurement Header";
+    SourceTableView = WHERE(Send = FILTER('Yes'),
+                            "Head of Department" = FILTER(<> Approved),
+                            Reject = FILTER('No'),
+                            "Document Type" = FILTER(Opex));
 
     layout
     {
@@ -14,23 +14,23 @@ page 70131 "Head of Dept. Appr."
         {
             repeater(Group)
             {
-                field("No.";"No.")
+                field("No."; Rec."No.")
                 {
                     Caption = 'Opex No.';
                 }
-                field(Date;Date)
+                field(Date; Rec.Date)
                 {
                 }
-                field("Requester Name";"Requester Name")
+                field("Requester Name"; Rec."Requester Name")
                 {
                 }
-                field("Purchase Justification";"Purchase Justification")
+                field("Purchase Justification"; Rec."Purchase Justification")
                 {
                 }
-                field("Proposed Purchase Amount";"Proposed Purchase Amount")
+                field("Proposed Purchase Amount"; Rec."Proposed Purchase Amount")
                 {
                 }
-                field(Vendor;Vendor)
+                field(Vendor; Rec.Vendor)
                 {
                 }
             }
@@ -48,6 +48,6 @@ page 70131 "Head of Dept. Appr."
     end;
 
     var
-        UserSetup: Record "91";
+        UserSetup: Record "User Setup";
 }
 

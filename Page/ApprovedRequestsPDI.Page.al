@@ -2,10 +2,10 @@ page 50216 "Approved Requests (PDI)"
 {
     CardPageID = "Motor Show Repair Card";
     PageType = List;
-    SourceTable = Table70026;
-    SourceTableView = WHERE (Send for Approval=CONST(Yes),
-                            2nd Approval Status=FILTER(Approved),
-                            Send Estimate=CONST(No));
+    SourceTable = "Motor Show Repair";
+    SourceTableView = WHERE("Send for Approval" = filter(true),
+                            "2nd Approval Status" = FILTER('Approved'),
+                            "Send Estimate" = filter(false));
 
     layout
     {
@@ -13,193 +13,193 @@ page 50216 "Approved Requests (PDI)"
         {
             repeater(Group)
             {
-                field("Request No.";"Request No.")
+                field("Request No."; Rec."Request No.")
                 {
                 }
-                field("Entry Date";"Entry Date")
+                field("Entry Date"; Rec."Entry Date")
                 {
                 }
-                field("Request Type";"Request Type")
+                field("Request Type"; Rec."Request Type")
                 {
                 }
-                field(Requester;Requester)
+                field(Requester; Rec.Requester)
                 {
                 }
-                field("Requester Name";"Requester Name")
+                field("Requester Name"; Rec."Requester Name")
                 {
                 }
-                field("User ID";"User ID")
+                field("User ID"; Rec."User ID")
                 {
                 }
-                field("Global Dimension 1 code";"Global Dimension 1 code")
+                field("Global Dimension 1 code"; Rec."Global Dimension 1 code")
                 {
                 }
-                field(Approved;Approved)
+                field(Approved; Rec.Approved)
                 {
                 }
-                field("Approved by";"Approved by")
+                field("Approved by"; Rec."Approved by")
                 {
                 }
-                field("Send for Approval";"Send for Approval")
+                field("Send for Approval"; Rec."Send for Approval")
                 {
                 }
-                field("1st Approval";"1st Approval")
+                field("1st Approval"; Rec."1st Approval")
                 {
                 }
-                field("2nd Approval";"2nd Approval")
+                field("2nd Approval"; Rec."2nd Approval")
                 {
                 }
-                field(Comment;Comment)
+                field(Comment; Rec.Comment)
                 {
                 }
-                field("1st Approver";"1st Approver")
+                field("1st Approver"; Rec."1st Approver")
                 {
                 }
-                field("1st Approval Status";"1st Approval Status")
+                field("1st Approval Status"; Rec."1st Approval Status")
                 {
                 }
-                field("1st Approval Time";"1st Approval Time")
+                field("1st Approval Time"; Rec."1st Approval Time")
                 {
                 }
-                field("1st Approval's Comment";"1st Approval's Comment")
+                field("1st Approval's Comment"; Rec."1st Approval's Comment")
                 {
                 }
-                field("2nd Approver";"2nd Approver")
+                field("2nd Approver"; Rec."2nd Approver")
                 {
                 }
-                field("2nd Approval Status";"2nd Approval Status")
+                field("2nd Approval Status"; Rec."2nd Approval Status")
                 {
                 }
-                field("2nd Approval Time";"2nd Approval Time")
+                field("2nd Approval Time"; Rec."2nd Approval Time")
                 {
                 }
-                field("2nd Approval's Comment";"2nd Approval's Comment")
+                field("2nd Approval's Comment"; Rec."2nd Approval's Comment")
                 {
                 }
-                field(Treated;Treated)
+                field(Treated; Rec.Treated)
                 {
                 }
-                field(Sender;Sender)
+                field(Sender; Rec.Sender)
                 {
                 }
-                field("Sent Time";"Sent Time")
+                field("Sent Time"; Rec."Sent Time")
                 {
                 }
-                field("Current Pending Person";"Current Pending Person")
+                field("Current Pending Person"; Rec."Current Pending Person")
                 {
                 }
-                field("Mail Body";"Mail Body")
+                field("Mail Body"; Rec."Mail Body")
                 {
                 }
-                field(Hours;Hours)
+                field(Hours; Rec.Hours)
                 {
                 }
-                field(Days;Days)
+                field(Days; Rec.Days)
                 {
                 }
-                field(Employee;Employee)
+                field(Employee; Rec.Employee)
                 {
                 }
-                field("Final Approval";"Final Approval")
+                field("Final Approval"; Rec."Final Approval")
                 {
                 }
-                field("Final Approver";"Final Approver")
+                field("Final Approver"; Rec."Final Approver")
                 {
                 }
-                field("Pickup Time";"Pickup Time")
+                field("Pickup Time"; Rec."Pickup Time")
                 {
                 }
-                field("Return Time";"Return Time")
+                field("Return Time"; Rec."Return Time")
                 {
                 }
-                field(Reason;Reason)
+                field(Reason; Rec.Reason)
                 {
                 }
-                field("Take-off Location";"Take-off Location")
+                field("Take-off Location"; Rec."Take-off Location")
                 {
                 }
-                field(Reject;Reject)
+                field(Reject; Rec.Reject)
                 {
                 }
-                field("Auto Show Location";"Auto Show Location")
+                field("Auto Show Location"; Rec."Auto Show Location")
                 {
                 }
-                field(Make;Make)
+                field(Make; Rec.Make)
                 {
                 }
-                field(Model;Model)
+                field(Model; Rec.Model)
                 {
                 }
-                field("Registration No.";"Registration No.")
+                field("Registration No."; Rec."Registration No.")
                 {
                 }
-                field("KM Covered";"KM Covered")
+                field("KM Covered"; Rec."KM Covered")
                 {
                 }
-                field("Reference No.";"Reference No.")
+                field("Reference No."; Rec."Reference No.")
                 {
                 }
-                field("Responsible Dealer";"Responsible Dealer")
+                field("Responsible Dealer"; Rec."Responsible Dealer")
                 {
                 }
-                field("Job Done";"Job Done")
+                field("Job Done"; Rec."Job Done")
                 {
                 }
-                field("Payment Approver";"Payment Approver")
+                field("Payment Approver"; Rec."Payment Approver")
                 {
                 }
-                field("Payment Approval Status";"Payment Approval Status")
+                field("Payment Approval Status"; Rec."Payment Approval Status")
                 {
                 }
-                field("Payment Approval Time";"Payment Approval Time")
+                field("Payment Approval Time"; Rec."Payment Approval Time")
                 {
                 }
-                field("Payment Approval";"Payment Approval")
+                field("Payment Approval"; Rec."Payment Approval")
                 {
                 }
-                field("Send for Payment Approval";"Send for Payment Approval")
+                field("Send for Payment Approval"; Rec."Send for Payment Approval")
                 {
                 }
-                field("Sent Payment Approval Time";"Sent Payment Approval Time")
+                field("Sent Payment Approval Time"; Rec."Sent Payment Approval Time")
                 {
                 }
-                field("Payment Confirmed";"Payment Confirmed")
+                field("Payment Confirmed"; Rec."Payment Confirmed")
                 {
                 }
-                field("Related Job";"Related Job")
+                field("Related Job"; Rec."Related Job")
                 {
                 }
-                field("3rd Approval";"3rd Approval")
+                field("3rd Approval"; Rec."3rd Approval")
                 {
                 }
-                field("3rd Approver";"3rd Approver")
+                field("3rd Approver"; Rec."3rd Approver")
                 {
                 }
-                field("3rd Approval Status";"3rd Approval Status")
+                field("3rd Approval Status"; Rec."3rd Approval Status")
                 {
                 }
-                field("3rd Approval Time";"3rd Approval Time")
+                field("3rd Approval Time"; Rec."3rd Approval Time")
                 {
                 }
-                field("3rd Approval Comment";"3rd Approval Comment")
+                field("3rd Approval Comment"; Rec."3rd Approval Comment")
                 {
                 }
-                field("Job Done Time";"Job Done Time")
+                field("Job Done Time"; Rec."Job Done Time")
                 {
                 }
-                field("Job Done Id";"Job Done Id")
+                field("Job Done Id"; Rec."Job Done Id")
                 {
                 }
-                field("Job Done Name";"Job Done Name")
+                field("Job Done Name"; Rec."Job Done Name")
                 {
                 }
-                field(Close;Close)
+                field(Close; Rec.Close)
                 {
                 }
-                field("Job Closing Officer";"Job Closing Officer")
+                field("Job Closing Officer"; Rec."Job Closing Officer")
                 {
                 }
-                field("Close Date";"Close Date")
+                field("Close Date"; Rec."Close Date")
                 {
                 }
             }

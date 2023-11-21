@@ -4,33 +4,33 @@ page 50184 "Dealer Request process List"
     Editable = false;
     ModifyAllowed = false;
     PageType = Card;
-    SourceTable = Table50036;
+    SourceTable = "Dealer Request Process header";
 
     layout
     {
         area(content)
         {
-            repeater()
+            repeater(control5)
             {
-                field("Request Period"; "Request Period")
+                field("Request Period";Rec."Request Period")
                 {
                 }
-                field("Customer No."; "Customer No.")
+                field("Customer No.";Rec."Customer No.")
                 {
                 }
-                field("Customer Name"; "Customer Name")
+                field("Customer Name";Rec."Customer Name")
                 {
                 }
-                field("Process Date"; "Process Date")
+                field("Process Date";Rec."Process Date")
                 {
                 }
-                field("Process Time"; "Process Time")
+                field("Process Time";Rec."Process Time")
                 {
                 }
-                field("Total Quantity Requested"; "Total Quantity Requested")
+                field("Total Quantity Requested";Rec."Total Quantity Requested")
                 {
                 }
-                field("Total Quantity Allocated"; "Total Quantity Allocated")
+                field("Total Quantity Allocated";Rec."Total Quantity Allocated")
                 {
                 }
             }

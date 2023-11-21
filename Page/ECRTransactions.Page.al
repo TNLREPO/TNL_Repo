@@ -1,7 +1,7 @@
 page 50171 "ECR Transactions"
 {
     PageType = List;
-    SourceTable = Table70043;
+    SourceTable = "ECR Transactions";
 
     layout
     {
@@ -9,49 +9,49 @@ page 50171 "ECR Transactions"
         {
             repeater(Group)
             {
-                field("Entry No."; "Entry No.")
+                field("Entry No.";Rec."Entry No.")
                 {
                 }
-                field("Transaction Type"; "Transaction Type")
+                field("Transaction Type";Rec."Transaction Type")
                 {
                 }
-                field("Transaction Date"; "Transaction Date")
+                field("Transaction Date";Rec."Transaction Date")
                 {
                 }
-                field("Terminal ID"; "Terminal ID")
+                field("Terminal ID";Rec."Terminal ID")
                 {
                 }
-                field("Response Description"; "Response Description")
+                field("Response Description";Rec."Response Description")
                 {
                 }
-                field("Response Code"; "Response Code")
+                field("Response Code";Rec."Response Code")
                 {
                 }
-                field("Mode of Payment"; "Mode of Payment")
+                field("Mode of Payment";Rec."Mode of Payment")
                 {
                 }
-                field("Masked PAN"; "Masked PAN")
+                field("Masked PAN";Rec."Masked PAN")
                 {
                 }
-                field("Holder Name"; "Holder Name")
+                field("Holder Name";Rec."Holder Name")
                 {
                 }
-                field("ECR ID"; "ECR ID")
+                field("ECR ID";Rec."ECR ID")
                 {
                 }
-                field("Card Type"; "Card Type")
+                field("Card Type";Rec."Card Type")
                 {
                 }
-                field("Card Expiry Date"; "Card Expiry Date")
+                field("Card Expiry Date";Rec."Card Expiry Date")
                 {
                 }
-                field("Approval Code"; "Approval Code")
+                field("Approval Code";Rec."Approval Code")
                 {
                 }
-                field("Document No."; "Document No.")
+                field("Document No.";Rec."Document No.")
                 {
                 }
-                field(Amount; Amount)
+                field(Amount;Rec.Amount)
                 {
                 }
             }

@@ -4,363 +4,363 @@ page 50239 "Diagnostic Quest. List"
     DeleteAllowed = false;
     ModifyAllowed = false;
     PageType = List;
-    SourceTable = Table50120;
+    SourceTable = "Diagnostic Questionnaire";
 
     layout
     {
         area(content)
         {
-            repeater()
+            repeater(Group)
             {
-                field("Diagnostic Questionnier No."; "Diagnostic Questionnier No.")
+                field("Diagnostic Questionnier No.";Rec."Diagnostic Questionnier No.")
                 {
                 }
-                field(Date; Date)
+                field(Date;Rec.Date)
                 {
                 }
-                field("SA Name"; "SA Name")
+                field("SA Name";Rec."SA Name")
                 {
                 }
-                field("Reception Date"; "Reception Date")
+                field("Reception Date";Rec."Reception Date")
                 {
                 }
-                field("Reception Time"; "Reception Time")
+                field("Reception Time";Rec."Reception Time")
                 {
                 }
-                field("Reception Type"; "Reception Type")
+                field("Reception Type";Rec."Reception Type")
                 {
                 }
-                field("Courtesy Vehicle"; "Courtesy Vehicle")
+                field("Courtesy Vehicle";Rec."Courtesy Vehicle")
                 {
                 }
-                field("Delivery Type"; "Delivery Type")
+                field("Delivery Type";Rec."Delivery Type")
                 {
                 }
-                field("Delivery Date"; "Delivery Date")
+                field("Delivery Date";Rec."Delivery Date")
                 {
                 }
-                field("Delivery Time"; "Delivery Time")
+                field("Delivery Time";Rec."Delivery Time")
                 {
                 }
-                field("Confirmation Date"; "Confirmation Date")
+                field("Confirmation Date";Rec."Confirmation Date")
                 {
                 }
-                field("Customer Order No."; "Customer Order No.")
+                field("Customer Order No.";Rec."Customer Order No.")
                 {
                 }
-                field("Vehicle Driven By"; "Vehicle Driven By")
+                field("Vehicle Driven By";Rec."Vehicle Driven By")
                 {
                 }
-                field("Odometer Reading at Appointmen"; "Odometer Reading at Appointmen")
+                field("Odometer Reading at Appointmen";Rec."Odometer Reading at Appointmen")
                 {
                 }
-                field("Customer No."; "Customer No.")
+                field("Customer No.";Rec."Customer No.")
                 {
                 }
-                field("Customer Name"; "Customer Name")
+                field("Customer Name";Rec."Customer Name")
                 {
                 }
-                field(Address; Address)
+                field(Address;Rec.Address)
                 {
                 }
-                field(Telephone; Telephone)
+                field(Telephone;Rec.Telephone)
                 {
                 }
-                field("Vehicle Registration No."; "Vehicle Registration No.")
+                field("Vehicle Registration No.";Rec."Vehicle Registration No.")
                 {
                 }
-                field("Registered Date"; "Registered Date")
+                field("Registered Date";Rec."Registered Date")
                 {
                 }
-                field("Model Name"; "Model Name")
+                field("Model Name";Rec."Model Name")
                 {
                 }
-                field("Model Code"; "Model Code")
+                field("Model Code";Rec."Model Code")
                 {
                 }
-                field("Engine No."; "Engine No.")
+                field("Engine No.";Rec."Engine No.")
                 {
                 }
-                field("Confirmation Time"; "Confirmation Time")
+                field("Confirmation Time";Rec."Confirmation Time")
                 {
                 }
-                field(Phenomena; Phenomena)
+                field(Phenomena;Rec.Phenomena)
                 {
                 }
-                field("From When"; "From When")
+                field("From When";Rec."From When")
                 {
                 }
-                field("State if Other"; "State if Other")
+                field("State if Other";Rec."State if Other")
                 {
                 }
-                field(Frequency; Frequency)
+                field(Frequency;Rec.Frequency)
                 {
                 }
-                field("State Other Frequency"; "State Other Frequency")
+                field("State Other Frequency";Rec."State Other Frequency")
                 {
                 }
-                field(Place; Place)
+                field(Place;Rec.Place)
                 {
                 }
-                field("Warning Lamp"; "Warning Lamp")
+                field("Warning Lamp";Rec."Warning Lamp")
                 {
                 }
-                field(Starting; Starting)
+                field(Starting;Rec.Starting)
                 {
                 }
-                field("If Moving"; "If Moving")
+                field("If Moving";Rec."If Moving")
                 {
                 }
-                field(Stopped; Stopped)
+                field(Stopped;Rec.Stopped)
                 {
                 }
-                field(Speedmeter; Speedmeter)
+                field(Speedmeter;Rec.Speedmeter)
                 {
                 }
-                field(Tachometer; Tachometer)
+                field(Tachometer;Rec.Tachometer)
                 {
                 }
-                field(Advancing; Advancing)
+                field(Advancing;Rec.Advancing)
                 {
                 }
-                field("Shifting Gear"; "Shifting Gear")
+                field("Shifting Gear";Rec."Shifting Gear")
                 {
                 }
-                field("Backing Up"; "Backing Up")
+                field("Backing Up";Rec."Backing Up")
                 {
                 }
-                field(Bracking; Bracking)
+                field(Bracking;Rec.Bracking)
                 {
                 }
-                field("Number of Occupants"; "Number of Occupants")
+                field("Number of Occupants";Rec."Number of Occupants")
                 {
                 }
-                field("Vehicle Load"; "Vehicle Load")
+                field("Vehicle Load";Rec."Vehicle Load")
                 {
                 }
-                field("Towing Load"; "Towing Load")
+                field("Towing Load";Rec."Towing Load")
                 {
                 }
-                field(Surface; Surface)
+                field(Surface;Rec.Surface)
                 {
                 }
-                field("If Other Surface (State)"; "If Other Surface (State)")
+                field("If Other Surface (State)";Rec."If Other Surface (State)")
                 {
                 }
-                field(Weather; Weather)
+                field(Weather;Rec.Weather)
                 {
                 }
-                field("A/C Temp Setting"; "A/C Temp Setting")
+                field("A/C Temp Setting";Rec."A/C Temp Setting")
                 {
                 }
-                field("Fan Speed Setting"; "Fan Speed Setting")
+                field("Fan Speed Setting";Rec."Fan Speed Setting")
                 {
                 }
-                field("Recir. Position"; "Recir. Position")
+                field("Recir. Position";Rec."Recir. Position")
                 {
                 }
-                field("Air Flow Mode"; "Air Flow Mode")
+                field("Air Flow Mode";Rec."Air Flow Mode")
                 {
                 }
-                field("Condition Staff Name"; "Condition Staff Name")
+                field("Condition Staff Name";Rec."Condition Staff Name")
                 {
                 }
-                field("Condition Date"; "Condition Date")
+                field("Condition Date";Rec."Condition Date")
                 {
                 }
-                field("Condition Time"; "Condition Time")
+                field("Condition Time";Rec."Condition Time")
                 {
                 }
-                field("Contact Telephone"; "Contact Telephone")
+                field("Contact Telephone";Rec."Contact Telephone")
                 {
                 }
-                field("Contact Available Time to"; "Contact Available Time to")
+                field("Contact Available Time to";Rec."Contact Available Time to")
                 {
                 }
-                field("Contact Staff Name"; "Contact Staff Name")
+                field("Contact Staff Name";Rec."Contact Staff Name")
                 {
                 }
-                field("Contact Date"; "Contact Date")
+                field("Contact Date";Rec."Contact Date")
                 {
                 }
-                field("Contact Time"; "Contact Time")
+                field("Contact Time";Rec."Contact Time")
                 {
                 }
-                field("Confirmed with Customer"; "Confirmed with Customer")
+                field("Confirmed with Customer";Rec."Confirmed with Customer")
                 {
                 }
-                field("Additional Job Confirmation"; "Additional Job Confirmation")
+                field("Additional Job Confirmation";Rec."Additional Job Confirmation")
                 {
                 }
-                field(Valuable; Valuable)
+                field(Valuable;Rec.Valuable)
                 {
                 }
-                field("Seat Cover"; "Seat Cover")
+                field("Seat Cover";Rec."Seat Cover")
                 {
                 }
-                field("Floor Mat"; "Floor Mat")
+                field("Floor Mat";Rec."Floor Mat")
                 {
                 }
-                field("Walk-Arround Check"; "Walk-Arround Check")
+                field("Walk-Arround Check";Rec."Walk-Arround Check")
                 {
                 }
-                field("Inspection Detaile/Result"; "Inspection Detaile/Result")
+                field("Inspection Detaile/Result";Rec."Inspection Detaile/Result")
                 {
                 }
-                field("Key Assined No."; "Key Assined No.")
+                field("Key Assined No.";Rec."Key Assined No.")
                 {
                 }
-                field("Stall No."; "Stall No.")
+                field("Stall No.";Rec."Stall No.")
                 {
                 }
-                field(Reappearance; Reappearance)
+                field(Reappearance;Rec.Reappearance)
                 {
                 }
-                field("Result Discovered/Prediction"; "Result Discovered/Prediction")
+                field("Result Discovered/Prediction";Rec."Result Discovered/Prediction")
                 {
                 }
-                field("Main Cause1"; "Main Cause1")
+                field("Main Cause1";Rec."Main Cause1")
                 {
                 }
-                field("Main Cause2"; "Main Cause2")
+                field("Main Cause2";Rec."Main Cause2")
                 {
                 }
-                field("Main Cause3"; "Main Cause3")
+                field("Main Cause3";Rec."Main Cause3")
                 {
                 }
-                field("Main Cause4"; "Main Cause4")
+                field("Main Cause4";Rec."Main Cause4")
                 {
                 }
-                field("Start Date"; "Start Date")
+                field("Start Date";Rec."Start Date")
                 {
                 }
-                field("Start Time"; "Start Time")
+                field("Start Time";Rec."Start Time")
                 {
                 }
-                field("End Date"; "End Date")
+                field("End Date";Rec."End Date")
                 {
                 }
-                field("End Time"; "End Time")
+                field("End Time";Rec."End Time")
                 {
                 }
-                field("Time Required"; "Time Required")
+                field("Time Required";Rec."Time Required")
                 {
                 }
-                field(DTR; DTR)
+                field(DTR;Rec.DTR)
                 {
                 }
-                field("Instruction Staff Name"; "Instruction Staff Name")
+                field("Instruction Staff Name";Rec."Instruction Staff Name")
                 {
                 }
-                field("Confirmed By"; "Confirmed By")
+                field("Confirmed By";Rec."Confirmed By")
                 {
                 }
-                field("Confirmed Date"; "Confirmed Date")
+                field("Confirmed Date";Rec."Confirmed Date")
                 {
                 }
-                field("Confirmed Time"; "Confirmed Time")
+                field("Confirmed Time";Rec."Confirmed Time")
                 {
                 }
-                field(Warranty; Warranty)
+                field(Warranty;Rec.Warranty)
                 {
                 }
-                field(Destination; Destination)
+                field(Destination;Rec.Destination)
                 {
                 }
-                field("In Charge"; "In Charge")
+                field("In Charge";Rec."In Charge")
                 {
                 }
-                field("Receiving Status"; "Receiving Status")
+                field("Receiving Status";Rec."Receiving Status")
                 {
                 }
-                field("Receiving Status Date"; "Receiving Status Date")
+                field("Receiving Status Date";Rec."Receiving Status Date")
                 {
                 }
-                field("Receiving Status Time"; "Receiving Status Time")
+                field("Receiving Status Time";Rec."Receiving Status Time")
                 {
                 }
-                field("Vehicle Status"; "Vehicle Status")
+                field("Vehicle Status";Rec."Vehicle Status")
                 {
                 }
-                field(Requests; Requests)
+                field(Requests;Rec.Requests)
                 {
                 }
-                field("If Requests is Other Pls State"; "If Requests is Other Pls State")
+                field("If Requests is Other Pls State";Rec."If Requests is Other Pls State")
                 {
                 }
-                field("Support Request Date"; "Support Request Date")
+                field("Support Request Date";Rec."Support Request Date")
                 {
                 }
-                field("Support Request Time"; "Support Request Time")
+                field("Support Request Time";Rec."Support Request Time")
                 {
                 }
-                field("Support Staff Name"; "Support Staff Name")
+                field("Support Staff Name";Rec."Support Staff Name")
                 {
                 }
-                field("If Shift Position"; "If Shift Position")
+                field("If Shift Position";Rec."If Shift Position")
                 {
                 }
-                field("Outside Tempt."; "Outside Tempt.")
+                field("Outside Tempt.";Rec."Outside Tempt.")
                 {
                 }
-                field("Odometer Reading at Reception"; "Odometer Reading at Reception")
+                field("Odometer Reading at Reception";Rec."Odometer Reading at Reception")
                 {
                 }
-                field("Job Instruction"; "Job Instruction")
+                field("Job Instruction";Rec."Job Instruction")
                 {
                 }
-                field(DTC1; DTC1)
+                field(DTC1;Rec.DTC1)
                 {
                 }
-                field(DTC2; DTC2)
+                field(DTC2;Rec.DTC2)
                 {
                 }
-                field(DTC3; DTC3)
+                field(DTC3;Rec.DTC3)
                 {
                 }
-                field(DTC4; DTC4)
+                field(DTC4;Rec.DTC4)
                 {
                 }
-                field(Status1; Status1)
+                field(Status1;Rec.Status1)
                 {
                 }
-                field(Status2; Status2)
+                field(Status2;Rec.Status2)
                 {
                 }
-                field(Status3; Status3)
+                field(Status3;Rec.Status3)
                 {
                 }
-                field(Status4; Status4)
+                field(Status4;Rec.Status4)
                 {
                 }
-                field("Freeze Frame Data Saved1"; "Freeze Frame Data Saved1")
+                field("Freeze Frame Data Saved1";Rec."Freeze Frame Data Saved1")
                 {
                 }
-                field("Freeze Frame Data Saved2"; "Freeze Frame Data Saved2")
+                field("Freeze Frame Data Saved2";Rec."Freeze Frame Data Saved2")
                 {
                 }
-                field("Freeze Frame Data Saved3"; "Freeze Frame Data Saved3")
+                field("Freeze Frame Data Saved3";Rec."Freeze Frame Data Saved3")
                 {
                 }
-                field("Freeze Frame Data Saved4"; "Freeze Frame Data Saved4")
+                field("Freeze Frame Data Saved4";Rec."Freeze Frame Data Saved4")
                 {
                 }
-                field("Support Request Staff Name"; "Support Request Staff Name")
+                field("Support Request Staff Name";Rec."Support Request Staff Name")
                 {
                 }
-                field("Confirmation Staff Name"; "Confirmation Staff Name")
+                field("Confirmation Staff Name";Rec."Confirmation Staff Name")
                 {
                 }
-                field(Condition; Condition)
+                field(Condition;Rec.Condition)
                 {
                 }
-                field(Shift; Shift)
+                field(Shift;Rec.Shift)
                 {
                 }
-                field("Job Instruction Staff Name"; "Job Instruction Staff Name")
+                field("Job Instruction Staff Name";Rec."Job Instruction Staff Name")
                 {
                 }
-                field("No. Series"; "No. Series")
+                field("No. Series";Rec."No. Series")
                 {
                 }
             }

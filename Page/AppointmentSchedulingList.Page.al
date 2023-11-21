@@ -1,54 +1,54 @@
 page 50370 "Appointment Scheduling List"
 {
     PageType = Card;
-    SourceTable = Table50047;
+    SourceTable = "Appointment Scheduling";
 
     layout
     {
         area(content)
         {
-            repeater()
+            repeater(Control1)
             {
-                field("Entry No"; "Entry No")
+                field("Entry No"; Rec."Entry No")
                 {
                 }
-                field("Scheduling Code"; "Scheduling Code")
+                field("Scheduling Code"; Rec."Scheduling Code")
                 {
                 }
-                field("Schedule Date"; "Schedule Date")
+                field("Schedule Date"; Rec."Schedule Date")
                 {
                 }
-                field("Technician Code"; "Technician Code")
+                field("Technician Code"; Rec."Technician Code")
                 {
                 }
-                field("Technician Name"; "Technician Name")
+                field("Technician Name"; Rec."Technician Name")
                 {
                 }
-                field("Daily Man Hour"; "Daily Man Hour")
+                field("Daily Man Hour"; Rec."Daily Man Hour")
                 {
                 }
-                field("Time Bucket"; "Time Bucket")
+                field("Time Bucket"; Rec."Time Bucket")
                 {
                 }
-                field("Total Hours"; "Total Hours")
+                field("Total Hours"; Rec."Total Hours")
                 {
                 }
-                field("Job Type"; "Job Type")
+                field("Job Type"; Rec."Job Type")
                 {
                 }
-                field("Hours Left"; "Hours Left")
+                field("Hours Left"; Rec."Hours Left")
                 {
                 }
-                field("No of Jobs"; "No of Jobs")
+                field("No of Jobs"; Rec."No of Jobs")
                 {
                 }
-                field("Job Category"; "Job Category")
+                field("Job Category"; Rec."Job Category")
                 {
                 }
-                field("Carry Over"; "Carry Over")
+                field("Carry Over"; Rec."Carry Over")
                 {
                 }
-                field("Other Info"; "Other Info")
+                field("Other Info"; Rec."Other Info")
                 {
                 }
             }

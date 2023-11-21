@@ -1,9 +1,9 @@
 page 50283 "Inventory - Stock"
 {
     PageType = List;
-    SourceTable = Table32;
-    SourceTableView = WHERE (Remaining Quantity=FILTER(1),
-                            Inventory Posting Group=CONST(N_CARS));
+    SourceTable = "Item Ledger Entry";
+    SourceTableView = WHERE("Remaining Quantity" = FILTER('1'),
+                            "Inventory Posting Group" = FILTER('N_CARS'));
 
     layout
     {
@@ -11,55 +11,55 @@ page 50283 "Inventory - Stock"
         {
             repeater(Group)
             {
-                field("Entry No.";"Entry No.")
+                field("Entry No."; Rec."Entry No.")
                 {
                     Editable = false;
                 }
-                field("Item No.";"Item No.")
+                field("Item No."; Rec."Item No.")
                 {
                     Editable = false;
                 }
-                field("Posting Date";"Posting Date")
+                field("Posting Date"; Rec."Posting Date")
                 {
                     Editable = false;
                 }
-                field("Location Code";"Location Code")
+                field("Location Code"; Rec."Location Code")
                 {
                     Editable = false;
                 }
-                field(Description;Description)
+                field(Description; Rec.Description)
                 {
                     Editable = false;
                     Width = 50;
                 }
-                field("Remaining Quantity";"Remaining Quantity")
+                field("Remaining Quantity"; Rec."Remaining Quantity")
                 {
                     Editable = false;
                 }
-                field("Serial No.";"Serial No.")
+                field("Serial No."; Rec."Serial No.")
                 {
                     Editable = false;
                     Width = 30;
                 }
-                field("Exterior Colour Name";"Exterior Colour Name")
+                field("Exterior Colour Name"; Rec."Exterior Colour Name")
                 {
                 }
-                field("Engine No.";"Engine No.")
+                field("Engine No."; Rec."Engine No.")
                 {
                     Editable = false;
                     Width = 20;
                 }
-                field("Item Name";"Item Name")
+                field("Item Name"; Rec."Item Name")
                 {
                     Editable = false;
                 }
-                field("Date of Arrival";"Date of Arrival")
+                field("Date of Arrival"; "Date of Arrival")
                 {
                 }
-                field("No. of Days in Stock";"No. of Days in Stock")
+                field("No. of Days in Stock"; "No. of Days in Stock")
                 {
                 }
-                field("Current Date";"Current Date")
+                field("Current Date"; "Current Date")
                 {
 
                     trigger OnValidate()
@@ -78,8 +78,7 @@ page 50283 "Inventory - Stock"
     trigger OnAfterGetRecord()
     begin
         IF "Current Date" <> 0D THEN
-
-          VALIDATE("Current Date",WORKDATE);
+            VALIDATE("Current Date", WORKDATE);
     end;
 }
 

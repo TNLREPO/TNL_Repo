@@ -2,18 +2,18 @@ page 50074 "Educational Inst Grp List"
 {
     DeleteAllowed = false;
     PageType = Card;
-    SourceTable = Table50085;
+    SourceTable = "Education Institute Grp";
 
     layout
     {
         area(content)
         {
-            repeater()
+            repeater(Group)
             {
-                field("Group Code"; "Group Code")
+                field("Group Code";Rec. "Group Code")
                 {
                 }
-                field(Description; Description)
+                field(Description;Rec. Description)
                 {
                 }
             }

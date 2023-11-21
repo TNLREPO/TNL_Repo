@@ -1,51 +1,51 @@
 page 50353 "Hour Slot Info"
 {
     PageType = Card;
-    SourceTable = Table50049;
+    SourceTable = "Hour Slot Info";
 
     layout
     {
         area(content)
         {
-            group()
+            group(Group)
             {
-                field(Date; Date)
+                field(Date; Rec.Date)
                 {
                 }
-                field("Hour Slot"; "Hour Slot")
+                field("Hour Slot"; Rec."Hour Slot")
                 {
                 }
-                field(Technician; Technician)
+                field(Technician; Rec.Technician)
                 {
                 }
-                field("Technician Name"; "Technician Name")
+                field("Technician Name"; Rec."Technician Name")
                 {
                 }
-                field("Walk-In"; "Walk-In")
+                field("Walk-In"; Rec."Walk-In")
                 {
                 }
-                field("Date Filter"; "Date Filter")
+                field("Date Filter"; Rec."Date Filter")
                 {
                 }
-                field("COF No."; "COF No.")
+                field("COF No."; Rec."COF No.")
                 {
                 }
-                field("Line No."; "Line No.")
+                field("Line No."; Rec."Line No.")
                 {
                 }
-                field("Daily Man Hour"; "Daily Man Hour")
+                field("Daily Man Hour"; Rec."Daily Man Hour")
                 {
                 }
-                field("Hours Consumed"; "Hours Consumed")
+                field("Hours Consumed"; Rec."Hours Consumed")
                 {
                 }
-                field("Hours Remaining"; "Hours Remaining")
+                field("Hours Remaining"; Rec."Hours Remaining")
                 {
                 }
-                field(Overbooked; Overbooked)
+                field(Overbooked; Rec.Overbooked)
                 {
                 }
-                field(Hours; Hours)
+                field(Hours; Rec.Hours)
                 {
                 }
             }
@@ -55,7 +55,7 @@ page 50353 "Hour Slot Info"
                 field(COFNo2; COFNo2)
                 {
                     Caption = 'Old COF No.';
-                    TableRelation = "Customer Order Table." WHERE (Service Type=CONST(General Workshop));
+                    TableRelation = "Customer Order Table." WHERE("Service Type" = FILTER('General Workshop'));
 
                     trigger OnValidate()
                     begin
@@ -81,7 +81,7 @@ page 50353 "Hour Slot Info"
                 field(COFNo; COFNo)
                 {
                     Caption = 'New COF No.';
-                    TableRelation = "Customer Order Table." WHERE (Service Type=CONST(General Workshop));
+                    TableRelation = "Customer Order Table." WHERE("Service Type" = FILTER('General Workshop'));
 
                     trigger OnValidate()
                     begin
@@ -157,8 +157,8 @@ page 50353 "Hour Slot Info"
                     BreakCount: Integer;
                     HourSlotInfo2: Record 50049;
                 begin
-                    ServAppSch.SETRANGE(ServAppSch."Service Item", "Veh Reg No.");
-                    ServAppSch.SETRANGE(ServAppSch."Service Code", "Service Code");
+                    ServAppSch.SETRANGE(ServAppSch."Service Item", Rec."Veh Reg No.");
+                    ServAppSch.SETRANGE(ServAppSch."Service Code", Rec."Service Code");
                     IF ServAppSch.FINDLAST THEN BEGIN
                         ServSlot := ServAppSch."Service Slot";
                         DailyHour := ServAppSch."Man Hour Per Day";
@@ -197,7 +197,7 @@ page 50353 "Hour Slot Info"
                             ResCapEntry.SETRANGE(ResCapEntry.Date, StartDate);
                             IF ResCapEntry.FINDFIRST THEN
                                 HourSlotInfo."Daily Man Hour" := ResCapEntry.Capacity;
-                            HourSlotInfo."Walk-In" := "Walk-In";
+                            HourSlotInfo."Walk-In" := Rec."Walk-In";
                             HourSlotInfo."Veh Reg No." := VehRegNo;
                             HourSlotInfo."Service Code" := ServiceCode;
                             HourSlotInfo.VALIDATE(HourSlotInfo."Daily Man Hour", DailyHour);
@@ -243,8 +243,8 @@ page 50353 "Hour Slot Info"
         Tech2: Code[20];
         TechName: Text[30];
         TechName2: Text[30];
-        ResRec: Record "156";
-        HourSlot: Record "50048";
+        ResRec: Record "Resource";
+        HourSlot: Record "Hour Slot";
         HourSlotInfo: Record 50049;
         HourSlotInfo2: Record 50049;
         COFNo: Code[20];
@@ -259,8 +259,8 @@ page 50353 "Hour Slot Info"
         Hrrec: Code[10];
         AppScheduling: Record 50047;
         AppScheduling2: Record 50047;
-        "AppSSC/SC": Record "50054";
-        ResCapEntry: Record "160";
+        "AppSSC/SC": Record "Appointment SSC/SC";
+        ResCapEntry: Record "Res. Capacity Entry";
         DailyHour: Decimal;
         EndingTime: Code[10];
         StartSlot: Code[10];

@@ -2,21 +2,21 @@ page 50340 "DQ Inspection Details/Results"
 {
     AutoSplitKey = true;
     PageType = Card;
-    SourceTable = Table50125;
+    SourceTable = "DQ Inspection Details/Result";
 
     layout
     {
         area(content)
         {
-            repeater()
+            repeater(Group)
             {
-                field("DQ No."; "DQ No.")
+                field("DQ No.";Rec. "DQ No.")
                 {
                 }
-                field(Line; Line)
+                field(Line;Rec. Line)
                 {
                 }
-                field("Inspection Details/Result"; "Inspection Details/Result")
+                field("Inspection Details/Result";Rec. "Inspection Details/Result")
                 {
                 }
             }

@@ -2,7 +2,7 @@ page 70046 "Document Approval List"
 {
     CardPageID = "Document Approval Card";
     PageType = List;
-    SourceTable = Table50162;
+    SourceTable = "Document Approval";
 
     layout
     {
@@ -10,58 +10,58 @@ page 70046 "Document Approval List"
         {
             repeater(Group)
             {
-                field("No."; "No.")
+                field("No.";Rec."No.")
                 {
                 }
-                field("Document Type"; "Document Type")
+                field("Document Type";Rec."Document Type")
                 {
                 }
-                field("Document No."; "Document No.")
+                field("Document No.";Rec."Document No.")
                 {
                 }
-                field(Comment; Comment)
+                field(Comment;Rec.Comment)
                 {
                 }
-                field("Level 1"; "Level 1")
+                field("Level 1";Rec."Level 1")
                 {
                 }
-                field("Level 2"; "Level 2")
+                field("Level 2";Rec."Level 2")
                 {
                 }
-                field("Level 3"; "Level 3")
+                field("Level 3";Rec."Level 3")
                 {
                 }
-                field("Sender 1"; "Sender 1")
+                field("Sender 1";Rec."Sender 1")
                 {
                 }
-                field("Sender 2"; "Sender 2")
+                field("Sender 2";Rec."Sender 2")
                 {
                 }
-                field("Sender 3"; "Sender 3")
+                field("Sender 3";Rec."Sender 3")
                 {
                 }
-                field("Sender 4"; "Sender 4")
+                field("Sender 4";Rec."Sender 4")
                 {
                 }
-                field(Date; Date)
+                field(Date;Rec.Date)
                 {
                 }
-                field("Document Title"; "Document Title")
+                field("Document Title";Rec."Document Title")
                 {
                 }
-                field("Vendor No."; "Vendor No.")
+                field("Vendor No.";Rec."Vendor No.")
                 {
                 }
-                field("Vendor Name"; "Vendor Name")
+                field("Vendor Name";Rec."Vendor Name")
                 {
                 }
-                field(Amount; Amount)
+                field(Amount;Rec.Amount)
                 {
                 }
-                field("Payment Type"; "Payment Type")
+                field("Payment Type";Rec."Payment Type")
                 {
                 }
-                field("Pending Person"; "Pending Person")
+                field("Pending Person";Rec."Pending Person")
                 {
                 }
             }

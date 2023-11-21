@@ -1,7 +1,7 @@
 page 70185 "Direct Warranty Page"
 {
     PageType = List;
-    SourceTable = Table70017;
+    SourceTable = "Direct Warranty Coupon";
 
     layout
     {
@@ -9,133 +9,133 @@ page 70185 "Direct Warranty Page"
         {
             repeater(Group)
             {
-                field(VIN; VIN)
+                field(VIN;Rec.VIN)
                 {
                 }
-                field(WMI; WMI)
+                field(WMI;Rec.WMI)
                 {
                 }
-                field(VDS; VDS)
+                field(VDS;Rec.VDS)
                 {
                 }
-                field(VIS; VIS)
+                field(VIS;Rec.VIS)
                 {
                 }
-                field("Model Name"; "Model Name")
+                field("Model Name";Rec."Model Name")
                 {
                 }
-                field("Delivery Date"; "Delivery Date")
+                field("Delivery Date";Rec."Delivery Date")
                 {
                 }
-                field("Owner's Name"; "Owner's Name")
+                field("Owner's Name";Rec."Owner's Name")
                 {
                 }
-                field(Address; Address)
+                field(Address;Rec.Address)
                 {
                 }
-                field(City; City)
+                field(City;Rec.City)
                 {
                 }
-                field(State; State)
+                field(State;Rec.State)
                 {
                 }
-                field(Colour; Colour)
+                field(Colour;Rec.Colour)
                 {
                 }
-                field("Post Code"; "Post Code")
+                field("Post Code";Rec."Post Code")
                 {
                 }
-                field("Vehicle Group"; "Vehicle Group")
+                field("Vehicle Group";Rec."Vehicle Group")
                 {
                 }
-                field("Original Speedometer Rep Date"; "Original Speedometer Rep Date")
+                field("Original Speedometer Rep Date";Rec."Original Speedometer Rep Date")
                 {
                 }
-                field("Original Speedometer Rep at"; "Original Speedometer Rep at")
+                field("Original Speedometer Rep at";Rec."Original Speedometer Rep at")
                 {
                 }
-                field("Document Type"; "Document Type")
+                field("Document Type";Rec."Document Type")
                 {
                 }
-                field("Document Code"; "Document Code")
+                field("Document Code";Rec."Document Code")
                 {
                 }
-                field("Attach FTR"; "Attach FTR")
+                field("Attach FTR";Rec."Attach FTR")
                 {
                 }
-                field("Attach TWC"; "Attach TWC")
+                field("Attach TWC";Rec."Attach TWC")
                 {
                 }
-                field(Description; Description)
+                field(Description;Rec.Description)
                 {
                 }
-                field("Owner Age"; "Owner Age")
+                field("Owner Age";Rec."Owner Age")
                 {
                 }
-                field("Owner Sex"; "Owner Sex")
+                field("Owner Sex";Rec."Owner Sex")
                 {
                 }
-                field("Owner Type"; "Owner Type")
+                field("Owner Type";Rec."Owner Type")
                 {
                 }
-                field("Business Sector"; "Business Sector")
+                field("Business Sector";Rec."Business Sector")
                 {
                 }
-                field("Contact Persons"; "Contact Persons")
+                field("Contact Persons";Rec."Contact Persons")
                 {
                 }
-                field("Driver Name"; "Driver Name")
+                field("Driver Name";Rec."Driver Name")
                 {
                 }
-                field("Mobile Phone"; "Mobile Phone")
+                field("Mobile Phone";Rec."Mobile Phone")
                 {
                 }
-                field(Phone; Phone)
+                field(Phone;Rec.Phone)
                 {
                 }
-                field("Fax Line"; "Fax Line")
+                field("Fax Line";Rec."Fax Line")
                 {
                 }
-                field("E-Mail"; "E-Mail")
+                field("E-Mail";Rec."E-Mail")
                 {
                 }
-                field("Home-Page"; "Home-Page")
+                field("Home-Page";Rec."Home-Page")
                 {
                 }
-                field("Speedometer Reading"; "Speedometer Reading")
+                field("Speedometer Reading";Rec."Speedometer Reading")
                 {
                 }
-                field("Expected Warranty Expired KM"; "Expected Warranty Expired KM")
+                field("Expected Warranty Expired KM";Rec."Expected Warranty Expired KM")
                 {
                 }
-                field("Expected Warranty Expired Date"; "Expected Warranty Expired Date")
+                field("Expected Warranty Expired Date";Rec."Expected Warranty Expired Date")
                 {
                 }
-                field("Last School Attended"; "Last School Attended")
+                field("Last School Attended";Rec."Last School Attended")
                 {
                 }
-                field("Warranty Cop Rec. Date"; "Warranty Cop Rec. Date")
+                field("Warranty Cop Rec. Date";Rec."Warranty Cop Rec. Date")
                 {
                 }
-                field("Delay Days"; "Delay Days")
+                field("Delay Days";Rec."Delay Days")
                 {
                 }
-                field("Mode Name"; "Mode Name")
+                field("Mode Name";Rec."Mode Name")
                 {
                 }
-                field("Chassis Number"; "Chassis Number")
+                field("Chassis Number";Rec."Chassis Number")
                 {
                 }
-                field("Engine  Number"; "Engine  Number")
+                field("Engine  Number";Rec."Engine  Number")
                 {
                 }
-                field("Owner Status"; "Owner Status")
+                field("Owner Status";Rec."Owner Status")
                 {
                 }
-                field("Owners Type"; "Owners Type")
+                field("Owners Type";Rec."Owners Type")
                 {
                 }
-                field("Item No."; "Item No.")
+                field("Item No.";Rec."Item No.")
                 {
                 }
             }

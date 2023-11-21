@@ -1,11 +1,11 @@
 page 50284 "Inventory - Stock - Delivery"
 {
     PageType = List;
-    SourceTable = Table32;
-    SourceTableView = WHERE (Entry Type=FILTER(Sale),
-                            Inventory Posting Group=CONST(N_CARS),
-                            Invoiced Quantity=CONST(-1),
-                            Posting Date=FILTER(01/01/20..31/12/23));
+    SourceTable = "Item Ledger Entry";
+    SourceTableView = WHERE("Entry Type" = FILTER('Sale'),
+                            "Inventory Posting Group" = FILTER('N_CARS'),
+                            "Invoiced Quantity" = FILTER('-1'),
+                            "Posting Date" = FILTER('01/01/20..31/12/23'));
 
     layout
     {
@@ -13,51 +13,51 @@ page 50284 "Inventory - Stock - Delivery"
         {
             repeater(Group)
             {
-                field("Entry No.";"Entry No.")
+                field("Entry No."; Rec."Entry No.")
                 {
                     Editable = false;
                 }
-                field("Item No.";"Item No.")
+                field("Item No."; Rec."Item No.")
                 {
                     Editable = false;
                 }
-                field("Posting Date";"Posting Date")
+                field("Posting Date"; Rec."Posting Date")
                 {
                     Editable = false;
                 }
-                field("Location Code";"Location Code")
+                field("Location Code"; Rec."Location Code")
                 {
                     Editable = false;
                 }
-                field(Description;Description)
+                field(Description; Rec.Description)
                 {
                     Editable = false;
                     Width = 50;
                 }
-                field("Serial No.";"Serial No.")
+                field("Serial No."; Rec."Serial No.")
                 {
                     Editable = false;
                     Width = 30;
                 }
-                field("Exterior Colour Name";"Exterior Colour Name")
+                field("Exterior Colour Name"; Rec."Exterior Colour Name")
                 {
                 }
-                field("Engine No.";"Engine No.")
+                field("Engine No."; Rec."Engine No.")
                 {
                     Editable = false;
                     Width = 20;
                 }
-                field("Item Name";"Item Name")
+                field("Item Name"; Rec."Item Name")
                 {
                     Editable = false;
                 }
-                field(Delivered;Delivered)
+                field(Delivered; Rec.Delivered)
                 {
                 }
-                field("Whse Manager";"Whse Manager")
+                field("Whse Manager"; Rec."Whse Manager")
                 {
                 }
-                field("Dealer Delivered Date";"Dealer Delivered Date")
+                field("Dealer Delivered Date"; "Dealer Delivered Date")
                 {
                 }
             }
@@ -70,9 +70,8 @@ page 50284 "Inventory - Stock - Delivery"
 
     trigger OnAfterGetRecord()
     begin
-        IF "Current Date" <> 0D THEN
-
-          VALIDATE("Current Date",WORKDATE);
+        IF Rec."Current Date" <> 0D THEN
+            Rec.VALIDATE("Current Date", WORKDATE);
     end;
 }
 

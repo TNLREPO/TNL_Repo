@@ -5,8 +5,8 @@ page 50594 "Approved Pool Car Request List"
     Editable = false;
     ModifyAllowed = false;
     PageType = List;
-    SourceTable = Table70002;
-    SourceTableView = WHERE (2nd Approval Status=CONST(Approved));
+    SourceTable = "Pool Car Register";
+    SourceTableView = WHERE("2nd Approval Status" = filter('Approved'));
 
     layout
     {
@@ -14,22 +14,22 @@ page 50594 "Approved Pool Car Request List"
         {
             repeater(Group)
             {
-                field("Request No."; "Request No.")
+                field("Request No."; Rec."Request No.")
                 {
                 }
-                field("Entry Date"; "Entry Date")
+                field("Entry Date"; Rec."Entry Date")
                 {
                 }
-                field("Request Type"; "Request Type")
+                field("Request Type"; Rec."Request Type")
                 {
                 }
-                field(Requester; Requester)
+                field(Requester; Rec.Requester)
                 {
                 }
-                field("Requester Name"; "Requester Name")
+                field("Requester Name"; Rec."Requester Name")
                 {
                 }
-                field("Global Dimension 1 code"; "Global Dimension 1 code")
+                field("Global Dimension 1 code"; Rec."Global Dimension 1 code")
                 {
                 }
             }

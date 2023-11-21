@@ -2,14 +2,14 @@ page 70156 "Gen. Manager Appr.-Capex"
 {
     CardPageID = "Capex Card";
     PageType = List;
-    SourceTable = Table70008;
-    SourceTableView = WHERE (Document Type=CONST(Capex),
-                            Head of Audit=CONST(Approved),
-                            General Manager=CONST(" "),
-                            Managing Director=CONST(" "),
-                            Reject=CONST(No),
-                            Proposed Purchase Amount=FILTER(>100,001),
-                            Capex Type=FILTER(<>Fixed Asset));
+    SourceTable = "Procurement Header";
+    SourceTableView = WHERE("Document Type" = FILTER(Capex),
+                            "Head of Audit" = FILTER(Approved),
+                            "General Manager" = FILTER(" "),
+                            "Managing Director" = FILTER(" "),
+                            Reject = FILTER('No'),
+                            "Proposed Purchase Amount" = FILTER(> '100,001'),
+                            "Capex Type" = FILTER(<> "Fixed Asset"));
 
     layout
     {
@@ -17,32 +17,32 @@ page 70156 "Gen. Manager Appr.-Capex"
         {
             repeater(Group)
             {
-                field(Date;Date)
+                field(Date; Rec.Date)
                 {
                 }
-                field("No.";"No.")
+                field("No."; Rec."No.")
                 {
                     Caption = 'Capex No.';
                 }
-                field("Requester Name";"Requester Name")
+                field("Requester Name"; Rec."Requester Name")
                 {
                 }
-                field("Requester Department";"Requester Department")
+                field("Requester Department"; Rec."Requester Department")
                 {
                 }
-                field("Head of Department";"Head of Department")
+                field("Head of Department"; Rec."Head of Department")
                 {
                 }
-                field("Head of Audit";"Head of Audit")
+                field("Head of Audit"; Rec."Head of Audit")
                 {
                 }
-                field("Department Code";"Department Code")
+                field("Department Code"; Rec."Department Code")
                 {
                 }
-                field("Purchase Justification";"Purchase Justification")
+                field("Purchase Justification"; Rec."Purchase Justification")
                 {
                 }
-                field(Vendor;Vendor)
+                field(Vendor; Rec.Vendor)
                 {
                 }
             }

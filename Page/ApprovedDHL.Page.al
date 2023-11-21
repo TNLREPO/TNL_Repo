@@ -1,45 +1,44 @@
 page 70220 "Approved DHL"
 {
     CardPageID = "Air Online Order Card";
-    SourceTable = Table70022;
-    SourceTableView = WHERE (Send = CONST (Yes),
-                            HoDPartApproval = CONST (Yes),
-                            ComplianceCheck = CONST (Yes),
-                            HoDAuditApproval = CONST (Yes),
-                            Genarate FM=CONST(Yes),
-                            Air Order Type=FILTER(DHL));
-
+    SourceTable = "Air Online Header";
+    SourceTableView = WHERE(Send = filter('Yes'),
+                        HoDPartApproval = filter('Yes'),
+                        ComplianceCheck = filter('Yes'),
+                        HoDAuditApproval = filter('Yes'),
+                        "Genarate FM" = filter('Yes'),
+                        "Air Order Type" = FILTER('DHL'));
     layout
     {
         area(content)
         {
             repeater(Group)
             {
-                field("No.";"No.")
+                field("No."; Rec."No.")
                 {
                 }
-                field("Requester Code";"Requester Code")
+                field("Requester Code"; Rec."Requester Code")
                 {
                 }
-                field("Requester Name";"Requester Name")
+                field("Requester Name"; Rec."Requester Name")
                 {
                 }
-                field("Department Code";"Department Code")
+                field("Department Code"; Rec."Department Code")
                 {
                 }
-                field("Requester Department";"Requester Department")
+                field("Requester Department"; Rec."Requester Department")
                 {
                 }
-                field(Date;Date)
+                field(Date; Rec.Date)
                 {
                 }
-                field("Supplier's Name";"Supplier's Name")
+                field("Supplier's Name"; Rec."Supplier's Name")
                 {
                 }
-                field("Profoma Invoice No:";"Profoma Invoice No:")
+                field("Profoma Invoice No:"; Rec."Profoma Invoice No:")
                 {
                 }
-                field("Air Order Type";"Air Order Type")
+                field("Air Order Type"; Rec."Air Order Type")
                 {
                 }
             }

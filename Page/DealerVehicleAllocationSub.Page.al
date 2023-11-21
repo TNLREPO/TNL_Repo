@@ -3,128 +3,128 @@ page 50180 "Dealer Vehicle Allocation Sub"
     AutoSplitKey = true;
     DelayedInsert = true;
     PageType = Card;
-    SourceTable = Table50035;
+    SourceTable = "Vehicle Mth. Allocation Line";
 
     layout
     {
         area(content)
         {
-            repeater()
+            repeater(Group)
             {
-                field("Item No."; "Item No.")
+                field("Item No.";Rec."Item No.")
                 {
                 }
-                field("Allocation Code"; "Allocation Code")
+                field("Allocation Code";Rec."Allocation Code")
                 {
                 }
-                field(Invoiced; Invoiced)
+                field(Invoiced;Rec.Invoiced)
                 {
                 }
-                field("Picked Not Invoice"; "Picked Not Invoice")
+                field("Picked Not Invoice";Rec."Picked Not Invoice")
                 {
                 }
-                field("Quantity Invoiced"; "Quantity Invoiced")
+                field("Quantity Invoiced";Rec."Quantity Invoiced")
                 {
                 }
-                field(Tracking; Tracking)
+                field(Tracking;Rec.Tracking)
                 {
                 }
-                field("Serial No."; "Serial No.")
-                {
-                    Editable = false;
-                }
-                field("Customer No."; "Customer No.")
-                {
-                }
-                field("Line No."; "Line No.")
-                {
-                }
-                field("Model No."; "Model No.")
-                {
-                }
-                field("Model Name"; "Model Name")
-                {
-                }
-                field("Seat Option"; "Seat Option")
-                {
-                }
-                field(Transimision; Transimision)
-                {
-                }
-                field("A/C"; "A/C")
-                {
-                }
-                field("Fuel Type"; "Fuel Type")
-                {
-                }
-                field(Body; Body)
-                {
-                }
-                field(Type; Type)
-                {
-                }
-                field(Rim; Rim)
-                {
-                }
-                field(Location; Location)
-                {
-                }
-                field(Quantity; Quantity)
-                {
-                }
-                field(Variant; Variant)
-                {
-                }
-                field("Chasis No."; "Chasis No.")
-                {
-                }
-                field("Engine No."; "Engine No.")
-                {
-                }
-                field("Key No."; "Key No.")
+                field("Serial No.";Rec."Serial No.")
                 {
                     Editable = false;
                 }
-                field(Colour; Colour)
+                field("Customer No.";Rec."Customer No.")
                 {
                 }
-                field("Unit Price"; "Unit Price")
+                field("Line No.";Rec."Line No.")
                 {
                 }
-                field(Amount; Amount)
+                field("Model No.";Rec."Model No.")
                 {
                 }
-                field(Selected; Selected)
+                field("Model Name";Rec."Model Name")
                 {
                 }
-                field("Date Selected"; "Date Selected")
+                field("Seat Option";Rec."Seat Option")
                 {
                 }
-                field(Released; Released)
+                field(Transimision;Rec.Transimision)
                 {
                 }
-                field("Date Released"; "Date Released")
+                field("A/C";Rec."A/C")
                 {
                 }
-                field("Released By"; "Released By")
+                field("Fuel Type";Rec."Fuel Type")
                 {
                 }
-                field(Picked; Picked)
+                field(Body;Rec.Body)
                 {
                 }
-                field("Date Picked"; "Date Picked")
+                field(Type;Rec.Type)
                 {
                 }
-                field("Picked by"; "Picked by")
+                field(Rim;Rec.Rim)
                 {
                 }
-                field("Latest Picking Date"; "Latest Picking Date")
+                field(Location;Rec.Location)
                 {
                 }
-                field("Driver Name"; "Driver Name")
+                field(Quantity;Rec.Quantity)
                 {
                 }
-                field("Order No."; "Order No.")
+                field(Variant;Rec.Variant)
+                {
+                }
+                field("Chasis No.";Rec."Chasis No.")
+                {
+                }
+                field("Engine No.";Rec."Engine No.")
+                {
+                }
+                field("Key No.";Rec."Key No.")
+                {
+                    Editable = false;
+                }
+                field(Colour;Rec.Colour)
+                {
+                }
+                field("Unit Price";Rec."Unit Price")
+                {
+                }
+                field(Amount;Rec.Amount)
+                {
+                }
+                field(Selected;Rec.Selected)
+                {
+                }
+                field("Date Selected";Rec."Date Selected")
+                {
+                }
+                field(Released;Rec.Released)
+                {
+                }
+                field("Date Released";Rec."Date Released")
+                {
+                }
+                field("Released By";Rec."Released By")
+                {
+                }
+                field(Picked;Rec.Picked)
+                {
+                }
+                field("Date Picked";Rec."Date Picked")
+                {
+                }
+                field("Picked by";Rec."Picked by")
+                {
+                }
+                field("Latest Picking Date";Rec."Latest Picking Date")
+                {
+                }
+                field("Driver Name";Rec."Driver Name")
+                {
+                }
+                field("Order No.";Rec."Order No.")
                 {
                 }
             }

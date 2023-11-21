@@ -1,7 +1,7 @@
 page 70230 "Item list List"
 {
     PageType = List;
-    SourceTable = Table27;
+    SourceTable = "Item";
 
     layout
     {
@@ -9,16 +9,16 @@ page 70230 "Item list List"
         {
             repeater(Group)
             {
-                field("Last Purchase Date"; "Last Purchase Date")
+                field("Last Purchase Date"; Rec."Last Purchase Date")
                 {
                 }
-                field("Last Sales Date"; "Last Sales Date")
+                field("Last Sales Date"; Rec."Last Sales Date")
                 {
                 }
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                 }
             }

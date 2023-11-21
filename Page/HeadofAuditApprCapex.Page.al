@@ -2,11 +2,11 @@ page 70154 "Head of Audit Appr.-Capex"
 {
     CardPageID = "Capex Card";
     PageType = List;
-    SourceTable = Table70008;
-    SourceTableView = WHERE (Document Type=CONST(Capex),
-                            Head of Department=CONST(Approved),
-                            Head of Audit=FILTER(<>Approved),
-                            Reject=CONST(No));
+    SourceTable = "Procurement Header";
+    SourceTableView = WHERE("Document Type" = FILTER(Capex),
+                            "Head of Department" = FILTER(Approved),
+                            "Head of Audit" = FILTER(<> Approved),
+                            Reject = FILTER(false));
 
     layout
     {
@@ -14,26 +14,26 @@ page 70154 "Head of Audit Appr.-Capex"
         {
             repeater(Group)
             {
-                field(Date;Date)
+                field(Date; Rec.Date)
                 {
                 }
-                field("No.";"No.")
+                field("No."; Rec."No.")
                 {
                     Caption = 'Capex No.';
                 }
-                field("Requester Name";"Requester Name")
+                field("Requester Name"; Rec."Requester Name")
                 {
                 }
-                field("Requester Department";"Requester Department")
+                field("Requester Department"; Rec."Requester Department")
                 {
                 }
-                field("Head of Department";"Head of Department")
+                field("Head of Department"; Rec."Head of Department")
                 {
                 }
-                field("Department Code";"Department Code")
+                field("Department Code"; Rec."Department Code")
                 {
                 }
-                field("Purchase Justification";"Purchase Justification")
+                field("Purchase Justification"; Rec."Purchase Justification")
                 {
                 }
             }

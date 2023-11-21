@@ -2,16 +2,16 @@ page 70124 "Bal/Full Payment Capex-GM"
 {
     CardPageID = "Capex Card";
     PageType = List;
-    SourceTable = Table70008;
-    SourceTableView = WHERE (Document Type=CONST(Capex),
-                            Compliance=CONST(Yes),
-                            Balance Paymt.=CONST(No),
-                            Closed=CONST(No),
-                            Reject=CONST(No),
-                            Bal. Paymt. Audit=CONST(Approved),
-                            Bal. Paymt. GM=FILTER(<>Approved|Rejected),
-                            Balance Paymt. Appr.=CONST(Yes),
-                            Proposed Purchase Amount=FILTER(<100,000));
+    SourceTable = "Procurement Header";
+    SourceTableView = WHERE("Document Type" = filter('Capex'),
+                            Compliance = filter(true),
+                            "Balance Paymt." = filter(false),
+                            Closed = filter(false),
+                            Reject = filter(false),
+                            "Bal. Paymt. Audit" = filter('Approved'),
+                            "Bal. Paymt. GM" = FILTER(<> 'Approved|Rejected'),
+                            "Balance Paymt. Appr." = filter(true),
+                            "Proposed Purchase Amount" = FILTER(< '100,000'));
 
     layout
     {
@@ -19,26 +19,26 @@ page 70124 "Bal/Full Payment Capex-GM"
         {
             repeater(Group)
             {
-                field("No.";"No.")
+                field("No."; Rec."No.")
                 {
                     Caption = 'Capex No.';
                 }
-                field(Date;Date)
+                field(Date; Rec.Date)
                 {
                 }
-                field("Requester Name";"Requester Name")
+                field("Requester Name"; Rec."Requester Name")
                 {
                 }
-                field("Purchase Justification";"Purchase Justification")
+                field("Purchase Justification"; Rec."Purchase Justification")
                 {
                 }
-                field("Proposed Purchase Amount";"Proposed Purchase Amount")
+                field("Proposed Purchase Amount"; Rec."Proposed Purchase Amount")
                 {
                 }
-                field(Vendor;Vendor)
+                field(Vendor; Rec.Vendor)
                 {
                 }
-                field("Capex Type";"Capex Type")
+                field("Capex Type"; Rec."Capex Type")
                 {
                 }
             }

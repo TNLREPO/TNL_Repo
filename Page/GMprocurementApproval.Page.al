@@ -2,13 +2,13 @@ page 70198 "GM procurement Approval"
 {
     CardPageID = "LPP Card2";
     PageType = List;
-    SourceTable = Table70018;
-    SourceTableView = WHERE (Procurement Approval=CONST(No),
-                            GM Approval=CONST(Yes),
-                            MD Approval=CONST(No),
-                            Genarate LPO=CONST(No),
-                            Total Purchase Value=FILTER(100,001..499,000.99),
-                            Rejected=CONST(No));
+    SourceTable = "Local Part Purchase Register";
+    SourceTableView = WHERE("Procurement Approval" = FILTER(false),
+                            "GM Approval" = FILTER('Yes'),
+                            "MD Approval" = FILTER(false),
+                            "Genarate LPO" = FILTER(false),
+                            "Total Purchase Value" = FILTER('100,001..499,000.99'),
+                            Rejected = FILTER(false));
 
     layout
     {
@@ -16,22 +16,22 @@ page 70198 "GM procurement Approval"
         {
             repeater(Group)
             {
-                field("LPP No.";"LPP No.")
+                field("LPP No."; Rec."LPP No.")
                 {
                 }
-                field("Requester Name";"Requester Name")
+                field("Requester Name"; Rec."Requester Name")
                 {
                 }
-                field("Requester Department";"Requester Department")
+                field("Requester Department"; Rec."Requester Department")
                 {
                 }
-                field("Supplier's Name";"Supplier's Name")
+                field("Supplier's Name"; Rec."Supplier's Name")
                 {
                 }
-                field("Justification for purchase";"Justification for purchase")
+                field("Justification for purchase"; Rec."Justification for purchase")
                 {
                 }
-                field("Total Purchase Value";"Total Purchase Value")
+                field("Total Purchase Value"; Rec."Total Purchase Value")
                 {
                 }
             }

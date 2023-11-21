@@ -1,18 +1,18 @@
 page 50183 "Distribution Period"
 {
     PageType = Card;
-    SourceTable = Table50037;
+    SourceTable = "Production Period";
 
     layout
     {
         area(content)
         {
-            repeater()
+            repeater(Group)
             {
-                field("Period Code"; "Period Code")
+                field("Period Code";Rec. "Period Code")
                 {
                 }
-                field("Period Description"; "Period Description")
+                field("Period Description";Rec. "Period Description")
                 {
                 }
             }

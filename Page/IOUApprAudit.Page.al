@@ -2,11 +2,11 @@ page 70238 "IOU Appr. Audit"
 {
     CardPageID = "IOU Register Card";
     PageType = List;
-    SourceTable = Table50105;
-    SourceTableView = WHERE (2nd Approval to=FILTER(TOYOTANIGERIA\ADEWUMI),
-                            2nd Apprv. Status=FILTER(' '|on Hold),
-                            1st Apprv. Status=FILTER(Approved),
-                            Reject=CONST(No));
+    SourceTable = "IOU Register";
+    SourceTableView = WHERE("2nd Approval to" = FILTER('TOYOTANIGERIA\ADEWUMI'),
+                            "2nd Apprv. Status" = FILTER(' ' | 'on Hold'),
+                            "1st Apprv. Status" = FILTER('Approved'),
+                            Reject = FILTER('No'));
 
     layout
     {
@@ -14,25 +14,25 @@ page 70238 "IOU Appr. Audit"
         {
             repeater(Group)
             {
-                field("IOU No.";"IOU No.")
+                field("IOU No."; Rec."IOU No.")
                 {
                 }
-                field("Entry Date";"Entry Date")
+                field("Entry Date"; Rec."Entry Date")
                 {
                 }
-                field(Description;Description)
+                field(Description; Rec.Description)
                 {
                 }
-                field(Amount;Amount)
+                field(Amount; Rec.Amount)
                 {
                 }
-                field("Payment Date";"Payment Date")
+                field("Payment Date"; Rec."Payment Date")
                 {
                 }
-                field("Collected By";"Collected By")
+                field("Collected By"; Rec."Collected By")
                 {
                 }
-                field("Staff Name";"Staff Name")
+                field("Staff Name"; Rec."Staff Name")
                 {
                 }
             }

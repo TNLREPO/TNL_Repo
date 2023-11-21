@@ -4,7 +4,7 @@ page 50359 "Diag. Questionnaire Subform"
     DelayedInsert = true;
     MultipleNewLines = true;
     PageType = ListPart;
-    SourceTable = Table50125;
+    SourceTable = "DQ Inspection Details/Result";
 
     layout
     {
@@ -12,22 +12,22 @@ page 50359 "Diag. Questionnaire Subform"
         {
             repeater(Group)
             {
-                field("Inspection Details/Result"; "Inspection Details/Result")
+                field("Inspection Details/Result"; Rec."Inspection Details/Result")
                 {
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                 }
-                field(DTC; DTC)
+                field(DTC; Rec.DTC)
                 {
                 }
-                field("Freeze Frame Data Saved"; "Freeze Frame Data Saved")
+                field("Freeze Frame Data Saved"; Rec."Freeze Frame Data Saved")
                 {
                 }
-                field("Job Instruction"; "Job Instruction")
+                field("Job Instruction"; Rec."Job Instruction")
                 {
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                 }
             }

@@ -3,13 +3,13 @@ page 70213 "Head of Audit Approval FM"
     CardPageID = "Air Online Order Card";
     Editable = false;
     PageType = List;
-    SourceTable = Table70022;
-    SourceTableView = WHERE (Send = CONST (Yes),
-                            HoDPartApproval = CONST (Yes),
-                            ComplianceCheck = CONST (Yes),
-                            HoDAuditApproval = CONST (Yes),
-                            GMapproval = CONST (No),
-                            MDapproval = CONST (No));
+    SourceTable = "Air Online Header";
+    SourceTableView = WHERE(Send = FILTER(True),
+                            HoDPartApproval = FILTER(True),
+                            ComplianceCheck = FILTER(True),
+                            HoDAuditApproval = FILTER(True),
+                            GMapproval = FILTER(false),
+                            MDapproval = FILTER(false));
 
     layout
     {
@@ -17,28 +17,28 @@ page 70213 "Head of Audit Approval FM"
         {
             repeater(Group)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                 }
-                field("Requester Code"; "Requester Code")
+                field("Requester Code"; Rec."Requester Code")
                 {
                 }
-                field("Requester Name"; "Requester Name")
+                field("Requester Name"; Rec."Requester Name")
                 {
                 }
-                field("Department Code"; "Department Code")
+                field("Department Code"; Rec."Department Code")
                 {
                 }
-                field("Requester Department"; "Requester Department")
+                field("Requester Department"; Rec."Requester Department")
                 {
                 }
-                field(Date; Date)
+                field(Date; Rec.Date)
                 {
                 }
-                field("Supplier's Name"; "Supplier's Name")
+                field("Supplier's Name"; Rec."Supplier's Name")
                 {
                 }
-                field("Profoma Invoice No:"; "Profoma Invoice No:")
+                field("Profoma Invoice No:"; Rec."Profoma Invoice No:")
                 {
                 }
             }

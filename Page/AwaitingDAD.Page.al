@@ -2,9 +2,9 @@ page 80060 "Awaiting DAD"
 {
     CardPageID = "Customer Order Card";
     PageType = List;
-    SourceTable = Table70034;
-    SourceTableView = WHERE (Stage = CONST (Awaiting DAD),
-                            Delivered=CONST(No));
+    SourceTable = "Customer Order HeaderX";
+    SourceTableView = WHERE(Stage = filter("Awaiting DAD"),
+                            Delivered = filter('No'));
 
     layout
     {
@@ -12,44 +12,44 @@ page 80060 "Awaiting DAD"
         {
             repeater(Group)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                 }
-                field("Reception Date"; "Reception Date")
+                field("Reception Date"; Rec."Reception Date")
                 {
                 }
-                field("Reception Time"; "Reception Time")
+                field("Reception Time"; Rec."Reception Time")
                 {
                 }
-                field("Reception Type"; "Reception Type")
+                field("Reception Type"; Rec."Reception Type")
                 {
                 }
-                field("Customer No."; "Customer No.")
+                field("Customer No."; Rec."Customer No.")
                 {
                 }
-                field("Customer Name"; "Customer Name")
+                field("Customer Name"; Rec."Customer Name")
                 {
                 }
-                field("Parts Ordered Date"; "Parts Ordered Date")
+                field("Parts Ordered Date"; Rec."Parts Ordered Date")
                 {
                 }
-                field("Parts Ordered Time"; "Parts Ordered Time")
+                field("Parts Ordered Time"; Rec."Parts Ordered Time")
                 {
                 }
-                field("Vehicle Registration No."; "Vehicle Registration No.")
+                field("Vehicle Registration No."; Rec."Vehicle Registration No.")
                 {
                 }
-                field("Model Name"; "Model Name")
+                field("Model Name"; Rec."Model Name")
                 {
                 }
             }
         }
         area(factboxes)
         {
-            systempart(; Notes)
+            systempart(Notes; Notes)
             {
             }
-            systempart(; Links)
+            systempart(Links; Links)
             {
             }
         }

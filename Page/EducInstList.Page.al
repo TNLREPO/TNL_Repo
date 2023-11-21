@@ -4,27 +4,27 @@ page 50075 "Educ. Inst. List"
     Editable = false;
     ModifyAllowed = false;
     PageType = Card;
-    SourceTable = Table50086;
+    SourceTable = "Educational Institute";
 
     layout
     {
         area(content)
         {
-            repeater()
+            repeater(Group)
             {
-                field("Institute Code"; "Institute Code")
+                field("Institute Code";Rec. "Institute Code")
                 {
                 }
-                field("Institute Grp"; "Institute Grp")
+                field("Institute Grp";Rec. "Institute Grp")
                 {
                 }
-                field("Institute Name"; "Institute Name")
+                field("Institute Name";Rec. "Institute Name")
                 {
                 }
-                field("Institute Grp Name"; "Institute Grp Name")
+                field("Institute Grp Name";Rec. "Institute Grp Name")
                 {
                 }
-                field("Staffs In"; "Staffs In")
+                field("Staffs In";Rec. "Staffs In")
                 {
                 }
             }

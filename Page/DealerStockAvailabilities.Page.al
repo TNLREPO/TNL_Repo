@@ -2,41 +2,32 @@ page 50225 "Dealer Stock Availabilities"
 {
     Editable = false;
     PageType = Card;
-    SourceTable = Table27;
-    SourceTableView = WHERE (Inventory = FILTER (> 0),
-                            Net Change=FILTER(>0));
+    SourceTable = "Item";
+    SourceTableView = WHERE ("Inventory" = FILTER (> 0),
+                            "Net Change"=FILTER(>0));
 
     layout
     {
         area(content)
         {
-            repeater()
+            repeater(Group)
             {
-                field("No.";"No.")
+                field("No.";Rec."No.")
                 {
                 }
-                field(Description;Description)
+                field(Description;Rec.Description)
                 {
                 }
-                field("Unit Price";"Unit Price")
+                field("Unit Price";Rec."Unit Price")
                 {
                 }
-                field("Date Filter";"Date Filter")
+                field("Date Filter";Rec."Date Filter")
                 {
                 }
-                field("Location Filter";"Location Filter")
+                field("Location Filter";Rec."Location Filter")
                 {
                 }
-                field(Inventory;Inventory)
-                {
-
-                    trigger OnDrillDown()
-                    begin
-
-                        ERROR('You Don''t Have Permision to Open Details');
-                    end;
-                }
-                field("Net Change";"Net Change")
+                field(Inventory;Rec.Inventory)
                 {
 
                     trigger OnDrillDown()
@@ -45,7 +36,7 @@ page 50225 "Dealer Stock Availabilities"
                         ERROR('You Don''t Have Permision to Open Details');
                     end;
                 }
-                field("Qty. on Purch. Order";"Qty. on Purch. Order")
+                field("Net Change";Rec."Net Change")
                 {
 
                     trigger OnDrillDown()
@@ -54,7 +45,16 @@ page 50225 "Dealer Stock Availabilities"
                         ERROR('You Don''t Have Permision to Open Details');
                     end;
                 }
-                field("Qty. on Sales Order";"Qty. on Sales Order")
+                field("Qty. on Purch. Order";Rec."Qty. on Purch. Order")
+                {
+
+                    trigger OnDrillDown()
+                    begin
+
+                        ERROR('You Don''t Have Permision to Open Details');
+                    end;
+                }
+                field("Qty. on Sales Order";Rec."Qty. on Sales Order")
                 {
 
                     trigger OnDrillDown()
