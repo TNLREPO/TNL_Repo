@@ -1,0 +1,67 @@
+page 80012 "Job Instruction Subform"
+{
+    AutoSplitKey = true;
+    DelayedInsert = true;
+    PageType = ListPart;
+    SourceTable = "Customer Order LineX";
+
+    layout
+    {
+        area(content)
+        {
+            repeater(Group)
+            {
+                field("Additional Jobs";Rec. "Additional Jobs")
+                {
+                }
+                field("No.";Rec. "No.")
+                {
+                }
+                field(Description;Rec. Description)
+                {
+                }
+                field("Quantity Requested";Rec. "Quantity Requested")
+                {
+                }
+                field(Results;Rec. Results)
+                {
+                }
+                field("Stock Status";Rec. "Stock Status")
+                {
+                }
+                field(ETA;Rec. ETA)
+                {
+                }
+            }
+        }
+    }
+
+    actions
+    {
+    }
+
+    trigger OnAfterGetRecord()
+    begin
+        OnAfterGetCurrRecord;
+    end;
+
+    trigger OnNewRecord(BelowxRec: Boolean)
+    begin
+        OnAfterGetCurrRecord;
+    end;
+
+    var
+        CustOrderLine: Record 50122;
+        CustOrderRec: Record 50119;
+        [InDataSet]
+        "Unit CostEditable": Boolean;
+
+    local procedure OnAfterGetCurrRecord()
+    begin
+        xRec := Rec;
+        IF Rec."No." = 'SUBLET' THEN
+            "Unit CostEditable" := TRUE ELSE
+            "Unit CostEditable" := FALSE;
+    end;
+}
+

@@ -3,8 +3,8 @@ page 70204 "Generate LPO"
     CardPageID = "LPP Card";
     PageType = List;
     SourceTable = "Local Part Purchase Register";
-    SourceTableView = WHERE("Genarate LPO" = FILTER('Yes'),
-                            GenaratePayment = FILTER('No'));
+    SourceTableView = WHERE("Genarate LPO" = FILTER(true),
+                            GenaratePayment = FILTER(false));
 
     layout
     {

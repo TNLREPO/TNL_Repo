@@ -312,21 +312,21 @@ table 50103 "Payment/Receipt."
         field(29; "Debit Amount"; Decimal)
         {
 
-            /* trigger OnValidate()
+            trigger OnValidate()
             begin
                 IF "Debit Amount" <> 0 THEN
-                "Credit Amount" := 0;
+                    "Credit Amount" := 0;
                 Amount := "Debit Amount";
                 IF "Currency Code" = '' THEN
-                  "Amount (LCY)" := Amount
+                    "Amount (LCY)" := Amount
                 ELSE
-                  "Amount (LCY)" := ROUND(
-                    CurrExchRate.ExchangeAmtFCYToLCY(
-                      "Posting Date","Currency Code",
-                      Amount,"Currency Factor"));
+                    "Amount (LCY)" := ROUND(
+                      CurrExchRate.ExchangeAmtFCYToLCY(
+                        "Posting Date", "Currency Code",
+                        Amount, "Currency Factor"));
 
-                Amount := ROUND(Amount,currency."Amount Rounding Precision");
-            end; */
+                Amount := ROUND(Amount, currency."Amount Rounding Precision");
+            end;
         }
         field(30; "Bal. Acc. Description"; Text[50])
         {
@@ -334,31 +334,31 @@ table 50103 "Payment/Receipt."
         field(31; "Multiple Account"; Boolean)
         {
 
-            /*   trigger OnValidate()
-              begin
-                  IF "Multiple Account" = TRUE THEN BEGIN
-                      IF "Multiple Balance Account" = TRUE THEN BEGIN
-                          ReqReptLine.SETRANGE(ReqReptLine.Type, "Document Type");
-                          ReqReptLine.SETRANGE(ReqReptLine."Cash/Cheque", "Cash/Cheque");
-                          ReqReptLine.SETRANGE(ReqReptLine."No.", "No.");
-                          IF ReqReptLine.FIND('-') THEN
-                              ReqReptLine.DELETEALL;
-                          "Multiple Balance Account" := FALSE;
-                      END;
-                      if "Debit Amount" <> 0 then
-                        VALIDATE("Credit Amount","Debit Amount")
-                      else
-                        VALIDATE("Debit Amount","Credit Amount");
-                  END
-                  ELSE BEGIN
-                      ReqReptLine.SETRANGE(ReqReptLine.Type, "Document Type");
-                      ReqReptLine.SETRANGE(ReqReptLine."Cash/Cheque", "Cash/Cheque");
-                      ReqReptLine.SETRANGE(ReqReptLine."No.", "No.");
-                      IF ReqReptLine.FIND('-') THEN
-                          ReqReptLine.DELETEALL;
-                  END;
+            trigger OnValidate()
+            begin
+                IF "Multiple Account" = TRUE THEN BEGIN
+                    IF "Multiple Balance Account" = TRUE THEN BEGIN
+                        ReqReptLine.SETRANGE(ReqReptLine.Type, "Document Type");
+                        ReqReptLine.SETRANGE(ReqReptLine."Cash/Cheque", "Cash/Cheque");
+                        ReqReptLine.SETRANGE(ReqReptLine."No.", "No.");
+                        IF ReqReptLine.FIND('-') THEN
+                            ReqReptLine.DELETEALL;
+                        "Multiple Balance Account" := FALSE;
+                    END;
+                    if "Debit Amount" <> 0 then
+                        VALIDATE("Credit Amount", "Debit Amount")
+                    else
+                        VALIDATE("Debit Amount", "Credit Amount");
+                END
+                ELSE BEGIN
+                    ReqReptLine.SETRANGE(ReqReptLine.Type, "Document Type");
+                    ReqReptLine.SETRANGE(ReqReptLine."Cash/Cheque", "Cash/Cheque");
+                    ReqReptLine.SETRANGE(ReqReptLine."No.", "No.");
+                    IF ReqReptLine.FIND('-') THEN
+                        ReqReptLine.DELETEALL;
+                END;
 
-              end; */
+            end;
         }
         field(32; "Balance Department Code"; Code[20])
         {
@@ -373,10 +373,10 @@ table 50103 "Payment/Receipt."
         }
         field(35; "Balance Total"; Decimal)
         {
-            /* CalcFormula = Sum("Payment/Receipt Bal. Line.".Amount WHERE("No."=FIELD("No."),
-                                                                         Type=FIELD("Document Type"),
-                                                                         "Cash/Cheque"=FIELD("Cash/Cheque")));
-            FieldClass = FlowField; */
+            CalcFormula = Sum("Payment/Receipt Bal. Line.".Amount WHERE("No." = FIELD("No."),
+                                                                         Type = FIELD("Document Type"),
+                                                                         "Cash/Cheque" = FIELD("Cash/Cheque")));
+            FieldClass = FlowField;
         }
         field(36; Finished; Boolean)
         {
@@ -385,30 +385,29 @@ table 50103 "Payment/Receipt."
         {
             TableRelation = Currency.Code;
 
-            /*   trigger OnValidate()
-              begin
-                  IF "Currency Code" <> '' THEN BEGIN
+            trigger OnValidate()
+            begin
+                IF "Currency Code" <> '' THEN BEGIN
                     //GetCurrency;
                     IF ("Currency Code" <> xRec."Currency Code") OR
                        ("Posting Date" <> xRec."Posting Date") OR
                        (CurrFieldNo = FIELDNO("Currency Code")) OR
                        ("Currency Factor" = 0)
-                    THEN
-                      BEGIN
-                      "Currency Factor" :=
-                        CurrExchRate.ExchangeRate("Posting Date","Currency Code");
+                    THEN BEGIN
+                        "Currency Factor" :=
+                          CurrExchRate.ExchangeRate("Posting Date", "Currency Code");
                         IF ("Exchange rate" <> 0) THEN
-                        "Currency Factor" := 100/"Exchange rate";
-                         IF Amount <> 0  THEN
-                        "Amount (LCY)" := ROUND(
-                         CurrExchRate.ExchangeAmtFCYToLCY(
-                          "Posting Date","Currency Code",
-                            Amount,"Currency Factor"));
+                            "Currency Factor" := 100 / "Exchange rate";
+                        IF Amount <> 0 THEN
+                            "Amount (LCY)" := ROUND(
+                             CurrExchRate.ExchangeAmtFCYToLCY(
+                              "Posting Date", "Currency Code",
+                                Amount, "Currency Factor"));
                     END;
 
-                  END ELSE
+                END ELSE
                     "Currency Factor" := 0;
-              end; */
+            end;
         }
         field(39; "Amount (LCY)"; Decimal)
         {
@@ -420,30 +419,29 @@ table 50103 "Payment/Receipt."
             Editable = false;
             MinValue = 0;
 
-            /* trigger OnValidate()
+            trigger OnValidate()
             begin
                 IF ("Currency Code" = '') AND ("Currency Factor" <> 0) THEN
-                  FIELDERROR("Currency Factor",STRSUBSTNO(Text002,FIELDCAPTION("Currency Code")));
-            end; */
+                    FIELDERROR("Currency Factor", STRSUBSTNO(Text002, FIELDCAPTION("Currency Code")));
+            end;
         }
         field(41; "Exchange rate"; Decimal)
         {
             DecimalPlaces = 2 : 9;
 
-            /* trigger OnValidate()
+            trigger OnValidate()
             begin
                 IF "Currency Code" = '' THEN
-                  "Amount (LCY)" := Amount
-                ELSE
-                  BEGIN
+                    "Amount (LCY)" := Amount
+                ELSE BEGIN
                     IF "Exchange rate" <> 0 THEN
-                    "Currency Factor" := 100/"Exchange rate";
-                  "Amount (LCY)" := ROUND(
-                    CurrExchRate.ExchangeAmtFCYToLCY(
-                      "Posting Date","Currency Code",
-                      Amount,"Currency Factor"));
-                  END;
-            end; */
+                        "Currency Factor" := 100 / "Exchange rate";
+                    "Amount (LCY)" := ROUND(
+                      CurrExchRate.ExchangeAmtFCYToLCY(
+                        "Posting Date", "Currency Code",
+                        Amount, "Currency Factor"));
+                END;
+            end;
         }
         field(42; "FA Posting Type"; Option)
         {
@@ -1138,11 +1136,11 @@ table 50103 "Payment/Receipt."
         }
         field(76; "User ID"; Code[20])
         {
-            //TableRelation = Table2000000002.Field1;
+            TableRelation = User;
         }
         field(77; "Current pending Person"; Code[20])
         {
-            //TableRelation = Table2000000002.Field1;
+            TableRelation = user;
         }
         field(78; Attachment; Text[250])
         {
@@ -1262,9 +1260,9 @@ table 50103 "Payment/Receipt."
         }
         field(83; "Detail Balance"; Decimal)
         {
-            /* CalcFormula = Sum("Payment/Receipt Bal. Line."."Amount (LCY)" WHERE ("No."=FIELD("No.")));
+            CalcFormula = Sum("Payment/Receipt Bal. Line."."Amount (LCY)" WHERE("No." = FIELD("No.")));
             Editable = false;
-            FieldClass = FlowField; */
+            FieldClass = FlowField;
         }
         field(84; "Voucher Type"; Option)
         {
@@ -1301,12 +1299,12 @@ table 50103 "Payment/Receipt."
             Caption = 'Applies-to Doc. No.';
             Editable = false;
 
-            /* trigger OnLookup()
+            trigger OnLookup()
             var
-                GenJnlPostLine: Codeunit "12";
-                PaymentToleranceMgt: Codeunit "426";
+                GenJnlPostLine: Codeunit 12;
+                PaymentToleranceMgt: Codeunit 426;
             begin
-            end; */
+            end;
 
             trigger OnValidate()
             var
@@ -1318,53 +1316,42 @@ table 50103 "Payment/Receipt."
         }
         field(91; "Apply Entry"; Integer)
         {
-            /*     TableRelation = IF (Account Type=filter(Customer),
-                                    Credit Amount=FILTER(<>0)) "Cust. Ledger Entry"."Entry No." WHERE (Customer No.=FIELD(Account No.),
-                                                                                                       Open=filter(Yes),
-                                                                                                       Positive=filter(Yes))
-                                                                                                       ELSE IF (Account Type=filter(Customer),
-                                                                                                                Debit Amount=FILTER(<>0)) "Cust. Ledger Entry"."Entry No." WHERE (Customer No.=FIELD(Account No.),
-                                                                                                                                                                                  Open=filter(Yes),
-                                                                                                                                                                                  Positive=filter(No))
-                                                                                                                                                                                  ELSE IF (Account Type=filter(Supplier),
-                                                                                                                                                                                           Debit Amount=FILTER(<>0)) "Vendor Ledger Entry"."Entry No." WHERE (Vendor No.=FIELD(Account No.),
-                                                                                                                                                                                                                                                              Open=filter(Yes),
-                                                                                                                                                                                                                                                              Positive=filter(No))
-                                                                                                                                                                                                                                                              ELSE IF (Account Type=filter(Supplier),
-                                                                                                                                                                                                                                                                       Credit Amount=FILTER(<>0)) "Vendor Ledger Entry"."Entry No." WHERE (Vendor No.=FIELD(Account No.),
-                                                                                                                                                                                                                                                                                                                                           Open=filter(Yes),
-                                                                                                                                                                                                                                                                                                                                           Positive=filter(Yes))
-                                                                                                                                                                                                                                                                                                                                           ELSE IF (Account Type=filter(Staff),
-                                                                                                                                                                                                                                                                                                                                                    Credit Amount=FILTER(<>0)) "Cust. Ledger Entry"."Entry No." WHERE (Customer No.=FIELD(Account No.),
-                                                                                                                                                                                                                                                                                                                                                                                                                       Positive=filter(Yes),
-                                                                                                                                                                                                                                                                                                                                                                                                                       Open=filter(Yes))
-                                                                                                                                                                                                                                                                                                                                                                                                                       ELSE IF (Account Type=filter(Staff),
-                                                                                                                                                                                                                                                                                                                                                                                                                                Debit Amount=FILTER(<>0)) "Cust. Ledger Entry"."Entry No." WHERE (Customer No.=FIELD(Account No.),
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  Positive=filter(No),
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  Open=filter(Yes));
+            TableRelation = IF ("Account Type" = filter('Customer'), "Credit Amount" = FILTER(<> 0)) "Cust. Ledger Entry"."Entry No." WHERE("Customer No." = FIELD("Account No."), Open = filter(true), Positive = filter(true))
+            ELSE
+            IF ("Account Type" = filter('Customer'), "Debit Amount" = FILTER(<> 0)) "Cust. Ledger Entry"."Entry No." WHERE("Customer No." = FIELD("Account No."), Open = filter(true), Positive = filter(false))
+            ELSE
+            IF ("Account Type" = filter('Supplier'), "Debit Amount" = FILTER(<> 0)) "Vendor Ledger Entry"."Entry No." WHERE("Vendor No." = FIELD("Account No."), Open = filter(true), Positive = filter(false))
+            ELSE
+            IF ("Account Type" = filter('Supplier'), "Credit Amount" = FILTER(<> 0)) "Vendor Ledger Entry"."Entry No." WHERE("Vendor No." = FIELD("Account No."), Open = filter(true), Positive = filter(true))
+            ELSE
+            IF ("Account Type" = filter('Staff'), "Credit Amount" = FILTER(<> 0)) "Cust. Ledger Entry"."Entry No." WHERE("Customer No." = FIELD("Account No."), Positive = filter(true), Open = filter(true))
+            ELSE
+            IF ("Account Type" = filter('Staff'), "Debit Amount" = FILTER(<> 0)) "Cust. Ledger Entry"."Entry No." WHERE("Customer No." = FIELD("Account No."), Positive = filter(false))                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              Open = filter(Yes));
 
-                trigger OnValidate()
-                begin
-                    CASE "Account Type" OF
-                         "Account Type"::Customer,"Account Type"::Staff: IF CustLedgEntry.GET("Apply Entry") THEN BEGIN
-                                                                           "Applies-to Doc. Type" := CustLedgEntry."Document Type";
-                                                                           "Applies-to Doc. No." := CustLedgEntry."Document No.";
-                                                                          END ELSE BEGIN
-                                                                           "Applies-to Doc. Type" := 0;
-                                                                           "Applies-to Doc. No." := '';
-                                                                           END;
+            trigger OnValidate()
+            begin
+                CASE "Account Type" OF
+                    "Account Type"::Customer, "Account Type"::Staff:
+                        IF CustLedgEntry.GET("Apply Entry") THEN BEGIN
+                            "Applies-to Doc. Type" := CustLedgEntry."Document Type";
+                            "Applies-to Doc. No." := CustLedgEntry."Document No.";
+                        END ELSE BEGIN
+                            "Applies-to Doc. Type" := 0;
+                            "Applies-to Doc. No." := '';
+                        END;
 
 
-                         "Account Type"::Supplier,"Account Type"::LC: IF VendLedgEntry.GET("Apply Entry") THEN BEGIN
-                                                                         "Applies-to Doc. Type" := VendLedgEntry."Document Type";
-                                                                         "Applies-to Doc. No.":= VendLedgEntry."Document No.";
-                                                                      END ELSE BEGIN
-                                                                         "Applies-to Doc. Type" := 0;
-                                                                         "Applies-to Doc. No.":= '';
-                                                                      END;
+                    "Account Type"::Supplier, "Account Type"::LC:
+                        IF VendLedgEntry.GET("Apply Entry") THEN BEGIN
+                            "Applies-to Doc. Type" := VendLedgEntry."Document Type";
+                            "Applies-to Doc. No." := VendLedgEntry."Document No.";
+                        END ELSE BEGIN
+                            "Applies-to Doc. Type" := 0;
+                            "Applies-to Doc. No." := '';
+                        END;
 
-                    END;
-                end; */
+                END;
+            end;
         }
         field(92; "Approved Doc. No."; Code[20])
         {

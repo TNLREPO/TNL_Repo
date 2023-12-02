@@ -3,9 +3,9 @@ page 70194 "HOD Part Approval"
     CardPageID = "LPP Card2";
     PageType = List;
     SourceTable = "Local Part Purchase Register";
-    SourceTableView = WHERE(HoDPartApproval = FILTER('Yes'),
-                            ComplianceCheck = FILTER('No'),
-                            Rejected = FILTER('No'));
+    SourceTableView = WHERE(HoDPartApproval = FILTER(True),
+                            ComplianceCheck = FILTER(false),
+                            Rejected = FILTER(false));
 
     layout
     {

@@ -3,12 +3,12 @@ page 70132 "Gen. Manager Appr."
     CardPageID = "Opex Card";
     PageType = List;
     SourceTable = "Procurement Header";
-    SourceTableView = WHERE(ListGM = FILTER('Yes'),
-                            "Head of Audit" = FILTER(Approved),
-                            "General Manager" = FILTER(<> Approved | Rejected),
+    SourceTableView = WHERE(ListGM = FILTER(true),
+                            "Head of Audit" = FILTER('Approved'),
+                            "General Manager" = FILTER(<> 'Approved | Rejected'),
                             "Managing Director" = FILTER(" "),
-                            Reject = FILTER('No'),
-                            "Document Type" = FILTER(Opex));
+                            Reject = FILTER(false),
+                            "Document Type" = FILTER('Opex'));
 
     layout
     {

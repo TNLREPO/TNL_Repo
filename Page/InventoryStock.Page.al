@@ -53,7 +53,7 @@ page 50283 "Inventory - Stock"
                 {
                     Editable = false;
                 }
-                field("Date of Arrival"; "Date of Arrival")
+            /*     field("Date of Arrival"; Rec."Date of Arrival")
                 {
                 }
                 field("No. of Days in Stock"; "No. of Days in Stock")
@@ -66,7 +66,7 @@ page 50283 "Inventory - Stock"
                     begin
                         "No. of Days in Stock" := "Current Date" - "Date of Arrival";
                     end;
-                }
+                } */
             }
         }
     }
@@ -75,10 +75,10 @@ page 50283 "Inventory - Stock"
     {
     }
 
-    trigger OnAfterGetRecord()
+   /*  trigger OnAfterGetRecord()
     begin
-        IF "Current Date" <> 0D THEN
+        IF Rec."Current Date" <> 0D THEN
             VALIDATE("Current Date", WORKDATE);
-    end;
+    end; */
 }
 
