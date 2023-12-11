@@ -94,7 +94,7 @@ page 50449 "Fuel New Vehicle"
         GenPostSetup: Record 252;
         ItemJnlPost: Codeunit 22;
         GenJnlPost: Codeunit 12;
-        FuelVoucherR: Report "50255";
+        FuelVoucherR: Report 50255;
         AssetDescptn: Code[70];
 }
 

@@ -291,7 +291,7 @@ page 70108 "e-Receipt Card"
         ShortcutDimCode: array[8] of Code[20];
         GLEntry: Record 17;
         UserRec: Record 91;
-        GPC: Codeunit "50004";
+        GPC: Codeunit 50004;
         
 
         "FA Posting TypeVisible": Boolean;

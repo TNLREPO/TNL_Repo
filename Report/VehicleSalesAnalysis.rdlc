@@ -1,0 +1,2121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <rd:ReportUnitType>Invalid</rd:ReportUnitType>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+      <Fields>
+        <Field Name="FORMAT_TODAY_0_4_">
+          <DataField>FORMAT_TODAY_0_4_</DataField>
+        </Field>
+        <Field Name="COMPANYNAME">
+          <DataField>COMPANYNAME</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENO">
+          <DataField>CurrReport_PAGENO</DataField>
+        </Field>
+        <Field Name="USERID">
+          <DataField>USERID</DataField>
+        </Field>
+        <Field Name="GETFILTERS">
+          <DataField>GETFILTERS</DataField>
+        </Field>
+        <Field Name="SUMMARY_OF_UNIT_SALESCaption">
+          <DataField>SUMMARY_OF_UNIT_SALESCaption</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENOCaption">
+          <DataField>CurrReport_PAGENOCaption</DataField>
+        </Field>
+        <Field Name="Integer_Number">
+          <DataField>Integer_Number</DataField>
+        </Field>
+        <Field Name="VariancesText_1_">
+          <DataField>VariancesText_1_</DataField>
+        </Field>
+        <Field Name="VariancesText_2_">
+          <DataField>VariancesText_2_</DataField>
+        </Field>
+        <Field Name="VariancesText_3_">
+          <DataField>VariancesText_3_</DataField>
+        </Field>
+        <Field Name="VariancesText_4_">
+          <DataField>VariancesText_4_</DataField>
+        </Field>
+        <Field Name="VariancesText_5_">
+          <DataField>VariancesText_5_</DataField>
+        </Field>
+        <Field Name="VariancesText_6_">
+          <DataField>VariancesText_6_</DataField>
+        </Field>
+        <Field Name="VariancesText_7_">
+          <DataField>VariancesText_7_</DataField>
+        </Field>
+        <Field Name="VariancesText_8_">
+          <DataField>VariancesText_8_</DataField>
+        </Field>
+        <Field Name="VariancesText_9_">
+          <DataField>VariancesText_9_</DataField>
+        </Field>
+        <Field Name="VariancesText_10_">
+          <DataField>VariancesText_10_</DataField>
+        </Field>
+        <Field Name="VariancesText_11_">
+          <DataField>VariancesText_11_</DataField>
+        </Field>
+        <Field Name="VariancesText_12_">
+          <DataField>VariancesText_12_</DataField>
+        </Field>
+        <Field Name="Name__________FORMAT_aYear_">
+          <DataField>Name__________FORMAT_aYear_</DataField>
+        </Field>
+        <Field Name="Variances_1_">
+          <DataField>Variances_1_</DataField>
+        </Field>
+        <Field Name="Variances_1_Format">
+          <DataField>Variances_1_Format</DataField>
+        </Field>
+        <Field Name="Variances_2_">
+          <DataField>Variances_2_</DataField>
+        </Field>
+        <Field Name="Variances_2_Format">
+          <DataField>Variances_2_Format</DataField>
+        </Field>
+        <Field Name="Variances_3_">
+          <DataField>Variances_3_</DataField>
+        </Field>
+        <Field Name="Variances_3_Format">
+          <DataField>Variances_3_Format</DataField>
+        </Field>
+        <Field Name="Variances_4_">
+          <DataField>Variances_4_</DataField>
+        </Field>
+        <Field Name="Variances_4_Format">
+          <DataField>Variances_4_Format</DataField>
+        </Field>
+        <Field Name="Variances_5_">
+          <DataField>Variances_5_</DataField>
+        </Field>
+        <Field Name="Variances_5_Format">
+          <DataField>Variances_5_Format</DataField>
+        </Field>
+        <Field Name="Variances_6_">
+          <DataField>Variances_6_</DataField>
+        </Field>
+        <Field Name="Variances_6_Format">
+          <DataField>Variances_6_Format</DataField>
+        </Field>
+        <Field Name="Variances_7_">
+          <DataField>Variances_7_</DataField>
+        </Field>
+        <Field Name="Variances_7_Format">
+          <DataField>Variances_7_Format</DataField>
+        </Field>
+        <Field Name="Variances_8_">
+          <DataField>Variances_8_</DataField>
+        </Field>
+        <Field Name="Variances_8_Format">
+          <DataField>Variances_8_Format</DataField>
+        </Field>
+        <Field Name="Variances_9_">
+          <DataField>Variances_9_</DataField>
+        </Field>
+        <Field Name="Variances_9_Format">
+          <DataField>Variances_9_Format</DataField>
+        </Field>
+        <Field Name="Variances_10_">
+          <DataField>Variances_10_</DataField>
+        </Field>
+        <Field Name="Variances_10_Format">
+          <DataField>Variances_10_Format</DataField>
+        </Field>
+        <Field Name="Variances_11_">
+          <DataField>Variances_11_</DataField>
+        </Field>
+        <Field Name="Variances_11_Format">
+          <DataField>Variances_11_Format</DataField>
+        </Field>
+        <Field Name="Variances_12_">
+          <DataField>Variances_12_</DataField>
+        </Field>
+        <Field Name="Variances_12_Format">
+          <DataField>Variances_12_Format</DataField>
+        </Field>
+        <Field Name="Totals__">
+          <DataField>Totals__</DataField>
+        </Field>
+        <Field Name="Variances_1__Control1000000004">
+          <DataField>Variances_1__Control1000000004</DataField>
+        </Field>
+        <Field Name="Variances_1__Control1000000004Format">
+          <DataField>Variances_1__Control1000000004Format</DataField>
+        </Field>
+        <Field Name="Variances_2__Control1000000005">
+          <DataField>Variances_2__Control1000000005</DataField>
+        </Field>
+        <Field Name="Variances_2__Control1000000005Format">
+          <DataField>Variances_2__Control1000000005Format</DataField>
+        </Field>
+        <Field Name="Variances_3__Control1000000006">
+          <DataField>Variances_3__Control1000000006</DataField>
+        </Field>
+        <Field Name="Variances_3__Control1000000006Format">
+          <DataField>Variances_3__Control1000000006Format</DataField>
+        </Field>
+        <Field Name="Variances_4__Control1000000070">
+          <DataField>Variances_4__Control1000000070</DataField>
+        </Field>
+        <Field Name="Variances_4__Control1000000070Format">
+          <DataField>Variances_4__Control1000000070Format</DataField>
+        </Field>
+        <Field Name="Variances_5__Control1000000071">
+          <DataField>Variances_5__Control1000000071</DataField>
+        </Field>
+        <Field Name="Variances_5__Control1000000071Format">
+          <DataField>Variances_5__Control1000000071Format</DataField>
+        </Field>
+        <Field Name="Variances_6__Control1000000072">
+          <DataField>Variances_6__Control1000000072</DataField>
+        </Field>
+        <Field Name="Variances_6__Control1000000072Format">
+          <DataField>Variances_6__Control1000000072Format</DataField>
+        </Field>
+        <Field Name="Variances_7__Control1000000073">
+          <DataField>Variances_7__Control1000000073</DataField>
+        </Field>
+        <Field Name="Variances_7__Control1000000073Format">
+          <DataField>Variances_7__Control1000000073Format</DataField>
+        </Field>
+        <Field Name="Variances_8__Control1000000074">
+          <DataField>Variances_8__Control1000000074</DataField>
+        </Field>
+        <Field Name="Variances_8__Control1000000074Format">
+          <DataField>Variances_8__Control1000000074Format</DataField>
+        </Field>
+        <Field Name="Variances_9__Control1000000075">
+          <DataField>Variances_9__Control1000000075</DataField>
+        </Field>
+        <Field Name="Variances_9__Control1000000075Format">
+          <DataField>Variances_9__Control1000000075Format</DataField>
+        </Field>
+        <Field Name="Variances_10__Control1000000076">
+          <DataField>Variances_10__Control1000000076</DataField>
+        </Field>
+        <Field Name="Variances_10__Control1000000076Format">
+          <DataField>Variances_10__Control1000000076Format</DataField>
+        </Field>
+        <Field Name="Variances_11__Control1000000077">
+          <DataField>Variances_11__Control1000000077</DataField>
+        </Field>
+        <Field Name="Variances_11__Control1000000077Format">
+          <DataField>Variances_11__Control1000000077Format</DataField>
+        </Field>
+        <Field Name="Variances_12__Control1000000078">
+          <DataField>Variances_12__Control1000000078</DataField>
+        </Field>
+        <Field Name="Variances_12__Control1000000078Format">
+          <DataField>Variances_12__Control1000000078Format</DataField>
+        </Field>
+        <Field Name="Accounting_Period_Starting_Date">
+          <DataField>Accounting_Period_Starting_Date</DataField>
+        </Field>
+        <Field Name="VariancesText_1__Control1000000040">
+          <DataField>VariancesText_1__Control1000000040</DataField>
+        </Field>
+        <Field Name="VariancesText_2__Control1000000042">
+          <DataField>VariancesText_2__Control1000000042</DataField>
+        </Field>
+        <Field Name="VariancesText_3__Control1000000045">
+          <DataField>VariancesText_3__Control1000000045</DataField>
+        </Field>
+        <Field Name="VariancesText_4__Control1000000046">
+          <DataField>VariancesText_4__Control1000000046</DataField>
+        </Field>
+        <Field Name="VariancesText_5__Control1000000050">
+          <DataField>VariancesText_5__Control1000000050</DataField>
+        </Field>
+        <Field Name="VariancesText_6__Control1000000062">
+          <DataField>VariancesText_6__Control1000000062</DataField>
+        </Field>
+        <Field Name="VariancesText_7__Control1000000064">
+          <DataField>VariancesText_7__Control1000000064</DataField>
+        </Field>
+        <Field Name="VariancesText_8__Control1000000065">
+          <DataField>VariancesText_8__Control1000000065</DataField>
+        </Field>
+        <Field Name="VariancesText_9__Control1000000066">
+          <DataField>VariancesText_9__Control1000000066</DataField>
+        </Field>
+        <Field Name="VariancesText_10__Control1000000079">
+          <DataField>VariancesText_10__Control1000000079</DataField>
+        </Field>
+        <Field Name="VariancesText_11__Control1000000091">
+          <DataField>VariancesText_11__Control1000000091</DataField>
+        </Field>
+        <Field Name="VariancesText_12__Control1000000093">
+          <DataField>VariancesText_12__Control1000000093</DataField>
+        </Field>
+        <Field Name="Name__________FORMAT_aYear__Control1000000163">
+          <DataField>Name__________FORMAT_aYear__Control1000000163</DataField>
+        </Field>
+        <Field Name="Variances1_1_">
+          <DataField>Variances1_1_</DataField>
+        </Field>
+        <Field Name="Variances1_1_Format">
+          <DataField>Variances1_1_Format</DataField>
+        </Field>
+        <Field Name="Variances1_2_">
+          <DataField>Variances1_2_</DataField>
+        </Field>
+        <Field Name="Variances1_2_Format">
+          <DataField>Variances1_2_Format</DataField>
+        </Field>
+        <Field Name="Variances1_3_">
+          <DataField>Variances1_3_</DataField>
+        </Field>
+        <Field Name="Variances1_3_Format">
+          <DataField>Variances1_3_Format</DataField>
+        </Field>
+        <Field Name="Variances1_4_">
+          <DataField>Variances1_4_</DataField>
+        </Field>
+        <Field Name="Variances1_4_Format">
+          <DataField>Variances1_4_Format</DataField>
+        </Field>
+        <Field Name="Variances1_5_">
+          <DataField>Variances1_5_</DataField>
+        </Field>
+        <Field Name="Variances1_5_Format">
+          <DataField>Variances1_5_Format</DataField>
+        </Field>
+        <Field Name="Variances1_6_">
+          <DataField>Variances1_6_</DataField>
+        </Field>
+        <Field Name="Variances1_6_Format">
+          <DataField>Variances1_6_Format</DataField>
+        </Field>
+        <Field Name="Variances1_7_">
+          <DataField>Variances1_7_</DataField>
+        </Field>
+        <Field Name="Variances1_7_Format">
+          <DataField>Variances1_7_Format</DataField>
+        </Field>
+        <Field Name="Variances1_8_">
+          <DataField>Variances1_8_</DataField>
+        </Field>
+        <Field Name="Variances1_8_Format">
+          <DataField>Variances1_8_Format</DataField>
+        </Field>
+        <Field Name="Variances1_9_">
+          <DataField>Variances1_9_</DataField>
+        </Field>
+        <Field Name="Variances1_9_Format">
+          <DataField>Variances1_9_Format</DataField>
+        </Field>
+        <Field Name="Variances1_10_">
+          <DataField>Variances1_10_</DataField>
+        </Field>
+        <Field Name="Variances1_10_Format">
+          <DataField>Variances1_10_Format</DataField>
+        </Field>
+        <Field Name="Variances1_11_">
+          <DataField>Variances1_11_</DataField>
+        </Field>
+        <Field Name="Variances1_11_Format">
+          <DataField>Variances1_11_Format</DataField>
+        </Field>
+        <Field Name="Variances1_12_">
+          <DataField>Variances1_12_</DataField>
+        </Field>
+        <Field Name="Variances1_12_Format">
+          <DataField>Variances1_12_Format</DataField>
+        </Field>
+        <Field Name="Totals___Control1000000188">
+          <DataField>Totals___Control1000000188</DataField>
+        </Field>
+        <Field Name="Variances1_1__Control1000000189">
+          <DataField>Variances1_1__Control1000000189</DataField>
+        </Field>
+        <Field Name="Variances1_1__Control1000000189Format">
+          <DataField>Variances1_1__Control1000000189Format</DataField>
+        </Field>
+        <Field Name="Variances1_2__Control1000000190">
+          <DataField>Variances1_2__Control1000000190</DataField>
+        </Field>
+        <Field Name="Variances1_2__Control1000000190Format">
+          <DataField>Variances1_2__Control1000000190Format</DataField>
+        </Field>
+        <Field Name="Variances1_3__Control1000000191">
+          <DataField>Variances1_3__Control1000000191</DataField>
+        </Field>
+        <Field Name="Variances1_3__Control1000000191Format">
+          <DataField>Variances1_3__Control1000000191Format</DataField>
+        </Field>
+        <Field Name="Variances1_4__Control1000000192">
+          <DataField>Variances1_4__Control1000000192</DataField>
+        </Field>
+        <Field Name="Variances1_4__Control1000000192Format">
+          <DataField>Variances1_4__Control1000000192Format</DataField>
+        </Field>
+        <Field Name="Variances1_5__Control1000000193">
+          <DataField>Variances1_5__Control1000000193</DataField>
+        </Field>
+        <Field Name="Variances1_5__Control1000000193Format">
+          <DataField>Variances1_5__Control1000000193Format</DataField>
+        </Field>
+        <Field Name="Variances1_6__Control1000000194">
+          <DataField>Variances1_6__Control1000000194</DataField>
+        </Field>
+        <Field Name="Variances1_6__Control1000000194Format">
+          <DataField>Variances1_6__Control1000000194Format</DataField>
+        </Field>
+        <Field Name="Variances1_7__Control1000000195">
+          <DataField>Variances1_7__Control1000000195</DataField>
+        </Field>
+        <Field Name="Variances1_7__Control1000000195Format">
+          <DataField>Variances1_7__Control1000000195Format</DataField>
+        </Field>
+        <Field Name="Variances1_8__Control1000000196">
+          <DataField>Variances1_8__Control1000000196</DataField>
+        </Field>
+        <Field Name="Variances1_8__Control1000000196Format">
+          <DataField>Variances1_8__Control1000000196Format</DataField>
+        </Field>
+        <Field Name="Variances1_9__Control1000000197">
+          <DataField>Variances1_9__Control1000000197</DataField>
+        </Field>
+        <Field Name="Variances1_9__Control1000000197Format">
+          <DataField>Variances1_9__Control1000000197Format</DataField>
+        </Field>
+        <Field Name="Variances1_10__Control1000000198">
+          <DataField>Variances1_10__Control1000000198</DataField>
+        </Field>
+        <Field Name="Variances1_10__Control1000000198Format">
+          <DataField>Variances1_10__Control1000000198Format</DataField>
+        </Field>
+        <Field Name="Variances1_11__Control1000000199">
+          <DataField>Variances1_11__Control1000000199</DataField>
+        </Field>
+        <Field Name="Variances1_11__Control1000000199Format">
+          <DataField>Variances1_11__Control1000000199Format</DataField>
+        </Field>
+        <Field Name="Variances1_12__Control1000000200">
+          <DataField>Variances1_12__Control1000000200</DataField>
+        </Field>
+        <Field Name="Variances1_12__Control1000000200Format">
+          <DataField>Variances1_12__Control1000000200Format</DataField>
+        </Field>
+        <Field Name="SUMMARY_OF_TURNOVER_ON_VEHICLESCaption">
+          <DataField>SUMMARY_OF_TURNOVER_ON_VEHICLESCaption</DataField>
+        </Field>
+        <Field Name="Period1_Starting_Date">
+          <DataField>Period1_Starting_Date</DataField>
+        </Field>
+        <Field Name="VariancesText_1__Control1000000111">
+          <DataField>VariancesText_1__Control1000000111</DataField>
+        </Field>
+        <Field Name="VariancesText_2__Control1000000112">
+          <DataField>VariancesText_2__Control1000000112</DataField>
+        </Field>
+        <Field Name="VariancesText_3__Control1000000113">
+          <DataField>VariancesText_3__Control1000000113</DataField>
+        </Field>
+        <Field Name="VariancesText_4__Control1000000114">
+          <DataField>VariancesText_4__Control1000000114</DataField>
+        </Field>
+        <Field Name="VariancesText_5__Control1000000115">
+          <DataField>VariancesText_5__Control1000000115</DataField>
+        </Field>
+        <Field Name="VariancesText_6__Control1000000116">
+          <DataField>VariancesText_6__Control1000000116</DataField>
+        </Field>
+        <Field Name="VariancesText_7__Control1000000117">
+          <DataField>VariancesText_7__Control1000000117</DataField>
+        </Field>
+        <Field Name="VariancesText_8__Control1000000118">
+          <DataField>VariancesText_8__Control1000000118</DataField>
+        </Field>
+        <Field Name="VariancesText_9__Control1000000119">
+          <DataField>VariancesText_9__Control1000000119</DataField>
+        </Field>
+        <Field Name="VariancesText_10__Control1000000120">
+          <DataField>VariancesText_10__Control1000000120</DataField>
+        </Field>
+        <Field Name="VariancesText_11__Control1000000121">
+          <DataField>VariancesText_11__Control1000000121</DataField>
+        </Field>
+        <Field Name="VariancesText_12__Control1000000122">
+          <DataField>VariancesText_12__Control1000000122</DataField>
+        </Field>
+        <Field Name="Name__________FORMAT_aYear__Control1000000267">
+          <DataField>Name__________FORMAT_aYear__Control1000000267</DataField>
+        </Field>
+        <Field Name="Variances2_1_">
+          <DataField>Variances2_1_</DataField>
+        </Field>
+        <Field Name="Variances2_1_Format">
+          <DataField>Variances2_1_Format</DataField>
+        </Field>
+        <Field Name="Variances2_2_">
+          <DataField>Variances2_2_</DataField>
+        </Field>
+        <Field Name="Variances2_2_Format">
+          <DataField>Variances2_2_Format</DataField>
+        </Field>
+        <Field Name="Variances2_3_">
+          <DataField>Variances2_3_</DataField>
+        </Field>
+        <Field Name="Variances2_3_Format">
+          <DataField>Variances2_3_Format</DataField>
+        </Field>
+        <Field Name="Variances2_4_">
+          <DataField>Variances2_4_</DataField>
+        </Field>
+        <Field Name="Variances2_4_Format">
+          <DataField>Variances2_4_Format</DataField>
+        </Field>
+        <Field Name="Variances2_5_">
+          <DataField>Variances2_5_</DataField>
+        </Field>
+        <Field Name="Variances2_5_Format">
+          <DataField>Variances2_5_Format</DataField>
+        </Field>
+        <Field Name="Variances2_6_">
+          <DataField>Variances2_6_</DataField>
+        </Field>
+        <Field Name="Variances2_6_Format">
+          <DataField>Variances2_6_Format</DataField>
+        </Field>
+        <Field Name="Variances2_7_">
+          <DataField>Variances2_7_</DataField>
+        </Field>
+        <Field Name="Variances2_7_Format">
+          <DataField>Variances2_7_Format</DataField>
+        </Field>
+        <Field Name="Variances2_8_">
+          <DataField>Variances2_8_</DataField>
+        </Field>
+        <Field Name="Variances2_8_Format">
+          <DataField>Variances2_8_Format</DataField>
+        </Field>
+        <Field Name="Variances2_9_">
+          <DataField>Variances2_9_</DataField>
+        </Field>
+        <Field Name="Variances2_9_Format">
+          <DataField>Variances2_9_Format</DataField>
+        </Field>
+        <Field Name="Variances2_10_">
+          <DataField>Variances2_10_</DataField>
+        </Field>
+        <Field Name="Variances2_10_Format">
+          <DataField>Variances2_10_Format</DataField>
+        </Field>
+        <Field Name="Variances2_11_">
+          <DataField>Variances2_11_</DataField>
+        </Field>
+        <Field Name="Variances2_11_Format">
+          <DataField>Variances2_11_Format</DataField>
+        </Field>
+        <Field Name="Variances2_12_">
+          <DataField>Variances2_12_</DataField>
+        </Field>
+        <Field Name="Variances2_12_Format">
+          <DataField>Variances2_12_Format</DataField>
+        </Field>
+        <Field Name="Totals___Control1000000214">
+          <DataField>Totals___Control1000000214</DataField>
+        </Field>
+        <Field Name="Variances2_1__Control1000000215">
+          <DataField>Variances2_1__Control1000000215</DataField>
+        </Field>
+        <Field Name="Variances2_1__Control1000000215Format">
+          <DataField>Variances2_1__Control1000000215Format</DataField>
+        </Field>
+        <Field Name="Variances2_2__Control1000000216">
+          <DataField>Variances2_2__Control1000000216</DataField>
+        </Field>
+        <Field Name="Variances2_2__Control1000000216Format">
+          <DataField>Variances2_2__Control1000000216Format</DataField>
+        </Field>
+        <Field Name="Variances2_3__Control1000000217">
+          <DataField>Variances2_3__Control1000000217</DataField>
+        </Field>
+        <Field Name="Variances2_3__Control1000000217Format">
+          <DataField>Variances2_3__Control1000000217Format</DataField>
+        </Field>
+        <Field Name="Variances2_4__Control1000000218">
+          <DataField>Variances2_4__Control1000000218</DataField>
+        </Field>
+        <Field Name="Variances2_4__Control1000000218Format">
+          <DataField>Variances2_4__Control1000000218Format</DataField>
+        </Field>
+        <Field Name="Variances2_5__Control1000000219">
+          <DataField>Variances2_5__Control1000000219</DataField>
+        </Field>
+        <Field Name="Variances2_5__Control1000000219Format">
+          <DataField>Variances2_5__Control1000000219Format</DataField>
+        </Field>
+        <Field Name="Variances2_6__Control1000000220">
+          <DataField>Variances2_6__Control1000000220</DataField>
+        </Field>
+        <Field Name="Variances2_6__Control1000000220Format">
+          <DataField>Variances2_6__Control1000000220Format</DataField>
+        </Field>
+        <Field Name="Variances2_7__Control1000000221">
+          <DataField>Variances2_7__Control1000000221</DataField>
+        </Field>
+        <Field Name="Variances2_7__Control1000000221Format">
+          <DataField>Variances2_7__Control1000000221Format</DataField>
+        </Field>
+        <Field Name="Variances2_8__Control1000000222">
+          <DataField>Variances2_8__Control1000000222</DataField>
+        </Field>
+        <Field Name="Variances2_8__Control1000000222Format">
+          <DataField>Variances2_8__Control1000000222Format</DataField>
+        </Field>
+        <Field Name="Variances2_9__Control1000000223">
+          <DataField>Variances2_9__Control1000000223</DataField>
+        </Field>
+        <Field Name="Variances2_9__Control1000000223Format">
+          <DataField>Variances2_9__Control1000000223Format</DataField>
+        </Field>
+        <Field Name="Variances2_10__Control1000000224">
+          <DataField>Variances2_10__Control1000000224</DataField>
+        </Field>
+        <Field Name="Variances2_10__Control1000000224Format">
+          <DataField>Variances2_10__Control1000000224Format</DataField>
+        </Field>
+        <Field Name="Variances2_11__Control1000000225">
+          <DataField>Variances2_11__Control1000000225</DataField>
+        </Field>
+        <Field Name="Variances2_11__Control1000000225Format">
+          <DataField>Variances2_11__Control1000000225Format</DataField>
+        </Field>
+        <Field Name="Variances2_12__Control1000000226">
+          <DataField>Variances2_12__Control1000000226</DataField>
+        </Field>
+        <Field Name="Variances2_12__Control1000000226Format">
+          <DataField>Variances2_12__Control1000000226Format</DataField>
+        </Field>
+        <Field Name="SUMMARY_OF_COST_OF_SALES_ON_VEHICLESCaption">
+          <DataField>SUMMARY_OF_COST_OF_SALES_ON_VEHICLESCaption</DataField>
+        </Field>
+        <Field Name="Period2_Starting_Date">
+          <DataField>Period2_Starting_Date</DataField>
+        </Field>
+        <Field Name="VariancesText_1__Control1000000137">
+          <DataField>VariancesText_1__Control1000000137</DataField>
+        </Field>
+        <Field Name="VariancesText_2__Control1000000138">
+          <DataField>VariancesText_2__Control1000000138</DataField>
+        </Field>
+        <Field Name="VariancesText_3__Control1000000139">
+          <DataField>VariancesText_3__Control1000000139</DataField>
+        </Field>
+        <Field Name="VariancesText_4__Control1000000140">
+          <DataField>VariancesText_4__Control1000000140</DataField>
+        </Field>
+        <Field Name="VariancesText_5__Control1000000141">
+          <DataField>VariancesText_5__Control1000000141</DataField>
+        </Field>
+        <Field Name="VariancesText_6__Control1000000142">
+          <DataField>VariancesText_6__Control1000000142</DataField>
+        </Field>
+        <Field Name="VariancesText_7__Control1000000143">
+          <DataField>VariancesText_7__Control1000000143</DataField>
+        </Field>
+        <Field Name="VariancesText_8__Control1000000144">
+          <DataField>VariancesText_8__Control1000000144</DataField>
+        </Field>
+        <Field Name="VariancesText_9__Control1000000145">
+          <DataField>VariancesText_9__Control1000000145</DataField>
+        </Field>
+        <Field Name="VariancesText_10__Control1000000146">
+          <DataField>VariancesText_10__Control1000000146</DataField>
+        </Field>
+        <Field Name="VariancesText_11__Control1000000147">
+          <DataField>VariancesText_11__Control1000000147</DataField>
+        </Field>
+        <Field Name="VariancesText_12__Control1000000148">
+          <DataField>VariancesText_12__Control1000000148</DataField>
+        </Field>
+        <Field Name="Name__________FORMAT_aYear__Control1000000293">
+          <DataField>Name__________FORMAT_aYear__Control1000000293</DataField>
+        </Field>
+        <Field Name="Variances3_1_">
+          <DataField>Variances3_1_</DataField>
+        </Field>
+        <Field Name="Variances3_1_Format">
+          <DataField>Variances3_1_Format</DataField>
+        </Field>
+        <Field Name="Variances3_2_">
+          <DataField>Variances3_2_</DataField>
+        </Field>
+        <Field Name="Variances3_2_Format">
+          <DataField>Variances3_2_Format</DataField>
+        </Field>
+        <Field Name="Variances3_3_">
+          <DataField>Variances3_3_</DataField>
+        </Field>
+        <Field Name="Variances3_3_Format">
+          <DataField>Variances3_3_Format</DataField>
+        </Field>
+        <Field Name="Variances3_4_">
+          <DataField>Variances3_4_</DataField>
+        </Field>
+        <Field Name="Variances3_4_Format">
+          <DataField>Variances3_4_Format</DataField>
+        </Field>
+        <Field Name="Variances3_5_">
+          <DataField>Variances3_5_</DataField>
+        </Field>
+        <Field Name="Variances3_5_Format">
+          <DataField>Variances3_5_Format</DataField>
+        </Field>
+        <Field Name="Variances3_6_">
+          <DataField>Variances3_6_</DataField>
+        </Field>
+        <Field Name="Variances3_6_Format">
+          <DataField>Variances3_6_Format</DataField>
+        </Field>
+        <Field Name="Variances3_7_">
+          <DataField>Variances3_7_</DataField>
+        </Field>
+        <Field Name="Variances3_7_Format">
+          <DataField>Variances3_7_Format</DataField>
+        </Field>
+        <Field Name="Variances3_8_">
+          <DataField>Variances3_8_</DataField>
+        </Field>
+        <Field Name="Variances3_8_Format">
+          <DataField>Variances3_8_Format</DataField>
+        </Field>
+        <Field Name="Variances3_9_">
+          <DataField>Variances3_9_</DataField>
+        </Field>
+        <Field Name="Variances3_9_Format">
+          <DataField>Variances3_9_Format</DataField>
+        </Field>
+        <Field Name="Variances3_10_">
+          <DataField>Variances3_10_</DataField>
+        </Field>
+        <Field Name="Variances3_10_Format">
+          <DataField>Variances3_10_Format</DataField>
+        </Field>
+        <Field Name="Variances3_11_">
+          <DataField>Variances3_11_</DataField>
+        </Field>
+        <Field Name="Variances3_11_Format">
+          <DataField>Variances3_11_Format</DataField>
+        </Field>
+        <Field Name="Variances3_12_">
+          <DataField>Variances3_12_</DataField>
+        </Field>
+        <Field Name="Variances3_12_Format">
+          <DataField>Variances3_12_Format</DataField>
+        </Field>
+        <Field Name="Totals___Control1000000240">
+          <DataField>Totals___Control1000000240</DataField>
+        </Field>
+        <Field Name="Variances3_1__Control1000000241">
+          <DataField>Variances3_1__Control1000000241</DataField>
+        </Field>
+        <Field Name="Variances3_1__Control1000000241Format">
+          <DataField>Variances3_1__Control1000000241Format</DataField>
+        </Field>
+        <Field Name="Variances3_2__Control1000000242">
+          <DataField>Variances3_2__Control1000000242</DataField>
+        </Field>
+        <Field Name="Variances3_2__Control1000000242Format">
+          <DataField>Variances3_2__Control1000000242Format</DataField>
+        </Field>
+        <Field Name="Variances3_3__Control1000000243">
+          <DataField>Variances3_3__Control1000000243</DataField>
+        </Field>
+        <Field Name="Variances3_3__Control1000000243Format">
+          <DataField>Variances3_3__Control1000000243Format</DataField>
+        </Field>
+        <Field Name="Variances3_4__Control1000000244">
+          <DataField>Variances3_4__Control1000000244</DataField>
+        </Field>
+        <Field Name="Variances3_4__Control1000000244Format">
+          <DataField>Variances3_4__Control1000000244Format</DataField>
+        </Field>
+        <Field Name="Variances3_5__Control1000000245">
+          <DataField>Variances3_5__Control1000000245</DataField>
+        </Field>
+        <Field Name="Variances3_5__Control1000000245Format">
+          <DataField>Variances3_5__Control1000000245Format</DataField>
+        </Field>
+        <Field Name="Variances3_6__Control1000000246">
+          <DataField>Variances3_6__Control1000000246</DataField>
+        </Field>
+        <Field Name="Variances3_6__Control1000000246Format">
+          <DataField>Variances3_6__Control1000000246Format</DataField>
+        </Field>
+        <Field Name="Variances3_7__Control1000000247">
+          <DataField>Variances3_7__Control1000000247</DataField>
+        </Field>
+        <Field Name="Variances3_7__Control1000000247Format">
+          <DataField>Variances3_7__Control1000000247Format</DataField>
+        </Field>
+        <Field Name="Variances3_8__Control1000000248">
+          <DataField>Variances3_8__Control1000000248</DataField>
+        </Field>
+        <Field Name="Variances3_8__Control1000000248Format">
+          <DataField>Variances3_8__Control1000000248Format</DataField>
+        </Field>
+        <Field Name="Variances3_9__Control1000000249">
+          <DataField>Variances3_9__Control1000000249</DataField>
+        </Field>
+        <Field Name="Variances3_9__Control1000000249Format">
+          <DataField>Variances3_9__Control1000000249Format</DataField>
+        </Field>
+        <Field Name="Variances3_10__Control1000000250">
+          <DataField>Variances3_10__Control1000000250</DataField>
+        </Field>
+        <Field Name="Variances3_10__Control1000000250Format">
+          <DataField>Variances3_10__Control1000000250Format</DataField>
+        </Field>
+        <Field Name="Variances3_11__Control1000000251">
+          <DataField>Variances3_11__Control1000000251</DataField>
+        </Field>
+        <Field Name="Variances3_11__Control1000000251Format">
+          <DataField>Variances3_11__Control1000000251Format</DataField>
+        </Field>
+        <Field Name="Variances3_12__Control1000000252">
+          <DataField>Variances3_12__Control1000000252</DataField>
+        </Field>
+        <Field Name="Variances3_12__Control1000000252Format">
+          <DataField>Variances3_12__Control1000000252Format</DataField>
+        </Field>
+        <Field Name="SUMMARY_OF_CONTRIBUTION_ON_VEHICLESCaption">
+          <DataField>SUMMARY_OF_CONTRIBUTION_ON_VEHICLESCaption</DataField>
+        </Field>
+        <Field Name="Period3_Starting_Date">
+          <DataField>Period3_Starting_Date</DataField>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Tablix Name="Table1">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>2.775cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.95cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.8cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.95cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.8cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.95cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.1cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.1cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.95cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.95cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.95cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.95cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.875cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.2cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.2cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.2cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.2cm</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.423cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Name__________FORMAT_aYear_">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Name__________FORMAT_aYear_.Value</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Top>0cm</Top>
+                          <Left>0.3cm</Left>
+                          <Height>0.423cm</Height>
+                          <Width>2.7cm</Width>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Variances_1_">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Code.BlankZero(Fields!Variances_1_.Value)</Value>
+                                  <Style>
+                                    <FontSize>6pt</FontSize>
+                                    <Format>=Fields!Variances_1_Format.Value</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Top>0cm</Top>
+                          <Left>3.15cm</Left>
+                          <Height>0.423cm</Height>
+                          <Width>1.8cm</Width>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Variances_2_">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Code.BlankZero(Fields!Variances_2_.Value)</Value>
+                                  <Style>
+                                    <FontSize>6pt</FontSize>
+                                    <Format>=Fields!Variances_2_Format.Value</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Top>0cm</Top>
+                          <Left>5.1cm</Left>
+                          <Height>0.423cm</Height>
+                          <Width>1.65cm</Width>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Variances_3_">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Code.BlankZero(Fields!Variances_3_.Value)</Value>
+                                  <Style>
+                                    <FontSize>6pt</FontSize>
+                                    <Format>=Fields!Variances_3_Format.Value</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Top>0cm</Top>
+                          <Left>6.9cm</Left>
+                          <Height>0.423cm</Height>
+                          <Width>1.8cm</Width>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Variances_4_">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Code.BlankZero(Fields!Variances_4_.Value)</Value>
+                                  <Style>
+                                    <FontSize>6pt</FontSize>
+                                    <Format>=Fields!Variances_4_Format.Value</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Top>0cm</Top>
+                          <Left>8.85cm</Left>
+                          <Height>0.423cm</Height>
+                          <Width>1.65cm</Width>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Variances_5_">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Code.BlankZero(Fields!Variances_5_.Value)</Value>
+                                  <Style>
+                                    <FontSize>6pt</FontSize>
+                                    <Format>=Fields!Variances_5_Format.Value</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Top>0cm</Top>
+                          <Left>10.65cm</Left>
+                          <Height>0.423cm</Height>
+                          <Width>1.8cm</Width>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Variances_6_">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Code.BlankZero(Fields!Variances_6_.Value)</Value>
+                                  <Style>
+                                    <FontSize>6pt</FontSize>
+                                    <Format>=Fields!Variances_6_Format.Value</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Top>0cm</Top>
+                          <Left>12.6cm</Left>
+                          <Height>0.423cm</Height>
+                          <Width>1.95cm</Width>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Variances_7_">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Code.BlankZero(Fields!Variances_7_.Value)</Value>
+                                  <Style>
+                                    <FontSize>6pt</FontSize>
+                                    <Format>=Fields!Variances_7_Format.Value</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Top>0cm</Top>
+                          <Left>14.7cm</Left>
+                          <Height>0.423cm</Height>
+                          <Width>1.95cm</Width>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Variances_8_">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Code.BlankZero(Fields!Variances_8_.Value)</Value>
+                                  <Style>
+                                    <FontSize>6pt</FontSize>
+                                    <Format>=Fields!Variances_8_Format.Value</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Top>0cm</Top>
+                          <Left>16.8cm</Left>
+                          <Height>0.423cm</Height>
+                          <Width>1.8cm</Width>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Variances_9_">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Code.BlankZero(Fields!Variances_9_.Value)</Value>
+                                  <Style>
+                                    <FontSize>6pt</FontSize>
+                                    <Format>=Fields!Variances_9_Format.Value</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Top>0cm</Top>
+                          <Left>18.75cm</Left>
+                          <Height>0.423cm</Height>
+                          <Width>1.8cm</Width>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Variances_10_">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Code.BlankZero(Fields!Variances_10_.Value)</Value>
+                                  <Style>
+                                    <FontSize>6pt</FontSize>
+                                    <Format>=Fields!Variances_10_Format.Value</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Top>0cm</Top>
+                          <Left>20.7cm</Left>
+                          <Height>0.423cm</Height>
+                          <Width>1.8cm</Width>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Variances_11_">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Code.BlankZero(Fields!Variances_11_.Value)</Value>
+                                  <Style>
+                                    <FontSize>6pt</FontSize>
+                                    <Format>=Fields!Variances_11_Format.Value</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Top>0cm</Top>
+                          <Left>22.65cm</Left>
+                          <Height>0.423cm</Height>
+                          <Width>1.8cm</Width>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Variances_12_">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Code.BlankZero(Fields!Variances_12_.Value)</Value>
+                                  <Style>
+                                    <FontSize>6pt</FontSize>
+                                    <Format>=Fields!Variances_12_Format.Value</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Top>0cm</Top>
+                          <Left>24.6cm</Left>
+                          <Height>0.423cm</Height>
+                          <Width>1.8cm</Width>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="COMPANYNAME">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!COMPANYNAME.Value</Value>
+                                  <Style>
+                                    <Color>#ff0000</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Visibility>
+                            <Hidden>true</Hidden>
+                          </Visibility>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="GETFILTERS">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!GETFILTERS.Value</Value>
+                                  <Style>
+                                    <Color>#ff0000</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Visibility>
+                            <Hidden>true</Hidden>
+                          </Visibility>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="SUMMARY_OF_UNIT_SALESCaption">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!SUMMARY_OF_UNIT_SALESCaption.Value</Value>
+                                  <Style>
+                                    <Color>#ff0000</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Visibility>
+                            <Hidden>true</Hidden>
+                          </Visibility>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="CurrReport_PAGENOCaption">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!CurrReport_PAGENOCaption.Value</Value>
+                                  <Style>
+                                    <Color>#ff0000</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Visibility>
+                            <Hidden>true</Hidden>
+                          </Visibility>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.423cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Totals___Control1000000214">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!Totals___Control1000000214.Value)</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Top>0cm</Top>
+                          <Left>0.3cm</Left>
+                          <Height>0.423cm</Height>
+                          <Width>2.7cm</Width>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Variances2_1__Control1000000215">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Code.BlankZero(Sum(Fields!Variances2_1_.Value))</Value>
+                                  <Style>
+                                    <FontSize>6pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>=First(Fields!Variances2_1__Control1000000215Format.Value)</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Top>0cm</Top>
+                          <Left>3.15cm</Left>
+                          <Height>0.423cm</Height>
+                          <Width>1.8cm</Width>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Variances2_2__Control1000000216">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Code.BlankZero(Sum(Fields!Variances2_2_.Value))</Value>
+                                  <Style>
+                                    <FontSize>6pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>=First(Fields!Variances2_2__Control1000000216Format.Value)</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Top>0cm</Top>
+                          <Left>5.1cm</Left>
+                          <Height>0.423cm</Height>
+                          <Width>1.65cm</Width>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Variances2_3__Control1000000217">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Code.BlankZero(Sum(Fields!Variances2_3_.Value))</Value>
+                                  <Style>
+                                    <FontSize>6pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>=First(Fields!Variances2_3__Control1000000217Format.Value)</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Top>0cm</Top>
+                          <Left>6.9cm</Left>
+                          <Height>0.423cm</Height>
+                          <Width>1.8cm</Width>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Variances2_4__Control1000000218">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Code.BlankZero(Sum(Fields!Variances2_4_.Value))</Value>
+                                  <Style>
+                                    <FontSize>6pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>=First(Fields!Variances2_4__Control1000000218Format.Value)</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Top>0cm</Top>
+                          <Left>8.85cm</Left>
+                          <Height>0.423cm</Height>
+                          <Width>1.65cm</Width>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Variances2_5__Control1000000219">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Code.BlankZero(Sum(Fields!Variances2_5_.Value))</Value>
+                                  <Style>
+                                    <FontSize>6pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>=First(Fields!Variances2_5__Control1000000219Format.Value)</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Top>0cm</Top>
+                          <Left>10.65cm</Left>
+                          <Height>0.423cm</Height>
+                          <Width>1.8cm</Width>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Variances2_6__Control1000000220">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Code.BlankZero(Sum(Fields!Variances2_6_.Value))</Value>
+                                  <Style>
+                                    <FontSize>6pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>=First(Fields!Variances2_6__Control1000000220Format.Value)</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Top>0cm</Top>
+                          <Left>12.6cm</Left>
+                          <Height>0.423cm</Height>
+                          <Width>1.95cm</Width>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Variances2_7__Control1000000221">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Code.BlankZero(Sum(Fields!Variances2_7_.Value))</Value>
+                                  <Style>
+                                    <FontSize>6pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>=First(Fields!Variances2_7__Control1000000221Format.Value)</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Top>0cm</Top>
+                          <Left>14.7cm</Left>
+                          <Height>0.423cm</Height>
+                          <Width>1.95cm</Width>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Variances2_8__Control1000000222">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Code.BlankZero(Sum(Fields!Variances2_8_.Value))</Value>
+                                  <Style>
+                                    <FontSize>6pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>=First(Fields!Variances2_8__Control1000000222Format.Value)</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Top>0cm</Top>
+                          <Left>16.8cm</Left>
+                          <Height>0.423cm</Height>
+                          <Width>1.8cm</Width>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Variances2_9__Control1000000223">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Code.BlankZero(Sum(Fields!Variances2_9_.Value))</Value>
+                                  <Style>
+                                    <FontSize>6pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>=First(Fields!Variances2_9__Control1000000223Format.Value)</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Top>0cm</Top>
+                          <Left>18.75cm</Left>
+                          <Height>0.423cm</Height>
+                          <Width>1.8cm</Width>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Variances2_10__Control1000000224">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Code.BlankZero(Sum(Fields!Variances2_10_.Value))</Value>
+                                  <Style>
+                                    <FontSize>6pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>=First(Fields!Variances2_10__Control1000000224Format.Value)</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Top>0cm</Top>
+                          <Left>20.7cm</Left>
+                          <Height>0.423cm</Height>
+                          <Width>1.8cm</Width>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Variances2_11__Control1000000225">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Code.BlankZero(Sum(Fields!Variances2_11_.Value))</Value>
+                                  <Style>
+                                    <FontSize>6pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>=First(Fields!Variances2_11__Control1000000225Format.Value)</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Top>0cm</Top>
+                          <Left>22.65cm</Left>
+                          <Height>0.423cm</Height>
+                          <Width>1.8cm</Width>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Variances2_12__Control1000000226">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Code.BlankZero(Sum(Fields!Variances2_12_.Value))</Value>
+                                  <Style>
+                                    <FontSize>6pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>=First(Fields!Variances2_12__Control1000000226Format.Value)</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Top>0cm</Top>
+                          <Left>24.6cm</Left>
+                          <Height>0.423cm</Height>
+                          <Width>1.8cm</Width>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="TextBox1">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <ColSpan>4</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <Group Name="Table1_Details_Group">
+                    <DataElementName>Detail</DataElementName>
+                  </Group>
+                  <TablixMembers>
+                    <TablixMember />
+                  </TablixMembers>
+                  <DataElementName>Detail_Collection</DataElementName>
+                  <DataElementOutput>Output</DataElementOutput>
+                  <KeepTogether>true</KeepTogether>
+                </TablixMember>
+                <TablixMember>
+                  <KeepWithGroup>Before</KeepWithGroup>
+                  <KeepTogether>true</KeepTogether>
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>DataSet_Result</DataSetName>
+            <Top>0cm</Top>
+            <Height>0.846cm</Height>
+          </Tablix>
+        </ReportItems>
+        <Height>0.846cm</Height>
+      </Body>
+      <Width>26.90001cm</Width>
+      <Page>
+        <PageHeader>
+          <Height>1.692cm</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="PageNumberTextBox">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Globals!PageNumber</Value>
+                      <Style>
+                        <FontSize>7pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.423cm</Top>
+              <Left>25.65cm</Left>
+              <Height>0.423cm</Height>
+              <Width>0.75cm</Width>
+              <Style>
+                <VerticalAlign>Middle</VerticalAlign>
+              </Style>
+            </Textbox>
+            <Textbox Name="UserIdTextBox">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=User!UserID</Value>
+                      <Style>
+                        <FontSize>7pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.846cm</Top>
+              <Left>20.45cm</Left>
+              <Height>0.423cm</Height>
+              <Width>5.95cm</Width>
+              <Style>
+                <VerticalAlign>Middle</VerticalAlign>
+              </Style>
+            </Textbox>
+            <Textbox Name="ExecutionTimeTextBox">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Globals!ExecutionTime</Value>
+                      <Style>
+                        <FontSize>7pt</FontSize>
+                        <Format>g</Format>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>0cm</Top>
+              <Left>21.45cm</Left>
+              <Height>0.423cm</Height>
+              <Width>4.95cm</Width>
+              <Style>
+                <VerticalAlign>Middle</VerticalAlign>
+              </Style>
+            </Textbox>
+            <Textbox Name="COMPANYNAME1">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=ReportItems!COMPANYNAME.Value</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                </Paragraph>
+              </Paragraphs>
+              <Top>0cm</Top>
+              <Left>0cm</Left>
+              <Height>0.423cm</Height>
+              <Width>10.05cm</Width>
+              <Style>
+                <VerticalAlign>Middle</VerticalAlign>
+              </Style>
+            </Textbox>
+            <Textbox Name="GETFILTERS1">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=ReportItems!GETFILTERS.Value</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                </Paragraph>
+              </Paragraphs>
+              <Top>1.269cm</Top>
+              <Left>0cm</Left>
+              <Height>0.423cm</Height>
+              <Width>13.8cm</Width>
+              <Style>
+                <VerticalAlign>Middle</VerticalAlign>
+              </Style>
+            </Textbox>
+            <Textbox Name="SUMMARY_OF_UNIT_SALESCaption1">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=ReportItems!SUMMARY_OF_UNIT_SALESCaption.Value</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.423cm</Top>
+              <Left>0cm</Left>
+              <Height>0.423cm</Height>
+              <Width>10.05cm</Width>
+              <Style>
+                <VerticalAlign>Middle</VerticalAlign>
+              </Style>
+            </Textbox>
+            <Textbox Name="CurrReport_PAGENOCaption1">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=ReportItems!CurrReport_PAGENOCaption.Value</Value>
+                      <Style>
+                        <FontSize>7pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.423cm</Top>
+              <Left>24.9cm</Left>
+              <Height>0.423cm</Height>
+              <Width>0.75cm</Width>
+              <Style>
+                <VerticalAlign>Middle</VerticalAlign>
+              </Style>
+            </Textbox>
+          </ReportItems>
+        </PageHeader>
+        <PageHeight>29.7cm</PageHeight>
+        <PageWidth>29.60001cm</PageWidth>
+        <LeftMargin>2cm</LeftMargin>
+        <RightMargin>0cm</RightMargin>
+        <TopMargin>1cm</TopMargin>
+        <BottomMargin>0cm</BottomMargin>
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+</Report>

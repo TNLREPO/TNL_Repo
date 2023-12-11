@@ -148,7 +148,7 @@ page 50024 "Loan Card."
 
     var
         employee: Record 5200;
-        gpc: Codeunit "50004";
+        gpc: Codeunit 50004;
         DefaultPostingGroup: Code[20];
 }
 

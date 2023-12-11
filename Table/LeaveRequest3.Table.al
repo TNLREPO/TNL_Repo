@@ -5,6 +5,7 @@ table 70009 "Leave Request3"
     {
         field(1; "Request No."; Code[30])
         {
+
         }
         field(2; "Entry Date"; Date)
         {
@@ -51,396 +52,10 @@ table 70009 "Leave Request3"
         field(12; "Send for Approval"; Boolean)
         {
 
-            /*   trigger OnValidate()
-              begin
-                  IF NOT CONFIRM('Are you sure you want to send for Approval', FALSE) THEN
-                      "Send for Approval" := FALSE
-                  ELSE BEGIN
+            trigger OnValidate()
+            begin
 
-                      IF "Entry Date" <> TODAY THEN
-                          ERROR('Entry date must be todays date. Kindly contact your system Administrator');
-
-                      IF SKIP = FALSE THEN BEGIN
-                          IF (""Leave Category"" = 'CASUAL') AND ("Actual Duration" > 3) THEN
-                              ERROR('Casual leave cannot be more than 3 working days');
-
-                          IF ("Request Type" = "Request Type"::HOD) AND (""Leave Category"" = 'ANNUAL') AND (("Actual Start Date" - "Entry Date") < 30) THEN
-                              ERROR('You can only request for annual Leave 30 days ahead the plan actual start leave date');
-
-                          IF ("Request Type" = "Request Type"::HOD1) AND (""Leave Category"" = 'ANNUAL') AND (("Actual Start Date" - "Entry Date") < 30) THEN
-                              ERROR('You can only request for annual Leave 30 days ahead the plan actual start leave date');
-
-                          IF ("Request Type" = "Request Type"::Manager) AND (""Leave Category"" = 'ANNUAL') AND (("Actual Start Date" - "Entry Date") < 30) THEN
-                              ERROR('You can only request for annual Leave 30 days ahead the plan actual start leave date');
-                          IF ("Request Type" = "Request Type"::"Junior staff - Deputy Manager") AND (""Leave Category"" = 'ANNUAL') AND (("Actual Start Date" - "Entry Date") < 14) THEN
-                              ERROR('You can only request for annual Leave 14 days ahead the plan actual start leave date');
-
-                          IF ("Request Type" = "Request Type"::Branch) AND (""Leave Category"" = 'ANNUAL') AND ("Actual Duration" > 15) THEN
-                              ERROR('Your Leave request is greater than the number of actual leave due');
-
-                          IF ("Actual Duration") > ("Total Leaves Due" - "Total Consuming") THEN
-                              ERROR('Your Leave request is greater than the number of actual leave due');
-
-                          IF (""Leave Category"" = 'ANNUAL') AND ("Actual Duration" > 15) THEN
-                              ERROR('Annual leave cannot be more than 15 working days');
-
-                          IF ""Leave Category"" = 'ANNUAL' THEN BEGIN
-                              LeaveRequest.SETRANGE("""Employee No"."", """Employee No"."");
-                              LeaveRequest.SETRANGE("Send for Approval", TRUE);
-                              LeaveRequest.SETRANGE(Reject, FALSE);
-                              LeaveRequest.SETRANGE(""Leave Category"", 'ANNUAL');
-                              IF LeaveRequest.FINDLAST THEN BEGIN
-                                  AnnualDiff := (("Actual Start Date") - (LeaveRequest."Actual End Date"));
-                                  IF AnnualDiff < 60 THEN
-                                      ERROR('You cannot  request for Annual Leave!');
-                              END;
-                          END;
-                      END;
-
-                      IF "Actual Start Date" = 0D THEN BEGIN
-                          "Actual Duration" := 0;
-                          EXIT;
-                      END;
-
-                      IF ("Actual End Date" < "Actual Start Date") AND ("Actual End Date" <> 0D) THEN
-                          ERROR(FIELDCAPTION("Actual Start Date") + 'Must be on or after ' + FIELDCAPTION("Actual End Date"));
-
-                      IF "Actual End Date" <> 0D THEN
-                          "Actual Duration" := GenPCode.GetNoOfDays("Actual Start Date", "Actual End Date")
-                      ELSE
-                          IF "Actual Duration" <> 0 THEN
-                              "Actual End Date" := GenPCode.GetEndDate("Actual Start Date", "Actual Duration");
-
-                      CheckTotalDuration(9);
-
-                      IF SKIP2 = FALSE THEN BEGIN
-                          IF (""Leave Category"" = 'CASUAL') AND ("Actual Duration" > 3) THEN
-                              ERROR('Casual leave cannot be more than 3 working days');
-                          TESTFIELD(""Leave Category"");
-                          IF ""Leave Category"" = 'CASUAL' THEN BEGIN
-                              LeaveRequest.SETRANGE("""Employee No"."", """Employee No"."");
-                              LeaveRequest.SETRANGE("Send for Approval", TRUE);
-                              LeaveRequest.SETRANGE(""Leave Category"", 'CASUAL');
-                              LeaveRequest.SETRANGE(Reject, FALSE);
-                              IF LeaveRequest.FINDLAST THEN BEGIN
-                                  CasualDiff := (("Actual Start Date") - (LeaveRequest."Actual End Date"));
-                                  IF CasualDiff < 30 THEN
-                                      ERROR('You cannot  request for Casual Leave !');
-                              END
-                          END;
-                      END;
-
-                      IF "1st Approval" = '' THEN
-                          ERROR('You need to choose an approver!');
-                      //HOD
-                      IF ("Request Type" = "Request Type"::HOD) THEN BEGIN
-                          IF UserSetup.GET("1st Approval") THEN BEGIN
-                              Addressee := UserSetup.Initials;
-                              Sender := USERID;
-                              UserSetup2.GET(USERID);
-
-                              SenderName := UserSetup2.Initials;
-                              SenderAddress := UserSetup2."E-Mail";
-                              "Sent Time" := CURRENTDATETIME;
-                              "User ID" := USERID;
-                              "Current Pending Person" := "1st Approval";
-                              "HOD HR/ADMIN" := TRUE;
-                              ToAddresses := UserSetup."E-Mail";
-                              BccAddresses := '';
-                              subject := STRSUBSTNO(text001, "Request No.");
-
-                              WITH TempEmailItem DO BEGIN
-                                  "Send to" := ToAddresses;
-                                  "Send CC" := SenderAddress;
-                                  "Send BCC" := BccAddresses;
-                                  Subject := STRSUBSTNO(text001, "Request No.");
-
-                                  CRLF := '';
-                                  CRLF[1] := 13;
-                                  CRLF[2] := 10;
-
-                                  BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                  BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                                  BodyStream.WRITETEXT(CRLF + CRLF);
-                                  BodyStream.WRITETEXT(Text014 + CRLF + CRLF + CRLF +
-                                  Text015 + STRSUBSTNO("Request No.") + CRLF +
-                                  Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF +
-                                  Text017 + STRSUBSTNO(""Leave Category"") + CRLF +
-                                  text011 + FORMAT("Actual Start Date") + CRLF +
-                                  text012 + FORMAT("Actual End Date") + CRLF +
-                                  STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                                  Text018 + CRLF +
-                                  SenderName);
-                                  BodyStream.WRITETEXT(CRLF + CRLF);
-                                  BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                  Body := BodyBlob.Blob;
-                                  Send(FALSE);
-                              END;
-                          END;
-                      END;
-                      // HOD1
-                      IF ("Request Type" = "Request Type"::HOD1) THEN BEGIN
-                          IF UserSetup2.GET("1st Approval") THEN BEGIN
-                              ToAddresses := UserSetup2."E-Mail";
-                              Sender := USERID;
-                              UserSetup.GET(USERID);
-                              SenderName := UserSetup.Initials;
-                              SenderAddress := UserSetup."E-Mail";
-                              "Sent Time" := CURRENTDATETIME;
-                              "User ID" := USERID;
-                              "Current Pending Person" := "1st Approval";
-                              Addressee := UserSetup."E-Mail";
-                              BccAddresses := '';
-                              subject := STRSUBSTNO(text001, "Request No.");
-
-                              WITH TempEmailItem DO BEGIN
-                                  "Send to" := ToAddresses;
-                                  "Send CC" := SenderAddress;
-                                  "Send BCC" := BccAddresses;
-                                  Subject := STRSUBSTNO(text001, "Request No.");
-
-                                  CRLF := '';
-                                  CRLF[1] := 13;
-                                  CRLF[2] := 10;
-
-                                  BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                  BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                                  BodyStream.WRITETEXT(CRLF + CRLF);
-                                  BodyStream.WRITETEXT(Text014 + CRLF + CRLF + CRLF +
-                                  Text015 + STRSUBSTNO("Request No.") + CRLF +
-                                  Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF +
-                                  Text017 + STRSUBSTNO(""Leave Category"") + CRLF +
-                                  text011 + FORMAT("Actual Start Date") + CRLF +
-                                  text012 + FORMAT("Actual End Date") + CRLF +
-                                  STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                                  Text018 + CRLF +
-                                  SenderName);
-                                  BodyStream.WRITETEXT(CRLF + CRLF);
-                                  BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                  Body := BodyBlob.Blob;
-                                  Send(FALSE);
-                              END;
-                          END;
-                      END;
-                      //Manager
-                      IF ("Request Type" = "Request Type"::Manager) THEN BEGIN
-                          UserSetup.GET("1st Approval");
-                          Addressee := UserSetup.Initials;
-                          Sender := USERID;
-                          BccAddresses := '';
-                          UserSetup2.GET(USERID);
-                          SenderName := UserSetup2."E-Mail";
-                          "Sent Time" := CURRENTDATETIME;
-                          "User ID" := USERID;
-                          "Current Pending Person" := "1st Approval";
-                          ToAddresses := UserSetup."E-Mail";
-                          subject := STRSUBSTNO(text001, "Request No.");
-                          WITH TempEmailItem DO BEGIN
-                              "Send to" := ToAddresses;
-                              "Send CC" := SenderAddress;
-                              "Send BCC" := BccAddresses;
-                              Subject := STRSUBSTNO(text001, "Request No.");
-
-                              CRLF := '';
-                              CRLF[1] := 13;
-                              CRLF[2] := 10;
-
-                              BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                              BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                              BodyStream.WRITETEXT(CRLF + CRLF);
-                              BodyStream.WRITETEXT(Text014 + CRLF + CRLF + CRLF +
-                              Text015 + STRSUBSTNO("Request No.") + CRLF +
-                              Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF +
-                              Text017 + STRSUBSTNO(""Leave Category"") + CRLF +
-                              text011 + FORMAT("Actual Start Date") + CRLF +
-                              text012 + FORMAT("Actual End Date") + CRLF +
-                              STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                              Text018 + CRLF +
-                              SenderName);
-                              BodyStream.WRITETEXT(CRLF + CRLF);
-                              BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                              Body := BodyBlob.Blob;
-                              Send(FALSE);
-                          END;
-                      END;
-                      //END;
-                      //Junior staff - Deputy Manager
-                      IF ("Request Type" = "Request Type"::"Junior staff - Deputy Manager") THEN BEGIN
-                          UserSetup.GET("1st Approval");
-                          Addressee := UserSetup.Initials;
-
-                          Sender := USERID;
-                          UserSetup2.GET(USERID);
-                          SenderName := UserSetup2.Initials;
-                          SenderAddress := UserSetup2."E-Mail";
-                          "Sent Time" := CURRENTDATETIME;
-                          "User ID" := USERID;
-                          "Current Pending Person" := "1st Approval";
-                          ToAddresses := UserSetup."E-Mail";
-                          subject := STRSUBSTNO(text001, "Request No.");
-
-                          WITH TempEmailItem DO BEGIN
-                              "Send to" := ToAddresses;
-                              "Send CC" := SenderAddress;
-                              "Send BCC" := '';
-                              Subject := STRSUBSTNO(text001, "Request No.");
-
-                              CRLF := '';
-                              CRLF[1] := 13;
-                              CRLF[2] := 10;
-
-                              BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                              BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                              BodyStream.WRITETEXT(CRLF + CRLF);
-                              BodyStream.WRITETEXT(Text014 + CRLF + CRLF + CRLF +
-                              Text015 + STRSUBSTNO("Request No.") + CRLF +
-                              Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF +
-                              Text017 + STRSUBSTNO(""Leave Category"") + CRLF +
-                              text011 + FORMAT("Actual Start Date") + CRLF +
-                              text012 + FORMAT("Actual End Date") + CRLF +
-                              STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                              Text018 + CRLF +
-                              SenderName);
-                              BodyStream.WRITETEXT(CRLF + CRLF);
-                              BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                              Body := BodyBlob.Blob;
-                              Send(FALSE);
-                          END;
-                      END;
-                      //END;
-                      //Branch
-                      IF ("Request Type" = "Request Type"::Branch) THEN BEGIN
-                          IF UserSetup.GET("1st Approval") THEN BEGIN
-                              Addressee := UserSetup.Initials;
-                              Sender := USERID;
-                              UserSetup2.GET(USERID);
-                              SenderName := UserSetup2.Initials;
-                              SenderAddress := UserSetup2."E-Mail";
-                              "Sent Time" := CURRENTDATETIME;
-                              "User ID" := USERID;
-                              "Current Pending Person" := "1st Approval";
-                              ToAddresses := UserSetup."E-Mail";
-                              subject := STRSUBSTNO(text001, "Request No.");
-
-                              WITH TempEmailItem DO BEGIN
-                                  "Send to" := ToAddresses;
-                                  "Send CC" := SenderAddress;
-                                  "Send BCC" := '';
-                                  Subject := STRSUBSTNO(text001, "Request No.");
-
-                                  CRLF := '';
-                                  CRLF[1] := 13;
-                                  CRLF[2] := 10;
-
-                                  BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                  BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                                  BodyStream.WRITETEXT(CRLF + CRLF);
-                                  BodyStream.WRITETEXT(Text014 + CRLF + CRLF + CRLF +
-                                  Text015 + STRSUBSTNO("Request No.") + CRLF +
-                                  Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF +
-                                  Text017 + STRSUBSTNO(""Leave Category"") + CRLF +
-                                  text011 + FORMAT("Actual Start Date") + CRLF +
-                                  text012 + FORMAT("Actual End Date") + CRLF +
-                                  STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                                  Text018 + CRLF +
-                                  SenderName);
-                                  BodyStream.WRITETEXT(CRLF + CRLF);
-                                  BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                  Body := BodyBlob.Blob;
-                                  Send(FALSE);
-                              END;
-                          END;
-                      END;
-                      //MD OFFICE
-                      IF ("Request Type" = "Request Type"::"MD OFFICE") THEN BEGIN
-                          IF UserSetup.GET("1st Approval") THEN BEGIN
-                              Addressee := UserSetup.Initials;
-                              Sender := USERID;
-                              UserSetup2.GET(USERID);
-                              SenderName := UserSetup2.Initials;
-                              SenderAddress := UserSetup2."E-Mail";
-                              "Sent Time" := CURRENTDATETIME;
-                              "User ID" := USERID;
-                              "Current Pending Person" := "1st Approval";
-                              "HOD HR/ADMIN" := TRUE;
-                              ToAddresses := UserSetup."E-Mail";
-                              subject := STRSUBSTNO(text001, "Request No.");
-
-                              WITH TempEmailItem DO BEGIN
-                                  "Send to" := ToAddresses;
-                                  "Send CC" := SenderAddress;
-                                  "Send BCC" := '';
-                                  Subject := STRSUBSTNO(text001, "Request No.");
-
-                                  CRLF := '';
-                                  CRLF[1] := 13;
-                                  CRLF[2] := 10;
-
-                                  BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                  BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                                  BodyStream.WRITETEXT(CRLF + CRLF);
-                                  BodyStream.WRITETEXT(Text014 + CRLF + CRLF + CRLF +
-                                  Text015 + STRSUBSTNO("Request No.") + CRLF +
-                                  Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF +
-                                  Text017 + STRSUBSTNO(""Leave Category"") + CRLF +
-                                  text011 + FORMAT("Actual Start Date") + CRLF +
-                                  text012 + FORMAT("Actual End Date") + CRLF +
-                                  STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                                  Text018 + CRLF +
-                                  SenderName);
-                                  BodyStream.WRITETEXT(CRLF + CRLF);
-                                  BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                  Body := BodyBlob.Blob;
-                                  Send(FALSE);
-                              END;
-                          END;
-                      END;
-
-                      //FG
-                      IF ("Request Type" = "Request Type"::FG) THEN BEGIN
-                          IF UserSetup.GET("1st Approval") THEN BEGIN
-                              Addressee := UserSetup.Initials;
-                              Sender := USERID;
-                              UserSetup2.GET(USERID);
-                              SenderName := UserSetup2.Initials;
-                              SenderAddress := UserSetup2."E-Mail";
-                              "Sent Time" := CURRENTDATETIME;
-                              "User ID" := USERID;
-                              "Current Pending Person" := "1st Approval";
-                              ToAddresses := UserSetup."E-Mail";
-                              subject := STRSUBSTNO(text001, "Request No.");
-
-                              WITH TempEmailItem DO BEGIN
-                                  "Send to" := ToAddresses;
-                                  "Send CC" := SenderAddress;
-                                  "Send BCC" := '';
-                                  Subject := STRSUBSTNO(text001, "Request No.");
-
-                                  CRLF := '';
-                                  CRLF[1] := 13;
-                                  CRLF[2] := 10;
-
-                                  BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                  BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                                  BodyStream.WRITETEXT(CRLF + CRLF);
-                                  BodyStream.WRITETEXT(Text014 + CRLF + CRLF + CRLF +
-                                  Text015 + STRSUBSTNO("Request No.") + CRLF +
-                                  Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF +
-                                  Text017 + STRSUBSTNO(""Leave Category"") + CRLF +
-                                  text011 + FORMAT("Actual Start Date") + CRLF +
-                                  text012 + FORMAT("Actual End Date") + CRLF +
-                                  STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                                  Text018 + CRLF +
-                                  SenderName);
-                                  BodyStream.WRITETEXT(CRLF + CRLF);
-                                  BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                  Body := BodyBlob.Blob;
-                                  Send(FALSE);
-                              END;
-                          END;
-                      END;
-                  END;
-              end; */
+            end;
         }
         field(13; "1st Approval"; Code[30])
         {
@@ -497,419 +112,10 @@ table 70009 "Leave Request3"
             OptionCaption = ' ,On hold,Approved,Rejected';
             OptionMembers = " ","On hold",Approved,Rejected;
 
-            /*  trigger OnValidate()
-             begin
-                 IF (""Leave Category"" = 'CASUAL') AND ("Actual Duration" > 3) THEN
-                     ERROR('Casual leave cannot be more than 3 working days');
+            trigger OnValidate()
+            begin
 
-                 TESTFIELD(""Leave Category"");
-                 TESTFIELD("Send for Approval", TRUE);
-                 TESTFIELD("1st Approval", USERID);
-                 TESTFIELD("2nd Approval");
-                 //HOD
-                 IF ("Request Type" = "Request Type"::HOD) THEN
-                     IF "1st Approval Status" = "1st Approval Status"::Approved THEN
-                         IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
-                             "1st Approval Status" := LeaveRequest."1st Approval Status"::" "
-                         ELSE BEGIN
-                             UserSetup.GET("2nd Approval");
-                             "1st Approval Time" := CURRENTDATETIME;
-                             "Current Pending Person" := "2nd Approval";
-                             ToAddresses := UserSetup."E-Mail";
-                             subject := STRSUBSTNO(text001, "Request No.");
-                             UserSetup2.GET(USERID);
-                             Addressee := UserSetup.Initials;
-                             UserSetup2.GET(USERID);
-                             SenderName := UserSetup2.Initials;
-                             SenderAddress := UserSetup2."E-Mail";
-
-                             WITH TempEmailItem DO BEGIN
-                                 "Send to" := ToAddresses;
-                                 "Send CC" := SenderAddress;
-                                 "Send BCC" := '';
-                                 Subject := STRSUBSTNO(text001, "Request No.");
-
-                                 CRLF := '';
-                                 CRLF[1] := 13;
-                                 CRLF[2] := 10;
-
-                                 BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                 BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT(Text014 + CRLF + CRLF + CRLF +
-                                 Text015 + STRSUBSTNO("Request No.") + CRLF +
-                                 Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF +
-                                 Text017 + STRSUBSTNO(""Leave Category"") + CRLF + CRLF +
-                                 text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                                 text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                                 STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                                 Text018 + CRLF +
-                                 SenderName);
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                 Body := BodyBlob.Blob;
-                                 Send(FALSE);
-                             END;
-                             "MD Leave Approval" := TRUE;
-                         END;
-
-
-                 //HOD1
-                 IF ("Request Type" = "Request Type"::HOD1) THEN
-                     IF "1st Approval Status" = "1st Approval Status"::Approved THEN
-                         IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
-                             "1st Approval Status" := LeaveRequest."1st Approval Status"::" "
-                         ELSE BEGIN
-                             IF UserSetup.GET("2nd Approval") THEN BEGIN
-                                 "1st Approval Time" := CURRENTDATETIME;
-                                 "Current Pending Person" := "2nd Approval";
-                                 ToAddresses := UserSetup."E-Mail";
-                                 subject := STRSUBSTNO(text001, "Request No.");
-                                 UserSetup2.GET(USERID);
-                                 SenderAddress := UserSetup2."E-Mail";
-                                 SenderName := UserSetup2.Initials;
-                                 Addressee := UserSetup.Initials;
-
-                                 WITH TempEmailItem DO BEGIN
-                                     "Send to" := ToAddresses;
-                                     "Send CC" := SenderAddress;
-                                     "Send BCC" := '';
-                                     Subject := STRSUBSTNO(text001, "Request No.");
-
-                                     CRLF := '';
-                                     CRLF[1] := 13;
-                                     CRLF[2] := 10;
-
-                                     BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                     BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                                     BodyStream.WRITETEXT(CRLF + CRLF);
-                                     BodyStream.WRITETEXT(Text014 + CRLF + CRLF + CRLF +
-                                     Text015 + STRSUBSTNO("Request No.") + CRLF + CRLF +
-                                     Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF +
-                                     Text017 + STRSUBSTNO(""Leave Category"") + CRLF + CRLF +
-                                     text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                                     text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                                     STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                                     Text018 + CRLF +
-                                     SenderName);
-                                     BodyStream.WRITETEXT(CRLF + CRLF);
-                                     BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                     Body := BodyBlob.Blob;
-                                     Send(FALSE);
-                                 END;
-                                 "HOD HR/ADMIN" := TRUE;
-                             END;
-                         END;
-
-                 //Manager
-                 IF ("Request Type" = "Request Type"::Manager) THEN
-                     IF "1st Approval Status" = "1st Approval Status"::Approved THEN
-                         IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
-                             "1st Approval Status" := LeaveRequest."1st Approval Status"::" "
-                         ELSE BEGIN
-                             IF UserSetup.GET("2nd Approval") THEN BEGIN
-                                 "1st Approval Time" := CURRENTDATETIME;
-                                 "Current Pending Person" := "2nd Approval";
-                                 ToAddresses := UserSetup."E-Mail";
-                                 Addressee := UserSetup.Initials;
-                                 subject := STRSUBSTNO(text001, "Request No.");
-                                 "HOD HR/ADMIN" := TRUE;
-                                 UserSetup2.GET(USERID);
-                                 SenderName := UserSetup2.Initials;
-                                 SenderAddress := UserSetup2."E-Mail";
-
-                                 WITH TempEmailItem DO BEGIN
-                                     "Send to" := ToAddresses;
-                                     "Send CC" := SenderAddress;
-                                     "Send BCC" := '';
-                                     Subject := STRSUBSTNO(text001, "Request No.");
-
-                                     CRLF := '';
-                                     CRLF[1] := 13;
-                                     CRLF[2] := 10;
-
-                                     BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                     BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                                     BodyStream.WRITETEXT(CRLF + CRLF);
-                                     BodyStream.WRITETEXT(Text014 + CRLF + CRLF + CRLF +
-                                     Text015 + STRSUBSTNO("Request No.") + CRLF + CRLF +
-                                     Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF +
-                                     Text017 + STRSUBSTNO(""Leave Category"") + CRLF + CRLF +
-                                     text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                                     text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                                     STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                                     Text018 + CRLF +
-                                     SenderName);
-                                     BodyStream.WRITETEXT(CRLF + CRLF);
-                                     BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                     Body := BodyBlob.Blob;
-                                     Send(FALSE);
-                                 END;
-                             END;
-                         END;
-
-                 //Branch
-                 IF ("Request Type" = "Request Type"::Branch) THEN
-                     IF "1st Approval Status" = "1st Approval Status"::Approved THEN
-                         IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
-                             "1st Approval Status" := LeaveRequest."1st Approval Status"::" "
-                         ELSE BEGIN
-                             IF UserSetup.GET("2nd Approval") THEN BEGIN
-                                 "1st Approval Time" := CURRENTDATETIME;
-                                 "Current Pending Person" := "2nd Approval";
-                                 ToAddresses := UserSetup."E-Mail";
-                                 Addressee := UserSetup.Initials;
-                                 subject := STRSUBSTNO(text001, "Request No.");
-                                 UserSetup2.GET(USERID);
-                                 SenderName := UserSetup2.Initials;
-                                 SenderAddress := UserSetup2."E-Mail";
-
-                                 WITH TempEmailItem DO BEGIN
-                                     "Send to" := ToAddresses;
-                                     "Send CC" := SenderAddress;
-                                     "Send BCC" := '';
-                                     Subject := STRSUBSTNO(text001, "Request No.");
-                                     CRLF := '';
-                                     CRLF[1] := 13;
-                                     CRLF[2] := 10;
-
-                                     BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                     BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                                     BodyStream.WRITETEXT(CRLF + CRLF);
-                                     BodyStream.WRITETEXT(Text014 + CRLF + CRLF + CRLF +
-                                     Text015 + STRSUBSTNO("Request No.") + CRLF + CRLF +
-                                     Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF + CRLF +
-                                     Text017 + STRSUBSTNO(""Leave Category"") + CRLF + CRLF +
-                                     text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                                     text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                                     STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                                     Text018 + CRLF +
-                                     SenderName);
-                                     BodyStream.WRITETEXT(CRLF + CRLF);
-                                     BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                     Body := BodyBlob.Blob;
-                                     Send(FALSE);
-                                 END;
-                             END;
-                         END;
-
-                 //Junior staff - Deputy Manager
-                 IF ("Request Type" = "Request Type"::"Junior staff - Deputy Manager") THEN
-                     IF "1st Approval Status" = "1st Approval Status"::Approved THEN
-                         IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
-                             "1st Approval Status" := LeaveRequest."1st Approval Status"::" "
-                         ELSE BEGIN
-                             IF UserSetup.GET("2nd Approval") THEN BEGIN
-                                 "1st Approval Time" := CURRENTDATETIME;
-                                 "Current Pending Person" := "2nd Approval";
-                                 ToAddresses := UserSetup."E-Mail";
-                                 subject := STRSUBSTNO(text001, "Request No.");
-                                 Addressee := UserSetup.Initials;
-                                 UserSetup2.GET(USERID);
-                                 SenderName := UserSetup2.Initials;
-                                 SenderAddress := UserSetup2."E-Mail";
-
-                                 WITH TempEmailItem DO BEGIN
-                                     "Send to" := ToAddresses;
-                                     "Send CC" := SenderAddress;
-                                     "Send BCC" := '';
-                                     Subject := STRSUBSTNO(text001, "Request No.");
-                                     CRLF := '';
-                                     CRLF[1] := 13;
-                                     CRLF[2] := 10;
-
-                                     BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                     BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                                     BodyStream.WRITETEXT(CRLF + CRLF);
-                                     BodyStream.WRITETEXT(Text014 + CRLF + CRLF +
-                                     Text015 + STRSUBSTNO("Request No.") + CRLF + CRLF +
-                                     Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF + CRLF +
-                                     Text017 + STRSUBSTNO(""Leave Category"") + CRLF + CRLF +
-                                     text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                                     text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                                     STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                                     Text018 + CRLF +
-                                     SenderName);
-                                     BodyStream.WRITETEXT(CRLF + CRLF);
-                                     BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                     Body := BodyBlob.Blob;
-                                     Send(FALSE);
-                                 END;
-                             END;
-                             "HOD HR/ADMIN" := TRUE;
-                         END;
-
-
-                 CASE "1st Approval Status" OF
-                     "1st Approval Status"::Rejected:
-                         IF NOT CONFIRM('Are you sure you want to REJECT', FALSE) THEN
-                             "1st Approval Status" := LeaveRequest."1st Approval Status"::" "
-                         ELSE BEGIN
-                             "1st Approval Time" := CURRENTDATETIME;
-                             UserSetup2.GET(Requester);
-                             ToAddresses := UserSetup2."E-Mail";
-                             subject := STRSUBSTNO(text003, "Request No.");
-                             Addressee := UserSetup2.Initials;
-                             UserSetup.GET(USERID);
-                             SenderName := UserSetup.Initials;
-                             SenderAddress := UserSetup."E-Mail";
-
-                             WITH TempEmailItem DO BEGIN
-                                 "Send to" := ToAddresses;
-                                 "Send CC" := SenderAddress;
-                                 "Send BCC" := '';
-                                 Subject := STRSUBSTNO(text003, "Request No.");
-                                 CRLF := '';
-                                 CRLF[1] := 13;
-                                 CRLF[2] := 10;
-
-                                 BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                 BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT(Text019 + CRLF + CRLF +
-                                 Text015 + STRSUBSTNO("Request No.") + CRLF + CRLF +
-                                 Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF + CRLF +
-                                 Text017 + STRSUBSTNO(""Leave Category"") + CRLF + CRLF +
-                                 text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                                 text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                                 STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                                 Text018 + CRLF +
-                                 SenderName);
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                 Body := BodyBlob.Blob;
-                                 Send(FALSE);
-                             END;
-                             "MD Leave Approval" := FALSE;
-                             Reject := TRUE;
-                         END;
-                     "1st Approval Status"::"On hold":
-                         IF NOT CONFIRM('Are you sure you want to place ON HOLD', FALSE) THEN
-                             "1st Approval Status" := LeaveRequest."1st Approval Status"::" "
-                         ELSE BEGIN
-                             "1st Approval Time" := CURRENTDATETIME;
-                             UserSetup2.GET(Requester);
-                             ToAddresses := UserSetup2."E-Mail";
-                             subject := STRSUBSTNO(text004, "Request No.");
-                             Addressee := UserSetup2.Initials;
-                             UserSetup.GET(USERID);
-                             SenderName := UserSetup.Initials;
-                             SenderAddress := UserSetup."E-Mail";
-
-                             WITH TempEmailItem DO BEGIN
-                                 "Send to" := ToAddresses;
-                                 "Send CC" := SenderAddress;
-                                 "Send BCC" := '';
-                                 Subject := STRSUBSTNO(text004, "Request No.");
-                                 CRLF := '';
-                                 CRLF[1] := 13;
-                                 CRLF[2] := 10;
-
-                                 BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                 BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT(Text020 + CRLF + CRLF +
-                                 Text015 + STRSUBSTNO("Request No.") + CRLF + CRLF +
-                                 Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF + CRLF +
-                                 Text017 + STRSUBSTNO(""Leave Category"") + CRLF + CRLF +
-                                 text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                                 text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                                 STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                                 Text018 + CRLF +
-                                 SenderName);
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                 Body := BodyBlob.Blob;
-                                 Send(FALSE);
-                             END;
-                             "MD Leave Approval" := FALSE;
-                         END;
-                 END;
-                 //MD OFFICE
-                 IF ("Request Type" = "Request Type"::"MD OFFICE") THEN
-                     IF "1st Approval Status" = "1st Approval Status"::Approved THEN BEGIN
-                         IF UserSetup.GET("2nd Approval") THEN BEGIN
-                             "1st Approval Time" := CURRENTDATETIME;
-                             "Current Pending Person" := "2nd Approval";
-                             ToAddresses := UserSetup."E-Mail";
-                             Addressee := 'MD,';
-                             UserSetup2.GET(USERID);
-                             SenderName := UserSetup2.Initials;
-                             SenderAddress := UserSetup2."E-Mail";
-
-                             WITH TempEmailItem DO BEGIN
-                                 "Send to" := ToAddresses;
-                                 "Send CC" := SenderAddress;
-                                 "Send BCC" := '';
-                                 Subject := STRSUBSTNO(text001, "Request No.");
-                                 CRLF := '';
-                                 CRLF[1] := 13;
-                                 CRLF[2] := 10;
-
-                                 BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                 BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT(Text014 + CRLF + CRLF +
-                                 Text015 + STRSUBSTNO("Request No.") + CRLF + CRLF +
-                                 Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF + CRLF +
-                                 Text017 + STRSUBSTNO(""Leave Category"") + CRLF + CRLF +
-                                 text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                                 text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                                 STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                                 Text018 + CRLF +
-                                 SenderName);
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                 Body := BodyBlob.Blob;
-                                 Send(FALSE);
-                             END;
-                             "MD Leave Approval" := TRUE;
-                         END;
-                     END;
-
-
-                 //FG
-                 IF ("Request Type" = "Request Type"::FG) THEN
-                     IF "1st Approval Status" = "1st Approval Status"::Approved THEN BEGIN
-                         IF UserSetup.GET("2nd Approval") THEN BEGIN
-                             "1st Approval Time" := CURRENTDATETIME;
-                             "Current Pending Person" := "2nd Approval";
-                             ToAddresses := UserSetup."E-Mail";
-                             Addressee := UserSetup.Initials;
-                             UserSetup2.GET(USERID);
-                             SenderName := UserSetup2.Initials;
-                             SenderAddress := UserSetup2."E-Mail";
-
-                             WITH TempEmailItem DO BEGIN
-                                 "Send to" := ToAddresses;
-                                 "Send CC" := SenderAddress;
-                                 "Send BCC" := '';
-                                 Subject := STRSUBSTNO(text001, "Request No.");
-                                 CRLF := '';
-                                 CRLF[1] := 13;
-                                 CRLF[2] := 10;
-
-                                 BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                 BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT(Text014 + CRLF + CRLF +
-                                 Text015 + STRSUBSTNO("Request No.") + CRLF + CRLF +
-                                 Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF + CRLF +
-                                 Text017 + STRSUBSTNO(""Leave Category"") + CRLF + CRLF +
-                                 text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                                 text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                                 STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                                 Text018 + CRLF +
-                                 SenderName);
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                 Body := BodyBlob.Blob;
-                                 Send(FALSE);
-                             END;
-                         END;
-                     END;
-                 // END;
-             end; */
+            end;
         }
         field(28; "1st Approval Time"; DateTime)
         {
@@ -925,478 +131,10 @@ table 70009 "Leave Request3"
             OptionCaption = ' ,On hold,Approved,Rejected';
             OptionMembers = " ","On hold",Approved,Rejected;
 
-            /*  trigger OnValidate()
-             begin
-                 CRLF := '';
-                 CRLF[1] := 13;
-                 CRLF[2] := 10;
+            trigger OnValidate()
+            begin
 
-                 TESTFIELD(""Leave Category"");
-                 TESTFIELD("Send for Approval", TRUE);
-                 TESTFIELD("1st Approval Status", 2);
-                 TESTFIELD("2nd Approval", USERID);
-
-                 //IF "2nd Approval" = "Final Approval" THEN
-                 //ERROR(text009);
-                 //HOD
-                 IF ("2nd Approval Status" = "2nd Approval Status"::Approved) AND ("Request Type" = "Request Type"::HOD) THEN
-                     IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
-                         "2nd Approval Status" := LeaveRequest."2nd Approval Status"::" "
-                     ELSE BEGIN
-
-                         "2nd Approval Time" := CURRENTDATETIME;
-                         UserSetup.GET(Requester);
-                         ToAddresses := UserSetup."E-Mail";
-                         CCName := 'lawal@toyotanigeria.com;' + 'ibidapo-obe@toyotanigeria.com';
-                         subject := STRSUBSTNO(text008);
-                         Addressee := UserSetup.Initials;
-                         UserSetup2.GET(USERID);
-                         SenderName := UserSetup2.Initials;
-                         SenderAddress := UserSetup2."E-Mail";
-
-                         WITH TempEmailItem DO BEGIN
-                             "Send to" := ToAddresses;
-                             "Send CC" := SenderAddress + ';' + 'lawal@toyotanigeria.com;' + 'ibidapo-obe@toyotanigeria.com';
-                             "Send BCC" := '';
-                             Subject := STRSUBSTNO(text001, "Request No.");
-
-                             CRLF := '';
-                             CRLF[1] := 13;
-                             CRLF[2] := 10;
-
-                             BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                             BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT(STRSUBSTNO(text008) + CRLF + CRLF +
-                             Text015 + STRSUBSTNO("Request No.") + CRLF + CRLF +
-                             Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF + CRLF +
-                             Text017 + STRSUBSTNO(""Leave Category"") + CRLF + CRLF +
-                             text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                             text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                             STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                             Text018 + CRLF +
-                             SenderName);
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                             Body := BodyBlob.Blob;
-                             Send(FALSE);
-                         END;
-
-                         Approved2 := TRUE;
-                     END;
-
-                 IF ("2nd Approval Status" = "2nd Approval Status"::Approved) AND ("Request Type" = "Request Type"::"MD OFFICE") THEN
-                     IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
-                         "2nd Approval Status" := LeaveRequest."2nd Approval Status"::" "
-                     ELSE BEGIN
-                         "2nd Approval Time" := CURRENTDATETIME;
-                         UserSetup.GET(Requester);
-                         ToAddresses := UserSetup."E-Mail";
-                         CCName := 'lawal@toyotanigeria.com;' + 'ibidapo-obe@toyotanigeria.com';
-                         subject := STRSUBSTNO(text008);
-                         Addressee := UserSetup.Initials;
-                         UserSetup2.GET(USERID);
-                         SenderName := UserSetup2.Initials;
-                         SenderAddress := UserSetup2."E-Mail";
-
-                         WITH TempEmailItem DO BEGIN
-                             "Send to" := ToAddresses;
-                             "Send CC" := SenderAddress + ';' + 'lawal@toyotanigeria.com;' + 'ibidapo-obe@toyotanigeria.com';
-                             "Send BCC" := '';
-                             Subject := STRSUBSTNO(text008);
-
-                             CRLF := '';
-                             CRLF[1] := 13;
-                             CRLF[2] := 10;
-
-                             BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                             BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT(STRSUBSTNO(text008) + CRLF + CRLF + CRLF +
-                             Text015 + STRSUBSTNO("Request No.") + CRLF + CRLF +
-                             Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF + CRLF +
-                             Text017 + STRSUBSTNO(""Leave Category"") + CRLF + CRLF +
-                             text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                             text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                             STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                             Text018 + CRLF +
-                             SenderName);
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                             Body := BodyBlob.Blob;
-                             Send(FALSE);
-                         END;
-
-                         Approved2 := TRUE;
-                     END;
-
-                 CASE "2nd Approval Status" OF
-                     "2nd Approval Status"::Rejected:
-                         IF NOT CONFIRM('Are you sure you want to REJECT', FALSE) THEN
-                             "2nd Approval Status" := LeaveRequest."2nd Approval Status"::" "
-                         ELSE BEGIN
-                             "2nd Approval Time" := CURRENTDATETIME;
-                             UserSetup2.GET(Requester);
-                             ToAddresses := UserSetup2."E-Mail";
-                             CCName := 'lawal@toyotanigeria.com;' + 'ibidapo-obe@toyotanigeria.com';
-                             subject := STRSUBSTNO(text003, "Request No.");
-                             Addressee := UserSetup2.Initials;
-                             Reject := TRUE;
-                             UserSetup.GET(USERID);
-                             SenderName := UserSetup.Initials;
-                             SenderAddress := UserSetup."E-Mail";
-
-                             WITH TempEmailItem DO BEGIN
-                                 "Send to" := ToAddresses;
-                                 "Send CC" := SenderAddress + ';' + 'lawal@toyotanigeria.com;' + 'ibidapo-obe@toyotanigeria.com';
-                                 "Send BCC" := '';
-                                 Subject := STRSUBSTNO(text008);
-
-                                 CRLF := '';
-                                 CRLF[1] := 13;
-                                 CRLF[2] := 10;
-
-                                 BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                 BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT(text003 + CRLF + CRLF + CRLF +
-                                 Text015 + STRSUBSTNO("Request No.") + CRLF + CRLF +
-                                 Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF + CRLF +
-                                 Text017 + STRSUBSTNO(""Leave Category"") + CRLF + CRLF +
-                                 text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                                 text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                                 STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                                 Text018 + CRLF +
-                                 SenderName);
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                 Body := BodyBlob.Blob;
-                                 Send(FALSE);
-                             END;
-                         END;
-                     "2nd Approval Status"::"On hold":
-                         IF NOT CONFIRM('Are you sure you want to place ON HOLD', FALSE) THEN
-                             "2nd Approval Status" := LeaveRequest."2nd Approval Status"::" "
-                         ELSE BEGIN
-                             "2nd Approval Time" := CURRENTDATETIME;
-                             UserSetup2.GET(Requester);
-                             ToAddresses := UserSetup2."E-Mail";
-                             CCName := 'lawal@toyotanigeria.com; ' + 'ibidapo-obe@toyotanigeria.com';
-                             subject := STRSUBSTNO(text004, "Request No.");
-                             Addressee := UserSetup2.Initials;
-                             UserSetup.GET(USERID);
-                             SenderName := UserSetup.Initials;
-                             SenderAddress := UserSetup."E-Mail";
-
-                             WITH TempEmailItem DO BEGIN
-                                 "Send to" := ToAddresses;
-                                 "Send CC" := SenderAddress + ';' + 'lawal@toyotanigeria.com;' + 'ibidapo-obe@toyotanigeria.com';
-                                 "Send BCC" := '';
-                                 Subject := STRSUBSTNO(text004, "Request No.");
-                                 CRLF := '';
-                                 CRLF[1] := 13;
-                                 CRLF[2] := 10;
-
-                                 BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                 BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT(Text020 + CRLF + CRLF + CRLF +
-                                 Text015 + STRSUBSTNO("Request No.") + CRLF + CRLF +
-                                 Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF + CRLF +
-                                 Text017 + STRSUBSTNO(""Leave Category"") + CRLF + CRLF +
-                                 text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                                 text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                                 STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                                 Text018 + CRLF +
-                                 SenderName);
-                                 BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                 Body := BodyBlob.Blob;
-                                 Send(FALSE);
-                             END;
-                         END;
-                 END;
-                 //Junior staff - Deputy Manager
-                 IF ("2nd Approval Status" = "2nd Approval Status"::Approved) AND ("Request Type" = "Request Type"::"Junior staff - Deputy Manager") AND
-                    ("Send to MD for Approval" = FALSE) THEN
-                     IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
-                         "2nd Approval Status" := LeaveRequest."2nd Approval Status"::" "
-                     ELSE BEGIN
-                         "2nd Approval Time" := CURRENTDATETIME;
-                         UserSetup.GET(Requester);
-                         ToAddresses := UserSetup."E-Mail";
-                         Addressee := UserSetup.Initials;
-                         UserSetup2.GET("1st Approval");
-                         CCName := UserSetup2."E-Mail" + ';lawal@toyotanigeria.com;';
-                         subject := STRSUBSTNO(text008);
-                         //Addressee :=  UserSetup2.Initials;
-                         UserSetup2.GET(USERID);
-                         SenderName := UserSetup2.Initials;
-                         SenderAddress := UserSetup2."E-Mail";
-
-
-                         WITH TempEmailItem DO BEGIN
-                             "Send to" := ToAddresses;
-                             "Send CC" := SenderAddress + ';' + 'lawal@toyotanigeria.com';
-                             "Send BCC" := '';
-                             Subject := STRSUBSTNO(text008);
-
-                             CRLF := '';
-                             CRLF[1] := 13;
-                             CRLF[2] := 10;
-
-                             BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                             BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT(STRSUBSTNO(text008) + CRLF + CRLF + CRLF +
-                             Text015 + STRSUBSTNO("Request No.") + CRLF + CRLF +
-                             Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF + CRLF +
-                             Text017 + STRSUBSTNO(""Leave Category"") + CRLF + CRLF +
-                             text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                             text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                             STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                             Text018 + CRLF +
-                             SenderName);
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                             Body := BodyBlob.Blob;
-                             Send(FALSE);
-                         END;
-                         Approved2 := TRUE;
-                     END;
-
-                 IF ("2nd Approval Status" = "2nd Approval Status"::Approved) AND (("Request Type" = "Request Type"::"Junior staff - Deputy Manager") AND
-                 ("Send to MD for Approval" = TRUE)) THEN
-                     IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
-                         "2nd Approval Status" := LeaveRequest."2nd Approval Status"::" "
-                     ELSE BEGIN
-                         IF UserSetup.GET("3rd Approval") THEN BEGIN
-                             "2nd Approval Time" := CURRENTDATETIME;
-                             "Current Pending Person" := "3rd Approval";
-                             ToAddresses := UserSetup."E-Mail";
-                             CCName := 'lawal@toyotanigeria.com';
-                             subject := STRSUBSTNO(text008);
-                             Addressee := 'MD,';
-                             UserSetup2.GET(USERID);
-                             SenderName := UserSetup2.Initials;
-                             SenderAddress := UserSetup2."E-Mail";
-
-                             WITH TempEmailItem DO BEGIN
-                                 "Send to" := ToAddresses;
-                                 "Send CC" := SenderAddress + ';' + 'lawal@toyotanigeria.com';
-                                 "Send BCC" := '';
-                                 Subject := STRSUBSTNO(text008);
-
-                                 CRLF := '';
-                                 CRLF[1] := 13;
-                                 CRLF[2] := 10;
-
-                                 BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                 BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT(STRSUBSTNO(text008) + CRLF + CRLF + CRLF +
-                                 Text015 + STRSUBSTNO("Request No.") + CRLF +
-                                 Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF +
-                                 Text017 + STRSUBSTNO(""Leave Category"") + CRLF + CRLF +
-                                 text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                                 text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                                 STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                                 Text018 + CRLF +
-                                 SenderName);
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                 Body := BodyBlob.Blob;
-                                 Send(FALSE);
-                             END;
-                             "MD Leave Approval" := TRUE;
-                         END;
-                     END;
-                 //HOD1
-                 IF ("2nd Approval Status" = "2nd Approval Status"::Approved) AND ("Request Type" = "Request Type"::HOD1) THEN
-                     IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
-                         "2nd Approval Status" := LeaveRequest."2nd Approval Status"::" "
-                     ELSE BEGIN
-                         IF UserSetup.GET("3rd Approval") THEN BEGIN
-                             "2nd Approval Time" := CURRENTDATETIME;
-                             "Current Pending Person" := "3rd Approval";
-                             ToAddresses := UserSetup."E-Mail";
-                             CCName := 'lawal@toyotanigeria.com';
-                             subject := STRSUBSTNO(text001, "Request No.");
-                             Addressee := 'MD,';
-                             UserSetup2.GET(USERID);
-                             SenderName := UserSetup2.Initials;
-                             SenderAddress := UserSetup2."E-Mail";
-
-                             WITH TempEmailItem DO BEGIN
-                                 "Send to" := ToAddresses;
-                                 "Send CC" := SenderAddress + ';' + 'lawal@toyotanigeria.com';
-                                 "Send BCC" := '';
-                                 Subject := STRSUBSTNO(text001, "Request No.");
-
-                                 CRLF := '';
-                                 CRLF[1] := 13;
-                                 CRLF[2] := 10;
-
-                                 BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                 BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT(Text014 + CRLF + CRLF + CRLF +
-                                 Text015 + STRSUBSTNO("Request No.") + CRLF +
-                                 Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF +
-                                 Text017 + STRSUBSTNO(""Leave Category"") + CRLF + CRLF +
-                                 text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                                 text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                                 STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                                 Text018 + CRLF +
-                                 SenderName);
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                 Body := BodyBlob.Blob;
-                                 Send(FALSE);
-                             END;
-                             "MD Leave Approval" := TRUE;
-                         END;
-                     END;
-
-                 //Manager
-                 IF ("2nd Approval Status" = "2nd Approval Status"::Approved) AND ("Request Type" = "Request Type"::Manager) THEN
-                     IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
-                         "2nd Approval Status" := LeaveRequest."2nd Approval Status"::" "
-                     ELSE BEGIN
-                         IF UserSetup.GET("3rd Approval") THEN BEGIN
-                             "2nd Approval Time" := CURRENTDATETIME;
-                             "Current Pending Person" := "3rd Approval";
-                             ToAddresses := UserSetup."E-Mail";
-                             CCName := 'lawal@toyotanigeria.com';
-                             subject := STRSUBSTNO(text001, "Request No.");
-                             Addressee := 'MD,';
-                             UserSetup2.GET(USERID);
-                             SenderName := UserSetup2.Initials;
-                             SenderAddress := UserSetup2."E-Mail";
-
-                             WITH TempEmailItem DO BEGIN
-                                 "Send to" := ToAddresses;
-                                 "Send CC" := SenderAddress + ';' + 'lawal@toyotanigeria.com';
-                                 "Send BCC" := '';
-                                 Subject := STRSUBSTNO(text001, "Request No.");
-
-                                 CRLF := '';
-                                 CRLF[1] := 13;
-                                 CRLF[2] := 10;
-
-                                 BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                 BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT(Text014 + CRLF + CRLF + CRLF +
-                                 Text015 + STRSUBSTNO("Request No.") + CRLF +
-                                 Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF +
-                                 Text017 + STRSUBSTNO(""Leave Category"") + CRLF + CRLF +
-                                 text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                                 text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                                 STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                                 Text018 + CRLF +
-                                 SenderName);
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                 Body := BodyBlob.Blob;
-                                 Send(FALSE);
-                             END;
-                             "MD Leave Approval" := TRUE;
-                         END;
-                     END;
-                 //Branch
-                 IF ("2nd Approval Status" = "2nd Approval Status"::Approved) AND ("Request Type" = "Request Type"::Branch) THEN
-                     IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
-                         "2nd Approval Status" := LeaveRequest."2nd Approval Status"::" "
-                     ELSE BEGIN
-                         IF UserSetup.GET("3rd Approval") THEN BEGIN
-                             "2nd Approval Time" := CURRENTDATETIME;
-                             "Current Pending Person" := "3rd Approval";
-                             ToAddresses := UserSetup."E-Mail";
-                             CCName := 'lawal@toyotanigeria.com';
-                             subject := STRSUBSTNO(text001, "Request No.");
-                             Addressee := UserSetup.Initials;
-                             "HOD HR/ADMIN" := TRUE;
-                             UserSetup2.GET(USERID);
-                             SenderName := UserSetup2.Initials;
-                             SenderAddress := UserSetup2."E-Mail";
-
-                             WITH TempEmailItem DO BEGIN
-                                 "Send to" := ToAddresses;
-                                 "Send CC" := SenderAddress + ';' + 'lawal@toyotanigeria.com';
-                                 "Send BCC" := '';
-                                 Subject := STRSUBSTNO(text001, "Request No.");
-
-                                 CRLF := '';
-                                 CRLF[1] := 13;
-                                 CRLF[2] := 10;
-
-                                 BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                 BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT(Text014 + CRLF + CRLF + CRLF +
-                                 Text015 + STRSUBSTNO("Request No.") + CRLF +
-                                 Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF +
-                                 Text017 + STRSUBSTNO(""Leave Category"") + CRLF + CRLF +
-                                 text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                                 text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                                 STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                                 Text018 + CRLF +
-                                 SenderName);
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                 Body := BodyBlob.Blob;
-                                 Send(FALSE);
-                             END;
-                         END;
-                     END;
-
-                 //FG
-                 IF ("2nd Approval Status" = "2nd Approval Status"::Approved) AND ("Request Type" = "Request Type"::FG) THEN
-                     IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
-                         "2nd Approval Status" := LeaveRequest."2nd Approval Status"::" "
-                     ELSE BEGIN
-                         IF UserSetup.GET("3rd Approval") THEN BEGIN
-                             "2nd Approval Time" := CURRENTDATETIME;
-                             "Current Pending Person" := "3rd Approval";
-                             ToAddresses := UserSetup."E-Mail";
-                             CCName := 'lawal@toyotanigeria.com';
-                             subject := STRSUBSTNO(text001, "Request No.");
-                             Addressee := UserSetup.Initials;
-                             "HOD HR/ADMIN" := TRUE;
-                             UserSetup2.GET(USERID);
-                             SenderName := UserSetup2.Initials;
-                             SenderAddress := UserSetup2."E-Mail";
-
-                             WITH TempEmailItem DO BEGIN
-                                 "Send to" := ToAddresses;
-                                 "Send CC" := SenderAddress + ';' + 'lawal@toyotanigeria.com';
-                                 "Send BCC" := '';
-                                 Subject := STRSUBSTNO(text001, "Request No.");
-
-                                 CRLF := '';
-                                 CRLF[1] := 13;
-                                 CRLF[2] := 10;
-
-                                 BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                 BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT(Text014 + CRLF + CRLF + CRLF +
-                                 Text015 + STRSUBSTNO("Request No.") + CRLF +
-                                 Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF +
-                                 Text017 + STRSUBSTNO(""Leave Category"") + CRLF + CRLF +
-                                 text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                                 text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                                 STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                                 Text018 + CRLF +
-                                 SenderName);
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                 Body := BodyBlob.Blob;
-                                 Send(FALSE);
-                             END;
-                         END;
-                     END;
-             end; */
+            end;
         }
         field(32; "2nd Approval Time"; DateTime)
         {
@@ -1454,326 +192,10 @@ table 70009 "Leave Request3"
             OptionCaption = ' ,On hold,Approved,Rejected';
             OptionMembers = " ","On hold",Approved,Rejected;
 
-            /* trigger OnValidate()
+            trigger OnValidate()
             begin
-                CRLF := '';
-                CRLF[1] := 13;
-                CRLF[2] := 10;
-                 TESTFIELD(""Leave Category"");
-                 TESTFIELD("Send for Approval",TRUE);
-                 TESTFIELD("2nd Approval Status",2);
-                 //TESTFIELD("3rd Approval",USERID);
-                //HOD1
-                IF ("3rd Approval Status" ="3rd Approval Status"::Approved) AND ("Request Type"= "Request Type":: HOD1) THEN
-                  IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
-                    "3rd Approval Status" := LeaveRequest."3rd Approval Status"::" "
-                  ELSE BEGIN
-                    "3rd  Approval Time"  := CURRENTDATETIME;
-                    UserSetup.GET(Requester);
-                    ToAddresses  := UserSetup."E-Mail";
-                    Addressee :=  UserSetup.Initials;
-                    UserSetup.GET("1st Approval");
-                    CCName :=UserSetup."E-Mail"+ ';lawal@toyotanigeria.com;'+ 'ibidapo-obe@toyotanigeria.com' ;
-                    subject := STRSUBSTNO(text008);
-                    UserSetup2.GET(USERID);
-                    SenderName := UserSetup2.Initials ;
-                    SenderAddress := UserSetup2."E-Mail";
 
-                    WITH TempEmailItem DO BEGIN
-                      "Send to" := ToAddresses;
-                      "Send CC" := SenderAddress + ';' + 'lawal@toyotanigeria.com;' + 'ibidapo-obe@toyotanigeria.com';
-                      "Send BCC" := '';
-                      Subject := STRSUBSTNO(text008);
-
-                      CRLF := '';
-                      CRLF[1] := 13;
-                      CRLF[2] := 10;
-
-                      BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                      BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',' );
-                      BodyStream.WRITETEXT(CRLF + CRLF);
-                      BodyStream.WRITETEXT(STRSUBSTNO(text008) + CRLF + CRLF + CRLF +
-                      Text015 + STRSUBSTNO("Request No.") + CRLF +
-                      Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF +
-                      Text017 + STRSUBSTNO(""Leave Category"") + CRLF + CRLF +
-                      text011 + FORMAT("Actual Start Date")  + CRLF + CRLF +
-                      text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                      STRSUBSTNO(text010,"Actual Duration") + CRLF + CRLF +
-                      Text018 + CRLF +
-                      SenderName);
-                      BodyStream.WRITETEXT(CRLF + CRLF);
-                      BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                      Body := BodyBlob.Blob;
-                      Send(FALSE);
-                    END;
-                  Approved2:= TRUE;
-                END;
-
-                //Manager
-                IF ("3rd Approval Status" ="3rd Approval Status"::Approved) AND ("Request Type"= "Request Type":: Manager) THEN
-                  IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
-                    "3rd Approval Status" := LeaveRequest."3rd Approval Status"::" "
-                  ELSE BEGIN
-                    "3rd  Approval Time"  := CURRENTDATETIME;
-                    UserSetup.GET(Requester);
-                    ToAddresses  := UserSetup."E-Mail";
-                    Addressee := UserSetup.Initials;
-                    UserSetup.GET("1st Approval");
-                    CCName :=UserSetup."E-Mail"+ ';lawal@toyotanigeria.com;'+ 'ibidapo-obe@toyotanigeria.com' ;
-                    subject := STRSUBSTNO(text008);
-                    UserSetup2.GET(USERID);
-                    SenderName :=   UserSetup2.Initials;
-                    SenderAddress := UserSetup2."E-Mail";
-
-                    WITH TempEmailItem DO BEGIN
-                      "Send to" := ToAddresses;
-                      "Send CC" := SenderAddress + ';' + 'lawal@toyotanigeria.com;' + 'ibidapo-obe@toyotanigeria.com';
-                      "Send BCC" := '';
-                      Subject := STRSUBSTNO(text008);
-
-                      CRLF := '';
-                      CRLF[1] := 13;
-                      CRLF[2] := 10;
-
-                      BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                      BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',' );
-                      BodyStream.WRITETEXT(CRLF + CRLF);
-                      BodyStream.WRITETEXT(STRSUBSTNO(text008) + CRLF + CRLF + CRLF +
-                      Text015 + STRSUBSTNO("Request No.") + CRLF +
-                      Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF +
-                      Text017 + STRSUBSTNO(""Leave Category"") + CRLF + CRLF +
-                      text011 + FORMAT("Actual Start Date")  + CRLF + CRLF +
-                      text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                      STRSUBSTNO(text010,"Actual Duration") + CRLF + CRLF +
-                      Text018 + CRLF +
-                      SenderName);
-                      BodyStream.WRITETEXT(CRLF + CRLF);
-                      BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                      Body := BodyBlob.Blob;
-                      Send(FALSE);
-                    END;
-                  Approved2:= TRUE;
-                END;
-
-                //Branch
-                IF ("3rd Approval Status" ="3rd Approval Status"::Approved) AND ("Request Type"= "Request Type":: Branch) THEN
-                  IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
-                    "3rd Approval Status" := LeaveRequest."3rd Approval Status"::" "
-                  ELSE BEGIN
-                    "3rd  Approval Time"  := CURRENTDATETIME;
-                    UserSetup.GET(Requester);
-                    ToAddresses  := UserSetup."E-Mail";
-                    CCName := 'lawal@toyotanigeria.com;'+ 'ibidapo-obe@toyotanigeria.com' ;
-                    subject := STRSUBSTNO(text008);
-                    Addressee :=  UserSetup.Initials;
-                    UserSetup2.GET(USERID);
-                    SenderName :=   UserSetup2.Initials;
-                    SenderAddress := UserSetup2."E-Mail";
-
-                    WITH TempEmailItem DO BEGIN
-                      "Send to" := ToAddresses;
-                      "Send CC" := SenderAddress + ';' + 'lawal@toyotanigeria.com;' + 'ibidapo-obe@toyotanigeria.com';
-                      "Send BCC" := '';
-                      Subject := STRSUBSTNO(text008);
-
-                      CRLF := '';
-                      CRLF[1] := 13;
-                      CRLF[2] := 10;
-
-                      BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                      BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',' );
-                      BodyStream.WRITETEXT(CRLF + CRLF);
-                      BodyStream.WRITETEXT(STRSUBSTNO(text008) + CRLF + CRLF + CRLF +
-                      Text015 + STRSUBSTNO("Request No.") + CRLF +
-                      Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF +
-                      Text017 + STRSUBSTNO(""Leave Category"") + CRLF + CRLF +
-                      text011 + FORMAT("Actual Start Date")  + CRLF + CRLF +
-                      text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                      STRSUBSTNO(text010,"Actual Duration") + CRLF + CRLF +
-                      Text018 + CRLF +
-                      SenderName);
-                      BodyStream.WRITETEXT(CRLF + CRLF);
-                      BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                      Body := BodyBlob.Blob;
-                      Send(FALSE);
-                    END;
-                  Approved2:= TRUE;
-                END;
-                //Junior staff - Deputy Manager
-                IF ("3rd Approval Status" ="3rd Approval Status"::Approved) AND (("Request Type"= "Request Type":: "Junior staff - Deputy Manager") AND
-                   ("Send to MD for Approval"= TRUE)) THEN
-                     IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
-                    "3rd Approval Status" := LeaveRequest."3rd Approval Status"::" "
-                  ELSE BEGIN
-                    "3rd  Approval Time"  := CURRENTDATETIME;
-                    UserSetup.GET(Requester);
-                    ToAddresses  := UserSetup."E-Mail";
-                    CCName := 'lawal@toyotanigeria.com;'+ 'ibidapo-obe@toyotanigeria.com' ;
-                    subject := STRSUBSTNO(text008);
-                    Addressee :=  UserSetup.Initials ;
-                    UserSetup2.GET(USERID);
-                    SenderName := UserSetup2.Initials;
-                    SenderAddress := UserSetup2."E-Mail";
-
-                    WITH TempEmailItem DO BEGIN
-                      "Send to" := ToAddresses;
-                      "Send CC" := SenderAddress + ';' + 'lawal@toyotanigeria.com;' + 'ibidapo-obe@toyotanigeria.com';
-                      "Send BCC" := '';
-                      Subject := STRSUBSTNO(text008);
-
-                      CRLF := '';
-                      CRLF[1] := 13;
-                      CRLF[2] := 10;
-
-                      BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                      BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',' );
-                      BodyStream.WRITETEXT(CRLF + CRLF);
-                      BodyStream.WRITETEXT(STRSUBSTNO(text008) + CRLF + CRLF + CRLF +
-                      Text015 + STRSUBSTNO("Request No.") + CRLF +
-                      Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF +
-                      Text017 + STRSUBSTNO(""Leave Category"") + CRLF + CRLF +
-                      text011 + FORMAT("Actual Start Date")  + CRLF + CRLF +
-                      text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                      STRSUBSTNO(text010,"Actual Duration") + CRLF + CRLF +
-                      Text018 + CRLF +
-                      SenderName);
-                      BodyStream.WRITETEXT(CRLF + CRLF);
-                      BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                      Body := BodyBlob.Blob;
-                      Send(FALSE);
-                    END;
-                  Approved2:= TRUE;
-                END;
-
-                //FG
-                IF ("3rd Approval Status" ="3rd Approval Status"::Approved) AND ("Request Type"= "Request Type":: FG) THEN
-                  IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
-                    "3rd Approval Status" := LeaveRequest."3rd Approval Status"::" "
-                  ELSE BEGIN
-                    "3rd  Approval Time"  := CURRENTDATETIME;
-                    UserSetup.GET("4th Approval");
-                    ToAddresses  := UserSetup."E-Mail";
-                    CCName := 'lawal@toyotanigeria.com;'+ 'ibidapo-obe@toyotanigeria.com' ;
-                    subject := STRSUBSTNO(text008);
-                    Addressee :=  UserSetup.Initials;
-                    UserSetup2.GET(USERID);
-                    SenderName :=   UserSetup2.Initials;
-                    SenderAddress := UserSetup2."E-Mail";
-
-                    WITH TempEmailItem DO BEGIN
-                      "Send to" := ToAddresses;
-                      "Send CC" := SenderAddress + ';' + 'lawal@toyotanigeria.com;' + 'ibidapo-obe@toyotanigeria.com';
-                      "Send BCC" := '';
-                      Subject := STRSUBSTNO(text008);
-
-                      CRLF := '';
-                      CRLF[1] := 13;
-                      CRLF[2] := 10;
-
-                      BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                      BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',' );
-                      BodyStream.WRITETEXT(CRLF + CRLF);
-                      BodyStream.WRITETEXT(STRSUBSTNO(text008) + CRLF + CRLF + CRLF +
-                      Text015 + STRSUBSTNO("Request No.") + CRLF +
-                      Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF +
-                      Text017 + STRSUBSTNO(""Leave Category"") + CRLF + CRLF +
-                      text011 + FORMAT("Actual Start Date")  + CRLF + CRLF +
-                      text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                      STRSUBSTNO(text010,"Actual Duration") + CRLF + CRLF +
-                      Text018 + CRLF +
-                      SenderName);
-                      BodyStream.WRITETEXT(CRLF + CRLF);
-                      BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                      Body := BodyBlob.Blob;
-                      Send(FALSE);
-                    END;
-                  "MD Leave Approval" := TRUE;
-                END;
-
-                CASE  "3rd Approval Status" OF
-                  "3rd Approval Status"::Rejected:
-                    IF NOT CONFIRM('Are you sure you want to REJECT', FALSE) THEN
-                    "3rd Approval Status" := LeaveRequest."3rd Approval Status"::" "
-                  ELSE BEGIN
-                    "3rd  Approval Time"  := CURRENTDATETIME;
-                    UserSetup2.GET(Requester);
-                    ToAddresses  := UserSetup2."E-Mail";
-                    CCName := 'lawal@toyotanigeria.com;'+ 'ibidapo-obe@toyotanigeria.com' ;
-                    subject := STRSUBSTNO(text003,"Request No.");
-                    Addressee :=  UserSetup2.Initials;
-                    Reject:= TRUE;
-                    UserSetup.GET(USERID);
-                    SenderName :=   UserSetup.Initials;
-                    SenderAddress := UserSetup."E-Mail";
-
-                    WITH TempEmailItem DO BEGIN
-                      "Send to" := ToAddresses;
-                      "Send CC" := SenderAddress;
-                      "Send BCC" := '';
-                      Subject := STRSUBSTNO(text003,"Request No.");
-                      CRLF := '';
-                      CRLF[1] := 13;
-                      CRLF[2] := 10;
-
-                      BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                      BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',' );
-                      BodyStream.WRITETEXT(CRLF + CRLF);
-                      BodyStream.WRITETEXT(Text019 + CRLF + CRLF + CRLF +
-                      Text015 + STRSUBSTNO("Request No.") + CRLF + CRLF +
-                      Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF + CRLF +
-                      Text017 + STRSUBSTNO(""Leave Category"") + CRLF + CRLF +
-                      text011 + FORMAT("Actual Start Date")  + CRLF + CRLF +
-                      text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                      STRSUBSTNO(text010,"Actual Duration") + CRLF + CRLF +
-                      Text018 + CRLF +
-                      SenderName);
-                      BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                      Body := BodyBlob.Blob;
-                      Send(FALSE);
-                    END;
-                  END;
-                  "3rd Approval Status"::"On hold":
-                    IF NOT CONFIRM('Are you sure you want to place ON HOLD', FALSE) THEN
-                    "3rd Approval Status" := LeaveRequest."3rd Approval Status"::" "
-                  ELSE BEGIN
-                    "3rd  Approval Time" := CURRENTDATETIME;
-                    UserSetup2.GET(Requester);
-                    ToAddresses  := UserSetup2."E-Mail";
-                    CCName := 'lawal@toyotanigeria.com; '+ 'ibidapo-obe@toyotanigeria.com';
-                    subject := STRSUBSTNO(text004,"Request No.");
-                    Addressee :=  UserSetup2.Initials;
-                    UserSetup.GET(USERID);
-                    SenderName :=   UserSetup.Initials;
-                    SenderAddress := UserSetup."E-Mail";
-
-                    WITH TempEmailItem DO BEGIN
-                      "Send to" := ToAddresses;
-                      "Send CC" := SenderAddress;
-                      "Send BCC" := '';
-                      Subject := STRSUBSTNO(text004,"Request No.");
-                      CRLF := '';
-                      CRLF[1] := 13;
-                      CRLF[2] := 10;
-
-                      BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                      BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',' );
-                      BodyStream.WRITETEXT(CRLF + CRLF);
-                      BodyStream.WRITETEXT(Text020 + CRLF + CRLF + CRLF +
-                      Text015 + STRSUBSTNO("Request No.") + CRLF + CRLF +
-                      Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF + CRLF +
-                      Text017 + STRSUBSTNO(""Leave Category"") + CRLF + CRLF +
-                      text011 + FORMAT("Actual Start Date")  + CRLF + CRLF +
-                      text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                      STRSUBSTNO(text010,"Actual Duration") + CRLF + CRLF +
-                      Text018 + CRLF +
-                      SenderName);
-                      BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                      Body := BodyBlob.Blob;
-                      Send(FALSE);
-                    END;
-                  END;
-                END;
-            end; */
+            end;
         }
         field(60; "3rd  Approval Time"; DateTime)
         {
@@ -1790,152 +212,10 @@ table 70009 "Leave Request3"
             OptionCaption = ' ,On hold,Approved,Rejected';
             OptionMembers = " ","On hold",Approved,Rejected;
 
-            /*       trigger OnValidate()
-                  begin
+            trigger OnValidate()
+            begin
 
-                      CRLF := '';
-                      CRLF[1] := 13;
-                      CRLF[2] := 10;
-
-                        IF "4th  Approval Status"= "4th  Approval Status"::Approved THEN
-                          IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
-                          "4th  Approval Status" := LeaveRequest."4th  Approval Status"::" "
-                        ELSE BEGIN
-                          "4th Approval Time":= CURRENTDATETIME;
-                          UserSetup.GET(Requester);
-                          ToAddresses  := UserSetup."E-Mail";
-                          Addressee := UserSetup.Initials;
-                          UserSetup.GET("1st Approval");
-                          CCName :=UserSetup."E-Mail"+ ';lawal@toyotanigeria.com;'+ 'ibidapo-obe@toyotanigeria.com' ;
-                          subject := STRSUBSTNO(text008);
-                          UserSetup2.GET(USERID);
-                          SenderName :=   UserSetup2.Initials;
-                          SenderAddress := UserSetup2."E-Mail";
-
-                            WITH TempEmailItem DO BEGIN
-                              "Send to" := ToAddresses;
-                              "Send CC" := SenderAddress + ';lawal@toyotanigeria.com;'+ 'ibidapo-obe@toyotanigeria.com' ;;
-                              "Send BCC" := '';
-                              Subject := STRSUBSTNO(text008);
-                              CRLF := '';
-                              CRLF[1] := 13;
-                              CRLF[2] := 10;
-
-                              BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                              BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',' );
-                              BodyStream.WRITETEXT(CRLF + CRLF);
-                              BodyStream.WRITETEXT(STRSUBSTNO(text008) + CRLF + CRLF + CRLF +
-                              Text015 + STRSUBSTNO("Request No.") + CRLF + CRLF +
-                              Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF + CRLF +
-                              Text017 + STRSUBSTNO(""Leave Category"") + CRLF + CRLF +
-                              text011 + FORMAT("Actual Start Date")  + CRLF + CRLF +
-                              text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                              STRSUBSTNO(text010,"Actual Duration") + CRLF + CRLF +
-                              Text018 + CRLF +
-                              SenderName);
-                              BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                              Body := BodyBlob.Blob;
-                              Send(FALSE);
-                            END;
-                        Approved2:= TRUE;
-                       END;
-
-                       CASE  "4th  Approval Status" OF
-                       "4th  Approval Status"::Rejected:
-                          IF NOT CONFIRM('Are you sure you want to REJECT', FALSE) THEN
-                          "4th  Approval Status" := LeaveRequest."4th  Approval Status"::" "
-                        ELSE BEGIN
-                        "4th Approval Time":= CURRENTDATETIME;
-                        UserSetup2.GET(Requester);
-                        ToAddresses  := UserSetup2."E-Mail";
-                        CCName := 'lawal@toyotanigeria.com;'+ 'ibidapo-obe@toyotanigeria.com' ;
-                        subject := STRSUBSTNO(text003,"Request No.");
-                        Addressee :=  UserSetup2.Initials;
-                        Reject:= TRUE;
-                        UserSetup.GET(USERID);
-                        SenderName :=   UserSetup.Initials;
-                        SenderAddress := UserSetup."E-Mail";
-
-
-                        Body :='Dear ' + Addressee +',' + CRLF + CRLF +
-                        'Please note that your reject request has been rejected.' + CRLF + CRLF + CRLF +
-                        'Request No : '+ STRSUBSTNO("Request No.")+CRLF +
-                        'Requester Name :' + STRSUBSTNO(EmpRec.GetFullName("""Employee No".""))+CRLF +
-                        '"Leave Category" :' + STRSUBSTNO(""Leave Category"")+CRLF +
-                          text011 + FORMAT("Actual Start Date")  + CRLF +
-                          text012 + FORMAT("Actual End Date") + CRLF +
-                          STRSUBSTNO(text010,"Actual Duration") +CRLF +CRLF +
-                         'Regards,'+ CRLF + CRLF +
-                         SenderName;
-
-                          WITH TempEmailItem DO BEGIN
-                            "Send to" := ToAddresses;
-                            "Send CC" := SenderAddress + ';' + 'lawal@toyotanigeria.com;'+ 'ibidapo-obe@toyotanigeria.com';
-                            "Send BCC" := '';
-                            Subject := STRSUBSTNO(text003,"Request No.");
-                            CRLF := '';
-                            CRLF[1] := 13;
-                            CRLF[2] := 10;
-
-                            BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                            BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',' );
-                            BodyStream.WRITETEXT(CRLF + CRLF);
-                            BodyStream.WRITETEXT(Text019 + CRLF + CRLF + CRLF +
-                            Text015 + STRSUBSTNO("Request No.") + CRLF + CRLF +
-                            Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF + CRLF +
-                            Text017 + STRSUBSTNO(""Leave Category"") + CRLF + CRLF +
-                            text011 + FORMAT("Actual Start Date")  + CRLF + CRLF +
-                            text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                            STRSUBSTNO(text010,"Actual Duration") + CRLF + CRLF +
-                            Text018 + CRLF +
-                            SenderName);
-                            BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                            Body := BodyBlob.Blob;
-                            Send(FALSE);
-                          END;
-                        END;
-                        "4th  Approval Status"::"On hold":
-                        BEGIN
-                        "4th Approval Time":= CURRENTDATETIME;
-                        UserSetup2.GET(Requester);
-                        ToAddresses  := UserSetup2."E-Mail";
-                        CCName := 'lawal@toyotanigeria.com; '+ 'ibidapo-obe@toyotanigeria.com';
-                        subject := STRSUBSTNO(text004,"Request No.");
-                        Addressee :=  UserSetup2.Initials;
-                        UserSetup.GET(USERID);
-                        SenderName :=   UserSetup.Initials;
-                        SenderAddress := UserSetup."E-Mail";
-
-                          WITH TempEmailItem DO BEGIN
-                            "Send to" := ToAddresses;
-                            "Send CC" := SenderAddress + ';' + 'lawal@toyotanigeria.com;'+ 'ibidapo-obe@toyotanigeria.com';
-                            "Send BCC" := '';
-                            Subject := STRSUBSTNO(text004,"Request No.");
-                            CRLF := '';
-                            CRLF[1] := 13;
-                            CRLF[2] := 10;
-
-                            BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                            BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',' );
-                            BodyStream.WRITETEXT(CRLF + CRLF);
-                            BodyStream.WRITETEXT(Text020 + CRLF + CRLF + CRLF +
-                            Text015 + STRSUBSTNO("Request No.") + CRLF + CRLF +
-                            Text016 + STRSUBSTNO(EmpRec.GetFullName("""Employee No"."")) + CRLF + CRLF +
-                            Text017 + STRSUBSTNO(""Leave Category"") + CRLF + CRLF +
-                            text011 + FORMAT("Actual Start Date")  + CRLF + CRLF +
-                            text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                            STRSUBSTNO(text010,"Actual Duration") + CRLF + CRLF +
-                            Text018 + CRLF +
-                            SenderName);
-                            BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                            Body := BodyBlob.Blob;
-                            Send(FALSE);
-                          END;
-
-
-                      END;
-                      END;
-                  end; */
+            end;
         }
         field(64; "4th Approval Time"; DateTime)
         {
@@ -1946,120 +226,36 @@ table 70009 "Leave Request3"
         field(66; "Actual Start Date"; Date)
         {
 
-            /*  trigger OnValidate()
-             begin
-                 //IF xRec.Registered THEN ERROR('You cannot MODIFY a Registered Leave Record');
+            trigger OnValidate()
+            begin
 
-                 IF "Actual Start Date" = 0D THEN BEGIN
-                     "Actual Duration" := 0;
-                     EXIT;
-                 END;
-
-                 IF ("Actual End Date" < "Actual Start Date") AND ("Actual End Date" <> 0D) THEN
-                     ERROR(FIELDCAPTION("Actual Start Date") + 'Must be on or after ' + FIELDCAPTION("Actual End Date"));
-
-                 IF "Actual End Date" <> 0D THEN
-                     "Actual Duration" := GenPCode.GetNoOfDays("Actual Start Date", "Actual End Date")
-                 ELSE
-                     IF "Actual Duration" <> 0 THEN
-                         "Actual End Date" := GenPCode.GetEndDate("Actual Start Date", "Actual Duration");
-
-                 CheckTotalDuration(9);
-             end; */
+            end;
         }
         field(67; "Actual End Date"; Date)
         {
             Editable = true;
 
-            /*  trigger OnValidate()
-             begin
-                 //IF xRec.Registered THEN ERROR('You cannot MODIFY a Registered Leave Record');
 
-                 IF "Actual End Date" = 0D THEN BEGIN
-                     "Actual Duration" := 0;
-                     EXIT;
-                 END;
-
-                 IF ("Actual End Date" < "Actual Start Date") AND ("Actual Start Date" <> 0D) THEN
-                     ERROR(FIELDCAPTION("Actual End Date") + 'Must be on or before ' + FIELDCAPTION("Actual Start Date"));
-
-                 IF "Actual Start Date" <> 0D THEN
-                     "Actual Duration" := GenPCode.GetNoOfDays("Actual Start Date", "Actual End Date")
-                 ELSE
-                     IF "Actual Duration" <> 0 THEN
-                         "Actual Start Date" := GenPCode.GetStartDate("Actual End Date", "Actual Duration");
-
-                 CheckTotalDuration(9);
-             end; */
         }
         field(68; "Actual Duration"; Integer)
         {
 
-            /*  trigger OnValidate()
-             begin
-                 //IF xRec.Registered THEN ERROR('You cannot MODIFY a Registered Leave Record');
-
-                 IF "Entry Date" <> TODAY THEN
-                 ERROR( 'Entry date must be todays date. Kindly contact your system Administrator');
+            trigger OnValidate()
+            begin
 
 
-                 IF "Actual Duration"=0 THEN
-                  BEGIN
-                    VALIDATE("Actual End Date",0D);
-                    EXIT;
-                  END;
 
-                 IF ("Actual Start Date"=0D) AND ("Actual End Date"=0D) THEN EXIT;
-
-                 IF "Actual Start Date"<>0D THEN
-                   "Actual End Date" := GenPCode.GetEndDate("Actual Start Date","Actual Duration")
-                 ELSE
-                   "Actual Start Date" := GenPCode.GetStartDate("Actual End Date","Actual Duration");
-
-                 IF  EmpRec.GET("""Employee No"."") THEN EmpGrpCode := EmpRec."Employee Group";
-
-                 CheckTotalDuration(9);
-
-
-                 IF (""Leave Category"" = 'CASH') AND NOT(Registered) AND ("No. Days" > 0)THEN
-                 BEGIN
-                   PayRec.FIND('+');
-                   PayRec."Entry no" := PayRec."Entry no" + 10;
-                   PayRec.INIT;
-                   PayRec."Leave Plan No" := "Serial No";
-                   PayRec."Payment Date" := TODAY;
-                   PayRec."Total Days Paid For" := "No. Days";
-                   PayRec.INSERT;
-                 END;
-
-
-             end; */
+            end;
         }
         field(69; "Leave Period"; Integer)
         {
 
-            /*  trigger OnValidate()
-             begin
-                 
-            EmpRec.GET("""Employee No"."");
-            IF PGrp.GET(EmpRec."Posting Group" ) THEN
-                  BEGIN
-                    EmpDate := EmpRec."Employment Date";
-            IF (EmpDate = 0D) THEN ERROR('Please specify the employment date for %1',EmpRec.FullName);
-            EmpDay  := DATE2DMY(EmpDate,1);
-            EmpMth  := DATE2DMY(EmpDate,2);
-            EmpYr   := DATE2DMY(EmpDate,3);
+            trigger OnValidate()
+            begin
 
-            //  "Leave Period" := LeaveYear;
 
-            EmpLeaveYr:= "Leave Period";
 
-            VALIDATE("Annual Duration",PGrp."Annual Leave Days");
-            VALIDATE("Start Date1",DMY2DATE(EmpDay,EmpMth,EmpLeaveYr));
-            VALIDATE("No. Days1",PGrp."Annual Leave Days");
-                  END;
-
-            end; */
+            end;
         }
         field(70; "Annual Duration"; Decimal)
         {
@@ -2163,345 +359,103 @@ table 70009 "Leave Request3"
         field(82; "Start Date1"; Date)
         {
 
-            /*   trigger OnValidate()
-              begin
-                  //IF xRec.Registered THEN ERROR('You cannot MODIFY a Registered Leave Record');
 
-                  IF "Start Date1"=0D THEN
-                    BEGIN
-                      "No. Days1" :=0;
-                      EXIT;
-                    END;
-
-                  IF ("End Date1"<"Start Date1") AND ("End Date1"<>0D) THEN
-                     ERROR(FIELDCAPTION("Start Date1")+'Must be on or after '+FIELDCAPTION("End Date1"));
-
-                  IF "End Date1"<>0D THEN
-                    "No. Days1" := GenPCode.GetNoOfDays("Start Date1","End Date1")
-                  ELSE
-                    IF "No. Days1"<>0 THEN
-                     "End Date1" := GenPCode.GetEndDate("Start Date1","No. Days1");
-
-                  CheckTotalDuration(1);
-              end; */
         }
         field(83; "End Date1"; Date)
         {
 
-            /*   trigger OnValidate()
-              begin
-                  //IF xRec.Registered THEN ERROR('You cannot MODIFY a Registered Leave Record');
 
-                  IF "End Date1"=0D THEN
-                  BEGIN
-                    "No. Days1" :=0;
-                    EXIT;
-                  END;
-
-                  IF ("End Date1"<"Start Date1") AND ("Start Date1"<>0D) THEN ERROR(FORMAT("Start Date1") + ' == ' + FORMAT("End Date1"));
-                  //   ERROR(FIELDCAPTION("End Date1")+'Must be on or before '+FIELDCAPTION("Start Date1"));
-
-                  IF "Start Date1"<>0D THEN
-                    "No. Days1" := GenPCode.GetNoOfDays("Start Date1","End Date1")
-                  ELSE
-                    IF "No. Days1"<>0 THEN
-                     "Start Date1" := GenPCode.GetStartDate("End Date1","No. Days1");
-
-                  CheckTotalDuration(1);
-              end; */
         }
         field(84; "No. Days1"; Integer)
         {
 
-            /*  trigger OnValidate()
-             begin
-                 //IF xRec.Registered THEN ERROR('You cannot MODIFY a Registered Leave Record');
+            trigger OnValidate()
+            begin
 
 
-                 IF "No. Days1"=0 THEN EXIT;
 
-                 IF ("Start Date1"=0D) AND ("End Date1"=0D) THEN EXIT;
-
-                 IF "Start Date1"<>0D THEN
-                   "End Date1" := GenPCode.GetEndDate("Start Date1","No. Days1")
-                 ELSE
-                   "Start Date1" := GenPCode.GetStartDate("End Date1","No. Days1");
-
-                 IF  EmpRec.GET("""Employee No"."") THEN EmpGrpCode := EmpRec."Employee Group";
-
-                 CheckTotalDuration(1);
-
-
-                 IF (""Leave Category"" = 'CASH') AND NOT(Registered) AND ("No. Days" > 0)THEN
-                 BEGIN
-                   PayRec.FIND('+');
-                   PayRec."Entry no" := PayRec."Entry no" + 10;
-                   PayRec.INIT;
-                   PayRec."Leave Plan No" := "Serial No";
-                   PayRec."Payment Date" := TODAY;
-                   PayRec."Total Days Paid For" := "No. Days";
-                   PayRec.INSERT;
-                 END;
-
-
-             end; */
+            end;
         }
         field(85; "Start Date2"; Date)
         {
 
-            /*     trigger OnValidate()
-                begin
-                    //IF xRec.Registered THEN ERROR('You cannot MODIFY a Registered Leave Record');
+            trigger OnValidate()
+            begin
 
-                    IF "Start Date2"=0D THEN
-                      BEGIN
-                        "No. Days2" :=0;
-                        EXIT;
-                      END;
-
-                    IF ("End Date2"<"Start Date2") AND ("End Date2"<>0D) THEN
-                       ERROR(FIELDCAPTION("Start Date2")+'Must be on or after '+FIELDCAPTION("End Date2"));
-
-                    IF "End Date2"<>0D THEN
-                      "No. Days2" := GenPCode.GetNoOfDays("Start Date2","End Date2")
-                    ELSE
-                      IF "No. Days2"<>0 THEN
-                        "End Date2" := GenPCode.GetEndDate("Start Date2","No. Days2");
-
-                    CheckTotalDuration(1);
-                end; */
+            end;
         }
         field(86; "End Date2"; Date)
         {
 
-            /*  trigger OnValidate()
-             begin
-
-                 IF "End Date2"=0D THEN
-                 BEGIN
-                   "No. Days2" :=0;
-                   EXIT;
-                 END;
-
-                 IF ("End Date2"<"Start Date2") AND ("Start Date2"<>0D) THEN
-                    ERROR(FIELDCAPTION("End Date2")+'Must be on or before '+FIELDCAPTION("Start Date2"));
-
-                 IF "Start Date2"<>0D THEN
-                   "No. Days2" := GenPCode.GetNoOfDays("Start Date2","End Date2")
-                 ELSE
-                   IF "No. Days2"<>0 THEN
-                     "Start Date2" := GenPCode.GetStartDate("End Date2","No. Days2");
+            trigger OnValidate()
+            begin
 
 
-                 CheckTotalDuration(1);
-             end; */
+            end;
         }
         field(87; "No. Days2"; Integer)
         {
 
-            /* trigger OnValidate()
+            trigger OnValidate()
             begin
-                //error('There');
-                
-                IF "No. Days2"=0 THEN EXIT;
-                
-                IF ("Start Date2"=0D) AND ("End Date2"=0D) THEN EXIT;
-                
-                IF "Start Date2"<>0D THEN
-                  "End Date2" := GenPCode.GetEndDate("Start Date2","No. Days2")
-                ELSE
-                  "Start Date2" := GenPCode.GetStartDate("End Date2","No. Days2");
-                
-                IF  EmpRec.GET("""Employee No"."") THEN EmpGrpCode := EmpRec."Employee Group";
-                
-                CheckTotalDuration(1);
-                
-                
-                
-                IF (""Leave Category"" = 'CASH') AND NOT(Registered) AND ("No. Days" > 0)THEN
-                BEGIN
-                  PayRec.FIND('+');
-                  PayRec."Entry no" := PayRec."Entry no" + 10;
-                  PayRec.INIT;
-                  PayRec."Leave Plan No" := "Serial No";
-                  PayRec."Payment Date" := TODAY;
-                  PayRec."Total Days Paid For" := "No. Days";
-                  PayRec.INSERT;
-                END;
-                
 
-            end; */
+
+
+            end;
         }
         field(88; "Start Date3"; Date)
         {
 
-            /*  trigger OnValidate()
-             begin
+            trigger OnValidate()
+            begin
 
-                 IF "Start Date3"=0D THEN BEGIN
-                 "No. Days3" :=0;
-                 EXIT;
-                 END;
 
-                 IF ("End Date3"<"Start Date3") AND ("End Date3"<>0D) THEN
-                    ERROR(FIELDCAPTION("Start Date3")+'Must be on or after '+FIELDCAPTION("End Date3"));
-
-                 IF "End Date3"<>0D THEN
-                   "No. Days3" := GenPCode.GetNoOfDays("Start Date3","End Date3")
-                 ELSE
-                   IF "No. Days3"<>0 THEN
-                     "End Date3" := GenPCode.GetEndDate("Start Date3","No. Days3");
-
-                 CheckTotalDuration(1);
-             end; */
+            end;
         }
         field(89; "End Date3"; Date)
         {
 
-            /* trigger OnValidate()
+            trigger OnValidate()
             begin
 
-                IF "End Date3"=0D THEN
-                BEGIN
-                  "No. Days3" :=0;
-                  EXIT;
-                END;
 
-                IF ("End Date3"<"Start Date3") AND ("Start Date3"<>0D) THEN
-                   ERROR(FIELDCAPTION("End Date3")+'Must be on or before '+FIELDCAPTION("Start Date3"));
-
-                IF "Start Date3"<>0D THEN
-                  "No. Days3" := GenPCode.GetNoOfDays("Start Date3","End Date3")
-                ELSE
-                  IF "No. Days3"<>0 THEN
-                    "Start Date3" := GenPCode.GetStartDate("End Date3","No. Days3");
-
-                CheckTotalDuration(1);
-            end; */
+            end;
         }
         field(90; "No. Days3"; Integer)
         {
 
-            /* trigger OnValidate()
+            trigger OnValidate()
             begin
-                //IF xRec.Registered THEN ERROR('You cannot MODIFY a Registered Leave Record');
-                
-                //GetAmountDue;
-                
-                IF "No. Days3"=0 THEN EXIT;
-                
-                IF ("Start Date3"=0D) AND ("End Date3"=0D) THEN EXIT;
-                
-                IF "Start Date3"<>0D THEN
-                  "End Date3" := GenPCode.GetEndDate("Start Date3","No. Days3")
-                ELSE
-                  "Start Date3" := GenPCode.GetStartDate("End Date3","No. Days3");
-                
-                IF  EmpRec.GET("""Employee No"."") THEN EmpGrpCode := EmpRec."Employee Group";
-                
-                CheckTotalDuration(1);
-                
-                
-                IF (""Leave Category"" = 'CASH') AND NOT(Registered) AND ("No. Days" > 0)THEN
-                BEGIN
-                  PayRec.FIND('+');
-                  PayRec."Entry no" := PayRec."Entry no" + 10;
-                  PayRec.INIT;
-                  PayRec."Leave Plan No" := "Serial No";
-                  PayRec."Payment Date" := TODAY;
-                  PayRec."Total Days Paid For" := "No. Days";
-                  PayRec.INSERT;
-                END;
-                
 
-            end; */
+
+
+            end;
         }
         field(91; "Start Date4"; Date)
         {
 
-            /*  trigger OnValidate()
-             begin
-                 //IF xRec.Registered THEN ERROR('You cannot MODIFY a Registered Leave Record');
+            trigger OnValidate()
+            begin
 
-                 IF "Start Date4"=0D THEN
-                   BEGIN
-                     "No. Days4" :=0;
-                     EXIT;
-                   END;
-
-                 IF ("End Date4"<"Start Date4") AND ("End Date4"<>0D) THEN
-                    ERROR(FIELDCAPTION("Start Date4")+'Must be on or after '+FIELDCAPTION("End Date4"));
-
-                 IF "End Date4"<>0D THEN
-                     "No. Days4" := GenPCode.GetNoOfDays("Start Date4","End Date4")
-                 ELSE
-                   IF "No. Days4"<>0 THEN
-                     "End Date4" := GenPCode.GetEndDate("Start Date4","No. Days4");
-
-                 CheckTotalDuration(1);
-             end; */
+            end;
         }
         field(92; "End Date4"; Date)
         {
 
-            /*  trigger OnValidate()
-             begin
-                 //IF xRec.Registered THEN ERROR('You cannot MODIFY a Registered Leave Record');
+            trigger OnValidate()
+            begin
 
-                 IF "End Date4"=0D THEN
-                 BEGIN
-                   "No. Days4" :=0;
-                   EXIT;
-                 END;
-
-                 IF ("End Date4"<"Start Date4") AND ("Start Date4"<>0D) THEN
-                    ERROR(FIELDCAPTION("End Date4")+'Must be on or before '+FIELDCAPTION("Start Date4"));
-
-                 IF "Start Date4"<>0D THEN
-                   "No. Days4" := GenPCode.GetNoOfDays("Start Date4","End Date4")
-                 ELSE
-                   IF "No. Days4"<>0 THEN
-                     "Start Date4" := GenPCode.GetStartDate("End Date4","No. Days4");
-
-                 CheckTotalDuration(1);
-             end; */
+            end;
         }
         field(93; "No. Days4"; Integer)
         {
 
-            /* trigger OnValidate()
+            trigger OnValidate()
             begin
-                //IF xRec.Registered THEN ERROR('You cannot MODIFY a Registered Leave Record');
-                
-                //GetAmountDue;
-                
-                IF "No. Days4"=0 THEN EXIT;
-                
-                IF ("Start Date4"=0D) AND ("End Date4"=0D) THEN EXIT;
-                
-                IF "Start Date4"<>0D THEN
-                  "End Date4" := GenPCode.GetEndDate("Start Date4","No. Days4")
-                ELSE
-                  "Start Date4" := GenPCode.GetStartDate("End Date4","No. Days4");
-                
-                IF  EmpRec.GET("""Employee No"."") THEN EmpGrpCode := EmpRec."Employee Group";
-                
-                CheckTotalDuration(1);
-                
-                
-                IF (""Leave Category"" = 'CASH') AND NOT(Registered) AND ("No. Days" > 0)THEN
-                BEGIN
-                  PayRec.FIND('+');
-                  PayRec."Entry no" := PayRec."Entry no" + 10;
-                  PayRec.INIT;
-                  PayRec."Leave Plan No" := "Serial No";
-                  PayRec."Payment Date" := TODAY;
-                  PayRec."Total Days Paid For" := "No. Days";
-                  PayRec.INSERT;
-                END;
-                
 
-            end; */
+
+
+            end;
         }
         field(94; "Employee No."; Code[30])
         {
@@ -2510,35 +464,7 @@ table 70009 "Leave Request3"
             trigger OnValidate()
             begin
 
-                // LeaveRequest.SETRANGE("""Employee No"."","""Employee No"."");
-                // IF LeaveRequest.FINDLAST THEN BEGIN
-                //  IF LeaveRequest."Actual End Date" > "Entry Date" THEN
-                //     ERROR('Your Leave request cannot be granted. Kindly contact IT!');
-                // END;
 
-
-                /*   LeaveRequest.SETRANGE(LeaveRequest."""Employee No"."","""Employee No"."");
-                  LeaveRequest.SETRANGE(LeaveRequest.Approved2,FALSE);
-                   IF LeaveRequest.FINDFIRST THEN BEGIN
-                    ERROR(Text50001);
-                  END;
-
-
-                  IF EmpRec.GET("""Employee No"."") THEN
-                    BEGIN
-                     // "Request Type":= EmplyRec."Leave Grade";
-                      "Business Unit" := EmpRec."Business Unit";
-                      "Global Dimension 1 code" := EmpRec."Global Dimension 1 Code";
-                      "Global Dimension 2 Code" := EmpRec."Global Dimension 2 Code";
-                       EmpGrpCode := EmpRec."Employee Group";
-                    END;
-
-
-                  IF ("Entry Type" = "Entry Type"::PLAN) AND (EmpGrpRec.GET(EmpGrpCode)) THEN
-                    BEGIN
-                       "Amount Due" := 15*(EmpRec."Basic Salary")/100;
-                    END;
-                    */
             end;
         }
         field(95; "Entry Type"; Option)
@@ -2554,52 +480,10 @@ table 70009 "Leave Request3"
         {
             TableRelation = "Leave Categories".Code;
 
-            /*  trigger OnValidate()
-             begin
+            trigger OnValidate()
+            begin
 
-                 IF "Entry Date" <> TODAY THEN
-                  ERROR( 'Entry date must be todays date. Kindly contact your system Administrator');
-
-                 IF SKIP = FALSE THEN BEGIN
-                 IF (""Leave Category"" = 'CASUAL') AND( "Actual Duration"> 3 ) THEN
-                    ERROR('Casual leave cannot be more than 3 working days');
-
-                 IF ("Request Type" = "Request Type"::HOD) AND (""Leave Category"" = 'ANNUAL')  AND(("Actual Start Date"-"Entry Date") < 30) THEN
-                     ERROR('You can only request for annual Leave 30 days ahead the plan actual start leave date');
-
-                 IF ("Request Type" = "Request Type"::HOD1) AND (""Leave Category"" = 'ANNUAL')  AND(("Actual Start Date"-"Entry Date") < 30) THEN
-                    ERROR('You can only request for annual Leave 30 days ahead the plan actual start leave date');
-
-
-                 IF ("Request Type" = "Request Type"::Manager) AND (""Leave Category"" = 'ANNUAL')  AND(("Actual Start Date"-"Entry Date") < 30) THEN
-                    ERROR('You can only request for annual Leave 30 days ahead the plan actual start leave date');
-                 IF ("Request Type" = "Request Type"::"Junior staff - Deputy Manager") AND (""Leave Category"" = 'ANNUAL')  AND(("Actual Start Date"-"Entry Date") < 14) THEN
-                  ERROR('You can only request for annual Leave 14 days ahead the plan actual start leave date');
-
-                 IF ("Request Type" = "Request Type"::Branch) AND (""Leave Category"" = 'ANNUAL')  AND(("Actual Start Date"-"Entry Date") < 14) THEN
-                    ERROR('You can only request for annual Leave 14 days ahead the plan actual start leave date');
-
-                 IF  ( "Actual Duration") > ("Total Leaves Due" - "Total Consuming") THEN
-                 ERROR('Your Leave request is greater than the number of actual leave due');
-
-                 IF  (""Leave Category"" = 'ANNUAL')  AND  ("Actual Duration" >15 ) THEN
-                     ERROR('Annual leave cannot be more than 15 working days');
-
-
-                    IF ""Leave Category"" = 'ANNUAL' THEN BEGIN
-                  LeaveRequest.SETRANGE("""Employee No"."","""Employee No"."");
-                  LeaveRequest.SETRANGE("Send for Approval",TRUE);
-                   LeaveRequest.SETRANGE(Reject,FALSE);
-                  LeaveRequest.SETRANGE(""Leave Category"",'ANNUAL');
-                  IF LeaveRequest.FINDLAST THEN BEGIN
-                     AnnualDiff:=( ("Actual Start Date") - (LeaveRequest."Actual End Date"));
-                    IF AnnualDiff < 60 THEN
-                      ERROR('You cannot  request for Annual Leave!');
-                  END;
-                  END;
-
-                  END;
-             end; */
+            end;
         }
         field(97; LeaveDate; Date)
         {
@@ -2693,6 +577,7 @@ table 70009 "Leave Request3"
     end;
 
     var
+
         HRSetup: Record 5218;
         LeaveReg: Record 70008;
         NoSeriesMgt: Codeunit 396;
@@ -2774,7 +659,8 @@ table 70009 "Leave Request3"
         Text019: Label 'Please note that your leave request has been rejected.';
         Text020: Label 'Please note that your leave request is on-hold.';
 
-    
+
+
     procedure CheckTotalDuration(Cnt: Integer)
     begin
         /*
@@ -2808,7 +694,7 @@ table 70009 "Leave Request3"
         */
     end;
 
-    
+
     procedure IsConsuming(LCat: Code[10]): Boolean
     begin
         IF LCategory.GET(LCat) THEN
@@ -2817,14 +703,14 @@ table 70009 "Leave Request3"
             EXIT(FALSE);
     end;
 
-        procedure ValidateShortcutDimCode(FieldNo: Integer; var ShortcutDimCode: Code[20])
+    procedure ValidateShortcutDimCode(FieldNo: Integer; var ShortcutDimCode: Code[20])
     begin
         DimMgt.ValidateDimValueCode(FieldNo, ShortcutDimCode);
         DimMgt.SaveDefaultDim(DATABASE::"Leave Plan Lines Rev 2", "Employee No.", FieldNo, ShortcutDimCode);
         MODIFY;
     end;
 
-       procedure RemainingLeave(): Integer
+    procedure RemainingLeave(): Integer
     begin
         CALCFIELDS("Total Consuming");
         EXIT("Total Leaves Due" - "Total Consuming");

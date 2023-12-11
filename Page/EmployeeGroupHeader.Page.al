@@ -68,7 +68,7 @@ page 50015 "Employee Group Header."
 
     var
         PGrp: Record 50011;
-        gpc: Codeunit "50004";
+        gpc: Codeunit 50004;
         DefaultPostingGroup: Code[20];
 
     procedure GetPGrp(Grp: Code[10]): Text[30]

@@ -1,0 +1,163 @@
+report 50260 "Who's In Report By Date"
+{
+    DefaultLayout = RDLC;
+    RDLCLayout = './WhosInReportByDate.rdlc';
+
+    dataset
+    {
+        dataitem(DataItem1131; Table50060)
+        {
+            DataItemTableView = SORTING (Date In)
+                                WHERE (Date In=FILTER(<>''));
+            RequestFilterFields = "Employee No.","TnA ID","Date In","Time In";
+            column(USERID;USERID)
+            {
+            }
+            column(CompanyData_Name;CompanyData.Name)
+            {
+            }
+            column(TODAY;TODAY)
+            {
+            }
+            column(CurrReport_PAGENO;CurrReport.PAGENO)
+            {
+            }
+            column(GETFILTERS;GETFILTERS)
+            {
+            }
+            column(Attendance_Register_2__Date_In_;"Date In")
+            {
+            }
+            column(Attendance_Register_2__Time_Out_;"Time Out")
+            {
+            }
+            column(Attendance_Register_2__Time_In_;"Time In")
+            {
+            }
+            column(EmployeeName;EmployeeName)
+            {
+            }
+            column(Attendance_Register_2__Mins_At_Work_;"Mins At Work")
+            {
+                DecimalPlaces = 0:5;
+            }
+            column(Attendance_Register_2__Out_Terminal_ID_;"Out-Terminal ID")
+            {
+            }
+            column(Attendance_Register_2__In_Terminal_ID_;"In-Terminal ID")
+            {
+            }
+            column(Attendance_Register_2__Employee_No__;"Employee No.")
+            {
+            }
+            column(Attendance_Register_2__Date_Out_;"Date Out")
+            {
+            }
+            column(Attendance_Register_2__Mins_At_Work__Control1000000016;"Mins At Work")
+            {
+                DecimalPlaces = 0:5;
+            }
+            column(PageCaption;PageCaptionLbl)
+            {
+            }
+            column(WHO_S_IN_REPORT_BY_DATECaption;WHO_S_IN_REPORT_BY_DATECaptionLbl)
+            {
+            }
+            column(Attendance_Register_2__Time_In_Caption;FIELDCAPTION("Time In"))
+            {
+            }
+            column(Attendance_Register_2__Time_Out_Caption;FIELDCAPTION("Time Out"))
+            {
+            }
+            column(Employee_NameCaption;Employee_NameCaptionLbl)
+            {
+            }
+            column(Attendance_Register_2__Mins_At_Work_Caption;FIELDCAPTION("Mins At Work"))
+            {
+            }
+            column(Attendance_Register_2__In_Terminal_ID_Caption;FIELDCAPTION("In-Terminal ID"))
+            {
+            }
+            column(Attendance_Register_2__Out_Terminal_ID_Caption;FIELDCAPTION("Out-Terminal ID"))
+            {
+            }
+            column(Attendance_Register_2__Employee_No__Caption;FIELDCAPTION("Employee No."))
+            {
+            }
+            column(Attendance_Register_2__Date_Out_Caption;FIELDCAPTION("Date Out"))
+            {
+            }
+            column(Filter_Caption;Filter_CaptionLbl)
+            {
+            }
+            column(DATE___Caption;DATE___CaptionLbl)
+            {
+            }
+            column(TotalCaption;TotalCaptionLbl)
+            {
+            }
+            column(Attendance_Register_2_Date;Date)
+            {
+            }
+
+            trigger OnAfterGetRecord()
+            begin
+                EmployeeName := '';
+                IF EmployeeRec.GET("Attendance Register 2"."Employee No.") THEN
+                EmployeeName := COPYSTR(EmployeeRec.Name,1,100);
+                IF NOT ShowIncompleteEntries THEN
+                  IF "Attendance Register 2".Status <> "Attendance Register 2".Status::Complete THEN
+                    CurrReport.SKIP;
+            end;
+
+            trigger OnPreDataItem()
+            begin
+                CompanyData.GET;
+                /*IF "Attendance Register".GETFILTER("Attendance Register"."Date In") = '' THEN
+                ERROR('Date In must be Specified!');
+                */
+
+            end;
+        }
+    }
+
+    requestpage
+    {
+
+        layout
+        {
+        }
+
+        actions
+        {
+        }
+    }
+
+    labels
+    {
+    }
+
+    trigger OnInitReport()
+    begin
+        ShowIncompleteEntries := TRUE;
+    end;
+
+    var
+        CompanyData: Record "79";
+        FromDate: Date;
+        ToDate: Date;
+        EmployeeRec: Record "50124";
+        EmployeeName: Text[100];
+        ShowZeroEntries: Boolean;
+        ShowIncompleteEntries: Boolean;
+        ShowOnlyIncompleteEntries: Boolean;
+        ScheduleDescription: Text[50];
+        OffDuty: Boolean;
+        PageCaptionLbl: Label 'Page';
+        WHO_S_IN_REPORT_BY_DATECaptionLbl: Label 'WHO''S IN REPORT BY DATE';
+        Employee_NameCaptionLbl: Label 'Employee Name';
+        Filter_CaptionLbl: Label 'Filter:';
+        DATE___CaptionLbl: Label 'DATE  :';
+        TotalCaptionLbl: Label 'Total';
+}
+

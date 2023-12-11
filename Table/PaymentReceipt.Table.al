@@ -9,12 +9,12 @@ table 50103 "Payment/Receipt."
 
             trigger OnValidate()
             begin
-                /*IF "No." <> xRec."No." THEN BEGIN
-                  GenSetup.GET;
-                  NoSeriesMgt.TestManual(GetNoSeriesCode);
-                  "No. Series" := '';
+                IF "No." <> xRec."No." THEN BEGIN
+                    GenSetup.GET;
+                    //NoSeriesMgt.TestManual(GetNoSeriesCode);
+                    "No. Series" := '';
                 END;
-                */
+
 
             end;
         }
@@ -27,10 +27,9 @@ table 50103 "Payment/Receipt."
         {
             OptionMembers = Cash,Cheque;
         }
-        field(4; "Account Type"; Option)
+        field(4; "Account Type"; Enum "Gen. Journal Account Type")
         {
-            OptionCaption = 'G/L Account,Customer,Supplier,Bank,Fixed Asset,Staff,LC';
-            OptionMembers = "G/L Account",Customer,Supplier,Bank,"Fixed Asset",Staff,LC;
+
 
             trigger OnValidate()
             begin
@@ -42,55 +41,54 @@ table 50103 "Payment/Receipt."
         }
         field(5; "Account No."; Code[20])
         {
-            TableRelation = IF ("Account Type" = filter("G/L Account")) "G/L Account"."No." WHERE(Blocked = FILTER(false),
-                "Account Type" = filter(Posting))
+            TableRelation = IF ("Account Type" = const("G/L Account")) "G/L Account"."No." WHERE(Blocked = FILTER(false), "Account Type" = filter(Posting))
             ELSE
-            IF ("Account Type" = filter(Customer)) Customer."No." WHERE(Blocked = FILTER(<> 'All'),
-                         "Customer Posting Group" = FILTER(<> 'STAFF'))
+            IF ("Account Type" = const(Customer)) Customer."No." WHERE(Blocked = FILTER(<> 'All'), "Customer Posting Group" = FILTER(<> 'STAFF'))
             ELSE
-            IF ("Cash/Cheque" = filter(Cheque), "Account Type" = filter(Bank)) "Bank Account"."No." WHERE(Blocked = filter(false))
+            IF ("Cash/Cheque" = const(Cheque), "Account Type" = filter("Bank Account")) "Bank Account"."No." WHERE(Blocked = filter(false))
             ELSE
-            IF ("Account Type" = filter(Supplier)) Vendor."No." WHERE(Blocked = FILTER(<> 'All'))
+            IF ("Account Type" = const(Vendor)) Vendor."No." WHERE(Blocked = FILTER(<> 'All'))
             ELSE
-            IF ("Account Type" = filter("Fixed Asset")) "Fixed Asset"."No." WHERE(Blocked = filter(false))
+            IF ("Account Type" = const("Fixed Asset")) "Fixed Asset"."No." WHERE(Blocked = filter(false))
             ELSE
-            IF ("Account Type" = filter(Staff)) Customer."No." WHERE(Blocked = FILTER(<> 'All'))
+            IF ("Account Type" = const("Staff Loan")) Customer."No." WHERE(Blocked = FILTER(<> 'All'))
             ELSE
-            IF ("Account Type" = filter(LC)) Vendor."No." WHERE(Blocked = FILTER(<> 'All'), "Vendor Posting Group" = FILTER('LC*'));
+            IF ("Account Type" = const(LC)) Vendor."No." WHERE(Blocked = filter(<> All), "Vendor Posting Group" = FILTER('LC*'));
 
             trigger OnValidate()
             begin
                 IF "Account No." <> '' THEN BEGIN
                     CASE "Account Type" OF
-                        0:
+
+                        "Account Type"::"G/L Account":
                             BEGIN
                                 "g/lacc".GET("Account No.");
                                 "Account Description" := "g/lacc".Name;
                                 "Global Dimension 1 Code" := "g/lacc"."Global Dimension 1 Code";
                                 "Global Dimension 2 Code" := "g/lacc"."Global Dimension 2 Code";
                             END;
-                        1, 5:
+                        "Account Type"::Customer, "Account Type"::"Staff Loan":
                             BEGIN
                                 custrec.GET("Account No.");
                                 "Account Description" := custrec.Name;
                                 "Global Dimension 1 Code" := custrec."Global Dimension 1 Code";
                                 "Global Dimension 2 Code" := custrec."Global Dimension 2 Code";
                             END;
-                        2, 6:
+                        "Account Type"::Vendor, "Account Type"::LC:
                             BEGIN
                                 vendrec.GET("Account No.");
                                 "Account Description" := vendrec.Name;
                                 "Global Dimension 1 Code" := vendrec."Global Dimension 1 Code";
                                 "Global Dimension 2 Code" := vendrec."Global Dimension 2 Code";
                             END;
-                        3:
+                        "Account Type"::"Bank Account":
                             BEGIN
                                 bankrec.GET("Account No.");
                                 "Account Description" := bankrec.Name;
                                 "Global Dimension 1 Code" := bankrec."Global Dimension 1 Code";
                                 "Global Dimension 2 Code" := bankrec."Global Dimension 2 Code";
                             END;
-                        4:
+                        "Account Type"::"Fixed Asset":
                             BEGIN
                                 fixedrec.GET("Account No.");
                                 "Account Description" := fixedrec.Description;
@@ -107,69 +105,73 @@ table 50103 "Payment/Receipt."
         field(7; "Transaction Description"; Text[250])
         {
         }
-        field(8; "Balance Account Type"; Option)
+        field(8; "Balance Account Type"; Enum "Gen. Journal Account Type")
         {
-            OptionMembers = "G/L Account",Customer,Supplier,Bank,"Fixed Asset";
 
-            /* trigger OnValidate()
-             begin
-                 IF xRec."Balance Account Type" <> "Balance Account Type" THEN
-                   BEGIN
-                     "Bal. Acc. Description":= '';
-                     "Balance Account No.":= '';
-                    END;
-             end; */
+            trigger OnValidate()
+            begin
+                IF xRec."Balance Account Type" <> "Balance Account Type" THEN BEGIN
+                    "Bal. Acc. Description" := '';
+                    "Balance Account No." := '';
+                END;
+            end;
         }
         field(9; "Balance Account No."; Code[20])
         {
-            /* TableRelation = IF (Balance Account Type=filter(G/L Account)) "G/L Account".No. WHERE (Blocked=filter(No),
-                                                                                                  Account Type=filter(Posting))
-                                                                                                  ELSE IF (Cash/Cheque=filter(Cheque),
-                                                                                                           Balance Account Type=filter(Bank)) "Bank Account".No. WHERE (Blocked=filter(No))
-                                                                                                           ELSE IF (Balance Account Type=filter(Customer)) Customer.No. WHERE (Blocked=FILTER(<>All))
-                                                                                                           ELSE IF (Balance Account Type=filter(Supplier)) Vendor.No. WHERE (Blocked=FILTER(<>All))
-                                                                                                           ELSE IF (Balance Account Type=filter(Fixed Asset)) "Fixed Asset".No. WHERE (Blocked=filter(No))
-                                                                                                           ELSE IF (Cash/Cheque=filter(Cash),
-                                                                                                                    Balance Account Type=filter(Bank)) "Bank Account".No. WHERE (Blocked=filter(No),
-                                                                                                                                                                                Cashier=filter(Yes));
+            TableRelation = IF ("Balance Account Type" = const("G/L Account")) "G/L Account"."No." WHERE(Blocked = filter(false), "Account Type" = const(Posting))
+            ELSE
+            IF ("Cash/Cheque" = const(Cheque), "Balance Account Type" = const("Bank Account")) "Bank Account"."No." WHERE(Blocked = filter(false))
+            ELSE
+            IF ("Balance Account Type" = const(Customer)) Customer."No." WHERE(Blocked = FILTER(<> All))
+            ELSE
+            IF ("Balance Account Type" = const(vendor)) Vendor."No." WHERE(Blocked = FILTER(<> All))
+            ELSE
+            IF ("Balance Account Type" = const("Fixed Asset")) "Fixed Asset"."No." WHERE(Blocked = filter(false))
+            ELSE
+            IF ("Cash/Cheque" = const(Cash), "Balance Account Type" = const("Bank Account")) "Bank Account"."No." WHERE(Blocked = filter(false), Cashier = filter(true));
 
             trigger OnValidate()
             begin
                 IF "Balance Account No." <> '' THEN BEGIN
-                CASE "Balance Account Type" OF
-                  0: BEGIN
-                       "g/lacc".GET("Balance Account No.");
-                       "Bal. Acc. Description" := "g/lacc".Name;
-                       "Balance Department Code":= "g/lacc"."Global Dimension 1 Code";
-                       "Balance Branch Code":= "g/lacc"."Global Dimension 2 Code";
-                     END;
-                  1: BEGIN
-                       custrec.GET("Balance Account No.");
-                       "Bal. Acc. Description" := custrec.Name;
-                       "Balance Department Code" := custrec."Global Dimension 1 Code";
-                       "Balance Branch Code":= custrec."Global Dimension 2 Code";
+                    CASE "Balance Account Type" OF
+                        "Account Type"::"G/L Account":
+                            BEGIN
+                                "g/lacc".GET("Balance Account No.");
+                                "Bal. Acc. Description" := "g/lacc".Name;
+                                "Balance Department Code" := "g/lacc"."Global Dimension 1 Code";
+                                "Balance Branch Code" := "g/lacc"."Global Dimension 2 Code";
+                            END;
+                        "Account Type"::Customer:
+                            BEGIN
+                                custrec.GET("Balance Account No.");
+                                "Bal. Acc. Description" := custrec.Name;
+                                "Balance Department Code" := custrec."Global Dimension 1 Code";
+                                "Balance Branch Code" := custrec."Global Dimension 2 Code";
+                            END;
+                        "Account Type"::Vendor:
+                            BEGIN
+                                vendrec.GET("Balance Account No.");
+                                "Bal. Acc. Description" := vendrec.Name;
+                                "Balance Department Code" := vendrec."Global Dimension 1 Code";
+                                "Balance Branch Code" := vendrec."Global Dimension 2 Code";
+                            END;
+                        "Account Type"::"Bank Account":
+                            BEGIN
+                                bankrec.GET("Balance Account No.");
+                                "Bal. Acc. Description" := bankrec.Name;
+                                "Balance Department Code" := bankrec."Global Dimension 1 Code";
+                                "Balance Branch Code" := bankrec."Global Dimension 2 Code";
+                            END;
+                        "Account Type"::"Fixed Asset":
+                            BEGIN
+                                fixedrec.GET("Balance Account No.");
+                                "Bal. Acc. Description" := fixedrec.Description;
+                                "Balance Department Code" := fixedrec."Global Dimension 1 Code";
+                                "Balance Branch Code" := fixedrec."Global Dimension 2 Code";
+                            END;
                     END;
-                  2: BEGIN
-                     vendrec.GET("Balance Account No.");
-                     "Bal. Acc. Description" := vendrec.Name;
-                     "Balance Department Code" := vendrec."Global Dimension 1 Code";
-                     "Balance Branch Code":= vendrec."Global Dimension 2 Code";
-                     END;
-                  3: BEGIN
-                      bankrec.GET("Balance Account No.");
-                      "Bal. Acc. Description" := bankrec.Name;
-                      "Balance Department Code" := bankrec."Global Dimension 1 Code";
-                      "Balance Branch Code":= bankrec."Global Dimension 2 Code";
-                     END;
-                  4: BEGIN
-                      fixedrec.GET("Balance Account No.");
-                      "Bal. Acc. Description" := fixedrec.Description;
-                      "Balance Department Code" := fixedrec."Global Dimension 1 Code";
-                      "Balance Branch Code":= fixedrec."Global Dimension 2 Code";
-                     END;
-                  END;
                 END;
-            end; */
+            end;
         }
         field(10; "Global Dimension 1 Code"; Code[20])
         {
@@ -182,9 +184,10 @@ table 50103 "Payment/Receipt."
         field(12; Amount; Decimal)
         {
 
-            /*  trigger OnValidate()
-              begin
-                  //GetCurrency;
+            trigger OnValidate()
+            begin
+
+                /*   //GetCurrency;
                   IF "Currency Code" = '' THEN
                       "Amount (LCY)" := Amount
                   ELSE
@@ -193,7 +196,7 @@ table 50103 "Payment/Receipt."
                           "Posting Date", "Currency Code",
                           Amount, "Currency Factor"));
 
-                  //Amount := ROUND(Amount,Currency."Amount Rounding Precision");
+                   //Amount := ROUND(Amount,Currency."Amount Rounding Precision");
                   IF (CurrFieldNo <> 0) AND
                      (CurrFieldNo <> FIELDNO("Applies-to Doc. No.")) AND
                      ((("Account Type" = "Account Type"::Customer) AND
@@ -203,14 +206,14 @@ table 50103 "Payment/Receipt."
                        ("Bal. Account No." <> '') AND (Amount < 0) AND
                        (CurrFieldNo <> FIELDNO("Account No."))))
                   THEN
-                    //CustCheckCreditLimit.GenJnlLineCheck(Rec);
+                      //CustCheckCreditLimit.GenJnlLineCheck(Rec);
 
-                  VALIDATE("VAT %");
+                    VALIDATE("VAT %");
                   VALIDATE("Bal. VAT %");
-                  UpdateLineBalance;
+                  UpdateLineBalance;  */
 
 
-              end; */
+            end;
         }
         field(13; "Received by"; Text[50])
         {
@@ -227,29 +230,26 @@ table 50103 "Payment/Receipt."
         field(15; "Multiple Balance Account"; Boolean)
         {
 
-            /* trigger OnValidate()
+            trigger OnValidate()
             begin
-                IF "Multiple Balance Account" = TRUE THEN
-                BEGIN
-                IF "Multiple Account" = TRUE THEN
-                BEGIN
-                ReqReptLine.SETRANGE(ReqReptLine.Type,"Document Type");
-                ReqReptLine.SETRANGE(ReqReptLine."Cash/Cheque","Cash/Cheque");
-                ReqReptLine.SETRANGE(ReqReptLine."No.","No.");
-                IF ReqReptLine.FIND('-') THEN
-                ReqReptLine.DELETEALL;
-                "Multiple Account" := FALSE;
-                END;
+                IF "Multiple Balance Account" = TRUE THEN BEGIN
+                    IF "Multiple Account" = TRUE THEN BEGIN
+                        ReqReptLine.SETRANGE(ReqReptLine.Type, "Document Type");
+                        ReqReptLine.SETRANGE(ReqReptLine."Cash/Cheque", "Cash/Cheque");
+                        ReqReptLine.SETRANGE(ReqReptLine."No.", "No.");
+                        IF ReqReptLine.FIND('-') THEN
+                            ReqReptLine.DELETEALL;
+                        "Multiple Account" := FALSE;
+                    END;
                 END
-                ELSE
-                BEGIN
-                ReqReptLine.SETRANGE(ReqReptLine.Type,"Document Type");
-                ReqReptLine.SETRANGE(ReqReptLine."Cash/Cheque","Cash/Cheque");
-                ReqReptLine.SETRANGE(ReqReptLine."No.","No.");
-                IF ReqReptLine.FIND('-') THEN
-                ReqReptLine.DELETEALL;
+                ELSE BEGIN
+                    ReqReptLine.SETRANGE(ReqReptLine.Type, "Document Type");
+                    ReqReptLine.SETRANGE(ReqReptLine."Cash/Cheque", "Cash/Cheque");
+                    ReqReptLine.SETRANGE(ReqReptLine."No.", "No.");
+                    IF ReqReptLine.FIND('-') THEN
+                        ReqReptLine.DELETEALL;
                 END;
-            end; */
+            end;
         }
         field(16; Posted; Boolean)
         {
@@ -282,10 +282,8 @@ table 50103 "Payment/Receipt."
         }
         field(26; "Balance Amount"; Decimal)
         {
-            /* CalcFormula = Sum("Payment/Receipt Bal. Line."."Amount (LCY)" WHERE ("No."=FIELD("No."),
-                                                                                 Type=FIELD("Document Type"),
-                                                                                 "Cash/Cheque"=FIELD("Cash/Cheque")));
-            FieldClass = FlowField; */
+            CalcFormula = Sum("Payment/Receipt Bal. Line."."Amount (LCY)" WHERE("No." = FIELD("No."), Type = FIELD("Document Type"), "Cash/Cheque" = FIELD("Cash/Cheque")));
+            FieldClass = FlowField;
         }
         field(27; Cashier; Code[20])
         {
@@ -293,21 +291,21 @@ table 50103 "Payment/Receipt."
         field(28; "Credit Amount"; Decimal)
         {
 
-            /*   trigger OnValidate()
-              begin
-                  IF "Credit Amount" <> 0 THEN
-                  "Debit Amount" := 0;
-                  Amount:= -"Credit Amount";
-                  IF "Currency Code" = '' THEN
+            trigger OnValidate()
+            begin
+                IF "Credit Amount" <> 0 THEN
+                    "Debit Amount" := 0;
+                Amount := -"Credit Amount";
+                IF "Currency Code" = '' THEN
                     "Amount (LCY)" := Amount
-                  ELSE
+                ELSE
                     "Amount (LCY)" := ROUND(
                       CurrExchRate.ExchangeAmtFCYToLCY(
-                        "Posting Date","Currency Code",
-                        Amount,"Currency Factor"));
+                        "Posting Date", "Currency Code",
+                        Amount, "Currency Factor"));
 
-                  Amount := ROUND(Amount,currency."Amount Rounding Precision");
-              end; */
+                Amount := ROUND(Amount, currency."Amount Rounding Precision");
+            end;
         }
         field(29; "Debit Amount"; Decimal)
         {
@@ -373,9 +371,7 @@ table 50103 "Payment/Receipt."
         }
         field(35; "Balance Total"; Decimal)
         {
-            CalcFormula = Sum("Payment/Receipt Bal. Line.".Amount WHERE("No." = FIELD("No."),
-                                                                         Type = FIELD("Document Type"),
-                                                                         "Cash/Cheque" = FIELD("Cash/Cheque")));
+            CalcFormula = Sum("Payment/Receipt Bal. Line.".Amount WHERE("No." = FIELD("No."), Type = FIELD("Document Type"), "Cash/Cheque" = FIELD("Cash/Cheque")));
             FieldClass = FlowField;
         }
         field(36; Finished; Boolean)
@@ -503,53 +499,6 @@ table 50103 "Payment/Receipt."
         field(51; "Send for Approval"; Boolean)
         {
 
-            /*  trigger OnValidate()
-             begin
-                 IF "Send for Approval" THEN
-                   IF NOT CONFIRM('Are you sure you want to request APPROVAL?',FALSE) THEN
-                     "Send for Approval" := FALSE
-                   ELSE BEGIN
-                     IF UserSetup.GET("1st Approval to") THEN
-                       Sender := COPYSTR(USERID,15);
-                       "Sent Time"  := CURRENTDATETIME;
-                       "User ID" := COPYSTR(USERID,15);
-                       TESTFIELD(Amount);
-                       TESTFIELD("1st Approval to");
-                       TESTFIELD("1st Apprv. Status",0);
-                       // UserSetup.GET("1st Approval to");
-                       "Current pending Person" := "1st Approval to";
-                       ToName  := UserSetup."E-Mail";
-                       Subject := STRSUBSTNO(text001,"No.");
-                       UserSetup2.GET(USERID);
-                       SenderEmail := UserSetup2."E-Mail";
-                       SenderInitial := UserSetup2.Initials;
-                       Initials := UserSetup.Initials;
-
-                       WITH TempEmailItem DO BEGIN
-                         "Send to" := ToName;
-                         "Send CC" := SenderEmail + ';' + CCName;
-                         "Send BCC" := '';
-                         Subject := STRSUBSTNO(text001,"No.");
-
-                         CRLF := '';
-                         CRLF[1] := 13;
-                         CRLF[2] := 10;
-
-                         BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                         BodyStream.WRITETEXT(text006 + Initials + ',');
-                         BodyStream.WRITETEXT(CRLF + CRLF);
-                         BodyStream.WRITETEXT(STRSUBSTNO(text001,"No.") + CRLF + CRLF +
-                         CRLF + CRLF +
-                         Text007 + CRLF);
-                         BodyStream.WRITETEXT(SenderInitial);
-                         BodyStream.WRITETEXT(CRLF + CRLF);
-                         BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                         Body := BodyBlob.Blob;
-                         Send(FALSE);
-                       END;
-                    //  mailsent := approvalmessage.NewMessage(ToName,CCName,Subject,"Mail Body",attachement,'',TRUE);
-                   END;
-             end; */
         }
         field(52; Sender; Text[50])
         {
@@ -577,120 +526,7 @@ table 50103 "Payment/Receipt."
             OptionCaption = ' ,on Hold,Approved,Rejected';
             OptionMembers = " ","on Hold",Approved,Rejected;
 
-            /* trigger OnValidate()
-            begin
-                 TESTFIELD("Send for Approval",TRUE);
-                 TESTFIELD("1st Approval to",COPYSTR(USERID,15));
-                  "1st Approval Time" := 0DT;
-                CASE "1st Apprv. Status" OF
-                  "1st Apprv. Status"::Approved:
-                    BEGIN
-                      TESTFIELD("2nd Approval to");
-                      "1st Approval Time" := CURRENTDATETIME;
-                      UserSetup.GET("2nd Approval to");
-                      "Current pending Person" := "2nd Approval to";
-                      ToName  := UserSetup."E-Mail";
-                      Subject := STRSUBSTNO(text001,"No.");
-                      UserSetup2.GET(USERID);
-                      SenderEmail := UserSetup2."E-Mail";
-                      SenderInitial := UserSetup2.Initials;
-                      Initials := UserSetup.Initials;
 
-                      WITH TempEmailItem DO BEGIN
-                        "Send to" := ToName;
-                        "Send CC" := SenderEmail;
-                        "Send BCC" := '';
-                        Subject := STRSUBSTNO(text001,"No.");
-
-                        CRLF := '';
-                        CRLF[1] := 13;
-                        CRLF[2] := 10;
-
-                        BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                        BodyStream.WRITETEXT(text006 + Initials + ',');
-                        BodyStream.WRITETEXT(CRLF + CRLF);
-                        BodyStream.WRITETEXT(STRSUBSTNO(text001,"No.") + CRLF + CRLF +
-                        CRLF + CRLF +
-                        Text007 + CRLF);
-                        BodyStream.WRITETEXT(SenderInitial);
-                        BodyStream.WRITETEXT(CRLF + CRLF);
-                        BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                        Body := BodyBlob.Blob;
-                        Send(FALSE);
-                      END;
-                    END;
-
-                  "1st Apprv. Status"::Rejected:
-                    BEGIN
-                      "1st Approval Time" := CURRENTDATETIME;
-                      UserSetup.GET(Sender);
-                      ToName  := UserSetup."E-Mail";
-                      Subject := STRSUBSTNO(text004,"No.");
-                      UserSetup2.GET(USERID);
-                      SenderEmail := UserSetup2."E-Mail";
-                      SenderInitial := UserSetup2.Initials;
-                      Initials := UserSetup.Initials;
-
-                      WITH TempEmailItem DO BEGIN
-                        "Send to" := ToName;
-                        "Send CC" := SenderEmail;
-                        "Send BCC" := '';
-                        Subject := STRSUBSTNO(text004,"No.");
-
-                        CRLF := '';
-                        CRLF[1] := 13;
-                        CRLF[2] := 10;
-
-                        BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                        BodyStream.WRITETEXT(text006 + Initials + ',');
-                        BodyStream.WRITETEXT(CRLF + CRLF);
-                        BodyStream.WRITETEXT(STRSUBSTNO(text004,"No.") + CRLF + CRLF +
-                        CRLF + CRLF +
-                        Text007 + CRLF);
-                        BodyStream.WRITETEXT(SenderInitial);
-                        BodyStream.WRITETEXT(CRLF + CRLF);
-                        BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                        Body := BodyBlob.Blob;
-                        Send(FALSE);
-                      END;
-                    END;
-
-                  "1st Apprv. Status"::"on Hold":
-                    BEGIN
-                      "1st Approval Time" := CURRENTDATETIME;
-                      UserSetup.GET(Sender);
-                      ToName  := UserSetup."E-Mail";
-                      Subject := STRSUBSTNO(text005,"No.");
-                      UserSetup2.GET(USERID);
-                      SenderEmail := UserSetup2."E-Mail";
-                      SenderInitial := UserSetup2.Initials;
-                      Initials := UserSetup.Initials;
-
-                      WITH TempEmailItem DO BEGIN
-                        "Send to" := ToName;
-                        "Send CC" := SenderEmail;
-                        "Send BCC" := '';
-                        Subject := STRSUBSTNO(text005,"No.");
-
-                        CRLF := '';
-                        CRLF[1] := 13;
-                        CRLF[2] := 10;
-
-                        BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                        BodyStream.WRITETEXT(text006 + Initials + ',');
-                        BodyStream.WRITETEXT(CRLF + CRLF);
-                        BodyStream.WRITETEXT(STRSUBSTNO(text005,"No.") + CRLF + CRLF +
-                        CRLF + CRLF +
-                        Text007 + CRLF);
-                        BodyStream.WRITETEXT(SenderInitial);
-                        BodyStream.WRITETEXT(CRLF + CRLF);
-                        BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                        Body := BodyBlob.Blob;
-                        Send(FALSE);
-                      END;
-                    END;
-                END;
-            end; */
         }
         field(57; "1st Approval Time"; DateTime)
         {
@@ -720,121 +556,7 @@ table 50103 "Payment/Receipt."
             OptionCaption = ' ,on Hold,Approved,Rejected';
             OptionMembers = " ","on Hold",Approved,Rejected;
 
-            /* trigger OnValidate()
-            begin
 
-                 TESTFIELD("Send for Approval",TRUE);
-                 TESTFIELD("1st Apprv. Status",2);
-                 TESTFIELD("2nd Approval to",COPYSTR(USERID,15));
-                  "2nd Approval Time" := 0DT;
-                CASE "2nd Apprv. Status" OF
-                  "2nd Apprv. Status"::Approved:
-                    BEGIN
-                      TESTFIELD("3rd Approval to");
-                      "2nd Approval Time" :=CURRENTDATETIME;
-                      UserSetup.GET("3rd Approval to");
-                      "Current pending Person" := "3rd Approval to";
-                      ToName  := UserSetup."E-Mail";
-                      Subject := STRSUBSTNO(text001,"No.");
-                      UserSetup2.GET(USERID);
-                      SenderEmail := UserSetup2."E-Mail";
-                      SenderInitial := UserSetup2.Initials;
-                      Initials := UserSetup.Initials;
-
-                      WITH TempEmailItem DO BEGIN
-                        "Send to" := ToName;
-                        "Send CC" := SenderEmail;
-                        "Send BCC" := '';
-                        Subject := STRSUBSTNO(text001,"No.");
-
-                        CRLF := '';
-                        CRLF[1] := 13;
-                        CRLF[2] := 10;
-
-                        BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                        BodyStream.WRITETEXT(text006 + Initials + ',');
-                        BodyStream.WRITETEXT(CRLF + CRLF);
-                        BodyStream.WRITETEXT(STRSUBSTNO(text001,"No.") + CRLF + CRLF +
-                        CRLF + CRLF +
-                        Text007 + CRLF);
-                        BodyStream.WRITETEXT(SenderInitial);
-                        BodyStream.WRITETEXT(CRLF + CRLF);
-                        BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                        Body := BodyBlob.Blob;
-                        Send(FALSE);
-                      END;
-                    END;
-
-                  "2nd Apprv. Status"::Rejected:
-                    BEGIN
-                      "2nd Approval Time" := CURRENTDATETIME;
-                      UserSetup.GET(Sender);
-                      ToName  := UserSetup."E-Mail";
-                      Subject := STRSUBSTNO(text004,"No.");
-                      UserSetup2.GET(USERID);
-                      SenderEmail := UserSetup2."E-Mail";
-                      SenderInitial := UserSetup2.Initials;
-                      Initials := UserSetup.Initials;
-
-                      WITH TempEmailItem DO BEGIN
-                        "Send to" := ToName;
-                        "Send CC" := SenderEmail;
-                        "Send BCC" := '';
-                        Subject := STRSUBSTNO(text004,"No.");
-
-                        CRLF := '';
-                        CRLF[1] := 13;
-                        CRLF[2] := 10;
-
-                        BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                        BodyStream.WRITETEXT(text006 + Initials + ',');
-                        BodyStream.WRITETEXT(CRLF + CRLF);
-                        BodyStream.WRITETEXT(STRSUBSTNO(text004,"No.") + CRLF + CRLF +
-                        CRLF + CRLF +
-                        Text007 + CRLF);
-                        BodyStream.WRITETEXT(SenderInitial);
-                        BodyStream.WRITETEXT(CRLF + CRLF);
-                        BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                        Body := BodyBlob.Blob;
-                        Send(FALSE);
-                      END;
-                    END;
-                  "2nd Apprv. Status"::"on Hold":
-                    BEGIN
-                      "2nd Approval Time" := CURRENTDATETIME;
-                      UserSetup.GET(Sender);
-                      ToName  := UserSetup."E-Mail";
-                      Subject := STRSUBSTNO(text005,"No.");
-                      UserSetup2.GET(USERID);
-                      SenderEmail := UserSetup2."E-Mail";
-                      SenderInitial := UserSetup2.Initials;
-                      Initials := UserSetup.Initials;
-
-                      WITH TempEmailItem DO BEGIN
-                        "Send to" := ToName;
-                        "Send CC" := SenderEmail;
-                        "Send BCC" := '';
-                        Subject := STRSUBSTNO(text005,"No.");
-
-                        CRLF := '';
-                        CRLF[1] := 13;
-                        CRLF[2] := 10;
-
-                        BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                        BodyStream.WRITETEXT(text006 + Initials + ',');
-                        BodyStream.WRITETEXT(CRLF + CRLF);
-                        BodyStream.WRITETEXT(STRSUBSTNO(text005,"No.") + CRLF + CRLF +
-                        CRLF + CRLF +
-                        Text007 + CRLF);
-                        BodyStream.WRITETEXT(SenderInitial);
-                        BodyStream.WRITETEXT(CRLF + CRLF);
-                        BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                        Body := BodyBlob.Blob;
-                        Send(FALSE);
-                      END;
-                    END;
-                END;
-            end; */
         }
         field(62; "2nd Approval Time"; DateTime)
         {
@@ -860,121 +582,7 @@ table 50103 "Payment/Receipt."
             OptionCaption = ' ,on Hold,Approved,Rejected';
             OptionMembers = " ","on Hold",Approved,Rejected;
 
-            /*  trigger OnValidate()
-             begin
-                 TESTFIELD("Send for Approval",TRUE);
-                 TESTFIELD("2nd Apprv. Status",2);
-                 TESTFIELD("3rd Approval to",COPYSTR(USERID,15));
-                 "3rd Approval Time" := 0DT;
 
-                 CASE "3rd Apprv.Status" OF
-                   "3rd Apprv.Status"::Approved:
-                     BEGIN
-                       TESTFIELD("Final Approval to");
-                       "3rd Approval Time" := CURRENTDATETIME;
-                       UserSetup.GET("Final Approval to");
-                       "Current pending Person" := "Final Approval to";
-                       ToName  := UserSetup."E-Mail";
-                       Subject := STRSUBSTNO(text001,"No.");
-                       UserSetup2.GET(USERID);
-                       SenderEmail := UserSetup2."E-Mail";
-                       SenderInitial := UserSetup2.Initials;
-                       Initials := UserSetup.Initials;
-
-                       WITH TempEmailItem DO BEGIN
-                         "Send to" := ToName;
-                         "Send CC" := SenderEmail;
-                         "Send BCC" := '';
-                         Subject := STRSUBSTNO(text001,"No.");
-
-                         CRLF := '';
-                         CRLF[1] := 13;
-                         CRLF[2] := 10;
-
-                         BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                         BodyStream.WRITETEXT(text006 + Initials + ',');
-                         BodyStream.WRITETEXT(CRLF + CRLF);
-                         BodyStream.WRITETEXT(STRSUBSTNO(text001,"No.") + CRLF + CRLF +
-                         CRLF + CRLF +
-                         Text007 + CRLF);
-                         BodyStream.WRITETEXT(SenderInitial);
-                         BodyStream.WRITETEXT(CRLF + CRLF);
-                         BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                         Body := BodyBlob.Blob;
-                         Send(FALSE);
-                       END;
-                     END;
-                   "3rd Apprv.Status"::Rejected:
-                     BEGIN
-                       "3rd Approval Time" := CURRENTDATETIME;
-                       UserSetup.GET(Sender);
-                       ToName  := UserSetup."E-Mail";
-                       Subject := STRSUBSTNO(text004,"No.");
-                       UserSetup2.GET(USERID);
-                       SenderEmail := UserSetup2."E-Mail";
-                       SenderInitial := UserSetup2.Initials;
-                       Initials := UserSetup.Initials;
-
-                       WITH TempEmailItem DO BEGIN
-                         "Send to" := ToName;
-                         "Send CC" := SenderEmail;
-                         "Send BCC" := '';
-                         Subject := STRSUBSTNO(text004,"No.");
-
-                         CRLF := '';
-                         CRLF[1] := 13;
-                         CRLF[2] := 10;
-
-                         BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                         BodyStream.WRITETEXT(text006 + Initials + ',');
-                         BodyStream.WRITETEXT(CRLF + CRLF);
-                         BodyStream.WRITETEXT(STRSUBSTNO(text004,"No.") + CRLF + CRLF +
-                         CRLF + CRLF +
-                         Text007 + CRLF);
-                         BodyStream.WRITETEXT(SenderInitial);
-                         BodyStream.WRITETEXT(CRLF + CRLF);
-                         BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                         Body := BodyBlob.Blob;
-                         Send(FALSE);
-                       END;
-                     END;
-
-                   "3rd Apprv.Status"::"on Hold":
-                     BEGIN
-                       "3rd Approval Time" := CURRENTDATETIME;
-                       UserSetup.GET(Sender);
-                       ToName  := UserSetup."E-Mail";
-                       Subject := STRSUBSTNO(text005,"No.");
-                       UserSetup2.GET(USERID);
-                       SenderEmail := UserSetup2."E-Mail";
-                       SenderInitial := UserSetup2.Initials;
-                       Initials := UserSetup.Initials;
-
-                       WITH TempEmailItem DO BEGIN
-                         "Send to" := ToName;
-                         "Send CC" := SenderEmail;
-                         "Send BCC" := '';
-                         Subject := STRSUBSTNO(text005,"No.");
-
-                         CRLF := '';
-                         CRLF[1] := 13;
-                         CRLF[2] := 10;
-
-                         BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                         BodyStream.WRITETEXT(text006 + Initials + ',');
-                         BodyStream.WRITETEXT(CRLF + CRLF);
-                         BodyStream.WRITETEXT(STRSUBSTNO(text005,"No.") + CRLF + CRLF +
-                         CRLF + CRLF +
-                         Text007 + CRLF);
-                         BodyStream.WRITETEXT(SenderInitial);
-                         BodyStream.WRITETEXT(CRLF + CRLF);
-                         BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                         Body := BodyBlob.Blob;
-                         Send(FALSE);
-                       END;
-                     END;
-                 END;
-             end; */
         }
         field(67; "3rd Approval Time"; DateTime)
         {
@@ -1000,127 +608,7 @@ table 50103 "Payment/Receipt."
             OptionCaption = ' ,on Hold,Approved,Rejected';
             OptionMembers = " ","on Hold",Approved,Rejected;
 
-            /* trigger OnValidate()
-            begin
-                 TESTFIELD("Send for Approval",TRUE);
-                 //TESTFIELD("3rd Apprv.Status",2);
-                 TESTFIELD("2nd Apprv. Status",2);
-                 //TESTFIELD("Final Approval to",COPYSTR(USERID,15));
-                  "Final Approval Time" := 0DT;
-                CASE "Final Apprv. Status" OF
-                  "Final Apprv. Status"::Approved:
-                    IF NOT CONFIRM('Are you sure you want this order Approved?', FALSE) THEN
-                      "Final Apprv. Status" := PaymentReceipt."Final Apprv. Status"::" "
-                    ELSE BEGIN
-                      TESTFIELD("1st Approval to");
-                      "Final Approval Time" := CURRENTDATETIME;
-                      UserSetup.GET(Sender);
-                      "Current pending Person" := "Final Approval to";
-                      ToName  := UserSetup."E-Mail";
-                      Subject := STRSUBSTNO(text003,"No.");
-                      UserSetup2.GET(USERID);
-                      SenderEmail := UserSetup2."E-Mail";
-                      SenderInitial := UserSetup2.Initials;
-                      Initials := UserSetup.Initials;
 
-                      WITH TempEmailItem DO BEGIN
-                        "Send to" := ToName;
-                        "Send CC" := SenderEmail;
-                        "Send BCC" := '';
-                        Subject := STRSUBSTNO(text003,"No.");
-
-                        CRLF := '';
-                        CRLF[1] := 13;
-                        CRLF[2] := 10;
-
-                        BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                        BodyStream.WRITETEXT(text006 + Initials + ',');
-                        BodyStream.WRITETEXT(CRLF + CRLF);
-                        BodyStream.WRITETEXT(STRSUBSTNO(text003,"No.") + CRLF + CRLF +
-                        CRLF + CRLF +
-                        Text007 + CRLF);
-                        BodyStream.WRITETEXT(SenderInitial);
-                        BodyStream.WRITETEXT(CRLF + CRLF);
-                        BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                        Body := BodyBlob.Blob;
-                        Send(FALSE);
-                      END;
-                    END;
-
-                  "Final Apprv. Status"::Rejected:
-                    IF NOT CONFIRM('Are you sure you want this order Rejected?', FALSE) THEN
-                      "Final Apprv. Status" := PaymentReceipt."Final Apprv. Status"::" "
-                    ELSE BEGIN
-                      "Final Approval Time" := CURRENTDATETIME;
-                      UserSetup.GET(Sender);
-                      ToName  := UserSetup."E-Mail";
-                      Subject := STRSUBSTNO(text004,"No.");
-                      UserSetup2.GET(USERID);
-                      SenderEmail := UserSetup2."E-Mail";
-                      SenderInitial := UserSetup2.Initials;
-                      Initials := UserSetup.Initials;
-
-                      WITH TempEmailItem DO BEGIN
-                        "Send to" := ToName;
-                        "Send CC" := SenderEmail;
-                        "Send BCC" := '';
-                        Subject := STRSUBSTNO(text004,"No.");
-
-                        CRLF := '';
-                        CRLF[1] := 13;
-                        CRLF[2] := 10;
-
-                        BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                        BodyStream.WRITETEXT(text006 + Initials + ',');
-                        BodyStream.WRITETEXT(CRLF + CRLF);
-                        BodyStream.WRITETEXT(STRSUBSTNO(text004,"No.") + CRLF + CRLF +
-                        CRLF + CRLF +
-                        Text007 + CRLF);
-                        BodyStream.WRITETEXT(SenderInitial);
-                        BodyStream.WRITETEXT(CRLF + CRLF);
-                        BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                        Body := BodyBlob.Blob;
-                        Send(FALSE);
-                      END;
-                    END;
-                  "Final Apprv. Status"::"on Hold":
-                    IF NOT CONFIRM('Are you sure you want to place this order On-hold?', FALSE) THEN
-                      "Final Apprv. Status" := PaymentReceipt."Final Apprv. Status"::" "
-                    ELSE BEGIN
-                      "Final Approval Time" := CURRENTDATETIME;
-                      UserSetup.GET(Sender);
-                      ToName  := UserSetup."E-Mail";
-                      Subject := STRSUBSTNO(text005,"No.");
-                      UserSetup2.GET(USERID);
-                      SenderEmail := UserSetup2."E-Mail";
-                      SenderInitial := UserSetup2.Initials;
-                      Initials := UserSetup.Initials;
-
-                      WITH TempEmailItem DO BEGIN
-                        "Send to" := ToName;
-                        "Send CC" := SenderEmail;
-                        "Send BCC" := '';
-                        Subject := STRSUBSTNO(text005,"No.");
-
-                        CRLF := '';
-                        CRLF[1] := 13;
-                        CRLF[2] := 10;
-
-                        BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                        BodyStream.WRITETEXT(text006 + Initials + ',');
-                        BodyStream.WRITETEXT(CRLF + CRLF);
-                        BodyStream.WRITETEXT(STRSUBSTNO(text005,"No.") + CRLF + CRLF +
-                        CRLF + CRLF +
-                        Text007 + CRLF);
-                        BodyStream.WRITETEXT(SenderInitial);
-                        BodyStream.WRITETEXT(CRLF + CRLF);
-                        BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                        Body := BodyBlob.Blob;
-                        Send(FALSE);
-                      END;
-                    END;
-                END;
-            end; */
         }
         field(72; "Final Approval Time"; DateTime)
         {
@@ -1148,104 +636,12 @@ table 50103 "Payment/Receipt."
         field(79; "Send for 2nd Apprv."; Boolean)
         {
 
-            /*  trigger OnValidate()
-             begin
-                 IF "Send for 2nd Apprv." THEN
-                   IF NOT CONFIRM('Are you sure you want to request APPROVAL?',FALSE) THEN
-                     "Send for 2nd Apprv." := FALSE
-                   ELSE BEGIN
-                 IF UserSetup.GET(COPYSTR(USERID,15)) THEN
-                     Sender := UserSetup.Name;
-                     "Sent Time"  := CURRENTDATETIME;
-                     "User ID" := COPYSTR(USERID,15);
-                     TESTFIELD(Amount);
-                     TESTFIELD("1st Approval to");
-                     TESTFIELD("1st Apprv. Status",0);
-                     TESTFIELD("2nd Approval to");
-                     TESTFIELD("2nd Apprv. Status",0);
-                     UserSetup.GET("1st Approval to");
-                     "Current pending Person" := "1st Approval to";
-                     ToName  := UserSetup."E-Mail";
-                     Subject := STRSUBSTNO(text001,"No.");
-                     UserSetup2.GET(USERID);
-                     SenderEmail := UserSetup2."E-Mail";
-                     SenderInitial := UserSetup2.Initials;
-                     Initials := UserSetup.Initials;
 
-                     WITH TempEmailItem DO BEGIN
-                       "Send to" := ToName;
-                       "Send CC" := SenderEmail;
-                       "Send BCC" := '';
-                       Subject := STRSUBSTNO(text001,"No.");
-
-                       CRLF := '';
-                       CRLF[1] := 13;
-                       CRLF[2] := 10;
-
-                       BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                       BodyStream.WRITETEXT(text006 + Initials + ',');
-                       BodyStream.WRITETEXT(CRLF + CRLF);
-                       BodyStream.WRITETEXT(STRSUBSTNO(text001,"No.") + CRLF + CRLF +
-                       CRLF + CRLF +
-                       Text007 + CRLF);
-                       BodyStream.WRITETEXT(SenderInitial);
-                       BodyStream.WRITETEXT(CRLF + CRLF);
-                       BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                       Body := BodyBlob.Blob;
-                       Send(FALSE);
-                     END;
-                   END;
-             end; */
         }
         field(80; "Send for 3rd Apprv."; Boolean)
         {
 
-            /*     trigger OnValidate()
-                begin
-                    IF "Send for 3rd Apprv." THEN
-                      IF NOT CONFIRM('Are you sure you want to send for Approval?',FALSE) THEN
-                        "Send for 3rd Apprv." := FALSE
-                      ELSE BEGIN
-                        UserSetup.GET(COPYSTR(USERID,15));
-                        Sender := UserSetup.Name;
-                        "Sent Time"  := CURRENTDATETIME;
-                        "User ID" := COPYSTR(USERID,15);
-                        TESTFIELD(Amount);
-                        TESTFIELD("1st Approval to");
-                        TESTFIELD("1st Apprv. Status",0);
-                        UserSetup.GET("1st Approval to");
-                        "Current pending Person" := "1st Approval to";
-                        ToName  := UserSetup."E-Mail";
-                        Subject := STRSUBSTNO(text001,"No.");
-                        UserSetup2.GET(USERID);
-                        SenderEmail := UserSetup2."E-Mail";
-                        SenderInitial := UserSetup2.Initials;
-                        Initials := UserSetup.Initials;
 
-                        WITH TempEmailItem DO BEGIN
-                          "Send to" := ToName;
-                          "Send CC" := SenderEmail;
-                          "Send BCC" := '';
-                          Subject := STRSUBSTNO(text001,"No.");
-
-                          CRLF := '';
-                          CRLF[1] := 13;
-                          CRLF[2] := 10;
-
-                          BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                          BodyStream.WRITETEXT(text006 + Initials + ',');
-                          BodyStream.WRITETEXT(CRLF + CRLF);
-                          BodyStream.WRITETEXT(STRSUBSTNO(text001,"No.") + CRLF + CRLF +
-                          CRLF + CRLF +
-                          Text007 + CRLF);
-                          BodyStream.WRITETEXT(SenderInitial);
-                          BodyStream.WRITETEXT(CRLF + CRLF);
-                          BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                          Body := BodyBlob.Blob;
-                          Send(FALSE);
-                        END;
-                      END;
-                end; */
         }
         field(81; Comment; Boolean)
         {
@@ -1316,42 +712,7 @@ table 50103 "Payment/Receipt."
         }
         field(91; "Apply Entry"; Integer)
         {
-            TableRelation = IF ("Account Type" = filter('Customer'), "Credit Amount" = FILTER(<> 0)) "Cust. Ledger Entry"."Entry No." WHERE("Customer No." = FIELD("Account No."), Open = filter(true), Positive = filter(true))
-            ELSE
-            IF ("Account Type" = filter('Customer'), "Debit Amount" = FILTER(<> 0)) "Cust. Ledger Entry"."Entry No." WHERE("Customer No." = FIELD("Account No."), Open = filter(true), Positive = filter(false))
-            ELSE
-            IF ("Account Type" = filter('Supplier'), "Debit Amount" = FILTER(<> 0)) "Vendor Ledger Entry"."Entry No." WHERE("Vendor No." = FIELD("Account No."), Open = filter(true), Positive = filter(false))
-            ELSE
-            IF ("Account Type" = filter('Supplier'), "Credit Amount" = FILTER(<> 0)) "Vendor Ledger Entry"."Entry No." WHERE("Vendor No." = FIELD("Account No."), Open = filter(true), Positive = filter(true))
-            ELSE
-            IF ("Account Type" = filter('Staff'), "Credit Amount" = FILTER(<> 0)) "Cust. Ledger Entry"."Entry No." WHERE("Customer No." = FIELD("Account No."), Positive = filter(true), Open = filter(true))
-            ELSE
-            IF ("Account Type" = filter('Staff'), "Debit Amount" = FILTER(<> 0)) "Cust. Ledger Entry"."Entry No." WHERE("Customer No." = FIELD("Account No."), Positive = filter(false))                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              Open = filter(Yes));
 
-            trigger OnValidate()
-            begin
-                CASE "Account Type" OF
-                    "Account Type"::Customer, "Account Type"::Staff:
-                        IF CustLedgEntry.GET("Apply Entry") THEN BEGIN
-                            "Applies-to Doc. Type" := CustLedgEntry."Document Type";
-                            "Applies-to Doc. No." := CustLedgEntry."Document No.";
-                        END ELSE BEGIN
-                            "Applies-to Doc. Type" := 0;
-                            "Applies-to Doc. No." := '';
-                        END;
-
-
-                    "Account Type"::Supplier, "Account Type"::LC:
-                        IF VendLedgEntry.GET("Apply Entry") THEN BEGIN
-                            "Applies-to Doc. Type" := VendLedgEntry."Document Type";
-                            "Applies-to Doc. No." := VendLedgEntry."Document No.";
-                        END ELSE BEGIN
-                            "Applies-to Doc. Type" := 0;
-                            "Applies-to Doc. No." := '';
-                        END;
-
-                END;
-            end;
         }
         field(92; "Approved Doc. No."; Code[20])
         {
@@ -1361,8 +722,8 @@ table 50103 "Payment/Receipt."
         }
         field(94; "Total Amount on Line"; Decimal)
         {
-            /* CalcFormula = Sum("Payment/Receipt Bal. Line."."Amount (LCY)" WHERE ("No."=FIELD("No.")));
-            FieldClass = FlowField; */
+            CalcFormula = Sum("Payment/Receipt Bal. Line."."Amount (LCY)" WHERE("No." = FIELD("No.")));
+            FieldClass = FlowField;
         }
         field(95; "Procurement No."; Code[20])
         {
@@ -1392,7 +753,7 @@ table 50103 "Payment/Receipt."
             trigger OnValidate()
             begin
                 IF POSTerminal.GET("Device Id.") THEN BEGIN
-                    "Balance Account Type" := "Balance Account Type"::Bank;
+                    "Balance Account Type" := "Balance Account Type"::"Bank Account";
                     "Balance Account No." := POSTerminal."Bank No.";
                     "Bal. Acc. Description" := POSTerminal."Bank Name";
                 END ELSE BEGIN
@@ -1432,38 +793,24 @@ table 50103 "Payment/Receipt."
 
     trigger OnDelete()
     begin
-        //IF ("Multiple Balance Account") OR ("Multiple Account") THEN
-        //BEGIN
-        //ReqReptLine.SETRANGE(ReqReptLine.Type,"Document Type");
-        //ReqReptLine.SETRANGE(ReqReptLine."Cash/Cheque","Cash/Cheque");
-        //ReqReptLine.SETRANGE(ReqReptLine."No.","No.");
-        //IF ReqReptLine.FIND('-') THEN
-        //ReqReptLine.DELETEALL;
-        //END;
-        //ERROR('It is not Possible to delete');
+
     end;
 
     trigger OnInsert()
     begin
-        GenSetup.GET;
-        IF "No." = '' THEN BEGIN
-            TestNoSeries;
-            NoSeriesMgt.InitSeries(GetNoSeriesCode, xRec."No. Series", "Posting Date", "No.", "No. Series");
-        END;
-        "Created By" := COPYSTR(USERID, 15);
-        InitRecord;
+
+
     end;
 
     trigger OnModify()
     begin
-        IF ("Multiple Balance Account") OR ("Multiple Account") THEN
-            MESSAGE('Please remember to effect change on the lines!');
-        "Modified By" := COPYSTR(USERID, 15);
+
     end;
 
     trigger OnRename()
     begin
-        ERROR('It is not Possible to Rename');
+
+
     end;
 
     var
@@ -1505,761 +852,22 @@ table 50103 "Payment/Receipt."
         text006: Label 'Dear ';
         Text007: Label 'Regards,';
         BodyTxt: Text;
-        //BodyBlob: Record "99008535";
         BodyStream: OutStream;
         SenderInitial: Text;
         SenderEmail: Text[50];
-        //TempEmailItem: Record "9500" temporary;
         Initials: Text[10];
         CRLF: Text[2];
         PaymentReceipt: Record 50103;
 
 
-    procedure InitRecord()
-    begin
-        CASE "Document Type" OF
-            "Document Type"::Receipt:
-                BEGIN
-                    IF "Cash/Cheque" = "Cash/Cheque"::Cash THEN BEGIN
-                        GenSetup.TESTFIELD("Cash Receipt No.");
-                        NoSeriesMgt.SetDefaultSeries("No. Series", GenSetup."Cash Receipt No.");
-                    END
-                    ELSE BEGIN
-                        GenSetup.TESTFIELD("Cheque Receipt No.");
-                        NoSeriesMgt.SetDefaultSeries("No. Series", GenSetup."Cheque Receipt No.");
-                    END;
-                END;
-            "Document Type"::Requisition:
-                BEGIN
-                    IF "Cash/Cheque" = "Cash/Cheque"::Cash THEN BEGIN
-                        GenSetup.TESTFIELD("Cash Requisition No.");
-                        NoSeriesMgt.SetDefaultSeries("No. Series", GenSetup."Cash Requisition No.");
-                    END
-                    ELSE BEGIN
-                        GenSetup.TESTFIELD("Cheque Requisition No.");
-                        NoSeriesMgt.SetDefaultSeries("No. Series", GenSetup."Cheque Requisition No.");
-                    END
-                END;
-            "Document Type"::Journal:
-                BEGIN
-                    GenSetup.TESTFIELD("Journal Voucher No.");
-                    NoSeriesMgt.SetDefaultSeries("No. Series", GenSetup."Journal Voucher No.");
-                END;
-            "Document Type"::"e-Receipt":
-                BEGIN
-                    GenSetup.TESTFIELD(GenSetup."E-Receipt Voucher No.");
-                    NoSeriesMgt.SetDefaultSeries("No. Series", GenSetup."E-Receipt Voucher No.");
-                END;
-            "Document Type"::"e-Pay":
-                BEGIN
-                    GenSetup.TESTFIELD(GenSetup."E-Payment Voucher No.");
-                    NoSeriesMgt.SetDefaultSeries("No. Series", GenSetup."E-Payment Voucher No.");
-                END;
-        END;
 
 
-        "Posting Date" := WORKDATE;
-        "Document Date" := WORKDATE;
-    end;
 
 
-    procedure AssistEdit("OldP/R": Record 50103): Boolean
-    begin
-        /* WITH "OldP/R" DO BEGIN
-             "OldP/R" := Rec;
-             GenSetup.GET;
-             CASE "Document Type" OF
-                 "Document Type"::Receipt:
-                     BEGIN
-                         IF Rec."Cash/Cheque" = "Cash/Cheque"::Cash THEN BEGIN
-                             IF NoSeriesMgt.SelectSeries(GenSetup."Cash Receipt No.", "OldP/R"."No. Series", "No. Series") THEN BEGIN
-                                 GenSetup.GET;
-                                 NoSeriesMgt.SetSeries("No.");
-                                 Rec := "OldP/R";
-                                 EXIT(TRUE);
-                             END;
-                         END
-                         ELSE BEGIN
-                             IF NoSeriesMgt.SelectSeries(GenSetup."Cheque Receipt No.", "OldP/R"."No. Series", "No. Series") THEN BEGIN
-                                 GenSetup.GET;
-                                 NoSeriesMgt.SetSeries("No.");
-                                 Rec := "OldP/R";
-                                 EXIT(TRUE);
-                             END;
-                         END;
-                     END;
-
-                 "Document Type"::Requisition:
-                     BEGIN
-                         IF "Cash/Cheque" = "Cash/Cheque"::Cash THEN BEGIN
-                             IF NoSeriesMgt.SelectSeries(GenSetup."Cash Requisition No.", "OldP/R"."No. Series", "No. Series") THEN BEGIN
-                                 GenSetup.GET;
-                                 NoSeriesMgt.SetSeries("No.");
-                                 Rec := "OldP/R";
-                                 EXIT(TRUE);
-                             END;
-                         END
-                         ELSE BEGIN
-                             IF NoSeriesMgt.SelectSeries(GenSetup."Cheque Requisition No.", "OldP/R"."No. Series", "No. Series") THEN BEGIN
-                                 GenSetup.GET;
-                                 NoSeriesMgt.SetSeries("No.");
-                                 Rec := "OldP/R";
-                                 EXIT(TRUE);
-                             END;
-                         END;
-                     END;
-                 "Document Type"::Journal:
-                     BEGIN
-                         IF NoSeriesMgt.SelectSeries(GenSetup."Journal Voucher No.", "OldP/R"."No. Series", "No. Series") THEN BEGIN
-                             GenSetup.GET;
-                             NoSeriesMgt.SetSeries("No.");
-                             Rec := "OldP/R";
-                             EXIT(TRUE);
-                         END;
-                     END;
-                 "Document Type"::"e-Pay":
-                     BEGIN
-                         IF NoSeriesMgt.SelectSeries(GenSetup."E-Payment Voucher No.", "OldP/R"."No. Series", "No. Series") THEN BEGIN
-                             GenSetup.GET;
-                             NoSeriesMgt.SetSeries("No.");
-                             Rec := "OldP/R";
-                             EXIT(TRUE);
-                         END;
-                     END;
-                 "Document Type"::"e-Receipt":
-                     BEGIN
-                         IF NoSeriesMgt.SelectSeries(GenSetup."E-Receipt Voucher No.", "OldP/R"."No. Series", "No. Series") THEN BEGIN
-                             GenSetup.GET;
-                             NoSeriesMgt.SetSeries("No.");
-                             Rec := "OldP/R";
-                             EXIT(TRUE);
-                         END;
-                     END
-             END;
-         END; */
-    end;
 
 
-    procedure TestNoSeries()
-    begin
-        CASE "Document Type" OF
-            "Document Type"::Receipt:
-                BEGIN
-                    IF "Cash/Cheque" = "Cash/Cheque"::Cash THEN
-                        GenSetup.TESTFIELD("Cash Receipt No.")
-                    ELSE
-                        GenSetup.TESTFIELD("Cheque Receipt No.");
-                END;
-            "Document Type"::Requisition:
-                BEGIN
-                    IF "Cash/Cheque" = "Cash/Cheque"::Cash THEN
-                        GenSetup.TESTFIELD("Cash Requisition No.")
-                    ELSE
-                        GenSetup.TESTFIELD("Cheque Requisition No.");
-                END;
-            "Document Type"::Journal:
-                GenSetup.TESTFIELD(GenSetup."Journal Voucher No.");
-
-            "Document Type"::"e-Pay":
-                GenSetup.TESTFIELD(GenSetup."E-Payment Voucher No.");
-
-            "Document Type"::"e-Receipt":
-                GenSetup.TESTFIELD(GenSetup."E-Receipt Voucher No.");
-
-        END;
-    end;
-
-    local procedure GetNoSeriesCode(): Code[10]
-    begin
-        CASE "Document Type" OF
-            "Document Type"::Receipt:
-                BEGIN
-                    IF Rec."Cash/Cheque" = "Cash/Cheque"::Cash THEN
-                        EXIT(GenSetup."Cash Receipt No.")
-                    ELSE
-                        EXIT(GenSetup."Cheque Receipt No.");
-                END;
-            "Document Type"::Requisition:
-                BEGIN
-                    IF "Cash/Cheque" = "Cash/Cheque"::Cash THEN
-                        EXIT(GenSetup."Cash Requisition No.")
-                    ELSE
-                        EXIT(GenSetup."Cheque Requisition No.");
-                END;
-            "Document Type"::Journal:
-                EXIT(GenSetup."Journal Voucher No.");
-            "Document Type"::"e-Pay":
-                EXIT(GenSetup."E-Payment Voucher No.");
-            "Document Type"::"e-Receipt":
-                EXIT(GenSetup."E-Receipt Voucher No.");
-
-        END;
-    end;
 
 
-    procedure Postgl(reqrec: Record 50103; PreviewMode: Boolean)
-    var
-        GlJour: Record 81;
-        "GlJou 2": Record 81;
-        GLENTRY: Record 17;
-        GenJnlLine: Record 81;
-        GenJournalLine: Record 81;
-    begin
 
-        /*  IF "Created By" = COPYSTR(USERID, 15) THEN
-              ERROR('You cannot post!');
-          GlJour.LOCKTABLE;
-          DelResidualJnl(reqrec."Document Type", reqrec."Cash/Cheque");
-          ValidateMultipleAcc(reqrec);
-
-          //suspended temporarily for Abanum, Dada.
-          GlJour.INIT;
-          CASE reqrec."Document Type" OF
-              reqrec."Document Type"::Receipt:
-                  GlJour."Journal Template Name" := 'CASHRCPT';
-              reqrec."Document Type"::Requisition:
-                  GlJour."Journal Template Name" := 'Payments';
-              2, 3, 4:
-                  GlJour."Journal Template Name" := 'General';
-          END;
-
-          IF reqrec."Cash/Cheque" = reqrec."Cash/Cheque"::Cash THEN
-              GlJour."Journal Batch Name" := 'Cash'
-          ELSE
-              GlJour."Journal Batch Name" := 'Cheque';
-          IF reqrec."Document Type" > 1 THEN
-              GlJour."Journal Batch Name" := 'Voucher';
-
-          //added by santus - begin
-          //check and delete existing entries on the journal line
-          GenJnlLine.SETRANGE("Journal Template Name", GlJour."Journal Template Name");
-          GenJnlLine.SETRANGE("Journal Batch Name", GlJour."Journal Batch Name");
-          IF GenJnlLine.FINDSET THEN
-              GenJnlLine.DELETEALL;
-          //added by santus - end
-
-          GlJour."Line No." := 10000;
-          CASE reqrec."Account Type" OF
-              1, 5:
-                  GlJour."Account Type" := GlJour."Account Type"::Customer;
-              2, 6:
-                  GlJour."Account Type" := GlJour."Account Type"::Vendor;
-              ELSE
-                  GlJour."Account Type" := reqrec."Account Type";
-          END;
-          GlJour.VALIDATE(GlJour."Posting Date", reqrec."Posting Date");
-          GlJour.VALIDATE(GlJour."Account No.", reqrec."Account No.");
-          IF reqrec."Document Type" = reqrec."Document Type"::Requisition THEN
-              GlJour."Document Type" := GlJour."Document Type"::" ";
-          GlJour.VALIDATE(GlJour."Document No.", reqrec."No.");
-          GlJour.Description := COPYSTR(reqrec."Transaction Description", 1, 50);
-          GlJour.VALIDATE(GlJour."Shortcut Dimension 1 Code", reqrec."Global Dimension 1 Code");
-          GlJour.VALIDATE(GlJour."Shortcut Dimension 2 Code", reqrec."Global Dimension 2 Code");
-          GlJour.VALIDATE(GlJour."Currency Code", reqrec."Currency Code");
-          GlJour.VALIDATE(GlJour."Currency Factor", reqrec."Currency Factor");
-          GlJour."Procurement No." := "Procurement No."; //codeware
-          GlJour."Job No." := reqrec."Job Code";
-          GlJour."Job Task No." := reqrec."Job Task code";
-          GlJour."Job Line Type" := reqrec."Job Line Type";
-          GlJour."Loan ID" := reqrec."Loan ID";
-          GlJour."Loan Type" := reqrec."Loan Type";
-          GlJour."Applies-to Doc. Type" := reqrec."Applies-to Doc. Type";
-          GlJour.VALIDATE(GlJour."Applies-to Doc. No.", reqrec."Applies-to Doc. No.");
-          //GlJour."Form M No.":= reqrec."Form M No.";
-          IF GlJour."Account Type" <> GlJour."Account Type"::"Fixed Asset" THEN BEGIN
-              GlJour."Depreciation Book Code" := '';
-              GlJour."Maintenance Code" := '';
-              GlJour."FA Posting Type" := 0;
-          END
-          ELSE BEGIN
-              GlJour.VALIDATE(GlJour."FA Posting Type", reqrec."FA Posting Type");
-              GlJour.VALIDATE(GlJour."Maintenance Code", reqrec."Maintenance Code");
-          END;
-          //TO GENERATE POSTING FIRST LEG LINE FOR MULTIPLE BALANCE LINES
-          IF reqrec."Multiple Balance Account" = TRUE THEN BEGIN
-              GlJour."Bal. Account Type" := 0;
-              GlJour.VALIDATE(GlJour."Bal. Account No.", '');
-          END;
-          IF "Multiple Account" = TRUE THEN BEGIN
-              GlJour."Account Type" := reqrec."Balance Account Type";
-              GlJour.VALIDATE(GlJour."Account No.", reqrec."Balance Account No.");
-              GlJour.VALIDATE(GlJour."Currency Code", reqrec."Currency Code");
-              GlJour.VALIDATE(GlJour."Currency Factor", reqrec."Currency Factor");
-              GlJour.Description := COPYSTR(reqrec."Transaction Description", 1, 50);
-              GlJour.VALIDATE(GlJour."Shortcut Dimension 1 Code", reqrec."Balance Department Code");
-              GlJour.VALIDATE(GlJour."Shortcut Dimension 2 Code", reqrec."Balance Branch Code");
-              IF GlJour."Account Type" <> GlJour."Account Type"::"Fixed Asset" THEN BEGIN
-                  GlJour."Depreciation Book Code" := '';
-                  GlJour."Maintenance Code" := '';
-                  GlJour."FA Posting Type" := 0;
-              END
-              ELSE BEGIN
-                  GlJour.VALIDATE(GlJour."FA Posting Type", reqrec."FA Posting Type");
-                  GlJour.VALIDATE(GlJour."Maintenance Code", reqrec."Maintenance Code");
-              END;
-              GlJour."Bal. Account Type" := 0;
-              GlJour.VALIDATE(GlJour."Bal. Account No.", '');
-          END;
-          GlJour.VALIDATE(GlJour.Amount, reqrec.Amount);
-          GlJour.VALIDATE(GlJour."Job Quantity", reqrec."Job Quantity");
-          IF GlJour."Account Type" = 0 THEN BEGIN
-              GlJour."Gen. Prod. Posting Group" := '';
-              GlJour."Gen. Bus. Posting Group" := '';
-              GlJour."VAT Bus. Posting Group" := '';
-              GlJour."VAT Prod. Posting Group" := '';
-              GlJour."Gen. Posting Type" := 0;
-          END;
-          GlJour."External Document No." := reqrec."External Document No.";
-          GlJour."Document Date" := reqrec."Document Date";
-          IF GlJour."Account Type" = 0 THEN BEGIN
-              GlJour."Gen. Prod. Posting Group" := '';
-              GlJour."Gen. Bus. Posting Group" := '';
-              GlJour."VAT Bus. Posting Group" := '';
-              GlJour."VAT Prod. Posting Group" := '';
-          END;
-          IF GlJour.Amount <> 0 THEN BEGIN
-              IF NOT GlJour.INSERT THEN GlJour.MODIFY;
-              GlJour.VALIDATE(GlJour."Shortcut Dimension 1 Code", reqrec."Global Dimension 1 Code");
-              GlJour.VALIDATE(GlJour."Shortcut Dimension 2 Code", reqrec."Global Dimension 2 Code");
-              GlJour.MODIFY(TRUE);
-          END;
-          // Generate the Second Leg for straight Transaction
-          IF (reqrec."Multiple Balance Account" = FALSE) AND (reqrec."Multiple Account" = FALSE) THEN BEGIN
-              "GlJou 2" := GlJour;
-              "GlJou 2"."Line No." := GlJour."Line No." + 10000;
-              "GlJou 2"."Account Type" := reqrec."Balance Account Type";
-              "GlJou 2".VALIDATE("GlJou 2"."Account No.", reqrec."Balance Account No.");
-              "GlJou 2".Description := COPYSTR(reqrec."Transaction Description", 1, 50);
-              IF "GlJou 2"."Account Type" = 0 THEN BEGIN
-                  "GlJou 2"."Gen. Prod. Posting Group" := '';
-                  "GlJou 2"."Gen. Bus. Posting Group" := '';
-                  "GlJou 2"."VAT Bus. Posting Group" := '';
-                  "GlJou 2"."VAT Prod. Posting Group" := '';
-                  "GlJou 2"."Gen. Posting Type" := 0;
-              END;
-              "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 1 Code", reqrec."Balance Department Code");
-              "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 2 Code", reqrec."Balance Branch Code");
-              "GlJou 2"."Bal. Account Type" := 0;
-              "GlJou 2".VALIDATE("GlJou 2".Amount, -reqrec."Amount (LCY)");
-
-              IF "GlJou 2"."Account Type" = 0 THEN BEGIN
-                  "GlJou 2"."Gen. Prod. Posting Group" := '';
-                  "GlJou 2"."Gen. Bus. Posting Group" := '';
-                  "GlJou 2"."VAT Bus. Posting Group" := '';
-                  "GlJou 2"."VAT Prod. Posting Group" := '';
-              END;
-              IF "GlJou 2"."Account Type" <> "GlJou 2"."Account Type"::"Fixed Asset" THEN BEGIN
-                  "GlJou 2"."Depreciation Book Code" := '';
-                  "GlJou 2"."Maintenance Code" := '';
-                  "GlJou 2"."FA Posting Type" := 0;
-              END
-              ELSE BEGIN
-                  "GlJou 2".VALIDATE("GlJou 2"."FA Posting Type", reqrec."FA Posting Type");
-                  "GlJou 2".VALIDATE("GlJou 2"."Maintenance Code", reqrec."Maintenance Code");
-              END;
-              IF "GlJou 2".Amount <> 0 THEN BEGIN
-                  IF NOT "GlJou 2".INSERT THEN "GlJou 2".MODIFY;
-                  "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 1 Code", reqrec."Balance Department Code");
-                  "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 2 Code", reqrec."Balance Branch Code");
-                  "GlJou 2".MODIFY(TRUE);
-              END;
-          END
-          ELSE
-          //TO GENERATE POSTING LINES FOR MULTIPLE SECOND LEGS
-          BEGIN
-              "GlJou 2" := GlJour;
-              LineNo := "GlJou 2"."Line No.";
-              ReqReptLine.SETRANGE(ReqReptLine.Type, reqrec."Document Type");
-              ReqReptLine.SETRANGE(ReqReptLine."Cash/Cheque", reqrec."Cash/Cheque");
-              ReqReptLine.SETRANGE(ReqReptLine."No.", reqrec."No.");
-              IF ReqReptLine.FIND('-') THEN
-                  REPEAT
-                      LineNo := LineNo + 10000;
-                      ReqReptLine.TESTFIELD(ReqReptLine.Amount);
-                      ReqReptLine.TESTFIELD(ReqReptLine."Account No.");
-                      "GlJou 2"."Line No." := LineNo;
-                      CASE ReqReptLine."Account Type" OF
-                          1, 5:
-                              "GlJou 2"."Account Type" := ReqReptLine."Account Type"::Customer;
-                          2, 6:
-                              "GlJou 2"."Account Type" := ReqReptLine."Account Type"::Supplier;
-                          ELSE
-                              "GlJou 2"."Account Type" := ReqReptLine."Account Type";
-                      END;
-                      "GlJou 2".VALIDATE("GlJou 2"."Account No.", ReqReptLine."Account No.");
-                      "GlJou 2".VALIDATE("GlJou 2"."Currency Code", ReqReptLine."Currency Code");
-                      "GlJou 2".VALIDATE("GlJou 2"."Currency Factor", ReqReptLine."Currency Factor");
-                      "GlJou 2".Description := COPYSTR(ReqReptLine."Transaction Description", 1, 50);
-                      "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 1 Code", ReqReptLine."Department Code");
-                      "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 2 Code", ReqReptLine."Branch Code");
-                      "GlJou 2".VALIDATE("GlJou 2".Amount, ReqReptLine.Amount);
-                      "GlJou 2"."Loan ID" := ReqReptLine."Loan ID";
-                      "GlJou 2"."Loan Type" := ReqReptLine."Loan Type";
-                      "GlJou 2"."Applies-to Doc. Type" := ReqReptLine."Applies-to Doc. Type";
-                      "GlJou 2".VALIDATE("GlJou 2"."Applies-to Doc. No.", ReqReptLine."Applies-to Doc. No.");
-                      //"GlJou 2"."Form M No."   := ReqReptLine."Form M No.";
-                      "GlJou 2".VALIDATE("GlJou 2"."Job No.", ReqReptLine."Job Code");
-                      "GlJou 2".VALIDATE("GlJou 2"."Job Task No.", ReqReptLine."Job Task code");
-                      "GlJou 2"."Job Line Type" := ReqReptLine."Job Line Type"::Contract;
-                      IF ReqReptLine."Job Code" <> '' THEN BEGIN
-                          //"GlJou 2".VALIDATE("GlJou 2"."Job Unit Cost",ReqReptLine."Amount (LCY)");
-                          "GlJou 2".VALIDATE("GlJou 2"."Job Quantity", 1);
-                      END;
-                      "GlJou 2"."Bal. Account Type" := 0;
-                      IF "GlJou 2"."Account Type" = 0 THEN BEGIN
-                          "GlJou 2"."Gen. Prod. Posting Group" := '';
-                          "GlJou 2"."Gen. Bus. Posting Group" := '';
-                          "GlJou 2"."VAT Bus. Posting Group" := '';
-                          "GlJou 2"."VAT Prod. Posting Group" := '';
-                          "GlJou 2"."Gen. Posting Type" := 0;
-                      END;
-                      IF "GlJou 2"."Account Type" <> "GlJou 2"."Account Type"::"Fixed Asset" THEN BEGIN
-                          "GlJou 2"."Depreciation Book Code" := '';
-                          "GlJou 2"."Maintenance Code" := '';
-                          "GlJou 2"."FA Posting Type" := 0;
-                      END
-                      ELSE BEGIN
-                          "GlJou 2".VALIDATE("GlJou 2"."FA Posting Type", ReqReptLine."FA Posting Type");
-                          "GlJou 2".VALIDATE("GlJou 2"."Maintenance Code", ReqReptLine."Maintenance Code");
-                      END;
-                      IF "GlJou 2".Amount <> 0 THEN BEGIN
-                          IF NOT "GlJou 2".INSERT THEN "GlJou 2".MODIFY;
-                          "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 1 Code", ReqReptLine."Department Code");
-                          "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 2 Code", ReqReptLine."Branch Code");
-                          "GlJou 2".MODIFY(TRUE);
-                      END;
-                  UNTIL ReqReptLine.NEXT = 0;
-          END;
-          COMMIT;
-
-          IF NOT PreviewMode THEN BEGIN
-              GenJournalLinex.RESET;
-              GenJournalLinex.SETFILTER("Journal Template Name", GlJour."Journal Template Name");
-              GenJournalLinex.SETFILTER("Journal Batch Name", GlJour."Journal Batch Name");
-              IF GenJournalLinex.FINDSET THEN
-                  GenJnlPost.RUN(GenJournalLinex)
-          END ELSE BEGIN
-              GenJournalLinex.RESET;
-              GenJournalLinex.SETFILTER("Journal Template Name", GlJour."Journal Template Name");
-              GenJournalLinex.SETFILTER("Journal Batch Name", GlJour."Journal Batch Name");
-              IF GenJournalLinex.FINDSET THEN BEGIN
-                  COMMIT;
-                  GenJnlPost.Preview(GenJournalLinex);
-              END;
-          END;
-
-
-          //Update as posted
-          GLENTRY.SETCURRENTKEY("Document No.", "Posting Date");
-          GLENTRY.SETRANGE("Document No.", "No.");
-          GLENTRY.SETRANGE("Posting Date", "Posting Date");
-          IF GLENTRY.FINDFIRST THEN BEGIN
-              Posted := TRUE;
-              MODIFY;
-          END
-          */
-    end;
-
-
-    procedure ValidateMultipleAcc(recpReq: Record 50103)
-    begin
-
-        /* IF (recpReq."Multiple Balance Account") OR (recpReq."Multiple Account") THEN BEGIN
-             //recpReq.TESTFIELD(recpReq."Balance Account No.",'');
-             recpReq.CALCFIELDS(recpReq."Balance Amount");
-             IF ABS(recpReq."Amount (LCY)") <> ABS(recpReq."Balance Amount") THEN
-                 ERROR('Transaction Not Balanced check Your values');
-         END;
-         //recpReq.TESTFIELD(recpReq."Transaction Description");
-         recpReq.TESTFIELD(recpReq."Account No.");
-         IF recpReq."Document Type" <> recpReq."Document Type"::Journal THEN
-             recpReq.TESTFIELD(recpReq.Amount);
-             */
-    end;
-
-
-    /* procedure Navigate()
-    var
-        NavigateForm: Page "344";
-    begin
-        NavigateForm.SetDoc("Posting Date", "No.");
-        NavigateForm.RUN;
-    end; */
-
-
-    procedure DelResidualJnl(DocType: Option Receipt,Requisition,Journal,"e-Pay","e-Receipt"; ReqType: Option Cash,Cheque)
-    var
-        deljnl: Record 81;
-    begin
-        CASE DocType OF
-            DocType::Receipt:
-                deljnl.SETRANGE(deljnl."Journal Template Name", 'CASHRCPT');
-            DocType::Requisition:
-                deljnl.SETRANGE(deljnl."Journal Template Name", 'Payments');
-            2, 3, 4:
-                deljnl.SETRANGE(deljnl."Journal Template Name", 'General');
-        END;
-        CASE ReqType OF
-            ReqType::Cash:
-                deljnl.SETRANGE(deljnl."Journal Batch Name", 'cash');
-            ReqType::Cheque:
-                deljnl.SETRANGE(deljnl."Journal Batch Name", 'cheque');
-        END;
-        IF DocType > 1 THEN
-            deljnl.SETRANGE(deljnl."Journal Batch Name", 'voucher');
-
-        /*   IF deljnl.FINDSET(TRUE, FALSE) THEN
-              deljnl.DELETEALL(TRUE); */
-    end;
-
-
-    procedure Testgl(reqrec: Record 50103)
-    var
-        GlJour: Record 81;
-        "GlJou 2": Record 81;
-        GLENTRY: Record 17;
-        GenJnlLine: Record 81;
-        GenJournalLine: Record 81;
-    begin
-
-        /* IF "Created By" = COPYSTR(USERID, 15) THEN
-            ERROR('You cannot post!');
-
-        GlJour.LOCKTABLE;
-
-        DelResidualJnl(reqrec."Document Type", reqrec."Cash/Cheque");
-        ValidateMultipleAcc(reqrec);
-
-        //suspended temporarily for Abanum, Dada.
-        GlJour.INIT;
-        CASE reqrec."Document Type" OF
-            reqrec."Document Type"::Receipt:
-                GlJour."Journal Template Name" := 'CASHRCPT';
-            reqrec."Document Type"::Requisition:
-                GlJour."Journal Template Name" := 'Payments';
-            2, 3, 4:
-                GlJour."Journal Template Name" := 'General';
-        END;
-
-        IF reqrec."Cash/Cheque" = reqrec."Cash/Cheque"::Cash THEN
-            GlJour."Journal Batch Name" := 'Cash'
-        ELSE
-            GlJour."Journal Batch Name" := 'Cheque';
-
-        IF reqrec."Document Type" > 1 THEN
-            GlJour."Journal Batch Name" := 'Voucher';
-
-        //added by santus - begin
-        //check and delete existing entries on the journal line
-        GenJnlLine.SETRANGE("Journal Template Name", GlJour."Journal Template Name");
-        GenJnlLine.SETRANGE("Journal Batch Name", GlJour."Journal Batch Name");
-        IF GenJnlLine.FINDSET THEN
-            GenJnlLine.DELETEALL;
-        //added by santus - end
-
-        GlJour."Line No." := 10000;
-        CASE reqrec."Account Type" OF
-            1, 5:
-                GlJour."Account Type" := GlJour."Account Type"::Customer;
-            2, 6:
-                GlJour."Account Type" := GlJour."Account Type"::Vendor;
-            ELSE
-                GlJour."Account Type" := reqrec."Account Type";
-        END;
-        GlJour.VALIDATE(GlJour."Posting Date", reqrec."Posting Date");
-        GlJour.VALIDATE(GlJour."Account No.", reqrec."Account No.");
-        IF reqrec."Document Type" = reqrec."Document Type"::Requisition THEN
-            GlJour."Document Type" := GlJour."Document Type"::" ";
-        GlJour.VALIDATE(GlJour."Document No.", reqrec."No.");
-        GlJour.Description := COPYSTR(reqrec."Transaction Description", 1, 50);
-        GlJour.VALIDATE(GlJour."Shortcut Dimension 1 Code", reqrec."Global Dimension 1 Code");
-        GlJour.VALIDATE(GlJour."Shortcut Dimension 2 Code", reqrec."Global Dimension 2 Code");
-        GlJour.VALIDATE(GlJour."Currency Code", reqrec."Currency Code");
-        GlJour.VALIDATE(GlJour."Currency Factor", reqrec."Currency Factor");
-        GlJour."Procurement No." := "Procurement No."; //codeware
-        GlJour."Job No." := reqrec."Job Code";
-        GlJour."Job Task No." := reqrec."Job Task code";
-        GlJour."Job Line Type" := reqrec."Job Line Type";
-        GlJour."Loan ID" := reqrec."Loan ID";
-        GlJour."Loan Type" := reqrec."Loan Type";
-        GlJour."Applies-to Doc. Type" := reqrec."Applies-to Doc. Type";
-        GlJour.VALIDATE(GlJour."Applies-to Doc. No.", reqrec."Applies-to Doc. No.");
-        //GlJour."Form M No.":= reqrec."Form M No.";
-        IF GlJour."Account Type" <> GlJour."Account Type"::"Fixed Asset" THEN BEGIN
-            GlJour."Depreciation Book Code" := '';
-            GlJour."Maintenance Code" := '';
-            GlJour."FA Posting Type" := 0;
-        END
-        ELSE BEGIN
-            GlJour.VALIDATE(GlJour."FA Posting Type", reqrec."FA Posting Type");
-            GlJour.VALIDATE(GlJour."Maintenance Code", reqrec."Maintenance Code");
-        END;
-        //TO GENERATE POSTING FIRST LEG LINE FOR MULTIPLE BALANCE LINES
-        IF reqrec."Multiple Balance Account" = TRUE THEN BEGIN
-            GlJour."Bal. Account Type" := 0;
-            GlJour.VALIDATE(GlJour."Bal. Account No.", '');
-        END;
-        IF "Multiple Account" = TRUE THEN BEGIN
-            GlJour."Account Type" := reqrec."Balance Account Type";
-            GlJour.VALIDATE(GlJour."Account No.", reqrec."Balance Account No.");
-            GlJour.VALIDATE(GlJour."Currency Code", reqrec."Currency Code");
-            GlJour.VALIDATE(GlJour."Currency Factor", reqrec."Currency Factor");
-            GlJour.Description := COPYSTR(reqrec."Transaction Description", 1, 50);
-            GlJour.VALIDATE(GlJour."Shortcut Dimension 1 Code", reqrec."Balance Department Code");
-            GlJour.VALIDATE(GlJour."Shortcut Dimension 2 Code", reqrec."Balance Branch Code");
-            IF GlJour."Account Type" <> GlJour."Account Type"::"Fixed Asset" THEN BEGIN
-                GlJour."Depreciation Book Code" := '';
-                GlJour."Maintenance Code" := '';
-                GlJour."FA Posting Type" := 0;
-            END
-            ELSE BEGIN
-                GlJour.VALIDATE(GlJour."FA Posting Type", reqrec."FA Posting Type");
-                GlJour.VALIDATE(GlJour."Maintenance Code", reqrec."Maintenance Code");
-            END;
-            GlJour."Bal. Account Type" := 0;
-            GlJour.VALIDATE(GlJour."Bal. Account No.", '');
-        END;
-        GlJour.VALIDATE(GlJour.Amount, reqrec.Amount);
-        GlJour.VALIDATE(GlJour."Job Quantity", reqrec."Job Quantity");
-        IF GlJour."Account Type" = 0 THEN BEGIN
-            GlJour."Gen. Prod. Posting Group" := '';
-            GlJour."Gen. Bus. Posting Group" := '';
-            GlJour."VAT Bus. Posting Group" := '';
-            GlJour."VAT Prod. Posting Group" := '';
-            GlJour."Gen. Posting Type" := 0;
-        END;
-        GlJour."External Document No." := reqrec."External Document No.";
-        GlJour."Document Date" := reqrec."Document Date";
-        IF GlJour."Account Type" = 0 THEN BEGIN
-            GlJour."Gen. Prod. Posting Group" := '';
-            GlJour."Gen. Bus. Posting Group" := '';
-            GlJour."VAT Bus. Posting Group" := '';
-            GlJour."VAT Prod. Posting Group" := '';
-        END;
-        IF GlJour.Amount <> 0 THEN BEGIN
-            IF NOT GlJour.INSERT THEN GlJour.MODIFY;
-            GlJour.VALIDATE(GlJour."Shortcut Dimension 1 Code", reqrec."Global Dimension 1 Code");
-            GlJour.VALIDATE(GlJour."Shortcut Dimension 2 Code", reqrec."Global Dimension 2 Code");
-            GlJour.MODIFY(TRUE);
-        END;
-        // Generate the Second Leg for straight Transaction
-        IF (reqrec."Multiple Balance Account" = FALSE) AND (reqrec."Multiple Account" = FALSE) THEN BEGIN
-            "GlJou 2" := GlJour;
-            "GlJou 2"."Line No." := GlJour."Line No." + 10000;
-            "GlJou 2"."Account Type" := reqrec."Balance Account Type";
-            "GlJou 2".VALIDATE("GlJou 2"."Account No.", reqrec."Balance Account No.");
-            "GlJou 2".Description := COPYSTR(reqrec."Transaction Description", 1, 50);
-            IF "GlJou 2"."Account Type" = 0 THEN BEGIN
-                "GlJou 2"."Gen. Prod. Posting Group" := '';
-                "GlJou 2"."Gen. Bus. Posting Group" := '';
-                "GlJou 2"."VAT Bus. Posting Group" := '';
-                "GlJou 2"."VAT Prod. Posting Group" := '';
-                "GlJou 2"."Gen. Posting Type" := 0;
-            END;
-            "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 1 Code", reqrec."Balance Department Code");
-            "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 2 Code", reqrec."Balance Branch Code");
-            "GlJou 2"."Bal. Account Type" := 0;
-            "GlJou 2".VALIDATE("GlJou 2".Amount, -reqrec."Amount (LCY)");
-
-            IF "GlJou 2"."Account Type" = 0 THEN BEGIN
-                "GlJou 2"."Gen. Prod. Posting Group" := '';
-                "GlJou 2"."Gen. Bus. Posting Group" := '';
-                "GlJou 2"."VAT Bus. Posting Group" := '';
-                "GlJou 2"."VAT Prod. Posting Group" := '';
-            END;
-            IF "GlJou 2"."Account Type" <> "GlJou 2"."Account Type"::"Fixed Asset" THEN BEGIN
-                "GlJou 2"."Depreciation Book Code" := '';
-                "GlJou 2"."Maintenance Code" := '';
-                "GlJou 2"."FA Posting Type" := 0;
-            END
-            ELSE BEGIN
-                "GlJou 2".VALIDATE("GlJou 2"."FA Posting Type", reqrec."FA Posting Type");
-                "GlJou 2".VALIDATE("GlJou 2"."Maintenance Code", reqrec."Maintenance Code");
-            END;
-            IF "GlJou 2".Amount <> 0 THEN BEGIN
-                IF NOT "GlJou 2".INSERT THEN "GlJou 2".MODIFY;
-                "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 1 Code", reqrec."Balance Department Code");
-                "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 2 Code", reqrec."Balance Branch Code");
-                "GlJou 2".MODIFY(TRUE);
-            END;
-        END
-        ELSE
-        //TO GENERATE POSTING LINES FOR MULTIPLE SECOND LEGS
-        BEGIN
-            "GlJou 2" := GlJour;
-            LineNo := "GlJou 2"."Line No.";
-            ReqReptLine.SETRANGE(ReqReptLine.Type, reqrec."Document Type");
-            ReqReptLine.SETRANGE(ReqReptLine."Cash/Cheque", reqrec."Cash/Cheque");
-            ReqReptLine.SETRANGE(ReqReptLine."No.", reqrec."No.");
-            IF ReqReptLine.FIND('-') THEN
-                REPEAT
-                    LineNo := LineNo + 10000;
-                    ReqReptLine.TESTFIELD(ReqReptLine.Amount);
-                    ReqReptLine.TESTFIELD(ReqReptLine."Account No.");
-                    "GlJou 2"."Line No." := LineNo;
-                    CASE ReqReptLine."Account Type" OF
-                        1, 5:
-                            "GlJou 2"."Account Type" := ReqReptLine."Account Type"::Customer;
-                        2, 6:
-                            "GlJou 2"."Account Type" := ReqReptLine."Account Type"::Supplier;
-                        ELSE
-                            "GlJou 2"."Account Type" := ReqReptLine."Account Type";
-                    END;
-                    "GlJou 2".VALIDATE("GlJou 2"."Account No.", ReqReptLine."Account No.");
-                    "GlJou 2".VALIDATE("GlJou 2"."Currency Code", ReqReptLine."Currency Code");
-                    "GlJou 2".VALIDATE("GlJou 2"."Currency Factor", ReqReptLine."Currency Factor");
-                    "GlJou 2".Description := COPYSTR(ReqReptLine."Transaction Description", 1, 50);
-                    "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 1 Code", ReqReptLine."Department Code");
-                    "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 2 Code", ReqReptLine."Branch Code");
-                    "GlJou 2".VALIDATE("GlJou 2".Amount, ReqReptLine.Amount);
-                    "GlJou 2"."Loan ID" := ReqReptLine."Loan ID";
-                    "GlJou 2"."Loan Type" := ReqReptLine."Loan Type";
-                    "GlJou 2"."Applies-to Doc. Type" := ReqReptLine."Applies-to Doc. Type";
-                    "GlJou 2".VALIDATE("GlJou 2"."Applies-to Doc. No.", ReqReptLine."Applies-to Doc. No.");
-                    //"GlJou 2"."Form M No."   := ReqReptLine."Form M No.";
-                    "GlJou 2".VALIDATE("GlJou 2"."Job No.", ReqReptLine."Job Code");
-                    "GlJou 2".VALIDATE("GlJou 2"."Job Task No.", ReqReptLine."Job Task code");
-                    "GlJou 2"."Job Line Type" := ReqReptLine."Job Line Type"::Contract;
-                    IF ReqReptLine."Job Code" <> '' THEN BEGIN
-                        //"GlJou 2".VALIDATE("GlJou 2"."Job Unit Cost",ReqReptLine."Amount (LCY)");
-                        "GlJou 2".VALIDATE("GlJou 2"."Job Quantity", 1);
-                    END;
-                    "GlJou 2"."Bal. Account Type" := 0;
-                    IF "GlJou 2"."Account Type" = 0 THEN BEGIN
-                        "GlJou 2"."Gen. Prod. Posting Group" := '';
-                        "GlJou 2"."Gen. Bus. Posting Group" := '';
-                        "GlJou 2"."VAT Bus. Posting Group" := '';
-                        "GlJou 2"."VAT Prod. Posting Group" := '';
-                        "GlJou 2"."Gen. Posting Type" := 0;
-                    END;
-                    IF "GlJou 2"."Account Type" <> "GlJou 2"."Account Type"::"Fixed Asset" THEN BEGIN
-                        "GlJou 2"."Depreciation Book Code" := '';
-                        "GlJou 2"."Maintenance Code" := '';
-                        "GlJou 2"."FA Posting Type" := 0;
-                    END
-                    ELSE BEGIN
-                        "GlJou 2".VALIDATE("GlJou 2"."FA Posting Type", ReqReptLine."FA Posting Type");
-                        "GlJou 2".VALIDATE("GlJou 2"."Maintenance Code", ReqReptLine."Maintenance Code");
-                    END;
-                    IF "GlJou 2".Amount <> 0 THEN BEGIN
-                        IF NOT "GlJou 2".INSERT THEN "GlJou 2".MODIFY;
-                        "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 1 Code", ReqReptLine."Department Code");
-                        "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 2 Code", ReqReptLine."Branch Code");
-                        "GlJou 2".MODIFY(TRUE);
-                    END;
-                UNTIL ReqReptLine.NEXT = 0;
-        END;
-        COMMIT;
-
-        IF "Test Report" THEN
-            Reportprint.PrintGenJnlLine(GlJour);
-
-        GenJournalLine.LOCKTABLE;
-        GenJournalLine.SETRANGE("Journal Template Name", GlJour."Journal Template Name");
-        GenJournalLine.SETRANGE("Journal Batch Name", GlJour."Journal Batch Name");
-        IF GenJournalLine.FINDFIRST THEN
-            GenJournalLine.DELETEALL;
-            */
-    end;
 }
 

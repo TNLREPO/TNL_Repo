@@ -56,7 +56,7 @@ table 50172 "Logistics Order"
         field(8; "Colour Name"; Text[30])
         {
         }
-        field(9; "false. Series"; Code[10])
+        field(9; "No. Series"; Code[10])
         {
         }
         field(10; "VRI Code"; Code[20])
@@ -74,7 +74,7 @@ table 50172 "Logistics Order"
 
 
                 ToName := UserSetup."E-Mail";
-                //Subject := STRSUBSTfalse(text001, "Order false.");
+                //Subject := STRSUBSTfalse(text001, "Order No.");
                 ToName := 'adeyemi@toyotanigeria.com';
                 CCName := 'Alamu@toyotanigeria.com';
                 //SendMail.NewMessage(ToName,CCName,Subject,"Job Description",attachement,'',TRUE);
@@ -144,7 +144,7 @@ table 50172 "Logistics Order"
         field(28; Estimate; Decimal)
         {
         }
-        field(29; "Claim false."; Code[20])
+        field(29; "Claim No."; Code[20])
         {
         }
         field(30; "Estimate Approval"; Boolean)
@@ -200,7 +200,7 @@ table 50172 "Logistics Order"
 
             trigger OnValidate()
             begin
-                IF "COF false." <> '' THEN
+                IF "COF No." <> '' THEN
                     ERROR('COF has been created before!') ELSE BEGIN
                     IF NOT ServiceItem.GET("VRI Code") THEN BEGIN
                         TESTFIELD("Responsible Customer");
@@ -223,11 +223,11 @@ table 50172 "Logistics Order"
                     COFRec."(Engine No)" := "Engine No.";
                     COFRec."Model Name" := "Model Name";
                     COFRec.INSERT(TRUE);
-                    "COF false." := COFRec."Customer Order Form No.";
+                    "COF No." := COFRec."Customer Order Form No.";
                 END;
             end;
         }
-        field(38; "COF false."; Code[10])
+        field(38; "COF No."; Code[10])
         {
         }
         field(39; "All ISPV"; Integer)
@@ -257,7 +257,7 @@ table 50172 "Logistics Order"
         IF "Order No." = '' THEN BEGIN
             ServMgtSetUp.GET;
             ServMgtSetUp.TESTFIELD("Logistic Nos.");
-            falseSeriesMgt.InitSeries(ServMgtSetUp."Logistic Nos.", xRec."false. Series", 0D, "Order No.", "false. Series");
+            falseSeriesMgt.InitSeries(ServMgtSetUp."Logistic Nos.", xRec."No. Series", 0D, "Order No.", "No. Series");
         END;
         Date := TODAY;
     end;
@@ -280,7 +280,7 @@ table 50172 "Logistics Order"
         Body: Text[100];
         attachement: Text[260];
         Opendialog: Boolean;
-        text001: Label 'ISPV false. %1 needs to be treated!';
+        text001: Label 'ISPV No. %1 needs to be treated!';
         //SMTPMail: Codeunit "400";
         SendersName: Text[50];
         SenderAddress: Text[50];

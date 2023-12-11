@@ -128,7 +128,7 @@ page 50472 "Logistics/VRI Card"
     }
 
     var
-        ItemLegEntry: Record "32";
+        ItemLegEntry: Record 32;
         VRIRec: Record 50058;
         VRIRec2: Record 50058;
         VRIRec3: Record 50058;

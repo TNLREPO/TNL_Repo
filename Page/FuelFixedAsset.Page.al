@@ -105,7 +105,7 @@ page 50450 "Fuel Fixed Asset"
         GenPostSetup: Record 252;
         ItemJnlPost: Codeunit 22;
         GenJnlPost: Codeunit 12;
-        FuelVoucherR: Report "50255";
+        FuelVoucherR: Report 50255;
         AssetDescptn: Code[70];
 }
 

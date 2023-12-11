@@ -129,7 +129,7 @@ page 50294 "E/D Codes."
                 {
                     Caption = 'Amend Payslip Details';
                     Ellipsis = true;
-                    RunObject = Report 50057;
+                    //RunObject = Report 50057;
                 }
             }
         }

@@ -399,7 +399,7 @@ page 70122 "Capex Approved5"
                         PaymentRec.INIT;
                         PaymentRec."Document Type" := PaymentRec."Document Type"::"e-Pay";
                         PaymentRec."Cash/Cheque" := PaymentRec."Cash/Cheque"::Cheque;
-                        PaymentRec."Account Type" := PaymentRec."Account Type"::Supplier;
+                        PaymentRec."Account Type" := PaymentRec."Account Type"::Vendor;
                         PaymentRec."Procurement No." := Rec."No.";
                         PaymentRec.INSERT(TRUE);
                         COMMIT;
@@ -439,7 +439,7 @@ page 70122 "Capex Approved5"
                         PaymentRec.INIT;
                         PaymentRec."Document Type" := PaymentRec."Document Type"::Requisition;
                         PaymentRec."Cash/Cheque" := PaymentRec."Cash/Cheque"::Cheque;
-                        PaymentRec."Account Type" := PaymentRec."Account Type"::Supplier;
+                        PaymentRec."Account Type" := PaymentRec."Account Type"::Vendor;
                         PaymentRec."Procurement No." := Rec."No.";
                         PaymentRec.INSERT(TRUE);
                         COMMIT;

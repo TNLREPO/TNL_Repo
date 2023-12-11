@@ -98,8 +98,8 @@ page 50400 "Overdue Vehicle Delivery"
     end;
 
     var
-        ItemLedgEntry: Record "32";
-        ItemLedgEntry2: Record "32";
+        ItemLedgEntry: Record 32;
+        ItemLedgEntry2: Record 32;
         CustRec: Record 18;
         VehMonitor: Record "50056";
         OverdueDate: Date;

@@ -271,7 +271,7 @@ page 50139 "Approved IOU Retirement"
         BalAmt := 0;
         Rec.CALCFIELDS(Rec."Amount To Retire");
         BalAmt := Rec."Original IOU Amount" - Rec."Amount To Retire";
-        OnAfterGetCurrRecord;
+        CustomOnAfterGetCurrRecord();
     end;
 
     trigger OnInit()
@@ -291,7 +291,7 @@ page 50139 "Approved IOU Retirement"
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
-        OnAfterGetCurrRecord;
+        CustomOnAfterGetCurrRecord;
     end;
 
     trigger OnOpenPage()
@@ -359,7 +359,7 @@ page 50139 "Approved IOU Retirement"
         Text19022435: Label '1st Approver''s Comment';
         GLEntry2: Record 17;
 
-    local procedure OnAfterGetCurrRecord()
+    local procedure CustomOnAfterGetCurrRecord()
     begin
         xRec := Rec;
         IF Rec."1st Apprv. Status" = Rec."1st Apprv. Status"::Approved THEN

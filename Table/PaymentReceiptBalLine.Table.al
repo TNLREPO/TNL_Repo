@@ -15,54 +15,59 @@ table 50104 "Payment/Receipt Bal. Line."
         {
             OptionMembers = Cash,Cheque;
         }
-        field(4; "Account Type"; Option)
+        field(4; "Account Type"; Enum "Gen. Journal Account Type")
         {
-            OptionCaption = 'G/L Account,Customer,Supplier,Bank,Fixed Asset,Staff Loan,LC';
-            OptionMembers = "G/L Account",Customer,Supplier,Bank,"Fixed Asset","Staff Loan",LC;
+
         }
         field(5; "Account No."; Code[20])
         {
-            /* TableRelation = IF (Account Type=CONST(G/L Account)) "G/L Account".No. WHERE (Blocked=FILTER(No),
-                                                                                          Account Type=CONST(Posting))
-                                                                                          ELSE IF (Account Type=CONST(Customer)) Customer.No. WHERE (Blocked=FILTER(<>All))
-                                                                                          ELSE IF (Account Type=CONST(Staff Loan)) Customer.No. WHERE (Blocked=FILTER(<>All),
-                                                                                                                                                       Customer Posting Group=CONST(STAFF))
-                                                                                                                                                       ELSE IF (Cash/Cheque=CONST(Cheque),
-                                                                                                                                                                Account Type=CONST(Bank)) "Bank Account".No. WHERE (Blocked=CONST(No))
-                                                                                                                                                                ELSE IF (Account Type=CONST(Supplier)) Vendor.No. WHERE (Blocked=FILTER(<>All),
-                                                                                                                                                                                                                         Vendor Posting Group=FILTER(<>LC))
-                                                                                                                                                                                                                         ELSE IF (Account Type=CONST(LC)) Vendor.No. WHERE (Blocked=FILTER(<>All),
-                                                                                                                                                                                                                                                                            Vendor Posting Group=FILTER(<>LC))
-                                                                                                                                                                                                                                                                            ELSE IF (Account Type=CONST(Fixed Asset)) "Fixed Asset".No. WHERE (Blocked=CONST(No));
+            TableRelation = IF ("Account Type" = CONST("G/L Account")) "G/L Account"."No." WHERE(Blocked = FILTER(false), "Account Type" = CONST(Posting))
+            ELSE
+            IF ("Account Type" = CONST(Customer)) Customer."No." WHERE(Blocked = FILTER(<> All))
+            ELSE
+            IF ("Account Type" = CONST("Staff Loan")) Customer."No." WHERE(Blocked = FILTER(<> All), "Customer Posting Group" = filter('STAFF'))
+            ELSE
+            IF ("Cash/Cheque" = CONST(Cheque), "Account Type" = CONST("Bank Account")) "Bank Account"."No." WHERE(Blocked = CONST(false))
+            ELSE
+            IF ("Account Type" = CONST(Vendor)) Vendor."No." WHERE(Blocked = FILTER(<> All), "Vendor Posting Group" = FILTER(<> 'LC'))
+            ELSE
+            IF ("Account Type" = CONST(LC)) Vendor."No." WHERE(Blocked = FILTER(<> All), "Vendor Posting Group" = FILTER(<> 'LC'))
+            ELSE
+            IF ("Account Type" = CONST("Fixed Asset")) "Fixed Asset"."No." WHERE(Blocked = CONST(false));
 
             trigger OnValidate()
             begin
                 //"g/lacc".GET("Account No.");
                 //"Account Description" := "g/lacc".Name;
                 CASE "Account Type" OF
-                0: BEGIN
-                   "g/lacc".GET("Account No.");
-                    "Account Description" := "g/lacc".Name;
-                   END;
-                1,5: BEGIN
-                   custrec.GET("Account No.");
-                   "Account Description" := custrec.Name;
-                   END;
-                2,6: BEGIN
-                   vendrec.GET("Account No.");
-                   "Account Description" := vendrec.Name;
-                   END;
+                    "Account Type"::"G/L Account":
+                        BEGIN
+                            "g/lacc".GET("Account No.");
+                            "Account Description" := "g/lacc".Name;
+                        END;
+                    "Account Type"::Customer, "Account Type"::"Staff Loan":
+                        BEGIN
+                            custrec.GET("Account No.");
+                            "Account Description" := custrec.Name;
+                        END;
+                    "Account Type"::Vendor, "Account Type"::LC:
+                        BEGIN
+                            vendrec.GET("Account No.");
+                            "Account Description" := vendrec.Name;
+                        END;
 
-                3: BEGIN
-                   bankrec.GET("Account No.");
-                   "Account Description" := bankrec.Name;
-                   END;
-                4: BEGIN
-                   fixedrec.GET("Account No.");
-                   "Account Description" := fixedrec.Description;
-                   END;
+                    "Account Type"::"Bank Account":
+                        BEGIN
+                            bankrec.GET("Account No.");
+                            "Account Description" := bankrec.Name;
+                        END;
+                    "Account Type"::"Fixed Asset":
+                        BEGIN
+                            fixedrec.GET("Account No.");
+                            "Account Description" := fixedrec.Description;
+                        END;
                 END;
-            end; */
+            end;
         }
         field(6; "Account Description"; Text[50])
         {
@@ -81,14 +86,16 @@ table 50104 "Payment/Receipt Bal. Line."
         }
         field(9; "Balance Account No."; Code[20])
         {
-            /*TableRelation = IF (Balance Account Type=CONST(G/L Account)) "G/L Account".No. WHERE (Blocked=CONST(No),
-                                                                                                  Account Type=CONST(Posting))
-                                                                                                  ELSE IF (Cash/Cheque=CONST(Cheque),
-                                                                                                           Balance Account Type=CONST(Bank)) "Bank Account".No. WHERE (Blocked=CONST(No))
-                                                                                                           ELSE IF (Balance Account Type=CONST(Customer)) Customer.No. WHERE (Blocked=FILTER(<>All))
-                                                                                                           ELSE IF (Balance Account Type=CONST(Supplier)) Vendor.No. WHERE (Blocked=FILTER(<>All))
-                                                                                                           ELSE IF (Balance Account Type=CONST(Fixed Asset)) "Fixed Asset".No. WHERE (Blocked=CONST(No));
-        */
+            TableRelation = IF ("Balance Account Type" = CONST("G/L Account")) "G/L Account"."No." WHERE(Blocked = CONST(false), "Account Type" = CONST(Posting))
+            ELSE
+            IF ("Cash/Cheque" = CONST(Cheque), "Balance Account Type" = CONST(Bank)) "Bank Account"."No." WHERE(Blocked = CONST(false))
+            ELSE
+            IF ("Balance Account Type" = CONST(Customer)) Customer."No." WHERE(Blocked = FILTER(<> All))
+            ELSE
+            IF ("Balance Account Type" = CONST(Supplier)) Vendor."No." WHERE(Blocked = FILTER(<> All))
+            ELSE
+            IF ("Balance Account Type" = CONST("Fixed Asset")) "Fixed Asset"."No." WHERE(Blocked = CONST(false));
+
         }
         field(10; "Department Code"; Code[20])
         {
@@ -101,18 +108,18 @@ table 50104 "Payment/Receipt Bal. Line."
         field(12; Amount; Decimal)
         {
             Editable = true;
-            /* 
-                        trigger OnValidate()
-                        begin
-                            //headerrec.GET(Type,"Cash/Cheque","No.");
-                            IF "Currency Code" = '' THEN
-                                "Amount (LCY)" := Amount
-                            ELSE BEGIN
-                                VALIDATE("Amount (LCY)", (
-                                ROUND(CurrExchRate.ExchangeAmtFCYToLCY(
-                                 "Posting Date", "Currency Code", Amount, "Currency Factor"))));
-                            END;
-                        end; */
+
+            trigger OnValidate()
+            begin
+                //headerrec.GET(Type,"Cash/Cheque","No.");
+                IF "Currency Code" = '' THEN
+                    "Amount (LCY)" := Amount
+                ELSE BEGIN
+                    VALIDATE("Amount (LCY)", (
+                    ROUND(CurrExchRate.ExchangeAmtFCYToLCY(
+                     "Posting Date", "Currency Code", Amount, "Currency Factor"))));
+                END;
+            end;
         }
         field(13; "Received by"; Text[50])
         {
@@ -159,36 +166,34 @@ table 50104 "Payment/Receipt Bal. Line."
         }
         field(30; "Cumm Balance"; Decimal)
         {
-            CalcFormula = Sum("Payment/Receipt Bal. Line.".Amount WHERE("No." = FIELD("No."),
-                                                                         Type = FIELD(Type),
-                                                                         "Cash/Cheque" = FIELD("Cash/Cheque")));
+            CalcFormula = Sum("Payment/Receipt Bal. Line.".Amount WHERE("No." = FIELD("No."), Type = FIELD(Type), "Cash/Cheque" = FIELD("Cash/Cheque")));
             FieldClass = FlowField;
         }
         field(37; "Currency Code"; Code[10])
         {
             TableRelation = Currency.Code;
 
-            /*   trigger OnValidate()
-              begin
-                  IF "Account Type" = "Account Type"::Supplier THEN BEGIN
-                      vendrec.GET("Account No.");
-                      vendrec.SETCURRENTKEY("No.");
-                      vendrec.SETRANGE("No.", "No.");
-                      "Currency Code" := vendrec."Currency Code";
-                  END;
+            trigger OnValidate()
+            begin
+                IF "Account Type" = "Account Type"::Vendor THEN BEGIN
+                    vendrec.GET("Account No.");
+                    vendrec.SETCURRENTKEY("No.");
+                    vendrec.SETRANGE("No.", "No.");
+                    "Currency Code" := vendrec."Currency Code";
+                END;
 
-                  IF "Currency Code" <> '' THEN BEGIN
-                      //GetCurrency;
-                      IF ("Currency Code" <> xRec."Currency Code") OR
-                         ("Posting Date" <> xRec."Posting Date") OR
-                         (CurrFieldNo = FIELDNO("Currency Code")) OR
-                         ("Currency Factor" = 0)
-                      THEN
-                          "Currency Factor" :=
-                            CurrExchRate.ExchangeRate("Posting Date", "Currency Code");
-                  END ELSE
-                      "Currency Factor" := 0;
-              end; */
+                IF "Currency Code" <> '' THEN BEGIN
+                    //GetCurrency;
+                    IF ("Currency Code" <> xRec."Currency Code") OR
+                       ("Posting Date" <> xRec."Posting Date") OR
+                       (CurrFieldNo = FIELDNO("Currency Code")) OR
+                       ("Currency Factor" = 0)
+                    THEN
+                        "Currency Factor" :=
+                          CurrExchRate.ExchangeRate("Posting Date", "Currency Code");
+                END ELSE
+                    "Currency Factor" := 0;
+            end;
         }
         field(39; "Amount (LCY)"; Decimal)
         {
@@ -199,30 +204,30 @@ table 50104 "Payment/Receipt Bal. Line."
             Editable = false;
             MinValue = 0;
 
-            /* trigger OnValidate()
+            trigger OnValidate()
             begin
                 IF ("Currency Code" = '') AND ("Currency Factor" <> 0) THEN
                     FIELDERROR("Currency Factor", STRSUBSTNO(TEXT002, FIELDCAPTION("Currency Code")));
                 VALIDATE(Amount);
-            end; */
+            end;
         }
         field(41; "Exchange Rate"; Decimal)
         {
             DecimalPlaces = 2 : 9;
 
-            /*  trigger OnValidate()
-             begin
-                 IF "Currency Code" = '' THEN
-                     "Amount (LCY)" := Amount
-                 ELSE BEGIN
-                     IF "Exchange Rate" <> 0 THEN
-                         "Currency Factor" := 100 / "Exchange Rate";
-                     "Amount (LCY)" := ROUND(
-                       CurrExchRate.ExchangeAmtFCYToLCY(
-                         "Posting Date", "Currency Code",
-                         Amount, "Currency Factor"));
-                 END;
-             end; */
+            trigger OnValidate()
+            begin
+                IF "Currency Code" = '' THEN
+                    "Amount (LCY)" := Amount
+                ELSE BEGIN
+                    IF "Exchange Rate" <> 0 THEN
+                        "Currency Factor" := 100 / "Exchange Rate";
+                    "Amount (LCY)" := ROUND(
+                      CurrExchRate.ExchangeAmtFCYToLCY(
+                        "Posting Date", "Currency Code",
+                        Amount, "Currency Factor"));
+                END;
+            end;
         }
         field(42; "FA Posting Type"; Option)
         {
@@ -267,11 +272,16 @@ table 50104 "Payment/Receipt Bal. Line."
         {
             OptionMembers = " ",Scheduled,Contract,"Scheduled & Contract";
         }
-        field(51; "Applies-to Doc. Type"; Option)
+        field(51; "Applies-to Doc. Type"; Enum "Gen. Journal Document Type")
         {
             Caption = 'Applies-to Doc. Type';
-            OptionCaption = ' ,Payment,Invoice,Credit Memo,Finance Charge Memo,Reminder,Refund';
-            OptionMembers = " ",Payment,Invoice,"Credit Memo","Finance Charge Memo",Reminder,Refund;
+
+            trigger OnValidate()
+            begin
+                if "Applies-to Doc. Type" <> xRec."Applies-to Doc. Type" then
+                    Validate("Applies-to Doc. No.", '');
+            end;
+
         }
         field(52; "Applies-to Doc. No."; Code[20])
         {
@@ -295,55 +305,45 @@ table 50104 "Payment/Receipt Bal. Line."
         }
         field(53; "Apply Entry"; Integer)
         {
-           /* TableRelation = IF (Account Type=CONST(Customer),
-                                Credit Amount=FILTER(<>0)) "Cust. Ledger Entry"."Entry No." WHERE (Customer No.=FIELD(Account No.),
-                                                                                                   Open=CONST(Yes),
-                                                                                                   Positive=CONST(Yes))
-                                                                                                   ELSE IF (Account Type=CONST(Customer),
-                                                                                                            Debit Amount=FILTER(<>0)) "Cust. Ledger Entry"."Entry No." WHERE (Customer No.=FIELD(Account No.),
-                                                                                                                                                                              Open=CONST(Yes),
-                                                                                                                                                                              Positive=CONST(No))
-                                                                                                                                                                              ELSE IF (Account Type=CONST(Supplier),
-                                                                                                                                                                                       Debit Amount=FILTER(<>0)) "Vendor Ledger Entry"."Entry No." WHERE (Vendor No.=FIELD(Account No.),
-                                                                                                                                                                                                                                                          Open=CONST(Yes),
-                                                                                                                                                                                                                                                          Positive=CONST(No))
-                                                                                                                                                                                                                                                          ELSE IF (Account Type=CONST(Supplier),
-                                                                                                                                                                                                                                                                   Credit Amount=FILTER(<>0)) "Vendor Ledger Entry"."Entry No." WHERE (Vendor No.=FIELD(Account No.),
-                                                                                                                                                                                                                                                                                                                                       Open=CONST(Yes),
-                                                                                                                                                                                                                                                                                                                                       Positive=CONST(Yes))
-                                                                                                                                                                                                                                                                                                                                       ELSE IF (Account Type=CONST(Staff Loan),
-                                                                                                                                                                                                                                                                                                                                                Credit Amount=FILTER(<>0)) "Cust. Ledger Entry"."Entry No." WHERE (Customer No.=FIELD(Account No.),
-                                                                                                                                                                                                                                                                                                                                                                                                                   Positive=CONST(Yes),
-                                                                                                                                                                                                                                                                                                                                                                                                                   Open=CONST(Yes))
-                                                                                                                                                                                                                                                                                                                                                                                                                   ELSE IF (Account Type=CONST(Staff Loan),
-                                                                                                                                                                                                                                                                                                                                                                                                                            Debit Amount=FILTER(<>0)) "Cust. Ledger Entry"."Entry No." WHERE (Customer No.=FIELD(Account No.),
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              Positive=CONST(No),
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              Open=CONST(Yes));
+            TableRelation = IF ("Account Type" = filter('Customer'),
+                                 "Credit Amount" = FILTER(<> 0)) "Cust. Ledger Entry"."Entry No." WHERE("Customer No." = FIELD("Account No."), Open = filter(true), Positive = filter(true))
+            ELSE
+            IF ("Account Type" = const(Customer), "Debit Amount" = FILTER(<> 0)) "Cust. Ledger Entry"."Entry No." WHERE("Customer No." = FIELD("Account No."), Open = filter(true), Positive = filter(false))
+            ELSE
+            IF ("Account Type" = const(Vendor), "Debit Amount" = FILTER(<> 0)) "Vendor Ledger Entry"."Entry No." WHERE("Vendor No." = FIELD("Account No."), Open = filter(true), Positive = filter(false))
+            ELSE
+            IF ("Account Type" = const(Vendor), "Credit Amount" = FILTER(<> 0)) "Vendor Ledger Entry"."Entry No." WHERE("Vendor No." = FIELD("Account No."), Open = filter(true), Positive = filter(true))
+            ELSE
+            IF ("Account Type" = const("Staff Loan"), "Credit Amount" = FILTER(<> 0)) "Cust. Ledger Entry"."Entry No." WHERE("Customer No." = FIELD("Account No."), Positive = filter(true), Open = filter(true))
+            ELSE
+            IF ("Account Type" = const("Staff Loan"), "Debit Amount" = FILTER(<> 0)) "Cust. Ledger Entry"."Entry No." WHERE("Customer No." = FIELD("Account No."), Positive = filter(false), Open = filter(true));
 
             trigger OnValidate()
             begin
                 CASE "Account Type" OF
-                     "Account Type"::Customer,"Account Type"::"Staff Loan": BEGIN
-                                                                       CustLedgEntry.GET("Apply Entry");
-                                                                       "Applies-to Doc. Type" := CustLedgEntry."Document Type";
-                                                                       "Applies-to Doc. No." := CustLedgEntry."Document No.";
-                                                                    END;
-                     "Account Type"::Supplier,"Account Type"::LC: BEGIN
-                                                                    VendLedgEntry.GET("Apply Entry");
-                                                                    "Applies-to Doc. Type" := VendLedgEntry."Document Type";
-                                                                    "Applies-to Doc. No.":= VendLedgEntry."Document No.";
-                                                                  END;
+                    "Account Type"::Customer, "Account Type"::"Staff Loan":
+                        BEGIN
+                            CustLedgEntry.GET("Apply Entry");
+                            "Applies-to Doc. Type" := CustLedgEntry."Document Type";
+                            "Applies-to Doc. No." := CustLedgEntry."Document No.";
+                        END;
+                    "Account Type"::Vendor, "Account Type"::LC:
+                        BEGIN
+                            VendLedgEntry.GET("Apply Entry");
+                            "Applies-to Doc. Type" := VendLedgEntry."Document Type";
+                            "Applies-to Doc. No." := VendLedgEntry."Document No.";
+                        END;
                 END;
-            end; */
+            end;
         }
     }
 
     keys
     {
-        key(Key1;Type,"Cash/Cheque","No.","Line No.")
+        key(Key1; Type, "Cash/Cheque", "No.", "Line No.")
         {
             Clustered = true;
-            SumIndexFields = Amount,"Amount (LCY)";
+            SumIndexFields = Amount, "Amount (LCY)";
         }
     }
 
@@ -370,43 +370,41 @@ table 50104 "Payment/Receipt Bal. Line."
         CustLedgEntry: Record 21;
         VendLedgEntry: Record 25;
 
-    
+
     procedure NewLine()
     begin
-        /*
-        headerrec.GET(Type,"Cash/Cheque","No.");
-        ReqReptLine.SETRANGE(ReqReptLine.Type,Type);
-        ReqReptLine.SETRANGE(ReqReptLine."Cash/Cheque","Cash/Cheque");
-        ReqReptLine.SETRANGE(ReqReptLine."No.","No.");
+
+        headerrec.GET(Type, "Cash/Cheque", "No.");
+        ReqReptLine.SETRANGE(ReqReptLine.Type, Type);
+        ReqReptLine.SETRANGE(ReqReptLine."Cash/Cheque", "Cash/Cheque");
+        ReqReptLine.SETRANGE(ReqReptLine."No.", "No.");
         IF ReqReptLine.FIND('+') THEN
-        "Line No." := ReqReptLine."Line No." + 10000
+            "Line No." := ReqReptLine."Line No." + 10000
         ELSE
-        "Line No.":= 20000;
-        IF headerrec."Multiple Account" THEN
-        BEGIN
-        "Account Type" := headerrec."Account Type";
-        "Account No.":=headerrec."Account No.";
+            "Line No." := 20000;
+        IF headerrec."Multiple Account" THEN BEGIN
+            "Account Type" := headerrec."Account Type";
+            "Account No." := headerrec."Account No.";
         END
-        ELSE
-        BEGIN
-        "Account Type" := headerrec."Balance Account Type";
-        "Account No.":= headerrec."Balance Account No.";
+        ELSE BEGIN
+            "Account Type" := headerrec."Balance Account Type";
+            "Account No." := headerrec."Balance Account No.";
         END;
         "Transaction Description" := headerrec."Transaction Description";
-        "Department Code":=headerrec."Global Dimension 1 Code";
+        "Department Code" := headerrec."Global Dimension 1 Code";
         "Branch Code" := headerrec."Global Dimension 2 Code";
         "Received by" := headerrec."Received by";
         "Cheque No." := headerrec."Cheque No.";
         "Currency Code" := headerrec."Currency Code";
         "Currency Factor" := headerrec."Currency Factor";
-        "Exchange Rate":= headerrec."Exchange rate";
-        */
+        "Exchange Rate" := headerrec."Exchange rate";
+
     end;
 
-    
+
     procedure valiAmount()
     begin
-        headerrec.GET(Type,"Cash/Cheque","No.");
+        headerrec.GET(Type, "Cash/Cheque", "No.");
         //IF ("Credit Amount" <> 0)  AND (headerrec."Credit Amount" <>0) THEN
         //ERROR('Line can Not be a Credit Entry');
         //IF ("Debit Amount"<>0) AND  (headerrec."Debit Amount" <>0) THEN
@@ -414,7 +412,7 @@ table 50104 "Payment/Receipt Bal. Line."
         CALCFIELDS("Cumm Balance");
         curbal := ("Cumm Balance" - xRec.Amount + Amount);
         IF ABS(curbal) > ABS(headerrec.Amount) THEN
-         ERROR('Cummulative Balance will be greater Than the Amount above');
+            ERROR('Cummulative Balance will be greater Than the Amount above');
     end;
 }
 

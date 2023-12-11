@@ -65,7 +65,7 @@ page 50026 "Monthly Variables Header Card."
     end;
 
     var
-        gpc: Codeunit "50004";
+        gpc: Codeunit 50004;
         DefaultPostingGroup: Code[20];
         LinesRec: Record "50017";
 }

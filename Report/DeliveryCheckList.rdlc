@@ -1,0 +1,4762 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>4f2bf147-ec85-44f7-90f8-8f0af9284ffa</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+      <Fields>
+        <Field Name="VRIDate_VRITableDeliveryCheckList">
+          <DataField>VRIDate_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="ItemNo_VRITableDeliveryCheckList">
+          <DataField>ItemNo_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="ModelNo_VRITableDeliveryCheckList">
+          <DataField>ModelNo_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="ModelName_VRITableDeliveryCheckList">
+          <DataField>ModelName_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="Description_VRITableDeliveryCheckList">
+          <DataField>Description_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="ItemSerialNo_VRITableDeliveryCheckList">
+          <DataField>ItemSerialNo_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="Walk0011_VRITableDeliveryCheckList">
+          <DataField>Walk0011_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="Walk0012_VRITableDeliveryCheckList">
+          <DataField>Walk0012_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="Walk0013_VRITableDeliveryCheckList">
+          <DataField>Walk0013_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="Walk0021_VRITableDeliveryCheckList">
+          <DataField>Walk0021_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="Walk0022_VRITableDeliveryCheckList">
+          <DataField>Walk0022_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="Walk0023_VRITableDeliveryCheckList">
+          <DataField>Walk0023_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="Walk0031_VRITableDeliveryCheckList">
+          <DataField>Walk0031_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="Walk0032_VRITableDeliveryCheckList">
+          <DataField>Walk0032_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="Walk0033_VRITableDeliveryCheckList">
+          <DataField>Walk0033_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="Walk0041_VRITableDeliveryCheckList">
+          <DataField>Walk0041_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="Walk0042_VRITableDeliveryCheckList">
+          <DataField>Walk0042_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="Walk0043_VRITableDeliveryCheckList">
+          <DataField>Walk0043_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="Walk0051_VRITableDeliveryCheckList">
+          <DataField>Walk0051_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="Walk0052_VRITableDeliveryCheckList">
+          <DataField>Walk0052_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="Walk0053_VRITableDeliveryCheckList">
+          <DataField>Walk0053_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="LOAD0011_VRITableDeliveryCheckList">
+          <DataField>LOAD0011_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="LOAD0012_VRITableDeliveryCheckList">
+          <DataField>LOAD0012_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="LOAD0013_VRITableDeliveryCheckList">
+          <DataField>LOAD0013_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="LOAD0021_VRITableDeliveryCheckList">
+          <DataField>LOAD0021_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="LOAD0022_VRITableDeliveryCheckList">
+          <DataField>LOAD0022_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="LOAD0023_VRITableDeliveryCheckList">
+          <DataField>LOAD0023_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="LOAD0031_VRITableDeliveryCheckList">
+          <DataField>LOAD0031_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="LOAD0032_VRITableDeliveryCheckList">
+          <DataField>LOAD0032_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="VRISupervisorNo_VRITableDeliveryCheckList">
+          <DataField>VRISupervisorNo_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="VRISupervisorName_VRITableDeliveryCheckList">
+          <DataField>VRISupervisorName_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="VRIInspectorCode_VRITableDeliveryCheckList">
+          <DataField>VRIInspectorCode_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="VRIInspectorName_VRITableDeliveryCheckList">
+          <DataField>VRIInspectorName_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="VRIInspectorDepartment_VRITableDeliveryCheckList">
+          <DataField>VRIInspectorDepartment_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="LOAD0033_VRITableDeliveryCheckList">
+          <DataField>LOAD0033_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="ENG0011_VRITableDeliveryCheckList">
+          <DataField>ENG0011_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="ENG0012_VRITableDeliveryCheckList">
+          <DataField>ENG0012_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="ENG0013_VRITableDeliveryCheckList">
+          <DataField>ENG0013_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="ENG0021_VRITableDeliveryCheckList">
+          <DataField>ENG0021_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="ENG0022_VRITableDeliveryCheckList">
+          <DataField>ENG0022_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="ENG0023_VRITableDeliveryCheckList">
+          <DataField>ENG0023_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="ENG0031_VRITableDeliveryCheckList">
+          <DataField>ENG0031_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="ENG0032_VRITableDeliveryCheckList">
+          <DataField>ENG0032_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="ENG0033_VRITableDeliveryCheckList">
+          <DataField>ENG0033_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV0011_VRITableDeliveryCheckList">
+          <DataField>IV0011_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV0012_VRITableDeliveryCheckList">
+          <DataField>IV0012_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV0013_VRITableDeliveryCheckList">
+          <DataField>IV0013_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV0021_VRITableDeliveryCheckList">
+          <DataField>IV0021_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV0022_VRITableDeliveryCheckList">
+          <DataField>IV0022_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV0023_VRITableDeliveryCheckList">
+          <DataField>IV0023_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV0031_VRITableDeliveryCheckList">
+          <DataField>IV0031_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV0032_VRITableDeliveryCheckList">
+          <DataField>IV0032_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV0033_VRITableDeliveryCheckList">
+          <DataField>IV0033_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV0041_VRITableDeliveryCheckList">
+          <DataField>IV0041_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV0042_VRITableDeliveryCheckList">
+          <DataField>IV0042_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV0043_VRITableDeliveryCheckList">
+          <DataField>IV0043_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV0051_VRITableDeliveryCheckList">
+          <DataField>IV0051_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV0052_VRITableDeliveryCheckList">
+          <DataField>IV0052_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV0053_VRITableDeliveryCheckList">
+          <DataField>IV0053_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV0061_VRITableDeliveryCheckList">
+          <DataField>IV0061_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV0062_VRITableDeliveryCheckList">
+          <DataField>IV0062_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV0063_VRITableDeliveryCheckList">
+          <DataField>IV0063_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV0071_VRITableDeliveryCheckList">
+          <DataField>IV0071_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV0072_VRITableDeliveryCheckList">
+          <DataField>IV0072_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV0073_VRITableDeliveryCheckList">
+          <DataField>IV0073_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV0081_VRITableDeliveryCheckList">
+          <DataField>IV0081_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV0082_VRITableDeliveryCheckList">
+          <DataField>IV0082_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV0083_VRITableDeliveryCheckList">
+          <DataField>IV0083_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV0091_VRITableDeliveryCheckList">
+          <DataField>IV0091_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV0092_VRITableDeliveryCheckList">
+          <DataField>IV0092_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV0093_VRITableDeliveryCheckList">
+          <DataField>IV0093_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV00101_VRITableDeliveryCheckList">
+          <DataField>IV00101_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV00102_VRITableDeliveryCheckList">
+          <DataField>IV00102_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV00103_VRITableDeliveryCheckList">
+          <DataField>IV00103_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV00201_VRITableDeliveryCheckList">
+          <DataField>IV00201_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV00202_VRITableDeliveryCheckList">
+          <DataField>IV00202_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV00203_VRITableDeliveryCheckList">
+          <DataField>IV00203_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV00301_VRITableDeliveryCheckList">
+          <DataField>IV00301_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV00302_VRITableDeliveryCheckList">
+          <DataField>IV00302_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV00303_VRITableDeliveryCheckList">
+          <DataField>IV00303_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV00401_VRITableDeliveryCheckList">
+          <DataField>IV00401_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV00402_VRITableDeliveryCheckList">
+          <DataField>IV00402_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV00403_VRITableDeliveryCheckList">
+          <DataField>IV00403_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="BOOT0011_VRITableDeliveryCheckList">
+          <DataField>BOOT0011_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="BOOT0012_VRITableDeliveryCheckList">
+          <DataField>BOOT0012_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="BOOT0013_VRITableDeliveryCheckList">
+          <DataField>BOOT0013_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV00501_VRITableDeliveryCheckList">
+          <DataField>IV00501_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV00502_VRITableDeliveryCheckList">
+          <DataField>IV00502_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="IV00503_VRITableDeliveryCheckList">
+          <DataField>IV00503_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="BOOT0021_VRITableDeliveryCheckList">
+          <DataField>BOOT0021_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="BOOT0022_VRITableDeliveryCheckList">
+          <DataField>BOOT0022_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="BOOT0023_VRITableDeliveryCheckList">
+          <DataField>BOOT0023_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="BOOT0031_VRITableDeliveryCheckList">
+          <DataField>BOOT0031_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="BOOT0032_VRITableDeliveryCheckList">
+          <DataField>BOOT0032_VRITableDeliveryCheckList</DataField>
+        </Field>
+        <Field Name="BOOT0033_VRITableDeliveryCheckList">
+          <DataField>BOOT0033_VRITableDeliveryCheckList</DataField>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>DataSet</rd:DataSetName>
+        <rd:SchemaPath>Report.xsd</rd:SchemaPath>
+        <rd:TableName>Result</rd:TableName>
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Textbox Name="Textbox3">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!Walk0012_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>1.00049in</Top>
+            <Left>5.20362in</Left>
+            <Height>0.25in</Height>
+            <Width>0.41667in</Width>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!Walk0012_VRITableDeliveryCheckList.Value, "DataSet_Result")=true, "Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox4">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!Walk0013_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>1.00049in</Top>
+            <Left>5.89807in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!Walk0013_VRITableDeliveryCheckList.Value, "DataSet_Result")=true, "Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox6">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!Walk0021_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>1.31646in</Top>
+            <Left>4.49181in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!Walk0021_VRITableDeliveryCheckList.Value, "DataSet_Result")=true, "Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox7">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!Walk0022_VRITableDeliveryCheckList.Value, "DataSet_Result")First(Fields!Walk0022_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>1.29216in</Top>
+            <Left>5.20362in</Left>
+            <Height>0.25in</Height>
+            <Width>0.41667in</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!Walk0022_VRITableDeliveryCheckList.Value, "DataSet_Result")=true, "Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox8">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!Walk0023_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>1.30258in</Top>
+            <Left>5.89807in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!Walk0023_VRITableDeliveryCheckList.Value, "DataSet_Result")=true, "Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox15">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!Walk0031_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>1.62201in</Top>
+            <Left>4.49182in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>5</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!Walk0031_VRITableDeliveryCheckList.Value, "DataSet_Result")=true, "Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox16">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!Walk0032_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>1.59771in</Top>
+            <Left>5.20363in</Left>
+            <Height>0.25in</Height>
+            <Width>0.41667in</Width>
+            <ZIndex>6</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!Walk0032_VRITableDeliveryCheckList.Value, "DataSet_Result")=true, "Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox17">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!Walk0033_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>1.59771in</Top>
+            <Left>5.89808in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>7</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!Walk0033_VRITableDeliveryCheckList.Value, "DataSet_Result")=true, "Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox18">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!Walk0041_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>1.91368in</Top>
+            <Left>4.49181in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>8</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!Walk0041_VRITableDeliveryCheckList.Value, "DataSet_Result")=true, "Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox19">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!Walk0042_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>1.88938in</Top>
+            <Left>5.20362in</Left>
+            <Height>0.25in</Height>
+            <Width>0.41667in</Width>
+            <ZIndex>9</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!Walk0042_VRITableDeliveryCheckList.Value, "DataSet_Result")=true, "Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox20">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!Walk0043_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>1.88938in</Top>
+            <Left>5.89807in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>10</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!Walk0043_VRITableDeliveryCheckList.Value, "DataSet_Result")=true, "Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox23">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!Walk0051_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>2.21056in</Top>
+            <Left>4.49181in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>11</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!Walk0051_VRITableDeliveryCheckList.Value, "DataSet_Result")=true, "Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox24">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!Walk0052_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>2.18626in</Top>
+            <Left>5.20362in</Left>
+            <Height>0.25in</Height>
+            <Width>0.41667in</Width>
+            <ZIndex>12</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!Walk0052_VRITableDeliveryCheckList.Value, "DataSet_Result")=true, "Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox25">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!Walk0053_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>2.19668in</Top>
+            <Left>5.89807in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>13</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!Walk0053_VRITableDeliveryCheckList.Value, "DataSet_Result")=true, "Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox27">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!LOAD0011_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>2.80605in</Top>
+            <Left>4.49179in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>14</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!LOAD0011_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox28">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!LOAD0012_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>2.78175in</Top>
+            <Left>5.2036in</Left>
+            <Height>0.25in</Height>
+            <Width>0.41667in</Width>
+            <ZIndex>15</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!LOAD0012_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox29">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!LOAD0013_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>2.79216in</Top>
+            <Left>5.89805in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>16</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!LOAD0013_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox31">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!LOAD0021_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>3.1116in</Top>
+            <Left>4.49179in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>17</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!LOAD0021_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox32">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!LOAD0022_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>3.0873in</Top>
+            <Left>5.2036in</Left>
+            <Height>0.25in</Height>
+            <Width>0.41667in</Width>
+            <ZIndex>18</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!LOAD0022_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox33">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!LOAD0023_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>3.09772in</Top>
+            <Left>5.89805in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>19</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!LOAD0023_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox36">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!LOAD0031_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>3.43105in</Top>
+            <Left>4.49181in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>20</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!LOAD0031_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox37">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!LOAD0032_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>3.40675in</Top>
+            <Left>5.20362in</Left>
+            <Height>0.25in</Height>
+            <Width>0.41667in</Width>
+            <ZIndex>21</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!LOAD0032_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox38">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!LOAD0033_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>3.40675in</Top>
+            <Left>5.89807in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>22</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!LOAD0033_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox39">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!ENG0011_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>4.00523in</Top>
+            <Left>4.49183in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>23</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!ENG0011_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox40">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!ENG0012_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>3.98093in</Top>
+            <Left>5.20364in</Left>
+            <Height>0.25in</Height>
+            <Width>0.41667in</Width>
+            <ZIndex>24</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!ENG0012_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox41">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!ENG0013_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>3.99135in</Top>
+            <Left>5.89809in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>25</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!ENG0013_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox44">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!ENG0021_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>4.37328in</Top>
+            <Left>4.49183in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>26</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!ENG0021_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox45">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!ENG0022_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>4.34898in</Top>
+            <Left>5.20364in</Left>
+            <Height>0.25in</Height>
+            <Width>0.41667in</Width>
+            <ZIndex>27</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!ENG0022_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox46">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!ENG0023_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>4.3594in</Top>
+            <Left>5.89809in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>28</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!ENG0023_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox48">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV0011_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>4.97004in</Top>
+            <Left>4.49183in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>29</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV0011_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox49">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV0012_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>4.95615in</Top>
+            <Left>5.20364in</Left>
+            <Height>0.25in</Height>
+            <Width>0.41667in</Width>
+            <ZIndex>30</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV0012_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox50">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV0013_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>4.95615in</Top>
+            <Left>5.89809in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>31</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV0013_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox52">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV0021_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>5.28948in</Top>
+            <Left>4.49183in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>32</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV0021_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox53">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV0022_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>5.26518in</Top>
+            <Left>5.20364in</Left>
+            <Height>0.25in</Height>
+            <Width>0.41667in</Width>
+            <ZIndex>33</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV0022_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox54">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV0023_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>5.2756in</Top>
+            <Left>5.89809in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>34</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV0023_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox61">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV0031_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>5.61414in</Top>
+            <Left>4.49183in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>35</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV0031_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox62">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV0032_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>5.58984in</Top>
+            <Left>5.20364in</Left>
+            <Height>0.25in</Height>
+            <Width>0.41667in</Width>
+            <ZIndex>36</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV0032_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox63">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV0033_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>5.60026in</Top>
+            <Left>5.89809in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>37</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV0033_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox64">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV0041_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>5.91969in</Top>
+            <Left>4.49183in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>38</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV0041_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox65">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV0042_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>5.91969in</Top>
+            <Left>5.20364in</Left>
+            <Height>0.25in</Height>
+            <Width>0.41667in</Width>
+            <ZIndex>39</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV0042_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox66">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV0043_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>5.91969in</Top>
+            <Left>5.89809in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>40</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV0043_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox69">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV0051_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>6.24435in</Top>
+            <Left>4.49183in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>41</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV0051_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox70">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV0052_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>6.22005in</Top>
+            <Left>5.20364in</Left>
+            <Height>0.25in</Height>
+            <Width>0.41667in</Width>
+            <ZIndex>42</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV0052_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox71">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV0053_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>6.23047in</Top>
+            <Left>5.89809in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>43</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV0053_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox55">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV0061_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>6.5447in</Top>
+            <Left>4.49183in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>44</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV0061_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox56">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV0062_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>6.53081in</Top>
+            <Left>5.20364in</Left>
+            <Height>0.25in</Height>
+            <Width>0.41667in</Width>
+            <ZIndex>45</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV0062_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox57">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV0063_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>6.53081in</Top>
+            <Left>5.89809in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>46</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV0063_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox73">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV0071_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>6.86414in</Top>
+            <Left>4.49183in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>47</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV0071_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox74">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV0072_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>6.86414in</Top>
+            <Left>5.20364in</Left>
+            <Height>0.2257in</Height>
+            <Width>0.41667in</Width>
+            <ZIndex>48</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV0072_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox75">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV0073_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>6.85026in</Top>
+            <Left>5.89809in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>49</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV0073_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox78">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV0081_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>7.1888in</Top>
+            <Left>4.49183in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>50</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV0081_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox79">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV0082_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>7.1645in</Top>
+            <Left>5.20364in</Left>
+            <Height>0.25in</Height>
+            <Width>0.41667in</Width>
+            <ZIndex>51</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV0082_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox80">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV0083_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>7.17492in</Top>
+            <Left>5.89809in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>52</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV0083_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox81">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV0091_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>7.50477in</Top>
+            <Left>4.49183in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>53</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV0091_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox82">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV0092_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>7.47005in</Top>
+            <Left>5.20364in</Left>
+            <Height>0.25in</Height>
+            <Width>0.41667in</Width>
+            <ZIndex>54</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV0092_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox83">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV0093_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>7.47005in</Top>
+            <Left>5.89809in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>55</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV0093_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox86">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV00101_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>7.76172in</Top>
+            <Left>4.49183in</Left>
+            <Height>0.23092in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>56</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV00101_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox87">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV00102_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>7.74264in</Top>
+            <Left>5.20364in</Left>
+            <Height>0.25in</Height>
+            <Width>0.41667in</Width>
+            <ZIndex>57</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV00102_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox88">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV00103_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>7.76172in</Top>
+            <Left>5.89809in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>58</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV00103_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox89">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV00201_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>8.04819in</Top>
+            <Left>4.49183in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>59</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV00201_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox90">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV00202_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>8.0343in</Top>
+            <Left>5.20364in</Left>
+            <Height>0.25in</Height>
+            <Width>0.41667in</Width>
+            <ZIndex>60</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV00202_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox91">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV00203_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>8.04819in</Top>
+            <Left>5.89809in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>61</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV00203_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox93">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV00301_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>8.35027in</Top>
+            <Left>4.49183in</Left>
+            <Height>0.23612in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>62</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV00301_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox94">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV00302_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>8.32597in</Top>
+            <Left>5.20364in</Left>
+            <Height>0.25in</Height>
+            <Width>0.41667in</Width>
+            <ZIndex>63</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV00302_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox95">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV00303_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>8.33639in</Top>
+            <Left>5.89809in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>64</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV00303_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox98">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV00401_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>8.61069in</Top>
+            <Left>4.49183in</Left>
+            <Height>0.2257in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>65</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV00401_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox99">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV00402_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>8.58639in</Top>
+            <Left>5.20364in</Left>
+            <Height>0.25in</Height>
+            <Width>0.41667in</Width>
+            <ZIndex>66</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV00402_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox100">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV00403_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>8.58639in</Top>
+            <Left>5.89809in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>67</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV00403_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox101">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV00501_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>8.86417in</Top>
+            <Left>4.49183in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>68</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV00501_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox102">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV00502_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>8.86937in</Top>
+            <Left>5.20364in</Left>
+            <Height>0.25in</Height>
+            <Width>0.41667in</Width>
+            <ZIndex>69</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV00502_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox103">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!IV00503_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>8.86417in</Top>
+            <Left>5.89809in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>70</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!IV00503_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox109">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!BOOT0011_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>9.3746in</Top>
+            <Left>4.49176in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>71</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!BOOT0011_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox110">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!BOOT0012_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>9.3746in</Top>
+            <Left>5.20357in</Left>
+            <Height>0.25in</Height>
+            <Width>0.41667in</Width>
+            <ZIndex>72</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!BOOT0012_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox111">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!BOOT0013_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>9.3746in</Top>
+            <Left>5.89802in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>73</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!BOOT0013_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox1">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">TNL DELIVERY CHECK LIST </Value>
+                    <Style>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>0.07512in</Top>
+            <Left>1.88022in</Left>
+            <Height>0.26044in</Height>
+            <Width>3.74008in</Width>
+            <ZIndex>74</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox5">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">Quality of keys / Transmitters</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>1.01959in</Top>
+            <Left>0.53124in</Left>
+            <Height>0.25in</Height>
+            <Width>2.14458in</Width>
+            <ZIndex>75</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox9">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">OK</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>0.73833in</Top>
+            <Left>4.49181in</Left>
+            <Height>0.22049in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>76</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox10">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">N/OK</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>0.73833in</Top>
+            <Left>5.20362in</Left>
+            <Height>0.22049in</Height>
+            <Width>0.41667in</Width>
+            <ZIndex>77</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox11">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">N/A  </Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>0.73833in</Top>
+            <Left>5.89807in</Left>
+            <Height>0.22049in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>78</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox12">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">1. WALK AROUND CHECK </Value>
+                    <Style>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>0.73833in</Top>
+            <Left>0.34374in</Left>
+            <Height>0.2257in</Height>
+            <Width>2.33208in</Width>
+            <ZIndex>79</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox13">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">Dent, Scratches &amp; broken of any glasses</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>1.32167in</Top>
+            <Left>0.53124in</Left>
+            <Height>0.25in</Height>
+            <Width>3.56125in</Width>
+            <ZIndex>80</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox14">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">Condition of headlamp, Rear light and Hazard light</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>1.62201in</Top>
+            <Left>0.53125in</Left>
+            <Height>0.25in</Height>
+            <Width>3.56125in</Width>
+            <ZIndex>81</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox21">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">Tyre pressure and age</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>1.91889in</Top>
+            <Left>0.53124in</Left>
+            <Height>0.25in</Height>
+            <Width>2.14458in</Width>
+            <ZIndex>82</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox22">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">Performance of the transmitters operation</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>2.21056in</Top>
+            <Left>0.53124in</Left>
+            <Height>0.25in</Height>
+            <Width>3.56125in</Width>
+            <ZIndex>83</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox26">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">2. FACTORY LOADED PARTS</Value>
+                    <Style>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>2.53in</Top>
+            <Left>0.34374in</Left>
+            <Height>0.2257in</Height>
+            <Width>2.33208in</Width>
+            <ZIndex>84</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox30">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">Condition of Snorkel pipe</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>2.81126in</Top>
+            <Left>0.53122in</Left>
+            <Height>0.25in</Height>
+            <Width>3.56125in</Width>
+            <ZIndex>85</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox34">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">Condition of Rear sticker </Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>3.11681in</Top>
+            <Left>0.53122in</Left>
+            <Height>0.25in</Height>
+            <Width>3.56125in</Width>
+            <ZIndex>86</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox35">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">Earphone Applicable to Coaster &amp; Land cruiser</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>3.43105in</Top>
+            <Left>0.53124in</Left>
+            <Height>0.25in</Height>
+            <Width>3.56125in</Width>
+            <ZIndex>87</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox42">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">Engine performance / Noise during warming up</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>4.00523in</Top>
+            <Left>0.6094in</Left>
+            <Height>0.25in</Height>
+            <Width>3.56125in</Width>
+            <ZIndex>88</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox43">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">Lubrication fluids, wiper washer, water coolant and power steering levels</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>4.32467in</Top>
+            <Left>0.6094in</Left>
+            <Height>0.25001in</Height>
+            <Width>3.56125in</Width>
+            <ZIndex>89</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox47">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">3. ENGINES </Value>
+                    <Style>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>3.72397in</Top>
+            <Left>0.34376in</Left>
+            <Height>0.2257in</Height>
+            <Width>2.33208in</Width>
+            <ZIndex>90</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox51">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">Warranty booklet &amp; Owners manual </Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>4.95836in</Top>
+            <Left>0.53126in</Left>
+            <Height>0.25in</Height>
+            <Width>3.56125in</Width>
+            <ZIndex>91</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox58">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">4. IN VEHICLE</Value>
+                    <Style>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>4.66322in</Top>
+            <Left>0.34376in</Left>
+            <Height>0.2257in</Height>
+            <Width>2.33208in</Width>
+            <ZIndex>92</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox59">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">Car stereo operations</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>5.286in</Top>
+            <Left>0.53126in</Left>
+            <Height>0.25in</Height>
+            <Width>3.56125in</Width>
+            <ZIndex>93</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox60">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">All lights operation</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>5.60545in</Top>
+            <Left>0.53126in</Left>
+            <Height>0.25in</Height>
+            <Width>3.56125in</Width>
+            <ZIndex>94</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox67">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">Seat belt operation</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>5.91621in</Top>
+            <Left>0.53126in</Left>
+            <Height>0.25in</Height>
+            <Width>3.56125in</Width>
+            <ZIndex>95</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox68">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">Seat operation and heater operation</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>6.23566in</Top>
+            <Left>0.53126in</Left>
+            <Height>0.25in</Height>
+            <Width>3.56125in</Width>
+            <ZIndex>96</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox72">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">Hand Brake Operations</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>6.54122in</Top>
+            <Left>0.53126in</Left>
+            <Height>0.25in</Height>
+            <Width>3.56125in</Width>
+            <ZIndex>97</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox76">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">Floor mats condition</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>6.86066in</Top>
+            <Left>0.53126in</Left>
+            <Height>0.25in</Height>
+            <Width>3.56125in</Width>
+            <ZIndex>98</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox77">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">Sunroof operations</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>7.18011in</Top>
+            <Left>0.53126in</Left>
+            <Height>0.25in</Height>
+            <Width>3.56125in</Width>
+            <ZIndex>99</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox84">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">Inner roof lining for stained &amp; damaged</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>7.49087in</Top>
+            <Left>0.53126in</Left>
+            <Height>0.25in</Height>
+            <Width>3.56125in</Width>
+            <ZIndex>100</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox85">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">Doors window operations</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>7.75825in</Top>
+            <Left>0.53126in</Left>
+            <Height>0.25in</Height>
+            <Width>3.56125in</Width>
+            <ZIndex>101</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox92">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">Rear Wind screen cotton control operation</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>8.04471in</Top>
+            <Left>0.53126in</Left>
+            <Height>0.25in</Height>
+            <Width>3.56125in</Width>
+            <ZIndex>102</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox96">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">AC and  Horn operation</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>8.35721in</Top>
+            <Left>0.53126in</Left>
+            <Height>0.25in</Height>
+            <Width>3.56125in</Width>
+            <ZIndex>103</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox97">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">Dashboard light</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>8.602in</Top>
+            <Left>0.53126in</Left>
+            <Height>0.25in</Height>
+            <Width>3.56125in</Width>
+            <ZIndex>104</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox104">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">Check light sign</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>8.86937in</Top>
+            <Left>0.53126in</Left>
+            <Height>0.22051in</Height>
+            <Width>3.56125in</Width>
+            <ZIndex>105</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox112">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">Availability of spare tyre, Jack, Tools</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>9.38501in</Top>
+            <Left>0.53119in</Left>
+            <Height>0.25in</Height>
+            <Width>3.56125in</Width>
+            <ZIndex>106</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox116">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">5. BOOT</Value>
+                    <Style>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>9.11765in</Top>
+            <Left>0.34372in</Left>
+            <Height>0.2257in</Height>
+            <Width>2.33208in</Width>
+            <ZIndex>107</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!Walk0011_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>1.01438in</Top>
+            <Left>4.49181in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>108</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!Walk0011_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox107">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">Dealer's Detail</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox105</rd:DefaultName>
+            <Top>10.5173in</Top>
+            <Left>5.53597in</Left>
+            <Height>0.20833in</Height>
+            <Width>2.04167in</Width>
+            <ZIndex>109</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox108">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">............................................</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox105</rd:DefaultName>
+            <Top>10.28556in</Top>
+            <Left>1.1158in</Left>
+            <Height>0.25in</Height>
+            <Width>2.04861in</Width>
+            <ZIndex>110</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox113">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">................................................</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox105</rd:DefaultName>
+            <Top>10.29508in</Top>
+            <Left>3.30455in</Left>
+            <Height>0.25in</Height>
+            <Width>2.10418in</Width>
+            <ZIndex>111</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox114">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">...............................................</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox105</rd:DefaultName>
+            <Top>10.30897in</Top>
+            <Left>5.53596in</Left>
+            <Height>0.25in</Height>
+            <Width>2.04167in</Width>
+            <ZIndex>112</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox115">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">Sign/Date:</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox115</rd:DefaultName>
+            <Top>10.28556in</Top>
+            <Left>0.34372in</Left>
+            <Height>0.25in</Height>
+            <Width>0.71653in</Width>
+            <ZIndex>113</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox117">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=Globals!ExecutionTime</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Format>g</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox117</rd:DefaultName>
+            <Top>0.3147in</Top>
+            <Left>6.38448in</Left>
+            <Height>0.25in</Height>
+            <Width>1.0265in</Width>
+            <ZIndex>114</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox118">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">TNL Service Rep</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox118</rd:DefaultName>
+            <Top>10.59112in</Top>
+            <Left>1.67579in</Left>
+            <Height>0.1875in</Height>
+            <Width>1in</Width>
+            <ZIndex>115</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox119">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">TNL Operation&amp; Logistics Rep</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox118</rd:DefaultName>
+            <Top>10.58675in</Top>
+            <Left>3.49601in</Left>
+            <Height>0.1875in</Height>
+            <Width>1.80209in</Width>
+            <ZIndex>116</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox120">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">Dealer Rep</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox118</rd:DefaultName>
+            <Top>10.62842in</Top>
+            <Left>6.06471in</Left>
+            <Height>0.1875in</Height>
+            <Width>1in</Width>
+            <ZIndex>117</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox121">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!BOOT0021_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>9.68016in</Top>
+            <Left>4.49177in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>118</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!BOOT0011_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox122">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!BOOT0022_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>9.68016in</Top>
+            <Left>5.20358in</Left>
+            <Height>0.25in</Height>
+            <Width>0.41667in</Width>
+            <ZIndex>119</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!BOOT0012_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox123">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!BOOT0023_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>9.68016in</Top>
+            <Left>5.89803in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>120</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!BOOT0013_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox124">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">Fire extinguisher</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>9.69057in</Top>
+            <Left>0.5312in</Left>
+            <Height>0.25in</Height>
+            <Width>3.56125in</Width>
+            <ZIndex>121</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox125">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!BOOT0031_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>9.98571in</Top>
+            <Left>4.49175in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>122</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!BOOT0011_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox126">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!BOOT0032_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>9.98571in</Top>
+            <Left>5.20356in</Left>
+            <Height>0.25in</Height>
+            <Width>0.41667in</Width>
+            <ZIndex>123</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!BOOT0012_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox127">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!BOOT0033_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Color>White</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>9.98571in</Top>
+            <Left>5.89801in</Left>
+            <Height>0.25in</Height>
+            <Width>0.44792in</Width>
+            <ZIndex>124</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>=iif(First(Fields!BOOT0013_VRITableDeliveryCheckList.Value, "DataSet_Result")=true,"Black","White")</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox128">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">C- caution</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>9.99612in</Top>
+            <Left>0.53118in</Left>
+            <Height>0.25in</Height>
+            <Width>3.56125in</Width>
+            <ZIndex>125</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox129">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">Date of Delivery</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <Format>g</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox117</rd:DefaultName>
+            <Top>0.07512in</Top>
+            <Left>6.38448in</Left>
+            <Height>0.21181in</Height>
+            <Width>1.0265in</Width>
+            <ZIndex>126</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox105">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">Model name</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>0.405in</Top>
+            <Left>0.53122in</Left>
+            <Height>0.25in</Height>
+            <Width>0.89458in</Width>
+            <ZIndex>127</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox106">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">=First(Fields!ModelName_VRITableDeliveryCheckList.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>0.405in</Top>
+            <Left>1.54515in</Left>
+            <Height>0.25in</Height>
+            <Width>1.50469in</Width>
+            <ZIndex>128</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox130">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto">Invoice No.</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>0.41889in</Top>
+            <Left>3.38539in</Left>
+            <Height>0.25in</Height>
+            <Width>1.18625in</Width>
+            <ZIndex>129</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox131">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Auto" />
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>0.41889in</Top>
+            <Left>4.64108in</Left>
+            <Height>0.25in</Height>
+            <Width>1.24875in</Width>
+            <ZIndex>130</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <Height>11.31598in</Height>
+        <Style />
+      </Body>
+      <Width>7.73959in</Width>
+      <Page>
+        <PageHeight>12in</PageHeight>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>4</NumberOfColumns>
+      <NumberOfRows>2</NumberOfRows>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+</Report>

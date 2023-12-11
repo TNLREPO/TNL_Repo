@@ -267,7 +267,7 @@ page 70017 "Journal Voucher Card"
         ReqRec: Record 50103;
         posd: Text[30];
         pos: Boolean;
-        ChangeExchangeRate: Page "511";
+        ChangeExchangeRate: Page 511;
         GLReconcile: Page 345;
         GenJnlManagement: Codeunit 230;
         ReportPrint: Codeunit 228;
@@ -281,7 +281,7 @@ page 70017 "Journal Voucher Card"
         ShortcutDimCode: array[8] of Code[20];
         GLEntry: Record 17;
         UserRec: Record 91;
-        GPC: Codeunit "50004";
+        GPC: Codeunit 50004;
         [InDataSet]
 
         "FA Posting TypeVisible": Boolean;

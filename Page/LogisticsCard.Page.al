@@ -88,6 +88,6 @@ page 50470 "Logistics Card"
     }
 
     var
-        ItemLedgEntry: Record "32";
+        ItemLedgEntry: Record 32;
 }
 

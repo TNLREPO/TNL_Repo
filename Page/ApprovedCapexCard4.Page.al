@@ -400,7 +400,7 @@ page 70152 "Approved Capex Card4"
                         PaymentRec.INIT;
                         PaymentRec."Document Type" := PaymentRec."Document Type"::"e-Pay";
                         PaymentRec."Cash/Cheque" := PaymentRec."Cash/Cheque"::Cheque;
-                        PaymentRec."Account Type" := PaymentRec."Account Type"::Supplier;
+                        PaymentRec."Account Type" := PaymentRec."Account Type"::Vendor;
                         PaymentRec."Procurement No." := Rec."No.";
                         PaymentRec.INSERT(TRUE);
                         COMMIT;
@@ -440,7 +440,7 @@ page 70152 "Approved Capex Card4"
                         PaymentRec.INIT;
                         PaymentRec."Document Type" := PaymentRec."Document Type"::Requisition;
                         PaymentRec."Cash/Cheque" := PaymentRec."Cash/Cheque"::Cheque;
-                        PaymentRec."Account Type" := PaymentRec."Account Type"::Supplier;
+                        PaymentRec."Account Type" := PaymentRec."Account Type"::Vendor;
                         PaymentRec."Procurement No." := Rec."No.";
                         PaymentRec.INSERT(TRUE);
                         COMMIT;

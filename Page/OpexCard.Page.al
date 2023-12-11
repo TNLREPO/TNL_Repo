@@ -596,7 +596,7 @@ page 70126 "Opex Card"
         ShowNewMailDialogOnSend: Boolean;
         UserSetup: Record 91;
         UserSetup2: Record 91;
-        IOUReg: Record "50105";
+        IOUReg: Record 50105;
         OpexRec: Record "70008";
         OpexRec2: Record "70008";
         Url: Text[500];

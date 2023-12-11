@@ -19,7 +19,7 @@ page 50063 "Employee Actual Leave"
 
     var
         AccountingPeriod: Record 50;
-        PeriodFormManagement: Codeunit 359;
+        //PeriodFormManagement: Codeunit 359;
         PeriodType: Option Day,Week,Month,Quarter,Year,"Accounting Period";
         LeaveType: Option Plan,Actual;
         ClosingEntryFilter: Option Include,Exclude;

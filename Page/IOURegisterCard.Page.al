@@ -271,7 +271,7 @@ page 70031 "IOU Register Card"
     var
         IOURec: Record 50105;
         IOUReport: Report "50299";
-        GPC: Codeunit "50004";
+        GPC: Codeunit 50004;
 
         "1st ApprovalVisible": Boolean;
 

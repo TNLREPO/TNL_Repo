@@ -98,7 +98,7 @@ page 50313 "Monthly Variables/Cont. Lines."
 
     var
         MonthCont: Record "50017";
-        Periodrec: Record "50004";
+        Periodrec: Record 50004;
         usersetup: Record 91;
         DefaultPostingGroup: Text[250];
 }

@@ -227,7 +227,7 @@ page 50243 "Issued Fuel Voucher"
         Text100: Label 'Do you want to Post Voucher?';
         GenJnlPost: Codeunit 12;
         Text101: Label 'Voucher successfully posted';
-        FuelVoucherR: Report "50255";
+        FuelVoucherR: Report 50255;
         AssetDescptn: Code[70];
 }
 

@@ -114,6 +114,6 @@ page 50222 "Deposit Card"
     }
 
     var
-        GPC: Codeunit "50004";
+        GPC: Codeunit 50004;
 }
 

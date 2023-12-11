@@ -89,7 +89,7 @@ page 80046 "Job Instruction Card"
             part(Lines; "Job Instruction Subform")
             {
                 Caption = 'Lines';
-                SubPageLink = "Document No." = Field(No.);
+                SubPageLink = "Document No." = Field("No.");
             }
             group("Preparation for Delivery")
             {
@@ -351,7 +351,7 @@ page 80046 "Job Instruction Card"
                 PromotedCategory = Process;
                 PromotedIsBig = true;
                 RunObject = Page "Clocking Sheet";
-                RunPageLink = "Job No." = FIELD(No.);
+                RunPageLink = "Job No." = FIELD("No.");
             }
             action("Update Actual Clocked Hours")
             {
@@ -417,19 +417,19 @@ page 80046 "Job Instruction Card"
         CustOrderLine2: Record 70036;
         ServiceLine2: Record 5902;
         CustOrderTable: Record 70034;
-        PurchOrderHeader: Record "38";
-        PurchOrderLine: Record "39";
+        PurchOrderHeader: Record 38;
+        PurchOrderLine: Record 39;
         NextLineNo: Integer;
-        NoSeriesMgt: Record "308";
+        NoSeriesMgt: Record 308;
         VRI2: Record 50058;
-        ItemRec: Record "27";
+        ItemRec: Record 27;
         COFRec2: Record 70034;
         VRIRec: Record 50058;
         COFLine: Record 70036;
         Clocking: Record 70038;
         ClockedHours: Duration;
 
-    [Scope('Internal')]
+
     procedure CreatePurchaseRequisition()
     var
         RequisitionLine: Record 246;
@@ -510,7 +510,7 @@ page 80046 "Job Instruction Card"
             UNTIL CustOrderLine.NEXT = 0;
     end;
 
-    [Scope('Internal')]
+
     procedure CreatEstimateRequestion()
     var
         RequisitionLine: Record 246;
@@ -584,7 +584,7 @@ page 80046 "Job Instruction Card"
             UNTIL CustOrderLine.NEXT = 0;
     end;
 
-    [Scope('Internal')]
+
     procedure AddOperations()
     var
         ServiceLine: Record 5902;

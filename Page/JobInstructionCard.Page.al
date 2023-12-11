@@ -216,7 +216,7 @@ page 70089 "Job Instruction Card."
                 trigger OnAction()
                 begin
 
-                    CreatePurchaseRequisition;
+                    Rec.CreatePurchaseRequisition;
                 end;
             }
             action("Get Estimate Info")

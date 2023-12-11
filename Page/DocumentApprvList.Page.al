@@ -32,8 +32,8 @@ page 50406 "Document Apprv. List"
                 Caption = 'Document';
                 Promoted = true;
                 PromotedCategory = Process;
-                RunObject = Page 50405;
-                RunPageLink = Field1 = FIELD (No.);
+                //RunObject = Page 50405;
+                //RunPageLink = Field1 = FIELD (No.);
             }
         }
     }

@@ -63,7 +63,7 @@ page 50025 "Loan List"
     end;
 
     var
-        gpc: Codeunit "50004";
+        gpc: Codeunit 50004;
         DefaultPostingGroup: Code[20];
 }
 

@@ -338,8 +338,8 @@ page 70147 "Approved Opex card4"
         {
             part("Procurement FactBox"; 70130)
             {
-                SubPageLink = "Document Type"=FIELD("Document Type"),
-                              "No."=FIELD("No.");
+                SubPageLink = "Document Type" = FIELD("Document Type"),
+                              "No." = FIELD("No.");
             }
         }
     }
@@ -361,23 +361,23 @@ page 70147 "Approved Opex card4"
                     Rec.TESTFIELD("Adv. Paymt. Audit");
 
 
-                    IF NOT CONFIRM(Text003,FALSE) THEN BEGIN
-                      PaymentRec2.SETRANGE("Procurement No.",Rec."No.");
-                      IF PaymentRec2.FINDFIRST THEN
-                        PAGE.RUNMODAL(70097,PaymentRec2)
+                    IF NOT CONFIRM(Text003, FALSE) THEN BEGIN
+                        PaymentRec2.SETRANGE("Procurement No.", Rec."No.");
+                        IF PaymentRec2.FINDFIRST THEN
+                            PAGE.RUNMODAL(70097, PaymentRec2)
                     END ELSE BEGIN
-                      PaymentRec.INIT;
-                      PaymentRec."Document Type" := PaymentRec."Document Type"::"e-Pay";
-                      PaymentRec."Cash/Cheque" := PaymentRec."Cash/Cheque"::Cheque;
-                      PaymentRec."Account Type" := PaymentRec."Account Type"::Supplier;
-                      PaymentRec."Procurement No." := Rec."No.";
-                      PaymentRec.INSERT(TRUE);
-                      COMMIT;
-                      MESSAGE(Text015);
-                      PaymentRec2.SETRANGE("Procurement No.",Rec."No.");
-                      IF PaymentRec2.FINDFIRST THEN
-                        PAGE.RUNMODAL(70097,PaymentRec2);
-                      Rec."Advance Voucher" := TRUE;
+                        PaymentRec.INIT;
+                        PaymentRec."Document Type" := PaymentRec."Document Type"::"e-Pay";
+                        PaymentRec."Cash/Cheque" := PaymentRec."Cash/Cheque"::Cheque;
+                        PaymentRec."Account Type" := PaymentRec."Account Type"::Vendor;
+                        PaymentRec."Procurement No." := Rec."No.";
+                        PaymentRec.INSERT(TRUE);
+                        COMMIT;
+                        MESSAGE(Text015);
+                        PaymentRec2.SETRANGE("Procurement No.", Rec."No.");
+                        IF PaymentRec2.FINDFIRST THEN
+                            PAGE.RUNMODAL(70097, PaymentRec2);
+                        Rec."Advance Voucher" := TRUE;
                         Rec.MODIFY;
                     END;
                 end;
@@ -392,24 +392,24 @@ page 70147 "Approved Opex card4"
 
                 trigger OnAction()
                 begin
-                     Rec.TESTFIELD("Adv. Paymt. Audit");
-                    IF NOT CONFIRM(Text016,FALSE) THEN BEGIN
-                      PaymentRec2.SETRANGE("Procurement No.",Rec."No.");
-                      IF PaymentRec2.FINDFIRST THEN
-                        PAGE.RUNMODAL(70097,PaymentRec2)
+                    Rec.TESTFIELD("Adv. Paymt. Audit");
+                    IF NOT CONFIRM(Text016, FALSE) THEN BEGIN
+                        PaymentRec2.SETRANGE("Procurement No.", Rec."No.");
+                        IF PaymentRec2.FINDFIRST THEN
+                            PAGE.RUNMODAL(70097, PaymentRec2)
                     END ELSE BEGIN
-                      PaymentRec.INIT;
-                      PaymentRec."Document Type" := PaymentRec."Document Type"::Requisition;
-                      PaymentRec."Cash/Cheque" := PaymentRec."Cash/Cheque"::Cheque;
-                      PaymentRec."Account Type" := PaymentRec."Account Type"::Supplier;
-                      PaymentRec."Procurement No." := Rec."No.";
-                      PaymentRec.INSERT(TRUE);
-                      COMMIT;
-                      MESSAGE(Text017);
-                      PaymentRec2.SETRANGE("Procurement No.",Rec."No.");
-                      IF PaymentRec2.FINDFIRST THEN
-                        PAGE.RUNMODAL(70010,PaymentRec2);
-                       Rec."Advance Voucher":= TRUE;
+                        PaymentRec.INIT;
+                        PaymentRec."Document Type" := PaymentRec."Document Type"::Requisition;
+                        PaymentRec."Cash/Cheque" := PaymentRec."Cash/Cheque"::Cheque;
+                        PaymentRec."Account Type" := PaymentRec."Account Type"::Vendor;
+                        PaymentRec."Procurement No." := Rec."No.";
+                        PaymentRec.INSERT(TRUE);
+                        COMMIT;
+                        MESSAGE(Text017);
+                        PaymentRec2.SETRANGE("Procurement No.", Rec."No.");
+                        IF PaymentRec2.FINDFIRST THEN
+                            PAGE.RUNMODAL(70010, PaymentRec2);
+                        Rec."Advance Voucher" := TRUE;
                         Rec.MODIFY;
                     END;
                 end;
@@ -420,57 +420,59 @@ page 70147 "Approved Opex card4"
     trigger OnOpenPage()
     begin
         IF Rec.Send THEN BEGIN
-          OpexAppr := TRUE END
-        ELSE OpexAppr := FALSE;
+            OpexAppr := TRUE
+        END
+        ELSE
+            OpexAppr := FALSE;
 
         IF NOT (Rec."Opex Type" = Rec."Opex Type"::Entertainment) THEN BEGIN
-          IF (Rec."Proposed Purchase Amount" <= 500000) THEN BEGIN
-            GMAppr := TRUE;
-            NameGM := TRUE;
-            Date3  := TRUE;
-            MDAppr := FALSE;
-            NameMD := FALSE;
-            Date4  := FALSE;
-            Rec.ListGM := TRUE;
-            Rec.ListMD := FALSE;
-            Rec.MODIFY
+            IF (Rec."Proposed Purchase Amount" <= 500000) THEN BEGIN
+                GMAppr := TRUE;
+                NameGM := TRUE;
+                Date3 := TRUE;
+                MDAppr := FALSE;
+                NameMD := FALSE;
+                Date4 := FALSE;
+                Rec.ListGM := TRUE;
+                Rec.ListMD := FALSE;
+                Rec.MODIFY
 
-          END ELSE BEGIN
-            GMAppr := FALSE;
-            NameGM := FALSE;
-            Date3  := FALSE;
-            MDAppr := TRUE;
-            NameMD := TRUE;
-            Date4  := TRUE;
-            Rec.ListGM := FALSE;
-            Rec.ListMD := TRUE;
-            Rec.MODIFY
+            END ELSE BEGIN
+                GMAppr := FALSE;
+                NameGM := FALSE;
+                Date3 := FALSE;
+                MDAppr := TRUE;
+                NameMD := TRUE;
+                Date4 := TRUE;
+                Rec.ListGM := FALSE;
+                Rec.ListMD := TRUE;
+                Rec.MODIFY
 
-          END
+            END
         END ELSE BEGIN
-          IF (Rec."Proposed Purchase Amount" <= 50000) THEN BEGIN
-            GMAppr := TRUE;
-            NameGM := TRUE;
-            Date3  := TRUE;
-            MDAppr := FALSE;
-            NameMD := FALSE;
-            Date4  := FALSE;
-            Rec.ListGM := TRUE;
-            Rec.ListMD := FALSE;
-            Rec.MODIFY
+            IF (Rec."Proposed Purchase Amount" <= 50000) THEN BEGIN
+                GMAppr := TRUE;
+                NameGM := TRUE;
+                Date3 := TRUE;
+                MDAppr := FALSE;
+                NameMD := FALSE;
+                Date4 := FALSE;
+                Rec.ListGM := TRUE;
+                Rec.ListMD := FALSE;
+                Rec.MODIFY
 
-          END ELSE BEGIN
-            GMAppr := FALSE;
-            NameGM := FALSE;
-            Date3  := FALSE;
-            MDAppr := TRUE;
-            NameMD := TRUE;
-            Date4  := TRUE;
-            Rec.ListGM := FALSE;
-            Rec.ListMD := TRUE;
-            Rec.MODIFY
+            END ELSE BEGIN
+                GMAppr := FALSE;
+                NameGM := FALSE;
+                Date3 := FALSE;
+                MDAppr := TRUE;
+                NameMD := TRUE;
+                Date4 := TRUE;
+                Rec.ListGM := FALSE;
+                Rec.ListMD := TRUE;
+                Rec.MODIFY
 
-          END
+            END
         END;
 
 
@@ -483,25 +485,25 @@ page 70147 "Approved Opex card4"
         //  MDAppr := TRUE;
         //END;
 
-        ProcurementLine.SETRANGE("Document No.",Rec."No.");
-        ProcurementLine.SETRANGE(Preferred,TRUE);
+        ProcurementLine.SETRANGE("Document No.", Rec."No.");
+        ProcurementLine.SETRANGE(Preferred, TRUE);
         IF ProcurementLine.FINDFIRST THEN
-          IF (ProcurementLine."Payment Terms" <> ProcurementLine."Payment Terms":: "100% after delivery") AND
-             (ProcurementLine."Payment Terms" <> ProcurementLine."Payment Terms":: "100% before delivery")THEN
-           IF (Rec."General Manager" = Rec."General Manager"::Approved) OR (Rec."Managing Director" = Rec."Managing Director"::Approved) THEN
-            AdvPay := TRUE;
+            IF (ProcurementLine."Payment Terms" <> ProcurementLine."Payment Terms"::"100% after delivery") AND
+               (ProcurementLine."Payment Terms" <> ProcurementLine."Payment Terms"::"100% before delivery") THEN
+                IF (Rec."General Manager" = Rec."General Manager"::Approved) OR (Rec."Managing Director" = Rec."Managing Director"::Approved) THEN
+                    AdvPay := TRUE;
 
         IF Rec.Compliance = TRUE THEN
-          Check := TRUE;
+            Check := TRUE;
 
-        IF Rec."Service Delivery2" = Rec."Service Delivery2"::Satisfactory THEN  BEGIN
-          IF Rec."Proposed Purchase Amount" <= 500000 THEN
-            BalGM := TRUE
-          ELSE
-            BalMD := TRUE;
+        IF Rec."Service Delivery2" = Rec."Service Delivery2"::Satisfactory THEN BEGIN
+            IF Rec."Proposed Purchase Amount" <= 500000 THEN
+                BalGM := TRUE
+            ELSE
+                BalMD := TRUE;
             BalPay := TRUE;
         END;
-         IF (Rec.Send = TRUE)OR (Rec."Payment Approval Only" = TRUE) THEN
+        IF (Rec.Send = TRUE) OR (Rec."Payment Approval Only" = TRUE) THEN
             EditSend := FALSE ELSE
             EditSend := TRUE;
     end;
@@ -577,64 +579,64 @@ page 70147 "Approved Opex card4"
 
     local procedure EditApproval()
     begin
-        IF (Rec.Send = TRUE)OR (Rec."Payment Approval Only" = TRUE) THEN
+        IF (Rec.Send = TRUE) OR (Rec."Payment Approval Only" = TRUE) THEN
             EditSend := FALSE ELSE
             EditSend := TRUE;
 
 
-        IF (Rec."Head of Department"=Rec."Head of Department":: Approved) OR
-           (Rec."Bal. Paymt. HOD"=Rec."Bal. Paymt. HOD"::Approved) THEN
-           EditVendorDetails:= FALSE ELSE
-           EditVendorDetails:= TRUE;
+        IF (Rec."Head of Department" = Rec."Head of Department"::Approved) OR
+           (Rec."Bal. Paymt. HOD" = Rec."Bal. Paymt. HOD"::Approved) THEN
+            EditVendorDetails := FALSE ELSE
+            EditVendorDetails := TRUE;
 
 
-        IF Rec."Head of Department" =Rec."Head of Department":: Approved THEN
-             EditHOD2 := FALSE ELSE
-             EditHOD2 := TRUE;
+        IF Rec."Head of Department" = Rec."Head of Department"::Approved THEN
+            EditHOD2 := FALSE ELSE
+            EditHOD2 := TRUE;
 
-        IF Rec."Head of Audit" =Rec."Head of Audit":: Approved THEN
-             EditHOA2 := FALSE ELSE
-             EditHOA2 := TRUE;
+        IF Rec."Head of Audit" = Rec."Head of Audit"::Approved THEN
+            EditHOA2 := FALSE ELSE
+            EditHOA2 := TRUE;
 
-        IF Rec."General Manager" =Rec."General Manager":: Approved THEN
-             EditGM2 := FALSE ELSE
-             EditGM2 := TRUE;
+        IF Rec."General Manager" = Rec."General Manager"::Approved THEN
+            EditGM2 := FALSE ELSE
+            EditGM2 := TRUE;
 
 
-         IF Rec."Managing Director" =Rec."Managing Director":: Approved THEN
-             EditMD2 := FALSE ELSE
-             EditMD2 := TRUE;
+        IF Rec."Managing Director" = Rec."Managing Director"::Approved THEN
+            EditMD2 := FALSE ELSE
+            EditMD2 := TRUE;
 
-        IF Rec."Adv. Paymt. HOD"=Rec."Adv. Paymt. HOD"::Approved THEN
-            EditAdvanceHOD:= FALSE ELSE
-            EditAdvanceHOD:= TRUE;
+        IF Rec."Adv. Paymt. HOD" = Rec."Adv. Paymt. HOD"::Approved THEN
+            EditAdvanceHOD := FALSE ELSE
+            EditAdvanceHOD := TRUE;
 
-        IF Rec."Adv. Paymt. Audit"=Rec."Adv. Paymt. Audit"::Approved THEN
-            EditAdvanceHOA:= FALSE ELSE
-            EditAdvanceHOA:= TRUE;
-        IF Rec."Service Delivery1"=Rec."Service Delivery1"::Satisfactory THEN
-            EditServiceCheckRequester:= FALSE ELSE
-            EditServiceCheckRequester:= TRUE;
+        IF Rec."Adv. Paymt. Audit" = Rec."Adv. Paymt. Audit"::Approved THEN
+            EditAdvanceHOA := FALSE ELSE
+            EditAdvanceHOA := TRUE;
+        IF Rec."Service Delivery1" = Rec."Service Delivery1"::Satisfactory THEN
+            EditServiceCheckRequester := FALSE ELSE
+            EditServiceCheckRequester := TRUE;
 
-        IF Rec."Service Delivery2"=Rec."Service Delivery2"::Satisfactory THEN
-            EditServiceCheckAudit:= FALSE ELSE
-            EditServiceCheckAudit:= TRUE;
+        IF Rec."Service Delivery2" = Rec."Service Delivery2"::Satisfactory THEN
+            EditServiceCheckAudit := FALSE ELSE
+            EditServiceCheckAudit := TRUE;
 
-        IF Rec."Bal. Paymt. HOD"=Rec."Bal. Paymt. HOD"::Approved THEN
-            EditBalanceHOD:= FALSE ELSE
-            EditBalanceHOD:= TRUE;
+        IF Rec."Bal. Paymt. HOD" = Rec."Bal. Paymt. HOD"::Approved THEN
+            EditBalanceHOD := FALSE ELSE
+            EditBalanceHOD := TRUE;
 
-        IF Rec."Bal. Paymt. Audit"=Rec."Bal. Paymt. Audit"::Approved THEN
-            EditBalanceHOA:= FALSE ELSE
-            EditBalanceHOA:= TRUE;
+        IF Rec."Bal. Paymt. Audit" = Rec."Bal. Paymt. Audit"::Approved THEN
+            EditBalanceHOA := FALSE ELSE
+            EditBalanceHOA := TRUE;
 
-        IF Rec."Bal. Paymt. GM"=Rec."Bal. Paymt. GM"::Approved THEN
-            EditBalanceGM:= FALSE ELSE
-            EditBalanceGM:= TRUE;
+        IF Rec."Bal. Paymt. GM" = Rec."Bal. Paymt. GM"::Approved THEN
+            EditBalanceGM := FALSE ELSE
+            EditBalanceGM := TRUE;
 
-        IF Rec."Bal. Paymt. MD"=Rec."Bal. Paymt. MD"::Approved THEN
-            EditBalanceMD:= FALSE ELSE
-            EditBalanceMD:= TRUE;
+        IF Rec."Bal. Paymt. MD" = Rec."Bal. Paymt. MD"::Approved THEN
+            EditBalanceMD := FALSE ELSE
+            EditBalanceMD := TRUE;
     end;
 }
 

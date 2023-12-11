@@ -44,11 +44,11 @@ page 50297 "Monthly Variables Header."
     var
         DefaultPostingGroup: Code[20];
         LinesRec: Record "50141";
-        PeriodRec: Record "50004";
+        PeriodRec: Record 50004;
         CurrentPeriod: Code[10];
         UserSetup: Record 91;
         OpenPeriodFilter: Code[30];
-        EmpRec: Record "5200";
+        EmpRec: Record 5200;
         Msg1: Text[200];
         PenaType: Integer;
         SelectedPenalty: Integer;
@@ -61,6 +61,6 @@ page 50297 "Monthly Variables Header."
         StaffNo: Code[20];
         GrpLines: Record "50008";
         EDText: Text[30];
-        EDRec: Record "50001";
+        EDRec: Record 50001;
 }
 

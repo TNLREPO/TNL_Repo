@@ -337,12 +337,12 @@ page 50210 "Kodawari Estimate List"
         CustOrderLine2: Record "50122";
         ServiceLine2: Record 5902;
         CustOrderTable: Record "50119";
-        PurchOrderHeader: Record "38";
-        PurchOrderLine: Record "39";
+        PurchOrderHeader: Record 38;
+        PurchOrderLine: Record 39;
         NextLineNo: Integer;
-        NoSeriesMgt: Record "308";
+        NoSeriesMgt: Record 308;
         VRI2: Record 50058;
-        ItemRec: Record "27";
+        ItemRec: Record 27;
         COFRec2: Record "50119";
         VRIRec: Record 50058;
         COFLine: Record "50122";
