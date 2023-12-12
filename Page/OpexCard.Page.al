@@ -597,8 +597,8 @@ page 70126 "Opex Card"
         UserSetup: Record 91;
         UserSetup2: Record 91;
         IOUReg: Record 50105;
-        OpexRec: Record "70008";
-        OpexRec2: Record "70008";
+        OpexRec: Record 70008;
+        OpexRec2: Record 70008;
         Url: Text[500];
         PaymentRec: Record 50103;
         PaymentRec2: Record 50103;

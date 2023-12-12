@@ -18,7 +18,7 @@ page 50603 "Leave Request Card"
 
                     trigger OnValidate()
                     begin
-                        IF "1st Approval Status" = "1st Approval Status"::Approved THEN
+                        IF Rec."1st Approval Status" = Rec."1st Approval Status"::Approved THEN
                             ERROR('You cannot change Request No  after approval has been made!');
                     end;
                 }
@@ -38,8 +38,8 @@ page 50603 "Leave Request Card"
 
                     trigger OnValidate()
                     begin
-                        IF EmpREc.GET("Employee No.") THEN
-                            "Request Type" := EmpREc."Leave Grade";
+                        IF EmpREc.GET(Rec."Employee No.") THEN
+                            Rec."Request Type" := EmpREc."Leave Grade";
                     end;
                 }
                 field("Employee Name"; EmpREc.FullName())
@@ -66,7 +66,7 @@ page 50603 "Leave Request Card"
 
                     trigger OnLookup(var Text: Text): Boolean
                     begin
-                        "Leave Period" := SelectYear;
+                        Rec."Leave Period" := SelectYear;
                     end;
                 }
                 field("Actual Start Date"; Rec."Actual Start Date")
@@ -81,7 +81,7 @@ page 50603 "Leave Request Card"
 
                     trigger OnValidate()
                     begin
-                        IF NOT ("Leave Category" = 'MATERNITY') AND ("Actual Duration" > 15) THEN
+                        IF NOT (Rec."Leave Category" = 'MATERNITY') AND (Rec."Actual Duration" > 15) THEN
                             ERROR('You cant request more than 15 days Annual Leave at once');
                     end;
                 }
@@ -123,7 +123,7 @@ page 50603 "Leave Request Card"
                     Caption = 'Time';
                     Editable = false;
                 }
-                field("1st Approval"; "1st Approval)
+                field("1st Approval"; Rec."1st Approval")
                 {
                     Caption = 'To';
                     Editable = "1st Approval toEditable";
@@ -131,182 +131,182 @@ page 50603 "Leave Request Card"
                     trigger OnLookup(var Text: Text): Boolean
                     begin
                         // HOD
-                        IF "Request Type" = "Request Type"::HOD THEN BEGIN
+                        IF Rec."Request Type" = Rec."Request Type"::HOD THEN BEGIN
                             UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\IBIDAPO-OBE', 'TOYOTANIGERIA\KOLAWOLE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
-                                "1st Approval" := UserSetup."User ID";
-                                "1st Approver" := UserSetup.Name;
+                                Rec."1st Approval" := UserSetup."User ID";
+                                Rec."1st Approver" := UserSetup.Name;
                                 //"Current pending Person" := UserSetup."User ID";
                             END;
                         END;
-                        IF ("Request Type" = "Request Type"::"MD OFFICE") AND ("Global Dimension 1 code" = '01EXADMIN') THEN BEGIN
+                        IF (Rec."Request Type" = Rec."Request Type"::"MD OFFICE") AND (Rec."Global Dimension 1 code" = '01EXADMIN') THEN BEGIN
                             UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\IBIDAPO-OBE', 'TOYOTANIGERIA\KOLAWOLE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
-                                "1st Approval" := UserSetup."User ID";
-                                "1st Approver" := UserSetup.Name;
+                                Rec."1st Approval" := UserSetup."User ID";
+                                Rec."1st Approver" := UserSetup.Name;
                                 //"Current pending Person" := UserSetup."User ID";
                             END;
                         END;
 
-                        IF ("Request Type" = "Request Type"::HOD1) THEN BEGIN
+                        IF (Rec."Request Type" = Rec."Request Type"::HOD1) THEN BEGIN
                             UserSetup.SETFILTER("User ID", '%1', 'TOYOTANIGERIA\BUNMI');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
-                                "1st Approval" := UserSetup."User ID";
-                                "1st Approver" := UserSetup.Name;
+                                Rec."1st Approval" := UserSetup."User ID";
+                                Rec."1st Approver" := UserSetup.Name;
                                 //"Current pending Person" := UserSetup."User ID";
                             END;
                         END;
 
                         //Manager
 
-                        IF ("Request Type" = "Request Type"::Manager) AND ("Global Dimension 1 code" = '07FINACC') THEN BEGIN
+                        IF (Rec."Request Type" = Rec."Request Type"::Manager) AND (Rec."Global Dimension 1 code" = '07FINACC') THEN BEGIN
                             UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\paa', 'TOYOTANIGERIA\BUNMI');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
-                                "1st Approval" := UserSetup."User ID";
-                                "1st Approver" := UserSetup.Name;
+                                Rec."1st Approval" := UserSetup."User ID";
+                                Rec."1st Approver" := UserSetup.Name;
                                 //"Current pending Person" := UserSetup."User ID";
                             END;
                         END;
 
-                        IF ("Request Type" = "Request Type"::Manager) AND ("Global Dimension 1 code" = '08AUDSYS') THEN BEGIN
+                        IF (Rec."Request Type" = Rec."Request Type"::Manager) AND (Rec."Global Dimension 1 code" = '08AUDSYS') THEN BEGIN
                             UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\ADEWUMI', 'TOYOTANIGERIA\AGBESUA');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
-                                "1st Approval" := UserSetup."User ID";
-                                "1st Approver" := UserSetup.Name;
+                                Rec."1st Approval" := UserSetup."User ID";
+                                Rec."1st Approver" := UserSetup.Name;
                                 //"Current pending Person" := UserSetup."User ID";
                             END;
                         END;
 
-                        IF ("Request Type" = "Request Type"::Manager) AND ("Global Dimension 1 code" = '09MARKET') THEN BEGIN
+                        IF (Rec."Request Type" = Rec."Request Type"::Manager) AND (Rec."Global Dimension 1 code" = '09MARKET') THEN BEGIN
                             UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\AJUYAH', 'TOYOTANIGERIA\BAYO');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
-                                "1st Approval" := UserSetup."User ID";
-                                "1st Approver" := UserSetup.Name;
+                                Rec."1st Approval" := UserSetup."User ID";
+                                Rec."1st Approver" := UserSetup.Name;
                                 //"Current pending Person" := UserSetup."User ID";
                             END;
                         END;
-                        IF ("Request Type" = "Request Type"::Manager) AND ("Global Dimension 1 code" = '05PARTS') THEN BEGIN
+                        IF (Rec."Request Type" = Rec."Request Type"::Manager) AND (Rec."Global Dimension 1 code" = '05PARTS') THEN BEGIN
                             UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\RAVINDER', 'TOYOTANIGERIA\AKINDELE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
-                                "1st Approval" := UserSetup."User ID";
-                                "1st Approver" := UserSetup.Name;
+                                Rec."1st Approval" := UserSetup."User ID";
+                                Rec."1st Approver" := UserSetup.Name;
                                 //"Current pending Person" := UserSetup."User ID";
                             END;
                         END;
 
-                        IF ("Request Type" = "Request Type"::Manager) AND ("Global Dimension 1 code" = '02ADMINHR') THEN BEGIN
+                        IF (Rec."Request Type" = Rec."Request Type"::Manager) AND (Rec."Global Dimension 1 code" = '02ADMINHR') THEN BEGIN
                             UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\LAWAL', 'TOYOTANIGERIA\KOLAWOLE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
-                                "1st Approval" := UserSetup."User ID";
-                                "1st Approver" := UserSetup.Name;
+                                Rec."1st Approval" := UserSetup."User ID";
+                                Rec."1st Approver" := UserSetup.Name;
                                 //"Current pending Person" := UserSetup."User ID";
                             END;
                         END;
-                        IF ("Request Type" = "Request Type"::Manager) AND ("Global Dimension 1 code" = '06SERVICE') THEN BEGIN
+                        IF (Rec."Request Type" = Rec."Request Type"::Manager) AND (Rec."Global Dimension 1 code" = '06SERVICE') THEN BEGIN
                             UserSetup.SETFILTER("User ID", '%1|%2|%3', 'TOYOTANIGERIA\INGALE', 'TOYOTANIGERIA\SYLVESTER', 'TOYOTANIGERIA\BAMIDELE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
-                                "1st Approval" := UserSetup."User ID";
-                                "1st Approver" := UserSetup.Name;
+                                Rec."1st Approval" := UserSetup."User ID";
+                                Rec."1st Approver" := UserSetup.Name;
                                 //"Current pending Person" := UserSetup."User ID";
                             END;
                         END;
-                        IF ("Request Type" = "Request Type"::Manager) AND ("Global Dimension 1 code" = '03OPLOGIC') THEN BEGIN
+                        IF (Rec."Request Type" = Rec."Request Type"::Manager) AND (Rec."Global Dimension 1 code" = '03OPLOGIC') THEN BEGIN
                             UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\TOLA', 'TOYOTANIGERIA\SEGUN');
                             //UserSetup.SETFILTER("User ID",'%1|%2','TOYOTANIGERIA\LAWAL','TOYOTANIGERIA\KOLAWOLE');
 
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
 
-                                "1st Approval" := UserSetup."User ID";
-                                "1st Approver" := UserSetup.Name;
+                                Rec."1st Approval" := UserSetup."User ID";
+                                Rec."1st Approver" := UserSetup.Name;
                                 //"Current pending Person" := UserSetup."User ID";
                             END;
                         END;
 
                         //Junior staff - Deputy Manager
-                        IF ("Request Type" = "Request Type"::"Junior staff - Deputy Manager") AND ("Global Dimension 1 code" = '08AUDSYS') THEN BEGIN
+                        IF (Rec."Request Type" = Rec."Request Type"::"Junior staff - Deputy Manager") AND (Rec."Global Dimension 1 code" = '08AUDSYS') THEN BEGIN
                             UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\ADEWUMI', 'TOYOTANIGERIA\AGBESUA');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
-                                "1st Approval" := UserSetup."User ID";
-                                "1st Approver" := UserSetup.Name;
+                                Rec."1st Approval" := UserSetup."User ID";
+                                Rec."1st Approver" := UserSetup.Name;
                                 //"Current pending Person" := UserSetup."User ID";
                             END;
                         END;
 
-                        IF ("Request Type" = "Request Type"::"Junior staff - Deputy Manager") AND ("Global Dimension 1 code" = '09MARKET') THEN BEGIN
+                        IF (Rec."Request Type" = Rec."Request Type"::"Junior staff - Deputy Manager") AND (Rec."Global Dimension 1 code" = '09MARKET') THEN BEGIN
                             UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\AJUYAH', 'TOYOTANIGERIA\BAYO');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
-                                "1st Approval" := UserSetup."User ID";
-                                "1st Approver" := UserSetup.Name;
+                                Rec."1st Approval" := UserSetup."User ID";
+                                Rec."1st Approver" := UserSetup.Name;
                                 //"Current pending Person" := UserSetup."User ID";
                             END;
                         END;
-                        IF ("Request Type" = "Request Type"::"Junior staff - Deputy Manager") AND ("Global Dimension 1 code" = '05PARTS') THEN BEGIN
+                        IF (Rec."Request Type" = Rec."Request Type"::"Junior staff - Deputy Manager") AND (Rec."Global Dimension 1 code" = '05PARTS') THEN BEGIN
                             UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\RAVINDER', 'TOYOTANIGERIA\AKINDELE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
-                                "1st Approval" := UserSetup."User ID";
-                                "1st Approver" := UserSetup.Name;
+                                Rec."1st Approval" := UserSetup."User ID";
+                                Rec."1st Approver" := UserSetup.Name;
                                 //"Current pending Person" := UserSetup."User ID";
                             END;
                         END;
 
-                        IF ("Request Type" = "Request Type"::"Junior staff - Deputy Manager") AND ("Global Dimension 1 code" = '02ADMINHR') THEN BEGIN
+                        IF (Rec."Request Type" = Rec."Request Type"::"Junior staff - Deputy Manager") AND (Rec."Global Dimension 1 code" = '02ADMINHR') THEN BEGIN
                             UserSetup.SETFILTER("User ID", '%1|%2|%3', 'TOYOTANIGERIA\IBIDAPO-OBE', 'TOYOTANIGERIA\KOLAWOLE', 'TOYOTANIGERIA\LAWAL');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
-                                "1st Approval" := UserSetup."User ID";
-                                "1st Approver" := UserSetup.Name;
+                                Rec."1st Approval" := UserSetup."User ID";
+                                Rec."1st Approver" := UserSetup.Name;
                                 //"Current pending Person" := UserSetup."User ID";
                             END;
                         END;
-                        IF ("Request Type" = "Request Type"::"Junior staff - Deputy Manager") AND ("Global Dimension 1 code" = '06SERVICE') THEN BEGIN
+                        IF (Rec."Request Type" = Rec."Request Type"::"Junior staff - Deputy Manager") AND (Rec."Global Dimension 1 code" = '06SERVICE') THEN BEGIN
                             UserSetup.SETFILTER("User ID", '%1|%2|%3', 'TOYOTANIGERIA\INGALE', 'TOYOTANIGERIA\SYLVESTER', 'TOYOTANIGERIA\BAMIDELE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
-                                "1st Approval" := UserSetup."User ID";
-                                "1st Approver" := UserSetup.Name;
+                                Rec."1st Approval" := UserSetup."User ID";
+                                Rec."1st Approver" := UserSetup.Name;
                                 //"Current pending Person" := UserSetup."User ID";
                             END;
                         END;
-                        IF ("Request Type" = "Request Type"::"Junior staff - Deputy Manager") AND ("Global Dimension 1 code" = '07FINACC') THEN BEGIN
+                        IF (Rec."Request Type" = Rec."Request Type"::"Junior staff - Deputy Manager") AND (Rec."Global Dimension 1 code" = '07FINACC') THEN BEGIN
                             UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\PAA', 'TOYOTANIGERIA\BUNMI');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
-                                "1st Approval" := UserSetup."User ID";
-                                "1st Approver" := UserSetup.Name;
+                                Rec."1st Approval" := UserSetup."User ID";
+                                Rec."1st Approver" := UserSetup.Name;
                                 //"Current pending Person" := UserSetup."User ID";
                             END;
                         END;
 
-                        IF ("Request Type" = "Request Type"::"Junior staff - Deputy Manager") AND ("Global Dimension 1 code" = '04DDEV') THEN BEGIN
+                        IF (Rec."Request Type" = Rec."Request Type"::"Junior staff - Deputy Manager") AND (Rec."Global Dimension 1 code" = '04DDEV') THEN BEGIN
                             UserSetup.SETFILTER("User ID", '%1', 'TOYOTANIGERIA\HENRY');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
-                                "1st Approval" := UserSetup."User ID";
-                                "1st Approver" := UserSetup.Name;
+                                Rec."1st Approval" := UserSetup."User ID";
+                                Rec."1st Approver" := UserSetup.Name;
                                 //"Current pending Person" := UserSetup."User ID";
                             END;
                         END;
-                        IF ("Request Type" = "Request Type"::"Junior staff - Deputy Manager") AND ("Global Dimension 1 code" = '03OPLOGIC') THEN BEGIN
+                        IF (Rec."Request Type" = Rec."Request Type"::"Junior staff - Deputy Manager") AND (Rec."Global Dimension 1 code" = '03OPLOGIC') THEN BEGIN
                             UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\TOLA', 'TOYOTANIGERIA\SEGUN');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
-                                "1st Approval" := UserSetup."User ID";
-                                "1st Approver" := UserSetup.Name;
+                                Rec."1st Approval" := UserSetup."User ID";
+                                Rec."1st Approver" := UserSetup.Name;
                                 //"Current pending Person" := UserSetup."User ID";
                             END;
                         END;
 
                         //Branch
-                        IF "Request Type" = "Request Type"::Branch THEN BEGIN
+                        IF Rec."Request Type" = Rec."Request Type"::Branch THEN BEGIN
                             UserSetup.SETFILTER("User ID", '%1|%2|%3|%4|%5', 'TOYOTANIGERIA\NISHANT', 'TOYOTANIGERIA\EOT', 'TOYOTANIGERIA\BAYONLE', 'TOYOTANIGERIA\MOSES', 'TOYOTANIGERIA\ISUEKEBHO');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
-                                "1st Approval" := UserSetup."User ID";
-                                "1st Approver" := UserSetup.Name;
+                                Rec."1st Approval" := UserSetup."User ID";
+                                Rec."1st Approver" := UserSetup.Name;
                                 //"Current pending Person" := UserSetup."User ID";
                             END;
                         END;
 
                         //FG
-                        IF "Request Type" = "Request Type"::FG THEN BEGIN
+                        IF Rec."Request Type" = Rec."Request Type"::FG THEN BEGIN
                             UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\NISHANT', 'TOYOTANIGERIA\EOT');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
-                                "1st Approval" := UserSetup."User ID";
-                                "1st Approver" := UserSetup.Name;
+                                Rec."1st Approval" := UserSetup."User ID";
+                                Rec."1st Approver" := UserSetup.Name;
                                 //"Current pending Person" := UserSetup."User ID";
                             END;
                         END;
@@ -314,35 +314,35 @@ page 50603 "Leave Request Card"
 
                     trigger OnValidate()
                     begin
-                        IF NOT ("Leave Category" = 'MATERNITY') AND ("Actual Duration" > 15) THEN
+                        IF NOT (Rec."Leave Category" = 'MATERNITY') AND (Rec."Actual Duration" > 15) THEN
                             ERROR('You cant request more than 15 days Annual Leave at once');
                     end;
                 }
-                field("1st Approver"; "1st Approver")
+                field("1st Approver"; Rec."1st Approver")
                 {
                     Caption = 'Name';
                     Editable = false;
                 }
-                field("1st Approval Status"; "1st Approval Status")
+                field("1st Approval Status"; Rec."1st Approval Status")
                 {
                     Caption = 'Action';
                     Editable = "1st Apprv. StatusEditable";
 
                     trigger OnValidate()
                     begin
-                        IF ("Leave Category" = 'CASUAL') AND ("Actual Duration" > 3) THEN
+                        IF (Rec."Leave Category" = 'CASUAL') AND (Rec."Actual Duration" > 3) THEN
                             ERROR('Casual leave cannot be more than 3 working days');
 
-                        TESTFIELD("2nd Approver");
+                        Rec.TESTFIELD(Rec."2nd Approver");
 
-                        IF "1st Approval Status" = "1st Approval Status"::Approved THEN BEGIN
+                        IF Rec."1st Approval Status" = Rec."1st Approval Status"::Approved THEN BEGIN
                             "2nd Approval toEditable" := FALSE;
                             "Send for ApprovalEditable" := FALSE;
                         END ELSE BEGIN
                             "2nd Approval toEditable" := TRUE;
                             "Send for ApprovalEditable" := TRUE;
                         END;
-                        IF "Request Type" = "Request Type"::HOD THEN BEGIN
+                        IF Rec."Request Type" = Rec."Request Type"::HOD THEN BEGIN
                             "3rd_Approver_Visible" := FALSE;
                             "3rd_Approver_Visible" := FALSE;
                         END ELSE BEGIN
@@ -351,7 +351,7 @@ page 50603 "Leave Request Card"
                         END;
                     end;
                 }
-                field("1st Approval Time"; "1st Approval Time")
+                field("1st Approval Time"; Rec."1st Approval Time")
                 {
                     Caption = 'Time';
                     Editable = false;
@@ -360,85 +360,85 @@ page 50603 "Leave Request Card"
             group("Level 1")
             {
                 Visible = Level_1;
-                field("2nd Approval"; "2nd Approval")
+                field("2nd Approval"; Rec."2nd Approval")
                 {
                     Caption = 'To';
                     Editable = "2nd Approval toEditable";
 
                     trigger OnLookup(var Text: Text): Boolean
                     begin
-                        IF "Request Type" = "Request Type"::HOD THEN BEGIN
+                        IF Rec."Request Type" = Rec."Request Type"::HOD THEN BEGIN
                             UserSetup.SETFILTER("User ID", '%1', 'TOYOTANIGERIA\OLAKUNLE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
-                                "2nd Approval" := UserSetup."User ID";
-                                "2nd Approver" := UserSetup.Name;
+                                Rec."2nd Approval" := UserSetup."User ID";
+                                Rec."2nd Approver" := UserSetup.Name;
                                 //"Current pending Person" := UserSetup."User ID";
                             END;
                         END;
 
-                        IF ("Request Type" = "Request Type"::"MD OFFICE") AND ("Global Dimension 1 code" = '01EXADMIN') THEN BEGIN
+                        IF (Rec."Request Type" = Rec."Request Type"::"MD OFFICE") AND (Rec."Global Dimension 1 code" = '01EXADMIN') THEN BEGIN
                             UserSetup.SETFILTER("User ID", '%1', 'TOYOTANIGERIA\OLAKUNLE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
-                                "2nd Approval" := UserSetup."User ID";
-                                "2nd Approver" := UserSetup.Name;
+                                Rec."2nd Approval" := UserSetup."User ID";
+                                Rec."2nd Approver" := UserSetup.Name;
                                 //"Current pending Person" := UserSetup."User ID";
                             END;
                         END;
 
-                        IF "Request Type" = "Request Type"::HOD1 THEN BEGIN
+                        IF Rec."Request Type" = Rec."Request Type"::HOD1 THEN BEGIN
                             UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\IBIDAPO-OBE', 'TOYOTANIGERIA\KOLAWOLE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
-                                "2nd Approval" := UserSetup."User ID";
-                                "2nd Approver" := UserSetup.Name;
+                                Rec."2nd Approval" := UserSetup."User ID";
+                                Rec."2nd Approver" := UserSetup.Name;
                                 //"Current pending Person" := UserSetup."User ID";
                             END;
                         END;
 
-                        IF ("Request Type" = "Request Type"::Manager) OR ("Request Type" = "Request Type"::"Junior staff - Deputy Manager") THEN BEGIN
+                        IF (Rec."Request Type" = Rec."Request Type"::Manager) OR (Rec."Request Type" = Rec."Request Type"::"Junior staff - Deputy Manager") THEN BEGIN
                             UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\IBIDAPO-OBE', 'TOYOTANIGERIA\KOLAWOLE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
-                                "2nd Approval" := UserSetup."User ID";
-                                "2nd Approver" := UserSetup.Name;
+                                Rec."2nd Approval" := UserSetup."User ID";
+                                Rec."2nd Approver" := UserSetup.Name;
                                 //"Current pending Person" := UserSetup."User ID";
                             END;
                         END;
-                        IF ("Request Type" = "Request Type"::Branch) //AND //("Global Dimension 1 code" = '05PARTS')/
+                        IF (Rec."Request Type" = Rec."Request Type"::Branch) //AND //("Global Dimension 1 code" = '05PARTS')/
                         THEN BEGIN
                             UserSetup.SETFILTER("User ID", '%1|%2|%3|4%', 'TOYOTANIGERIA\SYLVESTER', 'TOYOTANIGERIA\RAVINDER', 'TOYOTANIGERIA\BAMIDELE', 'TOYOTANIGERIA\PAA');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
-                                "2nd Approval" := UserSetup."User ID";
-                                "2nd Approver" := UserSetup.Name;
+                                Rec."2nd Approval" := UserSetup."User ID";
+                                Rec."2nd Approver" := UserSetup.Name;
                                 //"Current pending Person" := UserSetup."User ID";
                             END;
                         END;
 
-                        IF ("Request Type" = "Request Type"::FG) //AND //("Global Dimension 1 code" = '05PARTS')/
+                        IF (Rec."Request Type" = Rec."Request Type"::FG) //AND //("Global Dimension 1 code" = '05PARTS')/
                         THEN BEGIN
                             UserSetup.SETFILTER("User ID", '%1|%2|%3|4%', 'TOYOTANIGERIA\RAVINDER', 'TOYOTANIGERIA\INGALE', 'TOYOTANIGERIA\SYLVESTER', 'TOYOTANIGERIA\AKINDELE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
-                                "2nd Approval" := UserSetup."User ID";
-                                "2nd Approver" := UserSetup.Name;
+                                Rec."2nd Approval" := UserSetup."User ID";
+                                Rec."2nd Approver" := UserSetup.Name;
                                 //"Current pending Person" := UserSetup."User ID";
                             END;
                         END;
                     end;
                 }
-                field("2nd Approver"; "2nd Approver")
+                field("2nd Approver"; Rec."2nd Approver")
                 {
                     Caption = 'Name';
                     Editable = false;
                 }
-                field("Send to MD for Approval"; "Send to MD for Approval")
+                field("Send to MD for Approval"; Rec."Send to MD for Approval")
                 {
                     Visible = To_Visible;
 
                     trigger OnValidate()
                     begin
-                        IF ("Request Type" = "Request Type"::HOD) OR ("Request Type" = "Request Type"::Manager) OR ("Request Type" = "Request Type"::Branch) THEN
+                        IF (Rec."Request Type" = Rec."Request Type"::HOD) OR (Rec."Request Type" = Rec."Request Type"::Manager) OR (Rec."Request Type" = Rec."Request Type"::Branch) THEN
                             ERROR('You cannot send the leave request to the next level');
                     end;
                 }
-                field("2nd Approval Status"; "2nd Approval Status")
+                field("2nd Approval Status"; Rec."2nd Approval Status")
                 {
                     Caption = 'Action';
                     Editable = "2nd Apprv. StatusEditable";
@@ -446,14 +446,14 @@ page 50603 "Leave Request Card"
                     trigger OnValidate()
                     begin
 
-                        IF "2nd Approval Status" = "2nd Approval Status"::Approved THEN BEGIN
+                        IF Rec."2nd Approval Status" = Rec."2nd Approval Status"::Approved THEN BEGIN
                             "3rd Approval toEditable" := TRUE;
                             "1st Apprv. StatusEditable" := FALSE;
                         END ELSE BEGIN
                             "3rd Approval toEditable" := FALSE;
                             "1st Apprv. StatusEditable" := TRUE;
                         END;
-                        IF "Request Type" = "Request Type"::Manager THEN BEGIN
+                        IF Rec."Request Type" = Rec."Request Type"::Manager THEN BEGIN
                             "4th_Approver_Visible" := FALSE;
                             "4th_Apprv_Visible" := FALSE
                         END ELSE BEGIN
@@ -462,7 +462,7 @@ page 50603 "Leave Request Card"
                         END;
                     end;
                 }
-                field("2nd Approval Time"; "2nd Approval Time")
+                field("2nd Approval Time"; Rec."2nd Approval Time")
                 {
                     Caption = 'Time';
                     Editable = false;
@@ -471,7 +471,7 @@ page 50603 "Leave Request Card"
             group("Level 2")
             {
                 Visible = Level_2;
-                field("3rd Approval"; "3rd Approval")
+                field("3rd Approval"; Rec."3rd Approval")
                 {
                     Caption = 'To';
                     Editable = "3rd Approval toEditable";
@@ -479,47 +479,47 @@ page 50603 "Leave Request Card"
 
                     trigger OnLookup(var Text: Text): Boolean
                     begin
-                        IF "Request Type" = "Request Type"::Manager THEN BEGIN
+                        IF Rec."Request Type" = Rec."Request Type"::Manager THEN BEGIN
                             UserSetup.SETFILTER("User ID", '%1', 'TOYOTANIGERIA\OLAKUNLE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
-                                "3rd Approval" := UserSetup."User ID";
-                                "3rd Approver" := UserSetup.Name;
+                                Rec."3rd Approval" := UserSetup."User ID";
+                                Rec."3rd Approver" := UserSetup.Name;
                                 //"Current pending Person" := UserSetup."User ID";
                             END;
                         END;
 
-                        IF "Request Type" = "Request Type"::HOD1 THEN BEGIN
+                        IF Rec."Request Type" = Rec."Request Type"::HOD1 THEN BEGIN
                             UserSetup.SETFILTER("User ID", '%1', 'TOYOTANIGERIA\OLAKUNLE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
-                                "3rd Approval" := UserSetup."User ID";
-                                "3rd Approver" := UserSetup.Name;
+                                Rec."3rd Approval" := UserSetup."User ID";
+                                Rec."3rd Approver" := UserSetup.Name;
                                 //"Current pending Person" := UserSetup."User ID";
                             END;
                         END;
 
-                        IF ("Request Type" = "Request Type"::"Junior staff - Deputy Manager") AND ("Send to MD for Approval" = TRUE) THEN BEGIN
+                        IF (Rec."Request Type" = Rec."Request Type"::"Junior staff - Deputy Manager") AND (Rec."Send to MD for Approval" = TRUE) THEN BEGIN
                             UserSetup.SETFILTER("User ID", '%1', 'TOYOTANIGERIA\OLAKUNLE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
-                                "3rd Approval" := UserSetup."User ID";
-                                "3rd Approver" := UserSetup.Name;
+                                Rec."3rd Approval" := UserSetup."User ID";
+                                Rec."3rd Approver" := UserSetup.Name;
                                 //"Current pending Person" := UserSetup."User ID";
                             END;
                         END;
 
-                        IF ("Request Type" = "Request Type"::Branch) THEN BEGIN
+                        IF (Rec."Request Type" = Rec."Request Type"::Branch) THEN BEGIN
                             UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\IBIDAPO-OBE', 'TOYOTANIGERIA\KOLAWOLE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
-                                "3rd Approval" := UserSetup."User ID";
-                                "3rd Approver" := UserSetup.Name;
+                                Rec."3rd Approval" := UserSetup."User ID";
+                                Rec."3rd Approver" := UserSetup.Name;
                                 //"Current pending Person" := UserSetup."User ID";
                             END;
                         END;
 
-                        IF ("Request Type" = "Request Type"::FG) THEN BEGIN
+                        IF (Rec."Request Type" = Rec."Request Type"::FG) THEN BEGIN
                             UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\IBIDAPO-OBE', 'TOYOTANIGERIA\KOLAWOLE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
-                                "3rd Approval" := UserSetup."User ID";
-                                "3rd Approver" := UserSetup.Name;
+                                Rec."3rd Approval" := UserSetup."User ID";
+                                Rec."3rd Approver" := UserSetup.Name;
                                 //"Current pending Person" := UserSetup."User ID";
                             END;
                         END;
@@ -527,24 +527,24 @@ page 50603 "Leave Request Card"
 
                     trigger OnValidate()
                     begin
-                        IF ("Request Type" = "Request Type"::HOD) OR (("Request Type" = "Request Type"::"Junior staff - Deputy Manager") AND ("Send to MD for Approval" = FALSE)) THEN
+                        IF (Rec."Request Type" = Rec."Request Type"::HOD) OR ((Rec."Request Type" = Rec."Request Type"::"Junior staff - Deputy Manager") AND (Rec."Send to MD for Approval" = FALSE)) THEN
                             ERROR('You can only Appover this Leave Approval Request');
                     end;
                 }
-                field("3rd Approver"; "3rd Approver")
+                field("3rd Approver"; Rec."3rd Approver")
                 {
                     Caption = 'Name';
                     Editable = false;
                     Visible = To_Visible;
                 }
-                field("3rd Approval Status"; "3rd Approval Status")
+                field("3rd Approval Status"; Rec."3rd Approval Status")
                 {
                     Caption = 'Action';
                     Editable = "3rd Apprv. StatusEditable";
 
                     trigger OnValidate()
                     begin
-                        IF "3rd Approval Status" = "3rd Approval Status"::Approved THEN BEGIN
+                        IF Rec."3rd Approval Status" = Rec."3rd Approval Status"::Approved THEN BEGIN
                             "4th Approval toEditable" := TRUE;
                             "2nd Apprv. StatusEditable" := FALSE
                         END ELSE BEGIN
@@ -553,39 +553,39 @@ page 50603 "Leave Request Card"
                         END;
                     end;
                 }
-                field("3rd  Approval Time"; "3rd  Approval Time")
+                field("3rd  Approval Time"; Rec."3rd  Approval Time")
                 {
                     Caption = 'Time';
                     Editable = false;
                 }
             }
-            group()
+            group(Control1)
             {
                 Editable = "4th Approval toEditable";
                 Visible = Level_3;
-                field("4th Approval"; "4th Approval")
+                field("4th Approval"; Rec."4th Approval")
                 {
                     Editable = "4th Approval toEditable";
 
                     trigger OnLookup(var Text: Text): Boolean
                     begin
-                        IF "Request Type" = "Request Type"::FG THEN BEGIN
+                        IF Rec."Request Type" = Rec."Request Type"::FG THEN BEGIN
                             UserSetup.SETFILTER("User ID", '%1', 'TOYOTANIGERIA\OLAKUNLE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
-                                "4th Approval" := UserSetup."User ID";
-                                "4th  Approver" := UserSetup.Name;
+                                Rec."4th Approval" := UserSetup."User ID";
+                                Rec."4th  Approver" := UserSetup.Name;
                                 // "Current pending Person" := UserSetup."User ID";
                             END;
                         END;
                     end;
                 }
-                field("4th  Approver"; "4th  Approver")
+                field("4th  Approver"; Rec."4th  Approver")
                 {
                 }
-                field("4th  Approval Status"; "4th  Approval Status")
+                field("4th  Approval Status"; Rec."4th  Approval Status")
                 {
                 }
-                field("4th Approval Time"; "4th Approval Time")
+                field("4th Approval Time"; Rec."4th Approval Time")
                 {
                 }
             }
@@ -607,13 +607,13 @@ page 50603 "Leave Request Card"
 
                     IF CONFIRM('Do you want to raise a Plan Leave') THEN BEGIN
                         LPlanRec.INIT;
-                        LPlanRec.Leave_Request := "Request No.";
-                        LPlanRec."Employee No." := "Employee No.";
-                        LPlanRec."Leave Period" := "Leave Period";
-                        LPlanRec."Leave Category" := "Leave Category";
+                        LPlanRec.Leave_Request := Rec."Request No.";
+                        LPlanRec."Employee No." := Rec."Employee No.";
+                        LPlanRec."Leave Period" := Rec."Leave Period";
+                        LPlanRec."Leave Category" := Rec."Leave Category";
                         LPlanRec.INSERT(TRUE);
                         COMMIT;
-                        LPlanRec.SETRANGE(Leave_Request, "Request No.");
+                        LPlanRec.SETRANGE(Leave_Request, Rec."Request No.");
                         PAGE.RUNMODAL(50092, LPlanRec);
                     END;
                 end;
@@ -627,49 +627,49 @@ page 50603 "Leave Request Card"
                 trigger OnAction()
                 begin
 
-                    IF ("2nd Approval Status" <> "2nd Approval Status"::Approved) AND ("Request Type" = "Request Type"::HOD) THEN
+                    IF (Rec."2nd Approval Status" <> Rec."2nd Approval Status"::Approved) AND (Rec."Request Type" = Rec."Request Type"::HOD) THEN
                         ERROR('The leave request has not been approved!');
-                    IF ("2nd Approval Status" <> "2nd Approval Status"::Approved) AND ("Request Type" = "Request Type"::"Junior staff - Deputy Manager") AND
-                       ("Send to MD for Approval" = FALSE) THEN
-                        ERROR('The leave request has not been approved!');
-
-
-                    IF ("3rd Approval Status" <> "3rd Approval Status"::Approved) AND ("Request Type" = "Request Type"::HOD1) THEN
-                        ERROR('The leave request has not been approved!');
-
-                    IF ("3rd Approval Status" <> "3rd Approval Status"::Approved) AND ("Request Type" = "Request Type"::Manager) THEN
+                    IF (Rec."2nd Approval Status" <> Rec."2nd Approval Status"::Approved) AND (Rec."Request Type" = Rec."Request Type"::"Junior staff - Deputy Manager") AND
+                       (Rec."Send to MD for Approval" = FALSE) THEN
                         ERROR('The leave request has not been approved!');
 
 
-                    IF ("3rd Approval Status" <> "3rd Approval Status"::Approved) AND ("Request Type" = "Request Type"::Branch) THEN
+                    IF (Rec."3rd Approval Status" <> Rec."3rd Approval Status"::Approved) AND (Rec."Request Type" = Rec."Request Type"::HOD1) THEN
+                        ERROR('The leave request has not been approved!');
+
+                    IF (Rec."3rd Approval Status" <> Rec."3rd Approval Status"::Approved) AND (Rec."Request Type" = Rec."Request Type"::Manager) THEN
                         ERROR('The leave request has not been approved!');
 
 
-                    IF ("3rd Approval Status" <> "3rd Approval Status"::Approved) AND (("Request Type" = "Request Type"::"Junior staff - Deputy Manager") AND
-                       ("Send to MD for Approval" = TRUE)) THEN
+                    IF (Rec."3rd Approval Status" <> Rec."3rd Approval Status"::Approved) AND (Rec."Request Type" = Rec."Request Type"::Branch) THEN
                         ERROR('The leave request has not been approved!');
 
 
-                    TESTFIELD(Treated, FALSE);
+                    IF (Rec."3rd Approval Status" <> Rec."3rd Approval Status"::Approved) AND ((Rec."Request Type" = Rec."Request Type"::"Junior staff - Deputy Manager") AND
+                       (Rec."Send to MD for Approval" = TRUE)) THEN
+                        ERROR('The leave request has not been approved!');
+
+
+                    Rec.TESTFIELD(Rec.Treated, FALSE);
                     IF CONFIRM('Do you want to raise a leave plan?') THEN BEGIN
                         LPlanRec.INIT;
-                        LPlanRec.Leave_Request := "Request No.";
-                        LPlanRec."Employee No." := "Employee No.";
-                        LPlanRec."Leave Period" := "Leave Period";
-                        LPlanRec."Leave Category" := "Leave Category";
-                        LPlanRec."Actual Start Date" := "Actual Start Date";
-                        LPlanRec."Actual End Date" := "Actual End Date";
-                        LPlanRec."Actual Duration" := "Actual Duration";
+                        LPlanRec.Leave_Request := Rec."Request No.";
+                        LPlanRec."Employee No." := Rec."Employee No.";
+                        LPlanRec."Leave Period" := Rec."Leave Period";
+                        LPlanRec."Leave Category" := Rec."Leave Category";
+                        LPlanRec."Actual Start Date" := Rec."Actual Start Date";
+                        LPlanRec."Actual End Date" := Rec."Actual End Date";
+                        LPlanRec."Actual Duration" := Rec."Actual Duration";
                         LPlanRec."Entry Type" := LPlanRec."Entry Type"::ACTUAL;
-                        LPlanRec."Global Dimension 1 Code" := "Global Dimension 1 code";
-                        LPlanRec."Global Dimension 2 Code" := "Global Dimension 2 Code";
+                        LPlanRec."Global Dimension 1 Code" := Rec."Global Dimension 1 code";
+                        LPlanRec."Global Dimension 2 Code" := Rec."Global Dimension 2 Code";
                         LPlanRec."Entry Type" := LPlanRec."Entry Type"::ACTUAL;
                         LPlanRec.Treated := TRUE;
-                        Treated := TRUE;
+                        Rec.Treated := TRUE;
                         LPlanRec.INSERT(TRUE);
                         COMMIT;
 
-                        LPlanRec.SETRANGE(Leave_Request, "Request No.");
+                        LPlanRec.SETRANGE(Leave_Request, Rec."Request No.");
                         PAGE.RUNMODAL(70056, LPlanRec);
                     END;
                 end;
@@ -691,19 +691,19 @@ page 50603 "Leave Request Card"
     begin
 
 
-        IF ("Send for Approval" = TRUE) THEN
+        IF (Rec."Send for Approval" = TRUE) THEN
             Level_1 := TRUE
 
         ELSE
             Level_1 := FALSE;
 
-        IF "1st Approval Status" <> "1st Approval Status"::" " THEN
+        IF Rec."1st Approval Status" <> Rec."1st Approval Status"::" " THEN
             Level_2 := TRUE
 
         ELSE
             Level_2 := FALSE;
 
-        IF "Request Type" = "Request Type"::FG THEN
+        IF Rec."Request Type" = Rec."Request Type"::FG THEN
             Level_3 := TRUE;
 
         //IF  ( "2nd Approval Status" <> "2nd Approval Status":: " " ) THEN
@@ -711,25 +711,25 @@ page 50603 "Leave Request Card"
         //IF ("Request Type"= "Request Type":: Manager) OR ("Send for Approval" = TRUE) THEN
         //  Level_2 := TRUE;
 
-        IF "Send for Approval" = TRUE THEN
+        IF Rec."Send for Approval" = TRUE THEN
             "1st Approval toEditable" := FALSE
         ELSE
             "1st Approval toEditable" := TRUE;
-        IF "1st Approval Status" = "1st Approval Status"::Approved THEN BEGIN
+        IF Rec."1st Approval Status" = Rec."1st Approval Status"::Approved THEN BEGIN
             "2nd Approval toEditable" := FALSE;
             "Send for ApprovalEditable" := FALSE
         END ELSE BEGIN
             "2nd Approval toEditable" := TRUE;
             "Send for ApprovalEditable" := TRUE
         END;
-        IF "2nd Approval Status" = "2nd Approval Status"::Approved THEN BEGIN
+        IF Rec."2nd Approval Status" = Rec."2nd Approval Status"::Approved THEN BEGIN
             "3rd Approval toEditable" := FALSE;
             "1st Apprv. StatusEditable" := FALSE
         END ELSE BEGIN
             "3rd Approval toEditable" := TRUE;
             "1st Apprv. StatusEditable" := TRUE
         END;
-        IF "3rd Approval Status" = "3rd Approval Status"::Approved THEN BEGIN
+        IF Rec."3rd Approval Status" = Rec."3rd Approval Status"::Approved THEN BEGIN
             "4th Approval toEditable" := TRUE;
             "1st Apprv. StatusEditable" := FALSE
         END ELSE BEGIN
@@ -737,7 +737,7 @@ page 50603 "Leave Request Card"
             "1st Apprv. StatusEditable" := TRUE
         END;
 
-        IF "4th  Approval Status" = "4th  Approval Status"::Approved THEN BEGIN
+        IF Rec."4th  Approval Status" = Rec."4th  Approval Status"::Approved THEN BEGIN
             "2nd Apprv. StatusEditable" := FALSE;
             "4th Approval toEditable" := FALSE
         END ELSE BEGIN
@@ -750,17 +750,17 @@ page 50603 "Leave Request Card"
         //ELSE
         //  "2nd Apprv. StatusEditable" := TRUE;
 
-        IF "4th  Approval Status" = "4th  Approval Status"::Approved THEN
+        IF Rec."4th  Approval Status" = Rec."4th  Approval Status"::Approved THEN
             "3rd Apprv. StatusEditable" := FALSE
         ELSE
             "3rd Apprv. StatusEditable" := TRUE;
-        IF ("3rd Approval Status" = "3rd Approval Status"::Approved) AND
-           (("Request Type" = "Request Type"::Branch) OR ("Send to MD for Approval")) THEN
+        IF (Rec."3rd Approval Status" = Rec."3rd Approval Status"::Approved) AND
+           ((Rec."Request Type" = Rec."Request Type"::Branch) OR (Rec."Send to MD for Approval")) THEN
             "4th Apprv. StatusEditable" := TRUE
         ELSE
             "4th Apprv. StatusEditable" := TRUE;
         FastTabControl;
-        IF "Request Type" = "Request Type"::HOD THEN
+        IF Rec."Request Type" = Rec."Request Type"::HOD THEN
             To_Visible := FALSE
         ELSE
             To_Visible := TRUE;
@@ -816,7 +816,7 @@ page 50603 "Leave Request Card"
         "4th_Approver_Visible": Boolean;
         "3rd_Apprv_Visible": Boolean;
         "3rd_Approver_Visible": Boolean;
-        LeaveRegister: Record "70008";
+        LeaveRegister: Record 70008;
         To_Visible: Boolean;
         Name_Visible: Boolean;
         Send_Visible: Boolean;
@@ -858,13 +858,13 @@ page 50603 "Leave Request Card"
 
     local procedure FastTabControl()
     begin
-        IF "Send for Approval" THEN
+        IF Rec."Send for Approval" THEN
             Level_1 := TRUE
         ELSE
             Level_1 := FALSE;
 
-        IF (("Request Type" = "Request Type"::HOD1) OR ("Request Type" = "Request Type"::Manager) OR ("Request Type" = "Request Type"::FG) OR
-            ("Request Type" = "Request Type"::Branch)) OR ("Send to MD for Approval" = TRUE) THEN
+        IF ((Rec."Request Type" = Rec."Request Type"::HOD1) OR (Rec."Request Type" = Rec."Request Type"::Manager) OR (Rec."Request Type" = Rec."Request Type"::FG) OR
+            (Rec."Request Type" = Rec."Request Type"::Branch)) OR (Rec."Send to MD for Approval" = TRUE) THEN
             Level_2 := TRUE
         ELSE
             Level_2 := FALSE;

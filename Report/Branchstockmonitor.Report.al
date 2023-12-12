@@ -5,10 +5,10 @@ report 50224 "Branch stock monitor"
 
     dataset
     {
-        dataitem(DataItem8129; Table27)
+        dataitem(DataItem8129; Item)
         {
-            DataItemTableView = SORTING (No.)
-                                WHERE (Inventory Posting Group=CONST(N_PARTS));
+            DataItemTableView = SORTING ("No.")
+                                WHERE ("Inventory Posting Group"=filter('N_PARTS'));
             RequestFilterFields = "Location Filter","Date Filter",Inventory,"Inventory (All Locations)";
             column(FORMAT_TODAY_0_4_;FORMAT(TODAY,0,4))
             {

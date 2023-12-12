@@ -117,7 +117,7 @@ report 50423 "LPO Capex-Opex"
     var
         DimValue: Record "349";
         Department: Text[50];
-        CapexOpexReq: Record "70008";
+        CapexOpexReq: Record 70008;
         Requester: Text[60];
 }
 

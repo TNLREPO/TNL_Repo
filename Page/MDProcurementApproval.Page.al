@@ -45,6 +45,6 @@ page 70199 "MD Procurement Approval"
     }
 
     var
-        ProcurementHeader: Record "70008";
+        ProcurementHeader: Record 70008;
 }
 

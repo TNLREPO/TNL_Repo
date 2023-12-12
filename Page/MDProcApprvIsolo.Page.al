@@ -45,6 +45,6 @@ page 70217 "MD Proc Apprv Isolo"
     }
 
     var
-        ProcurementHeader: Record "70008";
+        ProcurementHeader: Record 70008;
 }
 

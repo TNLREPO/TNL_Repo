@@ -63,9 +63,7 @@ page 70057 "Leave History List"
                 field("Alt. Address End Date";Rec."Alt. Address End Date")
                 {
                 }
-                field(Picture;Picture)
-                {
-                }
+                
                 field("Birth Date";Rec."Birth Date")
                 {
                 }
