@@ -45,7 +45,7 @@ report 50167 "e-Procurement Email Reminder"
 
     var
         UserSetup: Record 91;
-        approvalmessage: Codeunit "397";
+        approvalmessage: Codeunit 397;
         mailsent: Boolean;
         ToName: Text[80];
         CCName: Text[80];

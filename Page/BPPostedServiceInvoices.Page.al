@@ -109,9 +109,7 @@ page 80066 "B&P Posted Service Invoices"
                 {
                     Caption = '<Total Labour>';
                 }
-                field("Total B&P Items"; Rec."Total B&P Items")
-                {
-                }
+
                 field("Received Date"; Rec."Received Date")
                 {
                 }
@@ -148,7 +146,7 @@ page 80066 "B&P Posted Service Invoices"
                     Image = Statistics;
                     Promoted = true;
                     PromotedCategory = Process;
-                    RunObject = Page 6033;
+                    RunObject = Page "Service Invoice Statistics";
                     RunPageLink = "No." = FIELD("No.");
                     ShortCutKey = 'F7';
                 }
@@ -156,7 +154,7 @@ page 80066 "B&P Posted Service Invoices"
                 {
                     Caption = 'Co&mments';
                     Image = ViewComments;
-                    RunObject = Page 5911;
+                    RunObject = Page "Service Comment Sheet";
                     RunPageLink = "Table Name" = CONST("Service Invoice Header"),
                                   "No." = FIELD("No."),
                                   Type = CONST(General);

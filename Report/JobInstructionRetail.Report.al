@@ -1006,7 +1006,7 @@ report 50308 "Job Instruction Retail"
     }
 
     var
-        CustomerOrderLine: Record "50122";
+        CustomerOrderLine: Record 50122;
         JOB_INSTRUCTIONCaptionLbl: Label 'JOB INSTRUCTION ';
         CurrReport_PAGENOCaptionLbl: Label 'Page';
         DateCaptionLbl: Label 'Date';

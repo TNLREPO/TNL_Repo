@@ -1126,7 +1126,7 @@ report 50052 "TCSC Sales Invoice-Part"
         CompanyInfo1: Record "79";
         CompanyInfo2: Record "79";
         CompanyInfo3: Record "79";
-        SalesSetup: Record "311";
+        SalesSetup: Record 311;
         Cust: Record 18;
         VATAmountLine: Record "290" temporary;
         DimSetEntry1: Record "480";

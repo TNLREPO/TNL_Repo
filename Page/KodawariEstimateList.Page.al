@@ -326,26 +326,26 @@ page 50210 "Kodawari Estimate List"
     }
 
     var
-        COFRec: Record "50119";
+        COFRec: Record 50119;
         ServiceOrder: Record 5900;
         SericeItemLine: Record 5901;
         ServiceLine: Record 5902;
         PurchSetup: Record 312;
         USERSETUP: Record 91;
-        JIRec: Record "50119";
-        CustOrderLine: Record "50122";
-        CustOrderLine2: Record "50122";
+        JIRec: Record 50119;
+        CustOrderLine: Record 50122;
+        CustOrderLine2: Record 50122;
         ServiceLine2: Record 5902;
-        CustOrderTable: Record "50119";
+        CustOrderTable: Record 50119;
         PurchOrderHeader: Record 38;
         PurchOrderLine: Record 39;
         NextLineNo: Integer;
         NoSeriesMgt: Record 308;
         VRI2: Record 50058;
         ItemRec: Record 27;
-        COFRec2: Record "50119";
+        COFRec2: Record 50119;
         VRIRec: Record 50058;
-        COFLine: Record "50122";
+        COFLine: Record 50122;
 
     [Scope('Internal')]
     procedure CreatePurchaseRequisition()

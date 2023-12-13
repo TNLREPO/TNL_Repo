@@ -584,9 +584,9 @@ page 70126 "Opex Card"
 
     var
         Text001: Label 'An invoice from a vendor is required for this transaction!';
-        OpexLine: Record "70001";
+        OpexLine: Record 70001;
         Text002: Label '3 quotes from 3 vendors will be required for this transaction!';
-        Mail: Codeunit "397";
+        Mail: Codeunit 397;
         ToAddresses: Text;
         CcAddresses: Text;
         BccAddresses: Text;
@@ -608,8 +608,8 @@ page 70126 "Opex Card"
         EditMD: Boolean;
         VisibleGM: Boolean;
         VisibleMD: Boolean;
-        ProcurementLine: Record "70001";
-        ProcurementLine2: Record "70001";
+        ProcurementLine: Record 70001;
+        ProcurementLine2: Record 70001;
         PurchSetup: Record 312;
         CRLF: Text[2];
         VendName: Text[70];
@@ -636,10 +636,10 @@ page 70126 "Opex Card"
         Date6: Boolean;
         BalMD: Boolean;
         BalGM: Boolean;
-        ProcurementLine3: Record "70001";
+        ProcurementLine3: Record 70001;
         PaymentRec3: Record 50103;
-        LPO: Record "70010";
-        CapexLine: Record "70001";
+        LPO: Record 70010;
+        CapexLine: Record 70001;
         SendVisible: Boolean;
         EditSend: Boolean;
         EditHOD2: Boolean;
@@ -655,7 +655,7 @@ page 70126 "Opex Card"
         EditBalanceGM: Boolean;
         EditBalanceMD: Boolean;
         EditVendorDetails: Boolean;
-        ProcurementDetail: Record "70001";
+        ProcurementDetail: Record 70001;
 
     local procedure EditApproval()
     begin

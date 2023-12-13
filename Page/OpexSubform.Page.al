@@ -128,12 +128,12 @@ page 70127 "Opex Subform"
 
     var
         IncomingDocument: Record "130";
-        ProcurementLine3: Record "70001";
+        ProcurementLine3: Record 70001;
         PaymentRec3: Record 70008;
-        LPO: Record "70010";
+        LPO: Record 70010;
         Text001: Label 'Are you sure you want to generate an LPO?';
         Text002: Label 'An LPO has been raised!';
-        CapexOpexLine: Record "70001";
+        CapexOpexLine: Record 70001;
         CapexOpexReq: Record 70008;
 }
 

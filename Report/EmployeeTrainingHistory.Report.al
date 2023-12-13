@@ -203,7 +203,7 @@ report 50133 "Employee Training History"
         GTSize: Decimal;
         VName: Text[100];
         Named: Boolean;
-        CTypeRec: Record "50081";
+        CTypeRec: Record 50081;
         CTName: Text[50];
         Duration: Code[10];
         TotalCost: Decimal;

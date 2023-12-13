@@ -31,7 +31,7 @@ report 50168 "e-Procurement Report"
 
     var
         UserSetup: Record 91;
-        approvalmessage: Codeunit "397";
+        approvalmessage: Codeunit 397;
         mailsent: Boolean;
         ToName: Text[80];
         CCName: Text[80];

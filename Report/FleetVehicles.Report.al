@@ -274,11 +274,11 @@ report 50247 "Fleet Vehicles"
     }
 
     var
-        CustOrderLine: Record "50122";
+        CustOrderLine: Record 50122;
         PartAmount: Decimal;
-        CustOrderLine2: Record "50122";
+        CustOrderLine2: Record 50122;
         SundryAmount: Decimal;
-        CustOrderLine3: Record "50122";
+        CustOrderLine3: Record 50122;
         LabourAmount: Decimal;
         SubTotal: Decimal;
         PurchHead: Record 38;

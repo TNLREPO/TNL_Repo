@@ -370,7 +370,7 @@ report 50403 "Workshop Estimate"
         BPLabour: Decimal;
         BPSundry: Decimal;
         BPTotal: Decimal;
-        CustOrderLine: Record "50122";
+        CustOrderLine: Record 50122;
         ClaimNo: Code[20];
         VRIRec: Record "50058";
         TotalEstimate: Decimal;
@@ -379,7 +379,7 @@ report 50403 "Workshop Estimate"
         JobType: Text[10];
         RegDate: Date;
         ServItem: Record "5940";
-        COFRec: Record "50119";
+        COFRec: Record 50119;
         CLAIM_NO_CaptionLbl: Label 'CLAIM NO:';
         Customer_Order_No_CaptionLbl: Label 'Customer Order No.';
         Reception_Date_Time_CaptionLbl: Label 'Reception Date/Time:';

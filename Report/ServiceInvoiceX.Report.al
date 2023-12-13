@@ -840,7 +840,7 @@ report 50616 "Service - InvoiceX"
         CompanyInfo1: Record "79";
         CompanyInfo2: Record "79";
         CompanyInfo3: Record "79";
-        ServiceSetup: Record "5911";
+        ServiceSetup: Record 5911;
         Cust: Record 18;
         DimSetEntry: Record "480";
         VATAmountLine: Record "290" temporary;

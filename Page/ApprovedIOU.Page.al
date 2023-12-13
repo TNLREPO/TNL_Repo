@@ -271,7 +271,7 @@ page 50440 "Approved IOU"
 
     trigger OnAfterGetRecord()
     begin
-        OnAfterGetCurrRecord;
+        CustOnAfterGetCurrRecord;
     end;
 
     trigger OnInit()
@@ -289,7 +289,7 @@ page 50440 "Approved IOU"
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
-        OnAfterGetCurrRecord;
+        CustOnAfterGetCurrRecord;
     end;
 
     trigger OnOpenPage()
@@ -350,7 +350,7 @@ page 50440 "Approved IOU"
         CurrPage.UPDATE(FALSE);
     end;
 
-    local procedure OnAfterGetCurrRecord()
+    local procedure CustOnAfterGetCurrRecord()
     begin
         xRec := Rec;
         IF Rec."Send for Approval" THEN

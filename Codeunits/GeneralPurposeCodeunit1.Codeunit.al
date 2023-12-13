@@ -735,67 +735,62 @@ codeunit 50004 "General Purpose Codeunit-1"
             GenJnlBatch.INSERT;
         END;
 
-        WITH IOURec DO BEGIN
-            IF CancelIOU THEN
-                AmtFactor := -1
-            ELSE
-                AmtFactor := 1;
+        IF CancelIOU THEN
+            AmtFactor := -1
+        ELSE
+            AmtFactor := 1;
 
-            TESTFIELD("IOU No.");
-            //TESTFIELD("Manual Voucher No.");
-            //TESTFIELD("Account No.");
-            TESTFIELD("Bal. Account No.");
-            //TESTFIELD(Paid);
-            TESTFIELD(Amount);
-
-            //delete records if any exists
-            GenJnlLine2.SETRANGE("Journal Template Name", 'GENERAL');
-            GenJnlLine2.SETRANGE("Journal Batch Name", 'IOU');
-            IF GenJnlLine2.FINDSET THEN
-                GenJnlLine2.DELETEALL;
-
-            // create gen. jnl. line
-            GenJnlLine.INIT;
-            GenJnlLine."Journal Template Name" := 'GENERAL';
-            GenJnlLine."Journal Batch Name" := 'IOU';
-            GenJnlLine."Document No." := "IOU No.";
-            GenJnlLine."Line No." := 10000;
-            GenJnlLine."External Document No." := "Manual Voucher No.";
-            GenJnlLine."System-Created Entry" := TRUE;
-            GenJnlLine."Account Type" := "Account Type";
-            GenJnlLine.VALIDATE(GenJnlLine."Account No.", "Account No.");
-            GenJnlLine."Posting Date" := TODAY;
-            GenJnlLine."Document Date" := "Entry Date";
-            //GenJnlLine."Document Type" := GenJnlLine."Document Type"::Payment;
-            GenJnlLine.Description := Description;
-            GenJnlLine.VALIDATE(GenJnlLine.Amount, Amount * AmtFactor);
-            IF "Bal. Account Type" <> 0 THEN
-                GenJnlLine."Bal. Account Type" := GenJnlLine."Bal. Account Type"::"Bank Account"
-            ELSE
-                GenJnlLine."Bal. Account Type" := "Bal. Account Type";
-            GenJnlLine.VALIDATE(GenJnlLine."Bal. Account No.", "Bal. Account No.");
-            GenJnlLine.VALIDATE(GenJnlLine."Shortcut Dimension 1 Code", "Global Dimension 1 Code");
-            GenJnlLine.VALIDATE(GenJnlLine."Shortcut Dimension 2 Code", "Global Dimension 2 Code");
-            GenJnlLine."Payer/Collector Name" := "Staff Name";
-            GenJnlLine."VAT Bus. Posting Group" := '';
-            GenJnlLine."VAT Prod. Posting Group" := '';
-            GenJnlLine."Bal. VAT Bus. Posting Group" := '';
-            GenJnlLine."Bal. VAT Prod. Posting Group" := '';
-            GenJnlLine.VALIDATE("VAT %", 0);
-            GenJnlLine."Reason Code" := 'IOU';
-            GenJnlLine.INSERT;
-            GenJnlPost.RUN(GenJnlLine);
-
-            // update IOURec as paid
-            IF NOT CancelIOU THEN BEGIN
-                //"Payment Date" := TODAY;
-                Posted := TRUE;
-            END ELSE BEGIN
-                Void := TRUE;
-                "Voided By" := USERID;
-            END;
-            MODIFY;
+        IOURec.TESTFIELD(IOURec."IOU No.");
+        //TESTFIELD("Manual Voucher No.");
+        //TESTFIELD("Account No.");
+        IOURec.TESTFIELD(IOURec."Bal. Account No.");
+        //TESTFIELD(Paid);
+        IOURec.TESTFIELD(IOURec.Amount);
+        //delete records if any exists
+        GenJnlLine2.SETRANGE("Journal Template Name", 'GENERAL');
+        GenJnlLine2.SETRANGE("Journal Batch Name", 'IOU');
+        IF GenJnlLine2.FINDSET THEN
+            GenJnlLine2.DELETEALL;
+        // create gen. jnl. line
+        GenJnlLine.INIT;
+        GenJnlLine."Journal Template Name" := 'GENERAL';
+        GenJnlLine."Journal Batch Name" := 'IOU';
+        GenJnlLine."Document No." := IOURec."IOU No.";
+        GenJnlLine."Line No." := 10000;
+        GenJnlLine."External Document No." := IOURec."Manual Voucher No.";
+        GenJnlLine."System-Created Entry" := TRUE;
+        GenJnlLine."Account Type" := IOURec."Account Type";
+        GenJnlLine.VALIDATE(GenJnlLine."Account No.", IOURec."Account No.");
+        GenJnlLine."Posting Date" := TODAY;
+        GenJnlLine."Document Date" := IOURec."Entry Date";
+        //GenJnlLine."Document Type" := GenJnlLine."Document Type"::Payment;
+        GenJnlLine.Description := IOURec.Description;
+        GenJnlLine.VALIDATE(GenJnlLine.Amount, IOURec.Amount * AmtFactor);
+        IF IOURec."Bal. Account Type" <> 0 THEN
+            GenJnlLine."Bal. Account Type" := GenJnlLine."Bal. Account Type"::"Bank Account"
+        ELSE
+            GenJnlLine."Bal. Account Type" := IOURec."Bal. Account Type";
+        GenJnlLine.VALIDATE(GenJnlLine."Bal. Account No.", IOURec."Bal. Account No.");
+        GenJnlLine.VALIDATE(GenJnlLine."Shortcut Dimension 1 Code", IOURec."Global Dimension 1 Code");
+        GenJnlLine.VALIDATE(GenJnlLine."Shortcut Dimension 2 Code", IOURec."Global Dimension 2 Code");
+        GenJnlLine."Payer/Collector Name" := IOURec."Staff Name";
+        GenJnlLine."VAT Bus. Posting Group" := '';
+        GenJnlLine."VAT Prod. Posting Group" := '';
+        GenJnlLine."Bal. VAT Bus. Posting Group" := '';
+        GenJnlLine."Bal. VAT Prod. Posting Group" := '';
+        GenJnlLine.VALIDATE("VAT %", 0);
+        GenJnlLine."Reason Code" := 'IOU';
+        GenJnlLine.INSERT;
+        GenJnlPost.RUN(GenJnlLine);
+        // update IOURec as paid
+        IF NOT CancelIOU THEN BEGIN
+            //"Payment Date" := TODAY;
+            IOURec.Posted := TRUE;
+        END ELSE BEGIN
+            IOURec.Void := TRUE;
+            IOURec."Voided By" := USERID;
         END;
+        IOURec.MODIFY;
     end;
 
    

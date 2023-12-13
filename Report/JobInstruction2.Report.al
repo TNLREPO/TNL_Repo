@@ -989,7 +989,7 @@ report 50313 "Job Instruction 2"
     }
 
     var
-        CustomerOrderLine: Record "50122";
+        CustomerOrderLine: Record 50122;
         JOB_INSTRUCTIONCaptionLbl: Label 'JOB INSTRUCTION ';
         CurrReport_PAGENOCaptionLbl: Label 'Page';
         DateCaptionLbl: Label 'Date';
@@ -1049,7 +1049,7 @@ report 50313 "Job Instruction 2"
         Additional_JobCaptionLbl: Label 'Additional Job';
         ServiceCost: Record "5905";
         ServiceDescription: Text;
-        CustOrderLine: Record "50122";
+        CustOrderLine: Record 50122;
         Sn: Integer;
 }
 

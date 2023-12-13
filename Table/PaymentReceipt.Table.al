@@ -683,12 +683,12 @@ table 50103 "Payment/Receipt."
         field(88; "Test Report"; Boolean)
         {
         }
-        field(89; "Applies-to Doc. Type"; Option)
+        field(89; "Applies-to Doc. Type"; enum "Gen. Journal Document Type")
         {
             Caption = 'Applies-to Doc. Type';
             Editable = false;
-            OptionCaption = ' ,Payment,Invoice,Credit Memo,Finance Charge Memo,Reminder,Refund';
-            OptionMembers = " ",Payment,Invoice,"Credit Memo","Finance Charge Memo",Reminder,Refund;
+            //OptionCaption = ' ,Payment,Invoice,Credit Memo,Finance Charge Memo,Reminder,Refund';
+            //OptionMembers = " ",Payment,Invoice,"Credit Memo","Finance Charge Memo",Reminder,Refund;
         }
         field(90; "Applies-to Doc. No."; Code[20])
         {
@@ -831,6 +831,8 @@ table 50103 "Payment/Receipt."
         date: Date;
         UserSetup: Record 91;
         UserSetup2: Record 91;
+        UserSetup3: Record 91;
+        UserSetup4: Record 91;
         approvalmessage: Codeunit 397;
         mailsent: Boolean;
         ToName: Text[80];
@@ -852,22 +854,795 @@ table 50103 "Payment/Receipt."
         text006: Label 'Dear ';
         Text007: Label 'Regards,';
         BodyTxt: Text;
+        //BodyBlob: Record "99008535";
         BodyStream: OutStream;
         SenderInitial: Text;
         SenderEmail: Text[50];
         Initials: Text[10];
         CRLF: Text[2];
         PaymentReceipt: Record 50103;
+        ProcurementHeader: Record 70008;
+        ToAddress: Text[50];
+        VendName: Text[70];
+        VendAmt: Decimal;
+        SendersName: Text[10];
+        SenderAddress: Text[50];
+        ToNameID: Code[30];
+        Text029: Label 'Vendors Name:';
+        Text031: Label 'Vendors Amount:';
+
+    procedure InitRecord()
+    begin
+        CASE "Document Type" OF
+            "Document Type"::Receipt:
+                BEGIN
+                    IF "Cash/Cheque" = "Cash/Cheque"::Cash THEN BEGIN
+                        GenSetup.TESTFIELD("Cash Receipt No.");
+                        NoSeriesMgt.SetDefaultSeries("No. Series", GenSetup."Cash Receipt No.");
+                    END
+                    ELSE BEGIN
+                        GenSetup.TESTFIELD("Cheque Receipt No.");
+                        NoSeriesMgt.SetDefaultSeries("No. Series", GenSetup."Cheque Receipt No.");
+                    END;
+                END;
+            "Document Type"::Requisition:
+                BEGIN
+                    IF "Cash/Cheque" = "Cash/Cheque"::Cash THEN BEGIN
+                        GenSetup.TESTFIELD("Cash Requisition No.");
+                        NoSeriesMgt.SetDefaultSeries("No. Series", GenSetup."Cash Requisition No.");
+                    END
+                    ELSE BEGIN
+                        GenSetup.TESTFIELD("Cheque Requisition No.");
+                        NoSeriesMgt.SetDefaultSeries("No. Series", GenSetup."Cheque Requisition No.");
+                    END
+                END;
+            "Document Type"::Journal:
+                BEGIN
+                    GenSetup.TESTFIELD("Journal Voucher No.");
+                    NoSeriesMgt.SetDefaultSeries("No. Series", GenSetup."Journal Voucher No.");
+                END;
+            "Document Type"::"e-Receipt":
+                BEGIN
+                    GenSetup.TESTFIELD(GenSetup."E-Receipt Voucher No.");
+                    NoSeriesMgt.SetDefaultSeries("No. Series", GenSetup."E-Receipt Voucher No.");
+                END;
+            "Document Type"::"e-Pay":
+                BEGIN
+                    GenSetup.TESTFIELD(GenSetup."E-Payment Voucher No.");
+                    NoSeriesMgt.SetDefaultSeries("No. Series", GenSetup."E-Payment Voucher No.");
+                END;
+        END;
 
 
+        "Posting Date" := WORKDATE;
+        "Document Date" := WORKDATE;
+    end;
 
+    procedure AssistEdit("OldP/R": Record "Payment/Receipt."): Boolean
+    begin
+        "OldP/R" := Rec;
+        GenSetup.GET;
+        CASE "OldP/R"."Document Type" OF
+            "OldP/R"."Document Type"::Receipt:
+                BEGIN
+                    IF Rec."Cash/Cheque" = "OldP/R"."Cash/Cheque"::Cash THEN BEGIN
+                        IF NoSeriesMgt.SelectSeries(GenSetup."Cash Receipt No.", "OldP/R"."No. Series", "OldP/R"."No. Series") THEN BEGIN
+                            GenSetup.GET;
+                            NoSeriesMgt.SetSeries("OldP/R"."No.");
+                            Rec := "OldP/R";
+                            EXIT(TRUE);
+                        END;
+                    END
+                    ELSE BEGIN
+                        IF NoSeriesMgt.SelectSeries(GenSetup."Cheque Receipt No.", "OldP/R"."No. Series", "OldP/R"."No. Series") THEN BEGIN
+                            GenSetup.GET;
+                            NoSeriesMgt.SetSeries("OldP/R"."No.");
+                            Rec := "OldP/R";
+                            EXIT(TRUE);
+                        END;
+                    END;
+                END;
 
+            "OldP/R"."Document Type"::Requisition:
+                BEGIN
+                    IF "OldP/R"."Cash/Cheque" = "OldP/R"."Cash/Cheque"::Cash THEN BEGIN
+                        IF NoSeriesMgt.SelectSeries(GenSetup."Cash Requisition No.", "OldP/R"."No. Series", "OldP/R"."No. Series") THEN BEGIN
+                            GenSetup.GET;
+                            NoSeriesMgt.SetSeries("OldP/R"."No.");
+                            Rec := "OldP/R";
+                            EXIT(TRUE);
+                        END;
+                    END
+                    ELSE BEGIN
+                        IF NoSeriesMgt.SelectSeries(GenSetup."Cheque Requisition No.", "OldP/R"."No. Series", "OldP/R"."No. Series") THEN BEGIN
+                            GenSetup.GET;
+                            NoSeriesMgt.SetSeries("OldP/R"."No.");
+                            Rec := "OldP/R";
+                            EXIT(TRUE);
+                        END;
+                    END;
+                END;
+            "OldP/R"."Document Type"::Journal:
+                BEGIN
+                    IF NoSeriesMgt.SelectSeries(GenSetup."Journal Voucher No.", "OldP/R"."No. Series", "OldP/R"."No. Series") THEN BEGIN
+                        GenSetup.GET;
+                        NoSeriesMgt.SetSeries("OldP/R"."No.");
+                        Rec := "OldP/R";
+                        EXIT(TRUE);
+                    END;
+                END;
+            "OldP/R"."Document Type"::"e-Pay":
+                BEGIN
+                    IF NoSeriesMgt.SelectSeries(GenSetup."E-Payment Voucher No.", "OldP/R"."No. Series", "OldP/R"."No. Series") THEN BEGIN
+                        GenSetup.GET;
+                        NoSeriesMgt.SetSeries("OldP/R"."No.");
+                        Rec := "OldP/R";
+                        EXIT(TRUE);
+                    END;
+                END;
+            "OldP/R"."Document Type"::"e-Receipt":
+                BEGIN
+                    IF NoSeriesMgt.SelectSeries(GenSetup."E-Receipt Voucher No.", "OldP/R"."No. Series", "OldP/R"."No. Series") THEN BEGIN
+                        GenSetup.GET;
+                        NoSeriesMgt.SetSeries("OldP/R"."No.");
+                        Rec := "OldP/R";
+                        EXIT(TRUE);
+                    END;
+                END
+        END;
+    end;
 
+    procedure TestNoSeries()
+    begin
+        CASE "Document Type" OF
+            "Document Type"::Receipt:
+                BEGIN
+                    IF "Cash/Cheque" = "Cash/Cheque"::Cash THEN
+                        GenSetup.TESTFIELD("Cash Receipt No.")
+                    ELSE
+                        GenSetup.TESTFIELD("Cheque Receipt No.");
+                END;
+            "Document Type"::Requisition:
+                BEGIN
+                    IF "Cash/Cheque" = "Cash/Cheque"::Cash THEN
+                        GenSetup.TESTFIELD("Cash Requisition No.")
+                    ELSE
+                        GenSetup.TESTFIELD("Cheque Requisition No.");
+                END;
+            "Document Type"::Journal:
+                GenSetup.TESTFIELD(GenSetup."Journal Voucher No.");
 
+            "Document Type"::"e-Pay":
+                GenSetup.TESTFIELD(GenSetup."E-Payment Voucher No.");
 
+            "Document Type"::"e-Receipt":
+                GenSetup.TESTFIELD(GenSetup."E-Receipt Voucher No.");
 
+        END;
+    end;
 
+    local procedure GetNoSeriesCode(): Code[10]
+    begin
+        CASE "Document Type" OF
+            "Document Type"::Receipt:
+                BEGIN
+                    IF Rec."Cash/Cheque" = "Cash/Cheque"::Cash THEN
+                        EXIT(GenSetup."Cash Receipt No.")
+                    ELSE
+                        EXIT(GenSetup."Cheque Receipt No.");
+                END;
+            "Document Type"::Requisition:
+                BEGIN
+                    IF "Cash/Cheque" = "Cash/Cheque"::Cash THEN
+                        EXIT(GenSetup."Cash Requisition No.")
+                    ELSE
+                        EXIT(GenSetup."Cheque Requisition No.");
+                END;
+            "Document Type"::Journal:
+                EXIT(GenSetup."Journal Voucher No.");
+            "Document Type"::"e-Pay":
+                EXIT(GenSetup."E-Payment Voucher No.");
+            "Document Type"::"e-Receipt":
+                EXIT(GenSetup."E-Receipt Voucher No.");
 
+        END;
+    end;
+
+    procedure Postgl(reqrec: Record "Payment/Receipt."; PreviewMode: Boolean)
+    var
+        GlJour: Record 81;
+        "GlJou 2": Record 81;
+        GLENTRY: Record 17;
+        GenJnlLine: Record 81;
+        GenJournalLine: Record 81;
+    begin
+        GlJour.LOCKTABLE;
+        DelResidualJnl(reqrec."Document Type", reqrec."Cash/Cheque");
+        ValidateMultipleAcc(reqrec);
+
+        //suspended temporarily for Abanum, Dada.
+        GlJour.INIT;
+        CASE reqrec."Document Type" OF
+            reqrec."Document Type"::Receipt:
+                GlJour."Journal Template Name" := 'CASHRCPT';
+            reqrec."Document Type"::Requisition:
+                GlJour."Journal Template Name" := 'Payments';
+            2, 3, 4:
+                GlJour."Journal Template Name" := 'General';
+        END;
+
+        IF reqrec."Cash/Cheque" = reqrec."Cash/Cheque"::Cash THEN
+            GlJour."Journal Batch Name" := 'Cash'
+        ELSE
+            GlJour."Journal Batch Name" := 'Cheque';
+        IF reqrec."Document Type" > 1 THEN
+            GlJour."Journal Batch Name" := 'Voucher';
+
+        //added by santus - begin
+        //check and delete existing entries on the journal line
+        GenJnlLine.SETRANGE("Journal Template Name", GlJour."Journal Template Name");
+        GenJnlLine.SETRANGE("Journal Batch Name", GlJour."Journal Batch Name");
+        IF GenJnlLine.FINDSET THEN
+            GenJnlLine.DELETEALL;
+        //added by santus - end
+
+        GlJour."Line No." := 10000;
+        CASE reqrec."Account Type" OF
+            "Gen. Journal Account Type"::Customer, "Gen. Journal Account Type"::"Staff Loan":
+                GlJour."Account Type" := GlJour."Account Type"::Customer;
+            //2, 6:
+            "Gen. Journal Account Type"::Vendor, "Gen. Journal Account Type"::LC:
+                GlJour."Account Type" := GlJour."Account Type"::Vendor;
+            ELSE
+                GlJour."Account Type" := reqrec."Account Type";
+        END;
+        GlJour.VALIDATE(GlJour."Posting Date", reqrec."Posting Date");
+        GlJour.VALIDATE(GlJour."Account No.", reqrec."Account No.");
+        IF reqrec."Document Type" = reqrec."Document Type"::Requisition THEN
+            GlJour."Document Type" := GlJour."Document Type"::" ";
+        GlJour.VALIDATE(GlJour."Document No.", reqrec."No.");
+        GlJour.Description := COPYSTR(reqrec."Transaction Description", 1, 50);
+        GlJour.VALIDATE(GlJour."Shortcut Dimension 1 Code", reqrec."Global Dimension 1 Code");
+        GlJour.VALIDATE(GlJour."Shortcut Dimension 2 Code", reqrec."Global Dimension 2 Code");
+        GlJour.VALIDATE(GlJour."Currency Code", reqrec."Currency Code");
+        GlJour.VALIDATE(GlJour."Currency Factor", reqrec."Currency Factor");
+        GlJour."Procurement No." := "Procurement No."; //codeware
+        GlJour."Job No." := reqrec."Job Code";
+        GlJour."Job Task No." := reqrec."Job Task code";
+        //GlJour."Job Line Type" := reqrec."Job Line Type";
+        GlJour."Loan ID" := reqrec."Loan ID";
+        GlJour."Loan Type" := reqrec."Loan Type";
+        GlJour."Applies-to Doc. Type" := reqrec."Applies-to Doc. Type";
+        GlJour.VALIDATE(GlJour."Applies-to Doc. No.", reqrec."Applies-to Doc. No.");
+        //GlJour."Form M No.":= reqrec."Form M No.";
+        IF GlJour."Account Type" <> GlJour."Account Type"::"Fixed Asset" THEN BEGIN
+            GlJour."Depreciation Book Code" := '';
+            GlJour."Maintenance Code" := '';
+            //GlJour."FA Posting Type" := 0;
+        END
+        ELSE BEGIN
+            GlJour.VALIDATE(GlJour."FA Posting Type", reqrec."FA Posting Type");
+            GlJour.VALIDATE(GlJour."Maintenance Code", reqrec."Maintenance Code");
+        END;
+        //TO GENERATE POSTING FIRST LEG LINE FOR MULTIPLE BALANCE LINES
+        IF reqrec."Multiple Balance Account" = TRUE THEN BEGIN
+            GlJour."Bal. Account Type" := reqrec."Balance Account Type"::" ";
+            GlJour.VALIDATE(GlJour."Bal. Account No.", '');
+        END;
+        IF "Multiple Account" = TRUE THEN BEGIN
+            GlJour."Account Type" := reqrec."Balance Account Type";
+            GlJour.VALIDATE(GlJour."Account No.", reqrec."Balance Account No.");
+            GlJour.VALIDATE(GlJour."Currency Code", reqrec."Currency Code");
+            GlJour.VALIDATE(GlJour."Currency Factor", reqrec."Currency Factor");
+            GlJour.Description := COPYSTR(reqrec."Transaction Description", 1, 50);
+            GlJour.VALIDATE(GlJour."Shortcut Dimension 1 Code", reqrec."Balance Department Code");
+            GlJour.VALIDATE(GlJour."Shortcut Dimension 2 Code", reqrec."Balance Branch Code");
+            IF GlJour."Account Type" <> GlJour."Account Type"::"Fixed Asset" THEN BEGIN
+                GlJour."Depreciation Book Code" := '';
+                GlJour."Maintenance Code" := '';
+                //GlJour."FA Posting Type" := 0;
+            END
+            ELSE BEGIN
+                GlJour.VALIDATE(GlJour."FA Posting Type", reqrec."FA Posting Type");
+                GlJour.VALIDATE(GlJour."Maintenance Code", reqrec."Maintenance Code");
+            END;
+            GlJour."Bal. Account Type" := GlJour."Bal. Account Type"::" ";
+            GlJour.VALIDATE(GlJour."Bal. Account No.", '');
+        END;
+        GlJour.VALIDATE(GlJour.Amount, reqrec.Amount);
+        GlJour.VALIDATE(GlJour."Job Quantity", reqrec."Job Quantity");
+        IF GlJour."Account Type" = GlJour."Account Type"::" " THEN BEGIN
+            GlJour."Gen. Prod. Posting Group" := '';
+            GlJour."Gen. Bus. Posting Group" := '';
+            GlJour."VAT Bus. Posting Group" := '';
+            GlJour."VAT Prod. Posting Group" := '';
+            //GlJour."Gen. Posting Type" := 0;
+        END;
+        GlJour."External Document No." := reqrec."External Document No.";
+        GlJour."Document Date" := reqrec."Document Date";
+        IF GlJour."Account Type" = GlJour."Account Type"::" " THEN BEGIN
+            GlJour."Gen. Prod. Posting Group" := '';
+            GlJour."Gen. Bus. Posting Group" := '';
+            GlJour."VAT Bus. Posting Group" := '';
+            GlJour."VAT Prod. Posting Group" := '';
+        END;
+        IF GlJour.Amount <> 0 THEN BEGIN
+            IF NOT GlJour.INSERT THEN GlJour.MODIFY;
+            GlJour.VALIDATE(GlJour."Shortcut Dimension 1 Code", reqrec."Global Dimension 1 Code");
+            GlJour.VALIDATE(GlJour."Shortcut Dimension 2 Code", reqrec."Global Dimension 2 Code");
+            GlJour.MODIFY(TRUE);
+        END;
+        // Generate the Second Leg for straight Transaction
+        IF (reqrec."Multiple Balance Account" = FALSE) AND (reqrec."Multiple Account" = FALSE) THEN BEGIN
+            "GlJou 2" := GlJour;
+            "GlJou 2"."Line No." := GlJour."Line No." + 10000;
+            "GlJou 2"."Account Type" := reqrec."Balance Account Type";
+            "GlJou 2".VALIDATE("GlJou 2"."Account No.", reqrec."Balance Account No.");
+            "GlJou 2".Description := COPYSTR(reqrec."Transaction Description", 1, 50);
+            IF "GlJou 2"."Account Type" = "GlJou 2"."Account Type"::" " THEN BEGIN
+                "GlJou 2"."Gen. Prod. Posting Group" := '';
+                "GlJou 2"."Gen. Bus. Posting Group" := '';
+                "GlJou 2"."VAT Bus. Posting Group" := '';
+                "GlJou 2"."VAT Prod. Posting Group" := '';
+                //"GlJou 2"."Gen. Posting Type" := 0;
+            END;
+            "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 1 Code", reqrec."Balance Department Code");
+            "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 2 Code", reqrec."Balance Branch Code");
+            "GlJou 2"."Bal. Account Type" := "GlJou 2"."Bal. Account Type"::" ";
+            "GlJou 2".VALIDATE("GlJou 2".Amount, -reqrec."Amount (LCY)");
+
+            IF "GlJou 2"."Account Type" = "GlJou 2"."Account Type"::" " THEN BEGIN
+                "GlJou 2"."Gen. Prod. Posting Group" := '';
+                "GlJou 2"."Gen. Bus. Posting Group" := '';
+                "GlJou 2"."VAT Bus. Posting Group" := '';
+                "GlJou 2"."VAT Prod. Posting Group" := '';
+            END;
+            IF "GlJou 2"."Account Type" <> "GlJou 2"."Account Type"::"Fixed Asset" THEN BEGIN
+                "GlJou 2"."Depreciation Book Code" := '';
+                "GlJou 2"."Maintenance Code" := '';
+                //"GlJou 2"."FA Posting Type" := 0;
+            END
+            ELSE BEGIN
+                "GlJou 2".VALIDATE("GlJou 2"."FA Posting Type", reqrec."FA Posting Type");
+                "GlJou 2".VALIDATE("GlJou 2"."Maintenance Code", reqrec."Maintenance Code");
+            END;
+            IF "GlJou 2".Amount <> 0 THEN BEGIN
+                IF NOT "GlJou 2".INSERT THEN "GlJou 2".MODIFY;
+                "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 1 Code", reqrec."Balance Department Code");
+                "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 2 Code", reqrec."Balance Branch Code");
+                "GlJou 2".MODIFY(TRUE);
+            END;
+        END
+        ELSE
+        //TO GENERATE POSTING LINES FOR MULTIPLE SECOND LEGS
+        BEGIN
+            "GlJou 2" := GlJour;
+            LineNo := "GlJou 2"."Line No.";
+            ReqReptLine.SETRANGE(ReqReptLine.Type, reqrec."Document Type");
+            ReqReptLine.SETRANGE(ReqReptLine."Cash/Cheque", reqrec."Cash/Cheque");
+            ReqReptLine.SETRANGE(ReqReptLine."No.", reqrec."No.");
+            IF ReqReptLine.FIND('-') THEN
+                REPEAT
+                    LineNo := LineNo + 10000;
+                    ReqReptLine.TESTFIELD(ReqReptLine.Amount);
+                    ReqReptLine.TESTFIELD(ReqReptLine."Account No.");
+                    "GlJou 2"."Line No." := LineNo;
+                    CASE ReqReptLine."Account Type" OF
+                        //1, 5:
+                        "Gen. Journal Account Type"::Customer, "Gen. Journal Account Type"::"Staff Loan":
+                            "GlJou 2"."Account Type" := ReqReptLine."Account Type"::Customer;
+                        //2, 6:
+                        "Gen. Journal Account Type"::Vendor, "Gen. Journal Account Type"::LC:
+                            "GlJou 2"."Account Type" := ReqReptLine."Account Type"::Vendor;
+                        ELSE
+                            "GlJou 2"."Account Type" := ReqReptLine."Account Type";
+                    END;
+                    "GlJou 2".VALIDATE("GlJou 2"."Account No.", ReqReptLine."Account No.");
+                    "GlJou 2".VALIDATE("GlJou 2"."Currency Code", ReqReptLine."Currency Code");
+                    "GlJou 2".VALIDATE("GlJou 2"."Currency Factor", ReqReptLine."Currency Factor");
+                    "GlJou 2".Description := COPYSTR(ReqReptLine."Transaction Description", 1, 50);
+                    "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 1 Code", ReqReptLine."Department Code");
+                    "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 2 Code", ReqReptLine."Branch Code");
+                    "GlJou 2".VALIDATE("GlJou 2".Amount, ReqReptLine.Amount);
+                    "GlJou 2"."Loan ID" := ReqReptLine."Loan ID";
+                    "GlJou 2"."Loan Type" := ReqReptLine."Loan Type";
+                    "GlJou 2"."Applies-to Doc. Type" := ReqReptLine."Applies-to Doc. Type";
+                    "GlJou 2".VALIDATE("GlJou 2"."Applies-to Doc. No.", ReqReptLine."Applies-to Doc. No.");
+                    //"GlJou 2"."Form M No."   := ReqReptLine."Form M No.";
+                    "GlJou 2".VALIDATE("GlJou 2"."Job No.", ReqReptLine."Job Code");
+                    "GlJou 2".VALIDATE("GlJou 2"."Job Task No.", ReqReptLine."Job Task code");
+                    //"GlJou 2"."Job Line Type" := ReqReptLine."Job Line Type"::Contract;
+                    IF ReqReptLine."Job Code" <> '' THEN BEGIN
+                        //"GlJou 2".VALIDATE("GlJou 2"."Job Unit Cost",ReqReptLine."Amount (LCY)");
+                        "GlJou 2".VALIDATE("GlJou 2"."Job Quantity", 1);
+                    END;
+                    "GlJou 2"."Bal. Account Type" := "GlJou 2"."Bal. Account Type"::" ";
+
+                    IF "GlJou 2"."Account Type" = "GlJou 2"."Account Type"::" " THEN BEGIN
+                        "GlJou 2"."Gen. Prod. Posting Group" := '';
+                        "GlJou 2"."Gen. Bus. Posting Group" := '';
+                        "GlJou 2"."VAT Bus. Posting Group" := '';
+                        "GlJou 2"."VAT Prod. Posting Group" := '';
+                        //"GlJou 2"."Gen. Posting Type" := 0;
+                    END;
+                    IF "GlJou 2"."Account Type" <> "GlJou 2"."Account Type"::"Fixed Asset" THEN BEGIN
+                        "GlJou 2"."Depreciation Book Code" := '';
+                        "GlJou 2"."Maintenance Code" := '';
+                        //"GlJou 2"."FA Posting Type" := 0;
+                    END
+                    ELSE BEGIN
+                        "GlJou 2".VALIDATE("GlJou 2"."FA Posting Type", ReqReptLine."FA Posting Type");
+                        "GlJou 2".VALIDATE("GlJou 2"."Maintenance Code", ReqReptLine."Maintenance Code");
+                    END;
+                    IF "GlJou 2".Amount <> 0 THEN BEGIN
+                        IF NOT "GlJou 2".INSERT THEN "GlJou 2".MODIFY;
+                        "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 1 Code", ReqReptLine."Department Code");
+                        "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 2 Code", ReqReptLine."Branch Code");
+                        "GlJou 2".MODIFY(TRUE);
+                    END;
+                UNTIL ReqReptLine.NEXT = 0;
+        END;
+        COMMIT;
+
+        IF NOT PreviewMode THEN BEGIN
+            GenJournalLinex.RESET;
+            GenJournalLinex.SETFILTER("Journal Template Name", GlJour."Journal Template Name");
+            GenJournalLinex.SETFILTER("Journal Batch Name", GlJour."Journal Batch Name");
+            IF GenJournalLinex.FINDSET THEN
+                GenJnlPost.RUN(GenJournalLinex);
+
+            IF "Procurement No." <> '' THEN BEGIN
+                ProcurementHeader.SETRANGE("No.", "Procurement No.");
+                IF ProcurementHeader.FINDFIRST THEN BEGIN
+                    ToNameID := ProcurementHeader."User ID";
+                    VendName := "Received by";
+                    VendAmt := ProcurementHeader."Proposed Purchase Amount";
+                    Initials := DELSTR(ToNameID, 1, 14);
+                    IF UserSetup3.GET(ToNameID) THEN
+                        ToAddress := UserSetup3."E-Mail";
+                END;
+                UserSetup4.GET(USERID);
+                SendersName := UserSetup4.Initials;
+                SenderAddress := UserSetup4."E-Mail";
+                //Subject := STRSUBSTNO(text008, "Procurement No.");
+                /* WITH TempEmailItem DO BEGIN
+                    "Send to" := ToAddress;
+                    "Send CC" := SenderAddress;
+                    "Send BCC" := '';
+                    Subject := STRSUBSTNO(text008, "Procurement No.");
+                    CRLF := '';
+                    CRLF[1] := 13;
+                    CRLF[2] := 10;
+                    BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                    BodyStream.WRITETEXT(text006 + Initials + ',');
+                    BodyStream.WRITETEXT(CRLF + CRLF);
+                    BodyStream.WRITETEXT(STRSUBSTNO(text008, "Procurement No.") + CRLF + CRLF +
+                      Text029 + FORMAT(VendName) + CRLF +
+                      Text031 + FORMAT(VendAmt) + CRLF + CRLF +
+                      Text007 + CRLF);
+                    BodyStream.WRITETEXT(SendersName);
+                    BodyStream.WRITETEXT(CRLF + CRLF);
+                    BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                    Body := BodyBlob.Blob;
+                    Send(FALSE);
+                END; */
+            END;
+
+        END ELSE BEGIN
+            GenJournalLinex.RESET;
+            GenJournalLinex.SETFILTER("Journal Template Name", GlJour."Journal Template Name");
+            GenJournalLinex.SETFILTER("Journal Batch Name", GlJour."Journal Batch Name");
+            IF GenJournalLinex.FINDSET THEN BEGIN
+                COMMIT;
+                GenJnlPost.Preview(GenJournalLinex);
+            END;
+        END;
+
+        //Update posting
+        GLENTRY.SETCURRENTKEY("Document No.", "Posting Date");
+        GLENTRY.SETRANGE("Document No.", "No.");
+        GLENTRY.SETRANGE("Posting Date", "Posting Date");
+        IF GLENTRY.FINDFIRST THEN BEGIN
+            Posted := TRUE;
+            MODIFY;
+        END;
+    end;
+
+    procedure ValidateMultipleAcc(recpReq: Record "Payment/Receipt.")
+    begin
+        IF (recpReq."Multiple Balance Account") OR (recpReq."Multiple Account") THEN BEGIN
+            //recpReq.TESTFIELD(recpReq."Balance Account No.",'');
+            recpReq.CALCFIELDS(recpReq."Balance Amount");
+            IF ABS(recpReq."Amount (LCY)") <> ABS(recpReq."Balance Amount") THEN
+                ERROR('Transaction Not Balanced check Your values');
+        END;
+        //recpReq.TESTFIELD(recpReq."Transaction Description");
+        recpReq.TESTFIELD(recpReq."Account No.");
+        IF recpReq."Document Type" <> recpReq."Document Type"::Journal THEN
+            recpReq.TESTFIELD(recpReq.Amount);
+    end;
+
+    procedure Navigate()
+    var
+        NavigateForm: Page Navigate;
+    begin
+        NavigateForm.SetDoc("Posting Date", "No.");
+        NavigateForm.RUN;
+    end;
+
+    procedure DelResidualJnl(DocType: Option Receipt,Requisition,Journal,"e-Pay","e-Receipt"; ReqType: Option Cash,Cheque)
+    var
+        deljnl: Record "Gen. Journal Line";
+    begin
+        CASE DocType OF
+            DocType::Receipt:
+                deljnl.SETRANGE(deljnl."Journal Template Name", 'CASHRCPT');
+            DocType::Requisition:
+                deljnl.SETRANGE(deljnl."Journal Template Name", 'Payments');
+            2, 3, 4:
+                deljnl.SETRANGE(deljnl."Journal Template Name", 'General');
+        END;
+        CASE ReqType OF
+            ReqType::Cash:
+                deljnl.SETRANGE(deljnl."Journal Batch Name", 'cash');
+            ReqType::Cheque:
+                deljnl.SETRANGE(deljnl."Journal Batch Name", 'cheque');
+        END;
+        IF DocType > 1 THEN
+            deljnl.SETRANGE(deljnl."Journal Batch Name", 'voucher');
+
+        //IF deljnl.FINDSET(TRUE, FALSE) THEN
+        if deljnl.FindFirst() then
+            deljnl.DELETEALL(TRUE);
+    end;
+
+    procedure Testgl(reqrec: Record "Payment/Receipt.")
+    var
+        GlJour: Record 81;
+        "GlJou 2": Record 81;
+        GLENTRY: Record 17;
+        GenJnlLine: Record 81;
+        GenJournalLine: Record 81;
+    begin
+        GlJour.LOCKTABLE;
+
+        DelResidualJnl(reqrec."Document Type", reqrec."Cash/Cheque");
+        ValidateMultipleAcc(reqrec);
+
+        //suspended temporarily for Abanum, Dada.
+        GlJour.INIT;
+        CASE reqrec."Document Type" OF
+            reqrec."Document Type"::Receipt:
+                GlJour."Journal Template Name" := 'CASHRCPT';
+            reqrec."Document Type"::Requisition:
+                GlJour."Journal Template Name" := 'Payments';
+            2, 3, 4:
+                GlJour."Journal Template Name" := 'General';
+        END;
+
+        IF reqrec."Cash/Cheque" = reqrec."Cash/Cheque"::Cash THEN
+            GlJour."Journal Batch Name" := 'Cash'
+        ELSE
+            GlJour."Journal Batch Name" := 'Cheque';
+
+        IF reqrec."Document Type" > 1 THEN
+            GlJour."Journal Batch Name" := 'Voucher';
+
+        //added by santus - begin
+        //check and delete existing entries on the journal line
+        GenJnlLine.SETRANGE("Journal Template Name", GlJour."Journal Template Name");
+        GenJnlLine.SETRANGE("Journal Batch Name", GlJour."Journal Batch Name");
+        IF GenJnlLine.FINDSET THEN
+            GenJnlLine.DELETEALL;
+        //added by santus - end
+
+        GlJour."Line No." := 10000;
+        CASE reqrec."Account Type" OF
+            //1, 5:
+            "Gen. Journal Account Type"::Customer, "Gen. Journal Account Type"::"Staff Loan":
+                GlJour."Account Type" := GlJour."Account Type"::Customer;
+            //2, 6:
+            "Gen. Journal Account Type"::Vendor, "Gen. Journal Account Type"::LC:
+                GlJour."Account Type" := GlJour."Account Type"::Vendor;
+            ELSE
+                GlJour."Account Type" := reqrec."Account Type";
+        END;
+        GlJour.VALIDATE(GlJour."Posting Date", reqrec."Posting Date");
+        GlJour.VALIDATE(GlJour."Account No.", reqrec."Account No.");
+        IF reqrec."Document Type" = reqrec."Document Type"::Requisition THEN
+            GlJour."Document Type" := GlJour."Document Type"::" ";
+        GlJour.VALIDATE(GlJour."Document No.", reqrec."No.");
+        GlJour.Description := COPYSTR(reqrec."Transaction Description", 1, 50);
+        GlJour.VALIDATE(GlJour."Shortcut Dimension 1 Code", reqrec."Global Dimension 1 Code");
+        GlJour.VALIDATE(GlJour."Shortcut Dimension 2 Code", reqrec."Global Dimension 2 Code");
+        GlJour.VALIDATE(GlJour."Currency Code", reqrec."Currency Code");
+        GlJour.VALIDATE(GlJour."Currency Factor", reqrec."Currency Factor");
+        GlJour."Procurement No." := "Procurement No."; //codeware
+        GlJour."Job No." := reqrec."Job Code";
+        GlJour."Job Task No." := reqrec."Job Task code";
+        //GlJour."Job Line Type" := reqrec."Job Line Type";
+        GlJour."Loan ID" := reqrec."Loan ID";
+        GlJour."Loan Type" := reqrec."Loan Type";
+        GlJour."Applies-to Doc. Type" := reqrec."Applies-to Doc. Type";
+        GlJour.VALIDATE(GlJour."Applies-to Doc. No.", reqrec."Applies-to Doc. No.");
+        //GlJour."Form M No.":= reqrec."Form M No.";
+        IF GlJour."Account Type" <> GlJour."Account Type"::"Fixed Asset" THEN BEGIN
+            GlJour."Depreciation Book Code" := '';
+            GlJour."Maintenance Code" := '';
+            //GlJour."FA Posting Type" := 0;
+        END
+        ELSE BEGIN
+            GlJour.VALIDATE(GlJour."FA Posting Type", reqrec."FA Posting Type");
+            GlJour.VALIDATE(GlJour."Maintenance Code", reqrec."Maintenance Code");
+        END;
+        //TO GENERATE POSTING FIRST LEG LINE FOR MULTIPLE BALANCE LINES
+        IF reqrec."Multiple Balance Account" = TRUE THEN BEGIN
+            GlJour."Bal. Account Type" := GlJour."Bal. Account Type"::" ";
+            GlJour.VALIDATE(GlJour."Bal. Account No.", '');
+        END;
+        IF "Multiple Account" = TRUE THEN BEGIN
+            GlJour."Account Type" := reqrec."Balance Account Type";
+            GlJour.VALIDATE(GlJour."Account No.", reqrec."Balance Account No.");
+            GlJour.VALIDATE(GlJour."Currency Code", reqrec."Currency Code");
+            GlJour.VALIDATE(GlJour."Currency Factor", reqrec."Currency Factor");
+            GlJour.Description := COPYSTR(reqrec."Transaction Description", 1, 50);
+            GlJour.VALIDATE(GlJour."Shortcut Dimension 1 Code", reqrec."Balance Department Code");
+            GlJour.VALIDATE(GlJour."Shortcut Dimension 2 Code", reqrec."Balance Branch Code");
+            IF GlJour."Account Type" <> GlJour."Account Type"::"Fixed Asset" THEN BEGIN
+                GlJour."Depreciation Book Code" := '';
+                GlJour."Maintenance Code" := '';
+                GlJour."FA Posting Type" := GlJour."FA Posting Type"::" ";
+            END
+            ELSE BEGIN
+                GlJour.VALIDATE(GlJour."FA Posting Type", reqrec."FA Posting Type");
+                GlJour.VALIDATE(GlJour."Maintenance Code", reqrec."Maintenance Code");
+            END;
+            GlJour."Bal. Account Type" := GlJour."Bal. Account Type"::" ";
+            GlJour.VALIDATE(GlJour."Bal. Account No.", '');
+        END;
+        GlJour.VALIDATE(GlJour.Amount, reqrec.Amount);
+        GlJour.VALIDATE(GlJour."Job Quantity", reqrec."Job Quantity");
+        IF GlJour."Account Type" = GlJour."Account Type"::" " THEN BEGIN
+            GlJour."Gen. Prod. Posting Group" := '';
+            GlJour."Gen. Bus. Posting Group" := '';
+            GlJour."VAT Bus. Posting Group" := '';
+            GlJour."VAT Prod. Posting Group" := '';
+            //GlJour."Gen. Posting Type" := 0;
+        END;
+        GlJour."External Document No." := reqrec."External Document No.";
+        GlJour."Document Date" := reqrec."Document Date";
+        IF GlJour."Account Type" = GlJour."Account Type"::" " THEN BEGIN
+            GlJour."Gen. Prod. Posting Group" := '';
+            GlJour."Gen. Bus. Posting Group" := '';
+            GlJour."VAT Bus. Posting Group" := '';
+            GlJour."VAT Prod. Posting Group" := '';
+        END;
+        IF GlJour.Amount <> 0 THEN BEGIN
+            IF NOT GlJour.INSERT THEN GlJour.MODIFY;
+            GlJour.VALIDATE(GlJour."Shortcut Dimension 1 Code", reqrec."Global Dimension 1 Code");
+            GlJour.VALIDATE(GlJour."Shortcut Dimension 2 Code", reqrec."Global Dimension 2 Code");
+            GlJour.MODIFY(TRUE);
+        END;
+        // Generate the Second Leg for straight Transaction
+        IF (reqrec."Multiple Balance Account" = FALSE) AND (reqrec."Multiple Account" = FALSE) THEN BEGIN
+            "GlJou 2" := GlJour;
+            "GlJou 2"."Line No." := GlJour."Line No." + 10000;
+            "GlJou 2"."Account Type" := reqrec."Balance Account Type";
+            "GlJou 2".VALIDATE("GlJou 2"."Account No.", reqrec."Balance Account No.");
+            "GlJou 2".Description := COPYSTR(reqrec."Transaction Description", 1, 50);
+            IF "GlJou 2"."Account Type" = "GlJou 2"."Account Type"::" " THEN BEGIN
+                "GlJou 2"."Gen. Prod. Posting Group" := '';
+                "GlJou 2"."Gen. Bus. Posting Group" := '';
+                "GlJou 2"."VAT Bus. Posting Group" := '';
+                "GlJou 2"."VAT Prod. Posting Group" := '';
+                "GlJou 2"."Gen. Posting Type" := "GlJou 2"."Gen. Posting Type"::" ";
+            END;
+            "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 1 Code", reqrec."Balance Department Code");
+            "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 2 Code", reqrec."Balance Branch Code");
+            "GlJou 2"."Bal. Account Type" := "GlJou 2"."Bal. Account Type"::" ";
+            "GlJou 2".VALIDATE("GlJou 2".Amount, -reqrec."Amount (LCY)");
+
+            IF "GlJou 2"."Account Type" = "GlJou 2"."Account Type"::" " THEN BEGIN
+                "GlJou 2"."Gen. Prod. Posting Group" := '';
+                "GlJou 2"."Gen. Bus. Posting Group" := '';
+                "GlJou 2"."VAT Bus. Posting Group" := '';
+                "GlJou 2"."VAT Prod. Posting Group" := '';
+            END;
+            IF "GlJou 2"."Account Type" <> "GlJou 2"."Account Type"::"Fixed Asset" THEN BEGIN
+                "GlJou 2"."Depreciation Book Code" := '';
+                "GlJou 2"."Maintenance Code" := '';
+                "GlJou 2"."FA Posting Type" := "GlJou 2"."FA Posting Type"::" ";
+            END
+            ELSE BEGIN
+                "GlJou 2".VALIDATE("GlJou 2"."FA Posting Type", reqrec."FA Posting Type");
+                "GlJou 2".VALIDATE("GlJou 2"."Maintenance Code", reqrec."Maintenance Code");
+            END;
+            IF "GlJou 2".Amount <> 0 THEN BEGIN
+                IF NOT "GlJou 2".INSERT THEN "GlJou 2".MODIFY;
+                "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 1 Code", reqrec."Balance Department Code");
+                "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 2 Code", reqrec."Balance Branch Code");
+                "GlJou 2".MODIFY(TRUE);
+            END;
+        END
+        ELSE
+        //TO GENERATE POSTING LINES FOR MULTIPLE SECOND LEGS
+        BEGIN
+            "GlJou 2" := GlJour;
+            LineNo := "GlJou 2"."Line No.";
+            ReqReptLine.SETRANGE(ReqReptLine.Type, reqrec."Document Type");
+            ReqReptLine.SETRANGE(ReqReptLine."Cash/Cheque", reqrec."Cash/Cheque");
+            ReqReptLine.SETRANGE(ReqReptLine."No.", reqrec."No.");
+            IF ReqReptLine.FIND('-') THEN
+                REPEAT
+                    LineNo := LineNo + 10000;
+                    ReqReptLine.TESTFIELD(ReqReptLine.Amount);
+                    ReqReptLine.TESTFIELD(ReqReptLine."Account No.");
+                    "GlJou 2"."Line No." := LineNo;
+                    CASE ReqReptLine."Account Type" OF
+                        //1, 5:
+                        "Gen. Journal Account Type"::Customer, "Gen. Journal Account Type"::"Staff Loan":
+                            "GlJou 2"."Account Type" := ReqReptLine."Account Type"::Customer;
+                        //2, 6:
+                        "Gen. Journal Account Type"::Vendor, "Gen. Journal Account Type"::LC:
+                            "GlJou 2"."Account Type" := ReqReptLine."Account Type"::Vendor;
+                        ELSE
+                            "GlJou 2"."Account Type" := ReqReptLine."Account Type";
+                    END;
+                    "GlJou 2".VALIDATE("GlJou 2"."Account No.", ReqReptLine."Account No.");
+                    "GlJou 2".VALIDATE("GlJou 2"."Currency Code", ReqReptLine."Currency Code");
+                    "GlJou 2".VALIDATE("GlJou 2"."Currency Factor", ReqReptLine."Currency Factor");
+                    "GlJou 2".Description := COPYSTR(ReqReptLine."Transaction Description", 1, 50);
+                    "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 1 Code", ReqReptLine."Department Code");
+                    "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 2 Code", ReqReptLine."Branch Code");
+                    "GlJou 2".VALIDATE("GlJou 2".Amount, ReqReptLine.Amount);
+                    "GlJou 2"."Loan ID" := ReqReptLine."Loan ID";
+                    "GlJou 2"."Loan Type" := ReqReptLine."Loan Type";
+                    "GlJou 2"."Applies-to Doc. Type" := ReqReptLine."Applies-to Doc. Type";
+                    "GlJou 2".VALIDATE("GlJou 2"."Applies-to Doc. No.", ReqReptLine."Applies-to Doc. No.");
+                    //"GlJou 2"."Form M No."   := ReqReptLine."Form M No.";
+                    "GlJou 2".VALIDATE("GlJou 2"."Job No.", ReqReptLine."Job Code");
+                    "GlJou 2".VALIDATE("GlJou 2"."Job Task No.", ReqReptLine."Job Task code");
+                    //"GlJou 2"."Job Line Type" := ReqReptLine."Job Line Type"::Contract;
+                    IF ReqReptLine."Job Code" <> '' THEN BEGIN
+                        //"GlJou 2".VALIDATE("GlJou 2"."Job Unit Cost",ReqReptLine."Amount (LCY)");
+                        "GlJou 2".VALIDATE("GlJou 2"."Job Quantity", 1);
+                    END;
+                    "GlJou 2"."Bal. Account Type" := "GlJou 2"."Bal. Account Type"::" ";
+                    IF "GlJou 2"."Account Type" = "GlJou 2"."Account Type"::" " THEN BEGIN
+                        "GlJou 2"."Gen. Prod. Posting Group" := '';
+                        "GlJou 2"."Gen. Bus. Posting Group" := '';
+                        "GlJou 2"."VAT Bus. Posting Group" := '';
+                        "GlJou 2"."VAT Prod. Posting Group" := '';
+                        "GlJou 2"."Gen. Posting Type" := "GlJou 2"."Gen. Posting Type"::" ";
+                    END;
+                    IF "GlJou 2"."Account Type" <> "GlJou 2"."Account Type"::"Fixed Asset" THEN BEGIN
+                        "GlJou 2"."Depreciation Book Code" := '';
+                        "GlJou 2"."Maintenance Code" := '';
+                        "GlJou 2"."FA Posting Type" := "GlJou 2"."FA Posting Type"::" ";
+                    END
+                    ELSE BEGIN
+                        "GlJou 2".VALIDATE("GlJou 2"."FA Posting Type", ReqReptLine."FA Posting Type");
+                        "GlJou 2".VALIDATE("GlJou 2"."Maintenance Code", ReqReptLine."Maintenance Code");
+                    END;
+                    IF "GlJou 2".Amount <> 0 THEN BEGIN
+                        IF NOT "GlJou 2".INSERT THEN "GlJou 2".MODIFY;
+                        "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 1 Code", ReqReptLine."Department Code");
+                        "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 2 Code", ReqReptLine."Branch Code");
+                        "GlJou 2".MODIFY(TRUE);
+                    END;
+                UNTIL ReqReptLine.NEXT = 0;
+        END;
+        COMMIT;
+
+        IF "Test Report" THEN
+            Reportprint.PrintGenJnlLine(GlJour);
+
+        GenJournalLine.LOCKTABLE;
+        GenJournalLine.SETRANGE("Journal Template Name", GlJour."Journal Template Name");
+        GenJournalLine.SETRANGE("Journal Batch Name", GlJour."Journal Batch Name");
+        IF GenJournalLine.FINDFIRST THEN
+            GenJournalLine.DELETEALL;
+    end;
 
 }
 
