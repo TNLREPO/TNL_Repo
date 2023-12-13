@@ -5,17 +5,14 @@ report 50323 "Appointment Customer List"
 
     dataset
     {
-        dataitem(DataItem2792; Table50114)
+        dataitem(DataItem2792; "Service Appointment Scheduled")
         {
-            DataItemTableView = SORTING (Service Item, Service Code);
+            DataItemTableView = SORTING("Service Item", "Service Code");
             RequestFilterFields = "Service Item", "Next Call Date.";
             column(FORMAT_TODAY_0_4_; FORMAT(TODAY, 0, 4))
             {
             }
             column(COMPANYNAME; COMPANYNAME)
-            {
-            }
-            column(CurrReport_PAGENO; CurrReport.PAGENO)
             {
             }
             column(USERID; USERID)
@@ -81,12 +78,12 @@ report 50323 "Appointment Customer List"
 
             trigger OnAfterGetRecord()
             begin
-                "Service Appointment Scheduled".SETRANGE("Service Appointment Scheduled"."Next Call Date.", TODAY);
-                "Service Appointment Scheduled"."Next Call Date." := TODAY;
+                SETRANGE("Next Call Date.", TODAY);
+                "Next Call Date." := TODAY;
                 IF CusRec.GET("Customer No.") THEN BEGIN
-                    "Service Appointment Scheduled".VALIDATE("Customer No.");
-                    "Service Appointment Scheduled"."Contact Person" := CusRec.Contact;
-                    "Service Appointment Scheduled"."Phone No 1." := CusRec."Phone No.";
+                    VALIDATE("Customer No.");
+                    "Contact Person" := CusRec.Contact;
+                    "Phone No 1." := CusRec."Phone No.";
                 END;
             end;
 

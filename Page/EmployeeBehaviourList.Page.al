@@ -64,9 +64,7 @@ page 70054 "Employee Behaviour List"
                 field("Alt. Address End Date";Rec."Alt. Address End Date")
                 {
                 }
-                field(Picture;Picture)
-                {
-                }
+                
                 field("Birth Date";Rec."Birth Date")
                 {
                 }

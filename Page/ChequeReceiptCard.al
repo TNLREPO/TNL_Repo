@@ -1,4 +1,4 @@
-page 70014 "Cheque Receipt Card"
+page 50032 "Cheque Receipt Card"
 {
     DataCaptionFields = "Cash/Cheque", "Document Type", "No.";
     PageType = Card;
@@ -365,5 +365,5 @@ page 70014 "Cheque Receipt Card"
             END
         END;
     end;
-}
 
+}

@@ -5,9 +5,9 @@ report 50299 "IOU Receipt"
 
     dataset
     {
-        dataitem(DataItem9583; Table50105)
+        dataitem(DataItem9583; "IOU Register")
         {
-            DataItemTableView = SORTING (IOU No.);
+            DataItemTableView = SORTING("IOU No.");
             RequestFilterFields = "IOU No.";
             column(CompanyData_Name; CompanyData.Name)
             {
@@ -60,13 +60,13 @@ report 50299 "IOU Receipt"
             column(IOU_Register__Account_No__; "Account No.")
             {
             }
-            column(AccountType_IOURegister; "IOU Register"."Account Type")
+            column(AccountType_IOURegister; "Account Type")
             {
             }
-            column(Description_IOURegister; "IOU Register".Description)
+            column(Description_IOURegister; Description)
             {
             }
-            column(Amount_IOURegister; "IOU Register".Amount)
+            column(Amount_IOURegister; Amount)
             {
             }
             column(AMOUNTINWORD; AMOUNTINWORD)
@@ -109,11 +109,11 @@ report 50299 "IOU Receipt"
         ipotxt2: Text[30];
         paymentot: array[3] of Text[30];
         Changed: Boolean;
-        AccRec: Record "98";
+        AccRec: Record 98;
         NameOfReceiver: Text[30];
-        glrecr: Record "50101";
-        GLLINEREC: Record "50102";
-        FinRec: Record "15";
+        glrecr: Record 50101;
+        GLLINEREC: Record 50102;
+        FinRec: Record 15;
         ipotxt: Text[30];
         "CRNo.": Code[10];
         Product: Record 27;
@@ -124,18 +124,18 @@ report 50299 "IOU Receipt"
         AmT2: array[15] of Text[4];
         detatype: Boolean;
         AmT3: array[15] of Text[4];
-        DepRec: Record "349";
+        DepRec: Record 349;
         TotalNet: Decimal;
         VATLiable: Decimal;
         TotalGross: Decimal;
-        Delivery: Record "10";
-        Payment: Record "3";
+        Delivery: Record 10;
+        Payment: Record 3;
         SupplierAddr: array[8] of Text[50];
-        SalesPerson: Record "13";
+        SalesPerson: Record 13;
         OrderNoTxt: Text[10];
         SalesPersonTxt: Text[20];
         ReferenceTxt: Text[15];
-        CompanyData: Record "79";
+        CompanyData: Record 79;
         PrintBottom: Boolean;
         MoreLines: Boolean;
         NoCopies: Integer;
@@ -143,10 +143,10 @@ report 50299 "IOU Receipt"
         CopyNo: Integer;
         CopyTxt: Text[10];
         Customer: Record 18;
-        vendor: Record "23";
-        bank: Record "270";
+        vendor: Record 23;
+        bank: Record 270;
         CustomerAddr: array[8] of Text[50];
-        "fixed": Record "5600";
+        "fixed": Record 5600;
         "Paid/Receipt": Text[50];
         TOTAMOUNT: Decimal;
         AMOUNTINWORD: Text[250];
@@ -174,14 +174,13 @@ report 50299 "IOU Receipt"
         deci: Text[3];
         reprint: Boolean;
         valid: Boolean;
-        CompanyInfo: Record "79";
+        CompanyInfo: Record 79;
         IOU_ReceiptCaptionLbl: Label 'IOU Receipt';
         CurrReport_PAGENOCaptionLbl: Label 'Page';
         Amount_in_Words_CaptionLbl: Label 'Amount in Words:';
         Cashier_s_Signature_CaptionLbl: Label 'Cashier''s Signature:';
         Copy_Not_Valid_Without_AuthorizationCaptionLbl: Label 'Copy Not Valid Without Authorization';
 
-    [Scope('Internal')]
     procedure figure(fig: Decimal; Currency: Text[30]; CurrencyUnit: Text[30]) figureinword: Text[200]
     begin
         figureinword := '';

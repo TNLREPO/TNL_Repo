@@ -1221,7 +1221,7 @@ table 50103 "Payment/Receipt."
             ReqReptLine.SETRANGE(ReqReptLine.Type, reqrec."Document Type");
             ReqReptLine.SETRANGE(ReqReptLine."Cash/Cheque", reqrec."Cash/Cheque");
             ReqReptLine.SETRANGE(ReqReptLine."No.", reqrec."No.");
-            IF ReqReptLine.FIND('-') THEN
+            IF ReqReptLine.FindFirst() THEN
                 REPEAT
                     LineNo := LineNo + 10000;
                     ReqReptLine.TESTFIELD(ReqReptLine.Amount);

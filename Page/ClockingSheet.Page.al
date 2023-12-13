@@ -10,9 +10,7 @@ page 80013 "Clocking Sheet"
         {
             repeater(Group)
             {
-                field("DQ ?"; Rec."DQ ?")
-                {
-                }
+               
                 field("Start."; Rec."Start.")
                 {
                 }
