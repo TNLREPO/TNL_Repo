@@ -149,10 +149,10 @@ table 50105 "IOU Register"
                 END;
             end;
         }
-        field(22; "Bal. Account Type"; Option)
+        field(22; "Bal. Account Type"; Enum "Gen. Journal Account Type")
         {
             InitValue = "Bank Account";
-            OptionMembers = "G/L Account","Bank Account";
+            //OptionMembers = "G/L Account","Bank Account";
 
             trigger OnValidate()
             begin

@@ -143,7 +143,7 @@ page 50111 "Warranty Couporn"
                     var
                         InteractTemplLanguage: Record "Warranty Coupon";
                     begin
-                        IF InteractTemplLanguage.GET(Rec.VIN) THEN
+                        IF InteractTemplLanguage.GET(Rec.VIN) THEN;
                         //  InteractTemplLanguage.OpenAttachment;
                     end;
                 }
@@ -164,7 +164,7 @@ page 50111 "Warranty Couporn"
                           InteractTemplLanguage.INSERT;
                         END;
                         */
-                        IF InteractTemplLanguage.GET(Rec.VIN) THEN
+                        IF InteractTemplLanguage.GET(Rec.VIN) THEN;
                         //InteractTemplLanguage.CreateAttachment;
                         //CurrPage.UPDATE;
 
@@ -188,7 +188,7 @@ page 50111 "Warranty Couporn"
                           COMMIT;
                         END;
                         */
-                        IF InteractTemplLanguage.GET(Rec.VIN) THEN
+                        IF InteractTemplLanguage.GET(Rec.VIN) THEN;
                         //InteractTemplLanguage.CopyFromAttachment;
                         //CurrPage.UPDATE;
 
@@ -211,11 +211,12 @@ page 50111 "Warranty Couporn"
                           InteractTemplLanguage.INSERT;
                         END;
                         */
-                        IF InteractTemplLanguage.GET(Rec.VIN) THEN
+                        IF InteractTemplLanguage.GET(Rec.VIN) THEN;
                         //InteractTemplLanguage.ImportAttachment;
                         //CurrPage.UPDATE;
 
                     end;
+                    
                 }
                 action("E&xport")
                 {
@@ -226,7 +227,7 @@ page 50111 "Warranty Couporn"
                     var
                         InteractTemplLanguage: Record "Warranty Coupon";
                     begin
-                        IF InteractTemplLanguage.GET(Rec.VIN) THEN
+                        IF InteractTemplLanguage.GET(Rec.VIN) THEN;
                         //  InteractTemplLanguage.ExportAttachment;
                     end;
                 }
@@ -239,7 +240,7 @@ page 50111 "Warranty Couporn"
                     var
                         InteractTemplLanguage: Record "Warranty Coupon";
                     begin
-                        IF InteractTemplLanguage.GET(Rec.VIN) THEN
+                        IF InteractTemplLanguage.GET(Rec.VIN) THEN;
                         //  InteractTemplLanguage.RemoveAttachment(TRUE);
                     end;
                 }

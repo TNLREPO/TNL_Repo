@@ -62,7 +62,7 @@ codeunit 50004 "General Purpose Codeunit-1"
         UserSetup: Record 91;
         Margin: Decimal;
 
-   
+
     procedure ExplodeLeavePlan(LPlanRec: Record 50075)
     var
         LeaveRosterRec: Record 50077;
@@ -115,7 +115,7 @@ codeunit 50004 "General Purpose Codeunit-1"
         //MESSAGE(FORMAT(LPlanRec.Exploded));
     end;
 
-   
+
     procedure ExplodeActualLeave(LPlanRec: Record 50075)
     var
         LeaveRosterRec: Record 50077;
@@ -168,7 +168,7 @@ codeunit 50004 "General Purpose Codeunit-1"
         LPlanRec.MODIFY;
     end;
 
-   
+
     procedure IsHoliday(CheckDate: Date): Boolean
     begin
         Dy := DATE2DMY(CheckDate, 1);
@@ -199,7 +199,7 @@ codeunit 50004 "General Purpose Codeunit-1"
         END;
     end;
 
-   
+
     procedure GetEndDate(StartD: Date; NoOfDays: Integer): Date
     begin
         TmpDate := StartD - 1;
@@ -211,7 +211,7 @@ codeunit 50004 "General Purpose Codeunit-1"
         EXIT(TmpDate);
     end;
 
-   
+
     procedure GetStartDate(EndD: Date; NoOfDays: Integer): Date
     begin
         TmpDate := EndD + 1;
@@ -223,7 +223,7 @@ codeunit 50004 "General Purpose Codeunit-1"
         EXIT(TmpDate);
     end;
 
-   
+
     procedure GetNoOfDays(StartD: Date; EndD: Date): Integer
     begin
         TmpDate := StartD - 1;
@@ -235,7 +235,7 @@ codeunit 50004 "General Purpose Codeunit-1"
         EXIT(Cnt);
     end;
 
-   
+
     procedure GetGrossED(SearchED: Option " ","NSITF Employee","NSITF Employer","Gross Salary","Pension Employee","Pension Employer"): Code[20]
     begin
         EDRec.SETCURRENTKEY(EDRec."ED Type");
@@ -244,14 +244,14 @@ codeunit 50004 "General Purpose Codeunit-1"
         IF EDRec.FIND('-') THEN EXIT(EDRec."E/D Code");
     end;
 
-   
+
     procedure PayrollMonthofDate(InputDate: Date; locPeriodRec: Record 50004): Integer
     begin
         locPeriodRec.SETRANGE(locPeriodRec."Start Date", 0D, InputDate);
         EXIT(DATE2DMY(locPeriodRec."Start Date", 2));
     end;
 
-   
+
     procedure BCLookup(RegionCode: Code[10]; costcenter: Code[10]): Code[10]
     var
         RegionRec: Record 220;
@@ -289,7 +289,7 @@ codeunit 50004 "General Purpose Codeunit-1"
 
     end;
 
-   
+
     procedure LocalBCLookup(costCenter: Code[10]): Code[10]
     var
         RegionRec: Record 220;
@@ -332,7 +332,7 @@ codeunit 50004 "General Purpose Codeunit-1"
 
     end;
 
-   
+
     procedure CCLookup(RegionCode: Code[10]; budgetcenter: Code[10]): Code[10]
     var
         RegionRec: Record 220;
@@ -369,7 +369,7 @@ codeunit 50004 "General Purpose Codeunit-1"
 
     end;
 
-   
+
     procedure ForeignBCLookup(costCenter: Code[10]): Code[10]
     var
         RegionRec: Record 220;
@@ -409,7 +409,7 @@ codeunit 50004 "General Purpose Codeunit-1"
 
     end;
 
-   
+
     procedure CmdProperties(zRole: Code[250]; zFormID: Integer; zCmd: Integer): Integer
     var
         tPermission: Integer;
@@ -436,7 +436,7 @@ codeunit 50004 "General Purpose Codeunit-1"
 
     end;
 
-   
+
     procedure AutoLocalBCLookup(costCenter: Code[10]): Code[10]
     var
         RegionRec: Record 220;
@@ -478,7 +478,7 @@ codeunit 50004 "General Purpose Codeunit-1"
 
     end;
 
-   
+
     procedure GetMonthlyVedhiclePurchase(PurchHdr: Record 38; OrderMonth: Date)
     var
         SKU: Record 5700;
@@ -530,7 +530,7 @@ codeunit 50004 "General Purpose Codeunit-1"
         END;
     end;
 
-   
+
     procedure GetStoredDept(): Code[100]
     var
         UserSetup: Record 91;
@@ -541,7 +541,7 @@ codeunit 50004 "General Purpose Codeunit-1"
             EXIT('');
     end;
 
-   
+
     procedure GetSalesInvoiceNo(): Code[100]
     var
         UserSetup: Record 91;
@@ -552,7 +552,7 @@ codeunit 50004 "General Purpose Codeunit-1"
             EXIT('');
     end;
 
-   
+
     procedure GetSalesOrderNo(): Code[100]
     var
         UserSetup: Record 91;
@@ -563,7 +563,7 @@ codeunit 50004 "General Purpose Codeunit-1"
             EXIT('');
     end;
 
-   
+
     procedure GetSalesCrMemoNo(): Code[100]
     var
         UserSetup: Record 91;
@@ -574,7 +574,7 @@ codeunit 50004 "General Purpose Codeunit-1"
             EXIT('');
     end;
 
-   
+
     procedure GetSalesBlkOrderNo(): Code[100]
     var
         UserSetup: Record 91;
@@ -585,7 +585,7 @@ codeunit 50004 "General Purpose Codeunit-1"
             EXIT('');
     end;
 
-   
+
     procedure GetSalesQuoteNo(): Code[100]
     var
         UserSetup: Record 91;
@@ -596,7 +596,7 @@ codeunit 50004 "General Purpose Codeunit-1"
             EXIT('');
     end;
 
-   
+
     procedure GetStoredPostedSalesNo(): Code[100]
     var
         UserSetup: Record 91;
@@ -607,7 +607,7 @@ codeunit 50004 "General Purpose Codeunit-1"
             EXIT('');
     end;
 
-   
+
     procedure GetSalesDocumentNoSeries(DocType: Option Salesinv,SalesQuote,SalesBlkOrder,SalesOrder,SalesCrMemo,PSalesInv,PSalesShpmt,PSalesCrMemo): Code[100]
     var
         UserSetup: Record 91;
@@ -635,7 +635,7 @@ codeunit 50004 "General Purpose Codeunit-1"
 
     end;
 
-   
+
     procedure GetPurchaseDocumentNoSeries(DocType: Option Purchinv,PurchQuote,PurchBlkOrder,PurchOrder,PurchCrMemo,PPurchInv,PPurchRecpt,PPurchCrMemo): Code[100]
     var
         UserSetup: Record 91;
@@ -663,7 +663,7 @@ codeunit 50004 "General Purpose Codeunit-1"
 
     end;
 
-   
+
     procedure ItemJnlCheckLine(ItemJnlLine: Record 83)
     begin
         /*
@@ -678,7 +678,7 @@ codeunit 50004 "General Purpose Codeunit-1"
 
     end;
 
-   
+
     procedure SalesLineCheck(SalesLine: Record 37)
     begin
         /*IF CheckItemAvail.SalesLineShowWarning(SalesLine) THEN BEGIN
@@ -691,7 +691,7 @@ codeunit 50004 "General Purpose Codeunit-1"
 
     end;
 
-   
+
     procedure TransferLineCheck(TransLine: Record 5741)
     begin
         /*IF CheckItemAvail.TransferLineShowWarning(TransLine) THEN BEGIN
@@ -704,7 +704,7 @@ codeunit 50004 "General Purpose Codeunit-1"
 
     end;
 
-   
+
     procedure ServiceInvLineCheck(ServInvLine: Record 5902)
     begin
         /*IF CheckItemAvail.ServiceInvLineShowWarning(ServInvLine) THEN BEGIN
@@ -717,7 +717,7 @@ codeunit 50004 "General Purpose Codeunit-1"
 
     end;
 
-   
+
     procedure PostIOUPayment(var IOURec: Record 50105; CancelIOU: Boolean)
     begin
         IF NOT CancelIOU THEN BEGIN
@@ -766,7 +766,7 @@ codeunit 50004 "General Purpose Codeunit-1"
         //GenJnlLine."Document Type" := GenJnlLine."Document Type"::Payment;
         GenJnlLine.Description := IOURec.Description;
         GenJnlLine.VALIDATE(GenJnlLine.Amount, IOURec.Amount * AmtFactor);
-        IF IOURec."Bal. Account Type" <> 0 THEN
+        IF IOURec."Bal. Account Type" <> IOURec."Bal. Account Type"::" " THEN
             GenJnlLine."Bal. Account Type" := GenJnlLine."Bal. Account Type"::"Bank Account"
         ELSE
             GenJnlLine."Bal. Account Type" := IOURec."Bal. Account Type";
@@ -793,7 +793,7 @@ codeunit 50004 "General Purpose Codeunit-1"
         IOURec.MODIFY;
     end;
 
-   
+
     procedure PostIOURetirement(var Rec: Record 50107)
     var
         IOURec: Record 50105;
@@ -885,14 +885,14 @@ codeunit 50004 "General Purpose Codeunit-1"
                         GenJnlLine.VALIDATE(GenJnlLine.Amount, RetLines.Amount);
                         GenJnlLine."Reason Code" := 'RETIRE';
                         GenJnlLine."System-Created Entry" := TRUE;
-                        GenJnlLine."Gen. Posting Type" := 0;
+                        GenJnlLine."Gen. Posting Type" := GenJnlLine."Gen. Posting Type"::" ";
                         GenJnlLine."Gen. Bus. Posting Group" := '';
                         GenJnlLine."Gen. Prod. Posting Group" := '';
                         GenJnlLine."VAT Bus. Posting Group" := '';
                         GenJnlLine."VAT Prod. Posting Group" := '';
                         IF GenJnlLine."Account Type" <> GenJnlLine."Account Type"::"Fixed Asset" THEN BEGIN
                             GenJnlLine."Depreciation Book Code" := '';
-                            GenJnlLine."FA Posting Type" := 0;
+                            GenJnlLine."FA Posting Type" := GenJnlLine."FA Posting Type"::" ";
                             GenJnlLine."Maintenance Code" := '';
                         END ELSE BEGIN
                             GenJnlLine.VALIDATE("FA Posting Type", RetLines."FA Posting Type");
@@ -915,7 +915,7 @@ codeunit 50004 "General Purpose Codeunit-1"
                     GenJnlLine."System-Created Entry" := TRUE;
                     GenJnlLine.VALIDATE("Shortcut Dimension 1 Code", IOURec."Global Dimension 1 Code");
                     GenJnlLine.VALIDATE("Shortcut Dimension 2 Code", IOURec."Global Dimension 2 Code");
-                    GenJnlLine."Gen. Posting Type" := 0;
+                    GenJnlLine."Gen. Posting Type" := GenJnlLine."Gen. Posting Type"::" ";
                     GenJnlLine."Gen. Bus. Posting Group" := '';
                     GenJnlLine."Gen. Prod. Posting Group" := '';
                     GenJnlLine."VAT Bus. Posting Group" := '';
@@ -924,7 +924,7 @@ codeunit 50004 "General Purpose Codeunit-1"
                     GenJnlLine.VALIDATE(GenJnlLine."Applies-to Doc. No.", Rec."Applies-to Doc. No.");
                     IF GenJnlLine."Account Type" <> GenJnlLine."Account Type"::"Fixed Asset" THEN BEGIN
                         GenJnlLine."Depreciation Book Code" := '';
-                        GenJnlLine."FA Posting Type" := 0;
+                        GenJnlLine."FA Posting Type" := GenJnlLine."FA Posting Type"::" ";
                         GenJnlLine."Maintenance Code" := '';
                     END ELSE BEGIN
                         GenJnlLine.VALIDATE("FA Posting Type", RetLines."FA Posting Type");
@@ -963,14 +963,14 @@ codeunit 50004 "General Purpose Codeunit-1"
                         GenJnlLine.VALIDATE(GenJnlLine.Amount, RetLines.Amount);
                         GenJnlLine."Reason Code" := 'RETIRE';
                         GenJnlLine."System-Created Entry" := TRUE;
-                        GenJnlLine."Gen. Posting Type" := 0;
+                        GenJnlLine."Gen. Posting Type" := GenJnlLine."Gen. Posting Type"::" ";
                         GenJnlLine."Gen. Bus. Posting Group" := '';
                         GenJnlLine."Gen. Prod. Posting Group" := '';
                         GenJnlLine."VAT Bus. Posting Group" := '';
                         GenJnlLine."VAT Prod. Posting Group" := '';
                         IF GenJnlLine."Account Type" <> GenJnlLine."Account Type"::"Fixed Asset" THEN BEGIN
                             GenJnlLine."Depreciation Book Code" := '';
-                            GenJnlLine."FA Posting Type" := 0;
+                            GenJnlLine."FA Posting Type" := GenJnlLine."FA Posting Type"::" ";
                             GenJnlLine."Maintenance Code" := '';
                         END ELSE BEGIN
                             GenJnlLine.VALIDATE("FA Posting Type", RetLines."FA Posting Type");
@@ -993,7 +993,7 @@ codeunit 50004 "General Purpose Codeunit-1"
                     GenJnlLine.VALIDATE(GenJnlLine.Amount, (-1) * Rec."Amount To Retire");
                     GenJnlLine."Reason Code" := 'RETIRE';
                     GenJnlLine."System-Created Entry" := TRUE;
-                    GenJnlLine."Gen. Posting Type" := 0;
+                    GenJnlLine."Gen. Posting Type" := GenJnlLine."Gen. Posting Type"::" ";
                     GenJnlLine."Gen. Bus. Posting Group" := '';
                     GenJnlLine."Gen. Prod. Posting Group" := '';
                     GenJnlLine."VAT Bus. Posting Group" := '';
@@ -1002,7 +1002,7 @@ codeunit 50004 "General Purpose Codeunit-1"
                     GenJnlLine.VALIDATE(GenJnlLine."Applies-to Doc. No.", Rec."Applies-to Doc. No.");
                     IF GenJnlLine."Account Type" <> GenJnlLine."Account Type"::"Fixed Asset" THEN BEGIN
                         GenJnlLine."Depreciation Book Code" := '';
-                        GenJnlLine."FA Posting Type" := 0;
+                        GenJnlLine."FA Posting Type" := GenJnlLine."FA Posting Type"::" ";
                         GenJnlLine."Maintenance Code" := '';
                     END ELSE BEGIN
                         GenJnlLine.VALIDATE("FA Posting Type", RetLines."FA Posting Type");
@@ -1274,8 +1274,8 @@ codeunit 50004 "General Purpose Codeunit-1"
 
     end;
 
-   
-    procedure PostDeposit(var Rec: Record "50108")
+
+    procedure PostDeposit(var Rec: Record "Deposit Management")
     begin
         IF NOT CONFIRM('Do you want to post Deposit!') THEN EXIT;
 
@@ -1297,7 +1297,7 @@ codeunit 50004 "General Purpose Codeunit-1"
             GenJnlLine."Account Type" := GenJnlLine."Account Type"::Vendor;
         GenJnlLine.VALIDATE("Account No.", Rec."No.");
         GenJnlLine.VALIDATE("VAT %", 0);
-        GenJnlLine."Gen. Posting Type" := 0;
+        GenJnlLine."Gen. Posting Type" := GenJnlLine."Gen. Posting Type"::" ";
         GenJnlLine."Gen. Bus. Posting Group" := '';
         GenJnlLine."Gen. Prod. Posting Group" := '';
         GenJnlLine."VAT Bus. Posting Group" := '';
@@ -1309,7 +1309,7 @@ codeunit 50004 "General Purpose Codeunit-1"
         GenJnlLine."Shortcut Dimension 1 Code" := Rec."Global Dimension 1 Code";
         GenJnlLine."Shortcut Dimension 2 Code" := Rec."Global Dimension 2 Code";
         GenJnlLine."System-Created Entry" := TRUE;
-        GenJnlLine."Bal. Gen. Posting Type" := 0;
+        GenJnlLine."Bal. Gen. Posting Type" := GenJnlLine."Bal. Gen. Posting Type"::" ";
         GenJnlLine."Bal. Gen. Bus. Posting Group" := '';
         GenJnlLine."Bal. Gen. Prod. Posting Group" := '';
         GenJnlLine."Bal. VAT Bus. Posting Group" := '';
@@ -1322,7 +1322,7 @@ codeunit 50004 "General Purpose Codeunit-1"
         Rec.MODIFY;
     end;
 
-   
+
     procedure ConvertIOU2Loan(var IOURec: Record 50105)
     var
         Loan: Record 50013;
@@ -1360,7 +1360,7 @@ codeunit 50004 "General Purpose Codeunit-1"
         MESSAGE('Loan successfully created!');
     end;
 
-   
+
     procedure AccessGranted(FieldNo: Code[10]): Boolean
     var
         HasPermission: Boolean;
@@ -1436,7 +1436,7 @@ codeunit 50004 "General Purpose Codeunit-1"
 
     end;
 
-   
+
     procedure figure(fig: Decimal; Currency: Text[30]; CurrencyUnit: Text[30]) figureinword: Text[200]
     begin
         IF ABS(fig) > 0 THEN BEGIN
@@ -1638,7 +1638,7 @@ codeunit 50004 "General Purpose Codeunit-1"
             figureinword := '';
     end;
 
-   
+
     procedure CheckItemCost(var ItemNo: Code[20]; var NewSalesPrice: Decimal)
     begin
         ItemLedgEntry.SETCURRENTKEY("Item No.", Positive, "Location Code", "Variant Code");
@@ -1662,7 +1662,7 @@ codeunit 50004 "General Purpose Codeunit-1"
         END;
     end;
 
-   
+
     procedure CheckItemCostToPost(var DocNo: Code[10])
     begin
         ReservEntry.SETCURRENTKEY("Source ID", "Item No.");
@@ -1691,7 +1691,7 @@ codeunit 50004 "General Purpose Codeunit-1"
         END;
     end;
 
-   
+
     procedure UseTodaysDate(var PostingDate: Date)
     begin
         UserSetup.GET(USERID);
@@ -1700,7 +1700,7 @@ codeunit 50004 "General Purpose Codeunit-1"
                 ERROR('Please change the Posting Date to todays date!');
     end;
 
-   
+
     procedure CheckMargin(var DocNo: Code[10])
     begin
         ReservEntry.SETCURRENTKEY("Source ID", "Item No.");

@@ -39,12 +39,11 @@ page 50301 "Employee Regular Var. Header."
     }
 
     var
-        PGrp: Record "50140";
+        PGrp: Record 50140;
         DefaultPostingGroup: Text[250];
         UserRec: Record 91;
         EmployeeRec: Record 5200;
-
-    [Scope('Internal')]
+    
     procedure GetPGrp(Grp: Code[10]): Text[30]
     begin
     end;

@@ -118,12 +118,12 @@ page 50332 "COF Job Instruction Item"
 
     trigger OnAfterGetRecord()
     begin
-        OnAfterGetCurrRecord;
+        CustOnAfterGetCurrRecord;
     end;
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
-        OnAfterGetCurrRecord;
+        CustOnAfterGetCurrRecord;
     end;
 
     var
@@ -132,7 +132,7 @@ page 50332 "COF Job Instruction Item"
 
         "Unit CostEditable": Boolean;
 
-    local procedure OnAfterGetCurrRecord()
+    local procedure CustOnAfterGetCurrRecord()
     begin
         xRec := Rec;
         IF Rec."No." = 'SUBLET' THEN

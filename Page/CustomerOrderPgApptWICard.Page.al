@@ -487,7 +487,7 @@ page 70086 "Customer Order Pg Appt/WI Card"
             action("Print COF")
             {
                 Caption = 'Print COF';
-                Image = print;
+                Image = Print;
 
                 trigger OnAction()
                 begin
