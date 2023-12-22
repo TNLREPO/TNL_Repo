@@ -1,6 +1,6 @@
 page 70171 "Complaint List"
 {
-    CardPageID = "Compaint Card";
+    CardPageID = "Complaint Card";
     PageType = List;
     SourceTable = "CRM Register";
     SourceTableView = WHERE("Type of Call" = CONST(Complain));

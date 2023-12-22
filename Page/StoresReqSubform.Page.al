@@ -3,7 +3,7 @@ page 50206 "Stores Req. Subform"
     AutoSplitKey = true;
     DelayedInsert = true;
     MultipleNewLines = true;
-    PageType = List;
+    PageType = ListPart;
     SourceTable = "Stores Req. Line.";
 
     layout

@@ -104,7 +104,7 @@ page 50369 "Complain List"
                 {
                     Caption = 'Card';
                     Image = EditLines;
-                    RunObject = Page 50368;
+                    //RunObject = Page 50368;
                     ShortCutKey = 'Shift+F7';
                 }
             }

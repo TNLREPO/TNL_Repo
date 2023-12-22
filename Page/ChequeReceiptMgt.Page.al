@@ -95,7 +95,7 @@ page 50226 "Cheque Receipt Mgt"
                 Caption = 'Print Temporary Receipt';
                 Promoted = true;
                 PromotedCategory = Process;
-                RunObject = Report 50300;
+                //RunObject = Report 50300;
                 Visible = false;
 
                 trigger OnAction()
@@ -110,12 +110,12 @@ page 50226 "Cheque Receipt Mgt"
                 action("Temporary Receipt")
                 {
                     Caption = 'Temporary Receipt';
-                    RunObject = Report 50300;
+                    //RunObject = Report 50300;
                 }
                 action("Confirmed Receipt")
                 {
                     Caption = 'Confirmed Receipt';
-                    RunObject = Report 50303;
+                    //RunObject = Report 50303;
                 }
             }
         }

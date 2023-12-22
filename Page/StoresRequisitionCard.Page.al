@@ -47,7 +47,7 @@ page 50205 "Stores Requisition Card"
                 {
                 }
             }
-            part("Requisition Lines"; 50206)
+            part("Requisition Lines"; "Stores Req. Subform")
             {
                 SubPageLink = "Document No." = FIELD("No."),
                               "Document Type" = FIELD(Type);
@@ -242,12 +242,12 @@ page 50205 "Stores Requisition Card"
         operationType: Integer;
         Doctype: Option;
         "Doc. Type": Text[30];
-        [InDataSet]
+
         PrintVisible: Boolean;
-        [InDataSet]
+
         CreateIssueVisible: Boolean;
 
-    [Scope('Internal')]
+
     procedure NEWREQ()
     begin
         InvtSetup.GET;
@@ -260,7 +260,6 @@ page 50205 "Stores Requisition Card"
         END;
     end;
 
-    [Scope('Internal')]
     procedure ALLOYNEWREQ()
     begin
         InvtSetup.GET;
