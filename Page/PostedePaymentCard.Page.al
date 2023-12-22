@@ -153,7 +153,7 @@ page 70100 "Posted e-Payment Card"
 
                 trigger OnAction()
                 begin
-                    Navigate;
+                    Rec.Navigate;
                 end;
             }
         }

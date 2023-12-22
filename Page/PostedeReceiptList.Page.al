@@ -71,7 +71,7 @@ page 70109 "Posted e-Receipt List"
 
                 trigger OnAction()
                 begin
-                    Navigate;
+                    Rec.Navigate;
                 end;
             }
         }

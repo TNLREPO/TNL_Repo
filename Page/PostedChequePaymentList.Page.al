@@ -1,4 +1,4 @@
-page 70023 "Posted Cheque Payment List"
+page 50038 "Posted Cheque Payment List"
 {
     CardPageID = "Posted Cheque Payment Card";
     DeleteAllowed = false;

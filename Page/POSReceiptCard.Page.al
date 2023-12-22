@@ -162,7 +162,7 @@ page 70513 "POS Receipt Card"
 
                 trigger OnAction()
                 begin
-                    CallAPI.POSIntegration(Rec);
+                    //CallAPI.POSIntegration(Rec);
                 end;
             }
             action("Test Report")
@@ -306,7 +306,7 @@ page 70513 "POS Receipt Card"
         Text19038076: Label 'Department Code';
         Text19077769: Label 'Branch Code';
         GLEntry2: Record 17;
-        CallAPI: Codeunit 50005;
+        //CallAPI: Codeunit 50005;
 
 
     procedure UpdatePosting()

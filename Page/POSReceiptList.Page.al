@@ -1,4 +1,4 @@
-page 70005 "POS Receipt List"
+page 50040 "POS Receipt List"
 {
     CardPageID = "Cash Receipt Card";
     Editable = false;

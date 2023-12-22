@@ -1,4 +1,4 @@
-page 70021 "Posted Cheque Receipt List"
+page 50039 "Posted Cheque Receipt List"
 {
     CardPageID = "Posted Cheque Receipt Card";
     DeleteAllowed = false;
@@ -67,7 +67,7 @@ page 70021 "Posted Cheque Receipt List"
 
                 trigger OnAction()
                 begin
-                    Navigate;
+                    Rec.Navigate;
                 end;
             }
         }

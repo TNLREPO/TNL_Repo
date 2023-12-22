@@ -68,7 +68,7 @@ page 70099 "Posted e-Payment List"
 
                 trigger OnAction()
                 begin
-                    Navigate;
+                    Rec.Navigate;
                 end;
             }
         }
