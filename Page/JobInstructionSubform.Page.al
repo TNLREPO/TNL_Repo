@@ -42,21 +42,21 @@ page 80012 "Job Instruction Subform"
 
     trigger OnAfterGetRecord()
     begin
-        OnAfterGetCurrRecord;
+        CustOnAfterGetCurrRecord;
     end;
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
-        OnAfterGetCurrRecord;
+        CustOnAfterGetCurrRecord;
     end;
 
     var
         CustOrderLine: Record 50122;
         CustOrderRec: Record 50119;
-        [InDataSet]
+        
         "Unit CostEditable": Boolean;
 
-    local procedure OnAfterGetCurrRecord()
+    local procedure CustOnAfterGetCurrRecord()
     begin
         xRec := Rec;
         IF Rec."No." = 'SUBLET' THEN

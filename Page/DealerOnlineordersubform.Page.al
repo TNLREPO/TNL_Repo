@@ -1,6 +1,6 @@
 page 50157 "Dealer Online order subform"
 {
-    PageType = Card;
+    PageType = ListPart;
     SourceTable = "Warranty Claim Header";
 
     layout

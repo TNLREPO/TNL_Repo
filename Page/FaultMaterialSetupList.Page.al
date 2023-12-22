@@ -33,7 +33,7 @@ page 50236 "Fault Material Setup List."
                 Caption = 'Open Card';
                 Image = GetEntries;
                 Promoted = true;
-                RunObject = Page "Request For Quote card";
+                //RunObject = Page "Request For Quote card";
                 RunPageOnRec = true;
                 ShortCutKey = 'Shift+F7';
             }

@@ -339,7 +339,7 @@ page 70086 "Customer Order Pg Appt/WI Card"
                 {
                 }
             }
-            part("SSC/SC Details"; 70080)
+            part("SSC/SC Details"; 70069)
             {
                 Caption = 'SSC/SC Details';
             }

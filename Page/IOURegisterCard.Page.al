@@ -52,7 +52,7 @@ page 70031 "IOU Register Card"
 
                     trigger OnValidate()
                     begin
-                        IF Rec."120Isolo" = "120Isolo"::"1" THEN
+                        IF Rec."120Isolo" THEN
                             JobDetails_Visible := TRUE
                         ELSE
                             JobDetails_Visible := FALSE;
@@ -233,12 +233,12 @@ page 70031 "IOU Register Card"
     trigger OnAfterGetRecord()
     begin
 
-        OnAfterGetCurrRecord;
+        CustOnAfterGetCurrRecord;
     end;
 
     trigger OnOpenPage()
     begin
-        IF Rec."120Isolo" = "120Isolo"::"1" THEN
+        IF Rec."120Isolo" THEN
             JobDetails_Visible := TRUE
         ELSE
             JobDetails_Visible := FALSE;
@@ -270,7 +270,7 @@ page 70031 "IOU Register Card"
 
     var
         IOURec: Record 50105;
-        IOUReport: Report "50299";
+        IOUReport: Report 50299;
         GPC: Codeunit 50004;
 
         "1st ApprovalVisible": Boolean;
@@ -296,7 +296,7 @@ page 70031 "IOU Register Card"
         "Entry DateEditable": Boolean;
         JobDetails_Visible: Boolean;
 
-    local procedure OnAfterGetCurrRecord()
+    local procedure CustOnAfterGetCurrRecord()
     begin
         xRec := Rec;
         IF Rec."1st Apprv. Status" = Rec."1st Apprv. Status"::Approved THEN

@@ -162,7 +162,7 @@ page 50165 "Fuel Voucher"
                         GenJnlLine.VALIDATE(GenJnlLine."Shortcut Dimension 2 Code",Rec. "Shortcut Dimension 2 Code");
                         GenJnlLine."Bal. Account Type" := GenJnlLine."Bal. Account Type"::"G/L Account";
                         GenJnlLine.VALIDATE("Bal. Account No.", GenPostSetup."Inventory Adjmt. Account");
-                        GenJnlLine."Gen. Posting Type" := 0;
+                        //GenJnlLine."Gen. Posting Type" := 0;
                         GenJnlLine."Gen. Bus. Posting Group" := '';
                         GenJnlLine."Gen. Prod. Posting Group" := '';
                         GenJnlPost.RUN(GenJnlLine);

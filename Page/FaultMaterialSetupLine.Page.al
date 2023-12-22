@@ -62,7 +62,7 @@ page 50237 "Fault Material Setup Line"
         {
             action(Availability)
             {
-                Caption = 'Availability';
+               /*  Caption = 'Availability';
                 Image = Warehouse;
                 Promoted = true;
                 PromotedCategory = Process;
@@ -70,7 +70,7 @@ page 50237 "Fault Material Setup Line"
                 trigger OnAction()
                 begin
                     ItemAvailFormsMgt.ShowItemAvailFromFaultSetup(Rec, ItemAvailFormsMgt.ByLocation)
-                end;
+                end; */
             }
         }
     }
@@ -85,14 +85,14 @@ page 50237 "Fault Material Setup Line"
         ServHeader: Record 5900;
         ServItem: Record 5940;
         ServItem2: Record 5940;
-        ItemTrackingEntry: Record "6502";
+        ItemTrackingEntry: Record 6502;
         ServLoanerMgt: Codeunit 5901;
-        ItemAvailFormsMgt: Codeunit "353";
+        ItemAvailFormsMgt: Codeunit 353;
 
     
     procedure FaultComments()
     var
-        ServCommentLine: Record "5906";
+        ServCommentLine: Record 5906;
     begin
         /*ServHeader.GET("Order No.");
         ServHeader.TESTFIELD("Customer No.");
@@ -110,7 +110,7 @@ page 50237 "Fault Material Setup Line"
     
     procedure ResolutionComments()
     var
-        ServCommentLine: Record "5906";
+        ServCommentLine: Record 5906;
     begin
         /*ServHeader.GET("Order No.");
         ServHeader.TESTFIELD("Customer No.");
@@ -128,7 +128,7 @@ page 50237 "Fault Material Setup Line"
     
     procedure InternalComments()
     var
-        ServCommentLine: Record "5906";
+        ServCommentLine: Record 5906;
     begin
         /*ServHeader.GET("Order No.");
         ServHeader.TESTFIELD("Customer No.");
@@ -146,7 +146,7 @@ page 50237 "Fault Material Setup Line"
     
     procedure AccessoryComments()
     var
-        ServCommentLine: Record "5906";
+        ServCommentLine: Record 5906;
     begin
         /*ServHeader.GET("Order No.");
         ServHeader.TESTFIELD("Customer No.");
@@ -164,7 +164,7 @@ page 50237 "Fault Material Setup Line"
     
     procedure LoanerComments()
     var
-        ServCommentLine: Record "5906";
+        ServCommentLine: Record 5906;
     begin
         /*ServHeader.GET("Order No.");
         ServHeader.TESTFIELD("Customer No.");
@@ -218,7 +218,7 @@ page 50237 "Fault Material Setup Line"
     
     procedure AllocateResource()
     var
-        ServOrderAlloc: Record "5950";
+        ServOrderAlloc: Record 5950;
     begin
         /*TESTFIELD("Order No.");
         TESTFIELD("Line No.");
@@ -248,7 +248,7 @@ page 50237 "Fault Material Setup Line"
     
     procedure ShowServItemEventLog()
     var
-        ServItemLog: Record "5942";
+        ServItemLog: Record 5942;
     begin
         /*TESTFIELD("Service Item No.");
         CLEAR(ServItemLog);
@@ -261,7 +261,7 @@ page 50237 "Fault Material Setup Line"
     
     procedure ShowChecklist()
     var
-        TblshtgHeader: Record "5943";
+        TblshtgHeader: Record 5943;
     begin
         // TblshtgHeader.ShowForServItemLine(Rec);
     end;

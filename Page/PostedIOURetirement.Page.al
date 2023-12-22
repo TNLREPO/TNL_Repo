@@ -98,12 +98,12 @@ page 50281 "Posted IOU Retirement"
         BalAmt := 0;
         Rec.CALCFIELDS("Amount To Retire");
         BalAmt := Rec."Original IOU Amount" - Rec."Amount To Retire";
-        OnAfterGetCurrRecord;
+        CustOnAfterGetCurrRecord;
     end;
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
-        OnAfterGetCurrRecord;
+        CustOnAfterGetCurrRecord;
     end;
 
     var
@@ -114,7 +114,7 @@ page 50281 "Posted IOU Retirement"
         BalAmt: Decimal;
         Text19002652: Label 'For Accounts Dept. ';
 
-    local procedure OnAfterGetCurrRecord()
+    local procedure CustOnAfterGetCurrRecord()
     begin
         xRec := Rec;
         BalAmt := 0;

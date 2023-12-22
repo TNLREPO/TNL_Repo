@@ -133,8 +133,8 @@ page 50472 "Logistics/VRI Card"
         VRIRec2: Record 50058;
         VRIRec3: Record 50058;
         NewVRICode: Code[10];
-        InStock: Record "50163";
-        InStock2: Record "50163";
+        InStock: Record 50163;
+        InStock2: Record 50163;
         EntryNo: Integer;
 }
 

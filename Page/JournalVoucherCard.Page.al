@@ -191,7 +191,7 @@ page 70017 "Journal Voucher Card"
                     Rec."Test Report" := FALSE;
                     Rec.Postgl(Rec, FALSE);
 
-                    UpdatePosting;
+                    //Rec.UpdatePosting;
                 end;
             }
             action(Print)
@@ -282,25 +282,17 @@ page 70017 "Journal Voucher Card"
         GLEntry: Record 17;
         UserRec: Record 91;
         GPC: Codeunit 50004;
-        [InDataSet]
-
         "FA Posting TypeVisible": Boolean;
-        [InDataSet]
         "Maintenance CodeVisible": Boolean;
-        [InDataSet]
         "Print DocumentVisible": Boolean;
-        [InDataSet]
         debalVisible: Boolean;
-        [InDataSet]
         MultilineVisible: Boolean;
-        [InDataSet]
         NavigateVisible: Boolean;
         Text19038076: Label 'Department Code';
         Text19077769: Label 'Branch Code';
         MultiLineEditable: Boolean;
         GLEntry2: Record 17;
-
-    [Scope('Internal')]
+  
     procedure UpdatePosting()
     begin
         GLEntry.SETCURRENTKEY("Document No.", "Posting Date");

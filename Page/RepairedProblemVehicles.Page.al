@@ -66,6 +66,6 @@ page 50458 "Repaired Problem Vehicles"
     }
 
     var
-        VRIRec: Record "50058";
+        VRIRec: Record 50058;
 }
 

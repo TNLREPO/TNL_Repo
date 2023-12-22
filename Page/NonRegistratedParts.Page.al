@@ -123,16 +123,16 @@ page 50109 "Non Registrated Parts"
 
     trigger OnAfterGetRecord()
     begin
-        OnAfterGetCurrRecord;
+        CustOnAfterGetCurrRecord;
     end;
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
         //"Entry No":="Entry No"+1;;
-        OnAfterGetCurrRecord;
+        CustOnAfterGetCurrRecord;
     end;
 
-    local procedure OnAfterGetCurrRecord()
+    local procedure CustOnAfterGetCurrRecord()
     begin
         xRec := Rec;
         Rec."Request Date" := TODAY;

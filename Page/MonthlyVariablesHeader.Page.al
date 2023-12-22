@@ -43,7 +43,7 @@ page 50297 "Monthly Variables Header."
 
     var
         DefaultPostingGroup: Code[20];
-        LinesRec: Record "50141";
+        LinesRec: Record 50141;
         PeriodRec: Record 50004;
         CurrentPeriod: Code[10];
         UserSetup: Record 91;
@@ -59,7 +59,7 @@ page 50297 "Monthly Variables Header."
         PenaltyPercent: Decimal;
         Wind: Dialog;
         StaffNo: Code[20];
-        GrpLines: Record "50008";
+        GrpLines: Record 50008;
         EDText: Text[30];
         EDRec: Record 50001;
 }

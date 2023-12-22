@@ -1,6 +1,6 @@
 page 50298 "Monthly Variables Lines sub."
 {
-    PageType = Card;
+    PageType = ListPart;
     SourceTable = "Monthly Variables Lines.";
 
     layout

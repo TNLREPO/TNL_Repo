@@ -432,11 +432,11 @@ page 50036 "TNL-Work Order Card"
         "Invoice Confirmation": Boolean;
         "Payment Confirmation": Boolean;
         "Transaction Closure": Boolean;
-        [InDataSet]
+        
         "1st Approval toEditable": Boolean;
-        [InDataSet]
+        
         "2nd Approval toEditable": Boolean;
-        [InDataSet]
+        
         "Send for ApprovalEditable": Boolean;
         "1st Approval StatusEditable": Boolean;
         "2nd Approval StatusEditable": Boolean;

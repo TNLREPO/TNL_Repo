@@ -45,7 +45,7 @@ page 50434 "IOU Approval List"
                 Caption = 'OK';
                 Promoted = true;
                 PromotedCategory = Process;
-                RunObject = Page 50433;
+                //RunObject = Page 50433;
             }
         }
     }

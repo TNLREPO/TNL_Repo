@@ -66,9 +66,8 @@ page 70191 "LPP Subform"
 
     var
         IncomingDocument: Record 130;
-
-    [Scope('Internal')]
-    procedure GetIncomingDocumentURL(): Text[1000]
+    
+    procedure CustGetIncomingDocumentURL(): Text[1000]
     var
         IncomingDocument: Record 130;
     begin

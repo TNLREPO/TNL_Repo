@@ -66,6 +66,6 @@ page 50457 "Problem Vehicles"
     }
 
     var
-        VRIRec: Record "50058";
+        VRIRec: Record 50058;
 }
 

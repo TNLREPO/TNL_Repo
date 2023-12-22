@@ -87,7 +87,7 @@ page 80042 "Fault Material Card"
     }
 
     var
-        FaultCode: Record "5918";
+        FaultCode: Record 5918;
         Text001: Label 'Fault Code has been updated!';
 }
 

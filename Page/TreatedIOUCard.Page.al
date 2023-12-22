@@ -157,7 +157,7 @@ page 50375 "Treated IOU Card"
 
     var
         IOURec: Record 50105;
-        IOUReport: Report "50299";
+        IOUReport: Report 50299;
         GPC: Codeunit 50004;
 }
 

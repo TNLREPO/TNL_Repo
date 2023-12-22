@@ -142,7 +142,7 @@ tableextension 50009 "Item Ledger Entry Ext" extends "Item Ledger Entry"
         {
             //FieldClass = FlowField;
             //CalcFormula = Lookup("Value Entry"."External Document No." WHERE("Item Ledger Entry Type" = CONST(Purchase),
-                                                                         //     Chassis = FIELD("Serial No.")));
+            //     Chassis = FIELD("Serial No.")));
 
         }
         field(60119; "TNL Selling Price to TCSC"; Decimal)
@@ -175,6 +175,10 @@ tableextension 50009 "Item Ledger Entry Ext" extends "Item Ledger Entry"
     keys
     {
         key(ExtKey1; "Document Type", "Serial No.")
+        {
+
+        }
+        key(ExtKey2; "Purchase Date")
         {
 
         }

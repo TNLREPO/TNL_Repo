@@ -55,7 +55,7 @@ page 50015 "Employee Group Header."
                 {
                     Caption = 'Copy Lines from another group';
                     Ellipsis = false;
-                    RunObject = Report 50055;
+                    //RunObject = Report 50055;
                 }
             }
         }

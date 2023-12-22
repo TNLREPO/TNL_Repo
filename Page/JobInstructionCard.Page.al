@@ -216,7 +216,7 @@ page 70089 "Job Instruction Card."
                 trigger OnAction()
                 begin
 
-                    Rec.CreatePurchaseRequisition;
+                    //Rec.CreatePurchaseRequisition;
                 end;
             }
             action("Get Estimate Info")
@@ -228,7 +228,7 @@ page 70089 "Job Instruction Card."
 
                 trigger OnAction()
                 begin
-                    CreatEstimateRequestion;
+                    //Rec.CreatEstimateRequestion;
                 end;
             }
             action("Add Parts to Part Order")
@@ -483,7 +483,7 @@ page 70089 "Job Instruction Card."
             action("Print Invoice")
             {
                 Caption = 'Print Invoice';
-                Image = print;
+                Image = Print;
                 Promoted = true;
                 PromotedCategory = Process;
 
@@ -525,7 +525,7 @@ page 70089 "Job Instruction Card."
         VRIRec: Record 50058;
         COFLine: Record 50122;
 
-    [Scope('Internal')]
+   
     procedure CreatePurchaseRequisition()
     var
         RequisitionLine: Record 246;
@@ -606,7 +606,7 @@ page 70089 "Job Instruction Card."
             UNTIL CustOrderLine.NEXT = 0;
     end;
 
-    [Scope('Internal')]
+   
     procedure CreatEstimateRequestion()
     var
         RequisitionLine: Record 246;
@@ -680,7 +680,7 @@ page 70089 "Job Instruction Card."
             UNTIL CustOrderLine.NEXT = 0;
     end;
 
-    [Scope('Internal')]
+   
     procedure AddOperations()
     var
         ServiceLine: Record 5902;

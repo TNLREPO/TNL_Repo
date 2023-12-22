@@ -175,7 +175,7 @@ page 50211 "Kodawari Estimate Card"
                 trigger OnAction()
                 begin
 
-                    CreatePurchaseRequisition;
+                    //CreatePurchaseRequisition;
                 end;
             }
             action("Get Estimate Info")
@@ -184,7 +184,7 @@ page 50211 "Kodawari Estimate Card"
 
                 trigger OnAction()
                 begin
-                    CreatEstimateRequestion;
+                    //CreatEstimateRequestion;
                 end;
             }
             action("Parts Ordered")
@@ -431,7 +431,6 @@ page 50211 "Kodawari Estimate Card"
         VRIRec: Record 50058;
         COFLine: Record 50122;
 
-    [Scope('Internal')]
     procedure CreatePurchaseRequisition()
     var
         RequisitionLine: Record 246;
@@ -512,7 +511,6 @@ page 50211 "Kodawari Estimate Card"
             UNTIL CustOrderLine.NEXT = 0;
     end;
 
-    [Scope('Internal')]
     procedure CreatEstimateRequestion()
     var
         RequisitionLine: Record 246;
@@ -586,7 +584,6 @@ page 50211 "Kodawari Estimate Card"
             UNTIL CustOrderLine.NEXT = 0;
     end;
 
-    [Scope('Internal')]
     procedure AddOperations()
     var
         ServiceLine: Record 5902;

@@ -2,7 +2,7 @@ page 50169 "Closed Warranty Claim Subform"
 {
     AutoSplitKey = true;
     DelayedInsert = true;
-    PageType = List;
+    PageType = ListPart;
     SourceTable = "Warranty Claim Detail";
 
     layout
