@@ -72,7 +72,7 @@ page 70024 "Posted Journal Voucher List"
 
                 trigger OnAction()
                 begin
-                    Navigate;
+                    Rec.Navigate;
                 end;
             }
         }

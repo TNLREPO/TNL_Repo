@@ -159,7 +159,7 @@ page 70028 "Posted Cheque Payment Card"
 
                 trigger OnAction()
                 begin
-                    Navigate;
+                    Rec.Navigate;
                 end;
             }
         }

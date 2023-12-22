@@ -153,7 +153,7 @@ page 80068 "Posted POS Receipt Card"
 
                 trigger OnAction()
                 begin
-                    Navigate;
+                    Rec.Navigate;
                 end;
             }
         }

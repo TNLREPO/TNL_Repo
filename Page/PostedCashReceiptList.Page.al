@@ -64,7 +64,7 @@ page 70020 "Posted Cash Receipt List"
 
                 trigger OnAction()
                 begin
-                    Navigate;
+                    Rec.Navigate;
                 end;
             }
         }

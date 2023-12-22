@@ -135,7 +135,7 @@ page 70027 "Posted Cash Payment Card"
             action("Print Document")
             {
                 Caption = '&Print Document';
-                Image = print;
+                Image = Print;
                 Promoted = true;
                 PromotedCategory = Process;
                 PromotedIsBig = true;
@@ -162,7 +162,8 @@ page 70027 "Posted Cash Payment Card"
 
                 trigger OnAction()
                 begin
-                    Navigate;
+                    Rec.Navigate();
+
                 end;
             }
         }

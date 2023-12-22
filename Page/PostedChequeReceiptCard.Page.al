@@ -148,7 +148,7 @@ page 70026 "Posted Cheque Receipt Card"
 
                 trigger OnAction()
                 begin
-                    Navigate;
+                    Rec.Navigate;
                 end;
             }
         }

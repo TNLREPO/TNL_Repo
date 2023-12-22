@@ -66,7 +66,7 @@ page 70023 "Posted Cheque Payment List"
 
                 trigger OnAction()
                 begin
-                    Navigate;
+                    Rec.Navigate;
                 end;
             }
         }

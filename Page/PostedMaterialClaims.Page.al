@@ -227,6 +227,6 @@ page 50202 "Posted Material Claims"
     }
 
     var
-        recrep: Record "50038";
+        recrep: Record 50038;
 }
 

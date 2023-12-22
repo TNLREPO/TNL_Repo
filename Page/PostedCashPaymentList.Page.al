@@ -63,7 +63,7 @@ page 70022 "Posted Cash Payment List"
 
                 trigger OnAction()
                 begin
-                    Navigate;
+                    Rec.Navigate;
                 end;
             }
         }

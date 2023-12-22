@@ -128,7 +128,7 @@ page 70029 "Posted Journal Voucher Card"
             action("Print Document")
             {
                 Caption = '&Print Document';
-                Image = print;
+                Image = Print;
                 Promoted = true;
                 PromotedCategory = Process;
                 PromotedIsBig = true;
@@ -155,7 +155,7 @@ page 70029 "Posted Journal Voucher Card"
 
                 trigger OnAction()
                 begin
-                    Navigate;
+                    Rec.Navigate;
                 end;
             }
         }

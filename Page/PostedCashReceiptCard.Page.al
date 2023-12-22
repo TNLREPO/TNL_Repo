@@ -153,7 +153,7 @@ page 70025 "Posted Cash Receipt Card"
 
                 trigger OnAction()
                 begin
-                    Navigate;
+                    Rec.Navigate;
                 end;
             }
         }

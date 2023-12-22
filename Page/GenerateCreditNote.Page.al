@@ -130,7 +130,7 @@ page 70189 "Generate Credit Note"
     }
 
     var
-        WarrantyClaim: Record "50038";
+        WarrantyClaim: Record 50038;
         SettlementReport: Report "50608";
 }
 
