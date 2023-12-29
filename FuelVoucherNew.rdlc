@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="FORMAT_TODAY_0_4_">
+          <DataField>FORMAT_TODAY_0_4_</DataField>
+        </Field>
+        <Field Name="COMPANYNAME">
+          <DataField>COMPANYNAME</DataField>
+        </Field>
+        <Field Name="USERID">
+          <DataField>USERID</DataField>
+        </Field>
+        <Field Name="Fuel_Vouchers___Voucher_No__">
+          <DataField>Fuel_Vouchers___Voucher_No__</DataField>
+        </Field>
+        <Field Name="Fuel_Vouchers__Description">
+          <DataField>Fuel_Vouchers__Description</DataField>
+        </Field>
+        <Field Name="Fuel_Vouchers___Transaction_Date_">
+          <DataField>Fuel_Vouchers___Transaction_Date_</DataField>
+        </Field>
+        <Field Name="Fuel_Vouchers___Item_No__">
+          <DataField>Fuel_Vouchers___Item_No__</DataField>
+        </Field>
+        <Field Name="Fuel_Vouchers__Location">
+          <DataField>Fuel_Vouchers__Location</DataField>
+        </Field>
+        <Field Name="Fuel_Vouchers___Asset_Code_">
+          <DataField>Fuel_Vouchers___Asset_Code_</DataField>
+        </Field>
+        <Field Name="Fuel_Vouchers___Fuel_Code_">
+          <DataField>Fuel_Vouchers___Fuel_Code_</DataField>
+        </Field>
+        <Field Name="Item_Description">
+          <DataField>Item_Description</DataField>
+        </Field>
+        <Field Name="FA_Description">
+          <DataField>FA_Description</DataField>
+        </Field>
+        <Field Name="Fuel_Vouchers___Shortcut_Dimension_1_Code_">
+          <DataField>Fuel_Vouchers___Shortcut_Dimension_1_Code_</DataField>
+        </Field>
+        <Field Name="Fuel_Vouchers___Shortcut_Dimension_2_Code_">
+          <DataField>Fuel_Vouchers___Shortcut_Dimension_2_Code_</DataField>
+        </Field>
+        <Field Name="Fuel_Vouchers___Qty_Issued_">
+          <DataField>Fuel_Vouchers___Qty_Issued_</DataField>
+        </Field>
+        <Field Name="Fuel_Vouchers___Qty_Issued_Format">
+          <DataField>Fuel_Vouchers___Qty_Issued_Format</DataField>
+        </Field>
+        <Field Name="Fuel_VoucherCaption">
+          <DataField>Fuel_VoucherCaption</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENOCaption">
+          <DataField>CurrReport_PAGENOCaption</DataField>
+        </Field>
+        <Field Name="Fuel_Vouchers___Voucher_No__Caption">
+          <DataField>Fuel_Vouchers___Voucher_No__Caption</DataField>
+        </Field>
+        <Field Name="Fuel_Vouchers__DescriptionCaption">
+          <DataField>Fuel_Vouchers__DescriptionCaption</DataField>
+        </Field>
+        <Field Name="Fuel_Vouchers___Transaction_Date_Caption">
+          <DataField>Fuel_Vouchers___Transaction_Date_Caption</DataField>
+        </Field>
+        <Field Name="Fuel_Vouchers___Item_No__Caption">
+          <DataField>Fuel_Vouchers___Item_No__Caption</DataField>
+        </Field>
+        <Field Name="Fuel_Vouchers__LocationCaption">
+          <DataField>Fuel_Vouchers__LocationCaption</DataField>
+        </Field>
+        <Field Name="Fuel_Vouchers___Asset_Code_Caption">
+          <DataField>Fuel_Vouchers___Asset_Code_Caption</DataField>
+        </Field>
+        <Field Name="Fuel_Vouchers___Fuel_Code_Caption">
+          <DataField>Fuel_Vouchers___Fuel_Code_Caption</DataField>
+        </Field>
+        <Field Name="Item_DescriptionCaption">
+          <DataField>Item_DescriptionCaption</DataField>
+        </Field>
+        <Field Name="FA_DescriptionCaption">
+          <DataField>FA_DescriptionCaption</DataField>
+        </Field>
+        <Field Name="Fuel_Vouchers___Shortcut_Dimension_1_Code_Caption">
+          <DataField>Fuel_Vouchers___Shortcut_Dimension_1_Code_Caption</DataField>
+        </Field>
+        <Field Name="Fuel_Vouchers___Shortcut_Dimension_2_Code_Caption">
+          <DataField>Fuel_Vouchers___Shortcut_Dimension_2_Code_Caption</DataField>
+        </Field>
+        <Field Name="Fuel_Vouchers___Qty_Issued_Caption">
+          <DataField>Fuel_Vouchers___Qty_Issued_Caption</DataField>
+        </Field>
+        <Field Name="SIGN______________________________________________DATE_______________________Caption">
+          <DataField>SIGN______________________________________________DATE_______________________Caption</DataField>
+        </Field>
+        <Field Name="SIGN______________________________________________DATE_______________________Caption_Control1000000013">
+          <DataField>SIGN______________________________________________DATE_______________________Caption_Control1000000013</DataField>
+        </Field>
+        <Field Name="FUEL_RECEIVED_BY______________________________________________________Caption">
+          <DataField>FUEL_RECEIVED_BY______________________________________________________Caption</DataField>
+        </Field>
+        <Field Name="ISSUE_APPROVED_BY______________________________________________________Caption">
+          <DataField>ISSUE_APPROVED_BY______________________________________________________Caption</DataField>
+        </Field>
+        <Field Name="SIGN______________________________________________DATE_______________________Caption_Control1000000025">
+          <DataField>SIGN______________________________________________DATE_______________________Caption_Control1000000025</DataField>
+        </Field>
+        <Field Name="FUEL_ISSUED_BY___________________________________________________________________________Caption">
+          <DataField>FUEL_ISSUED_BY___________________________________________________________________________Caption</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>
