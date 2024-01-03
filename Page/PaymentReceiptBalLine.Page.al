@@ -1,5 +1,6 @@
 page 70012 "Payment/Receipt Bal. Line"
 {
+    ApplicationArea = All;
     AutoSplitKey = true;
     PageType = ListPart;
     SourceTable = "Payment/Receipt Bal. Line.";

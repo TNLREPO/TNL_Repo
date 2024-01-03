@@ -1,5 +1,6 @@
 page 50281 "Posted IOU Retirement"
 {
+    ApplicationArea = All;
     Editable = false;
     PageType = Card;
     SourceTable = "IOU Retirement Header";

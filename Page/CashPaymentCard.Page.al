@@ -1,5 +1,6 @@
 page 70015 "Cash Payment Card"
 {
+    ApplicationArea = All;
     DataCaptionFields = "Cash/Cheque", "Document Type", "No.";
     PageType = Card;
     SourceTable = "Payment/Receipt.";
@@ -49,7 +50,7 @@ page 70015 "Cash Payment Card"
                 }
                 field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
                 {
-                    Caption = 'Branch Code';
+
                 }
                 field("Account Type"; Rec."Account Type")
                 {
@@ -141,9 +142,7 @@ page 70015 "Cash Payment Card"
             }
             part(Multiline; "Payment/Receipt Bal. Line")
             {
-                SubPageLink = "No." = FIELD("No."),
-                              Type = FIELD("Document Type"),
-                              "Cash/Cheque" = FIELD("Cash/Cheque");
+                SubPageLink = "No." = FIELD("No."), Type = FIELD("Document Type"), "Cash/Cheque" = FIELD("Cash/Cheque");
                 Visible = MultilineVisible;
             }
         }

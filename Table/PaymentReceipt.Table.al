@@ -118,7 +118,7 @@ table 50103 "Payment/Receipt."
         }
         field(9; "Balance Account No."; Code[20])
         {
-            TableRelation = IF ("Balance Account Type" = const("G/L Account")) "G/L Account"."No." WHERE(Blocked = filter(false), "Account Type" = const(Posting))
+            TableRelation = IF ("Balance Account Type" = const("G/L Account")) "G/L Account"."No." WHERE(Blocked = const(false), "Account Type" = const(Posting))
             ELSE
             IF ("Cash/Cheque" = const(Cheque), "Balance Account Type" = const("Bank Account")) "Bank Account"."No." WHERE(Blocked = filter(false))
             ELSE
@@ -126,9 +126,9 @@ table 50103 "Payment/Receipt."
             ELSE
             IF ("Balance Account Type" = const(vendor)) Vendor."No." WHERE(Blocked = FILTER(<> All))
             ELSE
-            IF ("Balance Account Type" = const("Fixed Asset")) "Fixed Asset"."No." WHERE(Blocked = filter(false))
+            IF ("Balance Account Type" = const("Fixed Asset")) "Fixed Asset"."No." WHERE(Blocked = const(false))
             ELSE
-            IF ("Cash/Cheque" = const(Cash), "Balance Account Type" = const("Bank Account")) "Bank Account"."No." WHERE(Blocked = filter(false), Cashier = filter(true));
+            IF ("Cash/Cheque" = const(Cash), "Balance Account Type" = const("Bank Account")) "Bank Account"."No." WHERE(Blocked = filter(false), Cashier = const(true));
 
             trigger OnValidate()
             begin
@@ -176,10 +176,14 @@ table 50103 "Payment/Receipt."
         field(10; "Global Dimension 1 Code"; Code[20])
         {
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = filter(1));
+            CaptionClass = '1,2,1';
+
         }
         field(11; "Global Dimension 2 Code"; Code[20])
         {
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = filter(2));
+            CaptionClass = '1,2,2';
+
         }
         field(12; Amount; Decimal)
         {

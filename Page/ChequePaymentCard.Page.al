@@ -1,9 +1,11 @@
 page 70016 "Cheque Payment Card"
 {
+    ApplicationArea = All;
     DataCaptionFields = "Cash/Cheque", "Document Type", "No.";
     PageType = Card;
     SourceTable = "Payment/Receipt.";
     SourceTableView = SORTING("Document Type", "Cash/Cheque", "No.");
+
 
     layout
     {

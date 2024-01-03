@@ -1,5 +1,6 @@
 page 80068 "Posted POS Receipt Card"
 {
+    ApplicationArea = All;
     DataCaptionFields = "Cash/Cheque", "Document Type", "No.";
     DeleteAllowed = false;
     Editable = false;

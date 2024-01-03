@@ -2,6 +2,7 @@ page 70066 "Service Appointment Mgt. Card"
 {
     PageType = Card;
     SourceTable = "Service Appointment Scheduled";
+    ApplicationArea = All;
 
     layout
     {

@@ -1,7 +1,7 @@
 report 50255 "Fuel Voucher New"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './FuelVoucherNew.rdlc';
+    RDLCLayout = 'Layout/FuelVoucherNew.rdl';
 
     dataset
     {

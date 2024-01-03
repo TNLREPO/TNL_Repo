@@ -3,6 +3,7 @@ page 50022 "Cash Receipt List"
     ApplicationArea = All;
     Caption = 'Cash Receipt List';
     PageType = List;
+    CardPageId = "Cash Receipt Card";
     SourceTable = "Payment/Receipt.";
     SourceTableView = WHERE("Document Type" = const(Receipt), "Cash/Cheque" = const(Cash), Posted = filter(false), Reject = filter(false));
     Editable = false;

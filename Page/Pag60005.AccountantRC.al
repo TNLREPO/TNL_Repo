@@ -1084,7 +1084,7 @@ page 60005 "Accountant RC"
                 ToolTip = 'Create a new bank deposit. ';
             }
         }
-        area(processing)
+        area(processing)  //Hook here 
         {
             group(CashVoucher)
             {
@@ -1121,6 +1121,38 @@ page 60005 "Accountant RC"
                     RunObject = Page "e-Payment List";
                     ToolTip = 'Post e-payment entries to the general ledger.';
                 }
+                action("Posted Cash Receipt")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Posted Cash Receipt';
+                    Image = CashReceiptJournal;
+                    RunObject = Page "Posted Cash Receipt List";
+                    ToolTip = 'View posted cash receipts in the general ledger.';
+                }
+                action("Posted Cash Payment")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Posted Cash Payment';
+                    Image = CashReceiptJournal;
+                    RunObject = Page "Posted Cash Payment List";
+                    ToolTip = 'View posted cash payments in the general ledger.';
+                }
+                action("Posted e-Receipt")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Posted e-Receipt';
+                    Image = CashReceiptJournal;
+                    RunObject = Page "Posted e-Receipt List";
+                    ToolTip = 'View posted e-Receipts in the general ledger.';
+                }
+                action("Posted e-Payment")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Posted e-Payment';
+                    Image = CashReceiptJournal;
+                    RunObject = Page "Posted e-Payment List";
+                    ToolTip = 'View posted e-Receipts in the general ledger.';
+                }
 
             }
             group(ChequeVoucher)
@@ -1129,7 +1161,7 @@ page 60005 "Accountant RC"
                 action("Cheq&ue Receipt")
                 {
                     ApplicationArea = Basic, Suite;
-                    Caption = 'Cash Receipt';
+                    Caption = 'Cheque Receipt';
                     Image = CashReceiptJournal;
                     RunObject = Page "Cheque Receipt List";
                     ToolTip = 'Post cheque receipt entries to the general ledger.';
@@ -1142,8 +1174,77 @@ page 60005 "Accountant RC"
                     RunObject = Page "Cheque Payment List";
                     ToolTip = 'Post cheque payment entries to the general ledger.';
                 }
+                action("Posted Cheque Receipt")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Posted Cheque Receipt';
+                    Image = CashReceiptJournal;
+                    RunObject = Page "Posted Cheque Receipt List";
+                    ToolTip = 'View posted cheque receipt entries in the general ledger.';
+                }
+                action("Posted Cheque Payment")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Posted Cheque Payment';
+                    Image = CashReceiptJournal;
+                    RunObject = Page "Posted Cheque Payment List";
+                    ToolTip = 'View posted cheque payment entries in the general ledger.';
+                }
             }
 
+
+            group(JournalVoucher)
+            {
+                Caption = 'Journal Voucher';
+                action("Journal Voucher")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Journal Voucher';
+                    Image = Journals;
+                    RunObject = Page "Journal Voucher List";
+                    ToolTip = 'Post journal entries to the general ledger.';
+                }
+                action("Posted Journal Voucher")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Posted Journal Voucher';
+                    Image = Journals;
+                    RunObject = Page "Posted Journal Voucher List";
+                    ToolTip = 'View posted journal entries in the general ledger.';
+                }
+
+            }
+
+            group(IOUPayment)
+            {
+                Caption = 'IOU Payment';
+                action("IOU Request")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'IOU Requestt';
+                    Image = Payment;
+                    RunObject = Page "IOU Register List";
+                    ToolTip = 'Raise IOU for payment.';
+                }
+                action("IOU Approved")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'IOU Approved';
+                    Image = Payment;
+                    RunObject = Page "IOU Approved List";
+                    ToolTip = 'View approved IOUs.';
+                }
+                action("IOU Treated")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'IOU Treated';
+                    Image = Payment;
+                    RunObject = Page "IOU Request";
+                    ToolTip = 'View treated IOUs.';
+
+
+                }
+            }
 
             group(Analysis)
             {

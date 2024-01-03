@@ -1,5 +1,6 @@
 page 50226 "Cheque Receipt Mgt"
 {
+    ApplicationArea = All;
     PageType = Card;
     SourceTable = "Cheque Receipt Mgt.";
 

@@ -1,5 +1,6 @@
 page 70020 "Posted Cash Receipt List"
 {
+    ApplicationArea = All;
     CardPageID = "Posted Cash Receipt Card";
     DeleteAllowed = false;
     Editable = false;

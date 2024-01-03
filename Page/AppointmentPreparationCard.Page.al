@@ -1,6 +1,7 @@
 page 70079 "Appointment Preparation Card"
 {
     SourceTable = "Customer Order Table.";
+    ApplicationArea = All;
 
     layout
     {

@@ -1,5 +1,6 @@
 page 70008 "Cheque Receipt List"
 {
+    ApplicationArea = All;
     CardPageID = "Cheque Receipt Card";
     Editable = false;
     PageType = List;

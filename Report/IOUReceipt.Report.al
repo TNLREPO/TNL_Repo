@@ -1,7 +1,7 @@
 report 50299 "IOU Receipt"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './IOUReceipt.rdlc';
+    RDLCLayout = 'Layout/IOUReceipt.rdl';
 
     dataset
     {

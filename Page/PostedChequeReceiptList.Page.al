@@ -1,5 +1,6 @@
 page 50039 "Posted Cheque Receipt List"
 {
+    ApplicationArea = All;
     CardPageID = "Posted Cheque Receipt Card";
     DeleteAllowed = false;
     Editable = false;

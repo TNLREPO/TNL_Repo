@@ -1,5 +1,6 @@
 page 70024 "Posted Journal Voucher List"
 {
+    ApplicationArea = All;
     CardPageID = "Posted Journal Voucher Card";
     DeleteAllowed = false;
     Editable = false;

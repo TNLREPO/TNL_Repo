@@ -1,5 +1,6 @@
 page 70028 "Posted Cheque Payment Card"
 {
+    ApplicationArea = All;
     DataCaptionFields = "Cash/Cheque", "Document Type", "No.";
     DeleteAllowed = false;
     Editable = false;

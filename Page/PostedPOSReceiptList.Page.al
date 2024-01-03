@@ -1,5 +1,6 @@
 page 80067 "Posted POS Receipt List"
 {
+    ApplicationArea = All;
     CardPageID = "Posted POS Receipt Card";
     DeleteAllowed = false;
     Editable = false;

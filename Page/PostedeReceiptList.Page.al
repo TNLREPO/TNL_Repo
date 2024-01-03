@@ -1,5 +1,6 @@
 page 70109 "Posted e-Receipt List"
 {
+    ApplicationArea = All;
     CardPageID = "Posted e-Receipt Voucher";
     DeleteAllowed = false;
     Editable = false;

@@ -1,5 +1,6 @@
 page 70022 "Posted Cash Payment List"
 {
+    ApplicationArea = All;
     CardPageID = "Posted Cash Payment Card";
     DeleteAllowed = false;
     Editable = false;

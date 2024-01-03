@@ -1,7 +1,7 @@
 report 50323 "Appointment Customer List"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './AppointmentCustomerList.rdlc';
+    RDLCLayout = 'Layout/AppointmentCustomerList.rdl';
 
     dataset
     {

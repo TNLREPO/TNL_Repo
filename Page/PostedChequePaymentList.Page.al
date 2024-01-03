@@ -1,5 +1,6 @@
 page 50038 "Posted Cheque Payment List"
 {
+    ApplicationArea = All;
     CardPageID = "Posted Cheque Payment Card";
     DeleteAllowed = false;
     Editable = false;

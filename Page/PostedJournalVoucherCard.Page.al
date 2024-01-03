@@ -1,5 +1,6 @@
 page 70029 "Posted Journal Voucher Card"
 {
+    ApplicationArea = All;
     DataCaptionFields = "Cash/Cheque", "Document Type", "No.";
     DeleteAllowed = false;
     Editable = false;

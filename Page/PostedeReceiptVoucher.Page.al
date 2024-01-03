@@ -1,5 +1,6 @@
 page 70110 "Posted e-Receipt Voucher"
 {
+    ApplicationArea = All;
     Editable = false;
     PageType = Card;
     SourceTable = "Payment/Receipt.";

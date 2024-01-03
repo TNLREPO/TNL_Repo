@@ -1,5 +1,7 @@
 page 70013 "Cash Receipt Card"
 {
+    ApplicationArea = All;
+    Caption = 'Cash Receipt';
     DataCaptionFields = "Cash/Cheque", "Document Type", "No.";
     PageType = Card;
     SourceTable = "Payment/Receipt.";
@@ -216,13 +218,32 @@ page 70013 "Cash Receipt Card"
 
                 trigger OnAction()
                 begin
-                    ReqRec.SETRANGE(ReqRec."Document Type", Rec."Document Type");
+
+                    /* ReqRec.SETRANGE(ReqRec."Document Type", Rec."Document Type");
                     ReqRec.SETRANGE(ReqRec."No.", Rec."No.");
                     IF ReqRec.FINDFIRST THEN BEGIN
                         IF ReqRec."Multiple Balance Account" OR ReqRec."Multiple Account" THEN
                             REPORT.RUNMODAL(50001, TRUE, TRUE, ReqRec) ELSE
                             REPORT.RUNMODAL(50007, TRUE, TRUE, ReqRec);
-                    END;
+                    END; */
+
+                    Clear(ReportSingle);
+                    Clear(ReportMultiple);
+
+                    ReqRec.SetFilter("No.", Rec."No.");
+                    if ReqRec.FindFirst() then begin
+                        if ReqRec."Multiple Balance Account" or ReqRec."Multiple Account" then begin
+                            ReportMultiple.SetTableView(ReqRec);
+                            ReportMultiple.UseRequestPage();
+                            ReportMultiple.RunModal();
+                        end else begin
+                            ReportSingle.SetTableView(ReqRec);
+                            ReportSingle.UseRequestPage();
+                            ReportSingle.RunModal();
+                        end;
+
+                    end;
+
                 end;
             }
         }
@@ -259,10 +280,7 @@ page 70013 "Cash Receipt Card"
 
     trigger OnOpenPage()
     begin
-        /*CurrPage.EDITABLE(TRUE);
-        NavigateVisible := FALSE;
-        ERROR('Cash Receipt has been disabled. Kindly contact the system Admin');
-        */
+
 
     end;
 
@@ -293,8 +311,6 @@ page 70013 "Cash Receipt Card"
         GLEntry: Record 17;
         UserRec: Record 91;
         GPC: Codeunit 50004;
-
-
         "FA Posting TypeVisible": Boolean;
 
         "Maintenance CodeVisible": Boolean;
@@ -309,7 +325,10 @@ page 70013 "Cash Receipt Card"
         Text19038076: Label 'Department Code';
         Text19077769: Label 'Branch Code';
         GLEntry2: Record 17;
-        //CallAPI: Codeunit 50005;
+        ReportSingle: Report "Cash Receipt-Sing.";
+        ReportMultiple: Report "Cash Receipt-Mult.";
+
+    //CallAPI: Codeunit 50005;
 
 
     procedure UpdatePosting()

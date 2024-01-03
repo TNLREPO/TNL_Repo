@@ -1,5 +1,6 @@
 page 50032 "Cheque Receipt Card"
 {
+    ApplicationArea = All;
     DataCaptionFields = "Cash/Cheque", "Document Type", "No.";
     PageType = Card;
     SourceTable = "Payment/Receipt.";

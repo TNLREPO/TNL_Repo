@@ -1,5 +1,6 @@
 page 70099 "Posted e-Payment List"
 {
+    ApplicationArea = All;
     CardPageID = "Posted e-Payment Card";
     DeleteAllowed = false;
     Editable = false;

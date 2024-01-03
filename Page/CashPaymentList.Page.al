@@ -1,5 +1,6 @@
 page 70009 "Cash Payment List"
 {
+    ApplicationArea = All;
     CardPageID = "Cash Payment Card";
     Editable = false;
     PageType = List;

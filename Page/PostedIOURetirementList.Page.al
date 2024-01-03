@@ -1,5 +1,6 @@
 page 70034 "Posted IOU Retirement List"
 {
+    ApplicationArea = All;
     CardPageID = "Posted IOU Retirement";
     Editable = false;
     PageType = List;
