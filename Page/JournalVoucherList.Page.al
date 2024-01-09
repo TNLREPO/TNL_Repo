@@ -1,7 +1,8 @@
 page 70011 "Journal Voucher List"
 {
+    ApplicationArea = All;
     CardPageID = "Journal Voucher Card";
-    Editable = true;
+    Editable = false;
     PageType = List;
     SourceTable = "Payment/Receipt.";
     SourceTableView = WHERE ("Document Type"=FILTER(Journal),

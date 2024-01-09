@@ -1,5 +1,6 @@
 page 70017 "Journal Voucher Card"
 {
+    ApplicationArea = All;
     DataCaptionFields = "Cash/Cheque", "Document Type", "No.";
     PageType = Card;
     ShowFilter = false;

@@ -1,5 +1,6 @@
 page 70191 "LPP Subform"
 {
+    ApplicationArea = All;
     AutoSplitKey = true;
     DelayedInsert = true;
     LinksAllowed = false;

@@ -1,5 +1,6 @@
 page 70108 "e-Receipt Card"
 {
+    ApplicationArea = All;
     PageType = Card;
     SourceTable = "Payment/Receipt.";
 

@@ -1,11 +1,14 @@
 page 70107 "e-Receipt List"
 {
+    ApplicationArea = All;
     CardPageID = "e-Receipt Card";
     PageType = List;
+    Editable = false;
     SourceTable = "Payment/Receipt.";
     SourceTableView = WHERE ("Document Type"=FILTER('e-Receipt'),
                           "Cash/Cheque"=FILTER('Cheque'),
                            "Posted"=FILTER('No'));
+    
 
     layout
     {

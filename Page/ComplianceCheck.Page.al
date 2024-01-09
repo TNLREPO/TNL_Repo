@@ -1,10 +1,10 @@
-page 70161 "Compliance Check-Capex"
+page 70138 "Compliance Check"
 {
     ApplicationArea = All;
-    CardPageID = "Capex Card";
+    CardPageID = "Opex Card";
     PageType = List;
     SourceTable = "Procurement Header";
-    SourceTableView = WHERE("Document Type" = CONST(Capex), Compliance = filter(true), "Balance Paymt. Appr." = filter(false), Reject = filter(false));
+    SourceTableView = WHERE(Compliance = CONST(true), "Balance Paymt. Appr." = CONST(false), "Document Type" = CONST(Opex), Reject = CONST(false));
 
     layout
     {

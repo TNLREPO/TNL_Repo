@@ -1,5 +1,6 @@
 page 70098 "e-Payment Card"
 {
+    ApplicationArea = All;
     DataCaptionFields = "Cash/Cheque", "Document Type", "No.";
     PageType = Card;
     SourceTable = "Payment/Receipt.";
@@ -285,7 +286,7 @@ page 70098 "e-Payment Card"
         Text19077769: Label 'Branch Code';
         GLEntry2: Record 17;
 
-    
+
     procedure UpdatePosting()
     begin
         GLEntry2.LOCKTABLE;

@@ -179,13 +179,13 @@ tableextension 50051 "Employee Ext" extends "Employee"
         field(50104; "Leave Days"; Integer)
         {
             BlankZero = true;
-            /*  CalcFormula = Count("Leave Roster" WHERE (Employee No=FIELD(No.),
-                                                       LeaveDate=FIELD(Date Filter),
-                                                       Entry Type=FIELD(Leave Type Filter),
-                                                       Business Unit Code=FIELD(Business Unit),
-                                                       Global Dimension 1 Code=FIELD(Global Dimension 1 Filter),
-                                                       Global Dimension 2 Code=FIELD(Global Dimension 2 Filter)));
-             FieldClass = FlowField; */
+            CalcFormula = Count("Leave Roster" WHERE("Employee No" = FIELD("No."),
+                                                       LeaveDate = FIELD("Date Filter"),
+                                                       "Entry Type" = FIELD("Leave Type Filter"),
+                                                       "Business Unit Code" = FIELD("Business Unit"),
+                                                       "Global Dimension 1 Code" = FIELD("Global Dimension 1 Filter"),
+                                                       "Global Dimension 2 Code" = FIELD("Global Dimension 2 Filter")));
+            FieldClass = FlowField;
         }
         field(50105; "Region Filter"; Code[10])
         {
@@ -571,42 +571,61 @@ tableextension 50051 "Employee Ext" extends "Employee"
     }
     var
         UserRec: Record User;
-
-        procedure GetBasic(EmpNo: Code[10]): Decimal
-
-        begin
-       /*  Employee.RESET;
-        EDRec.SETRANGE(EDRec."Control Type",EDRec."Control Type"::Basic);
-        EDRec.FIND('-');
-        BasicEDCode := EDRec."E/D Code";
-        Employee.GET(EmpNo);
-        EmpGrpCode := Employee."Employee Group";
+        Employee: Record Employee;
 
 
-        GrpLinesRec.SETRANGE(GrpLinesRec."Employee Group",EmpGrpCode);
-        GrpLinesRec.SETRANGE(GrpLinesRec."E/D Code",BasicEDCode);
-        IF GrpLinesRec.FIND('-') THEN
-          EXIT(GrpLinesRec."Default Amount")
-        ELSE
-          BEGIN
+    procedure GetBasic(EmpNo: Code[10]): Decimal
 
-            Employee.RESET;
-            EDRec.SETRANGE(EDRec."Control Type",EDRec."Control Type"::Basic);
-            EDRec.FIND('+');
-            BasicEDCode := EDRec."E/D Code";
-            Employee.GET(EmpNo);
-            EmpGrpCode := Employee."Employee Group";
+    begin
+        /*  Employee.RESET;
+         EDRec.SETRANGE(EDRec."Control Type",EDRec."Control Type"::Basic);
+         EDRec.FIND('-');
+         BasicEDCode := EDRec."E/D Code";
+         Employee.GET(EmpNo);
+         EmpGrpCode := Employee."Employee Group";
 
-            GrpLinesRec.SETRANGE(GrpLinesRec."Employee Group",EmpGrpCode);
-            GrpLinesRec.SETRANGE(GrpLinesRec."E/D Code",BasicEDCode);
-            IF GrpLinesRec.FIND('+') THEN
-              EXIT(GrpLinesRec."Default Amount")
+
+         GrpLinesRec.SETRANGE(GrpLinesRec."Employee Group",EmpGrpCode);
+         GrpLinesRec.SETRANGE(GrpLinesRec."E/D Code",BasicEDCode);
+         IF GrpLinesRec.FIND('-') THEN
+           EXIT(GrpLinesRec."Default Amount")
+         ELSE
+           BEGIN
+
+             Employee.RESET;
+             EDRec.SETRANGE(EDRec."Control Type",EDRec."Control Type"::Basic);
+             EDRec.FIND('+');
+             BasicEDCode := EDRec."E/D Code";
+             Employee.GET(EmpNo);
+             EmpGrpCode := Employee."Employee Group";
+
+             GrpLinesRec.SETRANGE(GrpLinesRec."Employee Group",EmpGrpCode);
+             GrpLinesRec.SETRANGE(GrpLinesRec."E/D Code",BasicEDCode);
+             IF GrpLinesRec.FIND('+') THEN
+               EXIT(GrpLinesRec."Default Amount")
+             ELSE
+               EXIT(0);
+
+           END;
+
+         EXIT(0); */
+    end;
+
+    procedure GetFullName(EmpNo: Code[10]): Text[100]
+    begin
+
+
+        IF Employee.GET(EmpNo) THEN BEGIN
+            IF Employee."Middle Name" = '' THEN
+                EXIT(Employee."First Name" + ' ' + Employee."Last Name")
             ELSE
-              EXIT(0);
+                EXIT(Employee."First Name" + ' ' + Employee."Middle Name" + ' ' + Employee."Last Name");
+        END
+        ELSE
+            EXIT('');
 
-          END;
+    end;
 
-        EXIT(0); */
-        end;
+
 
 }

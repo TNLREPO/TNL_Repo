@@ -1,10 +1,15 @@
-page 70161 "Compliance Check-Capex"
+page 70134 "Move to LPO Opex"
 {
     ApplicationArea = All;
-    CardPageID = "Capex Card";
+    CardPageID = "Approved Opex card2";
     PageType = List;
     SourceTable = "Procurement Header";
-    SourceTableView = WHERE("Document Type" = CONST(Capex), Compliance = filter(true), "Balance Paymt. Appr." = filter(false), Reject = filter(false));
+    SourceTableView = WHERE("Move to LPO" = CONST(true),
+                            "Voucher Raised" = CONST(false),
+                            Compliance = CONST(false),
+                            "Adv. Pymt. Required" = CONST(false),
+                            "Document Type" = CONST(Opex),
+                            Reject = CONST(false));
 
     layout
     {
@@ -35,6 +40,9 @@ page 70161 "Compliance Check-Capex"
                 {
                 }
                 field("Proposed Purchase Amount"; Rec."Proposed Purchase Amount")
+                {
+                }
+                field(Vendor; Rec.Vendor)
                 {
                 }
             }

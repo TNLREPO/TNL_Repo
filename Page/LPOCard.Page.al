@@ -1,5 +1,6 @@
 page 70143 "LPO Card"
 {
+    ApplicationArea = All;
     PageType = Card;
     SourceTable = "LPO";
 

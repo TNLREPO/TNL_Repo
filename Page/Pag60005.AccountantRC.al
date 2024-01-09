@@ -832,6 +832,147 @@ page 60005 "Accountant RC"
                     ToolTip = 'Reconcile bank accounts in your system with bank statements received from your bank.';
                 }
             }
+
+            group(OpexMgt)
+            {
+                Caption = 'Opex Management';
+                action("Opex")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Opex';
+                    RunObject = Page "Opex List";
+
+                }
+
+                action("HODApproval")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'HOD Approvals';
+                    RunObject = Page "Head of Dept. Appr.";
+
+                }
+                action("ApprovedOpex")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Approved Opex';
+                    RunObject = Page "Move to LPO Opex";
+
+                }
+                action("AdvancePayment")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Advance Payment';
+                    RunObject = Page "Advance Paymt Appr.";
+
+                }
+                action("ComplianceCheck")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Compliance Check';
+                    RunObject = Page "Compliance Check";
+
+                }
+                action("AwaitingBalancePayment")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Awaiting Balance Payment';
+                    RunObject = Page "Awaiting balance Pay. Appr.";
+
+                }
+                action("BalancePaymtApprval")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Balance Payment Approval';
+                    RunObject = Page "Awaiting balance Pay. Appr.";
+
+                }
+                action(LPO)
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Local Purchase Order';
+                    RunObject = Page "LPO List";
+
+                }
+                action("PaymtVoucherOpex")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Payment Voucher';
+                    RunObject = Page "Payment Vouncher";
+
+                }
+
+                action("GeneralManager")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'General Manager';
+                    RunObject = Page "Gen. Manager Appr.";
+
+                }
+                action("ManagingDirector")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Managing Director';
+                    RunObject = Page "Managing Dir. Appr.";
+
+                }
+                action("HeadAudit")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Head of Audit';
+                    RunObject = Page "Head of Audit Appr.";
+
+                }
+                action("AdvancePaymtApproved")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Advance Payment Approved';
+                    RunObject = Page "Advance Paymt Appr.";
+
+                }
+                action("BalFullPaymtApproved")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Balance/Full Payment Approved';
+                    RunObject = Page "Balance Payment";
+
+                }
+                action("BalFullPaymtGM")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Balance/Full Payment (GM)';
+                    RunObject = Page "Balance/full Payment Opex-GM";
+
+                }
+                action("BalFullPaymtMD")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Balance/Full Payment (MD)';
+                    RunObject = Page "Balance/Full Payment Opex-MD";
+
+                }
+                action("ClosedOpex")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Closed';
+                    RunObject = Page "Closed Opex";
+
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+            }
+
+
             group(Action84)
             {
                 Caption = 'Cost Accounting';
@@ -1245,6 +1386,44 @@ page 60005 "Accountant RC"
 
                 }
             }
+
+            group(LeaveMgt)
+            {
+                Caption = 'Leave';
+                action("Leave Request")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Leave Request';
+                    Image = Calendar;
+                    RunObject = Page "Leave Request List";
+                    ToolTip = 'Make leave applications entries.';
+                }
+                action("Leave Approval")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Leave Approval';
+                    Image = Calendar;
+                    RunObject = Page "Approval Leave List";
+                    ToolTip = 'Approve leave applications.';
+                }
+                action("HODHR")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Leave Approval- HR';
+                    Image = Calendar;
+                    RunObject = Page "HOD HR/ADMIN LIST";
+                    ToolTip = 'Approve leave applications.';
+                }
+                action("Approved Leave")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Approved Leave';
+                    Image = Calendar;
+                    RunObject = Page "Approved Leave List";
+                    ToolTip = 'View approved leave applications.';
+                }
+            }
+
 
             group(Analysis)
             {

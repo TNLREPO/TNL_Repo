@@ -1,10 +1,14 @@
-page 70161 "Compliance Check-Capex"
+page 70145 "Advance Payment"
 {
     ApplicationArea = All;
-    CardPageID = "Capex Card";
+    CardPageID = "Approved Opex card4";
     PageType = List;
     SourceTable = "Procurement Header";
-    SourceTableView = WHERE("Document Type" = CONST(Capex), Compliance = filter(true), "Balance Paymt. Appr." = filter(false), Reject = filter(false));
+    SourceTableView = WHERE("Adv. Paymt. Audit" = CONST(Approved),
+                            "Document Type" = FILTER(Opex),
+                            "Service Delivery1" = FILTER('<> Satisfactory'),
+                            "Advance Voucher" = CONST(false),
+                            Reject = CONST(false));
 
     layout
     {
@@ -22,19 +26,16 @@ page 70161 "Compliance Check-Capex"
                 field("Requester Name"; Rec."Requester Name")
                 {
                 }
-                field("Requester Department"; Rec."Requester Department")
-                {
-                }
-                field("Head of Department"; Rec."Head of Department")
-                {
-                }
-                field("Head of Audit"; Rec."Head of Audit")
-                {
-                }
                 field("Department Code"; Rec."Department Code")
                 {
                 }
+                field("Purchase Justification"; Rec."Purchase Justification")
+                {
+                }
                 field("Proposed Purchase Amount"; Rec."Proposed Purchase Amount")
+                {
+                }
+                field(Vendor; Rec.Vendor)
                 {
                 }
             }

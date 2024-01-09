@@ -1,10 +1,13 @@
-page 70161 "Compliance Check-Capex"
+page 70141 "Closed Opex"
 {
     ApplicationArea = All;
-    CardPageID = "Capex Card";
+    CardPageID = "Opex Card";
+    Editable = false;
     PageType = List;
     SourceTable = "Procurement Header";
-    SourceTableView = WHERE("Document Type" = CONST(Capex), Compliance = filter(true), "Balance Paymt. Appr." = filter(false), Reject = filter(false));
+    SourceTableView = WHERE(Closed = CONST(true),
+                            "Document Type" = CONST(Opex),
+                            Reject = CONST(false));
 
     layout
     {
@@ -35,6 +38,27 @@ page 70161 "Compliance Check-Capex"
                 {
                 }
                 field("Proposed Purchase Amount"; Rec."Proposed Purchase Amount")
+                {
+                }
+                field("Purchase Justification"; Rec."Purchase Justification")
+                {
+                }
+                field(TimeDate2; Rec.TimeDate2)
+                {
+                }
+                field(TimeDate3; Rec.TimeDate3)
+                {
+                }
+                field(TimeDate4; Rec.TimeDate4)
+                {
+                }
+                field(TimeDate10; Rec.TimeDate10)
+                {
+                }
+                field(TimeDate11; Rec.TimeDate11)
+                {
+                }
+                field(TimeDate12; Rec.TimeDate12)
                 {
                 }
             }

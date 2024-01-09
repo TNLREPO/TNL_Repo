@@ -1,10 +1,13 @@
-page 70161 "Compliance Check-Capex"
+page 70125 "Opex List"
 {
     ApplicationArea = All;
-    CardPageID = "Capex Card";
+    CardPageID = "Opex Card";
     PageType = List;
     SourceTable = "Procurement Header";
-    SourceTableView = WHERE("Document Type" = CONST(Capex), Compliance = filter(true), "Balance Paymt. Appr." = filter(false), Reject = filter(false));
+    SourceTableView = WHERE(Compliance = CONST(false),
+                            Send = CONST(false),
+                            "Document Type" = CONST(Opex),
+                            Reject = CONST(false));
 
     layout
     {
@@ -12,12 +15,12 @@ page 70161 "Compliance Check-Capex"
         {
             repeater(Group)
             {
-                field(Date; Rec.Date)
-                {
-                }
                 field("No."; Rec."No.")
                 {
                     Caption = 'Opex No.';
+                }
+                field(Date; Rec.Date)
+                {
                 }
                 field("Requester Name"; Rec."Requester Name")
                 {
@@ -31,10 +34,10 @@ page 70161 "Compliance Check-Capex"
                 field("Head of Audit"; Rec."Head of Audit")
                 {
                 }
-                field("Department Code"; Rec."Department Code")
+                field("General Manager"; Rec."General Manager")
                 {
                 }
-                field("Proposed Purchase Amount"; Rec."Proposed Purchase Amount")
+                field("Managing Director"; Rec."Managing Director")
                 {
                 }
             }

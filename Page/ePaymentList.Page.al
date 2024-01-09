@@ -1,7 +1,9 @@
 page 70097 "e-Payment List"
 {
+    ApplicationArea = All;
     CardPageID = "e-Payment Card";
     PageType = List;
+    Editable = false;
     SourceTable = "Payment/Receipt.";
     SourceTableView = WHERE("Document Type" = FILTER('e-Pay'),
                             "Cash/Cheque" = FILTER('Cheque'),
