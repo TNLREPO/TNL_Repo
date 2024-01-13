@@ -1,5 +1,6 @@
 page 70121 "Procurement Details"
 {
+    ApplicationArea = All;
     PageType = List;
     SourceTable = "Procurement Line Detail";
 

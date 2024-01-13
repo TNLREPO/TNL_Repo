@@ -1,5 +1,6 @@
 page 50166 "New Vehicle Fuel List"
 {
+    ApplicationArea = All;
     CardPageID = "Fuel New Vehicle";
     DeleteAllowed = false;
     PageType = List;

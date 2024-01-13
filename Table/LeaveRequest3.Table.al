@@ -55,6 +55,233 @@ table 70009 "Leave Request3"
             trigger OnValidate()
             begin
 
+
+                IF NOT CONFIRM('Are you sure you want to send for Approval', FALSE) THEN
+                    "Send for Approval" := FALSE
+                ELSE BEGIN
+
+                    IF "Entry Date" <> TODAY THEN
+                        ERROR('Entry date must be todays date. Kindly contact your system Administrator');
+
+                    IF SKIP = FALSE THEN BEGIN
+                        IF ("Leave Category" = 'CASUAL') AND ("Actual Duration" > 3) THEN
+                            ERROR('Casual leave cannot be more than 3 working days');
+
+                        IF ("Request Type" = "Request Type"::HOD) AND ("Leave Category" = 'ANNUAL') AND (("Actual Start Date" - "Entry Date") < 30) THEN
+                            ERROR('You can only request for annual Leave 30 days ahead the plan actual start leave date');
+
+                        IF ("Request Type" = "Request Type"::HOD1) AND ("Leave Category" = 'ANNUAL') AND (("Actual Start Date" - "Entry Date") < 30) THEN
+                            ERROR('You can only request for annual Leave 30 days ahead the plan actual start leave date');
+
+                        IF ("Request Type" = "Request Type"::Manager) AND ("Leave Category" = 'ANNUAL') AND (("Actual Start Date" - "Entry Date") < 30) THEN
+                            ERROR('You can only request for annual Leave 30 days ahead the plan actual start leave date');
+                        IF ("Request Type" = "Request Type"::"Junior staff - Deputy Manager") AND ("Leave Category" = 'ANNUAL') AND (("Actual Start Date" - "Entry Date") < 14) THEN
+                            ERROR('You can only request for annual Leave 14 days ahead the plan actual start leave date');
+
+                        IF ("Request Type" = "Request Type"::Branch) AND ("Leave Category" = 'ANNUAL') AND ("Actual Duration" > 15) THEN
+                            ERROR('Your Leave request is greater than the number of actual leave due');
+
+                        IF ("Actual Duration") > ("Total Leaves Due" - "Total Consuming") THEN
+                            ERROR('Your Leave request is greater than the number of actual leave due');
+
+                        IF ("Leave Category" = 'ANNUAL') AND ("Actual Duration" > 15) THEN
+                            ERROR('Annual leave cannot be more than 15 working days');
+
+                        IF "Leave Category" = 'ANNUAL' THEN BEGIN
+                            LeaveRequest.SETRANGE("Employee No.", "Employee No.");
+                            LeaveRequest.SETRANGE("Send for Approval", TRUE);
+                            LeaveRequest.SETRANGE(Reject, FALSE);
+                            LeaveRequest.SETRANGE("Leave Category", 'ANNUAL');
+                            IF LeaveRequest.FINDLAST THEN BEGIN
+                                AnnualDiff := (("Actual Start Date") - (LeaveRequest."Actual End Date"));
+                                IF AnnualDiff < 60 THEN
+                                    ERROR('You cannot  request for Annual Leave!');
+                            END;
+                        END;
+                    END;
+
+                    IF "Actual Start Date" = 0D THEN BEGIN
+                        "Actual Duration" := 0;
+                        EXIT;
+                    END;
+
+                    IF ("Actual End Date" < "Actual Start Date") AND ("Actual End Date" <> 0D) THEN
+                        ERROR(FIELDCAPTION("Actual Start Date") + 'Must be on or after ' + FIELDCAPTION("Actual End Date"));
+
+                    IF "Actual End Date" <> 0D THEN
+                        "Actual Duration" := GenPCode.GetNoOfDays("Actual Start Date", "Actual End Date")
+                    ELSE
+                        IF "Actual Duration" <> 0 THEN
+                            "Actual End Date" := GenPCode.GetEndDate("Actual Start Date", "Actual Duration");
+
+                    CheckTotalDuration(9);
+
+                    IF SKIP2 = FALSE THEN BEGIN
+                        IF ("Leave Category" = 'CASUAL') AND ("Actual Duration" > 3) THEN
+                            ERROR('Casual leave cannot be more than 3 working days');
+                        TESTFIELD("Leave Category");
+                        IF "Leave Category" = 'CASUAL' THEN BEGIN
+                            LeaveRequest.SETRANGE("Employee No.", "Employee No.");
+                            LeaveRequest.SETRANGE("Send for Approval", TRUE);
+                            LeaveRequest.SETRANGE("Leave Category", 'CASUAL');
+                            LeaveRequest.SETRANGE(Reject, FALSE);
+                            IF LeaveRequest.FINDLAST THEN BEGIN
+                                CasualDiff := (("Actual Start Date") - (LeaveRequest."Actual End Date"));
+                                IF CasualDiff < 30 THEN
+                                    ERROR('You cannot  request for Casual Leave !');
+                            END
+                        END;
+                    END;
+
+                    IF "1st Approval" = '' THEN
+                        ERROR('You need to choose an approver!');
+                    //HOD
+                    IF ("Request Type" = "Request Type"::HOD) THEN BEGIN
+                        IF UserSetup.GET("1st Approval") THEN BEGIN
+                            Addressee := UserSetup.Initials;
+
+                            Sender := USERID;
+                            UserSetup2.GET(USERID);
+
+                            SenderName := UserSetup2.Initials;
+                            SenderAddress := UserSetup2."E-Mail";
+                            "Sent Time" := CURRENTDATETIME;
+                            "User ID" := USERID;
+                            "Current Pending Person" := "1st Approval";
+                            "HOD HR/ADMIN" := TRUE;
+                            ToAddresses := UserSetup."E-Mail";
+                            BccAddresses := '';
+                            subject := STRSUBSTNO(text001, "Request No.");
+
+                            CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
+                            SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+
+                        END;
+                    END;
+
+
+                    // HOD1
+                    IF ("Request Type" = "Request Type"::HOD1) THEN BEGIN
+                        IF UserSetup2.GET("1st Approval") THEN BEGIN
+                            ToAddresses := UserSetup2."E-Mail";
+                            Sender := USERID;
+                            UserSetup.GET(USERID);
+                            SenderName := UserSetup.Initials;
+                            SenderAddress := UserSetup."E-Mail";
+                            "Sent Time" := CURRENTDATETIME;
+                            "User ID" := USERID;
+                            "Current Pending Person" := "1st Approval";
+                            Addressee := UserSetup."E-Mail";
+                            BccAddresses := '';
+                            subject := STRSUBSTNO(text001, "Request No.");
+
+                            CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
+                            SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+
+                        END;
+                    END;
+
+                    //Manager
+                    IF ("Request Type" = "Request Type"::Manager) THEN BEGIN
+                        UserSetup.GET("1st Approval");
+                        Addressee := UserSetup.Initials;
+                        Sender := USERID;
+                        BccAddresses := '';
+                        UserSetup2.GET(USERID);
+                        SenderName := UserSetup2."E-Mail";
+                        "Sent Time" := CURRENTDATETIME;
+                        "User ID" := USERID;
+                        "Current Pending Person" := "1st Approval";
+                        ToAddresses := UserSetup."E-Mail";
+                        subject := STRSUBSTNO(text001, "Request No.");
+
+                        CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
+                        SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+
+                    END;
+
+                    //Junior staff - Deputy Manager
+                    IF ("Request Type" = "Request Type"::"Junior staff - Deputy Manager") THEN BEGIN
+                        UserSetup.GET("1st Approval");
+                        Addressee := UserSetup.Initials;
+
+                        Sender := USERID;
+                        UserSetup2.GET(USERID);
+                        SenderName := UserSetup2.Initials;
+                        SenderAddress := UserSetup2."E-Mail";
+                        "Sent Time" := CURRENTDATETIME;
+                        "User ID" := USERID;
+                        "Current Pending Person" := "1st Approval";
+                        ToAddresses := UserSetup."E-Mail";
+                        subject := STRSUBSTNO(text001, "Request No.");
+
+                        CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
+                        SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+
+                    END;
+
+                    //Branch
+                    IF ("Request Type" = "Request Type"::Branch) THEN BEGIN
+                        IF UserSetup.GET("1st Approval") THEN BEGIN
+                            Addressee := UserSetup.Initials;
+                            Sender := USERID;
+                            UserSetup2.GET(USERID);
+                            SenderName := UserSetup2.Initials;
+                            SenderAddress := UserSetup2."E-Mail";
+                            "Sent Time" := CURRENTDATETIME;
+                            "User ID" := USERID;
+                            "Current Pending Person" := "1st Approval";
+                            ToAddresses := UserSetup."E-Mail";
+                            subject := STRSUBSTNO(text001, "Request No.");
+
+                            CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
+                            SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+
+                        END;
+                    END;
+
+                    //MD OFFICE
+                    IF ("Request Type" = "Request Type"::"MD OFFICE") THEN BEGIN
+                        IF UserSetup.GET("1st Approval") THEN BEGIN
+                            Addressee := UserSetup.Initials;
+                            Sender := USERID;
+                            UserSetup2.GET(USERID);
+                            SenderName := UserSetup2.Initials;
+                            SenderAddress := UserSetup2."E-Mail";
+                            "Sent Time" := CURRENTDATETIME;
+                            "User ID" := USERID;
+                            "Current Pending Person" := "1st Approval";
+                            "HOD HR/ADMIN" := TRUE;
+                            ToAddresses := UserSetup."E-Mail";
+                            subject := STRSUBSTNO(text001, "Request No.");
+
+                            CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
+                            SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+
+                        END;
+                    END;
+
+                    //FG
+                    IF ("Request Type" = "Request Type"::FG) THEN BEGIN
+                        IF UserSetup.GET("1st Approval") THEN BEGIN
+                            Addressee := UserSetup.Initials;
+                            Sender := USERID;
+                            UserSetup2.GET(USERID);
+                            SenderName := UserSetup2.Initials;
+                            SenderAddress := UserSetup2."E-Mail";
+                            "Sent Time" := CURRENTDATETIME;
+                            "User ID" := USERID;
+                            "Current Pending Person" := "1st Approval";
+                            ToAddresses := UserSetup."E-Mail";
+                            subject := STRSUBSTNO(text001, "Request No.");
+
+                            CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
+                            SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+
+                        END;
+                    END;
+                END;
+
             end;
         }
         field(13; "1st Approval"; Code[30])
@@ -114,6 +341,205 @@ table 70009 "Leave Request3"
 
             trigger OnValidate()
             begin
+                IF ("Leave Category" = 'CASUAL') AND ("Actual Duration" > 3) THEN
+                    ERROR('Casual leave cannot be more than 3 working days');
+
+                TESTFIELD("Leave Category");
+                TESTFIELD("Send for Approval", TRUE);
+                TESTFIELD("1st Approval", USERID);
+                TESTFIELD("2nd Approval");
+                //HOD
+                IF ("Request Type" = "Request Type"::HOD) THEN
+                    IF "1st Approval Status" = "1st Approval Status"::Approved THEN
+                        IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
+                            "1st Approval Status" := LeaveRequest."1st Approval Status"::" "
+                        ELSE BEGIN
+                            UserSetup.GET("2nd Approval");
+                            "1st Approval Time" := CURRENTDATETIME;
+                            "Current Pending Person" := "2nd Approval";
+                            ToAddresses := UserSetup."E-Mail";
+                            subject := STRSUBSTNO(text001, "Request No.");
+                            UserSetup2.GET(USERID);
+                            Addressee := UserSetup.Initials;
+                            UserSetup2.GET(USERID);
+                            SenderName := UserSetup2.Initials;
+                            SenderAddress := UserSetup2."E-Mail";
+
+                            CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
+                            SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+
+                            "MD Leave Approval" := TRUE;
+                        END;
+
+
+                //HOD1
+                IF ("Request Type" = "Request Type"::HOD1) THEN
+                    IF "1st Approval Status" = "1st Approval Status"::Approved THEN
+                        IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
+                            "1st Approval Status" := LeaveRequest."1st Approval Status"::" "
+                        ELSE BEGIN
+                            IF UserSetup.GET("2nd Approval") THEN BEGIN
+                                "1st Approval Time" := CURRENTDATETIME;
+                                "Current Pending Person" := "2nd Approval";
+                                ToAddresses := UserSetup."E-Mail";
+                                subject := STRSUBSTNO(text001, "Request No.");
+                                UserSetup2.GET(USERID);
+                                SenderAddress := UserSetup2."E-Mail";
+                                SenderName := UserSetup2.Initials;
+                                Addressee := UserSetup.Initials;
+
+                                CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
+                                SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+
+                                "HOD HR/ADMIN" := TRUE;
+                            END;
+                        END;
+
+                //Manager
+                IF ("Request Type" = "Request Type"::Manager) THEN
+                    IF "1st Approval Status" = "1st Approval Status"::Approved THEN
+                        IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
+                            "1st Approval Status" := LeaveRequest."1st Approval Status"::" "
+                        ELSE BEGIN
+                            IF UserSetup.GET("2nd Approval") THEN BEGIN
+                                "1st Approval Time" := CURRENTDATETIME;
+                                "Current Pending Person" := "2nd Approval";
+                                ToAddresses := UserSetup."E-Mail";
+                                Addressee := UserSetup.Initials;
+                                subject := STRSUBSTNO(text001, "Request No.");
+                                "HOD HR/ADMIN" := TRUE;
+                                UserSetup2.GET(USERID);
+                                SenderName := UserSetup2.Initials;
+                                SenderAddress := UserSetup2."E-Mail";
+
+                                CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
+                                SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+
+                            END;
+                        END;
+
+                //Branch
+                IF ("Request Type" = "Request Type"::Branch) THEN
+                    IF "1st Approval Status" = "1st Approval Status"::Approved THEN
+                        IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
+                            "1st Approval Status" := LeaveRequest."1st Approval Status"::" "
+                        ELSE BEGIN
+                            IF UserSetup.GET("2nd Approval") THEN BEGIN
+                                "1st Approval Time" := CURRENTDATETIME;
+                                "Current Pending Person" := "2nd Approval";
+                                ToAddresses := UserSetup."E-Mail";
+                                Addressee := UserSetup.Initials;
+                                subject := STRSUBSTNO(text001, "Request No.");
+                                UserSetup2.GET(USERID);
+                                SenderName := UserSetup2.Initials;
+                                SenderAddress := UserSetup2."E-Mail";
+
+                                CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
+                                SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+
+                            END;
+                        END;
+
+                //Junior staff - Deputy Manager
+                IF ("Request Type" = "Request Type"::"Junior staff - Deputy Manager") THEN
+                    IF "1st Approval Status" = "1st Approval Status"::Approved THEN
+                        IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
+                            "1st Approval Status" := LeaveRequest."1st Approval Status"::" "
+                        ELSE BEGIN
+                            IF UserSetup.GET("2nd Approval") THEN BEGIN
+                                "1st Approval Time" := CURRENTDATETIME;
+                                "Current Pending Person" := "2nd Approval";
+                                ToAddresses := UserSetup."E-Mail";
+                                subject := STRSUBSTNO(text001, "Request No.");
+                                Addressee := UserSetup.Initials;
+                                UserSetup2.GET(USERID);
+                                SenderName := UserSetup2.Initials;
+                                SenderAddress := UserSetup2."E-Mail";
+
+                                CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
+                                SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+
+                            END;
+                            "HOD HR/ADMIN" := TRUE;
+                        END;
+
+
+                CASE "1st Approval Status" OF
+                    "1st Approval Status"::Rejected:
+                        IF NOT CONFIRM('Are you sure you want to REJECT', FALSE) THEN
+                            "1st Approval Status" := LeaveRequest."1st Approval Status"::" "
+                        ELSE BEGIN
+                            "1st Approval Time" := CURRENTDATETIME;
+                            UserSetup2.GET(Requester);
+                            ToAddresses := UserSetup2."E-Mail";
+                            subject := STRSUBSTNO(text003, "Request No.");
+                            Addressee := UserSetup2.Initials;
+                            UserSetup.GET(USERID);
+                            SenderName := UserSetup.Initials;
+                            SenderAddress := UserSetup."E-Mail";
+
+                            CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
+                            SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+
+
+                            "MD Leave Approval" := FALSE;
+                            Reject := TRUE;
+                        END;
+                    "1st Approval Status"::"On hold":
+                        IF NOT CONFIRM('Are you sure you want to place ON HOLD', FALSE) THEN
+                            "1st Approval Status" := LeaveRequest."1st Approval Status"::" "
+                        ELSE BEGIN
+                            "1st Approval Time" := CURRENTDATETIME;
+                            UserSetup2.GET(Requester);
+                            ToAddresses := UserSetup2."E-Mail";
+                            subject := STRSUBSTNO(text004, "Request No.");
+                            Addressee := UserSetup2.Initials;
+                            UserSetup.GET(USERID);
+                            SenderName := UserSetup.Initials;
+                            SenderAddress := UserSetup."E-Mail";
+
+                            CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
+                            SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+
+                            "MD Leave Approval" := FALSE;
+                        END;
+                END;
+                //MD OFFICE
+                IF ("Request Type" = "Request Type"::"MD OFFICE") THEN
+                    IF "1st Approval Status" = "1st Approval Status"::Approved THEN BEGIN
+                        IF UserSetup.GET("2nd Approval") THEN BEGIN
+                            "1st Approval Time" := CURRENTDATETIME;
+                            "Current Pending Person" := "2nd Approval";
+                            ToAddresses := UserSetup."E-Mail";
+                            Addressee := 'MD,';
+                            UserSetup2.GET(USERID);
+                            SenderName := UserSetup2.Initials;
+                            SenderAddress := UserSetup2."E-Mail";
+
+                            CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
+                            SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+
+                            "MD Leave Approval" := TRUE;
+                        END;
+                    END;
+
+                //FG
+                IF ("Request Type" = "Request Type"::FG) THEN
+                    IF "1st Approval Status" = "1st Approval Status"::Approved THEN BEGIN
+                        IF UserSetup.GET("2nd Approval") THEN BEGIN
+                            "1st Approval Time" := CURRENTDATETIME;
+                            "Current Pending Person" := "2nd Approval";
+                            ToAddresses := UserSetup."E-Mail";
+                            Addressee := UserSetup.Initials;
+                            UserSetup2.GET(USERID);
+                            SenderName := UserSetup2.Initials;
+                            SenderAddress := UserSetup2."E-Mail";
+
+                            CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
+                            SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+
+                        END;
+                    END;
 
             end;
         }
@@ -266,10 +692,11 @@ table 70009 "Leave Request3"
         }
         field(72; "Amount Paid"; Decimal)
         {
-            /*  CalcFormula = Sum("Leave Payment Rev 2"."Amount Paid" WHERE ("Leave Period="FIELD(Leave Period),
-                                                                          ""Employee No"."=FIELD(""Employee No".")));
-             Editable = false;
-             FieldClass = FlowField; */
+            FieldClass = FlowField;
+            CalcFormula = Sum("Leave Payment Rev 2"."Amount Paid" WHERE("Leave Period" = FIELD("Leave Period"), "Employee No." = FIELD("Employee No.")));
+
+            Editable = false;
+
         }
         field(73; "Business Unit"; Code[10])
         {
@@ -288,73 +715,68 @@ table 70009 "Leave Request3"
         }
         field(75; "Total Leaves Due"; Decimal)
         {
-            /* BlankZero = true;
-            CalcFormula = Sum("Leave Plan Lines Rev 2"."Annual Duration" WHERE ("Employee No."=FIELD("Employee No".),
-                                                                                "Entry Type"=filter('PLAN'),
-                                                                                "Leave Period"=FIELD("Leave Period")));
-            DecimalPlaces = 0:0;
+            BlankZero = true;
+            FieldClass = FlowField;
+            CalcFormula = sum("Leave Plan Lines Rev 2"."Actual Duration" where("Employee No." = field("Employee No."),
+                                                 "Entry Type" = filter('PLAN'), "Leave Period" = FIELD("Leave Period")));
+            DecimalPlaces = 0 : 0;
             Editable = false;
-            FieldClass = FlowField; */
+
         }
         field(76; "Total Compassionate"; Integer)
         {
-            /* BlankZero = true;
-            CalcFormula = Count("Leave Roster" WHERE ("Employee No"=FIELD(""Employee No"."),
-                                                      LeaveDate=FIELD("Date Filter"),
-                                                      "Leave Category"=CONST(COMP),
-                                                      "Leave Period="FIELD("Period Filter")));
+            BlankZero = true;
+            CalcFormula = Count("Leave Roster" WHERE("Employee No" = FIELD("Employee No."),
+                                                      LeaveDate = FIELD("Date Filter"),
+                                                      "Leave Category" = filter('COMP'), "Leave Period" = FIELD("Period Filter")));
             Editable = false;
-            FieldClass = FlowField; */
+            FieldClass = FlowField;
         }
         field(77; "Total Exam"; Integer)
         {
-            /* BlankZero = true;
-            CalcFormula = Count("Leave Roster" WHERE ("Employee No"=FIELD(""Employee No"."),
-                                                      LeaveDate=FIELD("Date Filter"),
-                                                      "Leave Category"=CONST(EXAM),
-                                                      "Leave Period="FIELD("Period Filter")));
+            BlankZero = true;
+            CalcFormula = Count("Leave Roster" WHERE("Employee No" = FIELD("Employee No."),
+                                                      LeaveDate = FIELD("Date Filter"),
+                                                      "Leave Category" = filter('EXAM'), "Leave Period" = FIELD("Period Filter")));
             Editable = false;
-            FieldClass = FlowField; */
+            FieldClass = FlowField;
         }
         field(78; "Total Others"; Integer)
         {
-            /* BlankZero = true;
-            CalcFormula = Count("Leave Roster" WHERE ("Employee No"=FIELD(""Employee No"."),
-                                                      LeaveDate=FIELD("Date Filter"),
-                                                      "Leave Category"=CONST(OTHERS),
-                                                      "Leave Period="FIELD("Period Filter")));
+            BlankZero = true;
+            CalcFormula = Count("Leave Roster" WHERE("Employee No" = FIELD("Employee No."), LeaveDate = FIELD("Date Filter"),
+                                                      "Leave Category" = filter('OTHERS'),
+                                                      "Leave Period" = FIELD("Period Filter")));
             Editable = false;
-            FieldClass = FlowField; */
+            FieldClass = FlowField;
         }
         field(79; "Total Consuming"; Integer)
         {
-            /*  BlankZero = true;
-             CalcFormula = Count("Leave Roster" WHERE ("Employee No"=FIELD(""Employee No"."),
-                                                       LeaveDate=FIELD("Date Filter"),
-                                                       Consuming=CONST(Yes),
-                                                       "Leave Period="FIELD(Leave Period)));
-             Editable = false;
-             FieldClass = FlowField; */
+            BlankZero = true;
+            CalcFormula = Count("Leave Roster" WHERE("Employee No" = FIELD("Employee No."),
+                                                       LeaveDate = FIELD("Date Filter"),
+                                                       Consuming = CONST(true), "Leave Period" = FIELD("Leave Period")));
+            Editable = false;
+            FieldClass = FlowField;
         }
         field(80; "Total Annual"; Integer)
         {
-            /* BlankZero = true;
-            CalcFormula = Count("Leave Roster" WHERE ("Employee No"=FIELD(""Employee No"."),
-                                                      LeaveDate=FIELD("Date Filter"),
-                                                      "Leave Category"=CONST(ANNUAL),
-                                                      "Leave Period="FIELD("Period Filter")));
+            BlankZero = true;
+            CalcFormula = Count("Leave Roster" WHERE("Employee No" = FIELD("Employee No."),
+                                                      LeaveDate = FIELD("Date Filter"),
+                                                      "Leave Category" = filter('ANNUAL'), "Leave Period" = FIELD("Period Filter")));
             Editable = false;
-            FieldClass = FlowField; */
+            FieldClass = FlowField;
         }
         field(81; "Total Commuted To Cash"; Integer)
         {
-            /*  BlankZero = true;
-             CalcFormula = Count("Leave Roster" WHERE ("Employee No"=FIELD(""Employee No"."),
-                                                       LeaveDate=FIELD("Date Filter"),
-                                                       "Leave Category"=CONST(CASH),
-                                                       "Leave Period="FIELD("Period Filter")));
-             Editable = false;
-             FieldClass = FlowField; */
+            BlankZero = true;
+            CalcFormula = Count("Leave Roster" WHERE("Employee No" = FIELD("Employee No."),
+                                                       LeaveDate = FIELD("Date Filter"),
+                                                       "Leave Category" = filter('CASH'),
+                                                       "Leave Period" = FIELD("Period Filter")));
+            Editable = false;
+            FieldClass = FlowField;
         }
         field(82; "Start Date1"; Date)
         {
@@ -473,7 +895,7 @@ table 70009 "Leave Request3"
 
             trigger OnValidate()
             begin
-                //IF xRec.Registered THEN ERROR('You cannot MODIFY a Registered Leave Record');
+
             end;
         }
         field(96; "Leave Category"; Code[30])
@@ -603,7 +1025,7 @@ table 70009 "Leave Request3"
         text006: Label 'This document needs your approval.';
         text008: Label 'This document has been approved, generate  Leave Certificate';
         text009: Label 'The same person cannot approve this request.';
-        //GenPCode: Codeunit "50004";
+        GenPCode: Codeunit 50004;
         ActualLeaves: Integer;
         ConSumingLeaves: Integer;
         EmpRec: Record 5200;
@@ -634,23 +1056,20 @@ table 70009 "Leave Request3"
         CasualDiff: Integer;
         LeaveRequest: Record 70009;
         AnnualDiff: Integer;
-        text010: Label 'Actual duration:%1';
+        text010: Label 'Actual duration: %1';
         LevRec: Record 70009;
         text011: Label 'Start Date :';
         text012: Label 'End Date :';
         LeaveYear: Integer;
         Text50001: Label 'The employee has an open leave request. New leave request cannot be created.';
         Text032: Label 'Mail sent!';
-        //SMTPMail: Codeunit "400";
         SenderAddress: Text[50];
-        //EmailBody: Record "99008535";
         BodyTxt: Text;
-        //BodyBlob: Record "99008535";
         BodyStream: OutStream;
         SenderInitial: Text;
         SenderEmail: Text[50];
         TempEmailItem: Record 9500 temporary;
-        Text013: Label 'Dear';
+        Text013: Label 'Dear %1,';
         Text014: Label 'Kindly approve this leave request.';
         Text015: Label 'Request No : ';
         Text016: Label 'Requester Name :';
@@ -658,6 +1077,7 @@ table 70009 "Leave Request3"
         Text018: Label 'Regards';
         Text019: Label 'Please note that your leave request has been rejected.';
         Text020: Label 'Please note that your leave request is on-hold.';
+        EmailBody: Text;
 
 
 
@@ -756,5 +1176,50 @@ table 70009 "Leave Request3"
         */
 
     end;
+
+    local procedure CreateEmailBody(RecipientInitials: Text[70]; RequestNo: Code[30]; EmpNo: Code[30]; LeaveCat: Code[30]; StartDate: Date; EndDate: Date; ActualDuration: Integer)
+
+    begin
+
+        UserSetup.Get(UserId);
+
+        EmailBody := STRSUBSTNO(Text013, Addressee);
+        EmailBody += '<br><br>';
+        EmailBody += Text014;
+        EmailBody += '<br><br>';
+        EmailBody += Text015 + STRSUBSTNO(RequestNo);
+        EmailBody += '<br><br>';
+        EmailBody += Text016 + STRSUBSTNO(EmpRec.GetFullName(EmpNo));
+        EmailBody += '<br><br>';
+        EmailBody += Text017 + STRSUBSTNO(LeaveCat);
+        EmailBody += '<br><br>';
+        EmailBody += text011 + FORMAT(StartDate);
+        EmailBody += '<br><br>';
+        EmailBody += text012 + FORMAT(EndDate);
+        EmailBody += '<br><br>';
+        EmailBody += STRSUBSTNO(text010, ActualDuration);
+        EmailBody += '<br><br>';
+        EmailBody += Text018;
+        EmailBody += '<br><br>';
+        EmailBody += SenderName;
+
+    end;
+
+    procedure SendEmail(ToRecipients: Text; Subject: Text; Body: Text; CCRecipients: Text; BCCRecipients: Text)
+    var
+
+        Email: Codeunit Email;
+        EmailMessage: Codeunit "Email Message";
+
+
+    begin
+
+        EmailMessage.Create(ToRecipients, Subject, EmailBody, true);
+        EmailMessage.AddRecipient(enum::"Email Recipient Type"::Cc,CCRecipients);
+        EmailMessage.AddRecipient(Enum::"Email Recipient Type"::Bcc,BCCRecipients);
+        Email.OpenInEditorModally(EmailMessage, Enum::"Email Scenario"::Default)
+
+    end;
+
 }
 

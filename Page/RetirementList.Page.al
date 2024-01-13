@@ -1,17 +1,17 @@
-page 70033 "Approved IOU Retirement List"
+page 50204 "Retirement List"
 {
-    ApplicationArea = All;
-    CardPageID = "Approved IOU Retirement";
+    CardPageID = "IOU Retirement Card";
     PageType = List;
     SourceTable = "IOU Retirement Header";
-    SourceTableView = WHERE(Posted = filter('No'),
-                            "Final Apprv. Status" = filter('Approved'));
+    SourceTableView = WHERE(Posted = CONST(false),
+                            "Final Apprv. Status" = FILTER(' '),
+                            Reject = CONST(false));
 
     layout
     {
         area(content)
         {
-            repeater(Control1)
+            repeater(Control01)
             {
                 Editable = false;
                 field("No."; Rec."No.")
@@ -52,7 +52,7 @@ page 70033 "Approved IOU Retirement List"
     trigger OnAfterGetRecord()
     begin
         BalAmt := 0;
-        Rec.CALCFIELDS(Rec."Amount To Retire");
+        Rec.CALCFIELDS("Amount To Retire");
         BalAmt := Rec."Original IOU Amount" - Rec."Amount To Retire";
     end;
 

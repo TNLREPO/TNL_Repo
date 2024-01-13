@@ -1,5 +1,6 @@
 page 50451 "Fuel Staff"
 {
+    ApplicationArea = All;
     PageType = Card;
     SourceTable = "Fuel Vouchers.";
     SourceTableView = WHERE(Staff = Filter(true),

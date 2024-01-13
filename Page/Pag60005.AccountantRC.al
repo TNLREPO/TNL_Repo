@@ -958,19 +958,174 @@ page 60005 "Accountant RC"
 
                 }
 
+            }
 
+            group(CapexMgt)
+            {
+                Caption = 'Capex Management';
+                action("Capex")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Capex';
+                    RunObject = Page "Capex List";
 
+                }
+                action("LPOCapex")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Local Purchase Order';
+                    RunObject = Page "LPO List-Capex";
 
+                }
 
+                action("HODApprovalCapex")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'HOD of Approvals';
+                    RunObject = Page "Head of Dept. Appr.-Capex";
 
+                }
+                action("HODofAuditCapex")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Head of Audit';
+                    RunObject = Page "Head of Audit Appr.-Capex";
 
+                }
+                action("GMApprovalCapex")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'GM Approvals';
+                    RunObject = Page "Gen. Manager Appr.-Capex";
 
+                }
+                action("MDApprovalCapex")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'MD Approvals';
+                    RunObject = Page "Managing Dir. Appr.-Capex";
 
+                }
+                action("AdvancePaymtApprovalCapex")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Advance Payment Approvals';
+                    RunObject = Page "Advance Paymt Appr.-Capex";
 
+                }
+                action("BalFullPaymtApprovalCapex")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Balance/Full Payment';
+                    RunObject = Page "Full  Payment Appr.-Capex";
 
+                }
+                action("BalFullPaymtApprovalGMCapex")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Balance/Full Payment';
+                    RunObject = Page "Bal/Full Payment Capex-GM";
 
+                }
+                action("BalFullPaymtApprovalMDCapex")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Balance/Full Payment';
+                    RunObject = Page "Bal/Full Payment Capex-MD";
+
+                }
+                action("ApprovedCapex")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Approved Capex';
+                    RunObject = Page "Move to LPO -Capex";
+
+                }
+                action("PaymentVoucher")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Payment Voucher';
+                    RunObject = Page "Payment Vouncher-Capex";
+
+                }
+                action("ComplianceCapex")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Compliance Check';
+                    RunObject = Page "Compliance Check-Capex";
+
+                }
+                action("AdvancePaymtCapex")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Advance Payment';
+                    RunObject = Page "Advance Payment-Capex";
+
+                }
+                action("AwaitingBalanceCapex")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Awaiting Balance Payment';
+                    RunObject = Page "Awaiting Bal. Pay. Appr.-Capex";
+
+                }
+                action("BalancePaymentCapex")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Awaiting Balance Payment';
+                    RunObject = Page "Balance Payment-Capex";
+
+                }
+                action("ClosedCapex")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Awaiting Balance Payment';
+                    RunObject = Page "Closed Capex";
+
+                }
 
             }
+
+            group(WarrantyProcess)
+            {
+                Caption = 'Warranty Process';
+                action("WarrantyCoupon")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Warranty Coupon';
+                    RunObject = Page "Warranty Coupon2";
+
+                }
+                action("DirectWarranty")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Direct Warranty Coupon';
+                    RunObject = Page "Direct Warranty Page";
+
+                }
+                action("WarrantyClaim")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Warranty Claim';
+                    RunObject = Page "Warranty Claim List";
+
+                }
+                action("PostedMaterialClaim")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Posted Material Claim';
+                    RunObject = Page "Posted Material Claims";
+
+                }
+                action("ClosedWarrantyClaim")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Closed Warranty Claim';
+                    RunObject = Page "Closed Warranty Claim card";
+
+                }
+            }
+
 
 
             group(Action84)
@@ -1333,7 +1488,6 @@ page 60005 "Accountant RC"
                 }
             }
 
-
             group(JournalVoucher)
             {
                 Caption = 'Journal Voucher';
@@ -1383,9 +1537,71 @@ page 60005 "Accountant RC"
                     RunObject = Page "IOU Request";
                     ToolTip = 'View treated IOUs.';
 
-
                 }
             }
+            group(IOURetirement)
+            {
+                Caption = 'IOU Retirement';
+
+                action("Retirement")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'IOU Retirement';
+                    Image = Payment;
+                    RunObject = Page "Retirement List";
+                    ToolTip = 'View treated IOUs.';
+                }
+                action("ApprovedRetirement")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Approved IOU Retirement';
+                    Image = Payment;
+                    RunObject = Page "Approved IOU Retirement List";
+                    ToolTip = 'View treated IOUs.';
+                }
+                action("PostedIOURetirement")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Posted IOU Retirement';
+                    Image = Payment;
+                    RunObject = Page "Posted IOU Retirement List";
+                    ToolTip = 'View treated IOUs.';
+                }
+            }
+
+            group(FuelMgt)
+            {
+                Caption = 'Fuel';
+
+                action("NewVehicle")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'New Vehicle';
+                    Image = FaultDefault;
+                    RunObject = Page "New Vehicle Fuel List";
+                    ToolTip = 'View treated IOUs.';
+                }
+                action("FAFuelList")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Fixed Asset';
+                    Image = FaultDefault;
+                    RunObject = Page "Fixed Asset Fuel List";
+                    ToolTip = 'View treated IOUs.';
+                }
+
+                action("StaffFuelList")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Staff';
+                    Image = FaultDefault;
+                    RunObject = Page "Staff Fuel List";
+                    ToolTip = 'View treated IOUs.';
+                }
+
+
+            }
+
 
             group(LeaveMgt)
             {
@@ -1422,6 +1638,51 @@ page 60005 "Accountant RC"
                     RunObject = Page "Approved Leave List";
                     ToolTip = 'View approved leave applications.';
                 }
+            }
+
+            group(PoolCars)
+            {
+                Caption = 'Pool Cars';
+
+                action("New Request")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'New Request';
+                    Image = RedoFluent;
+                    RunObject = Page "Pool Car Request List";
+                    ToolTip = 'Make a new request for pool car.';
+
+                }
+
+                action("ApprovedPoolCar")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Approved Requests';
+                    Image = RedoFluent;
+                    RunObject = Page "Approved Pool Car Request List";
+                    ToolTip = 'Make a new request for pool car.';
+
+                }
+                action("PoolCarAllocation")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Allocation';
+                    Image = RedoFluent;
+                    RunObject = Page "Pool Car Allocation List";
+                    ToolTip = 'Make a new request for pool car.';
+
+                }
+                action("ClosedPoolCar")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Closed Requests';
+                    Image = RedoFluent;
+                    RunObject = Page "Close Pool Car List";
+                    ToolTip = 'Closed requests.';
+
+                }
+
+
             }
 
 

@@ -1,5 +1,6 @@
 page 50041 "Fixed Asset Fuel List"
 {
+    ApplicationArea = All;
     CardPageID = "Fuel Fixed Asset";
     PageType = List;
     SourceTable = "Fuel Vouchers.";

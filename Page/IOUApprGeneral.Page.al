@@ -1,5 +1,6 @@
 page 70239 "IOU Appr. General"
 {
+    ApplicationArea = All;
     PageType = List;
     SourceTable = "IOU Register";
     SourceTableView = WHERE("Send for Approval" = FILTER('Yes'),

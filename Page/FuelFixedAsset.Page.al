@@ -1,9 +1,9 @@
 page 50450 "Fuel Fixed Asset"
 {
+    ApplicationArea = All;
     PageType = Card;
     SourceTable = "Fuel Vouchers.";
-    SourceTableView = WHERE ("Fixed Asset"= Filter (true),
-                            Issue=filter (false));
+    SourceTableView = WHERE("Fixed Asset" = Filter(true), Issue = filter(false));
 
     layout
     {
@@ -12,49 +12,49 @@ page 50450 "Fuel Fixed Asset"
             group(General)
             {
                 Caption = 'General';
-                field("Voucher No.";Rec."Voucher No.")
+                field("Voucher No."; Rec."Voucher No.")
                 {
                 }
-                field("Transaction Date";Rec."Transaction Date")
+                field("Transaction Date"; Rec."Transaction Date")
                 {
                 }
-                field("Item No.";Rec."Item No.")
+                field("Item No."; Rec."Item No.")
                 {
                     Caption = 'Fuel Type';
                 }
-                field(Description;Rec.Description)
+                field(Description; Rec.Description)
                 {
                     Editable = true;
                 }
-                field(Location;Rec.Location)
+                field(Location; Rec.Location)
                 {
                 }
-                field("Asset Code";Rec."Asset Code")
+                field("Asset Code"; Rec."Asset Code")
                 {
                 }
-                field("Asset Name";Rec."Asset Name")
+                field("Asset Name"; Rec."Asset Name")
                 {
                     Editable = false;
                 }
-                field("Shortcut Dimension 1 Code";Rec."Shortcut Dimension 1 Code")
+                field("Shortcut Dimension 1 Code"; Rec."Shortcut Dimension 1 Code")
                 {
                 }
-                field("Shortcut Dimension 2 Code";Rec."Shortcut Dimension 2 Code")
+                field("Shortcut Dimension 2 Code"; Rec."Shortcut Dimension 2 Code")
                 {
                 }
-                field("Qty Issued";Rec."Qty Issued")
+                field("Qty Issued"; Rec."Qty Issued")
                 {
                 }
-                field("Issued By";Rec."Issued By")
+                field("Issued By"; Rec."Issued By")
                 {
                 }
-                field("Received By";Rec."Received By")
+                field("Received By"; Rec."Received By")
                 {
                 }
-                field("Receipt Date";Rec."Receipt Date")
+                field("Receipt Date"; Rec."Receipt Date")
                 {
                 }
-                field("Registration No.";Rec."Registration No.")
+                field("Registration No."; Rec."Registration No.")
                 {
                 }
             }

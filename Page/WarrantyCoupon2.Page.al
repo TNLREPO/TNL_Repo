@@ -1,5 +1,6 @@
 page 70048 "Warranty Coupon2"
 {
+    ApplicationArea = All;
     DelayedInsert = true;
     PageType = List;
     PopulateAllFields = true;

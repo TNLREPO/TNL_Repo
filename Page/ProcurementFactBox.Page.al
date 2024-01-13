@@ -1,5 +1,6 @@
 page 70130 "Procurement FactBox"
 {
+    ApplicationArea = All;
     Caption = 'e-Procurement Details';
     PageType = CardPart;
     SourceTable = "Procurement Header";

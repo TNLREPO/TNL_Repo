@@ -1,5 +1,6 @@
 page 70018 "Warranty Coupon4"
 {
+    ApplicationArea = All;
     DelayedInsert = true;
     Editable = false;
     PageType = List;

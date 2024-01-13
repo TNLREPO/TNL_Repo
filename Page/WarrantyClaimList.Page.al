@@ -1,5 +1,6 @@
 page 50163 "Warranty Claim List"
 {
+    ApplicationArea = All;
     CardPageID = "Warranty Claim card";
     DelayedInsert = true;
     DeleteAllowed = false;

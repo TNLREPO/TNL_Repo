@@ -1,5 +1,6 @@
 page 70152 "Approved Capex Card4"
 {
+    ApplicationArea = All;
     PageType = Card;
     SourceTable = "Procurement Header";
 

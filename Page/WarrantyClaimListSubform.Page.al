@@ -1,6 +1,7 @@
 page 70049 "Warranty Claim List Subform"
 {
-    PageType = CardPart;
+    ApplicationArea = All;
+    PageType = ListPart;
     SourceTable = "Warranty Claim Detail";
 
     layout

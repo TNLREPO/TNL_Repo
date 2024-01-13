@@ -1,5 +1,6 @@
 page 50161 "Warranty Claim card"
 {
+    ApplicationArea = All;
     CardPageID = "Warrantee Claim Subform";
     PageType = Card;
     SourceTable = "Warranty Claim Header";

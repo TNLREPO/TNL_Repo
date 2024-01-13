@@ -120,9 +120,7 @@ tableextension 50083 "Service Invoice Header Ext" extends "Service Invoice Heade
             Caption = 'Total B&P Labour';
             FieldClass = FlowField;
         }
-        field(50276; "External Document No."; Text[30])
-        {
-        }
+
         field(50277; "Received Date"; Date)
         {
             /* CalcFormula = Lookup("Customer Order HeaderX"."Reception Date" WHERE ("No."=FIELD("Customer Order No.")));

@@ -1,5 +1,6 @@
 page 50440 "Approved IOU"
 {
+    ApplicationArea = All;
     PageType = Card;
     SourceTable = "IOU Register";
     SourceTableView = SORTING("IOU No.")

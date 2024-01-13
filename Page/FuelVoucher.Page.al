@@ -1,5 +1,6 @@
 page 50165 "Fuel Voucher"
 {
+    ApplicationArea = All;
     PageType = Card;
     SourceTable = "Fuel Vouchers.";
     SourceTableView = WHERE(Issue = filter(false));
@@ -28,7 +29,7 @@ page 50165 "Fuel Voucher"
                 field("Voucher Description"; Rec.Description)
                 {
                 }
-                field("Item Description";Item.Description)
+                field("Item Description"; Item.Description)
                 {
                     Caption = 'Item Description';
                     Editable = false;
@@ -133,15 +134,15 @@ page 50165 "Fuel Voucher"
                         ItemJnlLine."Journal Template Name" := 'ITEM';
                         //ItemJnlLine."Journal Batch Name" := 'FUEL';
                         ItemJnlLine."Line No." := 10000;
-                        ItemJnlLine.VALIDATE("Item No.",Rec. "Item No.");
+                        ItemJnlLine.VALIDATE("Item No.", Rec."Item No.");
                         ItemJnlLine."Posting Date" := TODAY;
-                        ItemJnlLine.Description :=Rec. Description;
+                        ItemJnlLine.Description := Rec.Description;
                         ItemJnlLine."Entry Type" := ItemJnlLine."Entry Type"::"Negative Adjmt.";
                         ItemJnlLine."Document No." := Rec."Voucher No.";
                         ItemJnlLine."Location Code" := Rec.Location;
                         ItemJnlLine.VALIDATE(Quantity, Rec."Qty Issued");
-                        ItemJnlLine.VALIDATE(ItemJnlLine."Shortcut Dimension 1 Code",Rec. "Shortcut Dimension 1 Code");
-                        ItemJnlLine.VALIDATE(ItemJnlLine."Shortcut Dimension 2 Code",Rec. "Shortcut Dimension 2 Code");
+                        ItemJnlLine.VALIDATE(ItemJnlLine."Shortcut Dimension 1 Code", Rec."Shortcut Dimension 1 Code");
+                        ItemJnlLine.VALIDATE(ItemJnlLine."Shortcut Dimension 2 Code", Rec."Shortcut Dimension 2 Code");
                         ItemJnlPost.RUN(ItemJnlLine);
 
                         //post maintenance
@@ -149,17 +150,17 @@ page 50165 "Fuel Voucher"
                         //GenJnlLine."Journal Batch Name" := 'FUEL';
                         GenJnlLine."Line No." := 10000;
                         GenJnlLine."Account Type" := GenJnlLine."Account Type"::"Fixed Asset";
-                        GenJnlLine.VALIDATE("Account No.",Rec."Asset Code");
+                        GenJnlLine.VALIDATE("Account No.", Rec."Asset Code");
                         GenJnlLine."Posting Date" := TODAY;
                         GenJnlLine."FA Posting Date" := TODAY;
-                        GenJnlLine."Document No." :=Rec."Voucher No.";
-                        GenJnlLine.Description :=Rec. Description;
-                        GenJnlLine.Amount := Item."Unit Cost" *Rec. "Qty Issued";
+                        GenJnlLine."Document No." := Rec."Voucher No.";
+                        GenJnlLine.Description := Rec.Description;
+                        GenJnlLine.Amount := Item."Unit Cost" * Rec."Qty Issued";
                         GenJnlLine."FA Posting Type" := GenJnlLine."FA Posting Type"::Maintenance;
                         GenJnlLine."Depreciation Book Code" := FADeprBk."Depreciation Book Code";
-                        GenJnlLine."Maintenance Code" :=Rec. "Fuel Code";
-                        GenJnlLine.VALIDATE(GenJnlLine."Shortcut Dimension 1 Code",Rec. "Shortcut Dimension 1 Code");
-                        GenJnlLine.VALIDATE(GenJnlLine."Shortcut Dimension 2 Code",Rec. "Shortcut Dimension 2 Code");
+                        GenJnlLine."Maintenance Code" := Rec."Fuel Code";
+                        GenJnlLine.VALIDATE(GenJnlLine."Shortcut Dimension 1 Code", Rec."Shortcut Dimension 1 Code");
+                        GenJnlLine.VALIDATE(GenJnlLine."Shortcut Dimension 2 Code", Rec."Shortcut Dimension 2 Code");
                         GenJnlLine."Bal. Account Type" := GenJnlLine."Bal. Account Type"::"G/L Account";
                         GenJnlLine.VALIDATE("Bal. Account No.", GenPostSetup."Inventory Adjmt. Account");
                         //GenJnlLine."Gen. Posting Type" := 0;
@@ -191,7 +192,7 @@ page 50165 "Fuel Voucher"
                     FuelVoucher: Record 50053;
                 begin
                     CLEAR(FuelVoucherR);
-                    FuelVoucher.SETRANGE(FuelVoucher."Voucher No.",Rec. "Voucher No.");
+                    FuelVoucher.SETRANGE(FuelVoucher."Voucher No.", Rec."Voucher No.");
                     FuelVoucherR.SETTABLEVIEW(FuelVoucher);
                     FuelVoucherR.RUNMODAL;
                 end;

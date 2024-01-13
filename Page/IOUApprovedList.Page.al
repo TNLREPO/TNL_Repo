@@ -1,5 +1,6 @@
 page 70032 "IOU Approved List"
 {
+    ApplicationArea = All;
     PageType = List;
     SourceTable = "IOU Register";
     SourceTableView = WHERE("Final Apprv. Status" = filter('Approved'),

@@ -1,5 +1,6 @@
 page 70238 "IOU Appr. Audit"
 {
+    ApplicationArea = All;
     CardPageID = "IOU Register Card";
     PageType = List;
     SourceTable = "IOU Register";

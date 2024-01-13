@@ -1,7 +1,7 @@
 table 70007 "Procurement Line Detail"
 {
-    /* DrillDownPageID = 70121;
-    LookupPageID = 70121; */
+    DrillDownPageID = "Procurement Details";
+    LookupPageID = "Procurement Details";
 
     fields
     {

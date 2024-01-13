@@ -1,9 +1,10 @@
 page 50449 "Fuel New Vehicle"
 {
+    ApplicationArea = All;
     PageType = Card;
     SourceTable = "Fuel Vouchers.";
-    SourceTableView = WHERE ("New Vehicle"=Filter (True),
-                            "Issue"=Filter(False));
+    SourceTableView = WHERE("New Vehicle" = Filter(True),
+                            "Issue" = Filter(False));
 
     layout
     {
@@ -12,39 +13,39 @@ page 50449 "Fuel New Vehicle"
             group(General)
             {
                 Caption = 'General';
-                field("Voucher No.";Rec."Voucher No.")
+                field("Voucher No."; Rec."Voucher No.")
                 {
                 }
-                field("Transaction Date";Rec."Transaction Date")
+                field("Transaction Date"; Rec."Transaction Date")
                 {
                 }
-                field("Item No.";Rec."Item No.")
+                field("Item No."; Rec."Item No.")
                 {
                     Caption = 'Fuel Type';
                 }
-                field(Description;Rec.Description)
+                field(Description; Rec.Description)
                 {
                     Editable = true;
                 }
-                field(Location;Rec.Location)
+                field(Location; Rec.Location)
                 {
                 }
-                field("Shortcut Dimension 1 Code";Rec."Shortcut Dimension 1 Code")
+                field("Shortcut Dimension 1 Code"; Rec."Shortcut Dimension 1 Code")
                 {
                 }
-                field("Shortcut Dimension 2 Code";Rec."Shortcut Dimension 2 Code")
+                field("Shortcut Dimension 2 Code"; Rec."Shortcut Dimension 2 Code")
                 {
                 }
-                field("Qty Issued";Rec."Qty Issued")
+                field("Qty Issued"; Rec."Qty Issued")
                 {
                 }
-                field("Issued By";Rec."Issued By")
+                field("Issued By"; Rec."Issued By")
                 {
                 }
-                field("Received By";Rec."Received By")
+                field("Received By"; Rec."Received By")
                 {
                 }
-                field("Receipt Date";Rec."Receipt Date")
+                field("Receipt Date"; Rec."Receipt Date")
                 {
                 }
             }
@@ -73,7 +74,7 @@ page 50449 "Fuel New Vehicle"
                     Rec.TESTFIELD("Issued By");
                     Rec.TESTFIELD("Received By");
                     Rec.TESTFIELD("Receipt Date");
-                   rec.PostNewVehicle;
+                    rec.PostNewVehicle;
                     MESSAGE('Fuel has been posted!');
                 end;
             }

@@ -1,5 +1,6 @@
 page 50624 "Warranty Data Uploaded"
 {
+    ApplicationArea = All;
     PageType = List;
     SourceTable = "Warraty Data Upload";
 

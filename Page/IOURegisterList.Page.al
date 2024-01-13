@@ -1,5 +1,6 @@
 page 70030 "IOU Register List"
 {
+    ApplicationArea = All;
     CardPageID = "IOU Register Card";
     PageType = List;
     SourceTable = "IOU Register";

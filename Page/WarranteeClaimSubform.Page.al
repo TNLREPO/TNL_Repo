@@ -1,7 +1,7 @@
 page 50162 "Warrantee Claim Subform"
 {
+    ApplicationArea = All;
     AutoSplitKey = true;
-    CardPageID = "Warranty Claim card";
     DelayedInsert = true;
     InsertAllowed = true;
     PageType = ListPart;

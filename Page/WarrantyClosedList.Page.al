@@ -1,5 +1,6 @@
 page 70051 "Warranty Closed List"
 {
+    ApplicationArea = All;
     CardPageID = "Closed Warranty Claim card";
     PageType = List;
     SourceTable = "Warranty Claim Header";

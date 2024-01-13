@@ -1,6 +1,5 @@
-page 70151 "Approved Capex Card3"
+page 70061 "Request For Quote card"
 {
-    ApplicationArea = All;
     PageType = Card;
     SourceTable = "Procurement Header";
 
@@ -8,12 +7,15 @@ page 70151 "Approved Capex Card3"
     {
         area(content)
         {
-            group("Capex Details")
+            group("Opex Details")
             {
                 Editable = EditSend;
                 field("No."; Rec."No.")
                 {
-                    Caption = 'Capex No.';
+                    Caption = 'Opex No.';
+                }
+                field("Opex Type"; Rec."Opex Type")
+                {
                 }
                 field(Date; Rec.Date)
                 {
@@ -21,52 +23,36 @@ page 70151 "Approved Capex Card3"
                 }
                 field("Requester Name"; Rec."Requester Name")
                 {
-                    Editable = false;
                 }
                 field("Requester Department"; Rec."Requester Department")
                 {
                     Editable = false;
-                }
-                field("Capex Type"; Rec."Capex Type")
-                {
                 }
                 field("Budget Amount"; Rec."Budget Amount")
                 {
                 }
                 field("Proposed Purchase Amount"; Rec."Proposed Purchase Amount")
                 {
+                    Caption = 'Proposed Expense Amount';
 
                     trigger OnValidate()
                     begin
-                        IF Rec."Proposed Purchase Amount" >= 100000 THEN
-                            Rec."Capex Type" := Rec."Capex Type"::"Fixed Asset";
+                        IF Rec."Opex Type" IN [Rec."Opex Type"::SLA, Rec."Opex Type"::SE, Rec."Opex Type"::"Recurrent Service"] THEN
+                            MESSAGE(Text001);
 
-                        IF Rec."Proposed Purchase Amount" < 100000 THEN
-                            Rec."Capex Type" := Rec."Capex Type"::"Sundry Asset";
-
-                        IF Rec."Proposed Purchase Amount" >= 100000 THEN
-                            MESSAGE(Text002);
+                        IF Rec."Opex Type" IN [Rec."Opex Type"::"New Service", Rec."Opex Type"::Consumable] THEN
+                            IF Rec."Proposed Purchase Amount" >= 50000 THEN
+                                MESSAGE(Text002);
                     end;
                 }
                 field("Purchase Justification"; Rec."Purchase Justification")
                 {
                     Caption = 'Justification';
                 }
-                field("Asset Description"; Rec."Asset Description")
+                field("Purchase Type"; Rec."Purchase Type")
                 {
-                }
-                field("Asset User Code"; Rec."Asset User Code")
-                {
-                }
-                field("Asset User Name"; Rec."Asset User Name")
-                {
-                }
-                field("User Department Code"; Rec."User Department Code")
-                {
-                    Editable = false;
-                }
-                field("Payment No."; Rec."Payment No.")
-                {
+                    Style = StrongAccent;
+                    StyleExpr = TRUE;
                 }
                 field("Mode of Payment"; Rec."Mode of Payment")
                 {
@@ -78,20 +64,22 @@ page 70151 "Approved Capex Card3"
                 {
                     Editable = EditSend;
                 }
+                field("TCOF No."; Rec."TCOF No.")
+                {
+                    Editable = false;
+                }
             }
-            part("Vendor Details"; 70117)
+            part("Vendor Details"; 70062)
             {
                 Caption = 'Vendor Details';
-                Editable = EditVendorDetails;
-                SubPageLink = "Document Type" = FIELD("Document Type"),
-                              "Document No." = FIELD("No.");
+                SubPageLink = "Document Type" = FIELD("Document Type"), "Document No." = FIELD("No.");
             }
             group("Procurement Approval")
             {
-                Visible = CapexAppr;
-                grid(Control1)
+                Visible = OpexAppr;
+                grid(Control01)
                 {
-                    group(Control2)
+                    group(Control02)
                     {
                         field("Head of Department"; Rec."Head of Department")
                         {
@@ -109,7 +97,7 @@ page 70151 "Approved Capex Card3"
                             ShowCaption = false;
                         }
                     }
-                    group(Control11)
+                    group(Control03)
                     {
                         field("Head of Audit"; Rec."Head of Audit")
                         {
@@ -128,7 +116,7 @@ page 70151 "Approved Capex Card3"
                             ShowCaption = false;
                         }
                     }
-                    group(Control12)
+                    group(Control04)
                     {
                         field("General Manager"; Rec."General Manager")
                         {
@@ -149,7 +137,7 @@ page 70151 "Approved Capex Card3"
                             Visible = Date3;
                         }
                     }
-                    group(Control13)
+                    group(Control05)
                     {
                         field("Managing Director"; Rec."Managing Director")
                         {
@@ -176,9 +164,9 @@ page 70151 "Approved Capex Card3"
             group("Advance Payment Approval")
             {
                 Visible = AdvPay;
-                grid(Control3)
+                grid(Control06)
                 {
-                    group(Control4)
+                    group(Control07)
                     {
                         field("Adv. Paymt. HOD"; Rec."Adv. Paymt. HOD")
                         {
@@ -189,14 +177,16 @@ page 70151 "Approved Capex Card3"
                         }
                         field("Authorized by HOD"; Rec."Authorized by HOD")
                         {
+                            Editable = false;
                             ShowCaption = false;
                         }
                         field(TimeDate5; Rec.TimeDate5)
                         {
+                            Editable = false;
                             ShowCaption = false;
                         }
                     }
-                    group(Control14)
+                    group(Control08)
                     {
                         field("Adv. Paymt. Audit"; Rec."Adv. Paymt. Audit")
                         {
@@ -219,9 +209,9 @@ page 70151 "Approved Capex Card3"
             group("Service/Item Delivery Check")
             {
                 Visible = Check;
-                grid(Control5)
+                grid(Control09)
                 {
-                    group(Control6)
+                    group(Control010)
                     {
                         field("Service Delivery1"; Rec."Service Delivery1")
                         {
@@ -241,7 +231,7 @@ page 70151 "Approved Capex Card3"
                             ShowCaption = false;
                         }
                     }
-                    group(Control15)
+                    group(Control011)
                     {
                         field("Service Delivery2"; Rec."Service Delivery2")
                         {
@@ -264,10 +254,10 @@ page 70151 "Approved Capex Card3"
             }
             group("Balance Payment  Approval")
             {
-                Visible = CHECK;
-                grid(Control7)
+                Visible = BalPay;
+                grid(Control012)
                 {
-                    group(Control8)
+                    group(Control013)
                     {
                         field("Bal. Paymt. HOD"; Rec."Bal. Paymt. HOD")
                         {
@@ -279,14 +269,16 @@ page 70151 "Approved Capex Card3"
                         field("Bal. Paymt. by HOD"; Rec."Bal. Paymt. by HOD")
                         {
                             Caption = 'Payment Approved by';
+                            Editable = false;
                             ShowCaption = false;
                         }
                         field(TimeDate8; Rec.TimeDate8)
                         {
+                            Editable = false;
                             ShowCaption = false;
                         }
                     }
-                    group(Control16)
+                    group(Control014)
                     {
                         field("Bal. Paymt. Audit"; Rec."Bal. Paymt. Audit")
                         {
@@ -305,7 +297,7 @@ page 70151 "Approved Capex Card3"
                             ShowCaption = false;
                         }
                     }
-                    group(Control9)
+                    group(Control015)
                     {
                         Visible = BalGM;
                         field("Bal. Paymt. GM"; Rec."Bal. Paymt. GM")
@@ -325,7 +317,7 @@ page 70151 "Approved Capex Card3"
                             ShowCaption = false;
                         }
                     }
-                    group(Control10)
+                    group(Control016)
                     {
                         Visible = BalMD;
                         field("Bal. Paymt. MD"; Rec."Bal. Paymt. MD")
@@ -352,10 +344,9 @@ page 70151 "Approved Capex Card3"
         }
         area(factboxes)
         {
-            part(Lines; 70130)
+            part(Factbox; "Procurement FactBox")
             {
-                SubPageLink = "Document Type" = FIELD("Document Type"),
-                              "No." = FIELD("No.");
+                SubPageLink = "Document Type" = FIELD("Document Type"), "No." = FIELD("No.");
             }
         }
     }
@@ -364,19 +355,88 @@ page 70151 "Approved Capex Card3"
     {
         area(navigation)
         {
-            action(Close)
+            action("Payment Approval Only")
             {
-                Caption = 'Close';
-                Image = Delete;
+                Caption = 'Payment Approval Only';
+                Image = CheckRulesSyntax;
                 Promoted = true;
                 PromotedCategory = Process;
                 PromotedIsBig = true;
 
                 trigger OnAction()
                 begin
-                    IF CONFIRM('Do you want to close this opex?', FALSE) THEN
-                        Rec.Closed := TRUE;
+                    ProcurementLine.SETRANGE("Document Type", Rec."Document Type");
+                    ProcurementLine.SETRANGE("Document No.", Rec."No.");
+                    IF ProcurementLine.FINDFIRST THEN BEGIN
+                        IF (ProcurementLine."Payment Terms" <> ProcurementLine."Payment Terms"::"100% after delivery") AND
+                           (ProcurementLine."Payment Terms" <> ProcurementLine."Payment Terms"::"100% before delivery") THEN
+                            ERROR('You cannot use payment approval only for advance payment.');
+
+                    END;
+
+
+                    Rec.TESTFIELD(Send, FALSE);
+                    ProcurementLine.SETRANGE("Document Type", Rec."Document Type");
+                    ProcurementLine.SETRANGE("Document No.", Rec."No.");
+                    IF ProcurementLine.FINDFIRST THEN BEGIN
+                        REPEAT
+                            ProcurementLine.CALCFIELDS(Amount);
+                            ProcurementLine.TESTFIELD(Amount);
+                            ProcurementLine.TESTFIELD(Preferred, TRUE);
+                        UNTIL ProcurementLine.NEXT = 0;
+                    END;
+                    Rec.TESTFIELD("Send To");
+                    Rec.TESTFIELD("Proposed Purchase Amount");
+                    IF Rec."Document Type" = Rec."Document Type"::Opex THEN
+                        Rec.TESTFIELD("Opex Type");
+                    IF Rec."Document Type" = Rec."Document Type"::Capex THEN
+                        Rec.TESTFIELD("Capex Type");
+                    IF Rec."Document Type" = Rec."Document Type"::Opex THEN
+                        Rec.TESTFIELD("Purchase Type");
+
+                    Rec.TESTFIELD("Purchase Justification");
+
+
+                    Rec."Payment Approval Only" := TRUE;
+                    Rec.Compliance := TRUE;
+                    Rec.MODIFY;
+
+                    MESSAGE('Kindly proceed to compliance check!');
+
+                    //UserSetup.GET("Send To");
+                    //ToAddresses := 'adewumi@toyotanigeria.com';
+                    //CcAddresses := '';
+                    //BccAddresses := '';
+                    //Subject := STRSUBSTNO("No.");
+                    //Body := Text012;
+                    //AttachFilename := '';
+                    //ShowNewMailDialogOnSend := TRUE;
+                    //Mail.NewMessage(ToAddresses,CcAddresses,BccAddresses,Subject,Body,AttachFilename,ShowNewMailDialogOnSend);
                 end;
+            }
+            action("Raise LPP")
+            {
+                Image = RegisterPick;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+
+                trigger OnAction()
+                begin
+                    //IF "LPP Created" THEN
+                    //  ERROR('LPP has been raised');
+
+                    Rec.CreateLPP;
+                    MESSAGE('LPP Raised');
+                end;
+            }
+            action("View LPP")
+            {
+                Image = Form;
+                Promoted = true;
+                PromotedCategory = Process;
+                RunObject = Page 70193;
+                RunPageLink = "RFQ No." = FIELD("No."), "TCOF No." = FIELD("TCOF No.");
             }
         }
     }
@@ -384,103 +444,194 @@ page 70151 "Approved Capex Card3"
     trigger OnAfterGetRecord()
     begin
         IF Rec.Send THEN BEGIN
-            CapexAppr := TRUE
+            OpexAppr := TRUE
         END
         ELSE
-            CapexAppr := FALSE;
+            OpexAppr := FALSE;
 
-        IF (Rec."Capex Type" = Rec."Capex Type"::"Fixed Asset")// OR ("Proposed Purchase Amount" > 100000)
-         THEN BEGIN
-            GMAppr := FALSE;
-            NameGM := FALSE;
-            Date3 := FALSE;
-            MDAppr := TRUE;
-            NameMD := TRUE;
-            Date4 := TRUE;
-        END ELSE BEGIN
+        //IF "Proposed Purchase Amount" <= 500000 THEN BEGIN
+        //  GMAppr := TRUE;
+        //  NameGM := TRUE;
+        //  Date3  := TRUE;
+        //  MDAppr := FALSE;
+        //  NameMD := FALSE;
+        //  Date4  := FALSE
+        //END ELSE BEGIN
+        //  GMAppr := FALSE;
+        //  NameGM := FALSE;
+        //  Date3  := FALSE;
+        //  MDAppr := TRUE;
+        //  NameMD := TRUE;
+        //  Date4  := TRUE;
+        //END;
+
+        IF (Rec."Proposed Purchase Amount" <= 500000) AND (Rec."Opex Type" = Rec."Opex Type"::Entertainment) THEN BEGIN
             GMAppr := TRUE;
             NameGM := TRUE;
             Date3 := TRUE;
             MDAppr := FALSE;
             NameMD := FALSE;
             Date4 := FALSE
+        END ELSE BEGIN
+            GMAppr := FALSE;
+            NameGM := FALSE;
+            Date3 := FALSE;
+            MDAppr := TRUE;
+            NameMD := TRUE;
+            Date4 := TRUE;
         END;
 
-        ProcurementLine.SETRANGE("Document No.", Rec."No.");
-        ProcurementLine.SETRANGE(Preferred, TRUE);
-        IF ProcurementLine.FINDFIRST THEN
-            IF (ProcurementLine."Payment Terms" <> ProcurementLine."Payment Terms"::"100% after delivery") AND
-               (ProcurementLine."Payment Terms" <> ProcurementLine."Payment Terms"::"100% before delivery") THEN
-                IF (Rec."General Manager" = Rec."General Manager"::Approved) OR (Rec."Managing Director" = Rec."Managing Director"::Approved) THEN
-                    AdvPay := TRUE;
+
+
 
 
         IF Rec.Compliance = TRUE THEN
             Check := TRUE;
+    end;
 
-
-        IF Rec."Service Delivery2" = Rec."Service Delivery2"::Satisfactory THEN BEGIN
-            IF (Rec."Capex Type" = Rec."Capex Type"::"Fixed Asset") //OR ("Proposed Purchase Amount" > 100000)
-             THEN BEGIN
-                BalMD := TRUE;
-                BalPay := TRUE;
-            END ELSE BEGIN
-                BalGM := TRUE
-            END;
-        END;
+    trigger OnDeleteRecord(): Boolean
+    begin
+        ERROR('You can not delete this entry. Contact your System Administrator!')
     end;
 
     trigger OnOpenPage()
     begin
-        IF Rec.Send THEN BEGIN
-            CapexAppr := TRUE
-        END
-        ELSE
-            CapexAppr := FALSE;
+        //IF Send THEN BEGIN
+        //  OpexAppr := TRUE END
+        //ELSE OpexAppr := FALSE;
+        IF Rec."No." <> '' THEN BEGIN
+            IF Rec.Send THEN BEGIN
+                OpexAppr := TRUE
+            END
+            ELSE
+                OpexAppr := FALSE;
 
-        IF (Rec."Capex Type" = Rec."Capex Type"::"Fixed Asset")// OR ("Proposed Purchase Amount" > 100000)
-         THEN BEGIN
-            GMAppr := FALSE;
-            NameGM := FALSE;
-            Date3 := FALSE;
-            MDAppr := TRUE;
-            NameMD := TRUE;
-            Date4 := TRUE;
-        END ELSE BEGIN
-            GMAppr := TRUE;
-            NameGM := TRUE;
-            Date3 := TRUE;
-            MDAppr := FALSE;
-            NameMD := FALSE;
-            Date4 := FALSE
-        END;
+            //IF "Proposed Purchase Amount" <= 500000 THEN BEGIN
+            //  GMAppr := TRUE;
+            //  NameGM := TRUE;
+            //  Date3  := TRUE;
+            //  MDAppr := FALSE;
+            //  NameMD := FALSE;
+            //  Date4  := FALSE
+            //END ELSE BEGIN
+            //  GMAppr := FALSE;
+            //  NameGM := FALSE;
+            //  Date3  := FALSE;
+            //  MDAppr := TRUE;
+            //  NameMD := TRUE;
+            //  Date4  := TRUE;
+            //END;
 
-        ProcurementLine.SETRANGE("Document No.", Rec."No.");
-        ProcurementLine.SETRANGE(Preferred, TRUE);
-        IF ProcurementLine.FINDFIRST THEN
-            IF (ProcurementLine."Payment Terms" <> ProcurementLine."Payment Terms"::"100% after delivery") AND
-               (ProcurementLine."Payment Terms" <> ProcurementLine."Payment Terms"::"100% before delivery") THEN
-                IF (Rec."General Manager" = Rec."General Manager"::Approved) OR (Rec."Managing Director" = Rec."Managing Director"::Approved) THEN
-                    AdvPay := TRUE;
 
-        IF Rec.Compliance = TRUE THEN
-            Check := TRUE;
 
-        //IF "Service Delivery2" = "Service Delivery2"::Satisfactory THEN  BEGIN
-        //  IF "Proposed Purchase Amount" <= 350000 THEN
-        //    BalGM := TRUE
-        //  ELSE
-        //    BalMD := TRUE;
-        //    BalPay := TRUE;
-        //END;
-        IF Rec."Service Delivery2" = Rec."Service Delivery2"::Satisfactory THEN BEGIN
-            IF (Rec."Capex Type" = Rec."Capex Type"::"Fixed Asset")// OR ("Proposed Purchase Amount" > 100000)
-             THEN BEGIN
-                BalMD := TRUE;
-                BalPay := TRUE;
+            IF NOT (Rec."Opex Type" = Rec."Opex Type"::Entertainment) THEN BEGIN
+                IF (Rec."Proposed Purchase Amount" <= 500000) THEN BEGIN
+                    GMAppr := TRUE;
+                    NameGM := TRUE;
+                    Date3 := TRUE;
+                    MDAppr := FALSE;
+                    NameMD := FALSE;
+                    Date4 := FALSE;
+                    Rec.ListGM := TRUE;
+                    Rec.ListMD := FALSE;
+                    Rec.MODIFY
+
+                END ELSE BEGIN
+                    GMAppr := FALSE;
+                    NameGM := FALSE;
+                    Date3 := FALSE;
+                    MDAppr := TRUE;
+                    NameMD := TRUE;
+                    Date4 := TRUE;
+                    Rec.ListGM := FALSE;
+                    Rec.ListMD := TRUE;
+                    Rec.MODIFY
+
+                END
             END ELSE BEGIN
-                BalGM := TRUE
+                IF (Rec."Proposed Purchase Amount" <= 50000) THEN BEGIN
+                    GMAppr := TRUE;
+                    NameGM := TRUE;
+                    Date3 := TRUE;
+                    MDAppr := FALSE;
+                    NameMD := FALSE;
+                    Date4 := FALSE;
+                    Rec.ListGM := TRUE;
+                    Rec.ListMD := FALSE;
+                    Rec.MODIFY
+
+                END ELSE BEGIN
+                    GMAppr := FALSE;
+                    NameGM := FALSE;
+                    Date3 := FALSE;
+                    MDAppr := TRUE;
+                    NameMD := TRUE;
+                    Date4 := TRUE;
+                    Rec.ListGM := FALSE;
+                    Rec.ListMD := TRUE;
+                    Rec.MODIFY
+
+                END
             END;
+
+            IF Rec."Payment Approval Only" = TRUE THEN BEGIN
+                Check := TRUE;
+                SendVisible := FALSE
+            END ELSE BEGIN
+                Check := FALSE;
+                SendVisible := TRUE;
+            END;
+
+            ProcurementLine.SETRANGE("Document No.", Rec."No.");
+            ProcurementLine.SETRANGE(Preferred, TRUE);
+            IF ProcurementLine.FINDFIRST THEN
+                IF (ProcurementLine."Payment Terms" <> ProcurementLine."Payment Terms"::"100% after delivery") AND
+                   (ProcurementLine."Payment Terms" <> ProcurementLine."Payment Terms"::"100% before delivery") THEN
+                    IF (Rec."General Manager" = Rec."General Manager"::Approved) OR (Rec."Managing Director" = Rec."Managing Director"::Approved) THEN
+                        AdvPay := TRUE;
+
+            IF Rec.Compliance = TRUE THEN
+                Check := TRUE;
+
+            IF Rec."Service Delivery2" = Rec."Service Delivery2"::Satisfactory THEN BEGIN
+                //IF "Proposed Purchase Amount" <= 500000 THEN
+                //BalGM := TRUE
+                //ELSE
+                //BalMD := TRUE;
+                //BalPay := TRUE;
+                //END;
+                IF NOT (Rec."Opex Type" = Rec."Opex Type"::Entertainment) THEN BEGIN
+                    IF (Rec."Proposed Purchase Amount" <= 500000) THEN BEGIN
+                        BalGM := TRUE;
+                        BalMD := FALSE;
+                        BalPay := TRUE;
+                        Rec.MODIFY
+                    END ELSE BEGIN
+                        BalGM := FALSE;
+                        BalMD := TRUE;
+                        BalPay := TRUE;
+                        Rec.MODIFY
+
+                    END
+                END ELSE BEGIN
+                    IF (Rec."Proposed Purchase Amount" <= 50000) THEN BEGIN
+                        BalGM := TRUE;
+                        BalMD := FALSE;
+                        BalPay := TRUE;
+                        Rec.MODIFY
+                    END ELSE BEGIN
+                        BalGM := FALSE;
+                        BalMD := TRUE;
+                        BalPay := TRUE;
+                        Rec.MODIFY
+
+                    END;
+                END;
+            END;
+            // IF (Send = TRUE)OR ("Payment Approval Only" = TRUE) THEN
+            //    EditSend := FALSE ELSE
+            //    EditSend := TRUE;
+            EditApproval;
         END;
     end;
 
@@ -531,7 +682,7 @@ page 70151 "Approved Capex Card3"
         AdvPay: Boolean;
         Check: Boolean;
         BalPay: Boolean;
-        CapexAppr: Boolean;
+        OpexAppr: Boolean;
         Date3: Boolean;
         Date4: Boolean;
         Date5: Boolean;
@@ -542,6 +693,7 @@ page 70151 "Approved Capex Card3"
         PaymentRec3: Record 50103;
         LPO: Record 70010;
         CapexLine: Record 70001;
+        SendVisible: Boolean;
         EditSend: Boolean;
         EditHOD2: Boolean;
         EditHOA2: Boolean;
@@ -556,12 +708,14 @@ page 70151 "Approved Capex Card3"
         EditBalanceGM: Boolean;
         EditBalanceMD: Boolean;
         EditVendorDetails: Boolean;
+        ProcurementDetail: Record 70001;
 
     local procedure EditApproval()
     begin
-        IF (Rec.Send = TRUE) THEN
+        IF (Rec.Send = TRUE) OR (Rec."Payment Approval Only" = TRUE) THEN
             EditSend := FALSE ELSE
             EditSend := TRUE;
+
 
         IF (Rec."Head of Department" = Rec."Head of Department"::Approved) OR
            (Rec."Bal. Paymt. HOD" = Rec."Bal. Paymt. HOD"::Approved) THEN
@@ -569,51 +723,51 @@ page 70151 "Approved Capex Card3"
             EditVendorDetails := TRUE;
 
 
-        IF (Rec."Head of Department" = Rec."Head of Department"::Approved) THEN
+        IF Rec."Head of Department" = Rec."Head of Department"::Approved THEN
             EditHOD2 := FALSE ELSE
             EditHOD2 := TRUE;
 
-        IF (Rec."Head of Audit" = Rec."Head of Audit"::Approved) THEN
+        IF Rec."Head of Audit" = Rec."Head of Audit"::Approved THEN
             EditHOA2 := FALSE ELSE
             EditHOA2 := TRUE;
 
-        IF (Rec."General Manager" = Rec."General Manager"::Approved) THEN
+        IF Rec."General Manager" = Rec."General Manager"::Approved THEN
             EditGM2 := FALSE ELSE
             EditGM2 := TRUE;
 
 
-        IF (Rec."Managing Director" = Rec."Managing Director"::Approved) THEN
+        IF Rec."Managing Director" = Rec."Managing Director"::Approved THEN
             EditMD2 := FALSE ELSE
             EditMD2 := TRUE;
 
-        IF (Rec."Adv. Paymt. HOD" = Rec."Adv. Paymt. HOD"::Approved) THEN
+        IF Rec."Adv. Paymt. HOD" = Rec."Adv. Paymt. HOD"::Approved THEN
             EditAdvanceHOD := FALSE ELSE
             EditAdvanceHOD := TRUE;
 
-        IF (Rec."Adv. Paymt. Audit" = Rec."Adv. Paymt. Audit"::Approved) THEN
+        IF Rec."Adv. Paymt. Audit" = Rec."Adv. Paymt. Audit"::Approved THEN
             EditAdvanceHOA := FALSE ELSE
             EditAdvanceHOA := TRUE;
-        IF (Rec."Service Delivery1" = Rec."Service Delivery1"::Satisfactory) THEN
+        IF Rec."Service Delivery1" = Rec."Service Delivery1"::Satisfactory THEN
             EditServiceCheckRequester := FALSE ELSE
             EditServiceCheckRequester := TRUE;
 
-        IF (Rec."Service Delivery2" = Rec."Service Delivery2"::Satisfactory) THEN
+        IF Rec."Service Delivery2" = Rec."Service Delivery2"::Satisfactory THEN
             EditServiceCheckAudit := FALSE ELSE
             EditServiceCheckAudit := TRUE;
 
-        IF (Rec."Bal. Paymt. HOD" = Rec."Bal. Paymt. HOD"::Approved) THEN
+        IF Rec."Bal. Paymt. HOD" = Rec."Bal. Paymt. HOD"::Approved THEN
             EditBalanceHOD := FALSE ELSE
             EditBalanceHOD := TRUE;
 
-        IF (Rec."Bal. Paymt. Audit" = Rec."Bal. Paymt. Audit"::Approved) THEN
+        IF Rec."Bal. Paymt. Audit" = Rec."Bal. Paymt. Audit"::Approved THEN
             EditBalanceHOA := FALSE ELSE
             EditBalanceHOA := TRUE;
 
-        IF (Rec."Bal. Paymt. GM" = Rec."Bal. Paymt. GM"::Approved) THEN
+        IF Rec."Bal. Paymt. GM" = Rec."Bal. Paymt. GM"::Approved THEN
             EditBalanceGM := FALSE ELSE
             EditBalanceGM := TRUE;
 
-        IF (Rec."Bal. Paymt. MD" = Rec."Bal. Paymt. MD"::Approved) THEN
+        IF Rec."Bal. Paymt. MD" = Rec."Bal. Paymt. MD"::Approved THEN
             EditBalanceMD := FALSE ELSE
             EditBalanceMD := TRUE;
     end;

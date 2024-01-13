@@ -1,10 +1,7 @@
-page 50139 "Approved IOU Retirement"
+page 50218 "IOU Retirement Card"
 {
-    ApplicationArea = All;
     PageType = Card;
     SourceTable = "IOU Retirement Header";
-    SourceTableView = WHERE(Posted = filter(false),
-                            "Final Apprv. Status" = filter('Approved'));
 
     layout
     {
@@ -16,10 +13,14 @@ page 50139 "Approved IOU Retirement"
                 field("No."; Rec."No.")
                 {
                     Editable = "No.Editable";
+
+                    trigger OnValidate()
+                    begin
+                        ERROR('You cannot change the Retirement No.!');
+                    end;
                 }
                 field("IOU No."; Rec."IOU No.")
                 {
-                    Editable = false;
 
                     trigger OnValidate()
                     begin
@@ -63,10 +64,6 @@ page 50139 "Approved IOU Retirement"
                     Caption = 'Balance';
                     Editable = false;
                 }
-                label(Control1)
-                {
-                    CaptionClass = Text19002652;
-                }
                 field("Applies-to Doc. No."; Rec."Applies-to Doc. No.")
                 {
                 }
@@ -74,25 +71,26 @@ page 50139 "Approved IOU Retirement"
                 {
                 }
             }
-            part("Retirement Lines"; 50221)
+            part("Retirement Lines"; "Retirement Lines")
             {
-                SubPageLink = "Retirement No." = FIELD("No."),
-                              "IOU No." = FIELD("IOU No.");
+                SubPageLink = "Retirement No." = FIELD("No."), "IOU No." = FIELD("IOU No.");
             }
-            group(Sender)
+            group(Approval)
             {
-                field("1st Approval to"; Rec."1st Approval to")
+                Caption = 'Approval';
+                field(Sender; Rec.Sender)
                 {
-                    Caption = 'Send To';
                     Editable = "1st Approval toEditable";
                 }
-                field("1st Approver"; Rec."1st Approver")
+                field("Sent Time"; Rec."Sent Time")
                 {
+                    Caption = 'Sent Time';
                     Editable = false;
                 }
                 field("Send for Approval"; Rec."Send for Approval")
                 {
-                    Editable = "Send for ApprovalEditable";
+                    Caption = 'Send';
+                    Editable = "1st Approval toEditable";
 
                     trigger OnValidate()
                     begin
@@ -102,25 +100,33 @@ page 50139 "Approved IOU Retirement"
                             "1st Approval toEditable" := TRUE;
                     end;
                 }
-                field("Sent Time"; Rec."Sent Time")
+                field("1st Approval to"; Rec."1st Approval to")
                 {
+                    Caption = 'To';
+                    Editable = "1st Approval toEditable";
+                }
+                field("1st Approver"; Rec."1st Approver")
+                {
+                    Caption = 'Name';
                     Editable = false;
                 }
             }
-            group("1st Approval")
+            group("Level 1")
             {
                 Visible = "1st ApprovalVisible";
                 field("2nd Approval to"; Rec."2nd Approval to")
                 {
-                    Caption = 'For Next Approval Send to';
+                    Caption = 'To';
                     Editable = "2nd Approval toEditable";
                 }
                 field("2nd Approver"; Rec."2nd Approver")
                 {
+                    Caption = 'Name';
                     Editable = false;
                 }
-                field("1st Apprv. Status"; Rec."1st Apprv. Status")
+                field("1st Apprv. Sta  tus"; Rec."1st Apprv. Status")
                 {
+                    Caption = 'Status';
                     Editable = "1st Apprv. StatusEditable";
 
                     trigger OnValidate()
@@ -134,29 +140,28 @@ page 50139 "Approved IOU Retirement"
                         END;
                     end;
                 }
-                field("1st Approval Time"; Rec."1st Approval Time")
+                field("1st Approval T  ime"; Rec."1st Approval Time")
                 {
+                    Caption = 'Sent Time';
                     Editable = false;
                 }
-                label(Control2)
-                {
-                    CaptionClass = Text19022435;
-                }
             }
-            group("2nd Approval")
+            group("Level 2")
             {
                 Visible = "2nd ApprovalVisible";
                 field("3rd Approval to"; Rec."3rd Approval to")
                 {
-                    Caption = 'For Next Approval Send to';
+                    Caption = 'To';
                     Editable = "3rd Approval toEditable";
                 }
-                field("3rd Approver"; Rec."3rd Approver")
+                field("3rd Appro  ver"; Rec."3rd Approver")
                 {
+                    Caption = 'Name';
                     Editable = false;
                 }
                 field("2nd Apprv. Status"; Rec."2nd Apprv. Status")
                 {
+                    Caption = 'Status';
                     Editable = "2nd Apprv. StatusEditable";
 
                     trigger OnValidate()
@@ -172,10 +177,11 @@ page 50139 "Approved IOU Retirement"
                 }
                 field("2nd Approval Time"; Rec."2nd Approval Time")
                 {
+                    Caption = 'Sent Time';
                     Editable = false;
                 }
             }
-            group("Final Approval")
+            group("Level 3")
             {
                 Visible = "Final ApprovalVisible";
                 field("Final Apprv. Status"; Rec."Final Apprv. Status")
@@ -208,6 +214,8 @@ page 50139 "Approved IOU Retirement"
                 {
                     Caption = 'Print';
                     Image = Print;
+                    Promoted = true;
+                    PromotedCategory = Process;
                     ShortCutKey = 'F7';
 
                     trigger OnAction()
@@ -217,52 +225,49 @@ page 50139 "Approved IOU Retirement"
                             REPORT.RUNMODAL(50350, TRUE, TRUE, IOURetireHead);
                     end;
                 }
-            }
-        }
-        area(processing)
-        {
-            action("P&ost")
-            {
-                Caption = 'P&ost';
-                Ellipsis = true;
-                Image = Post;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
-                Visible = true;
+                action("P&ost")
+                {
+                    Caption = 'P&ost';
+                    Ellipsis = true;
+                    Image = Post;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    PromotedIsBig = true;
+                    Visible = true;
 
-                trigger OnAction()
-                begin
-                    Rec.TESTFIELD("Final Apprv. Status", 2);
-                    IOURec.GET(Rec."IOU No.");
-                    IOURec.TESTFIELD(IOURec."Converted to Loan", FALSE);
-                    IF NOT CONFIRM(Text001, FALSE) THEN
-                        EXIT ELSE BEGIN
-                        GPC.PostIOURetirement(Rec);
-                        CurrPage.UPDATE(FALSE);
-                        IOURec.Posted := TRUE;
-                    END;
-                end;
-            }
-            action("test report")
-            {
-                Caption = 'Test Report';
-                Image = TestReport;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
+                    trigger OnAction()
+                    begin
+                        Rec.TESTFIELD("Final Apprv. Status", 2);
+                        IOURec.GET(Rec."IOU No.");
+                        IOURec.TESTFIELD(IOURec."Converted to Loan", FALSE);
+                        IF NOT CONFIRM(Text001, FALSE) THEN
+                            EXIT ELSE BEGIN
+                            GPC.PostIOURetirement(Rec);
+                            CurrPage.UPDATE(FALSE);
+                            IOURec.Posted := TRUE;
+                        END;
+                    end;
+                }
+                action("test report")
+                {
+                    Caption = 'Test Report';
+                    Image = TestReport;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    PromotedIsBig = true;
 
-                trigger OnAction()
-                begin
+                    trigger OnAction()
+                    begin
 
-                    Rec."Test Report" := TRUE;
+                        Rec."Test Report" := TRUE;
 
-                    GLEntry2.SETRANGE(GLEntry2."Document No.", Rec."No.");
-                    IF GLEntry2.FINDFIRST THEN
-                        ERROR('This document has been posted before!');
-                    IF Rec.Posted THEN ERROR('This document has been posted before!');
-                    Rec.Testgl(Rec);
-                end;
+                        GLEntry2.SETRANGE(GLEntry2."Document No.", Rec."No.");
+                        IF GLEntry2.FINDFIRST THEN
+                            ERROR('This document has been posted before!');
+                        IF Rec.Posted THEN ERROR('This document has been posted before!');
+                        Rec.Testgl(Rec);
+                    end;
+                }
             }
         }
     }
@@ -270,9 +275,9 @@ page 50139 "Approved IOU Retirement"
     trigger OnAfterGetRecord()
     begin
         BalAmt := 0;
-        Rec.CALCFIELDS(Rec."Amount To Retire");
+        Rec.CALCFIELDS("Amount To Retire");
         BalAmt := Rec."Original IOU Amount" - Rec."Amount To Retire";
-        CustomOnAfterGetCurrRecord();
+        CustOnAfterGetCurrRecord;
     end;
 
     trigger OnInit()
@@ -292,7 +297,7 @@ page 50139 "Approved IOU Retirement"
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
-        CustomOnAfterGetCurrRecord;
+        CustOnAfterGetCurrRecord;
     end;
 
     trigger OnOpenPage()
@@ -360,7 +365,7 @@ page 50139 "Approved IOU Retirement"
         Text19022435: Label '1st Approver''s Comment';
         GLEntry2: Record 17;
 
-    local procedure CustomOnAfterGetCurrRecord()
+    local procedure CustOnAfterGetCurrRecord()
     begin
         xRec := Rec;
         IF Rec."1st Apprv. Status" = Rec."1st Apprv. Status"::Approved THEN
@@ -380,7 +385,7 @@ page 50139 "Approved IOU Retirement"
             "Final ApprovalVisible" := FALSE;
 
         BalAmt := 0;
-        Rec.CALCFIELDS(Rec."Amount To Retire");
+        Rec.CALCFIELDS("Amount To Retire");
         BalAmt := Rec."Original IOU Amount" - Rec."Amount To Retire";
     end;
 }

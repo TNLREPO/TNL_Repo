@@ -102,105 +102,6 @@ table 50053 "Fuel Vouchers."
         field(18; Issue; Boolean)
         {
 
-            trigger OnValidate()
-            begin
-                /*
-                IF NOT CONFIRM(Text100,FALSE) THEN
-                  ERROR('Action aborted!');
-                
-                TESTFIELD("Item No.");
-                TESTFIELD("Fuel Code");
-                TESTFIELD("Qty Issued");
-                
-                Item.GET("Item No.");
-                GenPostSetup.GET('',Item."Gen. Prod. Posting Group");
-                IF FA.GET("Asset Code") THEN BEGIN
-                   GenPostSetup.GET('',Item."Gen. Prod. Posting Group");
-                   FADeprBk.SETRANGE(FADeprBk."FA No.",FA."No.");
-                   FADeprBk.FINDFIRST;
-                END;
-                //post item
-                ItemJnlLine."Journal Template Name" := 'ITEM';
-                ItemJnlLine."Journal Batch Name" := 'FUEL';
-                ItemJnlLine."Line No." := 10000;
-                ItemJnlLine."Posting Date" := "Transaction Date";
-                ItemJnlLine."Document No." := "Voucher No.";
-                ItemJnlLine.VALIDATE("Item No.","Item No.");
-                ItemJnlLine.Description := Description;
-                ItemJnlLine.VALIDATE(ItemJnlLine."Shortcut Dimension 1 Code","Shortcut Dimension 1 Code");
-                ItemJnlLine.VALIDATE(ItemJnlLine."Shortcut Dimension 2 Code","Shortcut Dimension 2 Code");
-                 //New Vehicle fueling
-                IF "New Vehicle" THEN
-                ItemJnlLine."Gen. Bus. Posting Group" := "Posting Group";
-                ItemJnlLine."Entry Type" := ItemJnlLine."Entry Type"::"Negative Adjmt.";
-                ItemJnlLine."Location Code" := Location;
-                ItemJnlLine.VALIDATE(Quantity,"Qty Issued");
-                IF NOT ItemJnlLine.INSERT(TRUE) THEN ItemJnlLine.MODIFY(TRUE);
-                ItemJnlPost.RUN(ItemJnlLine);
-                
-                //post maintenance
-                IF FA.GET("Asset Code") THEN BEGIN
-                  GenJnlLine."Journal Template Name" := 'GENERAL';
-                  GenJnlLine."Journal Batch Name" := 'FUEL';
-                  GenJnlLine."Line No." := 10000;
-                  GenJnlLine.VALIDATE(GenJnlLine."Posting Date","Transaction Date");
-                  GenJnlLine."Document No." := "Voucher No.";
-                  GenJnlLine."Account Type" := GenJnlLine."Account Type"::"Fixed Asset";
-                  GenJnlLine.VALIDATE("Account No.","Asset Code");
-                  GenJnlLine."Bal. Account Type" := GenJnlLine."Bal. Account Type"::"G/L Account";
-                  GenJnlLine.VALIDATE("Bal. Account No.",GenPostSetup."Inventory Adjmt. Account");
-                  GenJnlLine.VALIDATE(GenJnlLine."Shortcut Dimension 1 Code","Shortcut Dimension 1 Code");
-                  GenJnlLine.VALIDATE(GenJnlLine."Shortcut Dimension 2 Code","Shortcut Dimension 2 Code");
-                  GenJnlLine.Description := Description;
-                  GenJnlLine.Amount := Item."Unit Cost" * "Qty Issued";
-                  GenJnlLine."FA Posting Type" := GenJnlLine."FA Posting Type"::Maintenance;
-                  GenJnlLine."Depreciation Book Code" := FADeprBk."Depreciation Book Code";
-                  GenJnlLine."Maintenance Code" := "Fuel Code";
-                  GenJnlLine."Gen. Posting Type" := 0;
-                  GenJnlLine."Gen. Bus. Posting Group" := '';
-                  GenJnlLine."Gen. Prod. Posting Group" := '';
-                  IF NOT GenJnlLine.INSERT(TRUE) THEN GenJnlLine.MODIFY(TRUE);
-                    GenJnlPost.RUN(GenJnlLine);
-                END;
-                //Post Customer/Staff/vendor
-                CASE "Account Type" OF
-                  1: Custrec.GET("Account No.");
-                  2: Vendor.GET("Account No.");
-                END;
-                //IF Custrec.GET("Account No.") THEN
-                IF "Account No." <> '' THEN
-                BEGIN
-                  IF "Account Type" = 0 THEN
-                    ERROR('Account Type must be specified!');
-                
-                  GenJnlLine."Journal Template Name" := 'GENERAL';
-                  GenJnlLine."Journal Batch Name" := 'FUEL';
-                  GenJnlLine."Line No." := 10000;
-                  GenJnlLine.VALIDATE(GenJnlLine."Posting Date","Transaction Date");
-                  GenJnlLine."Document No." := "Voucher No.";
-                  IF "Account Type" = "Account Type"::Customer THEN
-                    GenJnlLine."Account Type" := GenJnlLine."Account Type"::Customer
-                  ELSE
-                    GenJnlLine."Account Type" := GenJnlLine."Account Type"::Vendor;
-                  GenJnlLine.VALIDATE("Account No.","Account No.");
-                  GenJnlLine."Bal. Account Type" := GenJnlLine."Bal. Account Type"::"G/L Account";
-                  GenJnlLine.VALIDATE("Bal. Account No.",GenPostSetup."Inventory Adjmt. Account");
-                  GenJnlLine.VALIDATE(GenJnlLine."Shortcut Dimension 1 Code","Shortcut Dimension 1 Code");
-                  GenJnlLine.VALIDATE(GenJnlLine."Shortcut Dimension 2 Code","Shortcut Dimension 2 Code");
-                  GenJnlLine.Description := Description;
-                  GenJnlLine.Amount := Item."Unit Cost" * "Qty Issued";
-                  GenJnlLine."FA Posting Type" := 0;
-                  GenJnlLine."Depreciation Book Code" := '';
-                  GenJnlLine."Maintenance Code" := '';
-                  GenJnlLine."Gen. Posting Type" := 0;
-                  GenJnlLine."Gen. Bus. Posting Group" := '';
-                  GenJnlLine."Gen. Prod. Posting Group" := '';
-                  IF NOT GenJnlLine.INSERT(TRUE) THEN GenJnlLine.MODIFY(TRUE);
-                    GenJnlPost.RUN(GenJnlLine);
-                END;
-                 */
-
-            end;
         }
         field(19; "Staff Name"; Text[50])
         {
@@ -285,7 +186,11 @@ table 50053 "Fuel Vouchers."
 
                 IF UserSetup2.GET("Select HOD") THEN BEGIN
                     ToName := UserSetup2."E-Mail";
-                    //SendMail.NewMessage(ToName, CCName, Subject, Body, Attachement, '', TRUE);
+
+                    EmailMessage.Create(ToName, Subject, Body, true);
+                    EmailMessage.AddRecipient(Enum::"Email Recipient Type"::Cc, CCName);
+                    Email.OpenInEditorModally(EmailMessage, Enum::"Email Scenario"::Default);
+
                 END;
             end;
         }
@@ -307,7 +212,11 @@ table 50053 "Fuel Vouchers."
                 IF UserSetup2.GET("Send By UserID") THEN BEGIN
                     ToName := 'akintoye@toyotanigeria.com';
                     CCName := UserSetup2."E-Mail";
-                    //SendMail.NewMessage(ToName, CCName, Subject, Body, Attachement, '', TRUE);
+
+                    EmailMessage.Create(ToName, Subject, Body, true);
+                    EmailMessage.AddRecipient(Enum::"Email Recipient Type"::Cc, CCName);
+                    Email.OpenInEditorModally(EmailMessage, Enum::"Email Scenario"::Default);
+
                 END;
             end;
         }
@@ -329,7 +238,11 @@ table 50053 "Fuel Vouchers."
                 IF UserSetup2.GET("Send By UserID") THEN BEGIN
                     ToName := UserSetup2."E-Mail";
                     CCName := '';
-                    //SendMail.NewMessage(ToName, CCName, Subject, Body, Attachement, '', TRUE);
+
+                    EmailMessage.Create(ToName, Subject, Body, true);
+                    EmailMessage.AddRecipient(Enum::"Email Recipient Type"::Cc, CCName);
+                    Email.OpenInEditorModally(EmailMessage, Enum::"Email Scenario"::Default);
+
                 END;
             end;
         }
@@ -351,7 +264,12 @@ table 50053 "Fuel Vouchers."
                 IF UserSetup2.GET("Send By UserID") THEN BEGIN
                     ToName := UserSetup2."E-Mail";
                     CCName := 'akintoye@toyotanigeria.com';
-                    //SendMail.NewMessage(ToName, CCName, Subject, Body, Attachement, '', TRUE);
+
+                    EmailMessage.Create(ToName, Subject, Body, true);
+                    EmailMessage.AddRecipient(Enum::"Email Recipient Type"::Cc, CCName);
+                    Email.OpenInEditorModally(EmailMessage, Enum::"Email Scenario"::Default);
+
+
                 END;
             end;
         }
@@ -404,7 +322,6 @@ table 50053 "Fuel Vouchers."
         MaintLedgEntry: Record "Maintenance Ledger Entry";
         LineNo: Integer;
         UserSetup: Record "User Setup";
-        //SendMail: Codeunit "397";
         mailsent: Boolean;
         ToName: Text[80];
         CCName: Text[80];
@@ -413,7 +330,8 @@ table 50053 "Fuel Vouchers."
         Attachement: Text[260];
         Opendialog: Boolean;
         UserSetup2: Record "User Setup";
-
+        Email: Codeunit Email;
+        EmailMessage: Codeunit "Email Message";
 
     procedure AssistEdit(OldFuelVou: Record "Fuel Vouchers."): Boolean
     begin

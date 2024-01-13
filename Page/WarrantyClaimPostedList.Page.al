@@ -1,5 +1,6 @@
 page 70050 "Warranty Claim Posted List"
 {
+    ApplicationArea = All;
     Editable = true;
     PageType = List;
     SourceTable = "Warranty Claim Header";

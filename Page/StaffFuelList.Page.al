@@ -1,10 +1,10 @@
 page 70002 "Staff Fuel List"
 {
+    ApplicationArea = All;
     CardPageID = "Fuel Staff";
     PageType = List;
     SourceTable = "Fuel Vouchers.";
-    SourceTableView = WHERE(Staff = FILTER(True),
-                            Issue = FILTER(false));
+    SourceTableView = WHERE(Staff = FILTER(True), Issue = FILTER(false));
 
     layout
     {

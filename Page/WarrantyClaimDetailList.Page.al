@@ -1,5 +1,6 @@
 page 50164 "Warranty Claim Detail List"
 {
+    ApplicationArea = All;
     DeleteAllowed = false;
     Editable = false;
     InsertAllowed = false;
