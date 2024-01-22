@@ -1,5 +1,6 @@
 page 70120 BalanceCapexCard
 {
+    ApplicationArea = All;
     SourceTable = "Procurement Header";
 
     layout

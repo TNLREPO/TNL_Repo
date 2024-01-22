@@ -1,5 +1,6 @@
 page 70163 "Balance Payment-Capex"
 {
+    ApplicationArea = All;
     CardPageID = BalanceCapexCard;
     PageType = List;
     SourceTable = "Procurement Header";

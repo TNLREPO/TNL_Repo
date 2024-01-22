@@ -1,5 +1,6 @@
 page 50480 "Posted Stores Requsition Card"
 {
+    ApplicationArea = All;
     Editable = false;
     PageType = Card;
     SourceTable = "Stores Requisition Header.";

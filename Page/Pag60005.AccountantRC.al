@@ -1126,6 +1126,29 @@ page 60005 "Accountant RC"
                 }
             }
 
+            group(Stores)
+            {
+                Caption = 'Stores';
+
+                action("StoreReq")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Store Requisition';
+                    RunObject = Page "Stores Requisition List";
+                }
+
+                action("PostedStoreReq")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Posted Store Requisition';
+                    RunObject = Page "Posted Stores Requisition List";
+                }
+
+
+
+
+            }
+
 
 
             group(Action84)
@@ -1516,7 +1539,7 @@ page 60005 "Accountant RC"
                 action("IOU Request")
                 {
                     ApplicationArea = Basic, Suite;
-                    Caption = 'IOU Requestt';
+                    Caption = 'IOU Request';
                     Image = Payment;
                     RunObject = Page "IOU Register List";
                     ToolTip = 'Raise IOU for payment.';
@@ -1602,10 +1625,33 @@ page 60005 "Accountant RC"
 
             }
 
+            group(LeavePlan)
+            {
+                Caption = 'Leave Plan';
+                action("Planned Leave")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Leave Plan';
+                    Image = CalculateCalendar;
+                    RunObject = Page "Leave Entries List";
+                    ToolTip = 'Plan your annual leave.';
+                }
+
+                action("Actual Leave")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Actual Leave';
+                    Image = CalculateCalendar;
+                    RunObject = Page "Acutal Leave List";
+                    ToolTip = 'Plan your annual leave.';
+                }
+
+
+            }
 
             group(LeaveMgt)
             {
-                Caption = 'Leave';
+                Caption = 'Leave Request';
                 action("Leave Request")
                 {
                     ApplicationArea = Basic, Suite;

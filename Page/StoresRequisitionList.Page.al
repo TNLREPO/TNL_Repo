@@ -1,5 +1,6 @@
 page 50207 "Stores Requisition List"
 {
+    ApplicationArea = All;
     CardPageID = "Stores Requisition Card";
     PageType = List;
     SourceTable = "Stores Requisition Header.";

@@ -1,5 +1,6 @@
 page 70248 "Capex Advance HOD Paymt Appr."
 {
+    ApplicationArea = All;
     CardPageID = "Capex Card";
     PageType = List;
     SourceTable = "Procurement Header";

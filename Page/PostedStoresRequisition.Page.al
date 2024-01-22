@@ -1,5 +1,6 @@
 page 50478 "Posted Stores Requisition"
 {
+    ApplicationArea = All;
     CardPageID = "Posted Stores Requsition Card";
     Editable = false;
     PageType = List;

@@ -1,5 +1,6 @@
 page 70154 "Head of Audit Appr.-Capex"
 {
+    ApplicationArea = All;
     CardPageID = "Capex Card";
     PageType = List;
     SourceTable = "Procurement Header";

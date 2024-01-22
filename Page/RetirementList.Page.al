@@ -1,5 +1,6 @@
 page 50204 "Retirement List"
 {
+    ApplicationArea = All;
     CardPageID = "IOU Retirement Card";
     PageType = List;
     SourceTable = "IOU Retirement Header";

@@ -24,7 +24,7 @@ table 50107 "IOU Retirement Header"
 
             trigger OnValidate()
             begin
-                //Balance := "Original IOU Amount" - "Amount To Retire";
+                Balance := "Original IOU Amount" - "Amount To Retire";
             end;
         }
         field(6; "Audit Approval"; Boolean)
@@ -66,10 +66,10 @@ table 50107 "IOU Retirement Header"
                                                   Retired = filter(false),
                                                   "Converted to Loan" = filter(false));
 
-           /* trigger OnValidate()
+            trigger OnValidate()
             var
                 RetireHdr: Record "IOU Retirement Header";
-             begin
+            begin
                 IF "IOU No." <> '' THEN BEGIN
                     //cannot create new retirement until previous one is posted
                     RetireHdr.SETRANGE(RetireHdr."IOU No.", "IOU No.");
@@ -92,7 +92,7 @@ table 50107 "IOU Retirement Header"
                     "Global Dimension 1 Code" := '';
                     "Global Dimension 2 Code" := '';
                 END;
-            end; */
+            end;
         }
         field(11; "User ID"; Code[25])
         {
@@ -112,59 +112,64 @@ table 50107 "IOU Retirement Header"
 
             trigger OnValidate()
             begin
-                /*  IF NOT CONFIRM('Are you sure you want to send for Approval', FALSE) THEN
-                      "Send for Approval" := FALSE
-                  ELSE BEGIN
-                      "Staff Name" := "Staff Name";
-                      Purpose := Description;
-                      "IOU Amount" := "Original IOU Amount";
-                      CALCFIELDS("Amount To Retire");
-                      "Retire Amount" := "Amount To Retire";
-                      Balance := "IOU Amount" - "Retire Amount";
+                IF NOT CONFIRM('Are you sure you want to send for Approval', FALSE) THEN
+                    "Send for Approval" := FALSE
+                ELSE BEGIN
+                    "Staff Name" := "Staff Name";
+                    Purpose := Description;
+                    "IOU Amount" := "Original IOU Amount";
+                    CALCFIELDS("Amount To Retire");
+                    "Retire Amount" := "Amount To Retire";
+                    Balance := "IOU Amount" - "Retire Amount";
 
 
-                      TESTFIELD("1st Approval to");
-                      TESTFIELD("1st Apprv. Status", 0);
+                    TESTFIELD("1st Approval to");
+                    TESTFIELD("1st Apprv. Status", 0);
 
-                      UserSetup.GET(USERID);
-                      Sender := USERID;
-                      "Sent Time" := CURRENTDATETIME;
-                      "User ID" := USERID;
-                      Sender := UserSetup."User ID";
-                      SendersName := UserSetup.Initials;
-                      SenderAddress := UserSetup."E-Mail";
-                      UserSetup2.GET("1st Approval to");
-                      ToAddresses := UserSetup2."E-Mail";
-                      Addressee := UserSetup2.Initials;
-                      CcAddresses := '';
-                      BccAddresses := '';
+                    UserSetup.GET(USERID);
+                    Sender := USERID;
+                    "Sent Time" := CURRENTDATETIME;
+                    "User ID" := USERID;
+                    Sender := UserSetup."User ID";
+                    SendersName := UserSetup.Initials;
+                    SenderAddress := UserSetup."E-Mail";
+                    UserSetup2.GET("1st Approval to");
+                    ToAddresses := UserSetup2."E-Mail";
+                    Addressee := UserSetup2.Initials;
+                    CcAddresses := '';
+                    BccAddresses := '';
 
-                      //WITH TempEmailItem DO BEGIN
-                          "Send to" := ToAddresses;
-                          "Send CC" := SenderAddress;
-                          "Send BCC" := BccAddresses;
-                          Subject := STRSUBSTNO(text001, "No.");
+                    Subject := STRSUBSTNO(text001, "No.");
+                    CreateEmailBody("No.", Addressee, text001, "Staff Name", Purpose, "IOU Amount", Balance);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
-                          CRLF := '';
-                          CRLF[1] := 13;
-                          CRLF[2] := 10;
+                    /*  WITH TempEmailItem DO BEGIN
+                         "Send to" := ToAddresses;
+                         "Send CC" := SenderAddress;
+                         "Send BCC" := BccAddresses;
+                         Subject := STRSUBSTNO(text001, "No.");
 
-                          BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                          BodyStream.WRITETEXT(Text011 + ' ' + Addressee + ',');
-                          BodyStream.WRITETEXT(CRLF + CRLF);
-                          BodyStream.WRITETEXT(STRSUBSTNO(text001, "No.") + CRLF +
-                          Text009 + FORMAT("Staff Name") + CRLF + CRLF +
-                          Text010 + FORMAT(Purpose) + CRLF + CRLF +
-                          Text012 + FORMAT("IOU Amount") + CRLF + CRLF +
-                          Text013 + FORMAT(Balance) + CRLF + CRLF +
-                          Text007 + CRLF);
-                          BodyStream.WRITETEXT(SendersName);
-                          BodyStream.WRITETEXT(CRLF + CRLF);
-                          BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                          Body := BodyBlob.Blob;
-                          //Send(FALSE);
-                      //END;
-                  END; */
+                         CRLF := '';
+                         CRLF[1] := 13;
+                         CRLF[2] := 10;
+
+                         BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                         BodyStream.WRITETEXT(Text011 + ' ' + Addressee + ',');
+                         BodyStream.WRITETEXT(CRLF + CRLF);
+                         BodyStream.WRITETEXT(STRSUBSTNO(text001, "No.") + CRLF +
+                         Text009 + FORMAT("Staff Name") + CRLF + CRLF +
+                         Text010 + FORMAT(Purpose) + CRLF + CRLF +
+                         Text012 + FORMAT("IOU Amount") + CRLF + CRLF +
+                         Text013 + FORMAT(Balance) + CRLF + CRLF +
+                         Text007 + CRLF);
+                         BodyStream.WRITETEXT(SendersName);
+                         BodyStream.WRITETEXT(CRLF + CRLF);
+                         BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                         Body := BodyBlob.Blob;
+                         Send(FALSE);
+                     END; */
+
+                END;
             end;
         }
         field(16; Sender; Text[50])
@@ -182,21 +187,21 @@ table 50107 "IOU Retirement Header"
         }
         field(18; "1st Approval to"; Code[25])
         {
-            /* TableRelation = IF (Department = FILTER('02ADMINHR')) "User Setup"."User ID" WHERE("User ID" = FILTER('TOYOTANIGERIA\IBIDAPO-OBE|TOYOTANIGERIA\KOLAWOLE'))
+            TableRelation = IF (Department = FILTER('02ADMINHR')) "User Setup"."User ID" WHERE("User ID" = FILTER('IBIDAPO-OBE|KOLAWOLE'))
             ELSE
-            IF (Department = FILTER('03OPLOGIC')) "User Setup"."User ID" WHERE("User ID" = FILTER('TOYOTANIGERIA\SEGUN|TOYOTANIGERIA\TOLA'))
+            IF (Department = FILTER('03OPLOGIC')) "User Setup"."User ID" WHERE("User ID" = FILTER('SEGUN|TOLA'))
             ELSE
-            IF (Department = FILTER('04DDEV')) "User Setup"."User ID" WHERE("User ID" = FILTER('TOYOTANIGERIA\HENRY|TOYOTANIGERIA\OLUFEMI'))
+            IF (Department = FILTER('04DDEV')) "User Setup"."User ID" WHERE("User ID" = FILTER('HENRY|OLUFEMI'))
             ELSE
-            IF (Department = FILTER('05PARTS')) "User Setup"."User ID" WHERE("User ID" = FILTER('TOYOTANIGERIA\AKINDELE|TOYOTANIGERIA\ISUEKEBHO|TOYOTANIGERIA\RAVINDER|TOYOTANIGERIA\SYLVESTER|TOYOTANIGERIA\IBIDAPO-OBE'))
+            IF (Department = FILTER('05PARTS')) "User Setup"."User ID" WHERE("User ID" = FILTER('AKINDELE|ISUEKEBHO|RAVINDER|SYLVESTER|IBIDAPO-OBE'))
             ELSE
-            IF (Department = FILTER('06SERVICE')) "User Setup"."User ID" WHERE("User ID" = FILTER('TOYOTANIGERIA\BAMIDELE|TOYOTANIGERIA\SYLVESTER'))
+            IF (Department = FILTER('06SERVICE')) "User Setup"."User ID" WHERE("User ID" = FILTER('BAMIDELE|SYLVESTER'))
             ELSE
-            IF (Department = FILTER('07FINACC')) "User Setup"."User ID" WHERE("User ID" = FILTER('TOYOTANIGERIA\ALBERT|TOYOTANIGERIA\BUNMI|TOYOTANIGERIA\PAA'))
+            IF (Department = FILTER('07FINACC')) "User Setup"."User ID" WHERE("User ID" = FILTER('ALBERT|BUNMI|PAA'))
             ELSE
-            IF (Department = FILTER('08AUDSYS')) "User Setup"."User ID" WHERE("User ID" = FILTER('TOYOTANIGERIA\ADEWUMI|TOYOTANIGERIA\AGBESUA|TOYOTANIGERIA\BRANO|TOYOTANIGERIA\JOSHUA'))
+            IF (Department = FILTER('08AUDSYS')) "User Setup"."User ID" WHERE("User ID" = FILTER('ADEWUMI|AGBESUA|BRANO|JOSHUA'))
             ELSE
-            IF (Department = FILTER('09MARKET')) "User Setup"."User ID" WHERE("User ID" = FILTER('TOYOTANIGERIA\AJUYAH|TOYOTANIGERIA\BAYO|TOYOTANIGERIA\BUKUNOLA'));
+            IF (Department = FILTER('09MARKET')) "User Setup"."User ID" WHERE("User ID" = FILTER('AJUYAH|BAYO|BUKUNOLA'));
 
             trigger OnValidate()
             begin
@@ -205,7 +210,7 @@ table 50107 "IOU Retirement Header"
 
                 IF UserSetup.GET("1st Approval to") THEN
                     "1st Approver" := UserSetup.Name;
-            end; */
+            end;
         }
         field(19; "1st Approver"; Text[50])
         {
@@ -219,169 +224,180 @@ table 50107 "IOU Retirement Header"
 
             trigger OnValidate()
             begin
-                /* TESTFIELD("Send for Approval", TRUE);
-                 TESTFIELD("1st Approval to", USERID);
+                TESTFIELD("Send for Approval", TRUE);
+                TESTFIELD("1st Approval to", USERID);
 
-                 IF "1st Apprv. Status" = "1st Apprv. Status"::Approved THEN
-                     IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
-                         "1st Apprv. Status" := RetireRec."1st Apprv. Status"::" "
-                     ELSE BEGIN
-                         "Staff Name" := "Staff Name";
-                         Purpose := Description;
-                         "IOU Amount" := "Original IOU Amount";
-                         CALCFIELDS("Amount To Retire");
-                         "Retire Amount" := "Amount To Retire";
-                         Balance := "IOU Amount" - "Retire Amount";
+                IF "1st Apprv. Status" = "1st Apprv. Status"::Approved THEN
+                    IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
+                        "1st Apprv. Status" := RetireRec."1st Apprv. Status"::" "
+                    ELSE BEGIN
+                        "Staff Name" := "Staff Name";
+                        Purpose := Description;
+                        "IOU Amount" := "Original IOU Amount";
+                        CALCFIELDS("Amount To Retire");
+                        "Retire Amount" := "Amount To Retire";
+                        Balance := "IOU Amount" - "Retire Amount";
 
-                         UserSetup.GET("2nd Approval to");
-                         TESTFIELD("2nd Approval to");
-                         "1st Approval Time" := CURRENTDATETIME;
-                         "Current pending Person" := "2nd Approval to";
+                        UserSetup.GET("2nd Approval to");
+                        TESTFIELD("2nd Approval to");
+                        "1st Approval Time" := CURRENTDATETIME;
+                        "Current pending Person" := "2nd Approval to";
 
-                         ToAddresses := UserSetup."E-Mail";
-                         Addressee := UserSetup.Initials;
-                         TESTFIELD("1st Approval to");
-                         UserSetup.GET(Sender);
-                         CcAddresses := UserSetup."E-Mail";
-                         BccAddresses := '';
-                         Subject := STRSUBSTNO(text003, "No.");
-                         ;
-                         UserSetup2.GET(USERID);
-                         SendersName := UserSetup2.Initials;
-                         SenderAddress := UserSetup2."E-Mail";
+                        ToAddresses := UserSetup."E-Mail";
+                        Addressee := UserSetup.Initials;
+                        TESTFIELD("1st Approval to");
+                        UserSetup.GET(Sender);
+                        CcAddresses := UserSetup."E-Mail";
+                        BccAddresses := '';
+                        Subject := STRSUBSTNO(text003, "No.");
 
-                         WITH TempEmailItem DO BEGIN
-                             "Send to" := ToAddresses;
-                             "Send CC" := SenderAddress;
-                             "Send BCC" := BccAddresses;
-                             Subject := STRSUBSTNO(text003, "No.");
+                        UserSetup2.GET(USERID);
+                        SendersName := UserSetup2.Initials;
+                        SenderAddress := UserSetup2."E-Mail";
 
-                             CRLF := '';
-                             CRLF[1] := 13;
-                             CRLF[2] := 10;
+                        Subject := STRSUBSTNO(text003, "No.");
+                        CreateEmailBody("No.", Addressee, text003, "Staff Name", Purpose, "IOU Amount", Balance);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
-                             BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                             BodyStream.WRITETEXT(Text011 + ' ' + Addressee + ',');
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT(STRSUBSTNO(text003, "No.") + CRLF + CRLF +
-                             Text009 + FORMAT("Staff Name") + CRLF +
-                             Text010 + FORMAT(Purpose) + CRLF + CRLF +
-                             Text012 + FORMAT("IOU Amount") + CRLF + CRLF +
-                             Text014 + FORMAT("Retire Amount") + CRLF + CRLF +
-                             Text013 + FORMAT(Balance) + CRLF + CRLF +
-                             Text007 + CRLF);
-                             BodyStream.WRITETEXT(SendersName);
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                             Body := BodyBlob.Blob;
-                             Send(FALSE);
-                         END;
-                     END;
+                        /*        WITH TempEmailItem DO BEGIN
+                                   "Send to" := ToAddresses;
+                                   "Send CC" := SenderAddress;
+                                   "Send BCC" := BccAddresses;
+                                   Subject := STRSUBSTNO(text003, "No.");
 
-                 // // "1st Apprv. Status"::Rejected:
-                 IF "1st Apprv. Status" = "1st Apprv. Status"::Rejected THEN
-                     IF NOT CONFIRM('Are you sure you want to REJECT', FALSE) THEN
-                         "1st Apprv. Status" := RetireRec."1st Apprv. Status"::" "
-                     ELSE BEGIN
-                         "Staff Name" := "Staff Name";
-                         Purpose := Description;
-                         "1st Approval Time" := CURRENTDATETIME;
-                         "IOU Amount" := "Original IOU Amount";
-                         CALCFIELDS("Amount To Retire");
-                         "Retire Amount" := "Amount To Retire";
-                         Balance := "IOU Amount" - "Retire Amount";
+                                   CRLF := '';
+                                   CRLF[1] := 13;
+                                   CRLF[2] := 10;
 
-                         UserSetup.GET(Sender);
-                         ToAddresses := UserSetup."E-Mail";
-                         Addressee := UserSetup.Initials;
-                         CcAddresses := '';
-                         BccAddresses := '';
-                         Subject := STRSUBSTNO(text004, "IOU No.");
-                         ;
-                         UserSetup2.GET(USERID);
-                         SendersName := UserSetup2.Initials;
-                         SenderAddress := UserSetup2."E-Mail";
+                                   BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                                   BodyStream.WRITETEXT(Text011 + ' ' + Addressee + ',');
+                                   BodyStream.WRITETEXT(CRLF + CRLF);
+                                   BodyStream.WRITETEXT(STRSUBSTNO(text003, "No.") + CRLF + CRLF +
+                                   Text009 + FORMAT("Staff Name") + CRLF +
+                                   Text010 + FORMAT(Purpose) + CRLF + CRLF +
+                                   Text012 + FORMAT("IOU Amount") + CRLF + CRLF +
+                                   Text014 + FORMAT("Retire Amount") + CRLF + CRLF +
+                                   Text013 + FORMAT(Balance) + CRLF + CRLF +
+                                   Text007 + CRLF);
+                                   BodyStream.WRITETEXT(SendersName);
+                                   BodyStream.WRITETEXT(CRLF + CRLF);
+                                   BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                                   Body := BodyBlob.Blob;
+                                   Send(FALSE);
+                               END; */
 
-                         WITH TempEmailItem DO BEGIN
-                             "Send to" := ToAddresses;
-                             "Send CC" := SenderAddress;
-                             "Send BCC" := BccAddresses;
-                             Subject := STRSUBSTNO(text004, "No.");
+                    END;
 
-                             CRLF := '';
-                             CRLF[1] := 13;
-                             CRLF[2] := 10;
+                // // "1st Apprv. Status"::Rejected:
+                IF "1st Apprv. Status" = "1st Apprv. Status"::Rejected THEN
+                    IF NOT CONFIRM('Are you sure you want to REJECT', FALSE) THEN
+                        "1st Apprv. Status" := RetireRec."1st Apprv. Status"::" "
+                    ELSE BEGIN
+                        "Staff Name" := "Staff Name";
+                        Purpose := Description;
+                        "1st Approval Time" := CURRENTDATETIME;
+                        "IOU Amount" := "Original IOU Amount";
+                        CALCFIELDS("Amount To Retire");
+                        "Retire Amount" := "Amount To Retire";
+                        Balance := "IOU Amount" - "Retire Amount";
 
-                             BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                             BodyStream.WRITETEXT(Text011 + ' ' + Addressee + ',');
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT(STRSUBSTNO(text004, "No.") + CRLF + CRLF +
-                             Text009 + FORMAT("Staff Name") + CRLF + CRLF +
-                             Text010 + FORMAT(Purpose) + CRLF + CRLF +
-                             Text012 + FORMAT("IOU Amount") + CRLF + CRLF +
-                             Text014 + FORMAT("Retire Amount") + CRLF + CRLF +
-                             Text013 + FORMAT(Balance) + CRLF + CRLF +
-                             Text007 + CRLF);
-                             BodyStream.WRITETEXT(SendersName);
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                             Body := BodyBlob.Blob;
-                             Send(FALSE);
-                         END;
-                         Reject := TRUE;
-                     END;
+                        UserSetup.GET(Sender);
+                        ToAddresses := UserSetup."E-Mail";
+                        Addressee := UserSetup.Initials;
+                        CcAddresses := '';
+                        BccAddresses := '';
+                        Subject := STRSUBSTNO(text004, "IOU No.");
 
-                 //"1st Apprv. Status"::"on Hold":
-                 IF "1st Apprv. Status" = "1st Apprv. Status"::"on Hold" THEN
-                     IF NOT CONFIRM('Are you sure you want to place ON HOLD', FALSE) THEN
-                         "1st Apprv. Status" := RetireRec."1st Apprv. Status"::" "
-                     ELSE BEGIN
-                         "Staff Name" := "Staff Name";
-                         Purpose := Description;
-                         "1st Approval Time" := CURRENTDATETIME;
-                         "IOU Amount" := "Original IOU Amount";
-                         CALCFIELDS("Amount To Retire");
-                         "Retire Amount" := "Amount To Retire";
-                         Balance := "IOU Amount" - "Retire Amount";
+                        UserSetup2.GET(USERID);
+                        SendersName := UserSetup2.Initials;
+                        SenderAddress := UserSetup2."E-Mail";
 
-                         UserSetup.GET(Sender);
-                         ToAddresses := UserSetup."E-Mail";
-                         Addressee := UserSetup.Initials;
-                         CcAddresses := '';
-                         BccAddresses := '';
-                         Subject := STRSUBSTNO(text005, "No.");
-                         ;
-                         UserSetup2.GET(USERID);
-                         SendersName := UserSetup2.Initials;
-                         SenderAddress := UserSetup2."E-Mail";
+                        Subject := STRSUBSTNO(text004, "No.");
+                        CreateEmailBody("No.", Addressee, text004, "Staff Name", Purpose, "IOU Amount", Balance);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
-                         WITH TempEmailItem DO BEGIN
-                             "Send to" := ToAddresses;
-                             "Send CC" := SenderAddress;
-                             "Send BCC" := BccAddresses;
-                             Subject := STRSUBSTNO(text005, "No.");
+                        /*   WITH TempEmailItem DO BEGIN
+                              "Send to" := ToAddresses;
+                              "Send CC" := SenderAddress;
+                              "Send BCC" := BccAddresses;
+                              Subject := STRSUBSTNO(text004, "No.");
 
-                             CRLF := '';
-                             CRLF[1] := 13;
-                             CRLF[2] := 10;
+                              CRLF := '';
+                              CRLF[1] := 13;
+                              CRLF[2] := 10;
 
-                             BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                             BodyStream.WRITETEXT(Text011 + ' ' + Addressee + ',');
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT(STRSUBSTNO(text005, "No.") + CRLF +
-                             Text009 + FORMAT("Staff Name") + CRLF + CRLF +
-                             Text010 + FORMAT(Purpose) + CRLF + CRLF +
-                             Text012 + FORMAT("IOU Amount") + CRLF + CRLF +
-                             Text014 + FORMAT("Retire Amount") + CRLF + CRLF +
-                             Text013 + FORMAT(Balance) + CRLF + CRLF +
-                             Text007 + CRLF);
-                             BodyStream.WRITETEXT(SendersName);
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                             Body := BodyBlob.Blob;
-                             Send(FALSE);
-                         END;
-                     END; */
+                              BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                              BodyStream.WRITETEXT(Text011 + ' ' + Addressee + ',');
+                              BodyStream.WRITETEXT(CRLF + CRLF);
+                              BodyStream.WRITETEXT(STRSUBSTNO(text004, "No.") + CRLF + CRLF +
+                              Text009 + FORMAT("Staff Name") + CRLF + CRLF +
+                              Text010 + FORMAT(Purpose) + CRLF + CRLF +
+                              Text012 + FORMAT("IOU Amount") + CRLF + CRLF +
+                              Text014 + FORMAT("Retire Amount") + CRLF + CRLF +
+                              Text013 + FORMAT(Balance) + CRLF + CRLF +
+                              Text007 + CRLF);
+                              BodyStream.WRITETEXT(SendersName);
+                              BodyStream.WRITETEXT(CRLF + CRLF);
+                              BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                              Body := BodyBlob.Blob;
+                              Send(FALSE);
+                          END; */
+
+                        Reject := TRUE;
+                    END;
+
+                //"1st Apprv. Status"::"on Hold":
+                IF "1st Apprv. Status" = "1st Apprv. Status"::"on Hold" THEN
+                    IF NOT CONFIRM('Are you sure you want to place ON HOLD', FALSE) THEN
+                        "1st Apprv. Status" := RetireRec."1st Apprv. Status"::" "
+                    ELSE BEGIN
+                        "Staff Name" := "Staff Name";
+                        Purpose := Description;
+                        "1st Approval Time" := CURRENTDATETIME;
+                        "IOU Amount" := "Original IOU Amount";
+                        CALCFIELDS("Amount To Retire");
+                        "Retire Amount" := "Amount To Retire";
+                        Balance := "IOU Amount" - "Retire Amount";
+
+                        UserSetup.GET(Sender);
+                        ToAddresses := UserSetup."E-Mail";
+                        Addressee := UserSetup.Initials;
+                        CcAddresses := '';
+                        BccAddresses := '';
+                        Subject := STRSUBSTNO(text005, "No.");
+
+                        UserSetup2.GET(USERID);
+                        SendersName := UserSetup2.Initials;
+                        SenderAddress := UserSetup2."E-Mail";
+
+                        Subject := STRSUBSTNO(text005, "No.");
+                        CreateEmailBody("No.", Addressee, text005, "Staff Name", Purpose, "IOU Amount", Balance);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+
+                        /*   WITH TempEmailItem DO BEGIN
+                              "Send to" := ToAddresses;
+                              "Send CC" := SenderAddress;
+                              "Send BCC" := BccAddresses;
+                              Subject := STRSUBSTNO(text005, "No.");
+                     
+                              BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                              BodyStream.WRITETEXT(Text011 + ' ' + Addressee + ',');
+                              BodyStream.WRITETEXT(CRLF + CRLF);
+                              BodyStream.WRITETEXT(STRSUBSTNO(text005, "No.") + CRLF +
+                              Text009 + FORMAT("Staff Name") + CRLF + CRLF +
+                              Text010 + FORMAT(Purpose) + CRLF + CRLF +
+                              Text012 + FORMAT("IOU Amount") + CRLF + CRLF +
+                              Text014 + FORMAT("Retire Amount") + CRLF + CRLF +
+                              Text013 + FORMAT(Balance) + CRLF + CRLF +
+                              Text007 + CRLF);
+                              BodyStream.WRITETEXT(SendersName);
+                              BodyStream.WRITETEXT(CRLF + CRLF);
+                              BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                              Body := BodyBlob.Blob;
+                              Send(FALSE);
+                          END; */
+
+                    END;
             end;
         }
         field(21; "1st Approval Time"; DateTime)
@@ -399,11 +415,11 @@ table 50107 "IOU Retirement Header"
             Editable = true;
             TableRelation = "User Setup"."User ID";
 
-            /* trigger OnValidate()
+            trigger OnValidate()
             begin
                 IF UserSetup.GET("2nd Approval to") THEN
                     "2nd Approver" := UserSetup.Name;
-            end; */
+            end;
         }
         field(24; "2nd Approver"; Text[50])
         {
@@ -413,11 +429,8 @@ table 50107 "IOU Retirement Header"
             OptionCaption = ' ,on Hold,Approved,Rejected';
             OptionMembers = " ","on Hold",Approved,Rejected;
 
-            /* trigger OnValidate()
+            trigger OnValidate()
             begin
-                CRLF := '';
-                CRLF[1] := 13;
-                CRLF[2] := 10;
 
                 TESTFIELD("Send for Approval", TRUE);
                 TESTFIELD("1st Apprv. Status", 2);
@@ -446,37 +459,42 @@ table 50107 "IOU Retirement Header"
                         CcAddresses := UserSetup."E-Mail";
                         BccAddresses := '';
                         Subject := STRSUBSTNO(text003, "No.");
-                        ;
+
                         UserSetup2.GET(USERID);
                         SendersName := UserSetup2.Initials;
                         SenderAddress := UserSetup2."E-Mail";
 
-                        WITH TempEmailItem DO BEGIN
-                            "Send to" := ToAddresses;
-                            "Send CC" := SenderAddress + ';' + CcAddresses;
-                            "Send BCC" := BccAddresses;
-                            Subject := STRSUBSTNO(text003, "No.");
+                        Subject := STRSUBSTNO(text003, "No.");
+                        CreateEmailBody("No.", Addressee, text003, "Staff Name", Purpose, "IOU Amount", Balance);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
-                            CRLF := '';
-                            CRLF[1] := 13;
-                            CRLF[2] := 10;
+                        /*        WITH TempEmailItem DO BEGIN
+                                   "Send to" := ToAddresses;
+                                   "Send CC" := SenderAddress + ';' + CcAddresses;
+                                   "Send BCC" := BccAddresses;
+                                   Subject := STRSUBSTNO(text003, "No.");
 
-                            BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                            BodyStream.WRITETEXT(Text011 + ' ' + Addressee + ',');
-                            BodyStream.WRITETEXT(CRLF + CRLF);
-                            BodyStream.WRITETEXT(STRSUBSTNO(text003, "No.") + CRLF + CRLF +
-                            Text009 + FORMAT("Staff Name") + CRLF +
-                            Text010 + FORMAT(Purpose) + CRLF + CRLF +
-                            Text012 + FORMAT("IOU Amount") + CRLF + CRLF +
-                            Text014 + FORMAT("Retire Amount") + CRLF + CRLF +
-                            Text013 + FORMAT(Balance) + CRLF + CRLF +
-                            Text007 + CRLF);
-                            BodyStream.WRITETEXT(SendersName);
-                            BodyStream.WRITETEXT(CRLF + CRLF);
-                            BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                            Body := BodyBlob.Blob;
-                            Send(FALSE);
-                        END;
+                                   CRLF := '';
+                                   CRLF[1] := 13;
+                                   CRLF[2] := 10;
+
+                                   BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                                   BodyStream.WRITETEXT(Text011 + ' ' + Addressee + ',');
+                                   BodyStream.WRITETEXT(CRLF + CRLF);
+                                   BodyStream.WRITETEXT(STRSUBSTNO(text003, "No.") + CRLF + CRLF +
+                                   Text009 + FORMAT("Staff Name") + CRLF +
+                                   Text010 + FORMAT(Purpose) + CRLF + CRLF +
+                                   Text012 + FORMAT("IOU Amount") + CRLF + CRLF +
+                                   Text014 + FORMAT("Retire Amount") + CRLF + CRLF +
+                                   Text013 + FORMAT(Balance) + CRLF + CRLF +
+                                   Text007 + CRLF);
+                                   BodyStream.WRITETEXT(SendersName);
+                                   BodyStream.WRITETEXT(CRLF + CRLF);
+                                   BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                                   Body := BodyBlob.Blob;
+                                   Send(FALSE);
+                               END; */
+
                     END;
 
                 IF "2nd Apprv. Status" = "2nd Apprv. Status"::Rejected THEN
@@ -497,37 +515,38 @@ table 50107 "IOU Retirement Header"
                         CcAddresses := '';
                         BccAddresses := '';
                         Subject := STRSUBSTNO(text004, "No.");
-                        ;
+
                         UserSetup2.GET(USERID);
                         SendersName := UserSetup2.Initials;
                         SenderAddress := UserSetup2."E-Mail";
 
-                        WITH TempEmailItem DO BEGIN
-                            "Send to" := ToAddresses;
-                            "Send CC" := SenderAddress;
-                            "Send BCC" := BccAddresses;
-                            Subject := STRSUBSTNO(text004, "No.");
+                        Subject := STRSUBSTNO(text004, "No.");
+                        CreateEmailBody("No.", Addressee, text004, "Staff Name", Purpose, "IOU Amount", Balance);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
-                            CRLF := '';
-                            CRLF[1] := 13;
-                            CRLF[2] := 10;
+                        /*  WITH TempEmailItem DO BEGIN
+                             "Send to" := ToAddresses;
+                             "Send CC" := SenderAddress;
+                             "Send BCC" := BccAddresses;
+                             Subject := STRSUBSTNO(text004, "No.");
 
-                            BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                            BodyStream.WRITETEXT(Text011 + ' ' + Addressee + ',');
-                            BodyStream.WRITETEXT(CRLF + CRLF);
-                            BodyStream.WRITETEXT(STRSUBSTNO(text004, "No.") + CRLF +
-                            Text009 + FORMAT("Staff Name") + CRLF +
-                            Text010 + FORMAT(Purpose) + CRLF + CRLF +
-                            Text012 + FORMAT("IOU Amount") + CRLF + CRLF +
-                            Text014 + FORMAT("Retire Amount") + CRLF + CRLF +
-                            Text013 + FORMAT(Balance) + CRLF + CRLF +
-                            Text007 + CRLF);
-                            BodyStream.WRITETEXT(SendersName);
-                            BodyStream.WRITETEXT(CRLF + CRLF);
-                            BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                            Body := BodyBlob.Blob;
-                            Send(FALSE);
-                        END;
+                             BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                             BodyStream.WRITETEXT(Text011 + ' ' + Addressee + ',');
+                             BodyStream.WRITETEXT(CRLF + CRLF);
+                             BodyStream.WRITETEXT(STRSUBSTNO(text004, "No.") + CRLF +
+                             Text009 + FORMAT("Staff Name") + CRLF +
+                             Text010 + FORMAT(Purpose) + CRLF + CRLF +
+                             Text012 + FORMAT("IOU Amount") + CRLF + CRLF +
+                             Text014 + FORMAT("Retire Amount") + CRLF + CRLF +
+                             Text013 + FORMAT(Balance) + CRLF + CRLF +
+                             Text007 + CRLF);
+                             BodyStream.WRITETEXT(SendersName);
+                             BodyStream.WRITETEXT(CRLF + CRLF);
+                             BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                             Body := BodyBlob.Blob;
+                             Send(FALSE);
+                         END; */
+
                         Reject := TRUE;
                     END;
 
@@ -550,39 +569,40 @@ table 50107 "IOU Retirement Header"
                         CcAddresses := '';
                         BccAddresses := '';
                         Subject := STRSUBSTNO(text005, "No.");
-                        ;
+
                         UserSetup2.GET(USERID);
                         SendersName := UserSetup2.Initials;
                         SenderAddress := UserSetup2."E-Mail";
 
-                        WITH TempEmailItem DO BEGIN
-                            "Send to" := ToAddresses;
-                            "Send CC" := SenderAddress;
-                            "Send BCC" := BccAddresses;
-                            Subject := STRSUBSTNO(text005, "No.");
+                        Subject := STRSUBSTNO(text005, "No.");
+                        CreateEmailBody("No.", Addressee, text005, "Staff Name", Purpose, "IOU Amount", Balance);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
-                            CRLF := '';
-                            CRLF[1] := 13;
-                            CRLF[2] := 10;
+                        /*      WITH TempEmailItem DO BEGIN
+                                 "Send to" := ToAddresses;
+                                 "Send CC" := SenderAddress;
+                                 "Send BCC" := BccAddresses;
+                                 Subject := STRSUBSTNO(text005, "No.");
 
-                            BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                            BodyStream.WRITETEXT(Text011 + ' ' + Addressee + ',');
-                            BodyStream.WRITETEXT(CRLF + CRLF);
-                            BodyStream.WRITETEXT(STRSUBSTNO(text005, "No.") + CRLF +
-                            Text009 + FORMAT("Staff Name") + CRLF + CRLF +
-                            Text010 + FORMAT(Purpose) + CRLF + CRLF +
-                            Text012 + FORMAT("IOU Amount") + CRLF + CRLF +
-                            Text014 + FORMAT("Retire Amount") + CRLF + CRLF +
-                            Text013 + FORMAT(Balance) + CRLF + CRLF +
-                            Text007 + CRLF);
-                            BodyStream.WRITETEXT(SendersName);
-                            BodyStream.WRITETEXT(CRLF + CRLF);
-                            BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                            Body := BodyBlob.Blob;
-                            Send(FALSE);
-                        END;
+                                 BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                                 BodyStream.WRITETEXT(Text011 + ' ' + Addressee + ',');
+                                 BodyStream.WRITETEXT(CRLF + CRLF);
+                                 BodyStream.WRITETEXT(STRSUBSTNO(text005, "No.") + CRLF +
+                                 Text009 + FORMAT("Staff Name") + CRLF + CRLF +
+                                 Text010 + FORMAT(Purpose) + CRLF + CRLF +
+                                 Text012 + FORMAT("IOU Amount") + CRLF + CRLF +
+                                 Text014 + FORMAT("Retire Amount") + CRLF + CRLF +
+                                 Text013 + FORMAT(Balance) + CRLF + CRLF +
+                                 Text007 + CRLF);
+                                 BodyStream.WRITETEXT(SendersName);
+                                 BodyStream.WRITETEXT(CRLF + CRLF);
+                                 BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                                 Body := BodyBlob.Blob;
+                                 Send(FALSE);
+                             END; */
+
                     END;
-            end; */
+            end;
         }
         field(26; "2nd Approval Time"; DateTime)
         {
@@ -594,11 +614,11 @@ table 50107 "IOU Retirement Header"
         {
             TableRelation = "User Setup"."User ID";
 
-            /* trigger OnValidate()
+            trigger OnValidate()
             begin
                 IF UserSetup.GET("3rd Approval to") THEN
                     "3rd Approver" := UserSetup.Name;
-            end; */
+            end;
         }
         field(29; "3rd Approver"; Text[50])
         {
@@ -608,12 +628,8 @@ table 50107 "IOU Retirement Header"
             OptionCaption = ' ,on Hold,Approved,Rejected';
             OptionMembers = " ","on Hold",Approved,Rejected;
 
-             /* trigger OnValidate()
+            trigger OnValidate()
             begin
-                CRLF := '';
-                CRLF[1] := 13;
-                CRLF[2] := 10;
-
 
                 TESTFIELD("Send for Approval", TRUE);
                 TESTFIELD("2nd Apprv. Status", 2);
@@ -629,7 +645,6 @@ table 50107 "IOU Retirement Header"
                     "Retire Amount" := "Amount To Retire";
                     Balance := "IOU Amount" - "Retire Amount";
 
-
                     TESTFIELD("Final Approval to");
                     "3rd Approval Time" := CURRENTDATETIME;
                     UserSetup.GET("Final Approval to");
@@ -639,12 +654,16 @@ table 50107 "IOU Retirement Header"
                     CcAddresses := '';
                     BccAddresses := '';
                     Subject := STRSUBSTNO(text001, "IOU No.");
-                    ;
+
                     UserSetup2.GET(USERID);
                     SendersName := UserSetup2.Initials;
                     SenderAddress := UserSetup2."E-Mail";
 
-                    Body := Text011 + ' ' + Addressee + ',' +
+                    Subject := STRSUBSTNO(text001, "No.");
+                    CreateEmailBody("No.", Addressee, text001, "Staff Name", Purpose, "IOU Amount", Balance);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+
+                    /* Body := Text011 + ' ' + Addressee + ',' +
                     CRLF + CRLF + STRSUBSTNO(text001, "IOU No.") + CRLF +
                     Text009 + FORMAT("Staff Name") + CRLF +
                     Text010 + FORMAT(Purpose) + CRLF +
@@ -652,13 +671,14 @@ table 50107 "IOU Retirement Header"
                     Text014 + FORMAT("Retire Amount") + CRLF +
                     Text013 + FORMAT(Balance) + CRLF +
                     CRLF + CRLF + CRLF + Text007 + CRLF + CRLF + SendersName;
+
                     IF CURRENTCLIENTTYPE = CLIENTTYPE::Windows THEN
                         //Mail.NewMessage(ToAddresses, CcAddresses, BccAddresses, Subject, Body, '', TRUE);
-                    IF CURRENTCLIENTTYPE = CLIENTTYPE::Web THEN BEGIN
+                        IF CURRENTCLIENTTYPE = CLIENTTYPE::Web THEN BEGIN
                             //SMTPMail.CreateMessage(SendersName, SenderAddress, ToAddresses, Subject, Body, FALSE);
                             //SMTPMail.Send;
                             MESSAGE(Text008);
-                        END;
+                        END; */
                 END;
 
                 IF "3rd Apprv.Status" = "3rd Apprv.Status"::Rejected THEN BEGIN
@@ -677,25 +697,31 @@ table 50107 "IOU Retirement Header"
                     CcAddresses := '';
                     BccAddresses := '';
                     Subject := STRSUBSTNO(text004, "IOU No.");
-                    ;
+
                     UserSetup2.GET(USERID);
                     SendersName := UserSetup2.Initials;
                     SenderAddress := UserSetup2."E-Mail";
-                    Body := Text011 + ' ' + Addressee + ',' +
-                    CRLF + CRLF + STRSUBSTNO(text004, "IOU No.") + CRLF +
-                    Text009 + FORMAT("Staff Name") + CRLF +
-                    Text010 + FORMAT(Purpose) + CRLF +
-                    Text012 + FORMAT("IOU Amount") + CRLF +
-                    Text014 + FORMAT("Retire Amount") + CRLF +
-                    Text013 + FORMAT(Balance) + CRLF +
-                    CRLF + CRLF + CRLF + Text007 + CRLF + CRLF + SendersName;
-                       IF CURRENTCLIENTTYPE = CLIENTTYPE::Windows THEN
-                           Mail.NewMessage(ToAddresses, CcAddresses, BccAddresses, Subject, Body, '', TRUE);
-                       IF CURRENTCLIENTTYPE = CLIENTTYPE::Web THEN BEGIN
-                           SMTPMail.CreateMessage(SendersName, SenderAddress, ToAddresses, Subject, Body, FALSE);
-                           SMTPMail.Send;
-                           MESSAGE(Text008);
-                       END;
+
+                    Subject := STRSUBSTNO(text004, "No.");
+                    CreateEmailBody("No.", Addressee, text004, "Staff Name", Purpose, "IOU Amount", Balance);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+
+                    /*  Body := Text011 + ' ' + Addressee + ',' +
+                     CRLF + CRLF + STRSUBSTNO(text004, "IOU No.") + CRLF +
+                     Text009 + FORMAT("Staff Name") + CRLF +
+                     Text010 + FORMAT(Purpose) + CRLF +
+                     Text012 + FORMAT("IOU Amount") + CRLF +
+                     Text014 + FORMAT("Retire Amount") + CRLF +
+                     Text013 + FORMAT(Balance) + CRLF +
+                     CRLF + CRLF + CRLF + Text007 + CRLF + CRLF + SendersName;
+                     IF CURRENTCLIENTTYPE = CLIENTTYPE::Windows THEN
+                         Mail.NewMessage(ToAddresses, CcAddresses, BccAddresses, Subject, Body, '', TRUE);
+                     IF CURRENTCLIENTTYPE = CLIENTTYPE::Web THEN BEGIN
+                         SMTPMail.CreateMessage(SendersName, SenderAddress, ToAddresses, Subject, Body, FALSE);
+                         SMTPMail.Send;
+                         MESSAGE(Text008);
+                     END; */
+
                 END;
 
                 IF "3rd Apprv.Status" = "3rd Apprv.Status"::"on Hold" THEN BEGIN
@@ -706,7 +732,6 @@ table 50107 "IOU Retirement Header"
                     "Retire Amount" := "Amount To Retire";
                     Balance := "IOU Amount" - "Retire Amount";
 
-
                     "3rd Approval Time" := CURRENTDATETIME;
 
                     UserSetup.GET(Sender);
@@ -714,12 +739,18 @@ table 50107 "IOU Retirement Header"
                     Addressee := UserSetup.Initials;
                     CcAddresses := '';
                     BccAddresses := '';
-                    Subject := STRSUBSTNO(text005, "IOU No.");
-                    ;
+
+                    Subject := STRSUBSTNO(text005, "No.");
+
                     UserSetup2.GET(USERID);
                     SendersName := UserSetup2.Initials;
                     SenderAddress := UserSetup2."E-Mail";
-                    Body := Text011 + ' ' + Addressee + ',' +
+
+                    Subject := STRSUBSTNO(text005, "No.");
+                    CreateEmailBody("No.", Addressee, text005, "Staff Name", Purpose, "IOU Amount", Balance);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+
+                    /* Body := Text011 + ' ' + Addressee + ',' +
                     CRLF + CRLF + STRSUBSTNO(text005, "IOU No.") + CRLF +
                     Text009 + FORMAT("Staff Name") + CRLF +
                     Text010 + FORMAT(Purpose) + CRLF +
@@ -727,15 +758,16 @@ table 50107 "IOU Retirement Header"
                     Text014 + FORMAT("Retire Amount") + CRLF +
                     Text013 + FORMAT(Balance) + CRLF +
                     CRLF + CRLF + CRLF + Text007 + CRLF + CRLF + SendersName;
-                        IF CURRENTCLIENTTYPE = CLIENTTYPE::Windows THEN
-                           Mail.NewMessage(ToAddresses, CcAddresses, BccAddresses, Subject, Body, '', TRUE);
-                       IF CURRENTCLIENTTYPE = CLIENTTYPE::Web THEN BEGIN
-                           SMTPMail.CreateMessage(SendersName, SenderAddress, ToAddresses, Subject, Body, FALSE);
-                           SMTPMail.Send;
-                           MESSAGE(Text008);
-                       END; 
+                    IF CURRENTCLIENTTYPE = CLIENTTYPE::Windows THEN
+                        Mail.NewMessage(ToAddresses, CcAddresses, BccAddresses, Subject, Body, '', TRUE);
+                    IF CURRENTCLIENTTYPE = CLIENTTYPE::Web THEN BEGIN
+                        SMTPMail.CreateMessage(SendersName, SenderAddress, ToAddresses, Subject, Body, FALSE);
+                        SMTPMail.Send;
+                        MESSAGE(Text008);
+                    END; */
+
                 END;
-            end; */ 
+            end;
         }
         field(31; "3rd Approval Time"; DateTime)
         {
@@ -763,165 +795,168 @@ table 50107 "IOU Retirement Header"
 
             trigger OnValidate()
             begin
-                /*  TESTFIELD("Send for Approval", TRUE);
-                  //TESTFIELD("3rd Apprv.Status",2);
-                  TESTFIELD("3rd Approval to", USERID);
-                  "Final Approval Time" := 0DT;
+                TESTFIELD("Send for Approval", TRUE);
+                //TESTFIELD("3rd Apprv.Status",2);
+                TESTFIELD("3rd Approval to", USERID);
+                "Final Approval Time" := 0DT;
 
 
-                  IF "Final Apprv. Status" = "Final Apprv. Status"::Approved THEN
-                      IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
-                          "Final Apprv. Status" := RetireRec."Final Apprv. Status"::" "
-                      ELSE BEGIN
-                          "Staff Name" := "Staff Name";
-                          Purpose := Description;
-                          "IOU Amount" := "Original IOU Amount";
-                          CALCFIELDS("Amount To Retire");
-                          "Retire Amount" := "Amount To Retire";
-                          Balance := "IOU Amount" - "Retire Amount";
+                IF "Final Apprv. Status" = "Final Apprv. Status"::Approved THEN
+                    IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
+                        "Final Apprv. Status" := RetireRec."Final Apprv. Status"::" "
+                    ELSE BEGIN
+                        "Staff Name" := "Staff Name";
+                        Purpose := Description;
+                        "IOU Amount" := "Original IOU Amount";
+                        CALCFIELDS("Amount To Retire");
+                        "Retire Amount" := "Amount To Retire";
+                        Balance := "IOU Amount" - "Retire Amount";
 
-                          TESTFIELD("1st Approval to");
-                          "Final Approval Time" := CURRENTDATETIME;
-                          UserSetup.GET(Sender);
-                          ToAddresses := UserSetup."E-Mail";
-                          Addressee := UserSetup.Initials;
-                          CcAddresses := '';
-                          BccAddresses := '';
-                          Subject := STRSUBSTNO(text003, "No.");
-                          ;
-                          UserSetup2.GET(USERID);
-                          SendersName := UserSetup2.Initials;
-                          SenderAddress := UserSetup2."E-Mail";
+                        TESTFIELD("1st Approval to");
+                        "Final Approval Time" := CURRENTDATETIME;
+                        UserSetup.GET(Sender);
+                        ToAddresses := UserSetup."E-Mail";
+                        Addressee := UserSetup.Initials;
+                        CcAddresses := '';
+                        BccAddresses := '';
+                        Subject := STRSUBSTNO(text003, "No.");
 
-                          WITH TempEmailItem DO BEGIN
-                              "Send to" := ToAddresses;
-                              "Send CC" := SenderAddress;
-                              "Send BCC" := BccAddresses;
-                              Subject := STRSUBSTNO(text003, "No.");
+                        UserSetup2.GET(USERID);
+                        SendersName := UserSetup2.Initials;
+                        SenderAddress := UserSetup2."E-Mail";
 
-                              CRLF := '';
-                              CRLF[1] := 13;
-                              CRLF[2] := 10;
+                        Subject := STRSUBSTNO(text003, "No.");
+                        CreateEmailBody("No.", Addressee, text003, "Staff Name", Purpose, "IOU Amount", Balance);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
-                              BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                              BodyStream.WRITETEXT(Text011 + ' ' + Addressee + ',');
-                              BodyStream.WRITETEXT(CRLF + CRLF);
-                              BodyStream.WRITETEXT(STRSUBSTNO(text003, "No.") + CRLF +
-                              Text009 + FORMAT("Staff Name") + CRLF +
-                              Text010 + FORMAT(Purpose) + CRLF +
-                              Text012 + FORMAT("IOU Amount") + CRLF + CRLF +
-                              Text014 + FORMAT("Retire Amount") + CRLF + CRLF +
-                              Text013 + FORMAT(Balance) + CRLF + CRLF +
-                              Text007 + CRLF);
-                              BodyStream.WRITETEXT(SendersName);
-                              BodyStream.WRITETEXT(CRLF + CRLF);
-                              BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                              Body := BodyBlob.Blob;
-                              Send(FALSE);
-                          END;
-                      END;
+                        /*  WITH TempEmailItem DO BEGIN
+                             "Send to" := ToAddresses;
+                             "Send CC" := SenderAddress;
+                             "Send BCC" := BccAddresses;
+                             Subject := STRSUBSTNO(text003, "No.");
 
-                  IF "Final Apprv. Status" = "Final Apprv. Status"::Rejected THEN
-                      IF NOT CONFIRM('Are you sure you want to REJECT', FALSE) THEN
-                          "Final Apprv. Status" := RetireRec."Final Apprv. Status"::" "
-                      ELSE BEGIN
-                          "Staff Name" := "Staff Name";
-                          Purpose := Description;
-                          "IOU Amount" := "Original IOU Amount";
-                          CALCFIELDS("Amount To Retire");
-                          "Retire Amount" := "Amount To Retire";
-                          Balance := "IOU Amount" - "Retire Amount";
+                             BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                             BodyStream.WRITETEXT(Text011 + ' ' + Addressee + ',');
+                             BodyStream.WRITETEXT(CRLF + CRLF);
+                             BodyStream.WRITETEXT(STRSUBSTNO(text003, "No.") + CRLF +
+                             Text009 + FORMAT("Staff Name") + CRLF +
+                             Text010 + FORMAT(Purpose) + CRLF +
+                             Text012 + FORMAT("IOU Amount") + CRLF + CRLF +
+                             Text014 + FORMAT("Retire Amount") + CRLF + CRLF +
+                             Text013 + FORMAT(Balance) + CRLF + CRLF +
+                             Text007 + CRLF);
+                             BodyStream.WRITETEXT(SendersName);
+                             BodyStream.WRITETEXT(CRLF + CRLF);
+                             BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                             Body := BodyBlob.Blob;
+                             Send(FALSE);
+                         END; */
+                    END;
 
-                          "Final Approval Time" := CURRENTDATETIME;
-                          UserSetup.GET(Sender);
-                          ToAddresses := UserSetup."E-Mail";
-                          Addressee := UserSetup.Initials;
-                          CcAddresses := '';
-                          BccAddresses := '';
-                          Subject := STRSUBSTNO(text004, "No.");
-                          ;
-                          UserSetup2.GET(USERID);
-                          SendersName := UserSetup2.Initials;
-                          SenderAddress := UserSetup2."E-Mail";
+                IF "Final Apprv. Status" = "Final Apprv. Status"::Rejected THEN
+                    IF NOT CONFIRM('Are you sure you want to REJECT', FALSE) THEN
+                        "Final Apprv. Status" := RetireRec."Final Apprv. Status"::" "
+                    ELSE BEGIN
+                        "Staff Name" := "Staff Name";
+                        Purpose := Description;
+                        "IOU Amount" := "Original IOU Amount";
+                        CALCFIELDS("Amount To Retire");
+                        "Retire Amount" := "Amount To Retire";
+                        Balance := "IOU Amount" - "Retire Amount";
 
-                          WITH TempEmailItem DO BEGIN
-                              "Send to" := ToAddresses;
-                              "Send CC" := SenderAddress;
-                              "Send BCC" := BccAddresses;
-                              Subject := STRSUBSTNO(text004, "No.");
+                        "Final Approval Time" := CURRENTDATETIME;
+                        UserSetup.GET(Sender);
+                        ToAddresses := UserSetup."E-Mail";
+                        Addressee := UserSetup.Initials;
+                        CcAddresses := '';
+                        BccAddresses := '';
+                        Subject := STRSUBSTNO(text004, "No.");
 
-                              CRLF := '';
-                              CRLF[1] := 13;
-                              CRLF[2] := 10;
+                        UserSetup2.GET(USERID);
+                        SendersName := UserSetup2.Initials;
+                        SenderAddress := UserSetup2."E-Mail";
 
-                              BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                              BodyStream.WRITETEXT(Text011 + ' ' + Addressee + ',');
-                              BodyStream.WRITETEXT(CRLF + CRLF);
-                              BodyStream.WRITETEXT(STRSUBSTNO(text004, "No.") + CRLF +
-                              Text009 + FORMAT("Staff Name") + CRLF + CRLF +
-                              Text010 + FORMAT(Purpose) + CRLF + CRLF +
-                              Text012 + FORMAT("IOU Amount") + CRLF + CRLF +
-                              Text014 + FORMAT("Retire Amount") + CRLF + CRLF +
-                              Text013 + FORMAT(Balance) + CRLF + CRLF +
-                              Text007 + CRLF);
-                              BodyStream.WRITETEXT(SendersName);
-                              BodyStream.WRITETEXT(CRLF + CRLF);
-                              BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                              Body := BodyBlob.Blob;
-                              Send(FALSE);
-                          END;
-                          Reject := TRUE;
-                      END;
+                        Subject := STRSUBSTNO(text004, "No.");
+                        CreateEmailBody("No.", Addressee, text004, "Staff Name", Purpose, "IOU Amount", Balance);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
-                  IF "Final Apprv. Status" = "Final Apprv. Status"::"on Hold" THEN
-                      IF NOT CONFIRM('Are you sure you want to place ON HOLD', FALSE) THEN
-                          "Final Apprv. Status" := RetireRec."Final Apprv. Status"::" "
-                      ELSE BEGIN
-                          "Staff Name" := "Staff Name";
-                          Purpose := Description;
-                          "IOU Amount" := "Original IOU Amount";
-                          CALCFIELDS("Amount To Retire");
-                          "Retire Amount" := "Amount To Retire";
-                          Balance := "IOU Amount" - "Retire Amount";
-                          "Final Approval Time" := CURRENTDATETIME;
-                          UserSetup.GET(Sender);
-                          ToAddresses := UserSetup."E-Mail";
-                          Addressee := UserSetup.Initials;
-                          CcAddresses := '';
-                          BccAddresses := '';
-                          Subject := STRSUBSTNO(text005, "No.");
-                          ;
-                          UserSetup2.GET(USERID);
-                          SendersName := UserSetup2.Initials;
-                          SenderAddress := UserSetup2."E-Mail";
+                        /*  WITH TempEmailItem DO BEGIN
+                             "Send to" := ToAddresses;
+                             "Send CC" := SenderAddress;
+                             "Send BCC" := BccAddresses;
+                             Subject := STRSUBSTNO(text004, "No.");
 
-                          WITH TempEmailItem DO BEGIN
-                              "Send to" := ToAddresses;
-                              "Send CC" := SenderAddress;
-                              "Send BCC" := BccAddresses;
-                              Subject := STRSUBSTNO(text005, "No.");
+                             BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                             BodyStream.WRITETEXT(Text011 + ' ' + Addressee + ',');
+                             BodyStream.WRITETEXT(CRLF + CRLF);
+                             BodyStream.WRITETEXT(STRSUBSTNO(text004, "No.") + CRLF +
+                             Text009 + FORMAT("Staff Name") + CRLF + CRLF +
+                             Text010 + FORMAT(Purpose) + CRLF + CRLF +
+                             Text012 + FORMAT("IOU Amount") + CRLF + CRLF +
+                             Text014 + FORMAT("Retire Amount") + CRLF + CRLF +
+                             Text013 + FORMAT(Balance) + CRLF + CRLF +
+                             Text007 + CRLF);
+                             BodyStream.WRITETEXT(SendersName);
+                             BodyStream.WRITETEXT(CRLF + CRLF);
+                             BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                             Body := BodyBlob.Blob;
+                             Send(FALSE);
+                         END; */
 
-                              CRLF := '';
-                              CRLF[1] := 13;
-                              CRLF[2] := 10;
+                        Reject := TRUE;
+                    END;
 
-                              BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                              BodyStream.WRITETEXT(Text011 + ' ' + Addressee + ',');
-                              BodyStream.WRITETEXT(CRLF + CRLF);
-                              BodyStream.WRITETEXT(STRSUBSTNO(text005, "No.") + CRLF +
-                              Text009 + FORMAT("Staff Name") + CRLF +
-                              Text010 + FORMAT(Purpose) + CRLF +
-                              Text012 + FORMAT("IOU Amount") + CRLF + CRLF +
-                              Text014 + FORMAT("Retire Amount") + CRLF + CRLF +
-                              Text013 + FORMAT(Balance) + CRLF + CRLF +
-                              Text007 + CRLF);
-                              BodyStream.WRITETEXT(SendersName);
-                              BodyStream.WRITETEXT(CRLF + CRLF);
-                              BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                              Body := BodyBlob.Blob;
-                              Send(FALSE);
-                          END;
-                      END; */
+                IF "Final Apprv. Status" = "Final Apprv. Status"::"on Hold" THEN
+                    IF NOT CONFIRM('Are you sure you want to place this on hold?', FALSE) THEN
+                        "Final Apprv. Status" := RetireRec."Final Apprv. Status"::" "
+                    ELSE BEGIN
+                        "Staff Name" := "Staff Name";
+                        Purpose := Description;
+                        "IOU Amount" := "Original IOU Amount";
+                        CALCFIELDS("Amount To Retire");
+                        "Retire Amount" := "Amount To Retire";
+                        Balance := "IOU Amount" - "Retire Amount";
+                        "Final Approval Time" := CURRENTDATETIME;
+
+                        UserSetup.GET(Sender);
+                        ToAddresses := UserSetup."E-Mail";
+                        Addressee := UserSetup.Initials;
+                        CcAddresses := '';
+                        BccAddresses := '';
+                        Subject := STRSUBSTNO(text005, "No.");
+
+                        UserSetup2.GET(USERID);
+                        SendersName := UserSetup2.Initials;
+                        SenderAddress := UserSetup2."E-Mail";
+
+                        Subject := STRSUBSTNO(text005, "No.");
+                        CreateEmailBody("No.", Addressee, text005, "Staff Name", Purpose, "IOU Amount", Balance);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+
+                        /*      WITH TempEmailItem DO BEGIN
+                                 "Send to" := ToAddresses;
+                                 "Send CC" := SenderAddress;
+                                 "Send BCC" := BccAddresses;
+                                 Subject := STRSUBSTNO(text005, "No.");
+
+                                 BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                                 BodyStream.WRITETEXT(Text011 + ' ' + Addressee + ',');
+                                 BodyStream.WRITETEXT(CRLF + CRLF);
+                                 BodyStream.WRITETEXT(STRSUBSTNO(text005, "No.") + CRLF +
+                                 Text009 + FORMAT("Staff Name") + CRLF +
+                                 Text010 + FORMAT(Purpose) + CRLF +
+                                 Text012 + FORMAT("IOU Amount") + CRLF + CRLF +
+                                 Text014 + FORMAT("Retire Amount") + CRLF + CRLF +
+                                 Text013 + FORMAT(Balance) + CRLF + CRLF +
+                                 Text007 + CRLF);
+                                 BodyStream.WRITETEXT(SendersName);
+                                 BodyStream.WRITETEXT(CRLF + CRLF);
+                                 BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                                 Body := BodyBlob.Blob;
+                                 Send(FALSE);
+                             END; */
+
+                    END;
             end;
         }
         field(36; "Final Approval Time"; DateTime)
@@ -956,17 +991,15 @@ table 50107 "IOU Retirement Header"
                     TESTFIELD("1st Apprv. Status", 0);
                     TESTFIELD("2nd Approval to");
                     TESTFIELD("2nd Apprv. Status", 0);
+
                     UserSetup2.GET("1st Approval to");
                     "Current pending Person" := "1st Approval to";
                     ToName := UserSetup2."E-Mail";
+
                     Subject := STRSUBSTNO(text001, "No.");
-                    IF CURRENTCLIENTTYPE = CLIENTTYPE::Windows THEN
-                        //Mail.NewMessage(ToAddresses, CcAddresses, BccAddresses, Subject, Body, '', TRUE);
-                    IF CURRENTCLIENTTYPE = CLIENTTYPE::Web THEN BEGIN
-                            //SMTPMail.CreateMessage(SendersName, SenderAddress, ToName, Subject, Body, FALSE);
-                            //SMTPMail.Send;
-                            MESSAGE(Text008);
-                        END;
+                    CreateEmailBody("No.", Addressee, text001, "Staff Name", Purpose, "IOU Amount", Balance);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+
                 END;
             end;
         }
@@ -982,18 +1015,23 @@ table 50107 "IOU Retirement Header"
                     "User ID" := USERID;
                     TESTFIELD("1st Approval to");
                     TESTFIELD("1st Apprv. Status", 0);
+
                     UserSetup2.GET("1st Approval to");
                     SenderAddress := UserSetup."E-Mail";
                     "Current pending Person" := "1st Approval to";
                     ToName := UserSetup2."E-Mail";
+
                     Subject := STRSUBSTNO(text001, "No.");
-                    IF CURRENTCLIENTTYPE = CLIENTTYPE::Windows THEN
-                        //Mail.NewMessage(ToAddresses, CcAddresses, BccAddresses, Subject, Body, '', TRUE);
-                    IF CURRENTCLIENTTYPE = CLIENTTYPE::Web THEN BEGIN
-                            //SMTPMail.CreateMessage(SendersName, SenderAddress, ToName, Subject, Body, FALSE);
-                            //SMTPMail.Send;
-                            MESSAGE(Text008);
-                        END;
+                    CreateEmailBody("No.", Addressee, text001, "Staff Name", Purpose, "IOU Amount", Balance);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+
+                    /*    IF CURRENTCLIENTTYPE = CLIENTTYPE::Windows THEN
+                           //Mail.NewMessage(ToAddresses, CcAddresses, BccAddresses, Subject, Body, '', TRUE);
+                       IF CURRENTCLIENTTYPE = CLIENTTYPE::Web THEN BEGIN
+                               //SMTPMail.CreateMessage(SendersName, SenderAddress, ToName, Subject, Body, FALSE);
+                               //SMTPMail.Send;
+                               MESSAGE(Text008);
+                           END; */
                 END;
             end;
         }
@@ -1033,8 +1071,8 @@ table 50107 "IOU Retirement Header"
         {
             Caption = 'Applies-to Doc. Type';
             Editable = false;
-    /*         OptionCaption = ' ,Payment,Invoice,Credit Memo,Finance Charge Memo,Reminder,Refund';
-            OptionMembers = " ",Payment,Invoice,"Credit Memo","Finance Charge Memo",Reminder,Refund; */
+            /*         OptionCaption = ' ,Payment,Invoice,Credit Memo,Finance Charge Memo,Reminder,Refund';
+                    OptionMembers = " ",Payment,Invoice,"Credit Memo","Finance Charge Memo",Reminder,Refund; */
         }
         field(52; "Applies-to Doc. No."; Code[20])
         {
@@ -1062,7 +1100,7 @@ table 50107 "IOU Retirement Header"
                                                                     Open = filter(true),
                                                                     Positive = filter(true));
 
-            /* trigger OnValidate()
+            trigger OnValidate()
             begin
                 IF "Staff No." <> '' THEN BEGIN
                     IF CustLedgEntry.GET("Apply Entry") THEN BEGIN
@@ -1070,11 +1108,11 @@ table 50107 "IOU Retirement Header"
 
                         "Applies-to Doc. No." := CustLedgEntry."Document No.";
                     END ELSE BEGIN
-                        "Applies-to Doc. Type" := 0;
+                        //"Applies-to Doc. Type" := 0;
                         "Applies-to Doc. No." := '';
                     END;
                 END;
-            end; */
+            end;
         }
         field(54; Reject; Boolean)
         {
@@ -1146,21 +1184,19 @@ table 50107 "IOU Retirement Header"
         Body: Text[500];
         attachement: Text[260];
         Opendialog: Boolean;
-        text003: Label 'Document ''%1'' has been approved';
-        text004: Label 'Document ''%1'' has been rejected';
-        text005: Label 'Document ''%1'' is on hold';
-        text001: Label 'Document  ''%1''  requires your approval';
+        text003: Label 'Document %1 has been approved.';
+        text004: Label 'Document %1 has been rejected.';
+        text005: Label 'Document %1 is on hold.';
+        text001: Label 'Document %1 requires your approval.';
         CustLedgEntry: Record "Cust. Ledger Entry";
         CRLF: Text[2];
         SendersName: Text;
         Addressee: Text;
         UserSetup2: Record "User Setup";
-        //Mail: Codeunit Mail;
         CcAddresses: Text;
         BccAddresses: Text;
         SenderAddress: Text;
         ToAddresses: Text;
-        //SMTPMail: Codeunit "400";
         "Staff Name": Text;
         Purpose: Text;
         Amount: Decimal;
@@ -1170,7 +1206,7 @@ table 50107 "IOU Retirement Header"
         Text008: Label 'Mail sent successfully.';
         Text009: Label 'Staff Name :';
         Text010: Label 'Purpose :';
-        Text011: Label 'Dear';
+        Text011: Label 'Dear %1,';
         Text012: Label 'IOU Amount :#';
         Text013: Label 'Balance :#';
         Text014: Label 'Amount Retired :#';
@@ -1205,9 +1241,8 @@ table 50107 "IOU Retirement Header"
         i: Integer;
         Reportprint: Codeunit "Test Report-Print";
         TempEmailItem: Record "Email Item" temporary;
-        //EmailBody: Record "99008535";
+        EmailBody: Text[1024];
         BodyTxt: Text;
-        //BodyBlob: Record "99008535";
         BodyStream: OutStream;
         SenderInitial: Text;
 
@@ -1474,6 +1509,48 @@ table 50107 "IOU Retirement Header"
 
         IF "Test Report" THEN
             Reportprint.PrintGenJnlLine(GlJour);
+
+    end;
+
+
+    procedure CreateEmailBody(DocNo: Code[20]; RecipientInitials: Text; BodyMsg: Text; StaffName: Text; RetPurpose: Text; RetireAmount: Decimal; BalAmount: Decimal);
+
+    begin
+
+        UserSetup.Get(UserId);
+
+        EmailBody := STRSUBSTNO(Text011, RecipientInitials);
+        EmailBody += '<br><br>';
+        EmailBody += STRSUBSTNO(BodyMsg, DocNo);
+        EmailBody += '<br>';
+        EmailBody += Text009 + FORMAT("Staff Name");
+        EmailBody += '<br>';
+        EmailBody += Text010 + FORMAT(Purpose);
+        EmailBody += '<br>';
+        EmailBody += Text012 + FORMAT("IOU Amount");
+        EmailBody += '<br>';
+        EmailBody += Text014 + FORMAT("Retire Amount");
+        EmailBody += '<br>';
+        EmailBody += Text013 + FORMAT(Balance);
+        EmailBody += '<br><br>';
+        EmailBody += 'Regards,';
+        EmailBody += '<br>';
+        EmailBody += UserSetup.Initials;
+    end;
+
+    procedure SendEmail(ToRecipients: Text; Subject: Text; Body: Text; CCRecipients: Text; BCCRecipients: Text)
+    var
+
+        Email: Codeunit Email;
+        EmailMessage: Codeunit "Email Message";
+
+
+    begin
+
+        EmailMessage.Create(ToRecipients, Subject, EmailBody, true);
+        EmailMessage.AddRecipient(enum::"Email Recipient Type"::Cc, CCRecipients);
+        EmailMessage.AddRecipient(Enum::"Email Recipient Type"::Bcc, BCCRecipients);
+        Email.OpenInEditorModally(EmailMessage, Enum::"Email Scenario"::Default)
 
     end;
 }

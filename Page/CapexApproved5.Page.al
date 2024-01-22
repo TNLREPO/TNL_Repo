@@ -1,5 +1,6 @@
 page 70122 "Capex Approved5"
 {
+    ApplicationArea = All;
     SourceTable = "Procurement Header";
 
     layout

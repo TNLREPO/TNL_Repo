@@ -781,7 +781,7 @@ page 50603 "Leave Request Card"
         LPlanRec: Record 50075;
         LeaveYr: Integer;
         DateRec: Record 2000000007;
-        //DateForm: Page "50098";
+        DateForm: Page 50098;
         CurrentYr: Integer;
 
         Level_1: Boolean;
@@ -846,9 +846,9 @@ page 50603 "Leave Request Card"
         UNTIL (DateRec."Period No." = CurrentYr);
 
         DateRec.FILTERGROUP(0);
-        // DateForm.SETTABLEVIEW(DateRec);
+        DateForm.SETTABLEVIEW(DateRec);
 
-        //IF PAGE.RUNMODAL(PAGE::Date, DateRec) = ACTION::LookupOK THEN EXIT(DateRec."Period No.");
+        IF PAGE.RUNMODAL(PAGE::Date, DateRec) = ACTION::LookupOK THEN EXIT(DateRec."Period No.");
 
         EXIT(0);
     end;

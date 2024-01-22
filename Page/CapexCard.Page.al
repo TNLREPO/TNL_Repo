@@ -1,5 +1,6 @@
 page 70116 "Capex Card"
 {
+    ApplicationArea = All;
     PageType = Card;
     SourceTable = "Procurement Header";
 

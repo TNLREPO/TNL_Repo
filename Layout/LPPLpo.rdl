@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <AutoRefresh>0</AutoRefresh>
@@ -11,85 +11,6 @@
       <rd:SecurityType>None</rd:SecurityType>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="LPPNo_LocalPartPurchaseRegister">
-          <DataField>LPPNo_LocalPartPurchaseRegister</DataField>
-        </Field>
-        <Field Name="RequesterCode_LocalPartPurchaseRegister">
-          <DataField>RequesterCode_LocalPartPurchaseRegister</DataField>
-        </Field>
-        <Field Name="RequesterName_LocalPartPurchaseRegister">
-          <DataField>RequesterName_LocalPartPurchaseRegister</DataField>
-        </Field>
-        <Field Name="DepartmentCode_LocalPartPurchaseRegister">
-          <DataField>DepartmentCode_LocalPartPurchaseRegister</DataField>
-        </Field>
-        <Field Name="RequesterDepartment_LocalPartPurchaseRegister">
-          <DataField>RequesterDepartment_LocalPartPurchaseRegister</DataField>
-        </Field>
-        <Field Name="Date_LocalPartPurchaseRegister">
-          <DataField>Date_LocalPartPurchaseRegister</DataField>
-        </Field>
-        <Field Name="SuppliersAddress_LocalPartPurchaseRegister">
-          <DataField>SuppliersAddress_LocalPartPurchaseRegister</DataField>
-        </Field>
-        <Field Name="SuppliersName_LocalPartPurchaseRegister">
-          <DataField>SuppliersName_LocalPartPurchaseRegister</DataField>
-        </Field>
-        <Field Name="ProfomaInvoiceNo_LocalPartPurchaseRegister">
-          <DataField>ProfomaInvoiceNo_LocalPartPurchaseRegister</DataField>
-        </Field>
-        <Field Name="Justificationforpurchase_LocalPartPurchaseRegister">
-          <DataField>Justificationforpurchase_LocalPartPurchaseRegister</DataField>
-        </Field>
-        <Field Name="TotalPurchaseValue_LocalPartPurchaseRegister">
-          <DataField>TotalPurchaseValue_LocalPartPurchaseRegister</DataField>
-        </Field>
-        <Field Name="TotalPurchaseValue_LocalPartPurchaseRegisterFormat">
-          <DataField>TotalPurchaseValue_LocalPartPurchaseRegisterFormat</DataField>
-        </Field>
-        <Field Name="OrderType_LocalPartPurchaseRegister">
-          <DataField>OrderType_LocalPartPurchaseRegister</DataField>
-        </Field>
-        <Field Name="DocumentNo_LPPLine">
-          <DataField>DocumentNo_LPPLine</DataField>
-        </Field>
-        <Field Name="OrderType_LPPLine">
-          <DataField>OrderType_LPPLine</DataField>
-        </Field>
-        <Field Name="ItemNo_LPPLine">
-          <DataField>ItemNo_LPPLine</DataField>
-        </Field>
-        <Field Name="ItemName_LPPLine">
-          <DataField>ItemName_LPPLine</DataField>
-        </Field>
-        <Field Name="Quantity_LPPLine">
-          <DataField>Quantity_LPPLine</DataField>
-        </Field>
-        <Field Name="Quantity_LPPLineFormat">
-          <DataField>Quantity_LPPLineFormat</DataField>
-        </Field>
-        <Field Name="UnitCost_LPPLine">
-          <DataField>UnitCost_LPPLine</DataField>
-        </Field>
-        <Field Name="UnitCost_LPPLineFormat">
-          <DataField>UnitCost_LPPLineFormat</DataField>
-        </Field>
-        <Field Name="Amount_LPPLine">
-          <DataField>Amount_LPPLine</DataField>
-        </Field>
-        <Field Name="Amount_LPPLineFormat">
-          <DataField>Amount_LPPLineFormat</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -2195,4 +2116,83 @@ End Function
 </Code>
   <Language>=User!Language</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="LPPNo_LocalPartPurchaseRegister">
+          <DataField>LPPNo_LocalPartPurchaseRegister</DataField>
+        </Field>
+        <Field Name="RequesterCode_LocalPartPurchaseRegister">
+          <DataField>RequesterCode_LocalPartPurchaseRegister</DataField>
+        </Field>
+        <Field Name="RequesterName_LocalPartPurchaseRegister">
+          <DataField>RequesterName_LocalPartPurchaseRegister</DataField>
+        </Field>
+        <Field Name="DepartmentCode_LocalPartPurchaseRegister">
+          <DataField>DepartmentCode_LocalPartPurchaseRegister</DataField>
+        </Field>
+        <Field Name="RequesterDepartment_LocalPartPurchaseRegister">
+          <DataField>RequesterDepartment_LocalPartPurchaseRegister</DataField>
+        </Field>
+        <Field Name="Date_LocalPartPurchaseRegister">
+          <DataField>Date_LocalPartPurchaseRegister</DataField>
+        </Field>
+        <Field Name="SuppliersAddress_LocalPartPurchaseRegister">
+          <DataField>SuppliersAddress_LocalPartPurchaseRegister</DataField>
+        </Field>
+        <Field Name="SuppliersName_LocalPartPurchaseRegister">
+          <DataField>SuppliersName_LocalPartPurchaseRegister</DataField>
+        </Field>
+        <Field Name="ProfomaInvoiceNo_LocalPartPurchaseRegister">
+          <DataField>ProfomaInvoiceNo_LocalPartPurchaseRegister</DataField>
+        </Field>
+        <Field Name="Justificationforpurchase_LocalPartPurchaseRegister">
+          <DataField>Justificationforpurchase_LocalPartPurchaseRegister</DataField>
+        </Field>
+        <Field Name="TotalPurchaseValue_LocalPartPurchaseRegister">
+          <DataField>TotalPurchaseValue_LocalPartPurchaseRegister</DataField>
+        </Field>
+        <Field Name="TotalPurchaseValue_LocalPartPurchaseRegisterFormat">
+          <DataField>TotalPurchaseValue_LocalPartPurchaseRegisterFormat</DataField>
+        </Field>
+        <Field Name="OrderType_LocalPartPurchaseRegister">
+          <DataField>OrderType_LocalPartPurchaseRegister</DataField>
+        </Field>
+        <Field Name="DocumentNo_LPPLine">
+          <DataField>DocumentNo_LPPLine</DataField>
+        </Field>
+        <Field Name="OrderType_LPPLine">
+          <DataField>OrderType_LPPLine</DataField>
+        </Field>
+        <Field Name="ItemNo_LPPLine">
+          <DataField>ItemNo_LPPLine</DataField>
+        </Field>
+        <Field Name="ItemName_LPPLine">
+          <DataField>ItemName_LPPLine</DataField>
+        </Field>
+        <Field Name="Quantity_LPPLine">
+          <DataField>Quantity_LPPLine</DataField>
+        </Field>
+        <Field Name="Quantity_LPPLineFormat">
+          <DataField>Quantity_LPPLineFormat</DataField>
+        </Field>
+        <Field Name="UnitCost_LPPLine">
+          <DataField>UnitCost_LPPLine</DataField>
+        </Field>
+        <Field Name="UnitCost_LPPLineFormat">
+          <DataField>UnitCost_LPPLineFormat</DataField>
+        </Field>
+        <Field Name="Amount_LPPLine">
+          <DataField>Amount_LPPLine</DataField>
+        </Field>
+        <Field Name="Amount_LPPLineFormat">
+          <DataField>Amount_LPPLineFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>

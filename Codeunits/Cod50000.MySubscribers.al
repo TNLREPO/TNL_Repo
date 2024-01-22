@@ -150,5 +150,13 @@ codeunit 50000 MySubscribers
         DtldCVLedgEntryBuffer."Loan ID" := GenJnlLine."Loan ID";
     end;
 
+    [EventSubscriber(ObjectType::Table, 5740, 'OnAfterCheckBeforePost', '', true, true)]
+
+    procedure Add_OnAfterCheckBeforePost(var TransferHeader: Record "Transfer Header")
+
+    Begin
+        TransferHeader.TransferControl();
+    End;
+
 }
 

@@ -1,5 +1,6 @@
 page 50206 "Stores Req. Subform"
 {
+    ApplicationArea = All;
     AutoSplitKey = true;
     DelayedInsert = true;
     MultipleNewLines = true;

@@ -3,8 +3,9 @@ page 70238 "IOU Appr. Audit"
     ApplicationArea = All;
     CardPageID = "IOU Register Card";
     PageType = List;
+    Editable = false;
     SourceTable = "IOU Register";
-    SourceTableView = WHERE("2nd Approval to" = FILTER('TOYOTANIGERIA\ADEWUMI'),
+    SourceTableView = WHERE("2nd Approval to" = FILTER('ADEWUMI'),
                             "2nd Apprv. Status" = FILTER(' ' | 'on Hold'),
                             "1st Apprv. Status" = FILTER('Approved'),
                             Reject = FILTER('No'));

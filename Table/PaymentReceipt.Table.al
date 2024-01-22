@@ -9,13 +9,11 @@ table 50103 "Payment/Receipt."
 
             trigger OnValidate()
             begin
-                IF "No." <> xRec."No." THEN BEGIN
-                    GenSetup.GET;
-                    //NoSeriesMgt.TestManual(GetNoSeriesCode);
-                    "No. Series" := '';
-                END;
-
-
+                /*  IF "No." <> xRec."No." THEN BEGIN
+                     GenSetup.GET;
+                     NoSeriesMgt.TestManual(GetNoSeriesCode);
+                     "No. Series" := '';
+                 END; */
             end;
         }
         field(2; "Document Type"; Option)
@@ -797,23 +795,40 @@ table 50103 "Payment/Receipt."
 
     trigger OnDelete()
     begin
+        IF ("Multiple Balance Account") OR ("Multiple Account") THEN BEGIN
+            ReqReptLine.SETRANGE(ReqReptLine.Type, "Document Type");
+            ReqReptLine.SETRANGE(ReqReptLine."Cash/Cheque", "Cash/Cheque");
+            ReqReptLine.SETRANGE(ReqReptLine."No.", "No.");
+            IF ReqReptLine.findfirst() THEN
+                ReqReptLine.DELETEALL;
+        END;
+        //ERROR('It is not Possible to delete');
 
     end;
 
     trigger OnInsert()
     begin
-
+        GenSetup.GET;
+        IF "No." = '' THEN BEGIN
+            TestNoSeries;
+            NoSeriesMgt.InitSeries(GetNoSeriesCode, xRec."No. Series", "Posting Date", "No.", "No. Series");
+        END;
+        "Created By" := COPYSTR(USERID, 15);
+        InitRecord;
 
     end;
 
     trigger OnModify()
     begin
+        IF ("Multiple Balance Account") OR ("Multiple Account") THEN
+            MESSAGE('Please remember to effect change on the lines!');
+        "Modified By" := COPYSTR(USERID, 15);
 
     end;
 
     trigger OnRename()
     begin
-
+        ERROR('You cannot rename this document!');
 
     end;
 

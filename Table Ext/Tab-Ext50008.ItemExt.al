@@ -55,12 +55,12 @@ tableextension 50008 "Item Ext" extends Item
         }
         field(50040; "Stock Value Posted to G/L"; Decimal)
         {
-           /*  CalcFormula = Sum("Value Entry"."Cost Posted to G/L" WHERE("Item No." = FIELD("No."),
+            CalcFormula = Sum("Value Entry"."Cost Posted to G/L" WHERE("Item No." = FIELD("No."),
                                                                         "Location Code" = FIELD("Location Filter"),
                                                                         "Posting Date" = FIELD("Date Filter"),
                                                                         "Variant Code" = FIELD("Variant Filter"),
-                                                                        "Expected Cost" = CONST(No)));
-            FieldClass = FlowField; */
+                                                                        "Expected Cost" = CONST(false)));
+            FieldClass = FlowField;
         }
         field(50041; "Phase out"; Boolean)
         {
@@ -156,7 +156,7 @@ tableextension 50008 "Item Ext" extends Item
         }
         field(50190; "Model No."; Code[50])
         {
-  /*           TableRelation = Model;
+            TableRelation = Model;
 
             trigger OnValidate()
             begin
@@ -164,7 +164,7 @@ tableextension 50008 "Item Ext" extends Item
                 Model.SETRANGE(Model."Model No.", "Model No.");
                 IF Model.FINDFIRST THEN
                     "Model Name" := Model."Model Name";
-            end; */
+            end;
         }
         field(50200; "Model Name"; Text[50])
         {
@@ -281,17 +281,17 @@ tableextension 50008 "Item Ext" extends Item
         }
         field(50219; "Stockvalue."; Decimal)
         {
-            /* FieldClass = FlowField;
+            FieldClass = FlowField;
             CalcFormula = Sum("Value Entry"."Cost Posted to G/L" WHERE("Item No." = FIELD("No."),
-                                                                        "Global Dimension 1 Code" = FIELD("Global Dimension 1 Filter)",
+                                                                        "Global Dimension 1 Code" = FIELD("Global Dimension 1 Filter"),
                                                                         "Global Dimension 2 Code" = FIELD("Global Dimension 2 Filter"),
                                                                         "Location Code" = FIELD("Location Filter"),
                                                                         "Drop Shipment" = FIELD("Drop Shipment Filter"),
                                                                         "Variant Code" = FIELD("Variant Filter"),
-                                                                        "Expected Cost" = CONST(No),
+                                                                        "Expected Cost" = CONST(false),
                                                                         "Posting Date" = FIELD("Date Filter")));
             DecimalPlaces = 0 : 5;
-            Editable = false; */
+            Editable = false;
 
         }
         field(50220; Department; Code[10])
@@ -342,13 +342,13 @@ tableextension 50008 "Item Ext" extends Item
         }
         field(50230; ICC; Code[10])
         {
-            //Editable = false;
-            //TableRelation = "Parts By Model"."Model Code";
+            Editable = false;
+            TableRelation = "Parts By Model"."Model Code";
         }
         field(50231; SCC; Code[10])
         {
-            //Editable = false;
-            //TableRelation = "Online Dealer Order";
+            Editable = false;
+            TableRelation = "Online Dealer Order";
         }
         field(50232; "Loss Sales"; Decimal)
         {
@@ -393,19 +393,19 @@ tableextension 50008 "Item Ext" extends Item
         }
         field(50239; "MVO Count"; Decimal)
         {
-           /*  FieldClass = FlowField;
-            CalcFormula = Sum("Monthly Vehicle Order Lines".Quantity WHERE("Period Starting" = FIELD("Date Filter"),
-                                                                            "PO Number" = FIELD("PO Filter)",
-                                                                            "Model No." = FIELD("No."),
-                                                                            Customer = FIELD("Customer Filter)",
-                                                                            "Model Group Code" = FIELD("Model Group Filter"),
-                                                                            "Model Category" = FIELD("Model Category Filter"),
-                                                                            Colour = FIELD("Colour Filter"),
-                                                                            "Customer Gen Bus Posting Group" = FIELD("Customer Gen Post Grp Filter"),
-                                                                            Purchaser = FIELD("MVO Purchaser Filter"),
-                                                                            "Location Code" = FIELD("Location Filter")));
-            DecimalPlaces = 0 : 0;
-            Editable = false; */
+            /*  FieldClass = FlowField;
+             CalcFormula = Sum("Monthly Vehicle Order Lines".Quantity WHERE("Period Starting" = FIELD("Date Filter"),
+                                                                             "PO Number" = FIELD("PO Filter)",
+                                                                             "Model No." = FIELD("No."),
+                                                                             Customer = FIELD("Customer Filter)",
+                                                                             "Model Group Code" = FIELD("Model Group Filter"),
+                                                                             "Model Category" = FIELD("Model Category Filter"),
+                                                                             Colour = FIELD("Colour Filter"),
+                                                                             "Customer Gen Bus Posting Group" = FIELD("Customer Gen Post Grp Filter"),
+                                                                             Purchaser = FIELD("MVO Purchaser Filter"),
+                                                                             "Location Code" = FIELD("Location Filter")));
+             DecimalPlaces = 0 : 0;
+             Editable = false; */
 
         }
         field(50240; "MVO Purchaser Filter"; Option)
@@ -438,8 +438,8 @@ tableextension 50008 "Item Ext" extends Item
         }
         field(50246; "PO Filter"; Code[20])
         {
-            //FieldClass = FlowFilter;
-            //TableRelation = "Monthly Vehicle Order"."PO Number";
+            FieldClass = FlowFilter;
+            TableRelation = "Monthly Vehicle Order"."PO Number";
         }
         field(50247; "Colour Filter"; Code[10])
         {
@@ -454,18 +454,18 @@ tableextension 50008 "Item Ext" extends Item
                                                                           "No."=FIELD("No.")));
             FieldClass = FlowField; */
         }
-        field(50250;"Own Spec";Boolean)
+        field(50250; "Own Spec"; Boolean)
         {
         }
-        field(50251;"Last Date Sold";Date)
+        field(50251; "Last Date Sold"; Date)
         {
         }
-        field(50252;"Part Category";Option)
+        field(50252; "Part Category"; Option)
         {
             OptionCaption = ' ,ENGINE/FUEL SYSTEM,POWER DRIVE/CHASIS,BODY PARTS,ELECTRICAL PARTS';
             OptionMembers = " ","ENGINE/FUEL SYSTEM","POWER DRIVE/CHASIS","BODY PARTS","ELECTRICAL PARTS";
         }
-        field(50253;"Qty Demanded";Decimal)
+        field(50253; "Qty Demanded"; Decimal)
         {
             /* FieldClass = FlowField;
             CalcFormula = Sum("Parts Enquiry"."Quantity Demanded" WHERE ("Part No"=FIELD("No."),
@@ -473,24 +473,24 @@ tableextension 50008 "Item Ext" extends Item
                                                                          "Location Code"=FIELD("Location Filter"),
                                                                          Variant=FIELD("Variant Filter")));
             DecimalPlaces = 0:0; */
-            
+
         }
-        field(50254;"Lost Sales Qty";Decimal)
+        field(50254; "Lost Sales Qty"; Decimal)
         {
-           /*  CalcFormula = Sum("Parts Enquiry"."Lost Quantity" WHERE (Part No=FIELD(No.),
-                                                                     Request Date=FIELD(Date Filter),
-                                                                     Location Code=FIELD(Location Filter),
-                                                                     Variant=FIELD(Variant Filter)));
-            DecimalPlaces = 0:0;
-            FieldClass = FlowField; */
+            /*  CalcFormula = Sum("Parts Enquiry"."Lost Quantity" WHERE (Part No=FIELD(No.),
+                                                                      Request Date=FIELD(Date Filter),
+                                                                      Location Code=FIELD(Location Filter),
+                                                                      Variant=FIELD(Variant Filter)));
+             DecimalPlaces = 0:0;
+             FieldClass = FlowField; */
         }
-        field(50255;"Freq Request";Integer)
+        field(50255; "Freq Request"; Integer)
         {
             /* CalcFormula = Count("Parts Enquiry" WHERE (Request Date=FIELD(Date Filter),
                                                        Part No=FIELD(No.)));
             FieldClass = FlowField; */
         }
-        field(50256;"Qty Supplied";Decimal)
+        field(50256; "Qty Supplied"; Decimal)
         {
             /* CalcFormula = Sum("Parts Enquiry"."Quantity Supplied" WHERE (Part No=FIELD(No.),
                                                                          Request Date=FIELD(Date Filter),
@@ -499,21 +499,21 @@ tableextension 50008 "Item Ext" extends Item
             DecimalPlaces = 0:0;
             FieldClass = FlowField; */
         }
-        field(50257;"Qty. On Request";Decimal)
+        field(50257; "Qty. On Request"; Decimal)
         {
         }
-        field(50258;"Issue Qty";Decimal)
+        field(50258; "Issue Qty"; Decimal)
         {
-           /*  CalcFormula = -Sum("Item Ledger Entry".Quantity WHERE (Entry Type=CONST(" "),
-                                                                   Item No.=FIELD(No.),
-                                                                   Location Code=FIELD(Location Filter),
-                                                                   Variant Code=FIELD(Variant Filter),
-                                                                   Posting Date=FIELD(Date Filter),
-                                                                   "Global Dimension 1 Code"=FIELD(Global Dimension 1 Filter),
-                                                                   Global Dimension 2 Code=FIELD(Global Dimension 2 Filter)));
-            FieldClass = FlowField; */
+            /*  CalcFormula = -Sum("Item Ledger Entry".Quantity WHERE (Entry Type=CONST(" "),
+                                                                    Item No.=FIELD(No.),
+                                                                    Location Code=FIELD(Location Filter),
+                                                                    Variant Code=FIELD(Variant Filter),
+                                                                    Posting Date=FIELD(Date Filter),
+                                                                    "Global Dimension 1 Code"=FIELD(Global Dimension 1 Filter),
+                                                                    Global Dimension 2 Code=FIELD(Global Dimension 2 Filter)));
+             FieldClass = FlowField; */
         }
-        field(50259;"Return Qty";Decimal)
+        field(50259; "Return Qty"; Decimal)
         {
             /* CalcFormula = Sum("Item Ledger Entry".Quantity WHERE (Entry Type=CONST(Assembly Consumption),
                                                                   Item No.=FIELD(No.),
@@ -524,34 +524,34 @@ tableextension 50008 "Item Ext" extends Item
                                                                   Global Dimension 2 Code=FIELD(Global Dimension 2 Filter)));
             FieldClass = FlowField; */
         }
-        field(50300;"Item Color";Code[30])
+        field(50300; "Item Color"; Code[30])
         {
         }
-        field(50301;Degree;Code[10])
+        field(50301; Degree; Code[10])
         {
         }
-        field(50302;"Year of Production";Code[10])
+        field(50302; "Year of Production"; Code[10])
         {
         }
-        field(50303;"Estimated Mileage";Code[10])
+        field(50303; "Estimated Mileage"; Code[10])
         {
         }
-        field(50304;"Pre-Owned Colour";Code[10])
+        field(50304; "Pre-Owned Colour"; Code[10])
         {
         }
-        field(60219;"Stockvalue.QQQ";Decimal)
-        {
-            Editable = false;
-        }
-        field(60220;"Bin Count";Decimal)
+        field(60219; "Stockvalue.QQQ"; Decimal)
         {
             Editable = false;
         }
-        field(60225;"Exchange Rate";Decimal)
+        field(60220; "Bin Count"; Decimal)
+        {
+            Editable = false;
+        }
+        field(60225; "Exchange Rate"; Decimal)
         {
             FieldClass = Normal;
         }
-        field(60226;"Abuja Inventory";Decimal)
+        field(60226; "Abuja Inventory"; Decimal)
         {
             /* CalcFormula = Sum("Item Ledger Entry".Quantity WHERE (Item No.=FIELD(No.),
                                                                   "Global Dimension 1 Code"=FIELD(Global Dimension 1 Filter),
@@ -565,35 +565,23 @@ tableextension 50008 "Item Ext" extends Item
             DecimalPlaces = 0:0;
             FieldClass = FlowField; */
         }
-        field(60227;"Portharcourt Inventory";Decimal)
+        field(60227; "Portharcourt Inventory"; Decimal)
         {
-           /*  CalcFormula = Sum("Item Ledger Entry".Quantity WHERE (Item No.=FIELD(No.),
-                                                                  "Global Dimension 1 Code"=FIELD(Global Dimension 1 Filter),
-                                                                  Global Dimension 2 Code=FIELD(Global Dimension 2 Filter),
-                                                                  Location Code=FIELD(Location Filter),
-                                                                  Location Code=FILTER(100PH),
-                                                                  Drop Shipment=FIELD(Drop Shipment Filter),
-                                                                  Variant Code=FIELD(Variant Filter),
-                                                                  Lot No.=FIELD(Lot No. Filter),
-                                                                  Serial No.=FIELD(Serial No. Filter)));
-            DecimalPlaces = 0:0;
-            FieldClass = FlowField; */
+
+            FieldClass = FlowField;
+            CalcFormula = Sum("Item Ledger Entry".Quantity WHERE("Item No." = FIELD("No."),
+                                                                   "Global Dimension 1 Code" = FIELD("Global Dimension 1 Filter"),
+                                                                   "Global Dimension 2 Code" = FIELD("Global Dimension 2 Filter"),
+                                                                   "Location Code" = FIELD("Location Filter"),
+                                                                   "Location Code" = FILTER('100PH'),
+                                                                   "Drop Shipment" = FIELD("Drop Shipment Filter"),
+                                                                   "Variant Code" = FIELD("Variant Filter"),
+                                                                   "Lot No." = FIELD("Lot No. Filter"),
+                                                                   "Serial No." = FIELD("Serial No. Filter")));
+            DecimalPlaces = 0 : 0;
+
         }
-        field(60228;"Isolo Inventory";Decimal)
-        {
-            /* CalcFormula = Sum("Item Ledger Entry".Quantity WHERE (Item No.=FIELD(No.),
-                                                                  "Global Dimension 1 Code"=FIELD(Global Dimension 1 Filter),
-                                                                  Global Dimension 2 Code=FIELD(Global Dimension 2 Filter),
-                                                                  Location Code=FIELD(Location Filter),
-                                                                  Location Code=FILTER(ISO150),
-                                                                  Drop Shipment=FIELD(Drop Shipment Filter),
-                                                                  Variant Code=FIELD(Variant Filter),
-                                                                  Lot No.=FIELD(Lot No. Filter),
-                                                                  Serial No.=FIELD(Serial No. Filter)));
-            DecimalPlaces = 0:0;
-            FieldClass = FlowField; */
-        }
-        field(60229;"Dojo Inventory";Decimal)
+        field(60228; "Isolo Inventory"; Decimal)
         {
             /* CalcFormula = Sum("Item Ledger Entry".Quantity WHERE (Item No.=FIELD(No.),
                                                                   "Global Dimension 1 Code"=FIELD(Global Dimension 1 Filter),
@@ -607,7 +595,7 @@ tableextension 50008 "Item Ext" extends Item
             DecimalPlaces = 0:0;
             FieldClass = FlowField; */
         }
-        field(60230;"Dojo Oregun  Inventory";Decimal)
+        field(60229; "Dojo Inventory"; Decimal)
         {
             /* CalcFormula = Sum("Item Ledger Entry".Quantity WHERE (Item No.=FIELD(No.),
                                                                   "Global Dimension 1 Code"=FIELD(Global Dimension 1 Filter),
@@ -621,27 +609,41 @@ tableextension 50008 "Item Ext" extends Item
             DecimalPlaces = 0:0;
             FieldClass = FlowField; */
         }
-        field(60231;"Item No Category";Code[10])
+        field(60230; "Dojo Oregun  Inventory"; Decimal)
+        {
+            /* CalcFormula = Sum("Item Ledger Entry".Quantity WHERE (Item No.=FIELD(No.),
+                                                                  "Global Dimension 1 Code"=FIELD(Global Dimension 1 Filter),
+                                                                  Global Dimension 2 Code=FIELD(Global Dimension 2 Filter),
+                                                                  Location Code=FIELD(Location Filter),
+                                                                  Location Code=FILTER(ISO150),
+                                                                  Drop Shipment=FIELD(Drop Shipment Filter),
+                                                                  Variant Code=FIELD(Variant Filter),
+                                                                  Lot No.=FIELD(Lot No. Filter),
+                                                                  Serial No.=FIELD(Serial No. Filter)));
+            DecimalPlaces = 0:0;
+            FieldClass = FlowField; */
+        }
+        field(60231; "Item No Category"; Code[10])
         {
             Caption = 'Product Grp Code';
             DataClassification = ToBeClassified;
-            //TableRelation = "Prod. Grp. Code".code;
+            TableRelation = "Prod. Grp. Code".code;
         }
-        field(60232;"Sub Item";Code[20])
+        field(60232; "Sub Item"; Code[20])
         {
-            //CalcFormula = Lookup("Item Substitution"."Substitute No." WHERE (No.=FIELD(No.)));
-            //FieldClass = FlowField;
+            CalcFormula = Lookup("Item Substitution"."Substitute No." WHERE("No." = FIELD("No.")));
+            FieldClass = FlowField;
         }
-        field(60233;"Sub Name";Text[100])
+        field(60233; "Sub Name"; Text[100])
         {
-            //CalcFormula = Lookup("Item Substitution".Description WHERE (Substitute No.=FIELD(No.)));
-            //FieldClass = FlowField;
+            CalcFormula = Lookup("Item Substitution".Description WHERE("Substitute No." = FIELD("No.")));
+            FieldClass = FlowField;
         }
-        field(60234;"Part Division";Text[50])
+        field(60234; "Part Division"; Text[50])
         {
             DataClassification = ToBeClassified;
         }
-        field(70000;"TNL Profit %";Decimal)
+        field(70000; "TNL Profit %"; Decimal)
         {
             Caption = 'Unit Price Factor %';
             Description = 'SUSPENDED';
@@ -653,10 +655,10 @@ tableextension 50008 "Item Ext" extends Item
                 //ProfitTNLtoStandard;
 
                 //VALIDATE("Profit %",ProfitTNLtoStandard);
-                 VALIDATE("Last Direct Cost");
+                VALIDATE("Last Direct Cost");
             end;
         }
-        field(70001;"TNL Discount B/4 Profit";Decimal)
+        field(70001; "TNL Discount B/4 Profit"; Decimal)
         {
             Description = 'SUSPENDED';
             InitValue = 30;
@@ -667,7 +669,7 @@ tableextension 50008 "Item Ext" extends Item
                 //UpdateSellingPrice(3);
             end;
         }
-        field(70002;"Item Price Group";Code[10])
+        field(70002; "Item Price Group"; Code[10])
         {
             /* Description = 'ok';
             TableRelation = IF (Inventory Posting Group=CONST(N_PARTS)) "Item Price Group"."Item Price Grp Code";
@@ -680,7 +682,7 @@ tableextension 50008 "Item Ext" extends Item
                 "TNL Profit %" := PriceGrp."Profit % On Cost B4 Discount";
             end; */
         }
-        field(70003;"Naira Sales Factor";Decimal)
+        field(70003; "Naira Sales Factor"; Decimal)
         {
             Description = 'SUSPENDED';
             Enabled = false;
@@ -691,65 +693,65 @@ tableextension 50008 "Item Ext" extends Item
                 //"Unit Price" := "Last Direct Cost" * "Naira Sales Factor";
             end;
         }
-        field(70004;"Created By";Code[20])
+        field(70004; "Created By"; Code[20])
         {
             Editable = false;
         }
-        field(70005;"Creation Date";Date)
+        field(70005; "Creation Date"; Date)
         {
             Editable = false;
         }
-        field(70006;StockQty;Decimal)
+        field(70006; StockQty; Decimal)
         {
-            DecimalPlaces = 0:5;
+            DecimalPlaces = 0 : 5;
             Editable = false;
         }
-        field(70007;StockQty2;Decimal)
+        field(70007; StockQty2; Decimal)
         {
-           /*  CalcFormula = Sum("Value Entry"."Valued Quantity" WHERE (Item No.=FIELD(No.),
-                                                                     Expected Cost=CONST(No),
-                                                                     Location Code=FIELD(Location Filter),
-                                                                     Posting Date=FIELD(Date Filter)));
-            DecimalPlaces = 0:5;
-            Editable = false;
-            FieldClass = FlowField; */
+            /*  CalcFormula = Sum("Value Entry"."Valued Quantity" WHERE (Item No.=FIELD(No.),
+                                                                      Expected Cost=CONST(No),
+                                                                      Location Code=FIELD(Location Filter),
+                                                                      Posting Date=FIELD(Date Filter)));
+             DecimalPlaces = 0:5;
+             Editable = false;
+             FieldClass = FlowField; */
         }
-        field(70008;StockValue2;Decimal)
+        field(70008; StockValue2; Decimal)
         {
-            DecimalPlaces = 0:5;
+            DecimalPlaces = 0 : 5;
             Editable = false;
         }
-        field(70009;StockQtyLdgEntry;Decimal)
+        field(70009; StockQtyLdgEntry; Decimal)
         {
-           /*  CalcFormula = Sum("Item Ledger Entry".Quantity WHERE (Item No.=FIELD(No.),
-                                                                  Posting Date=FIELD(Date Filter),
-                                                                  Location Code=FIELD(Location Filter),
-                                                                  Variant Code=FIELD(Variant Filter)));
-            DecimalPlaces = 0:5;
-            Editable = false;
-            FieldClass = FlowField; */
+            /*  CalcFormula = Sum("Item Ledger Entry".Quantity WHERE (Item No.=FIELD(No.),
+                                                                   Posting Date=FIELD(Date Filter),
+                                                                   Location Code=FIELD(Location Filter),
+                                                                   Variant Code=FIELD(Variant Filter)));
+             DecimalPlaces = 0:5;
+             Editable = false;
+             FieldClass = FlowField; */
         }
-        field(70011;StockValueLdgEntry;Decimal)
+        field(70011; StockValueLdgEntry; Decimal)
         {
             AutoFormatType = 1;
             Editable = false;
         }
-        field(70012;"Last Purchase Date";Date)
+        field(70012; "Last Purchase Date"; Date)
         {
-           /*  CalcFormula = Max("Item Ledger Entry"."Posting Date" WHERE (Item No.=FIELD(No.),
-                                                                        Entry Type=CONST(Purchase)));
-            Editable = false;
-            FieldClass = FlowField; */
-            
+            /*  CalcFormula = Max("Item Ledger Entry"."Posting Date" WHERE (Item No.=FIELD(No.),
+                                                                         Entry Type=CONST(Purchase)));
+             Editable = false;
+             FieldClass = FlowField; */
+
         }
-        field(70013;"Last Sales Date";Date)
+        field(70013; "Last Sales Date"; Date)
         {
-           /*  CalcFormula = Max("Item Ledger Entry"."Posting Date" WHERE (Item No.=FIELD(No.),
-                                                                        Entry Type=CONST(Sale)));
-            Editable = false;
-            FieldClass = FlowField; */
+            /*  CalcFormula = Max("Item Ledger Entry"."Posting Date" WHERE (Item No.=FIELD(No.),
+                                                                         Entry Type=CONST(Sale)));
+             Editable = false;
+             FieldClass = FlowField; */
         }
-        field(70014;"Sales Entries";Integer)
+        field(70014; "Sales Entries"; Integer)
         {
             /* CalcFormula = Count("Item Ledger Entry" WHERE (Item No.=FIELD(No.),
                                                            Entry Type=CONST(Sale),
@@ -759,7 +761,7 @@ tableextension 50008 "Item Ext" extends Item
             Editable = false;
             FieldClass = FlowField; */
         }
-        field(70015;"Transfer Cost";Decimal)
+        field(70015; "Transfer Cost"; Decimal)
         {
 
             trigger OnValidate()
@@ -768,7 +770,7 @@ tableextension 50008 "Item Ext" extends Item
                 //"Transfer Cost" := "Unit Price" * 0.67;
             end;
         }
-        field(70016;"Retail Price";Decimal)
+        field(70016; "Retail Price"; Decimal)
         {
 
             trigger OnValidate()
@@ -777,49 +779,49 @@ tableextension 50008 "Item Ext" extends Item
                 "Retail Price" := "Unit Price" * 0.67;
             end;
         }
-        field(70017;"BNP Grouping";Code[20])
+        field(70017; "BNP Grouping"; Code[20])
         {
         }
-        field(70100;"Item No. Filter";Code[250])
+        field(70100; "Item No. Filter"; Code[250])
         {
-            
+
         }
-        field(70101;"Product Group Filter";Code[250])
+        field(70101; "Product Group Filter"; Code[250])
         {
-            
+
         }
-        field(70102;"Sales Qty";Decimal)
-        {
-        }
-        field(70103;"Sales Amount";Decimal)
+        field(70102; "Sales Qty"; Decimal)
         {
         }
-        field(70104;"Unit Cost2";Decimal)
+        field(70103; "Sales Amount"; Decimal)
         {
         }
-        field(70105;"Product Code";Code[10])
+        field(70104; "Unit Cost2"; Decimal)
         {
         }
-        field(70106;"Old DB Date";Date)
+        field(70105; "Product Code"; Code[10])
         {
         }
-        field(70107;Promo;Boolean)
+        field(70106; "Old DB Date"; Date)
         {
         }
-        field(70108;"Part Group";Code[10])
+        field(70107; Promo; Boolean)
         {
         }
-        field(70109;"Factor (Air)";Decimal)
+        field(70108; "Part Group"; Code[10])
         {
         }
-        field(70110;"Isolo Shelf No.";Code[20])
+        field(70109; "Factor (Air)"; Decimal)
+        {
+        }
+        field(70110; "Isolo Shelf No."; Code[20])
         {
             Caption = 'Shelf No.';
         }
-        field(70111;"Available Quantity";Decimal)
+        field(70111; "Available Quantity"; Decimal)
         {
         }
-        field(70112;Contribution;Decimal)
+        field(70112; Contribution; Decimal)
         {
 
             trigger OnValidate()
@@ -828,74 +830,74 @@ tableextension 50008 "Item Ext" extends Item
                 Contribution := "Unit Price" * 0.33;
             end;
         }
-        field(70113;"Percentage Available";Decimal)
+        field(70113; "Percentage Available"; Decimal)
         {
 
             trigger OnValidate()
             begin
                 CALCFIELDS(Inventory);
-                "Available Quantity" := ROUND(Inventory * ("Percentage Available"/100),1,'=');
+                "Available Quantity" := ROUND(Inventory * ("Percentage Available" / 100), 1, '=');
             end;
         }
-        field(70114;"Isolo Profit %";Decimal)
+        field(70114; "Isolo Profit %"; Decimal)
         {
 
             trigger OnValidate()
             begin
                 VALIDATE("Unit Price");
-                "Isolo Profit %" := (("Unit Price"*0.33)/"Unit Price") * 100;
+                "Isolo Profit %" := (("Unit Price" * 0.33) / "Unit Price") * 100;
             end;
         }
-        field(70115;"Item Type";Option)
+        field(70115; "Item Type"; Option)
         {
             BlankZero = false;
             OptionCaption = ' ,Stock,Non-Stock';
             OptionMembers = " ",Stock,"Non-Stock";
         }
-        field(70116;"Item Source";Option)
+        field(70116; "Item Source"; Option)
         {
             OptionCaption = ' ,LPN,LPU';
             OptionMembers = " ",LPN,LPU;
         }
-        field(70117;"TNL Selling Price to TCSC";Decimal)
+        field(70117; "TNL Selling Price to TCSC"; Decimal)
         {
         }
-        field(70118;"Local Buys";Boolean)
+        field(70118; "Local Buys"; Boolean)
         {
         }
-        field(70119;"Prod. Code";Code[10])
+        field(70119; "Prod. Code"; Code[10])
         {
             DataClassification = ToBeClassified;
         }
     }
-var
-/* 
-        UserSetup: Record "91";
-        UserSetup2: Record "91";
-        InvPGrp: Code[10];
-        PriceGrp: Record "50094";
-        Model: Record "50014";
-        Locrec: Record "14";
-        LocFilter: Code[20];
-        LocAlloc: Decimal;
-        LocAllocVal: Decimal;
-        LocExceQty: Decimal;
-        LocExceVAl: Decimal;
-        ItemRec: Record "27";
-        ItemLedgerEntRec: Record "32";
-        SalesSetup: Record "311";
-        ValueEntryRec: Record "5802";
-        PurchInvLineRec: Record "123";
-        PurchInvHdrRec: Record "122";
-        FixedExchRate: Decimal;
-        FixedPrice: Record "50126";
-        FixedPrice2: Record "50128";
- */
+    var
+    
+            UserSetup: Record 91;
+            UserSetup2: Record 91;
+            InvPGrp: Code[10];
+            PriceGrp: Record 50094;
+            Model: Record 50014;
+            Locrec: Record 14;
+            LocFilter: Code[20];
+            LocAlloc: Decimal;
+            LocAllocVal: Decimal;
+            LocExceQty: Decimal;
+            LocExceVAl: Decimal;
+            ItemRec: Record 27;
+            ItemLedgerEntRec: Record 32;
+            SalesSetup: Record 311;
+            ValueEntryRec: Record 5802;
+            PurchInvLineRec: Record 123;
+            PurchInvHdrRec: Record 122;
+            FixedExchRate: Decimal;
+            FixedPrice: Record 50126;
+            FixedPrice2: Record 50128;
+    
     trigger OnInsert()
     var
         myInt: Integer;
     begin
-        
+
     end;
 }
 

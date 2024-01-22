@@ -1,5 +1,6 @@
 page 70117 "Capex Subform"
 {
+    ApplicationArea = All;
     AutoSplitKey = true;
     DelayedInsert = true;
     MultipleNewLines = true;
@@ -44,12 +45,12 @@ page 70117 "Capex Subform"
                             HYPERLINK(Rec.GetIncomingDocumentURL);
                     end;
 
-                    trigger OnLookup(var Text: Text): Boolean
+                    /* trigger OnLookup(var Text: Text): Boolean
                     begin
                         IncomingDocument.SETRANGE("Entry No.", Rec."Incoming Document Entry No.");
                         IF PAGE.RUNMODAL(0, IncomingDocument) = ACTION::LookupOK THEN
                             Rec."Incoming Document Entry No." := IncomingDocument."Entry No.";
-                    end;
+                    end; */
                 }
                 field(Description; Rec.Description)
                 {

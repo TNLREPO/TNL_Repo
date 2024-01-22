@@ -1,5 +1,6 @@
 page 50221 "Retirement Lines"
 {
+    ApplicationArea = All;
     AutoSplitKey = true;
     DelayedInsert = true;
     PageType = ListPart;

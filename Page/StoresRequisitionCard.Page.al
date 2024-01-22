@@ -1,5 +1,6 @@
 page 50205 "Stores Requisition Card"
 {
+    ApplicationArea = All;
     PageType = Card;
     SourceTable = "Stores Requisition Header.";
     SourceTableView = SORTING("No.", Type)

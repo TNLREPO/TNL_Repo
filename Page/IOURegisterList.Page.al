@@ -3,6 +3,7 @@ page 70030 "IOU Register List"
     ApplicationArea = All;
     CardPageID = "IOU Register Card";
     PageType = List;
+    Editable = false;
     SourceTable = "IOU Register";
     SourceTableView = SORTING("IOU No.")
                       WHERE(Posted = FILTER(false),

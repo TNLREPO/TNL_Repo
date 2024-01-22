@@ -1,5 +1,6 @@
 page 50218 "IOU Retirement Card"
 {
+    ApplicationArea = All;
     PageType = Card;
     SourceTable = "IOU Retirement Header";
 

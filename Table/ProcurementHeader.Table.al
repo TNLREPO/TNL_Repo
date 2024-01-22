@@ -224,7 +224,7 @@ table 70008 "Procurement Header"
                          PurJus := ProcurementLine.Description;
                      end; */
 
-                    CreateEmailBody("Document Type", "No.", Text026);
+
 
                     //sender
                     IF UserSetup2.GET(USERID) THEN BEGIN
@@ -235,11 +235,12 @@ table 70008 "Procurement Header"
 
                     IF UserSetup.GET("Send To") THEN BEGIN
                         ToAddresses := UserSetup."E-Mail";
-                        Addressee := UserSetup.Initials;
+                        Addressee := UserSetup.Initials;  //target
                     END;
 
                     Subject := STRSUBSTNO(Text007, "Document Type", "No.");
 
+                    CreateEmailBody("Document Type", "No.", Text026, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, BccAddresses);
 
                     /*  WITH TempEmailItem DO BEGIN
@@ -359,7 +360,7 @@ table 70008 "Procurement Header"
 
                     END; */
 
-                    CreateEmailBody("Document Type", "No.", Text037);
+                    CreateEmailBody("Document Type", "No.", Text037, 'STA');
 
                     UserSetup.GET("Send To");
                     IF UserSetup."User ID" <> "Send To" THEN
@@ -420,7 +421,7 @@ table 70008 "Procurement Header"
                          PurJus := CapexOpexLine.Description;
                      END; */
 
-                    CreateEmailBody("Document Type", "No.", Text033);
+
 
 
                     UserSetup.GET("Sent By");
@@ -428,7 +429,6 @@ table 70008 "Procurement Header"
                     Addressee := UserSetup.Name;
                     CcAddresses := '';
                     BccAddresses := '';
-                    Subject := STRSUBSTNO(Text017, "Document Type", "No.");
 
                     UserSetup4.GET(USERID);
                     SendersName := UserSetup4.Initials;
@@ -439,6 +439,8 @@ table 70008 "Procurement Header"
                     AdvHODonHold5 := UserSetup4.Name;
                     OnholdTimeDate5 := CURRENTDATETIME;
 
+                    Subject := STRSUBSTNO(Text017, "Document Type", "No.");
+                    CreateEmailBody("Document Type", "No.", Text033, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
                     /*   WITH TempEmailItem DO BEGIN
@@ -479,14 +481,11 @@ table 70008 "Procurement Header"
                         PurJus := CapexOpexLine.Description;
                     END; */
 
-                    CreateEmailBody("Document Type", "No.", Text034);
-
                     UserSetup.GET("Sent By");
                     ToAddresses := UserSetup."E-Mail";
                     Addressee := UserSetup.Name;
                     CcAddresses := '';
                     BccAddresses := '';
-                    Subject := STRSUBSTNO(Text018, "Document Type", "No.");
 
                     UserSetup4.GET(USERID);
                     SendersName := UserSetup4.Initials;
@@ -494,6 +493,8 @@ table 70008 "Procurement Header"
                     SenderAddress := UserSetup4."E-Mail";
                     TimeDate5 := CURRENTDATETIME;
 
+                    Subject := STRSUBSTNO(Text018, "Document Type", "No.");
+                    CreateEmailBody("Document Type", "No.", Text034, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
                     /*  WITH TempEmailItem DO BEGIN
@@ -554,8 +555,6 @@ table 70008 "Procurement Header"
                         PurJus := CapexOpexLine.Description;
                     END; */
 
-                    CreateEmailBody("Document Type", "No.", Text038);
-
                     UserSetup.GET("Send To");
                     PurchSetup.GET;
                     ToAddresses := PurchSetup."Account Dept. Approvers";
@@ -569,7 +568,7 @@ table 70008 "Procurement Header"
                     TimeDate6 := CURRENTDATETIME;
 
                     Subject := STRSUBSTNO(Text013, "Document Type", "No.");
-
+                    CreateEmailBody("Document Type", "No.", Text038, 'PAA');
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
                     /*          WITH TempEmailItem DO BEGIN
@@ -615,14 +614,14 @@ table 70008 "Procurement Header"
                          PurJus := CapexOpexLine.Description;
                      END; */
 
-                    CreateEmailBody("Document Type", "No.", Text033);
+
 
                     UserSetup.GET("Sent By");
                     ToAddresses := UserSetup."E-Mail";
                     Addressee := UserSetup.Initials;
                     CcAddresses := '';
                     BccAddresses := '';
-                    Subject := STRSUBSTNO(Text017, "Document Type", "No.");
+
 
                     UserSetup4.GET(USERID);
                     SendersName := UserSetup4.Initials;
@@ -633,6 +632,8 @@ table 70008 "Procurement Header"
                     AdvHOAonHold6 := UserSetup4.Name;
                     OnholdTimeDate6 := CURRENTDATETIME;
 
+                    Subject := STRSUBSTNO(Text017, "Document Type", "No.");
+                    CreateEmailBody("Document Type", "No.", Text033, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
                     /*                WITH TempEmailItem DO BEGIN
@@ -674,14 +675,11 @@ table 70008 "Procurement Header"
                          PurJus := CapexOpexLine.Description;
                     END; */
 
-                    CreateEmailBody("Document Type", "No.", Text034);
-
                     UserSetup.GET("Sent By");
                     ToAddresses := UserSetup."E-Mail";
                     Addressee := UserSetup.Initials;
                     CcAddresses := '';
                     BccAddresses := '';
-                    Subject := STRSUBSTNO(Text018, "Document Type", "No.");
 
                     UserSetup4.GET(USERID);
                     SendersName := UserSetup4.Initials;
@@ -689,6 +687,8 @@ table 70008 "Procurement Header"
                     SenderAddress := UserSetup4."E-Mail";
                     TimeDate6 := CURRENTDATETIME;
 
+                    Subject := STRSUBSTNO(Text018, "Document Type", "No.");
+                    CreateEmailBody("Document Type", "No.", Text034, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
                     /* WITH TempEmailItem DO BEGIN
@@ -789,7 +789,7 @@ table 70008 "Procurement Header"
                         PurJus := CapexOpexLine.Description;
                     END; */
 
-                    CreateEmailBody("Document Type", "No.", Text049);
+                    CreateEmailBody("Document Type", "No.", Text049, 'Team');
 
                     UserSetup4.GET(USERID);
                     IF UserSetup4."User ID" <> "User ID" THEN
@@ -802,8 +802,9 @@ table 70008 "Procurement Header"
                     ToAddresses := 'brano@toyotanigeria.com' + ';' + 'olamide@toyotanigeria.com' + ';' + 'grace@toyotanigeria.com';
                     // CcAddresses := +  ';' +PurchSetup."Audit Dept. Approvers";
                     BccAddresses := '';
-                    Subject := STRSUBSTNO(Text020, "Document Type", "No.");
 
+                    Subject := STRSUBSTNO(Text020, "Document Type", "No.");
+                    CreateEmailBody("Document Type", "No.", Text049, 'Team');
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
                     /* WITH TempEmailItem DO BEGIN
@@ -862,7 +863,7 @@ table 70008 "Procurement Header"
                           PurJus := CapexOpexLine.Description;
                      END; */
 
-                    CreateEmailBody("Document Type", "No.", Text056);
+
 
                     UserSetup4.GET(USERID);
                     IF NOT UserSetup4."Audit Service Approval" THEN
@@ -882,7 +883,7 @@ table 70008 "Procurement Header"
                     BccAddresses := '';
 
                     Subject := STRSUBSTNO(Text047, "Document Type", "No.");
-
+                    CreateEmailBody("Document Type", "No.", Text056, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
                     /*    WITH TempEmailItem DO BEGIN
@@ -923,7 +924,7 @@ table 70008 "Procurement Header"
                          PurJus := CapexOpexLine.Description;
                     END; */
 
-                    CreateEmailBody("Document Type", "No.", Text053);
+                    CreateEmailBody("Document Type", "No.", Text053, Addressee);
 
                     UserSetup4.GET(USERID);
                     IF NOT UserSetup4."Audit Service Approval" THEN
@@ -943,8 +944,9 @@ table 70008 "Procurement Header"
                     Addressee := UserSetup.Initials;
                     CcAddresses := '';
                     BccAddresses := '';
-                    Subject := STRSUBSTNO(Text052, "Document Type", "No.");
 
+                    Subject := STRSUBSTNO(Text052, "Document Type", "No.");
+                    CreateEmailBody("Document Type", "No.", Text053, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
                     /*  WITH TempEmailItem DO BEGIN
@@ -1020,7 +1022,7 @@ table 70008 "Procurement Header"
                         PurJus := CapexOpexLine.Description;
                     END; */
 
-                    CreateEmailBody("Document Type", "No.", Text063);
+
 
                     //UserSetup.GET();
                     ToAddresses := 'adewumi@toyotanigeria.com';
@@ -1037,6 +1039,8 @@ table 70008 "Procurement Header"
                     BalpayHODonHold8 := UserSetup4.Name;
                     OnholdTimeDate8 := CURRENTDATETIME;
 
+                    Subject := STRSUBSTNO(Text047, "Document Type", "No.");
+                    CreateEmailBody("Document Type", "No.", Text063, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
                     /*   WITH TempEmailItem DO BEGIN
@@ -1080,8 +1084,6 @@ table 70008 "Procurement Header"
                          PurJus := CapexOpexLine.Description;
                      END; */
 
-                    CreateEmailBody("Document Type", "No.", Text033);
-
                     UserSetup.GET("User ID");
                     ToAddresses := UserSetup."E-Mail";
                     Addressee := UserSetup.Initials;
@@ -1098,7 +1100,7 @@ table 70008 "Procurement Header"
                     OnholdTimeDate8 := CURRENTDATETIME;
 
                     Subject := STRSUBSTNO(Text017, "Document Type", "No.");
-
+                    CreateEmailBody("Document Type", "No.", Text033, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
                     /*  WITH TempEmailItem DO BEGIN
@@ -1141,7 +1143,6 @@ table 70008 "Procurement Header"
                          PurJus := CapexOpexLine.Description;
                      END; */
 
-                    CreateEmailBody("Document Type", "No.", Text034);
 
                     UserSetup.GET("User ID");
                     ToAddresses := UserSetup."E-Mail";
@@ -1156,7 +1157,7 @@ table 70008 "Procurement Header"
                     TimeDate8 := CURRENTDATETIME;
 
                     Subject := STRSUBSTNO(Text018, "Document Type", "No.");
-
+                    CreateEmailBody("Document Type", "No.", Text034, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
                     /* WITH TempEmailItem DO BEGIN
@@ -1208,8 +1209,8 @@ table 70008 "Procurement Header"
 
                 TESTFIELD("Bal. Paymt. HOD", "Bal. Paymt. HOD"::Approved);
                 UserSetup4.GET(USERID);
-                IF (UserSetup4."User ID" <> 'TOYOTANIGERIA\ADEWUMI') THEN
-                    IF (UserSetup4."User ID" <> 'TOYOTANIGERIA\AGBESUA') THEN
+                IF (UserSetup4."User ID" <> 'ADEWUMI') THEN
+                    IF (UserSetup4."User ID" <> 'AGBESUA') THEN
                         ERROR(Text039);
 
                 IF "Bal. Paymt. HOD" <> "Bal. Paymt. HOD"::Approved THEN
@@ -1240,7 +1241,7 @@ table 70008 "Procurement Header"
                          PurJus := CapexOpexLine.Description;
                      END; */
 
-                    CreateEmailBody("Document Type", "No.", Text060);
+
 
                     IF "Document Type" = "Document Type"::Opex THEN BEGIN
                         PurchSetup.GET;
@@ -1280,8 +1281,9 @@ table 70008 "Procurement Header"
 
                     BccAddresses := '';
                     TimeDate10 := CURRENTDATETIME;
-                    Subject := STRSUBSTNO(Text047, "Document Type", "No.");
 
+                    Subject := STRSUBSTNO(Text047, "Document Type", "No.");
+                    CreateEmailBody("Document Type", "No.", Text060, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
                     /*   WITH TempEmailItem DO BEGIN //To GM or MD
@@ -1325,15 +1327,11 @@ table 70008 "Procurement Header"
                         PurJus := CapexOpexLine.Description;
                     END; */
 
-                    CreateEmailBody("Document Type", "No.", Text033);
-
                     UserSetup.GET("User ID");
                     ToAddresses := UserSetup."E-Mail";
                     Addressee := UserSetup.Initials;
                     CcAddresses := '';
                     BccAddresses := '';
-                    Subject := STRSUBSTNO(Text017, "Document Type", "No.");
-
 
                     UserSetup4.GET(USERID);
                     SendersName := UserSetup4.Initials;
@@ -1344,6 +1342,8 @@ table 70008 "Procurement Header"
                     BalpayHOAuditonHold10 := UserSetup4.Name;
                     OnholdTimeDate10 := CURRENTDATETIME;
 
+                    Subject := STRSUBSTNO(Text017, "Document Type", "No.");
+                    CreateEmailBody("Document Type", "No.", Text033, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
                     /*    WITH TempEmailItem DO BEGIN
@@ -1385,14 +1385,13 @@ table 70008 "Procurement Header"
                          PurJus := CapexOpexLine.Description;
                      END; */
 
-                    CreateEmailBody("Document Type", "No.", Text034);
 
                     UserSetup.GET("User ID");
                     ToAddresses := UserSetup."E-Mail";
                     Addressee := UserSetup.Initials;
                     CcAddresses := '';
                     BccAddresses := '';
-                    Subject := STRSUBSTNO(Text018, "No.");
+
 
                     UserSetup4.GET(USERID);
                     SendersName := UserSetup4.Initials;
@@ -1401,7 +1400,7 @@ table 70008 "Procurement Header"
                     TimeDate10 := CURRENTDATETIME;
 
                     Subject := STRSUBSTNO(Text018, "Document Type", "No.");
-
+                    CreateEmailBody("Document Type", "No.", Text034, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
                     /*  WITH TempEmailItem DO BEGIN
@@ -1468,24 +1467,24 @@ table 70008 "Procurement Header"
                         PurJus := CapexOpexLine.Description;
                     END; */
 
-                    CreateEmailBody("Document Type", "No.", Text026);
-
                     IF UserSetup2.GET(USERID) THEN
                         SenderEmail := UserSetup2."E-Mail";
 
                     UserSetup.GET("Sent By");
                     PurchSetup.GET;
                     ToAddresses := 'adewumi@toyotanigeria.com';
-                    //Addressee := UserSetup.Initials ;
+                    Addressee := 'STA';
                     CcAddresses := 'agbesua@toyotanigeria.com';
                     BccAddresses := '';
-                    Subject := STRSUBSTNO(Text007, "Document Type", "No.");
+
                     UserSetup4.GET(USERID);
                     SendersName := UserSetup4.Initials;
                     "Name HOD" := UserSetup4.Name;
                     SenderAddress := UserSetup4."E-Mail";
                     TimeDate1 := CURRENTDATETIME;
 
+                    Subject := STRSUBSTNO(Text007, "Document Type", "No.");
+                    CreateEmailBody("Document Type", "No.", Text026, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
                     //To Head of Audit
@@ -1532,7 +1531,6 @@ table 70008 "Procurement Header"
                           PurJus := CapexOpexLine.Description;
                       END; */
 
-                    CreateEmailBody("Document Type", "No.", Text033);
 
                     UserSetup.GET("Sent By");
                     ToAddresses := UserSetup."E-Mail";
@@ -1550,7 +1548,7 @@ table 70008 "Procurement Header"
                     OnholdTimeDate1 := CURRENTDATETIME;
 
                     Subject := STRSUBSTNO(Text017, "Document Type", "No.");
-
+                    CreateEmailBody("Document Type", "No.", Text033, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
                     /* WITH TempEmailItem DO BEGIN
@@ -1591,7 +1589,6 @@ table 70008 "Procurement Header"
                         PurJus := CapexOpexLine.Description;
                     END; */
 
-                    CreateEmailBody("Document Type", "No.", Text034);
 
                     UserSetup.GET("Sent By");
                     ToAddresses := UserSetup."E-Mail";
@@ -1606,7 +1603,7 @@ table 70008 "Procurement Header"
                     TimeDate1 := CURRENTDATETIME;
 
                     Subject := STRSUBSTNO(Text018, "Document Type", "No.");
-
+                    CreateEmailBody("Document Type", "No.", Text034, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
                     /*   WITH TempEmailItem DO BEGIN
@@ -1653,10 +1650,10 @@ table 70008 "Procurement Header"
                 TESTFIELD("Head of Department", "Head of Department"::Approved);
 
                 UserSetup4.GET(USERID);
-                IF (UserSetup4."User ID" <> 'TOYOTANIGERIA\ADEWUMI') THEN
-                    IF (UserSetup4."User ID" <> 'TOYOTANIGERIA\AGBESUA') THEN
-                        // IF (UserSetup4."User ID" <> 'TOYOTANIGERIA\OLAMIDE') THEN
-                        // IF (UserSetup4."User ID" <> 'TOYOTANIGERIA\BRANO') THEN
+                IF (UserSetup4."User ID" <> 'ADEWUMI') THEN
+                    IF (UserSetup4."User ID" <> 'AGBESUA') THEN
+                        // IF (UserSetup4."User ID" <> 'OLAMIDE') THEN
+                        // IF (UserSetup4."User ID" <> 'BRANO') THEN
                         ERROR(Text039);
 
                 IF "Head of Audit" = "Head of Audit"::Approved THEN BEGIN
@@ -1674,7 +1671,7 @@ table 70008 "Procurement Header"
                          PurJus := CapexOpexLine.Description;
                      END; */
 
-                    CreateEmailBody("Document Type", "No.", Text026);
+
 
                     IF "Document Type" = "Document Type"::Opex THEN BEGIN
                         PurchSetup.GET;
@@ -1712,7 +1709,6 @@ table 70008 "Procurement Header"
                     UserSetup.GET("Sent By");
                     CcAddresses := UserSetup."E-Mail";
                     BccAddresses := '';
-                    Subject := STRSUBSTNO(Text007, "Document Type", "No.");
 
                     UserSetup4.GET(USERID);
                     SendersName := UserSetup4.Initials;
@@ -1723,7 +1719,7 @@ table 70008 "Procurement Header"
                     Subject := STRSUBSTNO(Text007, "Document Type", "No.");
 
                     //To GM or MD
-
+                    CreateEmailBody("Document Type", "No.", Text026, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
                     /*  WITH TempEmailItem DO BEGIN
@@ -1768,8 +1764,6 @@ table 70008 "Procurement Header"
                           PurJus := CapexOpexLine.Description;
                       END; */
 
-                    CreateEmailBody("Document Type", "No.", Text033);
-
                     UserSetup.GET("Sent By");
                     ToAddresses := UserSetup."E-Mail";
                     Addressee := UserSetup.Initials;
@@ -1786,7 +1780,7 @@ table 70008 "Procurement Header"
                     OnholdTimeDate2 := CURRENTDATETIME;
 
                     Subject := STRSUBSTNO(Text017, "Document Type", "No.");
-
+                    CreateEmailBody("Document Type", "No.", Text033, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
                     /*  WITH TempEmailItem DO BEGIN
@@ -1828,7 +1822,6 @@ table 70008 "Procurement Header"
                         PurJus := CapexOpexLine.Description;
                     END; */
 
-                    CreateEmailBody("Document Type", "No.", Text034);
 
                     UserSetup.GET("Sent By");
                     ToAddresses := UserSetup."E-Mail";
@@ -1842,8 +1835,9 @@ table 70008 "Procurement Header"
                     "Name Head of Audit" := UserSetup4.Name;
                     SenderAddress := UserSetup4."E-Mail";
                     TimeDate2 := CURRENTDATETIME;
-                    Subject := STRSUBSTNO(Text018, "Document Type", "No.");
 
+                    Subject := STRSUBSTNO(Text018, "Document Type", "No.");
+                    CreateEmailBody("Document Type", "No.", Text034, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
                     /*    WITH TempEmailItem DO BEGIN
@@ -1892,8 +1886,8 @@ table 70008 "Procurement Header"
                 TESTFIELD("Head of Audit", "Head of Audit"::Approved);
 
                 UserSetup4.GET(USERID);
-                IF UserSetup4."User ID" <> 'TOYOTANIGERIA\BUNMI' THEN
-                    //IF UserSetup4."User ID" <> 'TOYOTANIGERIA\PAA' THEN
+                IF UserSetup4."User ID" <> 'BUNMI' THEN
+                    //IF UserSetup4."User ID" <> 'PAA' THEN
                     ERROR(Text039);
 
                 IF "General Manager" = "General Manager"::Approved THEN BEGIN
@@ -1911,16 +1905,15 @@ table 70008 "Procurement Header"
                          PurJus := CapexOpexLine.Description;
                      END; */
 
-                    CreateEmailBody("Document Type", "No.", Text035);
 
-                    UserSetup.GET("Sent By");
                     PurchSetup.GET;
+                    UserSetup.GET("Sent By");
                     ToAddresses := UserSetup."E-Mail";
+                    Addressee := UserSetup.Initials;
+
                     UserSetup2.GET("Send To");
                     CcAddresses := 'adewumi@toyotanigeria.com; agbesua@toyotanigeria.com' + ';' + UserSetup2."E-Mail";
                     BccAddresses := '';
-
-                    Subject := STRSUBSTNO(Text010, "Document Type", "No.");
 
                     UserSetup4.GET(USERID);
                     SendersName := UserSetup4.Initials;
@@ -1929,6 +1922,8 @@ table 70008 "Procurement Header"
 
                     TimeDate3 := CURRENTDATETIME;
 
+                    Subject := STRSUBSTNO(Text010, "Document Type", "No.");
+                    CreateEmailBody("Document Type", "No.", Text035, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
                     /* 
                                         WITH TempEmailItem DO BEGIN
@@ -1983,16 +1978,15 @@ table 70008 "Procurement Header"
                          PurJus := CapexOpexLine.Description;
                      END; */
 
-                    CreateEmailBody("Document Type", "No.", Text033);
-
                     UserSetup.GET("Sent By");
+                    Addressee := UserSetup.Initials;
+
                     PurchSetup.GET;
 
                     ToAddresses := UserSetup."E-Mail";
                     UserSetup2.GET("Send To");
                     CcAddresses := PurchSetup."Audit Dept. Approvers" + ';' + UserSetup2."E-Mail";
                     BccAddresses := '';
-                    Subject := STRSUBSTNO(Text017, "Document Type", "No.");
 
                     UserSetup4.GET(USERID);
                     SendersName := UserSetup4.Initials;
@@ -2003,6 +1997,8 @@ table 70008 "Procurement Header"
                     GMonHold3 := UserSetup4.Name;
                     OnholdTimeDate3 := CURRENTDATETIME;
 
+                    Subject := STRSUBSTNO(Text017, "Document Type", "No.");
+                    CreateEmailBody("Document Type", "No.", Text033, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
                     /*  WITH TempEmailItem DO BEGIN
@@ -2043,16 +2039,14 @@ table 70008 "Procurement Header"
                         PurJus := CapexOpexLine.Description;
                     END; */
 
-                    CreateEmailBody("Document Type", "No.", Text034);
-
-                    UserSetup.GET("Sent By");
                     PurchSetup.GET;
+                    UserSetup.GET("Sent By");
+                    Addressee := UserSetup.Initials;
                     ToAddresses := UserSetup."E-Mail";
+
                     UserSetup2.GET("Send To");
                     CcAddresses := PurchSetup."Audit Dept. Approvers" + ';' + UserSetup2."E-Mail";
                     BccAddresses := '';
-
-                    Subject := STRSUBSTNO(Text018, "Document Type", "No.");
 
                     UserSetup4.GET(USERID);
                     SendersName := UserSetup4.Initials;
@@ -2060,6 +2054,8 @@ table 70008 "Procurement Header"
                     SenderAddress := UserSetup4."E-Mail";
                     TimeDate3 := CURRENTDATETIME;
 
+                    Subject := STRSUBSTNO(Text018, "Document Type", "No.");
+                    CreateEmailBody("Document Type", "No.", Text034, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
                     /*  WITH TempEmailItem DO BEGIN
@@ -2106,9 +2102,9 @@ table 70008 "Procurement Header"
 
                 TESTFIELD("Head of Audit", "Head of Audit"::Approved);
                 UserSetup4.GET(USERID);
-                IF UserSetup4."User ID" <> 'TOYOTANIGERIA\OLAKUNLE' THEN
-                    IF UserSetup4."User ID" <> 'TOYOTANIGERIA\BUNMI' THEN
-                        //IF (UserSetup4."User ID" <> 'TOYOTANIGERIA\OLAKUNLE') AND (UserSetup4."User ID" <> 'TOYOTANIGERIA\BUNMI') THEN
+                IF UserSetup4."User ID" <> 'OLAKUNLE' THEN
+                    IF UserSetup4."User ID" <> 'BUNMI' THEN
+                        //IF (UserSetup4."User ID" <> 'OLAKUNLE') AND (UserSetup4."User ID" <> 'BUNMI') THEN
                         ERROR(Text039);
 
                 IF "Managing Director" = "Managing Director"::Approved THEN BEGIN
@@ -2126,16 +2122,15 @@ table 70008 "Procurement Header"
                         PurJus := CapexOpexLine.Description;
                     END; */
 
-                    CreateEmailBody("Document Type", "No.", Text036);
 
                     UserSetup.GET("User ID");
+                    Addressee := UserSetup.Initials;
+
                     UserSetup2.GET("Send To");
                     PurchSetup.GET;
                     ToAddresses := UserSetup."E-Mail";
                     CcAddresses := 'adewumi@toyotanigeria.com;agbesua@toyotanigeria.com';// + ';' + UserSetup2."E-Mail" ;
                     BccAddresses := '';
-
-                    Subject := STRSUBSTNO(Text010, "Document Type", "No.");
 
                     UserSetup4.GET(USERID);
                     SendersName := UserSetup4.Initials;
@@ -2143,6 +2138,8 @@ table 70008 "Procurement Header"
                     SenderAddress := UserSetup4."E-Mail";
                     TimeDate4 := CURRENTDATETIME;
 
+                    Subject := STRSUBSTNO(Text010, "Document Type", "No.");
+                    CreateEmailBody("Document Type", "No.", Text036, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
                     /*  WITH TempEmailItem DO BEGIN
@@ -2197,16 +2194,14 @@ table 70008 "Procurement Header"
                         PurJus := CapexOpexLine.Description;
                     END; */
 
-                    CreateEmailBody("Document Type", "No.", Text033);
-
                     UserSetup.GET("User ID");
+                    Addressee := UserSetup.Initials;
+
                     UserSetup2.GET("Send To");
                     PurchSetup.GET;
                     ToAddresses := UserSetup."E-Mail";
                     CcAddresses := PurchSetup."Audit Dept. Approvers";// + ';' + UserSetup2."E-Mail" ;
                     BccAddresses := '';
-
-                    Subject := STRSUBSTNO(Text017, "Document Type", "No.");
 
                     UserSetup4.GET(USERID);
                     SendersName := UserSetup4.Initials;
@@ -2217,6 +2212,8 @@ table 70008 "Procurement Header"
                     MDonHold4 := UserSetup4.Name;
                     OnholdTimeDate4 := CURRENTDATETIME;
 
+                    Subject := STRSUBSTNO(Text017, "Document Type", "No.");
+                    CreateEmailBody("Document Type", "No.", Text033, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
                     /*     WITH TempEmailItem DO BEGIN
@@ -2259,16 +2256,14 @@ table 70008 "Procurement Header"
                         PurJus := CapexOpexLine.Description;
                     END; */
 
-                    CreateEmailBody("Document Type", "No.", Text034);
-
                     UserSetup.GET("User ID");
+                    Addressee := UserSetup.Initials;
+
                     UserSetup2.GET("Send To");
                     PurchSetup.GET;
                     ToAddresses := UserSetup."E-Mail";
                     CcAddresses := PurchSetup."Audit Dept. Approvers"; // + ';' + UserSetup2."E-Mail" ;
                     BccAddresses := '';
-
-                    Subject := STRSUBSTNO(Text018, "Document Type", "No.");
 
                     UserSetup4.GET(USERID);
                     SendersName := UserSetup4.Initials;
@@ -2276,6 +2271,8 @@ table 70008 "Procurement Header"
                     SenderAddress := UserSetup4."E-Mail";
                     TimeDate4 := CURRENTDATETIME;
 
+                    Subject := STRSUBSTNO(Text018, "Document Type", "No.");
+                    CreateEmailBody("Document Type", "No.", Text034, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
                     /* WITH TempEmailItem DO BEGIN
@@ -2333,9 +2330,9 @@ table 70008 "Procurement Header"
                 IF "Bal. Paymt. Audit" <> "Bal. Paymt. Audit"::Approved THEN
                     ERROR(Text054);
                 UserSetup4.GET(USERID);
-                IF UserSetup4."User ID" <> 'TOYOTANIGERIA\OLAKUNLE' THEN
-                    IF UserSetup4."User ID" <> 'TOYOTANIGERIA\BUNMI' THEN
-                        // IF (UserSetup4."User ID" <> 'TOYOTANIGERIA\OLAKUNLE') AND (UserSetup4."User ID" <> 'TOYOTANIGERIA\BUNMI') THEN
+                IF UserSetup4."User ID" <> 'OLAKUNLE' THEN
+                    IF UserSetup4."User ID" <> 'BUNMI' THEN
+                        // IF (UserSetup4."User ID" <> 'OLAKUNLE') AND (UserSetup4."User ID" <> 'BUNMI') THEN
                         ERROR(Text039);
 
                 IF "Bal. Paymt. MD" = "Bal. Paymt. MD"::Approved THEN BEGIN
@@ -2353,8 +2350,6 @@ table 70008 "Procurement Header"
                         PurJus := CapexOpexLine.Description;
                     END; */
 
-                    CreateEmailBody("Document Type", "No.", Text048);
-
                     UserSetup4.GET(USERID);
                     SendersName := UserSetup4.Initials;
                     "Bal. Paymt. by MD" := UserSetup4.Name;
@@ -2367,7 +2362,7 @@ table 70008 "Procurement Header"
                     BccAddresses := '';
 
                     Subject := STRSUBSTNO(Text013, "Document Type", "No.");
-
+                    CreateEmailBody("Document Type", "No.", Text048, 'PAA');
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
                     /*  WITH TempEmailItem DO BEGIN
@@ -2413,10 +2408,9 @@ table 70008 "Procurement Header"
                         PurJus := CapexOpexLine.Description;
                     END; */
 
-                    CreateEmailBody("Document Type", "No.", Text033);
-
                     UserSetup.GET("User ID");
                     Addressee := UserSetup.Initials;
+
                     UserSetup2.GET("Send To");
                     PurchSetup.GET;
                     ToAddresses := UserSetup."E-Mail";
@@ -2433,7 +2427,7 @@ table 70008 "Procurement Header"
                     OnholdTimeDate12 := CURRENTDATETIME;
 
                     Subject := STRSUBSTNO(Text017, "Document Type", "No.");
-
+                    CreateEmailBody("Document Type", "No.", Text033, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
                     /* WITH TempEmailItem DO BEGIN
@@ -2476,10 +2470,9 @@ table 70008 "Procurement Header"
                           PurJus := CapexOpexLine.Description;
                       END; */
 
-                    CreateEmailBody("Document Type", "No.", Text034);
-
                     UserSetup.GET("User ID");
                     Addressee := UserSetup.Initials;
+
                     UserSetup2.GET("Send To");
                     PurchSetup.GET;
                     ToAddresses := UserSetup."E-Mail";
@@ -2493,7 +2486,7 @@ table 70008 "Procurement Header"
                     TimeDate12 := CURRENTDATETIME;
 
                     Subject := STRSUBSTNO(Text018, "Document Type", "No.");
-
+                    CreateEmailBody("Document Type", "No.", Text034, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
                     /*   WITH TempEmailItem DO BEGIN
@@ -2567,14 +2560,13 @@ table 70008 "Procurement Header"
                            PurJus := CapexOpexLine.Description;
                        END; */
 
-                    CreateEmailBody("Document Type", "No.", Text048);
 
                     IF UserSetup2.GET(USERID) THEN
                         SenderEmail := UserSetup2."E-Mail";
 
                     UserSetup4.GET(USERID);
-                    IF UserSetup4."User ID" <> 'TOYOTANIGERIA\BUNMI' THEN
-                        //IF UserSetup4."User ID" <> 'TOYOTANIGERIA\PAA' THEN
+                    IF UserSetup4."User ID" <> 'BUNMI' THEN
+                        //IF UserSetup4."User ID" <> 'PAA' THEN
                         ERROR(Text039);
                     SendersName := UserSetup4.Initials;
                     "Bal. Paymt. by GM" := UserSetup4.Name;
@@ -2585,8 +2577,9 @@ table 70008 "Procurement Header"
                     ToAddresses := 'paa@toyotanigeria.com';
                     CcAddresses := 'albert@toyotanigeria.com;adewumi@toyotanigeria.com;agbesua@toyotanigeria.com' + ';' + UserSetup2."E-Mail" + ';' + SenderAddress;
                     BccAddresses := '';
-                    Subject := STRSUBSTNO(Text047, "Document Type", "No.");
 
+                    Subject := STRSUBSTNO(Text047, "Document Type", "No.");
+                    CreateEmailBody("Document Type", "No.", Text048, 'PAA');
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
                     /*    WITH TempEmailItem DO BEGIN
@@ -2631,9 +2624,6 @@ table 70008 "Procurement Header"
                          PurJus := CapexOpexLine.Description;
                      END; */
 
-                    CreateEmailBody("Document Type", "No.", Text033);
-
-
                     UserSetup.GET("User ID");
                     Addressee := UserSetup.Initials;
                     UserSetup2.GET("Send To");
@@ -2652,7 +2642,7 @@ table 70008 "Procurement Header"
                     OnholdTimeDate11 := CURRENTDATETIME;
 
                     Subject := STRSUBSTNO(Text017, "Document Type", "No.");
-
+                    CreateEmailBody("Document Type", "No.", Text033, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
                     /*      WITH TempEmailItem DO BEGIN
@@ -2694,10 +2684,10 @@ table 70008 "Procurement Header"
                           PurJus := CapexOpexLine.Description;
                       END; */
 
-                    CreateEmailBody("Document Type", "No.", Text034);
 
                     UserSetup.GET("User ID");
                     Addressee := UserSetup.Initials;
+
                     UserSetup2.GET("Send To");
                     PurchSetup.GET;
                     ToAddresses := UserSetup."E-Mail";
@@ -2711,7 +2701,7 @@ table 70008 "Procurement Header"
                     TimeDate11 := CURRENTDATETIME;
 
                     Subject := STRSUBSTNO(Text018, "Document Type", "No.");
-
+                    CreateEmailBody("Document Type", "No.", Text034, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
                     /* WITH TempEmailItem DO BEGIN
@@ -2849,7 +2839,7 @@ table 70008 "Procurement Header"
         field(96; Closed; Boolean)
         {
         }
-        field(97; Vendor; Text[30])
+        field(97; Vendor; Text[50])
         {
             CalcFormula = Lookup("Procurement Line"."Vendor Name" WHERE("Document No." = FIELD("No."),
                                                                          Preferred = CONST(true)));
@@ -3063,10 +3053,10 @@ table 70008 "Procurement Header"
 
     trigger OnDelete()
     begin
-        //CapexOpexLine.SETRANGE("Document Type","Document Type");
-        //CapexOpexLine.SETRANGE("Document No.","No.");
-        //CapexOpexLine.DELETEALL;
-        ERROR('You can not delete this entry. Contact your System Administrator!')
+        CapexOpexLine.SETRANGE("Document Type", "Document Type");
+        CapexOpexLine.SETRANGE("Document No.", "No.");
+        CapexOpexLine.DELETEALL;
+        //ERROR('You can not delete this entry. Contact your System Administrator!')
     end;
 
     trigger OnInsert()
@@ -3225,9 +3215,7 @@ table 70008 "Procurement Header"
         SenderEmail: Text[50];
         TempEmailItem: Record "Email Item" temporary;
         Customer: Record Customer;
-        //EmailBody: Record "99008535";
         BodyTxt: Text;
-        //BodyBlob: Record "99008535";
         BodyStream: OutStream;
         SenderInitial: Text;
         Text063: Label 'The above %1 with document number %2 requires your approval.';
@@ -3260,7 +3248,7 @@ table 70008 "Procurement Header"
         MODIFY;
     end;
 
-    procedure CreateEmailBody(DocType: Option; DocNo: Code[20]; BodyMsg: Text);
+    procedure CreateEmailBody(DocType: Option; DocNo: Code[20]; BodyMsg: Text; RecipientInitials: Text);
 
     var
         VendName: Text;
@@ -3289,19 +3277,25 @@ table 70008 "Procurement Header"
 
         if Advance <> 0 then begin
 
-            EmailBody := Format(StrSubstNo(Text025));
+            EmailBody := Format(StrSubstNo(Text025, RecipientInitials));
             EmailBody += '<br><br>';
             EmailBody += FORMAT(STRSUBSTNO(BodyMsg, "Document Type", "No."));
             EmailBody += '<br><br>';
             EmailBody += Text029 + FORMAT(VendName);
+            EmailBody += '<br>';
             EmailBody += Text030 + FORMAT(VendAddr);
+            EmailBody += '<br>';
             EmailBody += Text031 + FORMAT(VendAmt);
+            EmailBody += '<br>';
             EmailBody += Text057 + FORMAT(Advance);
+            EmailBody += '<br>';
             EmailBody += Text058 + FORMAT(Balance);
+            EmailBody += '<br>';
             EmailBody += Text055 + FORMAT(PurJus);
-            EmailBody += 'Yours sincerely,';
             EmailBody += '<br><br>';
-            EmailBody += UserSetup."Full Name";
+            EmailBody += 'Regards,';
+            EmailBody += '<br>';
+            EmailBody += UserSetup.Initials;
 
         end else begin
 
@@ -3310,12 +3304,16 @@ table 70008 "Procurement Header"
             EmailBody += FORMAT(STRSUBSTNO(BodyMsg, "Document Type", "No."));
             EmailBody += '<br><br>';
             EmailBody += Text029 + FORMAT(VendName);
+            EmailBody += '<br>';
             EmailBody += Text030 + FORMAT(VendAddr);
+            EmailBody += '<br>';
             EmailBody += Text031 + FORMAT(VendAmt);
+            EmailBody += '<br>';
             EmailBody += Text055 + FORMAT(PurJus);
-            EmailBody += 'Yours sincerely,';
             EmailBody += '<br><br>';
-            EmailBody += UserSetup."Full Name";
+            EmailBody += 'Yours sincerely,';
+            EmailBody += '<br>';
+            EmailBody += UserSetup.Initials;
 
         end;
 

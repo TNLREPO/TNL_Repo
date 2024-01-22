@@ -14,7 +14,7 @@ table 70001 "Procurement Line"
         field(3; "Line No."; Integer)
         {
         }
-        field(4; "Vendor Name"; Text[30])
+        field(4; "Vendor Name"; Text[50])
         {
 
             trigger OnLookup()
@@ -95,14 +95,29 @@ table 70001 "Procurement Line"
         field(9; "Incoming Document Entry No."; Integer)
         {
             Caption = 'Incoming Document Entry No.';
-            TableRelation = "Incoming Document" WHERE(Status = FILTER(New | Released));
+            TableRelation = "Incoming Document"; //WHERE(Status = FILTER(New | Released));
 
             trigger OnValidate()
             var
                 IncomingDocument: Record "Incoming Document";
             begin
+                /* IF Description = '' THEN
+                    Description := COPYSTR(IncomingDocument.Description, 1, MAXSTRLEN(Description)); */
+
                 IF Description = '' THEN
                     Description := COPYSTR(IncomingDocument.Description, 1, MAXSTRLEN(Description));
+                IF "Incoming Document Entry No." = xRec."Incoming Document Entry No." THEN
+                    EXIT;
+
+                IF "Incoming Document Entry No." = 0 THEN
+                    IncomingDocument.RemoveReferenceToWorkingDocument(xRec."Incoming Document Entry No.")
+                ELSE
+                    IncomingDocument.SetProcurementLine(Rec);
+
+
+
+
+
             end;
         }
         field(10; Description; Text[100])

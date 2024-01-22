@@ -1,5 +1,6 @@
 page 80003 "Booked Appointments"
 {
+    ApplicationArea = All;
     CardPageID = "Appointment Booking Card";
     Editable = false;
     PageType = List;

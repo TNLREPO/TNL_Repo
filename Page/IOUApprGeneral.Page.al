@@ -2,11 +2,12 @@ page 70239 "IOU Appr. General"
 {
     ApplicationArea = All;
     PageType = List;
+    Editable = false;
     SourceTable = "IOU Register";
     SourceTableView = WHERE("Send for Approval" = FILTER('Yes'),
                             "Global Dimension 1 Code" = FILTER(<> '08AUDSYS'),
                             "2nd Apprv. Status" = FILTER(' '),
-                            "2nd Approval to" = FILTER('TOYOTANIGERIA\ADEWUMI'));
+                            "2nd Approval to" = FILTER('ADEWUMI'));
 
     layout
     {

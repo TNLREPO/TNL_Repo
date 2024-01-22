@@ -1,5 +1,6 @@
 page 50230 "Retirement Lines List"
 {
+    ApplicationArea = All;
     AutoSplitKey = true;
     DeleteAllowed = false;
     ModifyAllowed = false;

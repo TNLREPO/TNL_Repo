@@ -1,5 +1,6 @@
 page 70124 "Bal/Full Payment Capex-GM"
 {
+    ApplicationArea = All;
     CardPageID = "Capex Card";
     PageType = List;
     SourceTable = "Procurement Header";

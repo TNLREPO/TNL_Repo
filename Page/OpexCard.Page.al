@@ -78,6 +78,7 @@ page 70126 "Opex Card"
                 {
                     group(Control2)
                     {
+                        Caption = 'Head of Department';
                         field("Head of Department"; Rec."Head of Department")
                         {
                             Caption = 'Head of Department';
@@ -96,6 +97,7 @@ page 70126 "Opex Card"
                     }
                     group(Control024)
                     {
+                        Caption = 'Head of Audit';
                         field("Head of Audit"; Rec."Head of Audit")
                         {
                             Caption = 'Head of Audit';
@@ -118,6 +120,7 @@ page 70126 "Opex Card"
                 {
                     group(Control011)
                     {
+                        Caption = 'General Manager';
                         field("General Manager"; Rec."General Manager")
                         {
                             Caption = 'General Manager';
@@ -139,6 +142,7 @@ page 70126 "Opex Card"
                     }
                     group(Control025)
                     {
+                        Caption = 'Managing Director';
                         field("Managing Director"; Rec."Managing Director")
                         {
                             Caption = 'Managing Director';

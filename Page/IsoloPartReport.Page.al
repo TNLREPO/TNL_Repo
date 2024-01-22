@@ -1,5 +1,6 @@
 page 80070 "Isolo Part Report"
 {
+    ApplicationArea = All;
     PageType = List;
     SourceTable = "Service Invoice Line";
     SourceTableView = WHERE("Customer No." = FILTER('TCSC*'),
