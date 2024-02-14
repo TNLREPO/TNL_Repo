@@ -3,6 +3,7 @@ page 50609 "Approval Leave List"
     ApplicationArea = All;
     CardPageID = "Leave Request Card";
     PageType = List;
+    Editable = false;
     SourceTable = "Leave Request3";
     SourceTableView = WHERE("Send for Approval" = CONST(true),
                             Approved2 = CONST(false),
@@ -40,7 +41,7 @@ page 50609 "Approval Leave List"
                 }
                 field("Global Dimension 1 code"; Rec."Global Dimension 1 code")
                 {
-                    
+
                 }
             }
         }

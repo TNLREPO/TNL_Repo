@@ -326,7 +326,7 @@ report 50009 "Cheque Payment Voucher-Mult."
             trigger OnPreDataItem()
             begin
                 CompanyData.GET;
-                SETRANGE("No.", ReceiptNo);
+                //SETRANGE("No.", ReceiptNo);
             end;
         }
     }

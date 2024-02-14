@@ -1,7 +1,10 @@
 page 50592 "Pool Car Request List"
 {
+    ApplicationArea = All;
+    Caption = 'Pool Car Request';
     CardPageID = "Pool Car Request Card";
     PageType = List;
+    Editable = false;
     SourceTable = "Pool Car Register";
     SourceTableView = WHERE("2nd Approval Status" = FILTER(<> Approved),
                             Reject = filter(false));

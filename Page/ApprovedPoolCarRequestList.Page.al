@@ -1,5 +1,6 @@
 page 50594 "Approved Pool Car Request List"
 {
+    ApplicationArea = All;
     CardPageID = "Approved Pool Car Request Card";
     DeleteAllowed = false;
     Editable = false;

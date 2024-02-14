@@ -1,5 +1,6 @@
 page 70249 "Pool Car Appr. Audit"
 {
+    ApplicationArea = All;
     CardPageID = "Pool Car Request Card";
     PageType = List;
     SourceTable = "Pool Car Register";

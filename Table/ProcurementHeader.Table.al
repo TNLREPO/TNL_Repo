@@ -3299,7 +3299,7 @@ table 70008 "Procurement Header"
 
         end else begin
 
-            EmailBody := Format(StrSubstNo(Text025));
+            EmailBody := Format(StrSubstNo(Text025, RecipientInitials));
             EmailBody += '<br><br>';
             EmailBody += FORMAT(STRSUBSTNO(BodyMsg, "Document Type", "No."));
             EmailBody += '<br><br>';

@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
-  <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSource">
@@ -9,6 +8,7 @@
         <ConnectString />
       </ConnectionProperties>
       <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>3027e90e-4ec6-4073-a7b3-aad4cae20abe</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <ReportSections>
@@ -40,7 +40,6 @@
             </Style>
           </Textbox>
           <Textbox Name="Textbox6">
-            <rd:DefaultName>Textbox6</rd:DefaultName>
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -57,6 +56,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
+            <rd:DefaultName>Textbox6</rd:DefaultName>
             <Top>0.10583cm</Top>
             <Left>0.61044cm</Left>
             <Height>0.84611cm</Height>
@@ -231,7 +231,6 @@
             </Style>
           </Textbox>
           <Textbox Name="Textbox31">
-            <rd:DefaultName>Textbox31</rd:DefaultName>
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -248,6 +247,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
+            <rd:DefaultName>Textbox31</rd:DefaultName>
             <Top>10.65584cm</Top>
             <Left>0.68875cm</Left>
             <Height>0.52944cm</Height>
@@ -262,7 +262,6 @@
             </Style>
           </Textbox>
           <Textbox Name="Textbox32">
-            <rd:DefaultName>Textbox31</rd:DefaultName>
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -280,6 +279,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
+            <rd:DefaultName>Textbox31</rd:DefaultName>
             <Top>10.7264cm</Top>
             <Left>4.51349cm</Left>
             <Height>0.49356cm</Height>
@@ -294,7 +294,6 @@
             </Style>
           </Textbox>
           <Textbox Name="Textbox33">
-            <rd:DefaultName>Textbox31</rd:DefaultName>
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -311,6 +310,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
+            <rd:DefaultName>Textbox31</rd:DefaultName>
             <Top>11.96079cm</Top>
             <Left>0.68875cm</Left>
             <Height>0.45889cm</Height>
@@ -349,7 +349,6 @@
             </Style>
           </Line>
           <Textbox Name="Textbox34">
-            <rd:DefaultName>Textbox31</rd:DefaultName>
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -366,6 +365,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
+            <rd:DefaultName>Textbox31</rd:DefaultName>
             <Top>12.63256cm</Top>
             <Left>0.86514cm</Left>
             <Height>0.49417cm</Height>
@@ -380,7 +380,6 @@
             </Style>
           </Textbox>
           <Textbox Name="Textbox35">
-            <rd:DefaultName>Textbox31</rd:DefaultName>
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -396,6 +395,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
+            <rd:DefaultName>Textbox31</rd:DefaultName>
             <Top>12.66723cm</Top>
             <Left>3.87667cm</Left>
             <Height>0.49417cm</Height>
@@ -410,7 +410,6 @@
             </Style>
           </Textbox>
           <Textbox Name="Textbox37">
-            <rd:DefaultName>Textbox31</rd:DefaultName>
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -428,6 +427,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
+            <rd:DefaultName>Textbox31</rd:DefaultName>
             <Top>13.4789cm</Top>
             <Left>0.79458cm</Left>
             <Height>0.62646cm</Height>
@@ -442,7 +442,6 @@
             </Style>
           </Textbox>
           <Textbox Name="Textbox36">
-            <rd:DefaultName>Textbox31</rd:DefaultName>
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -458,6 +457,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
+            <rd:DefaultName>Textbox31</rd:DefaultName>
             <Top>11.96079cm</Top>
             <Left>4.51349cm</Left>
             <Height>0.45889cm</Height>
@@ -484,7 +484,6 @@
             </Style>
           </Line>
           <Textbox Name="Textbox7">
-            <rd:DefaultName>Textbox1</rd:DefaultName>
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -500,6 +499,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>1.58661cm</Top>
             <Left>0.58146cm</Left>
             <Height>0.53826cm</Height>
@@ -516,7 +516,6 @@
             </Style>
           </Textbox>
           <Textbox Name="Textbox8">
-            <rd:DefaultName>Textbox1</rd:DefaultName>
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -532,6 +531,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>2.12487cm</Top>
             <Left>0.58146cm</Left>
             <Height>0.53827cm</Height>
@@ -548,7 +548,6 @@
             </Style>
           </Textbox>
           <Textbox Name="Textbox9">
-            <rd:DefaultName>Textbox1</rd:DefaultName>
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -564,6 +563,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>2.69841cm</Top>
             <Left>0.58146cm</Left>
             <Height>0.53827cm</Height>
@@ -580,7 +580,6 @@
             </Style>
           </Textbox>
           <Textbox Name="Textbox10">
-            <rd:DefaultName>Textbox1</rd:DefaultName>
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -596,6 +595,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>3.30723cm</Top>
             <Left>0.58146cm</Left>
             <Height>0.52063cm</Height>
@@ -637,7 +637,6 @@
             </Style>
           </Textbox>
           <Textbox Name="Textbox11">
-            <rd:DefaultName>Textbox11</rd:DefaultName>
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -656,6 +655,7 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
+            <rd:DefaultName>Textbox11</rd:DefaultName>
             <Top>7.66059cm</Top>
             <Left>0.68874cm</Left>
             <Height>0.6cm</Height>
@@ -672,7 +672,6 @@
             </Style>
           </Textbox>
           <Textbox Name="Textbox12">
-            <rd:DefaultName>Textbox12</rd:DefaultName>
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -691,6 +690,7 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
+            <rd:DefaultName>Textbox12</rd:DefaultName>
             <Top>7.66059cm</Top>
             <Left>13.18598cm</Left>
             <Height>0.6cm</Height>
@@ -743,7 +743,6 @@
             </Style>
           </Line>
           <Textbox Name="Textbox13">
-            <rd:DefaultName>Textbox13</rd:DefaultName>
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -759,6 +758,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
+            <rd:DefaultName>Textbox13</rd:DefaultName>
             <Top>9.04385cm</Top>
             <Left>1.60306cm</Left>
             <Height>0.6cm</Height>
@@ -773,7 +773,6 @@
             </Style>
           </Textbox>
           <Textbox Name="Textbox14">
-            <rd:DefaultName>Textbox14</rd:DefaultName>
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -790,6 +789,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
+            <rd:DefaultName>Textbox14</rd:DefaultName>
             <Top>9.04385cm</Top>
             <Left>14.89289cm</Left>
             <Height>0.6cm</Height>
@@ -804,7 +804,6 @@
             </Style>
           </Textbox>
           <Textbox Name="Textbox18">
-            <rd:DefaultName>Textbox18</rd:DefaultName>
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -818,6 +817,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
+            <rd:DefaultName>Textbox18</rd:DefaultName>
             <Top>14.25787cm</Top>
             <Left>0.68874cm</Left>
             <Height>2.90188cm</Height>
@@ -834,7 +834,6 @@
             </Style>
           </Textbox>
           <Textbox Name="Textbox38">
-            <rd:DefaultName>Textbox31</rd:DefaultName>
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -851,6 +850,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
+            <rd:DefaultName>Textbox31</rd:DefaultName>
             <Top>11.36167cm</Top>
             <Left>0.68877cm</Left>
             <Height>0.45889cm</Height>
@@ -865,14 +865,13 @@
             </Style>
           </Textbox>
           <Textbox Name="Textbox39">
-            <rd:DefaultName>Textbox31</rd:DefaultName>
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!BankName_PaymentReceipt.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!Bank_Name.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -881,6 +880,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
+            <rd:DefaultName>Textbox31</rd:DefaultName>
             <Top>11.36167cm</Top>
             <Left>4.51351cm</Left>
             <Height>0.45889cm</Height>
@@ -919,7 +919,6 @@
             </Style>
           </Line>
           <Textbox Name="Textbox16">
-            <rd:DefaultName>Textbox1</rd:DefaultName>
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -935,6 +934,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>3.85103cm</Top>
             <Left>0.61044cm</Left>
             <Height>0.53827cm</Height>
@@ -951,7 +951,6 @@
             </Style>
           </Textbox>
           <Textbox Name="Textbox23">
-            <rd:DefaultName>Textbox1</rd:DefaultName>
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -967,6 +966,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>4.45985cm</Top>
             <Left>0.61044cm</Left>
             <Height>0.52063cm</Height>
@@ -1011,7 +1011,6 @@
             </Style>
           </Textbox>
           <Textbox Name="Textbox1">
-            <rd:DefaultName>Textbox1</rd:DefaultName>
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -1027,6 +1026,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>0.68647cm</Top>
             <Left>12.45879cm</Left>
             <Height>0.46771cm</Height>
@@ -1043,7 +1043,6 @@
             </Style>
           </Textbox>
           <Textbox Name="Textbox2">
-            <rd:DefaultName>Textbox1</rd:DefaultName>
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -1059,6 +1058,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>1.22473cm</Top>
             <Left>12.45877cm</Left>
             <Height>0.46771cm</Height>
@@ -1075,7 +1075,6 @@
             </Style>
           </Textbox>
           <Textbox Name="Textbox3">
-            <rd:DefaultName>Textbox1</rd:DefaultName>
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -1091,6 +1090,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>1.69244cm</Top>
             <Left>12.45877cm</Left>
             <Height>0.46771cm</Height>
@@ -1107,7 +1107,6 @@
             </Style>
           </Textbox>
           <Textbox Name="Textbox4">
-            <rd:DefaultName>Textbox1</rd:DefaultName>
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -1123,6 +1122,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>2.19543cm</Top>
             <Left>12.45877cm</Left>
             <Height>0.46771cm</Height>
@@ -1139,7 +1139,6 @@
             </Style>
           </Textbox>
           <Textbox Name="Textbox5">
-            <rd:DefaultName>Textbox1</rd:DefaultName>
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -1155,6 +1154,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>2.7337cm</Top>
             <Left>12.45879cm</Left>
             <Height>0.46771cm</Height>
@@ -1171,7 +1171,6 @@
             </Style>
           </Textbox>
           <Textbox Name="Textbox24">
-            <rd:DefaultName>Textbox1</rd:DefaultName>
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -1187,6 +1186,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>3.20141cm</Top>
             <Left>12.45879cm</Left>
             <Height>0.46771cm</Height>
@@ -1203,7 +1203,6 @@
             </Style>
           </Textbox>
           <Textbox Name="Textbox15">
-            <rd:DefaultName>Textbox15</rd:DefaultName>
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -1217,6 +1216,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
+            <rd:DefaultName>Textbox15</rd:DefaultName>
             <Top>1.12833cm</Top>
             <Left>0.58146cm</Left>
             <Height>0.50304cm</Height>
@@ -1244,7 +1244,6 @@
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
             <Textbox Name="Textbox17">
-              <rd:DefaultName>Textbox12</rd:DefaultName>
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
@@ -1262,6 +1261,7 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
+              <rd:DefaultName>Textbox12</rd:DefaultName>
               <Top>1.37168cm</Top>
               <Left>12.45879cm</Left>
               <Height>0.45888cm</Height>
@@ -1274,7 +1274,6 @@
               </Style>
             </Textbox>
             <Textbox Name="Textbox19">
-              <rd:DefaultName>Textbox12</rd:DefaultName>
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
@@ -1292,6 +1291,7 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
+              <rd:DefaultName>Textbox12</rd:DefaultName>
               <Top>0.93925cm</Top>
               <Left>16.8216cm</Left>
               <Height>0.36187cm</Height>
@@ -1305,7 +1305,6 @@
               </Style>
             </Textbox>
             <Textbox Name="Textbox20">
-              <rd:DefaultName>Textbox12</rd:DefaultName>
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
@@ -1324,6 +1323,7 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
+              <rd:DefaultName>Textbox12</rd:DefaultName>
               <Top>0.57738cm</Top>
               <Left>13.88754cm</Left>
               <Height>0.36187cm</Height>
@@ -1337,7 +1337,6 @@
               </Style>
             </Textbox>
             <Textbox Name="Textbox21">
-              <rd:DefaultName>Textbox12</rd:DefaultName>
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
@@ -1355,6 +1354,7 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
+              <rd:DefaultName>Textbox12</rd:DefaultName>
               <Top>0.93926cm</Top>
               <Left>15.35562cm</Left>
               <Height>0.36187cm</Height>
@@ -1368,7 +1368,6 @@
               </Style>
             </Textbox>
             <Textbox Name="Textbox22">
-              <rd:DefaultName>Textbox12</rd:DefaultName>
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
@@ -1387,6 +1386,7 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
+              <rd:DefaultName>Textbox12</rd:DefaultName>
               <Top>0.18024cm</Top>
               <Left>14.33731cm</Left>
               <Height>0.36187cm</Height>
@@ -1409,9 +1409,7 @@
         <PageHeight>29.7cm</PageHeight>
         <PageWidth>24.25cm</PageWidth>
         <LeftMargin>2.1cm</LeftMargin>
-        <RightMargin>0cm</RightMargin>
         <TopMargin>2cm</TopMargin>
-        <BottomMargin>0cm</BottomMargin>
         <Style />
       </Page>
     </ReportSection>
@@ -1453,6 +1451,8 @@ End Function
 </Code>
   <Language>=User!Language</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>0fc3669a-efe9-427d-867b-d8b731ea2018</rd:ReportID>
   <DataSets>
     <DataSet Name="DataSet_Result">
       <Fields>
@@ -1473,9 +1473,6 @@ End Function
         </Field>
         <Field Name="CompanyData__Address_4_">
           <DataField>CompanyData__Address_4_</DataField>
-        </Field>
-        <Field Name="Bank_Name_PaymentReceipt">
-          <DataField>Bank_Name_PaymentReceipt</DataField>
         </Field>
         <Field Name="Tel_____CompanyData__Internation_phone_">
           <DataField>Tel_____CompanyData__Internation_phone_</DataField>
@@ -1581,6 +1578,9 @@ End Function
         </Field>
         <Field Name="Payment_Receipt___Multiple_Account">
           <DataField>Payment_Receipt___Multiple_Account</DataField>
+        </Field>
+        <Field Name="Bank_Name">
+          <DataField>Bank_Name</DataField>
         </Field>
         <Field Name="AMOUNTINWORD">
           <DataField>AMOUNTINWORD</DataField>

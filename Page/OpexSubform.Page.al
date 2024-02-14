@@ -60,7 +60,9 @@ page 70127 "Opex Subform"
                 {
                 }
             }
+
         }
+
     }
 
     actions
@@ -123,7 +125,9 @@ page 70127 "Opex Subform"
                 end;
             }
         }
+
     }
+
 
     var
         IncomingDocument: Record 130;

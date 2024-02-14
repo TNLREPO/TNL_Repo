@@ -107,20 +107,20 @@ page 50234 "Processed Stock Capitalisation"
 
     trigger OnAfterGetRecord()
     begin
-        CustOnAfterGetCurrRecord;
+        //CustOnAfterGetCurrRecord;
     end;
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
-        CustOnAfterGetCurrRecord;
+        // CustOnAfterGetCurrRecord;
     end;
 
-    local procedure CustOnAfterGetCurrRecord()
-    begin
-        xRec := Rec;
-        IF Rec.Processed THEN
-            CurrPage.EDITABLE(FALSE) ELSE
-            CurrPage.EDITABLE(TRUE);
-    end;
+    // local procedure CustOnAfterGetCurrRecord()
+    /*  begin
+         xRec := Rec;
+         IF Rec.Processed THEN
+             CurrPage.EDITABLE(FALSE) ELSE
+             CurrPage.EDITABLE(TRUE);
+     end; */
 }
 

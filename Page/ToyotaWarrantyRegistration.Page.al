@@ -1,5 +1,6 @@
 page 50112 "Toyota Warranty Registration"
 {
+    ApplicationArea = All;
     DelayedInsert = true;
     PageType = Card;
     SourceTable = "Warranty Coupon";

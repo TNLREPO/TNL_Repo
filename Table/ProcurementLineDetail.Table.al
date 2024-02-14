@@ -50,6 +50,7 @@ table 70007 "Procurement Line Detail"
                 "Unit Cost" := Amount / Quantity;
             end;
         }
+        
     }
 
     keys

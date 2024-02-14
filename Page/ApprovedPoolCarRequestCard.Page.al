@@ -1,5 +1,6 @@
 page 50595 "Approved Pool Car Request Card"
 {
+    ApplicationArea = All;
     DeleteAllowed = false;
     Editable = false;
     ModifyAllowed = false;

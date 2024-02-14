@@ -82,6 +82,8 @@ table 70009 "Leave Request3"
                         IF ("Request Type" = "Request Type"::Branch) AND ("Leave Category" = 'ANNUAL') AND ("Actual Duration" > 15) THEN
                             ERROR('Your Leave request is greater than the number of actual leave due');
 
+                        CalcFields("Total Leaves Due", "Total Consuming");
+
                         IF ("Actual Duration") > ("Total Leaves Due" - "Total Consuming") THEN
                             ERROR('Your Leave request is greater than the number of actual leave due');
 
@@ -1603,6 +1605,9 @@ table 70009 "Leave Request3"
                     VALIDATE("Annual Duration", PGrp."Annual Leave Days");
                     VALIDATE("Start Date1", DMY2DATE(EmpDay, EmpMth, EmpLeaveYr));
                     VALIDATE("No. Days1", PGrp."Annual Leave Days");
+
+                    Rec.RemainingLeave();
+
                 END;
 
             end;
@@ -1641,9 +1646,7 @@ table 70009 "Leave Request3"
         {
             BlankZero = true;
             FieldClass = FlowField;
-            CalcFormula = sum("Leave Plan Lines Rev 2"."Actual Duration" where("Employee No." = field("Employee No."),
-                                                 "Entry Type" = filter('PLAN'), "Leave Period" = FIELD("Leave Period")));
-
+            CalcFormula = Sum("Leave Plan Lines Rev 2"."Annual Duration" WHERE("Employee No." = FIELD("Employee No."), "Entry Type" = CONST(PLAN), "Leave Period" = FIELD("Leave Period")));
             Editable = false;
 
         }
@@ -1661,7 +1664,7 @@ table 70009 "Leave Request3"
             BlankZero = true;
             CalcFormula = Count("Leave Roster" WHERE("Employee No" = FIELD("Employee No."),
                                                       LeaveDate = FIELD("Date Filter"),
-                                                      "Leave Category" = filter('EXAM'), "Leave Period" = FIELD("Period Filter")));
+                                                      "Leave Category" = const('EXAM'), "Leave Period" = FIELD("Period Filter")));
             Editable = false;
             FieldClass = FlowField;
         }
@@ -2037,6 +2040,8 @@ table 70009 "Leave Request3"
                     IF ("Request Type" = "Request Type"::Branch) AND ("Leave Category" = 'ANNUAL') AND (("Actual Start Date" - "Entry Date") < 14) THEN
                         ERROR('You can only request for annual Leave 14 days ahead the plan actual start leave date');
 
+                    CalcFields("Total Leaves Due", "Total Consuming");
+
                     IF ("Actual Duration") > ("Total Leaves Due" - "Total Consuming") THEN
                         ERROR('Your Leave request is greater than the number of actual leave due');
 
@@ -2258,6 +2263,7 @@ table 70009 "Leave Request3"
                     OldTotal := "Total Consuming";
                     TakenTotal := OldTotal + "Actual Duration" - xRec."Actual Duration";
 
+                    CalcFields("Total Leaves Due");
                     RemDur := "Total Leaves Due" - TakenTotal;
                     OldRemDur := "Total Leaves Due" - OldTotal;
 
@@ -2288,7 +2294,7 @@ table 70009 "Leave Request3"
 
     procedure RemainingLeave(): Integer
     begin
-        CALCFIELDS("Total Consuming");
+        CALCFIELDS("Total Leaves Due", "Total Consuming");
         EXIT("Total Leaves Due" - "Total Consuming");
 
         IF "Leave Period" <> 0 THEN BEGIN
@@ -2299,7 +2305,7 @@ table 70009 "Leave Request3"
                 // EXIT(0)
                 ERROR('Kindly choose the current year')
             ELSE
-                CALCFIELDS("Total Consuming");
+                CALCFIELDS("Total Leaves Due", "Total Consuming");
             EXIT("Total Leaves Due" - "Total Consuming");
         END;
     end;

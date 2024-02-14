@@ -1,9 +1,10 @@
 page 50235 "Approved Stock Capitalisation"
 {
+    ApplicationArea = All;
     PageType = Card;
     SourceTable = "Stock Capitalisation";
     SourceTableView = WHERE("Stock Capitalisation Approval" = CONST(true),
-                            Processed = CONST(false));
+                          Processed = CONST(false));
 
     layout
     {
@@ -108,12 +109,12 @@ page 50235 "Approved Stock Capitalisation"
 
     trigger OnAfterGetRecord()
     begin
-        CustOnAfterGetCurrRecord;
+        //CustOnAfterGetCurrRecord;
     end;
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
-        CustOnAfterGetCurrRecord;
+        //CustOnAfterGetCurrRecord;
     end;
 
     local procedure CustOnAfterGetCurrRecord()

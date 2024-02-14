@@ -1,7 +1,9 @@
 page 50601 "Close Pool Car List"
 {
+    ApplicationArea = All;
     CardPageID = "Close Pool Car";
     PageType = List;
+    Editable = false;
     SourceTable = "Pool Car Allocation";
 
     layout

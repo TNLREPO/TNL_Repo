@@ -321,7 +321,7 @@ report 50003 "Cash Payment Voucher-Sing."
             trigger OnPreDataItem()
             begin
                 CompanyData.GET;
-                SETRANGE("No.", ReceiptNo);
+                //SETRANGE("No.", ReceiptNo);
             end;
         }
     }

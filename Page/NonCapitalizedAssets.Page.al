@@ -1,5 +1,6 @@
 page 50125 "Non-Capitalized Assets"
 {
+    ApplicationArea = All;
     CardPageID = "Non-Capitalized Asset";
     Editable = false;
     PageType = List;

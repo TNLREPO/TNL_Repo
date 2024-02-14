@@ -41,6 +41,7 @@ page 70121 "Procurement Details"
                 field(Amount; Rec.Amount)
                 {
                 }
+
             }
         }
     }
@@ -49,9 +50,13 @@ page 70121 "Procurement Details"
     {
     }
 
+  
+
+
     var
-        Procurement: Record 70007;
+        Procurement: Record "Procurement Line Detail";
         EditVendorDetails: Boolean;
-        ProcurementHeader: Record 70008;
+        ProcurementHeader: Record "Procurement Header";
+        ProcurLine: Record "Procurement Line";
 }
 

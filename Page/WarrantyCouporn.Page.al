@@ -217,7 +217,7 @@ page 50111 "Warranty Couporn"
                         //CurrPage.UPDATE;
 
                     end;
-                    
+
                 }
                 action("E&xport")
                 {

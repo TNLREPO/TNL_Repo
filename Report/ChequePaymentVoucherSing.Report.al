@@ -320,7 +320,7 @@ report 50004 "Cheque Payment Voucher-Sing."
             trigger OnPreDataItem()
             begin
                 CompanyData.GET;
-                SETRANGE("No.", ReceiptNo);
+                //SETRANGE("No.", ReceiptNo);
             end;
         }
     }

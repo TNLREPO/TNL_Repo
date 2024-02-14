@@ -268,6 +268,77 @@ page 60005 "Accountant RC"
                     ToolTip = 'Calculate VAT amounts from sales, and submit the amounts to a tax authority.';
                 }
             }
+            group("Other Reports")
+            {
+                action("EFCC Report")
+                {
+                    ApplicationArea = BasicEU;
+                    Caption = 'EFCC Report';
+                    Image = "Report";
+                    RunObject = Report EFCC2;
+                    ToolTip = 'View EFCC Report.';
+                }
+                action("CustomerItemSales")
+                {
+                    ApplicationArea = BasicEU;
+                    Caption = 'Customer/Item Sales';
+                    Image = "Report";
+                    RunObject = Report "Customer-Item Sales Report";
+                    ToolTip = 'View items sold to customers.';
+                }
+                action("CustomerBalPostingGrp")
+                {
+                    ApplicationArea = BasicEU;
+                    Caption = 'Customer Balance/Posting Group';
+                    Image = "Report";
+                    RunObject = Report "Customer Balance /Posting Grp";
+                    ToolTip = 'View customer balance by posting group.';
+                }
+                action("VendorBalPostingGrp")
+                {
+                    ApplicationArea = BasicEU;
+                    Caption = 'Vendor Balance/Posting Group';
+                    Image = "Report";
+                    RunObject = Report "Vendor Balance /Posting Grp";
+                    ToolTip = 'View vendor balance by posting group.';
+                }
+                action("GLTrialbalance")
+                {
+                    ApplicationArea = BasicEU;
+                    Caption = 'G/L Trial balance';
+                    Image = "Report";
+                    RunObject = Report "Trial Balance";
+                    ToolTip = 'View trial balance.';
+                }
+
+                action("BankDetailTB")
+                {
+                    ApplicationArea = BasicEU;
+                    Caption = 'Bank Detail Trial Balance';
+                    Image = "Report";
+                    RunObject = Report "Bank Acc. - Detail Trial Bal.";
+                    ToolTip = 'View bank detail trial balance.';
+                }
+
+                action("VendordetailTB")
+                {
+                    ApplicationArea = BasicEU;
+                    Caption = 'Vendor Detail Trial Balance';
+                    Image = "Report";
+                    RunObject = Report "Vendor - Detail Trial Balance";
+                    ToolTip = 'View vendor detail trial balance.';
+                }
+                action("InventoryValuation")
+                {
+                    ApplicationArea = BasicEU;
+                    Caption = 'Inventory Valuation';
+                    Image = "Report";
+                    RunObject = Report "Inventory Valuation";
+                    ToolTip = 'View inventory valuation.';
+                }
+
+            }
+
 #if not CLEAN22
             group(Action60)
             {
@@ -525,19 +596,7 @@ page 60005 "Accountant RC"
                     ToolTip = 'View a statement of posted VAT amounts, calculate your VAT settlement amount for a certain period, such as a quarter, and prepare to send the settlement to the tax authorities.';
                 }
 #if not CLEAN22
-                action("Intrastat Journals")
-                {
-                    ApplicationArea = BasicEU;
-                    Caption = 'Intrastat Journals';
-                    /* //Promoted = true;
-                    PromotedCategory = Process */
-                    ;
-                    RunObject = Page "Intrastat Jnl. Batches";
-                    ToolTip = 'Summarize the value of your purchases and sales with business partners in the EU for statistical purposes and prepare to send it to the relevant authority.';
-                    ObsoleteState = Pending;
-                    ObsoleteTag = '22.0';
-                    ObsoleteReason = 'Intrastat related functionalities are moved to Intrastat extensions.';
-                }
+
 #endif
                 action("Analysis Views")
                 {
@@ -574,54 +633,138 @@ page 60005 "Accountant RC"
                     RunObject = Page Dimensions;
                     ToolTip = 'View or edit dimensions, such as area, project, or department, that you can assign to sales and purchase documents to distribute costs and analyze transaction history.';
                 }
-                action(Partners)
+                /*   action(Partners)
+                  {
+                      ApplicationArea = Intercompany;
+                      Caption = 'Partners';
+                      //Promoted = true;
+                      //PromotedCategory = Process;
+                      RunObject = Page "IC Partner List";
+                      ToolTip = 'Set up each company or department within the group of companies as an intercompany partner of type Vendor or Customer. Intercompany partners can then be inserted on regular sales and purchase documents or journal lines that are exchanged through the intercompany inbox/outbox system and posted to agreed accounts in an intercompany chart of accounts.';
+                  }
+                  action(Action171)
+                  {
+                      ApplicationArea = Intercompany;
+                      Caption = 'IC Chart of Accounts';
+                      //Promoted = true;
+                      //PromotedCategory = Process;
+                      RunObject = Page "IC Chart of Accounts";
+                      ToolTip = 'Manage intercompany transactions within your group of companies in an aligned chart of accounts that uses the same account numbers and settings. In the setup phase, the parent company of the group can create a simplified version of their own chart of accounts and exports it to an XML file that each subsidiary can quickly implement.';
+                  }
+                  action(Action173)
+                  {
+                      ApplicationArea = Intercompany;
+                      Caption = 'Intercompany Dimensions';
+                      //Promoted = true;
+                      //PromotedCategory = Process;
+                      RunObject = Page "IC Dimensions";
+                      ToolTip = 'Enable companies within a group to exchange transactions with dimensions and to perform financial analysis by dimensions across the group. The parent company of the group can create a simplified version of their own set of dimensions and export them to an XML file that each subsidiary can import into the intercompany Dimensions window and then map them to their own dimensions.';
+                  }
+                  action("Accounting Periods")
+                  {
+                      ApplicationArea = Basic, Suite;
+                      Caption = 'Accounting Periods';
+                      Image = AccountingPeriods;
+                      RunObject = Page "Accounting Periods";
+                      ToolTip = 'Set up the number of accounting periods, such as 12 monthly periods, within the fiscal year and specify which period is the start of the new fiscal year.';
+                  }
+                  action("Number Series")
+                  {
+                      ApplicationArea = Basic, Suite;
+                      Caption = 'Number Series';
+                      RunObject = Page "No. Series";
+                      ToolTip = 'View or edit the number series that are used to organize transactions';
+                  }
+                  action("Bank Account Posting Groups")
+                  {
+                      ApplicationArea = Basic, Suite;
+                      Caption = 'Bank Account Posting Groups';
+                      RunObject = Page "Bank Account Posting Groups";
+                      ToolTip = 'Set up posting groups, so that payments in and out of each bank account are posted to the specified general ledger account.';
+                  } */
+            }
+
+            group(Action16)
+            {
+                Caption = 'Fixed Assets';
+                Image = FixedAssets;
+                ToolTip = 'Manage depreciation and insurance of your fixed assets.';
+                action(Action17)
                 {
-                    ApplicationArea = Intercompany;
-                    Caption = 'Partners';
+                    ApplicationArea = FixedAssets;
+                    Caption = 'Fixed Assets';
                     //Promoted = true;
                     //PromotedCategory = Process;
-                    RunObject = Page "IC Partner List";
-                    ToolTip = 'Set up each company or department within the group of companies as an intercompany partner of type Vendor or Customer. Intercompany partners can then be inserted on regular sales and purchase documents or journal lines that are exchanged through the intercompany inbox/outbox system and posted to agreed accounts in an intercompany chart of accounts.';
+                    RunObject = Page "Fixed Asset List";
+                    ToolTip = 'Manage periodic depreciation of your machinery or machines, keep track of your maintenance costs, manage insurance policies related to fixed assets, and monitor fixed asset statistics.';
                 }
-                action(Action171)
+                action("Fixed Assets G/L Journals")
                 {
-                    ApplicationArea = Intercompany;
-                    Caption = 'IC Chart of Accounts';
+                    ApplicationArea = FixedAssets;
+                    Caption = 'Fixed Assets G/L Journals';
                     //Promoted = true;
                     //PromotedCategory = Process;
-                    RunObject = Page "IC Chart of Accounts";
-                    ToolTip = 'Manage intercompany transactions within your group of companies in an aligned chart of accounts that uses the same account numbers and settings. In the setup phase, the parent company of the group can create a simplified version of their own chart of accounts and exports it to an XML file that each subsidiary can quickly implement.';
+                    RunObject = Page "General Journal Batches";
+                    RunPageView = WHERE("Template Type" = CONST(Assets),
+                                        Recurring = CONST(false));
+                    ToolTip = 'Post fixed asset transactions, such as acquisition and depreciation, in integration with the general ledger. The FA G/L Journal is a general journal, which is integrated into the general ledger.';
                 }
-                action(Action173)
+                action("Fixed Assets Journals")
                 {
-                    ApplicationArea = Intercompany;
-                    Caption = 'Intercompany Dimensions';
+                    ApplicationArea = FixedAssets;
+                    Caption = 'Fixed Assets Journals';
                     //Promoted = true;
                     //PromotedCategory = Process;
-                    RunObject = Page "IC Dimensions";
-                    ToolTip = 'Enable companies within a group to exchange transactions with dimensions and to perform financial analysis by dimensions across the group. The parent company of the group can create a simplified version of their own set of dimensions and export them to an XML file that each subsidiary can import into the intercompany Dimensions window and then map them to their own dimensions.';
+                    RunObject = Page "FA Journal Batches";
+                    RunPageView = WHERE(Recurring = CONST(false));
+                    ToolTip = 'Post fixed asset transactions, such as acquisition and depreciation book without integration to the general ledger.';
                 }
-                action("Accounting Periods")
+                action("Fixed Assets Reclass. Journals")
                 {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Accounting Periods';
-                    Image = AccountingPeriods;
-                    RunObject = Page "Accounting Periods";
-                    ToolTip = 'Set up the number of accounting periods, such as 12 monthly periods, within the fiscal year and specify which period is the start of the new fiscal year.';
+                    ApplicationArea = FixedAssets;
+                    Caption = 'Fixed Assets Reclass. Journals';
+                    //Promoted = true;
+                    //PromotedCategory = Process;
+                    RunObject = Page "FA Reclass. Journal Batches";
+                    ToolTip = 'Transfer, split, or combine fixed assets by preparing reclassification entries to be posted in the fixed asset journal.';
                 }
-                action("Number Series")
+                action(Insurance)
                 {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Number Series';
-                    RunObject = Page "No. Series";
-                    ToolTip = 'View or edit the number series that are used to organize transactions';
+                    ApplicationArea = FixedAssets;
+                    Caption = 'Insurance';
+                    //Promoted = true;
+                    //PromotedCategory = Process;
+                    RunObject = Page "Insurance List";
+                    ToolTip = 'Manage insurance policies for fixed assets and monitor insurance coverage.';
                 }
-                action("Bank Account Posting Groups")
+                action("Insurance Journals")
                 {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Bank Account Posting Groups';
-                    RunObject = Page "Bank Account Posting Groups";
-                    ToolTip = 'Set up posting groups, so that payments in and out of each bank account are posted to the specified general ledger account.';
+                    ApplicationArea = FixedAssets;
+                    Caption = 'Insurance Journals';
+                    //Promoted = true;
+                    //PromotedCategory = Process;
+                    RunObject = Page "Insurance Journal Batches";
+                    ToolTip = 'Post entries to the insurance coverage ledger.';
+                }
+                action("Recurring Fixed Asset Journals")
+                {
+                    ApplicationArea = FixedAssets;
+                    Caption = 'Recurring Fixed Asset Journals';
+                    //Promoted = true;
+                    //PromotedCategory = Process;
+                    RunObject = Page "FA Journal Batches";
+                    RunPageView = WHERE(Recurring = CONST(true));
+                    ToolTip = 'Post recurring fixed asset transactions, such as acquisition and depreciation book without integration to the general ledger.';
+                }
+                action("Non-Capitalized Assets")
+                {
+                    ApplicationArea = FixedAssets;
+                    Caption = 'Non-Capitalized Assets';
+                    //Promoted = true;
+                    //PromotedCategory = Process;
+                    RunObject = Page "Non-Capitalized Assets";
+
+                    ToolTip = 'View and enter non-capitalized assets.';
                 }
             }
             group(Journals)
@@ -832,6 +975,210 @@ page 60005 "Accountant RC"
                     ToolTip = 'Reconcile bank accounts in your system with bank statements received from your bank.';
                 }
             }
+
+            group(Vouchers)
+            {
+                Caption = 'Vouchers';
+                action("Cash Receip&t")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Cash Receipt';
+                    Image = CashReceiptJournal;
+                    RunObject = Page "Cash Receipt List";
+                    ToolTip = 'Post cash receipt entries to the general ledger.';
+                }
+                action("Cash Pay&ment")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Cash Payment';
+                    Image = CashReceiptJournal;
+                    RunObject = Page "Cash Payment List";
+                    ToolTip = 'Post cash payment entries to the general ledger.';
+                }
+                action("e-Rece&ipt")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'e-Receipt';
+                    Image = CashReceiptJournal;
+                    RunObject = Page "e-Receipt List";
+                    ToolTip = 'Post e-receipt entries to the general ledger.';
+                }
+                action("e-P&ayment")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'e-Payment';
+                    Image = CashReceiptJournal;
+                    RunObject = Page "e-Payment List";
+                    ToolTip = 'Post e-payment entries to the general ledger.';
+                }
+                action("Cheq&ue Receipt")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Cheque Receipt';
+                    Image = CashReceiptJournal;
+                    RunObject = Page "Cheque Receipt List";
+                    ToolTip = 'Post cheque receipt entries to the general ledger.';
+                }
+                action("C&heque Payment")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Cheque Payment';
+                    Image = CashReceiptJournal;
+                    RunObject = Page "Cheque Payment List";
+                    ToolTip = 'Post cheque payment entries to the general ledger.';
+                }
+                action("Journal Voucher")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Journal Voucher';
+                    Image = Journals;
+                    RunObject = Page "Journal Voucher List";
+                    ToolTip = 'Post journal entries to the general ledger.';
+                }
+                action("Posted Cash Receipt")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Posted Cash Receipt';
+                    Image = CashReceiptJournal;
+                    RunObject = Page "Posted Cash Receipt List";
+                    ToolTip = 'View posted cash receipts in the general ledger.';
+                }
+                action("Posted Cash Payment")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Posted Cash Payment';
+                    Image = CashReceiptJournal;
+                    RunObject = Page "Posted Cash Payment List";
+                    ToolTip = 'View posted cash payments in the general ledger.';
+                }
+                action("Posted e-Receipt")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Posted e-Receipt';
+                    Image = CashReceiptJournal;
+                    RunObject = Page "Posted e-Receipt List";
+                    ToolTip = 'View posted e-Receipts in the general ledger.';
+                }
+                action("Posted e-Payment")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Posted e-Payment';
+                    Image = CashReceiptJournal;
+                    RunObject = Page "Posted e-Payment List";
+                    ToolTip = 'View posted e-Receipts in the general ledger.';
+                }
+
+                action("Posted Cheque Receipt")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Posted Cheque Receipt';
+                    Image = CashReceiptJournal;
+                    RunObject = Page "Posted Cheque Receipt List";
+                    ToolTip = 'View posted cheque receipt entries in the general ledger.';
+                }
+                action("Posted Cheque Payment")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Posted Cheque Payment';
+                    Image = CashReceiptJournal;
+                    RunObject = Page "Posted Cheque Payment List";
+                    ToolTip = 'View posted cheque payment entries in the general ledger.';
+                }
+
+                action("Posted Journal Voucher")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Posted Journal Voucher';
+                    Image = Journals;
+                    RunObject = Page "Posted Journal Voucher List";
+                    ToolTip = 'View posted journal entries in the general ledger.';
+                }
+            }
+
+            group(StockCapitalization)
+            {
+                Caption = 'Stock Capitalization';
+                action("Stock Capitalization")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Stock Capitalization';
+                    Image = NonStockItemSetup;
+                    RunObject = Page "Stock Capitalisation List";
+                    ToolTip = 'Process stock capitalization.';
+                }
+                action("ProcessedCapitalization")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Approved Capitalization';
+                    Image = NonStockItemSetup;
+                    RunObject = Page "Approved Stock Capital List";
+                    ToolTip = 'View approved stock capitalization.';
+                }
+                action("ApprovedCapitalization")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Processed Capitalization';
+                    Image = NonStockItemSetup;
+                    RunObject = Page "Processed Stock Capital List";
+                    ToolTip = 'View processed stock capitalization.';
+                }
+
+            }
+
+            group(Paymentprocess)
+            {
+                Caption = 'Payment Process';
+                action("IOU Request")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'IOU Request';
+                    Image = Payment;
+                    RunObject = Page "IOU Register List";
+                    ToolTip = 'Raise IOU for payment.';
+                }
+                action("IOU Approved")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'IOU Approved';
+                    Image = Payment;
+                    RunObject = Page "IOU Approved List";
+                    ToolTip = 'View approved IOUs.';
+                }
+                action("IOU Treated")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'IOU Treated';
+                    Image = Payment;
+                    RunObject = Page "IOU Request";
+                    ToolTip = 'View treated IOUs.';
+
+                }
+                action("Retirement")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'IOU Retirement';
+                    Image = Payment;
+                    RunObject = Page "Retirement List";
+                    ToolTip = 'View treated IOUs.';
+                }
+                action("ApprovedRetirement")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Approved IOU Retirement';
+                    Image = Payment;
+                    RunObject = Page "Approved IOU Retirement List";
+                    ToolTip = 'View treated IOUs.';
+                }
+                action("PostedIOURetirement")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Posted IOU Retirement';
+                    Image = Payment;
+                    RunObject = Page "Posted IOU Retirement List";
+                    ToolTip = 'View treated IOUs.';
+                }
+            }
+
 
             group(OpexMgt)
             {
@@ -1093,7 +1440,7 @@ page 60005 "Accountant RC"
                 {
                     ApplicationArea = CostAccounting;
                     Caption = 'Warranty Coupon';
-                    RunObject = Page "Warranty Coupon2";
+                    RunObject = Page "Warranty Couporn";
 
                 }
                 action("DirectWarranty")
@@ -1144,11 +1491,181 @@ page 60005 "Accountant RC"
                     RunObject = Page "Posted Stores Requisition List";
                 }
 
+            }
+
+            group(FuelMgt)
+            {
+                Caption = 'Fuel';
 
 
+                action(FuelPurchase)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Purchase Order';
+                    Image = Purchase;
+                    RunObject = Page "Purchase Order List";
+                    ToolTip = 'View purchase orders.';
+                }
+                action(FuelReturn)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Purchase Credit Memo';
+                    Image = Purchase;
+                    RunObject = Page "Purchase Credit Memos";
+                    ToolTip = 'View purchase credit memos.';
+                }
+                action("NewVehicle")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'New Vehicle';
+                    Image = FaultDefault;
+                    RunObject = Page "New Vehicle Fuel List";
+                    ToolTip = 'View treated IOUs.';
+                }
+                action("FAFuelList")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Fixed Asset';
+                    Image = FaultDefault;
+                    RunObject = Page "Fixed Asset Fuel List";
+                    ToolTip = 'View treated IOUs.';
+                }
+
+                action("StaffFuelList")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Staff';
+                    Image = FaultDefault;
+                    RunObject = Page "Staff Fuel List";
+                    ToolTip = 'View treated IOUs.';
+                }
+                action(VendorsFuel)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Vendors';
+                    Image = FaultDefault;
+                    RunObject = Page "Vendor List";
+                    ToolTip = 'View vendor list.';
+                }
+                action(Locations)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Locations';
+                    Image = List;
+                    RunObject = Page "Location List";
+                    ToolTip = 'View location list.';
+                }
+            }
+
+            group(LeaveRequest1)
+            {
+                Caption = 'Leave Request';
+                action("LeaveRequest")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Leave Request';
+                    Image = CalculateCalendar;
+                    RunObject = Page "Leave Request List";
+                    ToolTip = 'Request for leave.';
+                }
+
+                action("LeaveApproval")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Leave Approval';
+                    Image = CalculateCalendar;
+                    RunObject = Page "Approval Leave List";
+                    ToolTip = 'View leaves awaiting approval.';
+                }
+
+                action("HODHR")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Leave Approval- HR';
+                    Image = Calendar;
+                    RunObject = Page "HOD HR/ADMIN LIST";
+                    ToolTip = 'Approve leave applications.';
+                }
+                action("Approved Leave")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Leave Approved';
+                    Image = Calendar;
+                    RunObject = Page "Approved Leave List";
+                    ToolTip = 'View approved leave applications.';
+                }
 
             }
 
+
+            group(LeavePlan)
+            {
+                Caption = 'Leave Plan';
+                action("Planned Leave")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Leave Plan';
+                    Image = CalculateCalendar;
+                    RunObject = Page "Leave Entries List";
+                    ToolTip = 'Plan your annual leave.';
+                }
+
+                action("Actual Leave")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Actual Leave';
+                    Image = CalculateCalendar;
+                    RunObject = Page "Acutal Leave List";
+                    ToolTip = 'Plan your annual leave.';
+                }
+
+            }
+
+
+            group(PoolCars)
+            {
+                Caption = 'Pool Cars';
+
+                action("New Request")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'New Request';
+                    Image = RedoFluent;
+                    RunObject = Page "Pool Car Request List";
+                    ToolTip = 'Make a new request for pool car.';
+
+                }
+
+                action("ApprovedPoolCar")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Approved Requests';
+                    Image = RedoFluent;
+                    RunObject = Page "Approved Pool Car Request List";
+                    ToolTip = 'Make a new request for pool car.';
+
+                }
+                action("PoolCarAllocation")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Allocation';
+                    Image = RedoFluent;
+                    RunObject = Page "Pool Car Allocation List";
+                    ToolTip = 'Make a new request for pool car.';
+
+                }
+                action("ClosedPoolCar")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Closed Requests';
+                    Image = RedoFluent;
+                    RunObject = Page "Close Pool Car List";
+                    ToolTip = 'Closed requests.';
+
+                }
+
+
+            }
 
 
             group(Action84)
@@ -1201,79 +1718,7 @@ page 60005 "Accountant RC"
                     ToolTip = 'Set up cost accounting budgets that are created based on cost types just as a budget for the general ledger is created based on general ledger accounts. A cost budget is created for a certain period of time, for example, a fiscal year. You can create as many cost budgets as needed. You can create a new cost budget manually, or by importing a cost budget, or by copying an existing cost budget as the budget base.';
                 }
             }
-            group(Action16)
-            {
-                Caption = 'Fixed Assets';
-                Image = FixedAssets;
-                ToolTip = 'Manage depreciation and insurance of your fixed assets.';
-                action(Action17)
-                {
-                    ApplicationArea = FixedAssets;
-                    Caption = 'Fixed Assets';
-                    //Promoted = true;
-                    //PromotedCategory = Process;
-                    RunObject = Page "Fixed Asset List";
-                    ToolTip = 'Manage periodic depreciation of your machinery or machines, keep track of your maintenance costs, manage insurance policies related to fixed assets, and monitor fixed asset statistics.';
-                }
-                action("Fixed Assets G/L Journals")
-                {
-                    ApplicationArea = FixedAssets;
-                    Caption = 'Fixed Assets G/L Journals';
-                    //Promoted = true;
-                    //PromotedCategory = Process;
-                    RunObject = Page "General Journal Batches";
-                    RunPageView = WHERE("Template Type" = CONST(Assets),
-                                        Recurring = CONST(false));
-                    ToolTip = 'Post fixed asset transactions, such as acquisition and depreciation, in integration with the general ledger. The FA G/L Journal is a general journal, which is integrated into the general ledger.';
-                }
-                action("Fixed Assets Journals")
-                {
-                    ApplicationArea = FixedAssets;
-                    Caption = 'Fixed Assets Journals';
-                    //Promoted = true;
-                    //PromotedCategory = Process;
-                    RunObject = Page "FA Journal Batches";
-                    RunPageView = WHERE(Recurring = CONST(false));
-                    ToolTip = 'Post fixed asset transactions, such as acquisition and depreciation book without integration to the general ledger.';
-                }
-                action("Fixed Assets Reclass. Journals")
-                {
-                    ApplicationArea = FixedAssets;
-                    Caption = 'Fixed Assets Reclass. Journals';
-                    //Promoted = true;
-                    //PromotedCategory = Process;
-                    RunObject = Page "FA Reclass. Journal Batches";
-                    ToolTip = 'Transfer, split, or combine fixed assets by preparing reclassification entries to be posted in the fixed asset journal.';
-                }
-                action(Insurance)
-                {
-                    ApplicationArea = FixedAssets;
-                    Caption = 'Insurance';
-                    //Promoted = true;
-                    //PromotedCategory = Process;
-                    RunObject = Page "Insurance List";
-                    ToolTip = 'Manage insurance policies for fixed assets and monitor insurance coverage.';
-                }
-                action("Insurance Journals")
-                {
-                    ApplicationArea = FixedAssets;
-                    Caption = 'Insurance Journals';
-                    //Promoted = true;
-                    //PromotedCategory = Process;
-                    RunObject = Page "Insurance Journal Batches";
-                    ToolTip = 'Post entries to the insurance coverage ledger.';
-                }
-                action("Recurring Fixed Asset Journals")
-                {
-                    ApplicationArea = FixedAssets;
-                    Caption = 'Recurring Fixed Asset Journals';
-                    //Promoted = true;
-                    //PromotedCategory = Process;
-                    RunObject = Page "FA Journal Batches";
-                    RunPageView = WHERE(Recurring = CONST(true));
-                    ToolTip = 'Post recurring fixed asset transactions, such as acquisition and depreciation book without integration to the general ledger.';
-                }
-            }
+
             group("Posted Documents")
             {
                 Caption = 'Posted Documents';
@@ -1403,335 +1848,8 @@ page 60005 "Accountant RC"
                 ToolTip = 'Create a new bank deposit. ';
             }
         }
-        area(processing)  //Hook here 
+        area(processing)
         {
-            group(CashVoucher)
-            {
-                Caption = 'Cash Voucher';
-                action("Cash Receip&t")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Cash Receipt';
-                    Image = CashReceiptJournal;
-                    RunObject = Page "Cash Receipt List";
-                    ToolTip = 'Post cash receipt entries to the general ledger.';
-                }
-                action("Cash Pay&ment")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Cash Payment';
-                    Image = CashReceiptJournal;
-                    RunObject = Page "Cash Payment List";
-                    ToolTip = 'Post cash payment entries to the general ledger.';
-                }
-                action("e-Rece&ipt")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'e-Receipt';
-                    Image = CashReceiptJournal;
-                    RunObject = Page "e-Receipt List";
-                    ToolTip = 'Post e-receipt entries to the general ledger.';
-                }
-                action("e-P&ayment")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'e-Payment';
-                    Image = CashReceiptJournal;
-                    RunObject = Page "e-Payment List";
-                    ToolTip = 'Post e-payment entries to the general ledger.';
-                }
-                action("Posted Cash Receipt")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Posted Cash Receipt';
-                    Image = CashReceiptJournal;
-                    RunObject = Page "Posted Cash Receipt List";
-                    ToolTip = 'View posted cash receipts in the general ledger.';
-                }
-                action("Posted Cash Payment")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Posted Cash Payment';
-                    Image = CashReceiptJournal;
-                    RunObject = Page "Posted Cash Payment List";
-                    ToolTip = 'View posted cash payments in the general ledger.';
-                }
-                action("Posted e-Receipt")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Posted e-Receipt';
-                    Image = CashReceiptJournal;
-                    RunObject = Page "Posted e-Receipt List";
-                    ToolTip = 'View posted e-Receipts in the general ledger.';
-                }
-                action("Posted e-Payment")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Posted e-Payment';
-                    Image = CashReceiptJournal;
-                    RunObject = Page "Posted e-Payment List";
-                    ToolTip = 'View posted e-Receipts in the general ledger.';
-                }
-
-            }
-            group(ChequeVoucher)
-            {
-                Caption = 'Cheque Voucher';
-                action("Cheq&ue Receipt")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Cheque Receipt';
-                    Image = CashReceiptJournal;
-                    RunObject = Page "Cheque Receipt List";
-                    ToolTip = 'Post cheque receipt entries to the general ledger.';
-                }
-                action("C&heque Payment")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Cheque Payment';
-                    Image = CashReceiptJournal;
-                    RunObject = Page "Cheque Payment List";
-                    ToolTip = 'Post cheque payment entries to the general ledger.';
-                }
-                action("Posted Cheque Receipt")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Posted Cheque Receipt';
-                    Image = CashReceiptJournal;
-                    RunObject = Page "Posted Cheque Receipt List";
-                    ToolTip = 'View posted cheque receipt entries in the general ledger.';
-                }
-                action("Posted Cheque Payment")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Posted Cheque Payment';
-                    Image = CashReceiptJournal;
-                    RunObject = Page "Posted Cheque Payment List";
-                    ToolTip = 'View posted cheque payment entries in the general ledger.';
-                }
-            }
-
-            group(JournalVoucher)
-            {
-                Caption = 'Journal Voucher';
-                action("Journal Voucher")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Journal Voucher';
-                    Image = Journals;
-                    RunObject = Page "Journal Voucher List";
-                    ToolTip = 'Post journal entries to the general ledger.';
-                }
-                action("Posted Journal Voucher")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Posted Journal Voucher';
-                    Image = Journals;
-                    RunObject = Page "Posted Journal Voucher List";
-                    ToolTip = 'View posted journal entries in the general ledger.';
-                }
-
-            }
-
-            group(IOUPayment)
-            {
-                Caption = 'IOU Payment';
-                action("IOU Request")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'IOU Request';
-                    Image = Payment;
-                    RunObject = Page "IOU Register List";
-                    ToolTip = 'Raise IOU for payment.';
-                }
-                action("IOU Approved")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'IOU Approved';
-                    Image = Payment;
-                    RunObject = Page "IOU Approved List";
-                    ToolTip = 'View approved IOUs.';
-                }
-                action("IOU Treated")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'IOU Treated';
-                    Image = Payment;
-                    RunObject = Page "IOU Request";
-                    ToolTip = 'View treated IOUs.';
-
-                }
-            }
-            group(IOURetirement)
-            {
-                Caption = 'IOU Retirement';
-
-                action("Retirement")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'IOU Retirement';
-                    Image = Payment;
-                    RunObject = Page "Retirement List";
-                    ToolTip = 'View treated IOUs.';
-                }
-                action("ApprovedRetirement")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Approved IOU Retirement';
-                    Image = Payment;
-                    RunObject = Page "Approved IOU Retirement List";
-                    ToolTip = 'View treated IOUs.';
-                }
-                action("PostedIOURetirement")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Posted IOU Retirement';
-                    Image = Payment;
-                    RunObject = Page "Posted IOU Retirement List";
-                    ToolTip = 'View treated IOUs.';
-                }
-            }
-
-            group(FuelMgt)
-            {
-                Caption = 'Fuel';
-
-                action("NewVehicle")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'New Vehicle';
-                    Image = FaultDefault;
-                    RunObject = Page "New Vehicle Fuel List";
-                    ToolTip = 'View treated IOUs.';
-                }
-                action("FAFuelList")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Fixed Asset';
-                    Image = FaultDefault;
-                    RunObject = Page "Fixed Asset Fuel List";
-                    ToolTip = 'View treated IOUs.';
-                }
-
-                action("StaffFuelList")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Staff';
-                    Image = FaultDefault;
-                    RunObject = Page "Staff Fuel List";
-                    ToolTip = 'View treated IOUs.';
-                }
-
-
-            }
-
-            group(LeavePlan)
-            {
-                Caption = 'Leave Plan';
-                action("Planned Leave")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Leave Plan';
-                    Image = CalculateCalendar;
-                    RunObject = Page "Leave Entries List";
-                    ToolTip = 'Plan your annual leave.';
-                }
-
-                action("Actual Leave")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Actual Leave';
-                    Image = CalculateCalendar;
-                    RunObject = Page "Acutal Leave List";
-                    ToolTip = 'Plan your annual leave.';
-                }
-
-
-            }
-
-            group(LeaveMgt)
-            {
-                Caption = 'Leave Request';
-                action("Leave Request")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Leave Request';
-                    Image = Calendar;
-                    RunObject = Page "Leave Request List";
-                    ToolTip = 'Make leave applications entries.';
-                }
-                action("Leave Approval")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Leave Approval';
-                    Image = Calendar;
-                    RunObject = Page "Approval Leave List";
-                    ToolTip = 'Approve leave applications.';
-                }
-                action("HODHR")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Leave Approval- HR';
-                    Image = Calendar;
-                    RunObject = Page "HOD HR/ADMIN LIST";
-                    ToolTip = 'Approve leave applications.';
-                }
-                action("Approved Leave")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Approved Leave';
-                    Image = Calendar;
-                    RunObject = Page "Approved Leave List";
-                    ToolTip = 'View approved leave applications.';
-                }
-            }
-
-            group(PoolCars)
-            {
-                Caption = 'Pool Cars';
-
-                action("New Request")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'New Request';
-                    Image = RedoFluent;
-                    RunObject = Page "Pool Car Request List";
-                    ToolTip = 'Make a new request for pool car.';
-
-                }
-
-                action("ApprovedPoolCar")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Approved Requests';
-                    Image = RedoFluent;
-                    RunObject = Page "Approved Pool Car Request List";
-                    ToolTip = 'Make a new request for pool car.';
-
-                }
-                action("PoolCarAllocation")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Allocation';
-                    Image = RedoFluent;
-                    RunObject = Page "Pool Car Allocation List";
-                    ToolTip = 'Make a new request for pool car.';
-
-                }
-                action("ClosedPoolCar")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Closed Requests';
-                    Image = RedoFluent;
-                    RunObject = Page "Close Pool Car List";
-                    ToolTip = 'Closed requests.';
-
-                }
-
-
-            }
-
-
             group(Analysis)
             {
                 Caption = 'Analysis';

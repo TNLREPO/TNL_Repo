@@ -1,5 +1,6 @@
 page 50597 "Pool Car Allocation Card"
 {
+    ApplicationArea = All;
     PageType = Card;
     SourceTable = "Pool Car Allocation";
 

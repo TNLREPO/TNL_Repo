@@ -26,9 +26,7 @@ report 50008 "Cheque Receipt-Sing."
             column(CompanyData__Address_4_; CompanyData."Address 4")
             {
             }
-            column(Bank_Name_PaymentReceipt; "Bank Name")
-            {
-            }
+
             column(Tel_____CompanyData__Internation_phone_; 'Tel.: ' + CompanyData."Internation phone")
             {
             }
@@ -131,6 +129,13 @@ report 50008 "Cheque Receipt-Sing."
             column(Payment_Receipt___Multiple_Account; "Multiple Account")
             {
             }
+            column(Bank_Name; "Bank Name")
+            {
+
+            }
+            /* column(Bank_Name_PaymentReceipt; "Bank Name")
+            {
+            } */
             column(AMOUNTINWORD; AMOUNTINWORD)
             {
             }
@@ -330,8 +335,8 @@ report 50008 "Cheque Receipt-Sing."
 
             trigger OnPreDataItem()
             begin
-                /* CompanyData.GET;
-                SETRANGE("No.", ReceiptNo); */
+                CompanyData.GET;
+                //SETRANGE("No.", ReceiptNo);
             end;
         }
     }

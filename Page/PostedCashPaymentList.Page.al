@@ -9,7 +9,7 @@ page 70022 "Posted Cash Payment List"
     SourceTable = "Payment/Receipt.";
     SourceTableView = WHERE("Document Type" = CONST(Requisition),
                             "Cash/Cheque" = CONST(Cash),
-                            Posted = filter(false));
+                            Posted = filter(true));
 
     layout
     {

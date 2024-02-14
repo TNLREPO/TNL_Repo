@@ -22,6 +22,21 @@ tableextension 50015 "Incoming Document Ext" extends "Incoming Document"
         field(50007; "Requisition Line No."; Integer)
         {
         }
+        field(50008; XURL; Text[1024])
+        {
+            Caption = 'URL';
+
+            trigger OnValidate()
+            var
+                myInt: Integer;
+            begin
+                if XURL <> '' then
+                    URL := XURL
+                else
+                    URL := '';
+
+            end;
+        }
 
 
     }
@@ -40,7 +55,7 @@ tableextension 50015 "Incoming Document Ext" extends "Incoming Document"
         if ProcuretLine."Incoming Document Entry No." = 0 then
             exit;
         Get(ProcuretLine."Incoming Document Entry No.");
-        TestReadyForProcessing();
+        //TestReadyForProcessing();
         TestIfAlreadyExists();
         "Document Type" := "Document Type"::Journal;
         Modify(true);

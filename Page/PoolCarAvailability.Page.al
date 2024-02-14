@@ -1,5 +1,6 @@
 page 50602 "Pool Car Availability"
 {
+    ApplicationArea = All;
     PageType = List;
     SourceTable = "Pool Car Availability";
 

@@ -41,9 +41,10 @@ table 70002 "Pool Car Register"
         {
             TableRelation = "User Setup"."User ID";
         }
-        field(7; "Global Dimension 1 code"; Code[20])
+        field(7; "Global Dimension 1 Code"; Code[20])
         {
-            Caption = 'Global Dimention 1 code';
+            CaptionClass = '1,2,1';
+            Caption = 'Global Dimension 1 Code';
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(1));
         }
         field(9; Approved; Boolean)

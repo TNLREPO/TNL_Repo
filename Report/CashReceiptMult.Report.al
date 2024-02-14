@@ -160,8 +160,12 @@ report 50001 "Cash Receipt-Mult."
             column(AMOUNTINWORDCaption; AMOUNTINWORDCaptionLbl)
             {
             }
-            column(BankName_PaymentReceipt; "Bank Name")
+            /*  column(BankName_PaymentReceipt; "Bank Name")
+             {
+             } */
+            column(Bank_Name; "Bank Name")
             {
+
             }
             column(AccountType_PaymentReceipt; "Account Type")
             {
@@ -326,7 +330,7 @@ report 50001 "Cash Receipt-Mult."
             trigger OnPreDataItem()
             begin
                 CompanyData.GET;
-                SETRANGE("No.", ReceiptNo);
+                //SETRANGE("No.", ReceiptNo);
             end;
         }
     }

@@ -1,5 +1,6 @@
 page 50598 "Pool Car Availability Subform"
 {
+    ApplicationArea = All;
     Editable = false;
     PageType = ListPart;
     SourceTable = "Pool Car Availability";

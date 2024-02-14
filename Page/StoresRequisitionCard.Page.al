@@ -50,6 +50,7 @@ page 50205 "Stores Requisition Card"
             }
             part("Requisition Lines"; "Stores Req. Subform")
             {
+                Caption = 'Lines';
                 SubPageLink = "Document No." = FIELD("No."),
                               "Document Type" = FIELD(Type);
             }

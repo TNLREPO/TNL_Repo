@@ -317,7 +317,7 @@ report 50002 "Cheque Receipt-Mult."
             trigger OnPreDataItem()
             begin
                 CompanyData.GET;
-                SETRANGE("No.", ReceiptNo);
+                //SETRANGE("No.", ReceiptNo);
             end;
         }
     }

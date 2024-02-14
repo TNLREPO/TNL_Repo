@@ -18,7 +18,7 @@ page 50206 "Stores Req. Subform"
 
                     trigger OnValidate()
                     begin
-                        
+
                     end;
                 }
                 field(Description; Rec.Description)
@@ -30,7 +30,7 @@ page 50206 "Stores Req. Subform"
 
                     trigger OnValidate()
                     begin
-                       
+
                     end;
                 }
                 field("Variant Code"; Rec."Variant Code")
@@ -90,7 +90,7 @@ page 50206 "Stores Req. Subform"
 
     trigger OnAfterGetRecord()
     begin
-       
+
     end;
 
     trigger OnInit()
@@ -101,7 +101,7 @@ page 50206 "Stores Req. Subform"
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
-        
+
     end;
 
     var

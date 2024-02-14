@@ -1,10 +1,12 @@
 page 70040 "Approved Stock Capital List"
 {
+    ApplicationArea = All;
     CardPageID = "Approved Stock Capitalisation";
+    Editable = false;
     PageType = List;
     SourceTable = "Stock Capitalisation";
-    SourceTableView = WHERE("Stock Capitalisation Approval" = filter(true),
-                            Processed = filter(false));
+    /* SourceTableView = WHERE("Stock Capitalisation Approval" = filter(true),
+                            Processed = filter(false)); */
 
     layout
     {
@@ -45,9 +47,9 @@ page 70040 "Approved Stock Capital List"
                 field("Asset Aquisition Date"; Rec."Asset Aquisition Date")
                 {
                 }
-                field(Processed; Rec.Processed)
+                /* field(Processed; Rec.Processed)
                 {
-                }
+                } */
                 field(Quantity; Rec.Quantity)
                 {
                 }
@@ -68,7 +70,7 @@ page 70040 "Approved Stock Capital List"
                 }
                 field("Stock Capitalisation Approval"; Rec."Stock Capitalisation Approval")
                 {
-                }
+                } 
                 field("Capitalisation Approved By"; Rec."Capitalisation Approved By")
                 {
                 }

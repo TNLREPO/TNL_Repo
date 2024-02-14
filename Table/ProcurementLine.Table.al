@@ -95,7 +95,7 @@ table 70001 "Procurement Line"
         field(9; "Incoming Document Entry No."; Integer)
         {
             Caption = 'Incoming Document Entry No.';
-            TableRelation = "Incoming Document"; //WHERE(Status = FILTER(New | Released));
+            TableRelation = "Incoming Document" WHERE(Status = FILTER('New'));
 
             trigger OnValidate()
             var
@@ -235,6 +235,7 @@ table 70001 "Procurement Line"
         field(15; Balance; Decimal)
         {
         }
+
     }
 
     keys
@@ -255,6 +256,9 @@ table 70001 "Procurement Line"
     trigger OnDelete()
     begin
         //ERROR('You can not delete this entry. Contact your System Administrator!') ;
+
+
+
     end;
 
     trigger OnModify()
@@ -278,6 +282,7 @@ table 70001 "Procurement Line"
         Body: Text;
         AttachFilename: Text;
         ShowNewMailDialogOnSend: Boolean;
+        ProcurLineDetail: Record "Procurement Line Detail";
 
 
     procedure GetIncomingDocumentURL(): Text[1000]

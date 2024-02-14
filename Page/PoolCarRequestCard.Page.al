@@ -1,5 +1,6 @@
 page 50593 "Pool Car Request Card"
 {
+    ApplicationArea = All;
     PageType = Card;
     SourceTable = "Pool Car Register";
 

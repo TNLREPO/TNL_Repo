@@ -813,7 +813,8 @@ table 50103 "Payment/Receipt."
             TestNoSeries;
             NoSeriesMgt.InitSeries(GetNoSeriesCode, xRec."No. Series", "Posting Date", "No.", "No. Series");
         END;
-        "Created By" := COPYSTR(USERID, 15);
+        "Created By" := UserId;
+        
         InitRecord;
 
     end;

@@ -1,5 +1,6 @@
 page 50479 "Non-Capitalized Asset"
 {
+    ApplicationArea = All;
     PageType = Card;
     SourceTable = "Non-Capitalized Asset";
 

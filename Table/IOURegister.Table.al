@@ -228,7 +228,7 @@ table 50105 "IOU Register"
                     BccAddresses := '';
 
                     Subject := STRSUBSTNO(Text001, "IOU No.");
-                    CreateEmailBody("IOU No.", Addressee, Text001, "Account Name", Description, Amount);
+                    CreateEmailBody("IOU No.", Addressee, Text001, "Staff Name", Description, Amount);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
                     /*    WITH TempEmailItem DO BEGIN
@@ -293,7 +293,7 @@ table 50105 "IOU Register"
             trigger OnValidate()
             begin
                 IF "1st Approval to" = USERID THEN
-                    ERROR('You cannot select yourself as the 1st APPROVER');
+                    ERROR('You cannot select yourself as the first approver!');
 
                 IF UserSetup.GET("1st Approval to") THEN
                     "1st Approver" := UserSetup.Name;
@@ -1043,7 +1043,7 @@ table 50105 "IOU Register"
         ToAddresses: Text;
         "Staff Name": Text;
         Purpose: Text;
-        Amount: Decimal;
+        //Amount: Decimal;
         text007: Label 'IOU  Document ''%1''  requires your approval';
         Text008: Label 'Regards,';
         Text009: Label 'Mail sent successfully.';
@@ -1066,14 +1066,18 @@ table 50105 "IOU Register"
         EmailBody := STRSUBSTNO(Text006, RecipientInitials);
         EmailBody += '<br><br>';
         EmailBody += STRSUBSTNO(BodyMsg, DocNo);
+        EmailBody += '<br><br>';
+        EmailBody += Text010 + FORMAT(StaffName);
         EmailBody += '<br>';
-        EmailBody += IOUPurpose;
+        EmailBody += Text011 + Format(IOUPurpose);
         EmailBody += '<br>';
-        EmailBody += Format(IOUAmount);
+        EmailBody += Text012 + Format(IOUAmount);
         EmailBody += '<br><br>';
         EmailBody += 'Regards,';
         EmailBody += '<br>';
         EmailBody += UserSetup.Initials;
+      
+                           
 
     end;
 

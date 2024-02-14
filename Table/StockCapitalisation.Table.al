@@ -21,10 +21,13 @@ table 50135 "Stock Capitalisation"
         field(3; "Global Dimension 1"; Code[20])
         {
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(1));
+            CaptionClass = '1,2,1';
+
         }
         field(4; "Global Dimension 2"; Code[20])
         {
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(2));
+            CaptionClass = '1,2,2';
         }
         field(5; "Item No."; Code[20])
         {
@@ -64,19 +67,18 @@ table 50135 "Stock Capitalisation"
         field(12; Processed; Boolean)
         {
 
-            trigger OnValidate()
-            begin
 
+            trigger OnValidate()
+
+            begin
 
                 TESTFIELD("Stock Capitalisation Approval");
                 UserSetup.GET(USERID);
-                IF NOT UserSetup."Process Stock Capitalisation" THEN ERROR('You dont have Permission to Process Stock Capitalisation');
+                IF NOT UserSetup."Process Stock Capitalisation" THEN
+                    ERROR('You dont have Permission to Process Stock Capitalisation');
                 "Process date" := TODAY;
                 "Process Time" := TIME;
                 "Process By" := USERID;
-
-
-
 
                 ItemJNL2.SETRANGE(ItemJNL2."Journal Template Name", 'ITEM');
                 ItemJNL2.SETRANGE(ItemJNL2."Journal Batch Name", 'STKCAPTAL');
@@ -130,7 +132,6 @@ table 50135 "Stock Capitalisation"
                 reserventry.INSERT(TRUE);
 
 
-
                 "G/lJrnl2".SETRANGE("G/lJrnl2"."Journal Template Name", 'GENERAL');
                 "G/lJrnl2".SETRANGE("G/lJrnl2"."Journal Batch Name", 'STKCAPTAL');
                 IF "G/lJrnl2".FINDFIRST THEN
@@ -168,6 +169,8 @@ table 50135 "Stock Capitalisation"
                 //CurrentJnlBatchName := GETRANGEMAX("Journal Batch Name");
                 //CurrPage.UPDATE(FALSE);
             end;
+
+
         }
         field(13; Quantity; Decimal)
         {
@@ -276,7 +279,8 @@ table 50135 "Stock Capitalisation"
 
     trigger OnModify()
     begin
-        IF xRec.Processed THEN ERROR('You Can not Change a processed Stock Capitalisation ');
+        IF xRec.Processed THEN
+            ERROR('You cannot change a processed stock capitalisation!');
     end;
 
     var
@@ -299,18 +303,16 @@ table 50135 "Stock Capitalisation"
 
     procedure AssistEdit(OldStockCap: Record 50135): Boolean
     begin
-        /* WITH Stockrec DO BEGIN
-            Stockrec := Rec;
+        Stockrec := Rec;
+        InventorySetup.GET;
+        InventorySetup.TESTFIELD("Stock Capitalisation No.");
+        IF NoseriesMgt.SelectSeries(InventorySetup."Stock Capitalisation No.", OldStockCap."No. Series", Stockrec."No. Series") THEN BEGIN
             InventorySetup.GET;
             InventorySetup.TESTFIELD("Stock Capitalisation No.");
-            IF NoseriesMgt.SelectSeries(InventorySetup."Stock Capitalisation No.", OldStockCap."No. Series", "No. Series") THEN BEGIN
-                InventorySetup.GET;
-                InventorySetup.TESTFIELD("Stock Capitalisation No.");
-                NoseriesMgt.SetSeries(Code);
-                Rec := Stockrec;
-                EXIT(TRUE);
-            END;
-        END; */
+            NoseriesMgt.SetSeries(Stockrec.Code);
+            Rec := Stockrec;
+            EXIT(TRUE);
+        END;
     end;
 }
 
