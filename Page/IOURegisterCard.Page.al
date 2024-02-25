@@ -19,6 +19,15 @@ page 70031 "IOU Register Card"
                 {
                     Editable = false;
                 }
+                field(Requester; Rec.Requester)
+                {
+                    Editable = false;
+                }
+                field("Requester Name"; Rec."Requester Name")
+                {
+                    Editable = false;
+                }
+
                 field("Entry Date"; Rec."Entry Date")
                 {
                 }

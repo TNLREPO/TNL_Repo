@@ -62,9 +62,9 @@ table 50107 "IOU Retirement Header"
         }
         field(10; "IOU No."; Code[20])
         {
-            TableRelation = "IOU Register" WHERE(Treated = filter(true),
-                                                  Retired = filter(false),
-                                                  "Converted to Loan" = filter(false));
+            TableRelation = "IOU Register" WHERE(Treated = const(true),
+                                                  Retired = const(false),
+                                                  "Converted to Loan" = const(false));
 
             trigger OnValidate()
             var

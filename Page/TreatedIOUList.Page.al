@@ -1,5 +1,6 @@
 page 50376 "Treated IOU List"
 {
+    ApplicationArea = All;
     CardPageID = "Treated IOU Card";
     DeleteAllowed = false;
     Editable = false;

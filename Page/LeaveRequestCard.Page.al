@@ -25,6 +25,8 @@ page 50603 "Leave Request Card"
                 {
                     Editable = true;
                 }
+
+
                 field(Requester; Rec.Requester)
                 {
                     Editable = false;
@@ -47,7 +49,7 @@ page 50603 "Leave Request Card"
                 }
                 field("Request Type"; Rec."Request Type")
                 {
-                    Visible = false;
+                    Visible = true;
                 }
                 field("Global Dimension 1 code"; Rec."Global Dimension 1 code")
                 {
@@ -131,7 +133,7 @@ page 50603 "Leave Request Card"
                     begin
                         // HOD
                         IF Rec."Request Type" = Rec."Request Type"::HOD THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\IBIDAPO-OBE', 'TOYOTANIGERIA\KOLAWOLE');
+                            UserSetup.SETFILTER("User ID", '%1|%2', 'IBIDAPO-OBE', 'KOLAWOLE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."1st Approval" := UserSetup."User ID";
                                 Rec."1st Approver" := UserSetup.Name;
@@ -139,7 +141,7 @@ page 50603 "Leave Request Card"
                             END;
                         END;
                         IF (Rec."Request Type" = Rec."Request Type"::"MD OFFICE") AND (Rec."Global Dimension 1 code" = '01EXADMIN') THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\IBIDAPO-OBE', 'TOYOTANIGERIA\KOLAWOLE');
+                            UserSetup.SETFILTER("User ID", '%1|%2', 'IBIDAPO-OBE', 'KOLAWOLE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."1st Approval" := UserSetup."User ID";
                                 Rec."1st Approver" := UserSetup.Name;
@@ -148,7 +150,7 @@ page 50603 "Leave Request Card"
                         END;
 
                         IF (Rec."Request Type" = Rec."Request Type"::HOD1) THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1', 'TOYOTANIGERIA\BUNMI');
+                            UserSetup.SETFILTER("User ID", '%1', 'BUNMI');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."1st Approval" := UserSetup."User ID";
                                 Rec."1st Approver" := UserSetup.Name;
@@ -159,7 +161,7 @@ page 50603 "Leave Request Card"
                         //Manager
 
                         IF (Rec."Request Type" = Rec."Request Type"::Manager) AND (Rec."Global Dimension 1 code" = '07FINACC') THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\paa', 'TOYOTANIGERIA\BUNMI');
+                            UserSetup.SETFILTER("User ID", '%1|%2', 'paa', 'BUNMI');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."1st Approval" := UserSetup."User ID";
                                 Rec."1st Approver" := UserSetup.Name;
@@ -168,7 +170,7 @@ page 50603 "Leave Request Card"
                         END;
 
                         IF (Rec."Request Type" = Rec."Request Type"::Manager) AND (Rec."Global Dimension 1 code" = '08AUDSYS') THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\ADEWUMI', 'TOYOTANIGERIA\AGBESUA');
+                            UserSetup.SETFILTER("User ID", '%1|%2', 'ADEWUMI', 'AGBESUA');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."1st Approval" := UserSetup."User ID";
                                 Rec."1st Approver" := UserSetup.Name;
@@ -177,7 +179,7 @@ page 50603 "Leave Request Card"
                         END;
 
                         IF (Rec."Request Type" = Rec."Request Type"::Manager) AND (Rec."Global Dimension 1 code" = '09MARKET') THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\AJUYAH', 'TOYOTANIGERIA\BAYO');
+                            UserSetup.SETFILTER("User ID", '%1|%2', 'AJUYAH', 'BAYO');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."1st Approval" := UserSetup."User ID";
                                 Rec."1st Approver" := UserSetup.Name;
@@ -185,7 +187,7 @@ page 50603 "Leave Request Card"
                             END;
                         END;
                         IF (Rec."Request Type" = Rec."Request Type"::Manager) AND (Rec."Global Dimension 1 code" = '05PARTS') THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\RAVINDER', 'TOYOTANIGERIA\AKINDELE');
+                            UserSetup.SETFILTER("User ID", '%1|%2', 'RAVINDER', 'AKINDELE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."1st Approval" := UserSetup."User ID";
                                 Rec."1st Approver" := UserSetup.Name;
@@ -194,7 +196,7 @@ page 50603 "Leave Request Card"
                         END;
 
                         IF (Rec."Request Type" = Rec."Request Type"::Manager) AND (Rec."Global Dimension 1 code" = '02ADMINHR') THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\LAWAL', 'TOYOTANIGERIA\KOLAWOLE');
+                            UserSetup.SETFILTER("User ID", '%1|%2', 'LAWAL', 'KOLAWOLE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."1st Approval" := UserSetup."User ID";
                                 Rec."1st Approver" := UserSetup.Name;
@@ -202,7 +204,7 @@ page 50603 "Leave Request Card"
                             END;
                         END;
                         IF (Rec."Request Type" = Rec."Request Type"::Manager) AND (Rec."Global Dimension 1 code" = '06SERVICE') THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1|%2|%3', 'TOYOTANIGERIA\INGALE', 'TOYOTANIGERIA\SYLVESTER', 'TOYOTANIGERIA\BAMIDELE');
+                            UserSetup.SETFILTER("User ID", '%1|%2|%3', 'INGALE', 'SYLVESTER', 'BAMIDELE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."1st Approval" := UserSetup."User ID";
                                 Rec."1st Approver" := UserSetup.Name;
@@ -210,8 +212,8 @@ page 50603 "Leave Request Card"
                             END;
                         END;
                         IF (Rec."Request Type" = Rec."Request Type"::Manager) AND (Rec."Global Dimension 1 code" = '03OPLOGIC') THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\TOLA', 'TOYOTANIGERIA\SEGUN');
-                            //UserSetup.SETFILTER("User ID",'%1|%2','TOYOTANIGERIA\LAWAL','TOYOTANIGERIA\KOLAWOLE');
+                            UserSetup.SETFILTER("User ID", '%1|%2', 'TOLA', 'SEGUN');
+                            //UserSetup.SETFILTER("User ID",'%1|%2','LAWAL','KOLAWOLE');
 
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
 
@@ -223,7 +225,7 @@ page 50603 "Leave Request Card"
 
                         //Junior staff - Deputy Manager
                         IF (Rec."Request Type" = Rec."Request Type"::"Junior staff - Deputy Manager") AND (Rec."Global Dimension 1 code" = '08AUDSYS') THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\ADEWUMI', 'TOYOTANIGERIA\AGBESUA');
+                            UserSetup.SETFILTER("User ID", '%1|%2', 'ADEWUMI', 'AGBESUA');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."1st Approval" := UserSetup."User ID";
                                 Rec."1st Approver" := UserSetup.Name;
@@ -232,7 +234,7 @@ page 50603 "Leave Request Card"
                         END;
 
                         IF (Rec."Request Type" = Rec."Request Type"::"Junior staff - Deputy Manager") AND (Rec."Global Dimension 1 code" = '09MARKET') THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\AJUYAH', 'TOYOTANIGERIA\BAYO');
+                            UserSetup.SETFILTER("User ID", '%1|%2', 'AJUYAH', 'BAYO');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."1st Approval" := UserSetup."User ID";
                                 Rec."1st Approver" := UserSetup.Name;
@@ -240,7 +242,7 @@ page 50603 "Leave Request Card"
                             END;
                         END;
                         IF (Rec."Request Type" = Rec."Request Type"::"Junior staff - Deputy Manager") AND (Rec."Global Dimension 1 code" = '05PARTS') THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\RAVINDER', 'TOYOTANIGERIA\AKINDELE');
+                            UserSetup.SETFILTER("User ID", '%1|%2', 'RAVINDER', 'AKINDELE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."1st Approval" := UserSetup."User ID";
                                 Rec."1st Approver" := UserSetup.Name;
@@ -249,7 +251,7 @@ page 50603 "Leave Request Card"
                         END;
 
                         IF (Rec."Request Type" = Rec."Request Type"::"Junior staff - Deputy Manager") AND (Rec."Global Dimension 1 code" = '02ADMINHR') THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1|%2|%3', 'TOYOTANIGERIA\IBIDAPO-OBE', 'TOYOTANIGERIA\KOLAWOLE', 'TOYOTANIGERIA\LAWAL');
+                            UserSetup.SETFILTER("User ID", '%1|%2|%3', 'IBIDAPO-OBE', 'KOLAWOLE', 'LAWAL');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."1st Approval" := UserSetup."User ID";
                                 Rec."1st Approver" := UserSetup.Name;
@@ -257,7 +259,7 @@ page 50603 "Leave Request Card"
                             END;
                         END;
                         IF (Rec."Request Type" = Rec."Request Type"::"Junior staff - Deputy Manager") AND (Rec."Global Dimension 1 code" = '06SERVICE') THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1|%2|%3', 'TOYOTANIGERIA\INGALE', 'TOYOTANIGERIA\SYLVESTER', 'TOYOTANIGERIA\BAMIDELE');
+                            UserSetup.SETFILTER("User ID", '%1|%2|%3', 'INGALE', 'SYLVESTER', 'BAMIDELE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."1st Approval" := UserSetup."User ID";
                                 Rec."1st Approver" := UserSetup.Name;
@@ -265,7 +267,7 @@ page 50603 "Leave Request Card"
                             END;
                         END;
                         IF (Rec."Request Type" = Rec."Request Type"::"Junior staff - Deputy Manager") AND (Rec."Global Dimension 1 code" = '07FINACC') THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\PAA', 'TOYOTANIGERIA\BUNMI');
+                            UserSetup.SETFILTER("User ID", '%1|%2', 'PAA', 'BUNMI');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."1st Approval" := UserSetup."User ID";
                                 Rec."1st Approver" := UserSetup.Name;
@@ -274,7 +276,7 @@ page 50603 "Leave Request Card"
                         END;
 
                         IF (Rec."Request Type" = Rec."Request Type"::"Junior staff - Deputy Manager") AND (Rec."Global Dimension 1 code" = '04DDEV') THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1', 'TOYOTANIGERIA\HENRY');
+                            UserSetup.SETFILTER("User ID", '%1', 'HENRY');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."1st Approval" := UserSetup."User ID";
                                 Rec."1st Approver" := UserSetup.Name;
@@ -282,7 +284,7 @@ page 50603 "Leave Request Card"
                             END;
                         END;
                         IF (Rec."Request Type" = Rec."Request Type"::"Junior staff - Deputy Manager") AND (Rec."Global Dimension 1 code" = '03OPLOGIC') THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\TOLA', 'TOYOTANIGERIA\SEGUN');
+                            UserSetup.SETFILTER("User ID", '%1|%2', 'TOLA', 'SEGUN');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."1st Approval" := UserSetup."User ID";
                                 Rec."1st Approver" := UserSetup.Name;
@@ -292,7 +294,7 @@ page 50603 "Leave Request Card"
 
                         //Branch
                         IF Rec."Request Type" = Rec."Request Type"::Branch THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1|%2|%3|%4|%5', 'TOYOTANIGERIA\NISHANT', 'TOYOTANIGERIA\EOT', 'TOYOTANIGERIA\BAYONLE', 'TOYOTANIGERIA\MOSES', 'TOYOTANIGERIA\ISUEKEBHO');
+                            UserSetup.SETFILTER("User ID", '%1|%2|%3|%4|%5', 'NISHANT', 'EOT', 'BAYONLE', 'MOSES', 'ISUEKEBHO');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."1st Approval" := UserSetup."User ID";
                                 Rec."1st Approver" := UserSetup.Name;
@@ -302,7 +304,7 @@ page 50603 "Leave Request Card"
 
                         //FG
                         IF Rec."Request Type" = Rec."Request Type"::FG THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\NISHANT', 'TOYOTANIGERIA\EOT');
+                            UserSetup.SETFILTER("User ID", '%1|%2', 'NISHANT', 'EOT');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."1st Approval" := UserSetup."User ID";
                                 Rec."1st Approver" := UserSetup.Name;
@@ -367,7 +369,7 @@ page 50603 "Leave Request Card"
                     trigger OnLookup(var Text: Text): Boolean
                     begin
                         IF Rec."Request Type" = Rec."Request Type"::HOD THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1', 'TOYOTANIGERIA\OLAKUNLE');
+                            UserSetup.SETFILTER("User ID", '%1', 'OLAKUNLE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."2nd Approval" := UserSetup."User ID";
                                 Rec."2nd Approver" := UserSetup.Name;
@@ -376,7 +378,7 @@ page 50603 "Leave Request Card"
                         END;
 
                         IF (Rec."Request Type" = Rec."Request Type"::"MD OFFICE") AND (Rec."Global Dimension 1 code" = '01EXADMIN') THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1', 'TOYOTANIGERIA\OLAKUNLE');
+                            UserSetup.SETFILTER("User ID", '%1', 'OLAKUNLE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."2nd Approval" := UserSetup."User ID";
                                 Rec."2nd Approver" := UserSetup.Name;
@@ -385,7 +387,7 @@ page 50603 "Leave Request Card"
                         END;
 
                         IF Rec."Request Type" = Rec."Request Type"::HOD1 THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\IBIDAPO-OBE', 'TOYOTANIGERIA\KOLAWOLE');
+                            UserSetup.SETFILTER("User ID", '%1|%2', 'IBIDAPO-OBE', 'KOLAWOLE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."2nd Approval" := UserSetup."User ID";
                                 Rec."2nd Approver" := UserSetup.Name;
@@ -394,7 +396,7 @@ page 50603 "Leave Request Card"
                         END;
 
                         IF (Rec."Request Type" = Rec."Request Type"::Manager) OR (Rec."Request Type" = Rec."Request Type"::"Junior staff - Deputy Manager") THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\IBIDAPO-OBE', 'TOYOTANIGERIA\KOLAWOLE');
+                            UserSetup.SETFILTER("User ID", '%1|%2', 'IBIDAPO-OBE', 'KOLAWOLE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."2nd Approval" := UserSetup."User ID";
                                 Rec."2nd Approver" := UserSetup.Name;
@@ -403,7 +405,7 @@ page 50603 "Leave Request Card"
                         END;
                         IF (Rec."Request Type" = Rec."Request Type"::Branch) //AND //(Rec."Global Dimension 1 code" = '05PARTS')/
                         THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1|%2|%3|4%', 'TOYOTANIGERIA\SYLVESTER', 'TOYOTANIGERIA\RAVINDER', 'TOYOTANIGERIA\BAMIDELE', 'TOYOTANIGERIA\PAA');
+                            UserSetup.SETFILTER("User ID", '%1|%2|%3|4%', 'SYLVESTER', 'RAVINDER', 'BAMIDELE', 'PAA');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."2nd Approval" := UserSetup."User ID";
                                 Rec."2nd Approver" := UserSetup.Name;
@@ -413,7 +415,7 @@ page 50603 "Leave Request Card"
 
                         IF (Rec."Request Type" = Rec."Request Type"::FG) //AND //(Rec."Global Dimension 1 code" = '05PARTS')/
                         THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1|%2|%3|4%', 'TOYOTANIGERIA\RAVINDER', 'TOYOTANIGERIA\INGALE', 'TOYOTANIGERIA\SYLVESTER', 'TOYOTANIGERIA\AKINDELE');
+                            UserSetup.SETFILTER("User ID", '%1|%2|%3|4%', 'RAVINDER', 'INGALE', 'SYLVESTER', 'AKINDELE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."2nd Approval" := UserSetup."User ID";
                                 Rec."2nd Approver" := UserSetup.Name;
@@ -479,7 +481,7 @@ page 50603 "Leave Request Card"
                     trigger OnLookup(var Text: Text): Boolean
                     begin
                         IF Rec."Request Type" = Rec."Request Type"::Manager THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1', 'TOYOTANIGERIA\OLAKUNLE');
+                            UserSetup.SETFILTER("User ID", '%1', 'OLAKUNLE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."3rd Approval" := UserSetup."User ID";
                                 Rec."3rd Approver" := UserSetup.Name;
@@ -488,7 +490,7 @@ page 50603 "Leave Request Card"
                         END;
 
                         IF Rec."Request Type" = Rec."Request Type"::HOD1 THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1', 'TOYOTANIGERIA\OLAKUNLE');
+                            UserSetup.SETFILTER("User ID", '%1', 'OLAKUNLE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."3rd Approval" := UserSetup."User ID";
                                 Rec."3rd Approver" := UserSetup.Name;
@@ -497,7 +499,7 @@ page 50603 "Leave Request Card"
                         END;
 
                         IF (Rec."Request Type" = Rec."Request Type"::"Junior staff - Deputy Manager") AND (Rec."Send to MD for Approval" = TRUE) THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1', 'TOYOTANIGERIA\OLAKUNLE');
+                            UserSetup.SETFILTER("User ID", '%1', 'OLAKUNLE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."3rd Approval" := UserSetup."User ID";
                                 Rec."3rd Approver" := UserSetup.Name;
@@ -506,7 +508,7 @@ page 50603 "Leave Request Card"
                         END;
 
                         IF (Rec."Request Type" = Rec."Request Type"::Branch) THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\IBIDAPO-OBE', 'TOYOTANIGERIA\KOLAWOLE');
+                            UserSetup.SETFILTER("User ID", '%1|%2', 'IBIDAPO-OBE', 'KOLAWOLE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."3rd Approval" := UserSetup."User ID";
                                 Rec."3rd Approver" := UserSetup.Name;
@@ -515,7 +517,7 @@ page 50603 "Leave Request Card"
                         END;
 
                         IF (Rec."Request Type" = Rec."Request Type"::FG) THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1|%2', 'TOYOTANIGERIA\IBIDAPO-OBE', 'TOYOTANIGERIA\KOLAWOLE');
+                            UserSetup.SETFILTER("User ID", '%1|%2', 'IBIDAPO-OBE', 'KOLAWOLE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."3rd Approval" := UserSetup."User ID";
                                 Rec."3rd Approver" := UserSetup.Name;
@@ -569,7 +571,7 @@ page 50603 "Leave Request Card"
                     trigger OnLookup(var Text: Text): Boolean
                     begin
                         IF Rec."Request Type" = Rec."Request Type"::FG THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1', 'TOYOTANIGERIA\OLAKUNLE');
+                            UserSetup.SETFILTER("User ID", '%1', 'OLAKUNLE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."4th Approval" := UserSetup."User ID";
                                 Rec."4th  Approver" := UserSetup.Name;

@@ -669,7 +669,7 @@ table 50105 "IOU Register"
         }
         field(43; "3rd Approval to"; Code[25])
         {
-            TableRelation = "User Setup"."User ID";
+            TableRelation = "User Setup"."User ID" WHERE("User ID" = FILTER('BUNMI' | 'PAA' | 'ALBERT' | 'ONIMISI'));
 
             trigger OnValidate()
             begin
@@ -1076,8 +1076,8 @@ table 50105 "IOU Register"
         EmailBody += 'Regards,';
         EmailBody += '<br>';
         EmailBody += UserSetup.Initials;
-      
-                           
+
+
 
     end;
 

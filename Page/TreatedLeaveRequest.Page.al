@@ -1,5 +1,6 @@
 page 50605 "Treated Leave Request"
 {
+    ApplicationArea = All;
     CardPageID = "Approve Leave request card";
     Editable = false;
     PageType = List;

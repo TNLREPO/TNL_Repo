@@ -1,5 +1,6 @@
 page 50375 "Treated IOU Card"
 {
+    ApplicationArea = All;
     DeleteAllowed = false;
     Editable = false;
     ModifyAllowed = false;

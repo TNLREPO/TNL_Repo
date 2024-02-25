@@ -289,7 +289,6 @@ table 70009 "Leave Request3"
         }
         field(13; "1st Approval"; Code[30])
         {
-            TableRelation = "User Setup"."User ID";
 
             trigger OnValidate()
             begin
@@ -378,7 +377,7 @@ table 70009 "Leave Request3"
                 //HOD1
                 IF ("Request Type" = "Request Type"::HOD1) THEN
                     IF "1st Approval Status" = "1st Approval Status"::Approved THEN
-                        IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
+                        IF NOT CONFIRM('Are you sure you want to approve?', FALSE) THEN
                             "1st Approval Status" := LeaveRequest."1st Approval Status"::" "
                         ELSE BEGIN
                             IF UserSetup.GET("2nd Approval") THEN BEGIN
@@ -401,7 +400,7 @@ table 70009 "Leave Request3"
                 //Manager
                 IF ("Request Type" = "Request Type"::Manager) THEN
                     IF "1st Approval Status" = "1st Approval Status"::Approved THEN
-                        IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
+                        IF NOT CONFIRM('Are you sure you want to approve?', FALSE) THEN
                             "1st Approval Status" := LeaveRequest."1st Approval Status"::" "
                         ELSE BEGIN
                             IF UserSetup.GET("2nd Approval") THEN BEGIN
@@ -424,7 +423,7 @@ table 70009 "Leave Request3"
                 //Branch
                 IF ("Request Type" = "Request Type"::Branch) THEN
                     IF "1st Approval Status" = "1st Approval Status"::Approved THEN
-                        IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
+                        IF NOT CONFIRM('Are you sure you want to approve?', FALSE) THEN
                             "1st Approval Status" := LeaveRequest."1st Approval Status"::" "
                         ELSE BEGIN
                             IF UserSetup.GET("2nd Approval") THEN BEGIN
@@ -446,7 +445,7 @@ table 70009 "Leave Request3"
                 //Junior staff - Deputy Manager
                 IF ("Request Type" = "Request Type"::"Junior staff - Deputy Manager") THEN
                     IF "1st Approval Status" = "1st Approval Status"::Approved THEN
-                        IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
+                        IF NOT CONFIRM('Are you sure you want to approve?', FALSE) THEN
                             "1st Approval Status" := LeaveRequest."1st Approval Status"::" "
                         ELSE BEGIN
                             IF UserSetup.GET("2nd Approval") THEN BEGIN
@@ -469,7 +468,7 @@ table 70009 "Leave Request3"
 
                 CASE "1st Approval Status" OF
                     "1st Approval Status"::Rejected:
-                        IF NOT CONFIRM('Are you sure you want to REJECT', FALSE) THEN
+                        IF NOT CONFIRM('Are you sure you want to reject?', FALSE) THEN
                             "1st Approval Status" := LeaveRequest."1st Approval Status"::" "
                         ELSE BEGIN
                             "1st Approval Time" := CURRENTDATETIME;
@@ -489,7 +488,7 @@ table 70009 "Leave Request3"
                             Reject := TRUE;
                         END;
                     "1st Approval Status"::"On hold":
-                        IF NOT CONFIRM('Are you sure you want to place ON HOLD', FALSE) THEN
+                        IF NOT CONFIRM('Are you sure you want to place on hold?', FALSE) THEN
                             "1st Approval Status" := LeaveRequest."1st Approval Status"::" "
                         ELSE BEGIN
                             "1st Approval Time" := CURRENTDATETIME;
@@ -572,7 +571,7 @@ table 70009 "Leave Request3"
                 //ERROR(text009);
                 //HOD
                 IF ("2nd Approval Status" = "2nd Approval Status"::Approved) AND ("Request Type" = "Request Type"::HOD) THEN
-                    IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
+                    IF NOT CONFIRM('Are you sure you want to approve?', FALSE) THEN
                         "2nd Approval Status" := LeaveRequest."2nd Approval Status"::" "
                     ELSE BEGIN
 
@@ -618,7 +617,7 @@ table 70009 "Leave Request3"
                     END;
 
                 IF ("2nd Approval Status" = "2nd Approval Status"::Approved) AND ("Request Type" = "Request Type"::"MD OFFICE") THEN
-                    IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
+                    IF NOT CONFIRM('Are you sure you want to approve?', FALSE) THEN
                         "2nd Approval Status" := LeaveRequest."2nd Approval Status"::" "
                     ELSE BEGIN
                         "2nd Approval Time" := CURRENTDATETIME;
@@ -664,7 +663,7 @@ table 70009 "Leave Request3"
 
                 CASE "2nd Approval Status" OF
                     "2nd Approval Status"::Rejected:
-                        IF NOT CONFIRM('Are you sure you want to REJECT', FALSE) THEN
+                        IF NOT CONFIRM('Are you sure you want to reject?', FALSE) THEN
                             "2nd Approval Status" := LeaveRequest."2nd Approval Status"::" "
                         ELSE BEGIN
                             "2nd Approval Time" := CURRENTDATETIME;
@@ -714,7 +713,7 @@ table 70009 "Leave Request3"
                         END;
 
                     "2nd Approval Status"::"On hold":
-                        IF NOT CONFIRM('Are you sure you want to place ON HOLD', FALSE) THEN
+                        IF NOT CONFIRM('Are you sure you want to place on hold?', FALSE) THEN
                             "2nd Approval Status" := LeaveRequest."2nd Approval Status"::" "
                         ELSE BEGIN
                             "2nd Approval Time" := CURRENTDATETIME;
@@ -762,7 +761,7 @@ table 70009 "Leave Request3"
                 //Junior staff - Deputy Manager
                 IF ("2nd Approval Status" = "2nd Approval Status"::Approved) AND ("Request Type" = "Request Type"::"Junior staff - Deputy Manager") AND
                    ("Send to MD for Approval" = FALSE) THEN
-                    IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
+                    IF NOT CONFIRM('Are you sure you want to approve?', FALSE) THEN
                         "2nd Approval Status" := LeaveRequest."2nd Approval Status"::" "
                     ELSE BEGIN
                         "2nd Approval Time" := CURRENTDATETIME;
@@ -812,7 +811,7 @@ table 70009 "Leave Request3"
 
                 IF ("2nd Approval Status" = "2nd Approval Status"::Approved) AND (("Request Type" = "Request Type"::"Junior staff - Deputy Manager") AND
                 ("Send to MD for Approval" = TRUE)) THEN
-                    IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
+                    IF NOT CONFIRM('Are you sure you want to approve?', FALSE) THEN
                         "2nd Approval Status" := LeaveRequest."2nd Approval Status"::" "
                     ELSE BEGIN
                         IF UserSetup.GET("3rd Approval") THEN BEGIN
@@ -859,7 +858,7 @@ table 70009 "Leave Request3"
                     END;
                 //HOD1
                 IF ("2nd Approval Status" = "2nd Approval Status"::Approved) AND ("Request Type" = "Request Type"::HOD1) THEN
-                    IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
+                    IF NOT CONFIRM('Are you sure you want to approve?', FALSE) THEN
                         "2nd Approval Status" := LeaveRequest."2nd Approval Status"::" "
                     ELSE BEGIN
                         IF UserSetup.GET("3rd Approval") THEN BEGIN
@@ -913,7 +912,7 @@ table 70009 "Leave Request3"
 
                 //Manager
                 IF ("2nd Approval Status" = "2nd Approval Status"::Approved) AND ("Request Type" = "Request Type"::Manager) THEN
-                    IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
+                    IF NOT CONFIRM('Are you sure you want to approve?', FALSE) THEN
                         "2nd Approval Status" := LeaveRequest."2nd Approval Status"::" "
                     ELSE BEGIN
                         IF UserSetup.GET("3rd Approval") THEN BEGIN
@@ -964,7 +963,7 @@ table 70009 "Leave Request3"
                     END;
                 //Branch
                 IF ("2nd Approval Status" = "2nd Approval Status"::Approved) AND ("Request Type" = "Request Type"::Branch) THEN
-                    IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
+                    IF NOT CONFIRM('Are you sure you want to approve?', FALSE) THEN
                         "2nd Approval Status" := LeaveRequest."2nd Approval Status"::" "
                     ELSE BEGIN
                         IF UserSetup.GET("3rd Approval") THEN BEGIN
@@ -1014,7 +1013,7 @@ table 70009 "Leave Request3"
 
                 //FG
                 IF ("2nd Approval Status" = "2nd Approval Status"::Approved) AND ("Request Type" = "Request Type"::FG) THEN
-                    IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
+                    IF NOT CONFIRM('Are you sure you want to approve?', FALSE) THEN
                         "2nd Approval Status" := LeaveRequest."2nd Approval Status"::" "
                     ELSE BEGIN
                         IF UserSetup.GET("3rd Approval") THEN BEGIN
@@ -1133,7 +1132,7 @@ table 70009 "Leave Request3"
                 //TESTFIELD("3rd Approval",USERID);
                 //HOD1
                 IF ("3rd Approval Status" = "3rd Approval Status"::Approved) AND ("Request Type" = "Request Type"::HOD1) THEN
-                    IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
+                    IF NOT CONFIRM('Are you sure you want to approve?', FALSE) THEN
                         "3rd Approval Status" := LeaveRequest."3rd Approval Status"::" "
                     ELSE BEGIN
                         "3rd  Approval Time" := CURRENTDATETIME;
@@ -1185,7 +1184,7 @@ table 70009 "Leave Request3"
 
                 //Manager
                 IF ("3rd Approval Status" = "3rd Approval Status"::Approved) AND ("Request Type" = "Request Type"::Manager) THEN
-                    IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
+                    IF NOT CONFIRM('Are you sure you want to approve?', FALSE) THEN
                         "3rd Approval Status" := LeaveRequest."3rd Approval Status"::" "
                     ELSE BEGIN
                         "3rd  Approval Time" := CURRENTDATETIME;
@@ -1237,7 +1236,7 @@ table 70009 "Leave Request3"
 
                 //Branch
                 IF ("3rd Approval Status" = "3rd Approval Status"::Approved) AND ("Request Type" = "Request Type"::Branch) THEN
-                    IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
+                    IF NOT CONFIRM('Are you sure you want to approve?', FALSE) THEN
                         "3rd Approval Status" := LeaveRequest."3rd Approval Status"::" "
                     ELSE BEGIN
                         "3rd  Approval Time" := CURRENTDATETIME;
@@ -1287,7 +1286,7 @@ table 70009 "Leave Request3"
                 //Junior staff - Deputy Manager
                 IF ("3rd Approval Status" = "3rd Approval Status"::Approved) AND (("Request Type" = "Request Type"::"Junior staff - Deputy Manager") AND
                    ("Send to MD for Approval" = TRUE)) THEN
-                    IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
+                    IF NOT CONFIRM('Are you sure you want to approve?', FALSE) THEN
                         "3rd Approval Status" := LeaveRequest."3rd Approval Status"::" "
                     ELSE BEGIN
                         "3rd  Approval Time" := CURRENTDATETIME;
@@ -1337,7 +1336,7 @@ table 70009 "Leave Request3"
 
                 //FG
                 IF ("3rd Approval Status" = "3rd Approval Status"::Approved) AND ("Request Type" = "Request Type"::FG) THEN
-                    IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
+                    IF NOT CONFIRM('Are you sure you want to approve?', FALSE) THEN
                         "3rd Approval Status" := LeaveRequest."3rd Approval Status"::" "
                     ELSE BEGIN
                         "3rd  Approval Time" := CURRENTDATETIME;
@@ -1389,7 +1388,7 @@ table 70009 "Leave Request3"
 
                 CASE "3rd Approval Status" OF
                     "3rd Approval Status"::Rejected:
-                        IF NOT CONFIRM('Are you sure you want to REJECT', FALSE) THEN
+                        IF NOT CONFIRM('Are you sure you want to reject?', FALSE) THEN
                             "3rd Approval Status" := LeaveRequest."3rd Approval Status"::" "
                         ELSE BEGIN
                             "3rd  Approval Time" := CURRENTDATETIME;
@@ -1437,7 +1436,7 @@ table 70009 "Leave Request3"
 
                         END;
                     "3rd Approval Status"::"On hold":
-                        IF NOT CONFIRM('Are you sure you want to place ON HOLD', FALSE) THEN
+                        IF NOT CONFIRM('Are you sure you want to place on hold?', FALSE) THEN
                             "3rd Approval Status" := LeaveRequest."3rd Approval Status"::" "
                         ELSE BEGIN
                             "3rd  Approval Time" := CURRENTDATETIME;

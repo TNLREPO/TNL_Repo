@@ -4,14 +4,14 @@ page 70119 "Bal/Full Payment Capex-MD"
     CardPageID = "Capex Card";
     PageType = List;
     SourceTable = "Procurement Header";
-    SourceTableView = WHERE("Document Type" = filter('Capex'),
-                            Compliance = filter(True),
-                           "Balance Paymt." = filter(false),
-                            Closed = filter(false),
-                            Reject = filter(false),
-                            "Bal. Paymt. Audit" = filter('Approved'),
+    SourceTableView = WHERE("Document Type" = const(Capex),
+                            Compliance = const(True),
+                           "Balance Paymt." = const(false),
+                            Closed = const(false),
+                            Reject = const(false),
+                            "Bal. Paymt. Audit" = const(Approved),
                             "Bal. Paymt. MD" = FILTER(' '),
-                            "Balance Paymt. Appr." = filter(True),
+                            "Balance Paymt. Appr." = const(True),
                             "Proposed Purchase Amount" = FILTER('>=100,000'));
 
     layout
