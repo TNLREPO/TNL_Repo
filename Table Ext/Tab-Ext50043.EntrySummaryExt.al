@@ -2,21 +2,16 @@ tableextension 50043 "Entry Summary Ext" extends "Entry Summary"
 {
     fields
     {
-        field(50000; "Engine No."; Code[20])
-        {
-            trigger OnValidate()
-            begin
-                /*"Engine No." := COPYSTR("Serial No.",1,(STRPOS("Serial No.",'/')-1));
-                "Chasis No.":= COPYSTR("Serial No.",(STRPOS("Serial No.",'/')+1));
-                 */
 
-            end;
-        }
         field(50001; "Registration No."; Code[20])
         {
         }
         field(50002; "Chasis No."; Code[20])
         {
+        }
+        field(50003; "Engine No."; Code[20])
+        {
+
         }
         field(50004; "Service Item Registered"; Boolean)
         {

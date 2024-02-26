@@ -14,8 +14,7 @@ tableextension 50041 "Tracking Specification Ext" extends "Tracking Specificatio
         }
         field(50004; "Service Item Registered"; Boolean)
         {
-            CalcFormula = Exist("Service Item" WHERE("No." = FIELD("Registration No.")));
-            FieldClass = FlowField;
+
         }
         field(50005; "Warranty Register"; Boolean)
         {
