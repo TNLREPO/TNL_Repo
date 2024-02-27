@@ -16,6 +16,14 @@ pageextension 50007 "User Setup Ext" extends "User Setup"
             {
                 ApplicationArea = All;
             }
+            field("Credit Memo Approval"; Rec."Credit Memo Approval")
+            {
+                ApplicationArea = All;
+            }
+            field("Allow Access"; Rec."Allow Access")
+            {
+                ApplicationArea = All;
+            }
 
         }
     }

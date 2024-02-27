@@ -17,6 +17,7 @@ pageextension 50006 "Sales Order Ext" extends "Sales Order"
                 field(Name; Rec."1st Approver")
                 {
                     ApplicationArea = All;
+                    Editable = false;
                 }
                 field("Send for Approval"; Rec."Send for Approval")
                 {
@@ -25,22 +26,54 @@ pageextension 50006 "Sales Order Ext" extends "Sales Order"
                 field(Sender; Rec.Sender)
                 {
                     ApplicationArea = All;
+                    Editable = false;
                 }
                 field("Sent Time"; Rec."Sent Time")
                 {
                     ApplicationArea = All;
+                    Editable = false;
                 }
                 field(Approved; Rec.Approved)
                 {
                     ApplicationArea = All;
+
+                    trigger OnValidate()
+                    var
+                        myInt: Integer;
+                    begin
+
+                        /*     IF (Rec."Shortcut Dimension 1 Code" = '05PARTS') OR (Rec."Shortcut Dimension 1 Code" = '') THEN
+                                EXIT;
+
+                            UserRec2.GET(USERID);
+                            IF UserRec2."Sales Line Approval" = FALSE THEN
+                                ERROR('You dont have the right to approve this order');
+
+                            SalesLine.SETCURRENTKEY("Document No.", "No.");
+                            SalesLine.SETRANGE("Document No.", "No.");
+                            IF SalesLine.FINDFIRST THEN BEGIN
+                                REPEAT
+                                    //SaleLineDiscount.GET(SalesLine."No.");
+                                    SaleLineDiscount.SETCURRENTKEY(Code);
+                                    SaleLineDiscount.SETRANGE(Code, SalesLine."No.");
+                                    SaleLineDiscount.FINDFIRST;
+
+                                    IF SalesLine."Line Discount %" > SaleLineDiscount."Line Discount %" THEN
+                                        UserRec2.TESTFIELD("Sales Line Limit", TRUE);
+                                UNTIL SalesLine.NEXT = 0;
+                            END; */
+
+                    end;
                 }
                 field("Approved Time"; Rec."Approved Time")
                 {
                     ApplicationArea = All;
+                    Editable = false;
                 }
                 field("Approved By"; Rec."Approved By")
                 {
                     ApplicationArea = All;
+                    Editable = false;
                 }
 
             }
@@ -195,20 +228,17 @@ pageextension 50006 "Sales Order Ext" extends "Sales Order"
             }
 
         }
+
     }
-
-
-
-
-
-
-
-
-
-
 
     var
 
         SalesHeader: Record "Sales Header";
+        UserRec2: Record "User Setup";
+        SalesLine: Record "Sales Line";
+        SaleLineDiscount: Record "Price List Line";
+
+
+   
 
 }

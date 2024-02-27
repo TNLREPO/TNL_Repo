@@ -40,28 +40,7 @@ page 50005 "HR RC"
             {
                 ApplicationArea = Suite;
             }
-            /*  part(Control1907692008; "My Accounts")
-             {
-                 ApplicationArea = Basic, Suite;
-             } */
-            /*  part(Control103; "Trailing Sales Orders Chart")
-             {
-                 ApplicationArea = Basic, Suite;
-                 Visible = false;
-             }
-             part(Control106; "My Job Queue")
-             {
-                 ApplicationArea = Basic, Suite;
-                 Visible = false;
-             }
-             part(Control9; "Help And Chart Wrapper")
-             {
-                 ApplicationArea = Basic, Suite;
-             }
-             part(Control100; "Cash Flow Forecast Chart")
-             {
-                 ApplicationArea = Basic, Suite;
-             } */
+            
             part(Control108; "Report Inbox Part")
             {
                 AccessByPermission = TableData "Report Inbox" = IMD;
@@ -619,9 +598,6 @@ page 50005 "HR RC"
                 }
 
             }
-
-            
-
 
             group(PoolCars)
             {

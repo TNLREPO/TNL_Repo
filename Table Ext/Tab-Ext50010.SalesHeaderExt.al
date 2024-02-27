@@ -59,11 +59,18 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                     IF UserSetup.GET("1st Approval to") THEN BEGIN
                         Sender := USERID;
                         "Sent Time" := CURRENTDATETIME;
+                        Addressee := UserSetup.Initials;
                         TESTFIELD("1st Approval to");
                         TESTFIELD("1st Apprv. Status", 0);
                         "Current pending Person" := "1st Approval to";
-                        ToName := UserSetup."E-Mail";
+                        ToAddresses := UserSetup."E-Mail";
+                        "Mail Body" := STRSUBSTNO(Text073, "No.");
+
                         Subject := STRSUBSTNO(Text073, "No.");
+
+                        CreateEmailBody("No.", Addressee, "Mail Body");
+                        SendEmail(ToAddresses, Subject, EmailBody, CCName, SenderEmail);
+
                         //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
                         //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
                         //.Send;
@@ -106,7 +113,7 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
         {
             CaptionClass = '1,2,1';
             Caption = 'User Department';
-            TableRelation = "Dimension Value".Code WHERE("Global Dimension No."= CONST(1));
+            TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(1));
 
             trigger OnValidate()
             begin
@@ -351,7 +358,7 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
         }
         field(50177; "1st Approver's Comment"; Boolean)
         {
-            
+
         }
         field(50178; "2nd Approval to"; Code[30])
         {
@@ -1131,16 +1138,87 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
         UserSetup: Record "User Setup";
         UserSetup2: Record "User Setup";
         CustRec: Record Customer;
-        Text073: Label 'Document %1  is waiting for your approval';
-        Text074: Label 'Document ''%1''  has been approved';
-        Text075: Label 'Document ''%1''  has been rejected';
-        Text076: Label 'Document ''%1''  is on hold';
+        Text073: Label 'Document %1 is waiting for your approval.';
+        Text074: Label 'Document %1 has been approved.';
+        Text075: Label 'Document %1 has been rejected.';
+        Text076: Label 'Document %1 is on hold.';
         SenderEmail: Text[40];
-        ////: Codeunit "400";
         UserRec: Record "User Setup";
+        EmailBody: Text[1024];
+        ToAddresses: Text;
+        Addressee: Text;
+        Salutation: Label 'Dear %1,';
 
 
+    procedure CreateEmailBody(DocNo: Code[20]; RecipientInitials: Text; BodyMsg: Text);
 
+    begin
+
+        UserSetup.Get(UserId);
+
+        EmailBody := STRSUBSTNO(Salutation, RecipientInitials);
+        EmailBody += '<br><br>';
+        EmailBody += STRSUBSTNO(BodyMsg, DocNo);
+        EmailBody += '<br><br>';
+        EmailBody += 'Regards,';
+        EmailBody += '<br>';
+        EmailBody += UserSetup.Initials;
+
+    end;
+
+    procedure SendEmail(ToRecipients: Text; Subject: Text; Body: Text; CCRecipients: Text; BCCRecipients: Text)
+    var
+        Email: Codeunit Email;
+        EmailMessage: Codeunit "Email Message";
+
+    begin
+
+        EmailMessage.Create(ToRecipients, Subject, EmailBody, true);
+        EmailMessage.AddRecipient(enum::"Email Recipient Type"::Cc, CCRecipients);
+        EmailMessage.AddRecipient(Enum::"Email Recipient Type"::Bcc, BCCRecipients);
+        Email.OpenInEditorModally(EmailMessage, Enum::"Email Scenario"::Default)
+
+    end;
+
+    procedure LinkedAcctControl();
+
+    var
+
+        CustLedgEntry: Record "Cust. Ledger Entry";
+        Cust: Record Customer;
+        Cust2: Record Customer;
+        CustRec2: Record Customer;
+        FirstDate: Date;
+        Diff: Integer;
+        DealerVerifNo: Code[10];
+
+    Begin
+        IF (COPYSTR(Rec."Sell-to Customer No.", 1, 3) = 'TDP') THEN
+            EXIT ELSE BEGIN
+
+            Cust.GET(Rec."Sell-to Customer No.");
+            DealerVerifNo := Cust."Dealer Verification No.";
+
+            IF DealerVerifNo <> '' THEN
+                CustRec2.RESET;
+            Cust2.SETCURRENTKEY("Dealer Verification No.");
+            Cust2.SETRANGE("Dealer Verification No.", DealerVerifNo);
+            IF Cust2.FINDFIRST THEN
+                REPEAT
+                    CustLedgEntry.SETCURRENTKEY("Customer No.", "Document Type", Open);
+                    CustLedgEntry.SETRANGE("Customer No.", Cust2."No.");
+                    CustLedgEntry.SETRANGE("Document Type", CustLedgEntry."Document Type"::Invoice);
+                    CustLedgEntry.SETRANGE(Open, TRUE);
+                    IF CustLedgEntry.FINDFIRST THEN BEGIN
+                        FirstDate := CustLedgEntry."Posting Date";
+                        IF FirstDate <> 0D THEN
+                            Diff := TODAY - FirstDate;
+                        IF (Diff > 60) THEN
+                            ERROR('Overdue invoices need to be cleared!')
+                    END;
+                UNTIL Cust2.NEXT = 0;
+        END;
+    end;
 
 }
 
