@@ -1664,6 +1664,15 @@ page 60005 "Accountant RC"
 
                 }
 
+                action(ModifyILE)
+                {
+                    Caption = 'Modify ILE';
+                    Image = Workflow;
+                    RunObject = xmlport "Modify Item Ledger Entry";
+                    ApplicationArea = All;
+
+                }
+
 
             }
 

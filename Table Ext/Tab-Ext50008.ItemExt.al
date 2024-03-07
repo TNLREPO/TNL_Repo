@@ -870,29 +870,37 @@ tableextension 50008 "Item Ext" extends Item
             DataClassification = ToBeClassified;
         }
     }
+
+    fieldgroups
+    {
+        addlast(DropDown; Inventory)
+        {
+
+        }
+    }
     var
-    
-            UserSetup: Record 91;
-            UserSetup2: Record 91;
-            InvPGrp: Code[10];
-            PriceGrp: Record 50094;
-            Model: Record 50014;
-            Locrec: Record 14;
-            LocFilter: Code[20];
-            LocAlloc: Decimal;
-            LocAllocVal: Decimal;
-            LocExceQty: Decimal;
-            LocExceVAl: Decimal;
-            ItemRec: Record 27;
-            ItemLedgerEntRec: Record 32;
-            SalesSetup: Record 311;
-            ValueEntryRec: Record 5802;
-            PurchInvLineRec: Record 123;
-            PurchInvHdrRec: Record 122;
-            FixedExchRate: Decimal;
-            FixedPrice: Record 50126;
-            FixedPrice2: Record 50128;
-    
+
+        UserSetup: Record 91;
+        UserSetup2: Record 91;
+        InvPGrp: Code[10];
+        PriceGrp: Record 50094;
+        Model: Record 50014;
+        Locrec: Record 14;
+        LocFilter: Code[20];
+        LocAlloc: Decimal;
+        LocAllocVal: Decimal;
+        LocExceQty: Decimal;
+        LocExceVAl: Decimal;
+        ItemRec: Record 27;
+        ItemLedgerEntRec: Record 32;
+        SalesSetup: Record 311;
+        ValueEntryRec: Record 5802;
+        PurchInvLineRec: Record 123;
+        PurchInvHdrRec: Record 122;
+        FixedExchRate: Decimal;
+        FixedPrice: Record 50126;
+        FixedPrice2: Record 50128;
+
     trigger OnInsert()
     var
         myInt: Integer;
