@@ -4,11 +4,11 @@ tableextension 50011 "Sales Line Ext" extends "Sales Line"
     {
         field(50000; "Search Code"; Code[20])
         {
-            // TableRelation = "Parts Enquiry"."Search Code" WHERE("Document No." = FIELD("Document No."));
+            TableRelation = "Parts Enquiry"."Search Code" WHERE("Document No." = FIELD("Document No."));
         }
         field(50002; "Search Line"; Integer)
         {
-            // TableRelation = "Parts Enquiry"."Entry No" WHERE("Search Code" = FIELD("Search Code"));
+            TableRelation = "Parts Enquiry"."Entry No" WHERE("Search Code" = FIELD("Search Code"));
         }
         field(50003; "Created Demand"; Boolean)
         {
@@ -16,7 +16,7 @@ tableextension 50011 "Sales Line Ext" extends "Sales Line"
         field(50006; Colour; Code[30])
         {
             Editable = true;
-            //TableRelation = "Colour Codes"."Colour Code";
+            TableRelation = "Colour Codes"."Colour Code";
         }
         field(50013; "Exterior Colour Name"; Code[30])
         {
@@ -118,6 +118,35 @@ tableextension 50011 "Sales Line Ext" extends "Sales Line"
                 Contribution := "Unit Price" * 0.33;
             end;
         }
+        
+        modify("Location Code")
+        {
+            trigger OnAfterValidate()
+            var
+                myInt: Integer;
+
+            begin
+
+                IF Location.GET("Location Code") THEN
+                    IF Location."With Accessory" THEN
+                        Accessory := TRUE ELSE
+                        Accessory := FALSE;
+
+                IF Location.GET("Location Code") THEN
+                    IF Location."VRI Location" = TRUE THEN
+                        MESSAGE(VRIError);
+
+                UserSetup.GET(USERID);
+                IF ((Type = Type::Item) AND ("Posting Group" = 'N_CARS')) THEN BEGIN
+                    IF Location.GET("Location Code") THEN BEGIN
+                        IF (Location."Monitored Location" = TRUE) AND (UserSetup."Access to Monitor Location" = FALSE) THEN
+                            ERROR(MonitorError)
+                    end;
+                end;
+            end;
+
+        }
+
     }
 
     keys
@@ -140,6 +169,10 @@ tableextension 50011 "Sales Line Ext" extends "Sales Line"
 
     var
         UserSetup: Record "User Setup";
+        Location: Record Location;
         //Color: Record "50067";
         //PurchInvLine: Record "123";
+        VRIError: Label 'You are picking from a VRI Location!';
+        MonitorError: Label 'You are not allowed to sell from this Location. Please Contact your Superior for Authorization!';
+
 }

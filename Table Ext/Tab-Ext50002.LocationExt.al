@@ -14,7 +14,7 @@ tableextension 50002 "Location Ext." extends Location
         {
             //FieldClass = FlowField;
             //CalcFormula = Sum("Value Entry"."Cost Posted to G/L" WHERE("Location Code" = FIELD(Code),
-                                                                       // "Inventory Posting Group" = CONST(N_PARTS)));
+            // "Inventory Posting Group" = CONST(N_PARTS)));
             //Editable = false;
 
         }
@@ -55,7 +55,7 @@ tableextension 50002 "Location Ext." extends Location
         }
         field(50011; "Period Unit"; Option)
         {
-            DataClassification = ToBeClassified;            
+            DataClassification = ToBeClassified;
             OptionCaption = 'Days,Weeks,Months,Years';
             OptionMembers = D,W,M,Y;
         }
@@ -132,8 +132,8 @@ tableextension 50002 "Location Ext." extends Location
         field(50202; "Main Location"; Code[20])
         {
             DataClassification = ToBeClassified;
-            //TableRelation = Location WHERE("Use As In-Transit" = CONST(No));
-            
+            TableRelation = Location WHERE("Use As In-Transit" = CONST(false));
+
         }
         field(50203; "VRI Location"; Boolean)
         {
