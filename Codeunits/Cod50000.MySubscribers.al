@@ -355,6 +355,32 @@ codeunit 50000 MySubscribers
         end;
     end;
 
+    [EventSubscriber(ObjectType::Page, Page::"Sales Credit Memo", 'OnBeforeActionEvent', 'Post', false, false)]
+
+    procedure ValidatePostSalesCrMemo(var Rec: Record "Sales Header")
+
+    var
+
+    Begin
+        Rec.TESTFIELD("External Document No.");
+        IF (Rec."Shortcut Dimension 1 Code" = '09MARKET') THEN BEGIN
+            IF Rec."2nd Apprv. Status" <> Rec."2nd Apprv. Status"::Approved THEN
+                ERROR('This transaction needs to be approved before posting!');
+        End;
+        IF (Rec."Shortcut Dimension 1 Code" = '05PARTS') AND (Rec."Reason Code" = 'NDEFECTIVE') THEN BEGIN
+            IF Rec."2nd Apprv. Status" <> Rec."2nd Apprv. Status"::Approved THEN
+                ERROR('This transaction needs to be approved before posting!');
+        END;
+        IF (Rec."Shortcut Dimension 1 Code" = '05PARTS') AND (Rec."Reason Code" = 'ERROR') THEN BEGIN
+            IF Rec."2nd Apprv. Status" <> Rec."2nd Apprv. Status"::Approved THEN
+                ERROR('This transaction needs to be approved before posting!');
+        END;
+        IF (Rec."Shortcut Dimension 1 Code" = '05PARTS') AND (Rec."Reason Code" = 'DEFECTIVE') THEN BEGIN
+            IF Rec."Final Apprv. Status" <> Rec."Final Apprv. Status"::Approved THEN
+                ERROR('This transaction needs to be approved before posting!');
+        END;
+
+    end;
 
 
 }

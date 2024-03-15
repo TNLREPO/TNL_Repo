@@ -22,6 +22,10 @@ pageextension 50005 "Customer Card Ext" extends "Customer Card"
                     ApplicationArea = Basic, Suite;
                     Editable = false;
                 }
+                field("Remove Account Link"; Rec."Remove Account Link")
+                {
+                    ApplicationArea = All;
+                }
             }
 
         }

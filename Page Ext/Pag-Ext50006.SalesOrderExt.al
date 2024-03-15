@@ -2,7 +2,8 @@ pageextension 50006 "Sales Order Ext" extends "Sales Order"
 {
     layout
     {
-        addafter(Control1900201301)
+        //addbefore(Control1900201301)
+        addbefore("Invoice Details")
         {
             group(Approval)
             {
