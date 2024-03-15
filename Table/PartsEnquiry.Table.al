@@ -1,7 +1,7 @@
 table 50095 "Parts Enquiry"
 {
-    /* DrillDownPageID = 50110;
-    LookupPageID = 50110; */
+    DrillDownPageID = 50118;
+    LookupPageID = 50118;
 
     fields
     {
@@ -208,11 +208,11 @@ table 50095 "Parts Enquiry"
         {
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(2));
         }
-        field(35; "Document Type"; Option)
+        field(35; "Document Type"; Enum "Sales Document Type")
         {
             Editable = true;
-            OptionCaption = ' ,Quote,Order,Invoice';
-            OptionMembers = " ",Quote,"Order",Invoice;
+            //OptionCaption = ' ,Quote,Order,Invoice';
+            //OptionMembers = " ",Quote,"Order",Invoice;
         }
         field(36; "Lost Quantity"; Decimal)
         {
@@ -410,18 +410,17 @@ table 50095 "Parts Enquiry"
 
     procedure AssistEdit(OldPart: Record "Parts Enquiry"): Boolean
     begin
-        /* WITH PartRec DO BEGIN
-            PartRec := Rec;
+
+        PartRec := Rec;
+        InvSetup.GET;
+        InvSetup.TESTFIELD("Search Tracker Nos.");
+        IF NoseriesMgt.SelectSeries(InvSetup."Search Tracker Nos.", OldPart."No. Series", PartRec."No. Series") THEN BEGIN
             InvSetup.GET;
-            InvSetup.TESTFIELD("Search Tracker Nos.");
-            IF NoseriesMgt.SelectSeries(InvSetup."Search Tracker Nos.", OldPart."No. Series", "No. Series") THEN BEGIN
-                InvSetup.GET;
-                InvSetup.TESTFIELD(InvSetup."Search Tracker Nos.");
-                NoseriesMgt.SetSeries("Search Code");
-                Rec := PartRec;
-                EXIT(TRUE);
-            END;
-        END; */
+            InvSetup.TESTFIELD(InvSetup."Search Tracker Nos.");
+            NoseriesMgt.SetSeries(PartRec."Search Code");
+            Rec := PartRec;
+            EXIT(TRUE);
+        END;
     end;
 
 
@@ -445,10 +444,10 @@ table 50095 "Parts Enquiry"
     end;
 
 
-    procedure CreateInvoice(dtype: Option Quote,"Order",Invoice)
+    procedure CreateInvoice(dtype: Enum "Sales Document Type")
     begin
 
-       /* LineNo := 10000;
+        LineNo := 10000;
 
         SaleHead.RESET;
         SalesLine.RESET;
@@ -468,6 +467,7 @@ table 50095 "Parts Enquiry"
                 SaleHead.INIT;
                 SaleHead."Document Type" := dtype;
                 SaleHead.INSERT(TRUE);
+
                 SaleHead.VALIDATE(SaleHead."Sell-to Customer No.", "Request by");
                 IF CustRec2.GET("Request by") THEN
                     SaleHead.VALIDATE("Customer Line discount", CustRec2."Customer Line Discount");
@@ -476,7 +476,7 @@ table 50095 "Parts Enquiry"
                 SaleHead."Tracker No." := PartEnquiry."Search Code";
                 SaleHead."Online Order" := PartEnquiry."Online Order";
                 SaleHead.MODIFY;
-                
+
             END;
             REPEAT
                 SalesLine.INIT;
@@ -493,17 +493,25 @@ table 50095 "Parts Enquiry"
                 SalesLine."Search Code" := PartEnquiry."Search Code";
                 SalesLine."Search Line" := PartEnquiry."Entry No";
                 SalesLine.INSERT(TRUE);
-                PartEnquiry."Document Type" := SaleHead."Document Type" + 1;
+
+                if SaleHead."Document Type" = "Sales Document Type"::Quote then
+                    PartEnquiry."Document Type" := "Sales Document Type"::Order;
+
+                if SaleHead."Document Type" = "Sales Document Type"::Order then
+                    PartEnquiry."Document Type" := "Sales Document Type"::Invoice;
+
+                //PartEnquiry."Document Type" := SaleHead."Document Type" + Format(1);
                 PartEnquiry."Document No." := SaleHead."No.";
                 PartEnquiry."Invoice Line No." := LineNo;
                 PartEnquiry."Record Locked" := TRUE;
                 PartEnquiry.MODIFY;
                 LineNo := LineNo + 10000;
+
             UNTIL PartEnquiry.NEXT = 0;
         END;
         "Document No." := SaleHead."No.";
-        */
-        
+
+
     end;
 
 
@@ -606,7 +614,7 @@ table 50095 "Parts Enquiry"
                 Status := Status::"Non Registered";
             END
             ELSE
-                ERROR('This Part  Number is Not Available on JPM/DPM List, Check the Number');
+                ERROR('This Part Number is Not Available on JPM/DPM List, Check the Number');
         END;
     end;
 }

@@ -22,7 +22,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">PICKING LIST</Value>
+                    <Value>PICKING LIST</Value>
                     <Style>
                       <FontSize>16pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -54,7 +54,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!CompanyData_Name.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!CompanyData_Name.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -84,7 +84,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!Sales_Header___Shipment_Date_.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!Sales_Header___Shipment_Date_.Value, "DataSet_Result")</Value>
                     <Style>
                       <Format>D</Format>
                     </Style>
@@ -118,7 +118,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!Sales_Header___No__.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!Sales_Header___No__.Value, "DataSet_Result")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -148,7 +148,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Customer No:</Value>
+                    <Value>Customer No:</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -178,7 +178,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Date:</Value>
+                    <Value>Date:</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -208,7 +208,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Order No:</Value>
+                    <Value>Order No:</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -238,7 +238,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!Bill_to_Customer_No________Shortcut_Dimension_1_Code_______Shortcut_Dimension_2_Code_.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!Bill_to_Customer_No________Shortcut_Dimension_1_Code_______Shortcut_Dimension_2_Code_.Value, "DataSet_Result")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -268,14 +268,8 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Page No.:  </Value>
+                    <Value>Page No.:  </Value>
                     <Style />
-                  </TextRun>
-                  <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!CurrReport_PAGENO.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -304,7 +298,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Sales Person:</Value>
+                    <Value>Sales Person:</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -334,7 +328,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!Sales_Header___Your_Reference_.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!Sales_Header___Your_Reference_.Value, "DataSet_Result")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -364,7 +358,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!SalesPerson_Name.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!SalesPerson_Name.Value, "DataSet_Result")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -422,7 +416,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">Part No.</Value>
+                                  <Value>Part No.</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -453,7 +447,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">Description</Value>
+                                  <Value>Description</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -484,7 +478,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">Variant</Value>
+                                  <Value>Variant</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -515,7 +509,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">Stock Location</Value>
+                                  <Value>Stock Location</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -546,7 +540,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">Bin Location</Value>
+                                  <Value>Bin Location</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -577,7 +571,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">Qty</Value>
+                                  <Value>Qty</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -613,7 +607,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">=Fields!No_SalesLine.Value</Value>
+                                  <Value>=Fields!No_SalesLine.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -642,7 +636,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">=Fields!Description_SalesLine.Value</Value>
+                                  <Value>=Fields!Description_SalesLine.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -671,7 +665,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">=Fields!VariantCode_SalesLine.Value</Value>
+                                  <Value>=Fields!VariantCode_SalesLine.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -700,7 +694,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">=Fields!LocationCode_SalesLine.Value</Value>
+                                  <Value>=Fields!LocationCode_SalesLine.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -729,7 +723,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">=Fields!binlocvar.Value</Value>
+                                  <Value>=Fields!binlocvar.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -758,7 +752,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">=Fields!QtytoShip_SalesLine.Value</Value>
+                                  <Value>=Fields!QtytoShip_SalesLine.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -857,7 +851,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Manager's Approval:</Value>
+                    <Value>Manager's Approval:</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -890,7 +884,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Storemanager Approval:</Value>
+                    <Value>Storemanager Approval:</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -923,7 +917,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!CustomerAddr_1_.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!CustomerAddr_1_.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -953,7 +947,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!SelltoAddress2_SalesHeader.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!SelltoAddress2_SalesHeader.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -983,7 +977,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!CustomerAddr_3_.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!CustomerAddr_3_.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -1013,7 +1007,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!CustomerAddr_4_.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!CustomerAddr_4_.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -1043,7 +1037,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!CustomerAddr_5_.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!CustomerAddr_5_.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -1073,7 +1067,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!CustomerAddr_6_.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!CustomerAddr_6_.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -1103,7 +1097,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Received by:</Value>
+                    <Value>Received by:</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -1136,7 +1130,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Your Ref.:</Value>
+                    <Value>Your Ref.:</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -1166,7 +1160,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!Sales_Header___Your_Reference_.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!Sales_Header___Your_Reference_.Value, "DataSet_Result")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -1208,7 +1202,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Billing Manager:</Value>
+                    <Value>Billing Manager:</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -1241,7 +1235,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!SelltoAddress_SalesHeader.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!SelltoAddress_SalesHeader.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -1271,7 +1265,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!CompanyData_Address.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!CompanyData_Address.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -1303,7 +1297,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!CompanyData__Address_2_.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!CompanyData__Address_2_.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -1335,7 +1329,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!CompanyData_City.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!CompanyData_City.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -1367,7 +1361,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!CompanyData__Address_4_.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!CompanyData__Address_4_.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -1399,7 +1393,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!Tel_____CompanyData__Internation_phone_.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!Tel_____CompanyData__Internation_phone_.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -1431,7 +1425,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!Reg__No_____CompanyData__Registration_No__.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!Reg__No_____CompanyData__Registration_No__.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -1474,7 +1468,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value EvaluationMode="Auto">=Fields!SalesTime_SalesHeader.Value</Value>
+                      <Value>=Fields!SalesTime_SalesHeader.Value</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>

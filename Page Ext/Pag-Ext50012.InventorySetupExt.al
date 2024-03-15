@@ -14,6 +14,10 @@ pageextension 50012 "Inventory Setup Ext" extends "Inventory Setup"
                 ApplicationArea = All;
 
             }
+            field("Search Tracker Nos."; Rec."Search Tracker Nos.")
+            {
+                ApplicationArea = All;
+            }
         }
     }
 }

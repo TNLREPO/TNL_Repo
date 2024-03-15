@@ -1,5 +1,6 @@
 page 50177 "Parts By Model List"
 {
+    ApplicationArea = All;
     DeleteAllowed = false;
     Editable = false;
     ModifyAllowed = false;

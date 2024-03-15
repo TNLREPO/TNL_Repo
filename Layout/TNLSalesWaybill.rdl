@@ -22,7 +22,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">WAYBILL</Value>
+                    <Value>WAYBILL</Value>
                     <Style>
                       <FontSize>16pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -54,7 +54,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Fax No: 01-4401321-2</Value>
+                    <Value>Fax No: 01-4401321-2</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -79,38 +79,6 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox3">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!CurrReport_PAGENO.Value, "DataSet_Result")</Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>2.79736in</Top>
-            <Left>6.58334in</Left>
-            <Height>0.25in</Height>
-            <Width>1in</Width>
-            <ZIndex>2</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
           <Textbox Name="Textbox4">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
@@ -118,7 +86,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Page No.: </Value>
+                    <Value>Page No.: </Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -132,7 +100,7 @@
             <Left>6.58334in</Left>
             <Height>0.25in</Height>
             <Width>0.89584in</Width>
-            <ZIndex>3</ZIndex>
+            <ZIndex>2</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -150,7 +118,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!YourReference_SalesHeader.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!YourReference_SalesHeader.Value, "DataSet_Result")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -162,7 +130,7 @@
             <Left>5.38542in</Left>
             <Height>0.25in</Height>
             <Width>1in</Width>
-            <ZIndex>4</ZIndex>
+            <ZIndex>3</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -180,7 +148,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Your Ref.: </Value>
+                    <Value>Your Ref.: </Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -194,7 +162,7 @@
             <Left>5.38542in</Left>
             <Height>0.25in</Height>
             <Width>0.875in</Width>
-            <ZIndex>5</ZIndex>
+            <ZIndex>4</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -212,7 +180,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!SelltoCustomerNo_SalesHeader.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!SelltoCustomerNo_SalesHeader.Value, "DataSet_Result")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -224,7 +192,7 @@
             <Left>3.77083in</Left>
             <Height>0.25in</Height>
             <Width>1in</Width>
-            <ZIndex>6</ZIndex>
+            <ZIndex>5</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -242,7 +210,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Customer No.:</Value>
+                    <Value>Customer No.:</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -256,7 +224,7 @@
             <Left>2.75in</Left>
             <Height>0.25in</Height>
             <Width>1.02083in</Width>
-            <ZIndex>7</ZIndex>
+            <ZIndex>6</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -274,7 +242,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!PostingDate_SalesHeader.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!PostingDate_SalesHeader.Value, "DataSet_Result")</Value>
                     <Style>
                       <Format>dd-MMM-yy</Format>
                     </Style>
@@ -288,7 +256,7 @@
             <Left>3.19444in</Left>
             <Height>0.25in</Height>
             <Width>1.57639in</Width>
-            <ZIndex>8</ZIndex>
+            <ZIndex>7</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -306,7 +274,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Date:</Value>
+                    <Value>Date:</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -320,7 +288,7 @@
             <Left>2.75in</Left>
             <Height>0.25in</Height>
             <Width>0.41667in</Width>
-            <ZIndex>9</ZIndex>
+            <ZIndex>8</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -338,7 +306,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!SalespersonCode_SalesHeader.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!SalespersonCode_SalesHeader.Value, "DataSet_Result")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -350,7 +318,7 @@
             <Left>1.2557in</Left>
             <Height>0.25in</Height>
             <Width>1in</Width>
-            <ZIndex>10</ZIndex>
+            <ZIndex>9</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -368,7 +336,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Sales Person:</Value>
+                    <Value>Sales Person:</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -382,7 +350,7 @@
             <Left>0.22792in</Left>
             <Height>0.25in</Height>
             <Width>1in</Width>
-            <ZIndex>11</ZIndex>
+            <ZIndex>10</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -400,7 +368,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!No_SalesHeader.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!No_SalesHeader.Value, "DataSet_Result")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -412,7 +380,7 @@
             <Left>1.22792in</Left>
             <Height>0.25in</Height>
             <Width>1in</Width>
-            <ZIndex>12</ZIndex>
+            <ZIndex>11</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -430,7 +398,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Waybill No.:</Value>
+                    <Value>Waybill No.:</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -444,7 +412,7 @@
             <Left>0.22792in</Left>
             <Height>0.25in</Height>
             <Width>1in</Width>
-            <ZIndex>13</ZIndex>
+            <ZIndex>12</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -462,7 +430,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">P.O.Box 14504, Lagos, Nigeria</Value>
+                    <Value>P.O.Box 14504, Lagos, Nigeria</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -478,7 +446,7 @@
             <Left>4.76042in</Left>
             <Height>0.25in</Height>
             <Width>2.19792in</Width>
-            <ZIndex>14</ZIndex>
+            <ZIndex>13</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -496,7 +464,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Lekki Peninsula Scheme</Value>
+                    <Value>Lekki Peninsula Scheme</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -512,7 +480,7 @@
             <Left>4.76042in</Left>
             <Height>0.25in</Height>
             <Width>2.19792in</Width>
-            <ZIndex>15</ZIndex>
+            <ZIndex>14</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -530,7 +498,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">TPAO 992, Ojulari Road</Value>
+                    <Value>TPAO 992, Ojulari Road</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -546,7 +514,7 @@
             <Left>4.76042in</Left>
             <Height>0.25in</Height>
             <Width>2.19792in</Width>
-            <ZIndex>16</ZIndex>
+            <ZIndex>15</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -564,7 +532,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!BilltoContact_SalesHeader.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!BilltoContact_SalesHeader.Value, "DataSet_Result")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -576,7 +544,7 @@
             <Left>0.22792in</Left>
             <Height>0.25in</Height>
             <Width>2.28125in</Width>
-            <ZIndex>17</ZIndex>
+            <ZIndex>16</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -594,7 +562,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!BilltoCity_SalesHeader.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!BilltoCity_SalesHeader.Value, "DataSet_Result")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -606,7 +574,7 @@
             <Left>0.22792in</Left>
             <Height>0.25in</Height>
             <Width>2.28125in</Width>
-            <ZIndex>18</ZIndex>
+            <ZIndex>17</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -624,7 +592,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto"> Toyota (Nigeria) Limited</Value>
+                    <Value> Toyota (Nigeria) Limited</Value>
                     <Style>
                       <FontSize>14pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -641,7 +609,7 @@
             <Left>4.64584in</Left>
             <Height>0.25in</Height>
             <Width>2.5743in</Width>
-            <ZIndex>19</ZIndex>
+            <ZIndex>18</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -659,7 +627,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!SelltoAddress2_SalesHeader.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!SelltoAddress2_SalesHeader.Value, "DataSet_Result")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -671,7 +639,7 @@
             <Left>0.22792in</Left>
             <Height>0.25in</Height>
             <Width>2.28125in</Width>
-            <ZIndex>20</ZIndex>
+            <ZIndex>19</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -689,7 +657,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!SelltoAddress_SalesHeader.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!SelltoAddress_SalesHeader.Value, "DataSet_Result")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -701,7 +669,7 @@
             <Left>0.22792in</Left>
             <Height>0.25in</Height>
             <Width>2.59375in</Width>
-            <ZIndex>21</ZIndex>
+            <ZIndex>20</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -719,7 +687,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!BilltoName_SalesHeader.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!BilltoName_SalesHeader.Value, "DataSet_Result")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -731,7 +699,7 @@
             <Left>0.22792in</Left>
             <Height>0.25in</Height>
             <Width>2.59375in</Width>
-            <ZIndex>22</ZIndex>
+            <ZIndex>21</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -749,7 +717,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Delivery Address:</Value>
+                    <Value>Delivery Address:</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -763,7 +731,7 @@
             <Left>0.22792in</Left>
             <Height>0.25in</Height>
             <Width>2.59375in</Width>
-            <ZIndex>23</ZIndex>
+            <ZIndex>22</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -781,7 +749,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">VAT No: IKV08002148</Value>
+                    <Value>VAT No: IKV08002148</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -795,7 +763,7 @@
             <Left>4.76042in</Left>
             <Height>0.25in</Height>
             <Width>2.19792in</Width>
-            <ZIndex>24</ZIndex>
+            <ZIndex>23</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -813,7 +781,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Reg No: R.C. 281837</Value>
+                    <Value>Reg No: R.C. 281837</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -827,7 +795,7 @@
             <Left>4.76042in</Left>
             <Height>0.25in</Height>
             <Width>2.19792in</Width>
-            <ZIndex>25</ZIndex>
+            <ZIndex>24</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -870,7 +838,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">Product No.</Value>
+                                  <Value>Product No.</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -902,7 +870,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">Description</Value>
+                                  <Value>Description</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -934,7 +902,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">Qty Ordered</Value>
+                                  <Value>Qty Ordered</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -966,7 +934,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">Qty Delivered</Value>
+                                  <Value>Qty Delivered</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -998,7 +966,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">Back Order</Value>
+                                  <Value>Back Order</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -1035,7 +1003,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">=Fields!No_SalesLine.Value</Value>
+                                  <Value>=Fields!No_SalesLine.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                   </Style>
@@ -1066,7 +1034,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">=Fields!Description_SalesLine.Value</Value>
+                                  <Value>=Fields!Description_SalesLine.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                   </Style>
@@ -1097,7 +1065,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">=Fields!Quantity_SalesLine.Value</Value>
+                                  <Value>=Fields!Quantity_SalesLine.Value</Value>
                                   <Style>
                                     <FontFamily>Arial Black</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -1129,7 +1097,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">=Fields!QtytoShip_SalesLine.Value</Value>
+                                  <Value>=Fields!QtytoShip_SalesLine.Value</Value>
                                   <Style>
                                     <FontFamily>Arial Black</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -1161,7 +1129,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">=First(Fields!OutstandingQuantity_SalesLine.Value, "DataSet_Result")-First(Fields!QtytoShip_SalesLine.Value, "DataSet_Result")</Value>
+                                  <Value>=First(Fields!OutstandingQuantity_SalesLine.Value, "DataSet_Result")-First(Fields!QtytoShip_SalesLine.Value, "DataSet_Result")</Value>
                                   <Style>
                                     <FontFamily>Arial Black</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -1215,7 +1183,7 @@
             <Left>0.51264in</Left>
             <Height>0.4375in</Height>
             <Width>6.7075in</Width>
-            <ZIndex>26</ZIndex>
+            <ZIndex>25</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1229,7 +1197,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Authosized Signature:</Value>
+                    <Value>Authosized Signature:</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -1243,7 +1211,7 @@
             <Left>0.76264in</Left>
             <Height>0.25in</Height>
             <Width>1.61459in</Width>
-            <ZIndex>27</ZIndex>
+            <ZIndex>26</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1261,7 +1229,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Sales:</Value>
+                    <Value>Sales:</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -1275,7 +1243,7 @@
             <Left>0.76264in</Left>
             <Height>0.25in</Height>
             <Width>1.61459in</Width>
-            <ZIndex>28</ZIndex>
+            <ZIndex>27</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1293,7 +1261,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Customer's Name/signature</Value>
+                    <Value>Customer's Name/signature</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -1307,7 +1275,7 @@
             <Left>0.74875in</Left>
             <Height>0.25in</Height>
             <Width>2.07292in</Width>
-            <ZIndex>29</ZIndex>
+            <ZIndex>28</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1325,7 +1293,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Finance / O&amp;L:</Value>
+                    <Value>Finance / O&amp;L:</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -1339,7 +1307,7 @@
             <Left>4.02951in</Left>
             <Height>0.25in</Height>
             <Width>1.09376in</Width>
-            <ZIndex>30</ZIndex>
+            <ZIndex>29</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1357,7 +1325,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Security:</Value>
+                    <Value>Security:</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -1371,7 +1339,7 @@
             <Left>5.60555in</Left>
             <Height>0.25in</Height>
             <Width>1.61459in</Width>
-            <ZIndex>31</ZIndex>
+            <ZIndex>30</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1389,7 +1357,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=Sum(Fields!QtytoShip_SalesLine.Value, "DataSet_Result")</Value>
+                    <Value>=Sum(Fields!QtytoShip_SalesLine.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Arial Black</FontFamily>
                       <FontWeight>Bold</FontWeight>
@@ -1404,7 +1372,7 @@
             <Left>5.20555in</Left>
             <Height>0.25in</Height>
             <Width>1.06876in</Width>
-            <ZIndex>32</ZIndex>
+            <ZIndex>31</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1431,7 +1399,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=Sum(Fields!Quantity_SalesLine.Value, "DataSet_Result")</Value>
+                    <Value>=Sum(Fields!Quantity_SalesLine.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Arial Black</FontFamily>
                       <FontWeight>Bold</FontWeight>
@@ -1446,7 +1414,7 @@
             <Left>4.25972in</Left>
             <Height>0.25in</Height>
             <Width>0.94583in</Width>
-            <ZIndex>33</ZIndex>
+            <ZIndex>32</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -1470,7 +1438,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=Sum(Fields!OutstandingQuantity_SalesLine.Value, "DataSet_Result")-Sum(Fields!QtytoShip_SalesLine.Value, "DataSet_Result")</Value>
+                    <Value>=Sum(Fields!OutstandingQuantity_SalesLine.Value, "DataSet_Result")-Sum(Fields!QtytoShip_SalesLine.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Arial Black</FontFamily>
                       <FontWeight>Bold</FontWeight>
@@ -1485,7 +1453,7 @@
             <Left>6.26042in</Left>
             <Height>0.25in</Height>
             <Width>0.95972in</Width>
-            <ZIndex>34</ZIndex>
+            <ZIndex>33</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1507,7 +1475,7 @@
             <Left>3.19444in</Left>
             <Height>0in</Height>
             <Width>3.45014in</Width>
-            <ZIndex>35</ZIndex>
+            <ZIndex>34</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -1519,7 +1487,7 @@
             <Left>2.55556in</Left>
             <Height>0in</Height>
             <Width>2.36458in</Width>
-            <ZIndex>36</ZIndex>
+            <ZIndex>35</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -1533,7 +1501,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">TOTAL:</Value>
+                    <Value>TOTAL:</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -1547,7 +1515,7 @@
             <Left>2.00972in</Left>
             <Height>0.25in</Height>
             <Width>0.94583in</Width>
-            <ZIndex>37</ZIndex>
+            <ZIndex>36</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1565,7 +1533,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Goods are delivered in good condition.</Value>
+                    <Value>Goods are delivered in good condition.</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -1580,7 +1548,7 @@
             <Left>1.90182cm</Left>
             <Height>0.6cm</Height>
             <Width>6.96829cm</Width>
-            <ZIndex>38</ZIndex>
+            <ZIndex>37</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1598,7 +1566,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Tel No: 234-1-4401311-5</Value>
+                    <Value>Tel No: 234-1-4401311-5</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -1612,7 +1580,7 @@
             <Left>12.09147cm</Left>
             <Height>0.52792cm</Height>
             <Width>5.58272cm</Width>
-            <ZIndex>39</ZIndex>
+            <ZIndex>38</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1630,7 +1598,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Parts Items confirmed defective or confirmed to be wrongly supplied and not return to TNL within five working days will not be accepted</Value>
+                    <Value>Parts Items confirmed defective or confirmed to be wrongly supplied and not return to TNL within five working days will not be accepted</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontFamily>Bookman Old Style</FontFamily>
@@ -1648,7 +1616,7 @@
             <Left>0.38541cm</Left>
             <Height>0.55767cm</Height>
             <Width>18.99712cm</Width>
-            <ZIndex>40</ZIndex>
+            <ZIndex>39</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1677,7 +1645,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value EvaluationMode="Auto">=Fields!SalesTime_SalesHeader.Value</Value>
+                      <Value>=Fields!SalesTime_SalesHeader.Value</Value>
                       <Style>
                         <FontSize>8pt</FontSize>
                         <Format>T</Format>

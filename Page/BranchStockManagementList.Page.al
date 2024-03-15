@@ -1,5 +1,6 @@
 page 70036 "Branch Stock Management List"
 {
+    ApplicationArea = All;
     PageType = List;
     SourceTable = Item;
     SourceTableView = WHERE("Inventory Posting Group" = filter('N_PARTS'));

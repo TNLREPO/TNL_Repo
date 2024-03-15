@@ -1729,5 +1729,68 @@ codeunit 50004 "General Purpose Codeunit-1"
             UNTIL ReservEntry.NEXT = 0;
         END;
     end;
+
+
+    procedure ShowItemAvailFromSearchTracker(VAR SearchTracker: Record "Parts Enquiry"; AvailabilityType: Option Date,Variant,Location,Bin,"Event")
+    var
+
+        ItemAvailFormsMgt: Codeunit "Item Availability Forms Mgt";
+        Item: Record item;
+        NewDate: Date;
+        NewVariantCode: Code[10];
+        NewLocationCode: Code[10];
+
+
+    begin
+
+        SearchTracker.TESTFIELD(SearchTracker."Part No");
+        Item.RESET;
+        Item.GET(SearchTracker."Part No");
+        ItemAvailFormsMgt.FilterItem(Item, SearchTracker."Location Code", SearchTracker.Variant, SearchTracker."Request Date");
+
+        CASE AvailabilityType OF
+            AvailabilityType::Date:
+                IF ItemAvailFormsMgt.ShowItemAvailByDate(Item, SearchTracker.FIELDCAPTION(SearchTracker."Request Date"), SearchTracker."Request Date", NewDate) THEN
+                    SearchTracker.VALIDATE(SearchTracker."Request Date", NewDate);
+            AvailabilityType::Variant:
+                IF ItemAvailFormsMgt.ShowItemAvailVariant(Item, SearchTracker.FIELDCAPTION(SearchTracker.Variant), SearchTracker.Variant, NewVariantCode) THEN
+                    SearchTracker.VALIDATE(SearchTracker.Variant, NewVariantCode);
+            AvailabilityType::Location:
+                IF ItemAvailFormsMgt.ShowItemAvailByLoc(Item, SearchTracker.FIELDCAPTION(SearchTracker."Location Code"), SearchTracker."Location Code", NewLocationCode) THEN
+                    SearchTracker.VALIDATE(SearchTracker."Location Code", NewLocationCode);
+            AvailabilityType::"Event":
+                IF ItemAvailFormsMgt.ShowItemAvailByEvent(Item, SearchTracker.FIELDCAPTION(SearchTracker."Request Date"), SearchTracker."Request Date", NewDate, FALSE) THEN
+                    SearchTracker.VALIDATE(SearchTracker."Request Date", NewDate);
+        END;
+    END;
+
+
+    procedure ShowItemAvailFromFaultSetup(VAR FaultSetupLine: Record "Fault Setup Line"; AvailabilityType: Option Date,Variant,Location,Bin,"Event")
+
+    var
+        Item: Record Item;
+        ItemAvailFormsMgt: Codeunit "Item Availability Forms Mgt";
+        NewDate: Date;
+        NewVariantCode: Code[10];
+        NewLocationCode: Code[10];
+
+    Begin
+        FaultSetupLine.TESTFIELD(FaultSetupLine.Type, FaultSetupLine.Type::Item);
+        FaultSetupLine.TESTFIELD(FaultSetupLine."No.");
+        Item.RESET;
+        Item.GET(FaultSetupLine."No.");
+        //ItemAvailFormsMgt.FilterItem(Item,Location,Variant,TODAY);
+        CASE AvailabilityType OF
+            AvailabilityType::Location:
+                IF ItemAvailFormsMgt.ShowItemAvailByLoc(Item, FaultSetupLine.FIELDCAPTION(FaultSetupLine.Location), FaultSetupLine.Location, NewLocationCode) THEN
+                    FaultSetupLine.VALIDATE(FaultSetupLine.Location, NewLocationCode);
+        END;
+    End;
+
+
+
+
+
+
 }
 
