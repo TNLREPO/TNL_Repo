@@ -1,5 +1,6 @@
 page 50324 "VRI Administrator list"
 {
+     ApplicationArea = All;
     CardPageID = "VRI Administrator card";
     PageType = List;
     SourceTable = "VRI Inspector";

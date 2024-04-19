@@ -395,28 +395,28 @@ table 50160 "VRI Table Delivery Check List"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /* trigger OnValidate()
+            trigger OnValidate()
             begin
                 TESTFIELD("VRI Inspector Code");
                 TESTFIELD("VRI Supervisor No");
                 TESTFIELD("VRI Date");
                 IF Dents = Dents::"Not OK" THEN BEGIN
-                  "Pass to Sales/Marketing" := FALSE;
-                  "Problem Vehicle" := TRUE;
-                  "OK Value" := "OK Value" + 1;
+                    "Pass to Sales/Marketing" := FALSE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
                 END ELSE BEGIN
-                  "Problem Vehicle" := FALSE;
-                  IF "OK Value" <> 0 THEN
-                  "OK Value" := "OK Value" - 1;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
                 END;
 
                 IF "OK Value" <> 0 THEN
-                  IF Fixed = FALSE THEN
-                  "Pass to Sales/Marketing" := FALSE;
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
                 IF "OK Value" = 0 THEN
-                  "Pass to Sales/Marketing" := TRUE;
-            end; */
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(37; Scratches; Option)
         {
@@ -424,28 +424,28 @@ table 50160 "VRI Table Delivery Check List"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*  trigger OnValidate()
-             begin
-                 TESTFIELD("VRI Inspector Code");
-                 TESTFIELD("VRI Supervisor No");
-                 TESTFIELD("VRI Date");
-                 IF Scratches = Scratches::"Not OK" THEN BEGIN
-                   "Pass to Sales/Marketing" := FALSE;
-                   "Problem Vehicle" := TRUE;
-                   "OK Value" := "OK Value" + 1;
-                 END ELSE BEGIN
-                   "Problem Vehicle" := FALSE;
-                   IF "OK Value" <> 0 THEN
-                   "OK Value" := "OK Value" - 1;
-                 END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF Scratches = Scratches::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                 IF "OK Value" <> 0 THEN
-                   IF Fixed = FALSE THEN
-                   "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                 IF "OK Value" = 0 THEN
-                   "Pass to Sales/Marketing" := TRUE;
-             end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(38; "Body Trim damages"; Option)
         {

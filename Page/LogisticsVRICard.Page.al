@@ -1,5 +1,6 @@
 page 50472 "Logistics/VRI Card"
 {
+    ApplicationArea = All;
     PageType = Card;
     SourceTable = "Logistics Order";
 
@@ -10,61 +11,61 @@ page 50472 "Logistics/VRI Card"
             group(General)
             {
                 Caption = 'General';
-                field("Order No.";Rec."Order No.")
+                field("Order No."; Rec."Order No.")
                 {
                 }
-                field(Date;Rec. Date)
+                field(Date; Rec.Date)
                 {
                 }
-                field("Chassis No.";Rec."Chassis No.")
+                field("Chassis No."; Rec."Chassis No.")
                 {
                 }
-                field("Item No.";Rec."Item No.")
+                field("Item No."; Rec."Item No.")
                 {
                 }
-                field(Description;Rec. Description)
+                field(Description; Rec.Description)
                 {
                 }
-                field(Model;Rec. Model)
+                field(Model; Rec.Model)
                 {
                 }
-                field("Model Name";Rec."Model Name")
+                field("Model Name"; Rec."Model Name")
                 {
                 }
-                field("Engine No.";Rec."Engine No.")
+                field("Engine No."; Rec."Engine No.")
                 {
                 }
-                field("Colour Name";Rec."Colour Name")
+                field("Colour Name"; Rec."Colour Name")
                 {
                 }
-                field("KM Reading";Rec."KM Reading")
+                field("KM Reading"; Rec."KM Reading")
                 {
                 }
-                field("Fuel Level";Rec."Fuel Level")
+                field("Fuel Level"; Rec."Fuel Level")
                 {
                 }
-                field("No. of Keys";Rec."No. of Keys")
+                field("No. of Keys"; Rec."No. of Keys")
                 {
                 }
-                field("Job Description";Rec."Job Description")
+                field("Job Description"; Rec."Job Description")
                 {
                 }
-                field("VRI Code";Rec."VRI Code")
+                field("VRI Code"; Rec."VRI Code")
                 {
                 }
-                field(Location;Rec. Location)
+                field(Location; Rec.Location)
                 {
                 }
-                field("Arrival Date";Rec."Arrival Date")
+                field("Arrival Date"; Rec."Arrival Date")
                 {
                 }
-                field("Date of Problem Report";Rec."Date of Problem Report")
+                field("Date of Problem Report"; Rec."Date of Problem Report")
                 {
                 }
-                field("Notify VRI";Rec."Notify VRI")
+                field("Notify VRI"; Rec."Notify VRI")
                 {
                 }
-                field("Sent By";Rec."Sent By")
+                field("Sent By"; Rec."Sent By")
                 {
                 }
             }
@@ -94,7 +95,7 @@ page 50472 "Logistics/VRI Card"
                                 NewVRICode := INCSTR(VRIRec."VRI Code");
                             VRIRec2.INIT;
                             VRIRec2."VRI Code" := NewVRICode;
-                            VRIRec2.VALIDATE("Item Serial No.",Rec. "Chassis No.");
+                            VRIRec2.VALIDATE("Item Serial No.", Rec."Chassis No.");
                             VRIRec2.Arrived := TRUE;
                             VRIRec2."Arrive Approve by" := 'SYSTEM';
                             VRIRec2."Date Of Arrival" := TODAY;

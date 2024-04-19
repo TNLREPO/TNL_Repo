@@ -293,5 +293,8 @@ tableextension 50022 "User Setup Ext" extends "User Setup"
         field(50247; Signature; BLOB)
         {
         }
+        field(50248; "Problem Vehicle"; Boolean)
+        {
+        }
     }
 }

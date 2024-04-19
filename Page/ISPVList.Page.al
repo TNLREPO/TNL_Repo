@@ -1,5 +1,6 @@
 page 70035 "ISPV List"
 {
+    ApplicationArea = All;
     CardPageID = "ISPV Folder";
     PageType = List;
     SourceTable = "Logistics Order";
@@ -47,7 +48,7 @@ page 70035 "ISPV List"
                 field(Date; Rec.Date)
                 {
                 }
-                
+
                 field("Estimate Approval"; Rec."Estimate Approval")
                 {
                 }

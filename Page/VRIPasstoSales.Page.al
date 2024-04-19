@@ -1,5 +1,6 @@
 page 50395 "VRI Pass to Sales"
 {
+     ApplicationArea = All;
     PageType = Card;
     SourceTable = "VRI Table";
     SourceTableView = WHERE("Pass to Sales/Marketing" = FILTER(True));

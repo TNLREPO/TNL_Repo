@@ -260,11 +260,11 @@ tableextension 50012 "Purchase Header Ext" extends "Purchase Header"
             UNTIL PurchLinerec.NEXT = 0;
     end;
 
-/*
+
     procedure GenerateVRI()
     var
-        VRIRec: Record "50058";
-        ResevRec: Record "337";
+        VRIRec: Record 50058;
+        ResevRec: Record 337;
     begin
         TESTFIELD("Vendor Shipment No.");
         ResevRec.SETRANGE(ResevRec."Source ID", "No.");
@@ -291,5 +291,5 @@ tableextension 50012 "Purchase Header Ext" extends "Purchase Header"
             UNTIL ResevRec.NEXT = 0;
         MESSAGE('VRI Codes have been generated!');
     end;
-*/
+
 }

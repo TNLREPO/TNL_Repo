@@ -1,5 +1,6 @@
 page 50272 "VRI Inspector Check list"
 {
+    ApplicationArea = All;
     DeleteAllowed = false;
     ModifyAllowed = false;
     PageType = Card;

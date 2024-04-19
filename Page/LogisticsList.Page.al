@@ -1,5 +1,6 @@
 page 50471 "Logistics List"
 {
+    ApplicationArea = All;
     CardPageID = "Logistics/VRI Card";
     PageType = List;
     SourceTable = "Logistics Order";

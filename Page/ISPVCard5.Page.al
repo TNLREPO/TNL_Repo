@@ -1,5 +1,6 @@
 page 50464 "ISPV Card 5"
 {
+    ApplicationArea = All;
     PageType = Card;
     SourceTable = "Logistics Order";
     SourceTableView = WHERE("Completed" = FILTER(True),

@@ -2,7 +2,7 @@ page 50399 "VRI Administrator card"
 {
     PageType = Card;
     SourceTable = "VRI Inspector";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

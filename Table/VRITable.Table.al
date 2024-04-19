@@ -100,29 +100,33 @@ table 50058 "VRI Table"
         field(18; "Send VRI Request"; Boolean)
         {
 
-            /*  trigger OnValidate()
-             begin
-                 TESTFIELD("Send For Approval", TRUE);
-                 UserSetup.GET(USERID);
-                 SenderEmail := UserSetup."E-Mail";
-                 "VRI Approval Name" := USERID;
-                 "VRI Request Date&Time" := CURRENTDATETIME;
-                 "Problem Statement from VRI" := "Problem Statement";
-                 Servicesetup.GET;
-                 ToName := 'faith@toyotanigeria.com';
-                 SenderName := UserSetup.Initials;
-                 CCName := '';
-                 Bcc := '';
+            trigger OnValidate()
+            begin
+                TESTFIELD("Send For Approval", TRUE);
+                UserSetup.GET(USERID);
+                SenderEmail := UserSetup."E-Mail";
+                "VRI Approval Name" := USERID;
+                "VRI Request Date&Time" := CURRENTDATETIME;
+                "Problem Statement from VRI" := "Problem Statement";
+                Servicesetup.GET;
+                ToName := 'faith@toyotanigeria.com';
+                SenderName := UserSetup.Initials;
+                CCName := '';
+                Bcc := '';
 
-                 IF Not CONFIRM('Are you sure the vehicle is Not SUITABLE?', FALSE) THEN
-                     "Send VRI Request" := FALSE
-                 ELSE BEGIN
+                IF Not CONFIRM('Are you sure the vehicle is Not SUITABLE?', FALSE) THEN
+                    "Send VRI Request" := FALSE
+                ELSE BEGIN
 
-                     WITH TempEmailItem DO BEGIN
+                    Subject := StrSubstNo(Text001, "VRI Code");
+                    CreateEmailBody("VRI Code", Text002, '');
+                    SendEmail(ToName, Subject, EmailBody, SenderEmail, CCName);
+
+                    /*  WITH TempEmailItem DO BEGIN
                          "Send to" := ToName;
                          "Send CC" := SenderEmail;
                          "Send BCC" := '';
-                         Subject := STRSUBSTfalse(Text001, "VRI Code");
+                         Subject := StrSubstNo(Text001, "VRI Code");
 
                          CRLF := '';
                          CRLF[1] := 13;
@@ -131,69 +135,76 @@ table 50058 "VRI Table"
                          BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
                          BodyStream.WRITETEXT('Hello,');
                          BodyStream.WRITETEXT(CRLF + CRLF);
-                         BodyStream.WRITETEXT(STRSUBSTfalse(Text002, "VRI Code", "Problem Statement") + CRLF + CRLF +
+                         BodyStream.WRITETEXT(StrSubstNo(Text002, "VRI Code", "Problem Statement") + CRLF + CRLF +
                          Text018);
                          BodyStream.WRITETEXT(SenderName);
                          BodyStream.WRITETEXT(CRLF + CRLF);
                          BodyStream.WRITETEXT('This is a system generated mail. Please do Not reply to this email ID.');
                          Body := BodyBlob.Blob;
                          Send(FALSE);
-                     END;
-                 END;
-             end; */
+                     END; */
+
+                END;
+            end;
         }
         field(19; "Op./Log.  Approval"; Boolean)
         {
             NotBlank = true;
 
-            /*  trigger OnValidate()
-             begin
-                 IF "Responsible Customer" = '' THEN
-                     ERROR('You must specify the responsible customer!');
+            trigger OnValidate()
+            begin
+                IF "Responsible Customer" = '' THEN
+                    ERROR('You must specify the responsible customer!');
 
-                 TESTFIELD("Send VRI Request");
-                 TESTFIELD("Logistic Action");
+                TESTFIELD("Send VRI Request");
+                TESTFIELD("Logistic Action");
 
-                 IF "Op./Log.  Approval" = TRUE THEN
-                     IF NOT CONFIRM('Are you sure the vehicle is Not SUITABLE?', FALSE) THEN
-                         "Op./Log.  Approval" := FALSE
-                     ELSE BEGIN
-                         "Op./Log Approval Name" := USERID;
-                         "Log. Approval Date&Time" := CURRENTDATETIME;
-                         "O/Log Comment" := "O/Log Comment2";
-                         "Op/Log Approval Comment2" := "Op./Log Approval Comment";
-                         UserSetup.GET(USERID);
-                         SenderEmail := UserSetup."E-Mail";
-                         SenderName := UserSetup.Initials;
-                         UserSetup2.GET("Send To VRI");
-                         ToName := UserSetup2."E-Mail";
+                IF "Op./Log.  Approval" = TRUE THEN
+                    IF NOT CONFIRM('Are you sure the vehicle is Not SUITABLE?', FALSE) THEN
+                        "Op./Log.  Approval" := FALSE
+                    ELSE BEGIN
+                        "Op./Log Approval Name" := USERID;
+                        "Log. Approval Date&Time" := CURRENTDATETIME;
+                        "O/Log Comment" := "O/Log Comment2";
+                        "Op/Log Approval Comment2" := "Op./Log Approval Comment";
+                        UserSetup.GET(USERID);
+                        SenderEmail := UserSetup."E-Mail";
+                        SenderName := UserSetup.Initials;
+                        UserSetup2.GET("Send To VRI");
+                        ToName := UserSetup2."E-Mail";
 
-                         CCName := '';
-                         Bcc := '';
+                        CCName := '';
+                        Bcc := '';
 
-                         WITH TempEmailItem DO BEGIN
-                             "Send to" := ToName;
-                             "Send CC" := SenderEmail;
-                             "Send BCC" := '';
-                             Subject := STRSUBSTfalse(Text003, "VRI Code");
 
-                             CRLF := '';
-                             CRLF[1] := 13;
-                             CRLF[2] := 10;
+                        Subject := StrSubstNo(Text003, "VRI Code");
+                        Body := StrSubstNo(Text004, "VRI Code", "O/Log Comment");
+                        CreateEmailBody("VRI Code", Body, '');
+                        SendEmail(ToName, Subject, EmailBody, SenderEmail, CCName);
 
-                             BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                             BodyStream.WRITETEXT('Hello,');
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT(STRSUBSTfalse(Text004, "VRI Code", "O/Log Comment") + CRLF + CRLF +
-                             Text018 + CRLF);
-                             BodyStream.WRITETEXT(SenderName);
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT('This is a system generated mail. Please do Not reply to this email ID.');
-                             Body := BodyBlob.Blob;
-                             Send(FALSE);
-                         END;
-                     END;
-             end; */
+                        /*   WITH TempEmailItem DO BEGIN
+                              "Send to" := ToName;
+                              "Send CC" := SenderEmail;
+                              "Send BCC" := '';
+                              Subject := StrSubstNo(Text003, "VRI Code");
+
+                              CRLF := '';
+                              CRLF[1] := 13;
+                              CRLF[2] := 10;
+
+                              BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                              BodyStream.WRITETEXT('Hello,');
+                              BodyStream.WRITETEXT(CRLF + CRLF);
+                              BodyStream.WRITETEXT(StrSubstNo(Text004, "VRI Code", "O/Log Comment") + CRLF + CRLF +
+                              Text018 + CRLF);
+                              BodyStream.WRITETEXT(SenderName);
+                              BodyStream.WRITETEXT(CRLF + CRLF);
+                              BodyStream.WRITETEXT('This is a system generated mail. Please do Not reply to this email ID.');
+                              Body := BodyBlob.Blob;
+                              Send(FALSE);
+                          END; */
+                    END;
+            end;
         }
         field(20; "No. Series"; Code[30])
         {
@@ -249,61 +260,61 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*     trigger OnValidate()
-                begin
-                    TESTFIELD("VRI Inspector Code");
-                    TESTFIELD("VRI Supervisor No");
-                    TESTFIELD("VRI Date");
-                    IF "Factory loaded parts present" = "Factory loaded parts present"::"Not OK" THEN BEGIN
-                        "Pass to Sales/Marketing" := FALSE;
-                        "GR Problems" := TRUE;
-                        "Problem Vehicle" := TRUE;
-                        "OK Value" := "OK Value" + 1;
-                    END ELSE BEGIN
-                        "GR Problems" := FALSE;
-                        "Problem Vehicle" := FALSE;
-                        IF "OK Value" <> 0 THEN
-                            "OK Value" := "OK Value" - 1;
-                    END;
-
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Factory loaded parts present" = "Factory loaded parts present"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "GR Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "GR Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
                     IF "OK Value" <> 0 THEN
-                        IF Fixed = FALSE THEN
-                            "Pass to Sales/Marketing" := FALSE;
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                    IF "OK Value" = 0 THEN
-                        "Pass to Sales/Marketing" := TRUE;
-                end; */
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
+
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(32; "Factory loaded parts condition"; Option)
         {
             BlankZero = false;
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
-            /* 
-                        trigger OnValidate()
-                        begin
-                            TESTFIELD("VRI Inspector Code");
-                            TESTFIELD("VRI Supervisor No");
-                            TESTFIELD("VRI Date");
-                            IF "Factory loaded parts condition" = "Factory loaded parts condition"::"Not OK" THEN BEGIN
-                                "Pass to Sales/Marketing" := FALSE;
-                                "GR Problems" := TRUE;
-                                "Problem Vehicle" := TRUE;
-                                "OK Value" := "OK Value" + 1;
-                            END ELSE BEGIN
-                                "GR Problems" := FALSE;
-                                "Problem Vehicle" := FALSE;
-                                IF "OK Value" <> 0 THEN
-                                    "OK Value" := "OK Value" - 1;
-                            END;
 
-                            IF "OK Value" <> 0 THEN
-                                IF Fixed = FALSE THEN
-                                    "Pass to Sales/Marketing" := FALSE;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Factory loaded parts condition" = "Factory loaded parts condition"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "GR Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "GR Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                            IF "OK Value" = 0 THEN
-                                "Pass to Sales/Marketing" := TRUE;
-                        end; */
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
+
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(33; "Quantities of keys/Transmitter"; Option)
         {
@@ -311,30 +322,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*  trigger OnValidate()
-             begin
-                 TESTFIELD("VRI Inspector Code");
-                 TESTFIELD("VRI Supervisor No");
-                 TESTFIELD("VRI Date");
-                 IF "Quantities of keys/Transmitter" = "Quantities of keys/Transmitter"::"Not OK" THEN BEGIN
-                     "Pass to Sales/Marketing" := FALSE;
-                     "GR Problems" := TRUE;
-                     "Problem Vehicle" := TRUE;
-                     "OK Value" := "OK Value" + 1;
-                 END ELSE BEGIN
-                     "GR Problems" := FALSE;
-                     "Problem Vehicle" := FALSE;
-                     IF "OK Value" <> 0 THEN
-                         "OK Value" := "OK Value" - 1;
-                 END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Quantities of keys/Transmitter" = "Quantities of keys/Transmitter"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "GR Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "GR Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                 IF "OK Value" <> 0 THEN
-                     IF Fixed = FALSE THEN
-                         "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                 IF "OK Value" = 0 THEN
-                     "Pass to Sales/Marketing" := TRUE;
-             end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(34; Accidents; Option)
         {
@@ -342,30 +353,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*    trigger OnValidate()
-               begin
-                   TESTFIELD("VRI Inspector Code");
-                   TESTFIELD("VRI Supervisor No");
-                   TESTFIELD("VRI Date");
-                   IF Accidents = Accidents::"Not OK" THEN BEGIN
-                       "Pass to Sales/Marketing" := FALSE;
-                       "GR Problems" := TRUE;
-                       "Problem Vehicle" := TRUE;
-                       "OK Value" := "OK Value" + 1;
-                   END ELSE BEGIN
-                       "GR Problems" := FALSE;
-                       "Problem Vehicle" := FALSE;
-                       IF "OK Value" <> 0 THEN
-                           "OK Value" := "OK Value" - 1;
-                   END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF Accidents = Accidents::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "GR Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "GR Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                   IF "OK Value" <> 0 THEN
-                       IF Fixed = FALSE THEN
-                           "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                   IF "OK Value" = 0 THEN
-                       "Pass to Sales/Marketing" := TRUE;
-               end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(35; "Body protective film"; Option)
         {
@@ -373,30 +384,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*   trigger OnValidate()
-              begin
-                  TESTFIELD("VRI Inspector Code");
-                  TESTFIELD("VRI Supervisor No");
-                  TESTFIELD("VRI Date");
-                  IF "Body protective film" = "Body protective film"::"Not OK" THEN BEGIN
-                      "Pass to Sales/Marketing" := FALSE;
-                      "BnP Problems" := TRUE;
-                      "Problem Vehicle" := TRUE;
-                      "OK Value" := "OK Value" + 1;
-                  END ELSE BEGIN
-                      "BnP Problems" := FALSE;
-                      // ""Problem Vehicle"" := FALSE;
-                      IF "OK Value" <> 0 THEN
-                          "OK Value" := "OK Value" - 1;
-                  END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Body protective film" = "Body protective film"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "BnP Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "BnP Problems" := FALSE;
+                    // ""Problem Vehicle"" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                  IF "OK Value" <> 0 THEN
-                      IF Fixed = FALSE THEN
-                          "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                  IF "OK Value" = 0 THEN
-                      "Pass to Sales/Marketing" := TRUE;
-              end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(36; Dents; Option)
         {
@@ -404,30 +415,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*   trigger OnValidate()
-              begin
-                  TESTFIELD("VRI Inspector Code");
-                  TESTFIELD("VRI Supervisor No");
-                  TESTFIELD("VRI Date");
-                  IF Dents = Dents::"Not OK" THEN BEGIN
-                      "Pass to Sales/Marketing" := FALSE;
-                      "BnP Problems" := TRUE;
-                      "Problem Vehicle" := TRUE;
-                      "OK Value" := "OK Value" + 1;
-                  END ELSE BEGIN
-                      "GR Problems" := FALSE;
-                      "Problem Vehicle" := FALSE;
-                      IF "OK Value" <> 0 THEN
-                          "OK Value" := "OK Value" - 1;
-                  END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF Dents = Dents::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "BnP Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "GR Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                  IF "OK Value" <> 0 THEN
-                      IF Fixed = FALSE THEN
-                          "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                  IF "OK Value" = 0 THEN
-                      "Pass to Sales/Marketing" := TRUE;
-              end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(37; Scratches; Option)
         {
@@ -435,30 +446,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*    trigger OnValidate()
-               begin
-                   TESTFIELD("VRI Inspector Code");
-                   TESTFIELD("VRI Supervisor No");
-                   TESTFIELD("VRI Date");
-                   IF Scratches = Scratches::"Not OK" THEN BEGIN
-                       "Pass to Sales/Marketing" := FALSE;
-                       "BnP Problems" := TRUE;
-                       "Problem Vehicle" := TRUE;
-                       "OK Value" := "OK Value" + 1;
-                   END ELSE BEGIN
-                       "BnP Problems" := FALSE;
-                       "Problem Vehicle" := FALSE;
-                       IF "OK Value" <> 0 THEN
-                           "OK Value" := "OK Value" - 1;
-                   END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF Scratches = Scratches::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "BnP Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "BnP Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                   IF "OK Value" <> 0 THEN
-                       IF Fixed = FALSE THEN
-                           "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                   IF "OK Value" = 0 THEN
-                       "Pass to Sales/Marketing" := TRUE;
-               end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(38; "Body Trim damages"; Option)
         {
@@ -466,30 +477,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*  trigger OnValidate()
-             begin
-                 TESTFIELD("VRI Inspector Code");
-                 TESTFIELD("VRI Supervisor No");
-                 TESTFIELD("VRI Date");
-                 IF "Body Trim damages" = "Body Trim damages"::"Not OK" THEN BEGIN
-                     "Pass to Sales/Marketing" := FALSE;
-                     "BnP Problems" := TRUE;
-                     "Problem Vehicle" := TRUE;
-                     "OK Value" := "OK Value" + 1;
-                 END ELSE BEGIN
-                     "BnP Problems" := FALSE;
-                     "Problem Vehicle" := FALSE;
-                     IF "OK Value" <> 0 THEN
-                         "OK Value" := "OK Value" - 1;
-                 END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Body Trim damages" = "Body Trim damages"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "BnP Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "BnP Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                 IF "OK Value" <> 0 THEN
-                     IF Fixed = FALSE THEN
-                         "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                 IF "OK Value" = 0 THEN
-                     "Pass to Sales/Marketing" := TRUE;
-             end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(39; Windscreen; Option)
         {
@@ -497,59 +508,59 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*       trigger OnValidate()
-                  begin
-                      TESTFIELD("VRI Inspector Code");
-                      TESTFIELD("VRI Supervisor No");
-                      TESTFIELD("VRI Date");
-                      IF Windscreen = Windscreen::"Not OK" THEN BEGIN
-                          "Pass to Sales/Marketing" := FALSE;
-                          "BnP Problems" := TRUE;
-                          "Problem Vehicle" := TRUE;
-                          "OK Value" := "OK Value" + 1;
-                      END ELSE BEGIN
-                          "BnP Problems" := FALSE;
-                          "Problem Vehicle" := FALSE;
-                          IF "OK Value" <> 0 THEN
-                              "OK Value" := "OK Value" - 1;
-                      END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF Windscreen = Windscreen::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "BnP Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "BnP Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                      IF "OK Value" <> 0 THEN
-                          IF Fixed = FALSE THEN
-                              "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                      IF "OK Value" = 0 THEN
-                          "Pass to Sales/Marketing" := TRUE;
-                  end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(40; "Side glasses"; Option)
         {
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*   trigger OnValidate()
-              begin
-                  TESTFIELD("VRI Inspector Code");
-                  TESTFIELD("VRI Supervisor No");
-                  TESTFIELD("VRI Date");
-                  IF "Side glasses" = "Side glasses"::"Not OK" THEN BEGIN
-                      "Pass to Sales/Marketing" := FALSE;
-                      "BnP Problems" := TRUE;
-                      "Problem Vehicle" := TRUE;
-                      "OK Value" := "OK Value" + 1;
-                  END ELSE BEGIN
-                      "BnP Problems" := FALSE;
-                      "Problem Vehicle" := FALSE;
-                      IF "OK Value" <> 0 THEN
-                          "OK Value" := "OK Value" - 1;
-                  END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Side glasses" = "Side glasses"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "BnP Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "BnP Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                  IF "OK Value" <> 0 THEN
-                      IF Fixed = FALSE THEN
-                          "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                  IF "OK Value" = 0 THEN
-                      "Pass to Sales/Marketing" := TRUE;
-              end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(41; "Side Mirrors"; Option)
         {
@@ -557,30 +568,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*    trigger OnValidate()
-               begin
-                   TESTFIELD("VRI Inspector Code");
-                   TESTFIELD("VRI Supervisor No");
-                   TESTFIELD("VRI Date");
-                   IF "Side Mirrors" = "Side Mirrors"::"Not OK" THEN BEGIN
-                       "Pass to Sales/Marketing" := FALSE;
-                       "BnP Problems" := TRUE;
-                       "Problem Vehicle" := TRUE;
-                       "OK Value" := "OK Value" + 1;
-                   END ELSE BEGIN
-                       "BnP Problems" := FALSE;
-                       // ""Problem Vehicle"" := FALSE;
-                       IF "OK Value" <> 0 THEN
-                           "OK Value" := "OK Value" - 1;
-                   END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Side Mirrors" = "Side Mirrors"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "BnP Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "BnP Problems" := FALSE;
+                    // ""Problem Vehicle"" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                   IF "OK Value" <> 0 THEN
-                       IF Fixed = FALSE THEN
-                           "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                   IF "OK Value" = 0 THEN
-                       "Pass to Sales/Marketing" := TRUE;
-               end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(42; Lamps; Option)
         {
@@ -588,30 +599,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*      trigger OnValidate()
-                 begin
-                     TESTFIELD("VRI Inspector Code");
-                     TESTFIELD("VRI Supervisor No");
-                     TESTFIELD("VRI Date");
-                     IF Lamps = Lamps::"Not OK" THEN BEGIN
-                         "Pass to Sales/Marketing" := FALSE;
-                         "BnP Problems" := TRUE;
-                         "Problem Vehicle" := TRUE;
-                         "OK Value" := "OK Value" + 1;
-                     END ELSE BEGIN
-                         "BnP Problems" := FALSE;
-                         "Problem Vehicle" := FALSE;
-                         IF "OK Value" <> 0 THEN
-                             "OK Value" := "OK Value" - 1;
-                     END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF Lamps = Lamps::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "BnP Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "BnP Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                     IF "OK Value" <> 0 THEN
-                         IF Fixed = FALSE THEN
-                             "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                     IF "OK Value" = 0 THEN
-                         "Pass to Sales/Marketing" := TRUE;
-                 end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(43; "Wiper blades"; Option)
         {
@@ -619,30 +630,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*   trigger OnValidate()
-              begin
-                  TESTFIELD("VRI Inspector Code");
-                  TESTFIELD("VRI Supervisor No");
-                  TESTFIELD("VRI Date");
-                  IF "Wiper blades" = "Wiper blades"::"Not OK" THEN BEGIN
-                      "Pass to Sales/Marketing" := FALSE;
-                      "BnP Problems" := TRUE;
-                      "Problem Vehicle" := TRUE;
-                      "OK Value" := "OK Value" + 1;
-                  END ELSE BEGIN
-                      "BnP Problems" := FALSE;
-                      "Problem Vehicle" := FALSE;
-                      IF "OK Value" <> 0 THEN
-                          "OK Value" := "OK Value" - 1;
-                  END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Wiper blades" = "Wiper blades"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "BnP Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "BnP Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                  IF "OK Value" <> 0 THEN
-                      IF Fixed = FALSE THEN
-                          "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                  IF "OK Value" = 0 THEN
-                      "Pass to Sales/Marketing" := TRUE;
-              end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(44; Label; Option)
         {
@@ -650,28 +661,28 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*  trigger OnValidate()
-             begin
-                 TESTFIELD("VRI Inspector Code");
-                 TESTFIELD("VRI Supervisor No");
-                 TESTFIELD("VRI Date");
-                 IF Label = Label::"Not OK" THEN BEGIN
-                     "Pass to Sales/Marketing" := FALSE;
-                     "Problem Vehicle" := TRUE;
-                     "OK Value" := "OK Value" + 1;
-                 END ELSE BEGIN
-                     "Problem Vehicle" := FALSE;
-                     IF "OK Value" <> 0 THEN
-                         "OK Value" := "OK Value" - 1;
-                 END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF Label = Label::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                 IF "OK Value" <> 0 THEN
-                     IF Fixed = FALSE THEN
-                         "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                 IF "OK Value" = 0 THEN
-                     "Pass to Sales/Marketing" := TRUE;
-             end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(45; Tyres; Option)
         {
@@ -679,30 +690,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*    trigger OnValidate()
-               begin
-                   TESTFIELD("VRI Inspector Code");
-                   TESTFIELD("VRI Supervisor No");
-                   TESTFIELD("VRI Date");
-                   IF Tyres = Tyres::"Not OK" THEN BEGIN
-                       "Pass to Sales/Marketing" := FALSE;
-                       "Missing Accessories" := TRUE;
-                       "Problem Vehicle" := TRUE;
-                       "OK Value" := "OK Value" + 1;
-                   END ELSE BEGIN
-                       "Missing Accessories" := FALSE;
-                       "Problem Vehicle" := FALSE;
-                       IF "OK Value" <> 0 THEN
-                           "OK Value" := "OK Value" - 1;
-                   END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF Tyres = Tyres::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "Missing Accessories" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "Missing Accessories" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                   IF "OK Value" <> 0 THEN
-                       IF Fixed = FALSE THEN
-                           "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                   IF "OK Value" = 0 THEN
-                       "Pass to Sales/Marketing" := TRUE;
-               end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(46; Trunk; Option)
         {
@@ -710,7 +721,7 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /* trigger OnValidate()
+            trigger OnValidate()
             begin
                 TESTFIELD("VRI Inspector Code");
                 TESTFIELD("VRI Supervisor No");
@@ -733,7 +744,7 @@ table 50058 "VRI Table"
 
                 IF "OK Value" = 0 THEN
                     "Pass to Sales/Marketing" := TRUE;
-            end; */
+            end;
         }
         field(47; "Brake disc"; Option)
         {
@@ -741,30 +752,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*   trigger OnValidate()
-              begin
-                  TESTFIELD("VRI Inspector Code");
-                  TESTFIELD("VRI Supervisor No");
-                  TESTFIELD("VRI Date");
-                  IF "Brake disc" = "Brake disc"::"Not OK" THEN BEGIN
-                      "Pass to Sales/Marketing" := FALSE;
-                      "GR Problems" := TRUE;
-                      "Problem Vehicle" := TRUE;
-                      "OK Value" := "OK Value" + 1;
-                  END ELSE BEGIN
-                      "GR Problems" := FALSE;
-                      "Problem Vehicle" := FALSE;
-                      IF "OK Value" <> 0 THEN
-                          "OK Value" := "OK Value" - 1;
-                  END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Brake disc" = "Brake disc"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "GR Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "GR Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                  IF "OK Value" <> 0 THEN
-                      IF Fixed = FALSE THEN
-                          "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                  IF "OK Value" = 0 THEN
-                      "Pass to Sales/Marketing" := TRUE;
-              end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(48; "Missing items"; Option)
         {
@@ -772,30 +783,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*  trigger OnValidate()
-             begin
-                 TESTFIELD("VRI Inspector Code");
-                 TESTFIELD("VRI Supervisor No");
-                 TESTFIELD("VRI Date");
-                 IF "Missing items" = "Missing items"::"Not OK" THEN BEGIN
-                     "Pass to Sales/Marketing" := FALSE;
-                     "Missing Accessories" := TRUE;
-                     "Problem Vehicle" := TRUE;
-                     "OK Value" := "OK Value" + 1;
-                 END ELSE BEGIN
-                     "Missing Accessories" := FALSE;
-                     "Problem Vehicle" := FALSE;
-                     IF "OK Value" <> 0 THEN
-                         "OK Value" := "OK Value" - 1;
-                 END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Missing items" = "Missing items"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "Missing Accessories" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "Missing Accessories" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                 IF "OK Value" <> 0 THEN
-                     IF Fixed = FALSE THEN
-                         "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                 IF "OK Value" = 0 THEN
-                     "Pass to Sales/Marketing" := TRUE;
-             end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(49; "Install Side mirrors"; Option)
         {
@@ -803,61 +814,61 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*   trigger OnValidate()
-              begin
-                  TESTFIELD("VRI Inspector Code");
-                  TESTFIELD("VRI Supervisor No");
-                  TESTFIELD("VRI Date");
-                  IF "Install Side mirrors" = "Install Side mirrors"::"Not OK" THEN BEGIN
-                      "Pass to Sales/Marketing" := FALSE;
-                      "BnP Problems" := TRUE;
-                      "Problem Vehicle" := TRUE;
-                      "OK Value" := "OK Value" + 1;
-                  END ELSE BEGIN
-                      "BnP Problems" := FALSE;
-                      "Problem Vehicle" := FALSE;
-                      IF "OK Value" <> 0 THEN
-                          "OK Value" := "OK Value" - 1;
-                  END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Install Side mirrors" = "Install Side mirrors"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "BnP Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "BnP Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                  IF "OK Value" <> 0 THEN
-                      IF Fixed = FALSE THEN
-                          "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                  IF "OK Value" = 0 THEN
-                      "Pass to Sales/Marketing" := TRUE;
-              end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
-        field(50; "Sfalserkel Pipe"; Option)
+        field(50; "Snorkel Pipe"; Option)
         {
             BlankZero = false;
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*   trigger OnValidate()
-              begin
-                  TESTFIELD("VRI Inspector Code");
-                  TESTFIELD("VRI Supervisor No");
-                  TESTFIELD("VRI Date");
-                  IF "Sfalserkel Pipe" = "Sfalserkel Pipe"::"Not OK" THEN BEGIN
-                      "Pass to Sales/Marketing" := FALSE;
-                      "BnP Problems" := TRUE;
-                      "Problem Vehicle" := TRUE;
-                      "OK Value" := "OK Value" + 1;
-                  END ELSE BEGIN
-                      "BnP Problems" := FALSE;
-                      "Problem Vehicle" := FALSE;
-                      IF "OK Value" <> 0 THEN
-                          "OK Value" := "OK Value" - 1;
-                  END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Snorkel Pipe" = "Snorkel Pipe"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "BnP Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "BnP Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                  IF "OK Value" <> 0 THEN
-                      IF Fixed = FALSE THEN
-                          "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                  IF "OK Value" = 0 THEN
-                      "Pass to Sales/Marketing" := TRUE;
-              end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(51; "Rear Sticker"; Option)
         {
@@ -865,30 +876,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*     trigger OnValidate()
-                begin
-                    TESTFIELD("VRI Inspector Code");
-                    TESTFIELD("VRI Supervisor No");
-                    TESTFIELD("VRI Date");
-                    IF "Rear Sticker" = "Rear Sticker"::"Not OK" THEN BEGIN
-                        "Pass to Sales/Marketing" := FALSE;
-                        "BnP Problems" := TRUE;
-                        "Problem Vehicle" := TRUE;
-                        "OK Value" := "OK Value" + 1;
-                    END ELSE BEGIN
-                        "BnP Problems" := FALSE;
-                        "Problem Vehicle" := FALSE;
-                        IF "OK Value" <> 0 THEN
-                            "OK Value" := "OK Value" - 1;
-                    END;
-
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Rear Sticker" = "Rear Sticker"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "BnP Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "BnP Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
                     IF "OK Value" <> 0 THEN
-                        IF Fixed = FALSE THEN
-                            "Pass to Sales/Marketing" := FALSE;
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                    IF "OK Value" = 0 THEN
-                        "Pass to Sales/Marketing" := TRUE;
-                end; */
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
+
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(52; "Air Spoiler"; Option)
         {
@@ -896,7 +907,7 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /* trigger OnValidate()
+            trigger OnValidate()
             begin
                 TESTFIELD("VRI Inspector Code");
                 TESTFIELD("VRI Supervisor No");
@@ -919,7 +930,7 @@ table 50058 "VRI Table"
 
                 IF "OK Value" = 0 THEN
                     "Pass to Sales/Marketing" := TRUE;
-            end; */
+            end;
         }
         field(53; "Wheel Covers"; Option)
         {
@@ -927,7 +938,7 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /* trigger OnValidate()
+            trigger OnValidate()
             begin
                 TESTFIELD("VRI Inspector Code");
                 TESTFIELD("VRI Supervisor No");
@@ -950,38 +961,38 @@ table 50058 "VRI Table"
 
                 IF "OK Value" = 0 THEN
                     "Pass to Sales/Marketing" := TRUE;
-            end; */
+            end;
         }
         field(54; "Towing eyelet"; Option)
         {
             BlankZero = false;
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
-            /* 
-                        trigger OnValidate()
-                        begin
-                            TESTFIELD("VRI Inspector Code");
-                            TESTFIELD("VRI Supervisor No");
-                            TESTFIELD("VRI Date");
-                            IF "Towing eyelet" = "Towing eyelet"::"Not OK" THEN BEGIN
-                                "Pass to Sales/Marketing" := FALSE;
-                                "Missing Accessories" := TRUE;
-                                "Problem Vehicle" := TRUE;
-                                "OK Value" := "OK Value" + 1;
-                            END ELSE BEGIN
-                                "Missing Accessories" := FALSE;
-                                "Problem Vehicle" := FALSE;
-                                IF "OK Value" <> 0 THEN
-                                    "OK Value" := "OK Value" - 1;
-                            END;
 
-                            IF "OK Value" <> 0 THEN
-                                IF Fixed = FALSE THEN
-                                    "Pass to Sales/Marketing" := FALSE;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Towing eyelet" = "Towing eyelet"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "Missing Accessories" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "Missing Accessories" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                            IF "OK Value" = 0 THEN
-                                "Pass to Sales/Marketing" := TRUE;
-                        end; */
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
+
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(55; "Battery teminal"; Option)
         {
@@ -989,7 +1000,7 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /* trigger OnValidate()
+            trigger OnValidate()
             begin
                 TESTFIELD("VRI Inspector Code");
                 TESTFIELD("VRI Supervisor No");
@@ -1012,7 +1023,7 @@ table 50058 "VRI Table"
 
                 IF "OK Value" = 0 THEN
                     "Pass to Sales/Marketing" := TRUE;
-            end; */
+            end;
         }
         field(56; Antennas; Option)
         {
@@ -1020,30 +1031,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*     trigger OnValidate()
-                begin
-                    TESTFIELD("VRI Inspector Code");
-                    TESTFIELD("VRI Supervisor No");
-                    TESTFIELD("VRI Date");
-                    IF Antennas = Antennas::"Not OK" THEN BEGIN
-                        "Pass to Sales/Marketing" := FALSE;
-                        "Missing Accessories" := TRUE;
-                        "Problem Vehicle" := TRUE;
-                        "OK Value" := "OK Value" + 1;
-                    END ELSE BEGIN
-                        "Missing Accessories" := FALSE;
-                        "Problem Vehicle" := FALSE;
-                        IF "OK Value" <> 0 THEN
-                            "OK Value" := "OK Value" - 1;
-                    END;
-
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF Antennas = Antennas::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "Missing Accessories" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "Missing Accessories" := FALSE;
+                    "Problem Vehicle" := FALSE;
                     IF "OK Value" <> 0 THEN
-                        IF Fixed = FALSE THEN
-                            "Pass to Sales/Marketing" := FALSE;
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                    IF "OK Value" = 0 THEN
-                        "Pass to Sales/Marketing" := TRUE;
-                end; */
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
+
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(57; "Ear phone"; Option)
         {
@@ -1051,91 +1062,91 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*    trigger OnValidate()
-               begin
-                   TESTFIELD("VRI Inspector Code");
-                   TESTFIELD("VRI Supervisor No");
-                   TESTFIELD("VRI Date");
-                   IF "Ear phone" = "Ear phone"::"Not OK" THEN BEGIN
-                       "Pass to Sales/Marketing" := FALSE;
-                       "Missing Accessories" := TRUE;
-                       "Problem Vehicle" := TRUE;
-                       "OK Value" := "OK Value" + 1;
-                   END ELSE BEGIN
-                       "Missing Accessories" := FALSE;
-                       "Problem Vehicle" := FALSE;
-                       IF "OK Value" <> 0 THEN
-                           "OK Value" := "OK Value" - 1;
-                   END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Ear phone" = "Ear phone"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "Missing Accessories" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "Missing Accessories" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                   IF "OK Value" <> 0 THEN
-                       IF Fixed = FALSE THEN
-                           "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                   IF "OK Value" = 0 THEN
-                       "Pass to Sales/Marketing" := TRUE;
-               end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(58; "Floor Mats"; Option)
         {
             BlankZero = false;
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
-            /* 
-                        trigger OnValidate()
-                        begin
-                            TESTFIELD("VRI Inspector Code");
-                            TESTFIELD("VRI Supervisor No");
-                            TESTFIELD("VRI Date");
-                            IF "Floor Mats" = "Floor Mats"::"Not OK" THEN BEGIN
-                                "Pass to Sales/Marketing" := FALSE;
-                                "Missing Accessories" := TRUE;
-                                "Problem Vehicle" := TRUE;
-                                "OK Value" := "OK Value" + 1;
-                            END ELSE BEGIN
-                                "Missing Accessories" := FALSE;
-                                "Problem Vehicle" := FALSE;
-                                IF "OK Value" <> 0 THEN
-                                    "OK Value" := "OK Value" - 1;
-                            END;
 
-                            IF "OK Value" <> 0 THEN
-                                IF Fixed = FALSE THEN
-                                    "Pass to Sales/Marketing" := FALSE;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Floor Mats" = "Floor Mats"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "Missing Accessories" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "Missing Accessories" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                            IF "OK Value" = 0 THEN
-                                "Pass to Sales/Marketing" := TRUE;
-                        end; */
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
+
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(59; "Jack and Tool"; Option)
         {
             BlankZero = false;
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
-            /*         trigger OnValidate()
-                    begin
-                        TESTFIELD("VRI Inspector Code");
-                        TESTFIELD("VRI Supervisor No");
-                        TESTFIELD("VRI Date");
-                        IF "Jack and Tool" = "Jack and Tool"::"Not OK" THEN BEGIN
-                            "Pass to Sales/Marketing" := FALSE;
-                            "Missing Accessories" := TRUE;
-                            "Problem Vehicle" := TRUE;
-                            "OK Value" := "OK Value" + 1;
-                        END ELSE BEGIN
-                            "Missing Accessories" := FALSE;
-                            "Problem Vehicle" := FALSE;
-                            IF "OK Value" <> 0 THEN
-                                "OK Value" := "OK Value" - 1;
-                        END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Jack and Tool" = "Jack and Tool"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "Missing Accessories" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "Missing Accessories" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                        IF "OK Value" <> 0 THEN
-                            IF Fixed = FALSE THEN
-                                "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                        IF "OK Value" = 0 THEN
-                            "Pass to Sales/Marketing" := TRUE;
-                    end;  */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(60; "Spare tyres"; Option)
         {
@@ -1143,7 +1154,7 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /* trigger OnValidate()
+            trigger OnValidate()
             begin
                 TESTFIELD("VRI Inspector Code");
                 TESTFIELD("VRI Supervisor No");
@@ -1166,7 +1177,7 @@ table 50058 "VRI Table"
 
                 IF "OK Value" = 0 THEN
                     "Pass to Sales/Marketing" := TRUE;
-            end; */
+            end;
         }
         field(61; "Battery terminals torque"; Option)
         {
@@ -1174,30 +1185,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*  trigger OnValidate()
-             begin
-                 TESTFIELD("VRI Inspector Code");
-                 TESTFIELD("VRI Supervisor No");
-                 TESTFIELD("VRI Date");
-                 IF "Battery terminals torque" = "Battery terminals torque"::"Not OK" THEN BEGIN
-                     "Pass to Sales/Marketing" := FALSE;
-                     "GR Problems" := TRUE;
-                     "Problem Vehicle" := TRUE;
-                     "OK Value" := "OK Value" + 1;
-                 END ELSE BEGIN
-                     "GR Problems" := FALSE;
-                     "Problem Vehicle" := FALSE;
-                     IF "OK Value" <> 0 THEN
-                         "OK Value" := "OK Value" - 1;
-                 END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Battery terminals torque" = "Battery terminals torque"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "GR Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "GR Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                 IF "OK Value" <> 0 THEN
-                     IF Fixed = FALSE THEN
-                         "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                 IF "OK Value" = 0 THEN
-                     "Pass to Sales/Marketing" := TRUE;
-             end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(62; "Fuse Box"; Option)
         {
@@ -1205,30 +1216,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*  trigger OnValidate()
-             begin
-                 TESTFIELD("VRI Inspector Code");
-                 TESTFIELD("VRI Supervisor No");
-                 TESTFIELD("VRI Date");
-                 IF "Fuse Box" = "Fuse Box"::"Not OK" THEN BEGIN
-                     "Pass to Sales/Marketing" := FALSE;
-                     "GR Problems" := TRUE;
-                     "Problem Vehicle" := TRUE;
-                     "OK Value" := "OK Value" + 1;
-                 END ELSE BEGIN
-                     "GR Problems" := FALSE;
-                     "Problem Vehicle" := FALSE;
-                     IF "OK Value" <> 0 THEN
-                         "OK Value" := "OK Value" - 1;
-                 END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Fuse Box" = "Fuse Box"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "GR Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "GR Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                 IF "OK Value" <> 0 THEN
-                     IF Fixed = FALSE THEN
-                         "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                 IF "OK Value" = 0 THEN
-                     "Pass to Sales/Marketing" := TRUE;
-             end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(63; "Engine warm up"; Option)
         {
@@ -1236,30 +1247,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*  trigger OnValidate()
-             begin
-                 TESTFIELD("VRI Inspector Code");
-                 TESTFIELD("VRI Supervisor No");
-                 TESTFIELD("VRI Date");
-                 IF "Engine warm up" = "Engine warm up"::"Not OK" THEN BEGIN
-                     "Pass to Sales/Marketing" := FALSE;
-                     "GR Problems" := TRUE;
-                     "Problem Vehicle" := TRUE;
-                     "OK Value" := "OK Value" + 1;
-                 END ELSE BEGIN
-                     "GR Problems" := FALSE;
-                     "Problem Vehicle" := FALSE;
-                     IF "OK Value" <> 0 THEN
-                         "OK Value" := "OK Value" - 1;
-                 END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Engine warm up" = "Engine warm up"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "GR Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "GR Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                 IF "OK Value" <> 0 THEN
-                     IF Fixed = FALSE THEN
-                         "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                 IF "OK Value" = 0 THEN
-                     "Pass to Sales/Marketing" := TRUE;
-             end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(64; Lubrication; Option)
         {
@@ -1267,30 +1278,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*      trigger OnValidate()
-                 begin
-                     TESTFIELD("VRI Inspector Code");
-                     TESTFIELD("VRI Supervisor No");
-                     TESTFIELD("VRI Date");
-                     IF Lubrication = Lubrication::"Not OK" THEN BEGIN
-                         "Pass to Sales/Marketing" := FALSE;
-                         "Missing Accessories" := TRUE;
-                         "Problem Vehicle" := TRUE;
-                         "OK Value" := "OK Value" + 1;
-                     END ELSE BEGIN
-                         "Missing Accessories" := FALSE;
-                         "Problem Vehicle" := FALSE;
-                         IF "OK Value" <> 0 THEN
-                             "OK Value" := "OK Value" - 1;
-                     END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF Lubrication = Lubrication::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "Missing Accessories" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "Missing Accessories" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                     IF "OK Value" <> 0 THEN
-                         IF Fixed = FALSE THEN
-                             "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                     IF "OK Value" = 0 THEN
-                         "Pass to Sales/Marketing" := TRUE;
-                 end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(65; "Wiper washer"; Option)
         {
@@ -1298,30 +1309,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*  trigger OnValidate()
-             begin
-                 TESTFIELD("VRI Inspector Code");
-                 TESTFIELD("VRI Supervisor No");
-                 TESTFIELD("VRI Date");
-                 IF "Wiper washer" = "Wiper washer"::"Not OK" THEN BEGIN
-                     "Pass to Sales/Marketing" := FALSE;
-                     "Missing Accessories" := TRUE;
-                     "Problem Vehicle" := TRUE;
-                     "OK Value" := "OK Value" + 1;
-                 END ELSE BEGIN
-                     "Missing Accessories" := FALSE;
-                     "Problem Vehicle" := FALSE;
-                     IF "OK Value" <> 0 THEN
-                         "OK Value" := "OK Value" - 1;
-                 END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Wiper washer" = "Wiper washer"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "Missing Accessories" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "Missing Accessories" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                 IF "OK Value" <> 0 THEN
-                     IF Fixed = FALSE THEN
-                         "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                 IF "OK Value" = 0 THEN
-                     "Pass to Sales/Marketing" := TRUE;
-             end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(66; "Water coolant"; Option)
         {
@@ -1329,30 +1340,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*   trigger OnValidate()
-              begin
-                  TESTFIELD("VRI Inspector Code");
-                  TESTFIELD("VRI Supervisor No");
-                  TESTFIELD("VRI Date");
-                  IF "Water coolant" = "Water coolant"::"Not OK" THEN BEGIN
-                      "Pass to Sales/Marketing" := FALSE;
-                      "Missing Accessories" := TRUE;
-                      "Problem Vehicle" := TRUE;
-                      "OK Value" := "OK Value" + 1;
-                  END ELSE BEGIN
-                      "Missing Accessories" := FALSE;
-                      "Problem Vehicle" := FALSE;
-                      IF "OK Value" <> 0 THEN
-                          "OK Value" := "OK Value" - 1;
-                  END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Water coolant" = "Water coolant"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "Missing Accessories" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "Missing Accessories" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                  IF "OK Value" <> 0 THEN
-                      IF Fixed = FALSE THEN
-                          "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                  IF "OK Value" = 0 THEN
-                      "Pass to Sales/Marketing" := TRUE;
-              end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(67; "Power steering"; Option)
         {
@@ -1360,30 +1371,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*    trigger OnValidate()
-               begin
-                   TESTFIELD("VRI Inspector Code");
-                   TESTFIELD("VRI Supervisor No");
-                   TESTFIELD("VRI Date");
-                   IF "Power steering" = "Power steering"::"Not OK" THEN BEGIN
-                       "Pass to Sales/Marketing" := FALSE;
-                       "GR Problems" := TRUE;
-                       "Problem Vehicle" := TRUE;
-                       "OK Value" := "OK Value" + 1;
-                   END ELSE BEGIN
-                       "GR Problems" := FALSE;
-                       "Problem Vehicle" := FALSE;
-                       IF "OK Value" <> 0 THEN
-                           "OK Value" := "OK Value" - 1;
-                   END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Power steering" = "Power steering"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "GR Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "GR Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                   IF "OK Value" <> 0 THEN
-                       IF Fixed = FALSE THEN
-                           "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                   IF "OK Value" = 0 THEN
-                       "Pass to Sales/Marketing" := TRUE;
-               end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(68; "Battery electrolyte"; Option)
         {
@@ -1391,30 +1402,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*   trigger OnValidate()
-              begin
-                  TESTFIELD("VRI Inspector Code");
-                  TESTFIELD("VRI Supervisor No");
-                  TESTFIELD("VRI Date");
-                  IF "Battery electrolyte" = "Battery electrolyte"::"Not OK" THEN BEGIN
-                      "Pass to Sales/Marketing" := FALSE;
-                      "GR Problems" := TRUE;
-                      "Problem Vehicle" := TRUE;
-                      "OK Value" := "OK Value" + 1;
-                  END ELSE BEGIN
-                      "GR Problems" := FALSE;
-                      "Problem Vehicle" := FALSE;
-                      IF "OK Value" <> 0 THEN
-                          "OK Value" := "OK Value" - 1;
-                  END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Battery electrolyte" = "Battery electrolyte"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "GR Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "GR Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                  IF "OK Value" <> 0 THEN
-                      IF Fixed = FALSE THEN
-                          "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                  IF "OK Value" = 0 THEN
-                      "Pass to Sales/Marketing" := TRUE;
-              end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(69; "Fusible link"; Option)
         {
@@ -1422,30 +1433,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*     trigger OnValidate()
-                begin
-                    TESTFIELD("VRI Inspector Code");
-                    TESTFIELD("VRI Supervisor No");
-                    TESTFIELD("VRI Date");
-                    IF "Fusible link" = "Fusible link"::"Not OK" THEN BEGIN
-                        "Pass to Sales/Marketing" := FALSE;
-                        "GR Problems" := TRUE;
-                        "Problem Vehicle" := TRUE;
-                        "OK Value" := "OK Value" + 1;
-                    END ELSE BEGIN
-                        "GR Problems" := FALSE;
-                        "Problem Vehicle" := FALSE;
-                        IF "OK Value" <> 0 THEN
-                            "OK Value" := "OK Value" - 1;
-                    END;
-
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Fusible link" = "Fusible link"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "GR Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "GR Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
                     IF "OK Value" <> 0 THEN
-                        IF Fixed = FALSE THEN
-                            "Pass to Sales/Marketing" := FALSE;
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                    IF "OK Value" = 0 THEN
-                        "Pass to Sales/Marketing" := TRUE;
-                end; */
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
+
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(70; "Warranty booklet"; Option)
         {
@@ -1453,30 +1464,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*   trigger OnValidate()
-              begin
-                  TESTFIELD("VRI Inspector Code");
-                  TESTFIELD("VRI Supervisor No");
-                  TESTFIELD("VRI Date");
-                  IF "Warranty booklet" = "Warranty booklet"::"Not OK" THEN BEGIN
-                      "Pass to Sales/Marketing" := FALSE;
-                      "Missing Accessories" := TRUE;
-                      "Problem Vehicle" := TRUE;
-                      "OK Value" := "OK Value" + 1;
-                  END ELSE BEGIN
-                      "Missing Accessories" := FALSE;
-                      "Problem Vehicle" := FALSE;
-                      IF "OK Value" <> 0 THEN
-                          "OK Value" := "OK Value" - 1;
-                  END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Warranty booklet" = "Warranty booklet"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "Missing Accessories" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "Missing Accessories" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                  IF "OK Value" <> 0 THEN
-                      IF Fixed = FALSE THEN
-                          "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                  IF "OK Value" = 0 THEN
-                      "Pass to Sales/Marketing" := TRUE;
-              end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(71; "Service sticker"; Option)
         {
@@ -1484,30 +1495,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*   trigger OnValidate()
-              begin
-                  TESTFIELD("VRI Inspector Code");
-                  TESTFIELD("VRI Supervisor No");
-                  TESTFIELD("VRI Date");
-                  IF "Service sticker" = "Service sticker"::"Not OK" THEN BEGIN
-                      "Pass to Sales/Marketing" := FALSE;
-                      "Missing Accessories" := TRUE;
-                      "Problem Vehicle" := TRUE;
-                      "OK Value" := "OK Value" + 1;
-                  END ELSE BEGIN
-                      "Missing Accessories" := FALSE;
-                      "Problem Vehicle" := FALSE;
-                      IF "OK Value" <> 0 THEN
-                          "OK Value" := "OK Value" - 1;
-                  END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Service sticker" = "Service sticker"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "Missing Accessories" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "Missing Accessories" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                  IF "OK Value" <> 0 THEN
-                      IF Fixed = FALSE THEN
-                          "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                  IF "OK Value" = 0 THEN
-                      "Pass to Sales/Marketing" := TRUE;
-              end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(72; "Owners manual"; Option)
         {
@@ -1515,30 +1526,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*  trigger OnValidate()
-             begin
-                 TESTFIELD("VRI Inspector Code");
-                 TESTFIELD("VRI Supervisor No");
-                 TESTFIELD("VRI Date");
-                 IF "Owners manual" = "Owners manual"::"Not OK" THEN BEGIN
-                     "Pass to Sales/Marketing" := FALSE;
-                     "Missing Accessories" := TRUE;
-                     "Problem Vehicle" := TRUE;
-                     "OK Value" := "OK Value" + 1;
-                 END ELSE BEGIN
-                     "Missing Accessories" := FALSE;
-                     "Problem Vehicle" := FALSE;
-                     IF "OK Value" <> 0 THEN
-                         "OK Value" := "OK Value" - 1;
-                 END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Owners manual" = "Owners manual"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "Missing Accessories" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "Missing Accessories" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                 IF "OK Value" <> 0 THEN
-                     IF Fixed = FALSE THEN
-                         "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                 IF "OK Value" = 0 THEN
-                     "Pass to Sales/Marketing" := TRUE;
-             end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(73; "Key/Transmitter Operation"; Option)
         {
@@ -1546,7 +1557,7 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /* trigger OnValidate()
+            trigger OnValidate()
             begin
                 TESTFIELD("VRI Inspector Code");
                 TESTFIELD("VRI Supervisor No");
@@ -1569,7 +1580,7 @@ table 50058 "VRI Table"
 
                 IF "OK Value" = 0 THEN
                     "Pass to Sales/Marketing" := TRUE;
-            end; */
+            end;
         }
         field(74; "Meters at Dashboard"; Option)
         {
@@ -1577,30 +1588,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*   trigger OnValidate()
-              begin
-                  TESTFIELD("VRI Inspector Code");
-                  TESTFIELD("VRI Supervisor No");
-                  TESTFIELD("VRI Date");
-                  IF "Meters at Dashboard" = "Meters at Dashboard"::"Not OK" THEN BEGIN
-                      "Pass to Sales/Marketing" := FALSE;
-                      "GR Problems" := TRUE;
-                      "Problem Vehicle" := TRUE;
-                      "OK Value" := "OK Value" + 1;
-                  END ELSE BEGIN
-                      "GR Problems" := FALSE;
-                      "Problem Vehicle" := FALSE;
-                      IF "OK Value" <> 0 THEN
-                          "OK Value" := "OK Value" - 1;
-                  END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Meters at Dashboard" = "Meters at Dashboard"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "GR Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "GR Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                  IF "OK Value" <> 0 THEN
-                      IF Fixed = FALSE THEN
-                          "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                  IF "OK Value" = 0 THEN
-                      "Pass to Sales/Marketing" := TRUE;
-              end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(75; "Hood opening"; Option)
         {
@@ -1608,30 +1619,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*  trigger OnValidate()
-             begin
-                 TESTFIELD("VRI Inspector Code");
-                 TESTFIELD("VRI Supervisor No");
-                 TESTFIELD("VRI Date");
-                 IF "Hood opening" = "Hood opening"::"Not OK" THEN BEGIN
-                     "Pass to Sales/Marketing" := FALSE;
-                     "GR Problems" := TRUE;
-                     "Problem Vehicle" := TRUE;
-                     "OK Value" := "OK Value" + 1;
-                 END ELSE BEGIN
-                     "GR Problems" := FALSE;
-                     "Problem Vehicle" := FALSE;
-                     IF "OK Value" <> 0 THEN
-                         "OK Value" := "OK Value" - 1;
-                 END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Hood opening" = "Hood opening"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "GR Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "GR Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                 IF "OK Value" <> 0 THEN
-                     IF Fixed = FALSE THEN
-                         "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                 IF "OK Value" = 0 THEN
-                     "Pass to Sales/Marketing" := TRUE;
-             end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(76; "Fuel Tank"; Option)
         {
@@ -1639,7 +1650,7 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /* trigger OnValidate()
+            trigger OnValidate()
             begin
                 TESTFIELD("VRI Inspector Code");
                 TESTFIELD("VRI Supervisor No");
@@ -1662,7 +1673,7 @@ table 50058 "VRI Table"
 
                 IF "OK Value" = 0 THEN
                     "Pass to Sales/Marketing" := TRUE;
-            end; */
+            end;
         }
         field(77; "Trunk lid"; Option)
         {
@@ -1670,30 +1681,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*  trigger OnValidate()
-             begin
-                 TESTFIELD("VRI Inspector Code");
-                 TESTFIELD("VRI Supervisor No");
-                 TESTFIELD("VRI Date");
-                 IF "Trunk lid" = "Trunk lid"::"Not OK" THEN BEGIN
-                     "Pass to Sales/Marketing" := FALSE;
-                     "GR Problems" := TRUE;
-                     "Problem Vehicle" := TRUE;
-                     "OK Value" := "OK Value" + 1;
-                 END ELSE BEGIN
-                     "GR Problems" := FALSE;
-                     "Problem Vehicle" := FALSE;
-                     IF "OK Value" <> 0 THEN
-                         "OK Value" := "OK Value" - 1;
-                 END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Trunk lid" = "Trunk lid"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "GR Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "GR Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                 IF "OK Value" <> 0 THEN
-                     IF Fixed = FALSE THEN
-                         "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                 IF "OK Value" = 0 THEN
-                     "Pass to Sales/Marketing" := TRUE;
-             end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(78; "Car Stereo"; Option)
         {
@@ -1701,30 +1712,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*  trigger OnValidate()
-             begin
-                 TESTFIELD("VRI Inspector Code");
-                 TESTFIELD("VRI Supervisor No");
-                 TESTFIELD("VRI Date");
-                 IF "Car Stereo" = "Car Stereo"::"Not OK" THEN BEGIN
-                     "Pass to Sales/Marketing" := FALSE;
-                     "Missing Accessories" := TRUE;
-                     "Problem Vehicle" := TRUE;
-                     "OK Value" := "OK Value" + 1;
-                 END ELSE BEGIN
-                     "Missing Accessories" := FALSE;
-                     "Problem Vehicle" := FALSE;
-                     IF "OK Value" <> 0 THEN
-                         "OK Value" := "OK Value" - 1;
-                 END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Car Stereo" = "Car Stereo"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "Missing Accessories" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "Missing Accessories" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                 IF "OK Value" <> 0 THEN
-                     IF Fixed = FALSE THEN
-                         "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                 IF "OK Value" = 0 THEN
-                     "Pass to Sales/Marketing" := TRUE;
-             end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(79; "Lights operation"; Option)
         {
@@ -1732,30 +1743,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*  trigger OnValidate()
-             begin
-                 TESTFIELD("VRI Inspector Code");
-                 TESTFIELD("VRI Supervisor No");
-                 TESTFIELD("VRI Date");
-                 IF "Lights operation" = "Lights operation"::"Not OK" THEN BEGIN
-                     "Pass to Sales/Marketing" := FALSE;
-                     "GR Problems" := TRUE;
-                     "Problem Vehicle" := TRUE;
-                     "OK Value" := "OK Value" + 1;
-                 END ELSE BEGIN
-                     "GR Problems" := FALSE;
-                     "Problem Vehicle" := FALSE;
-                     IF "OK Value" <> 0 THEN
-                         "OK Value" := "OK Value" - 1;
-                 END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Lights operation" = "Lights operation"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "GR Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "GR Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                 IF "OK Value" <> 0 THEN
-                     IF Fixed = FALSE THEN
-                         "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                 IF "OK Value" = 0 THEN
-                     "Pass to Sales/Marketing" := TRUE;
-             end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(80; "Wipers operation"; Option)
         {
@@ -1763,30 +1774,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*  trigger OnValidate()
-             begin
-                 TESTFIELD("VRI Inspector Code");
-                 TESTFIELD("VRI Supervisor No");
-                 TESTFIELD("VRI Date");
-                 IF "Wipers operation" = "Wipers operation"::"Not OK" THEN BEGIN
-                     "Pass to Sales/Marketing" := FALSE;
-                     "GR Problems" := TRUE;
-                     "Problem Vehicle" := TRUE;
-                     "OK Value" := "OK Value" + 1;
-                 END ELSE BEGIN
-                     "GR Problems" := FALSE;
-                     "Problem Vehicle" := FALSE;
-                     IF "OK Value" <> 0 THEN
-                         "OK Value" := "OK Value" - 1;
-                 END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Wipers operation" = "Wipers operation"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "GR Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "GR Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                 IF "OK Value" <> 0 THEN
-                     IF Fixed = FALSE THEN
-                         "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                 IF "OK Value" = 0 THEN
-                     "Pass to Sales/Marketing" := TRUE;
-             end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(81; "Seat belts Operation"; Option)
         {
@@ -1794,30 +1805,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*    trigger OnValidate()
-               begin
-                   TESTFIELD("VRI Inspector Code");
-                   TESTFIELD("VRI Supervisor No");
-                   TESTFIELD("VRI Date");
-                   IF "Seat belts Operation" = "Seat belts Operation"::"Not OK" THEN BEGIN
-                       "Pass to Sales/Marketing" := FALSE;
-                       "GR Problems" := TRUE;
-                       "Problem Vehicle" := TRUE;
-                       "OK Value" := "OK Value" + 1;
-                   END ELSE BEGIN
-                       "GR Problems" := FALSE;
-                       "Problem Vehicle" := FALSE;
-                       IF "OK Value" <> 0 THEN
-                           "OK Value" := "OK Value" - 1;
-                   END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Seat belts Operation" = "Seat belts Operation"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "GR Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "GR Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                   IF "OK Value" <> 0 THEN
-                       IF Fixed = FALSE THEN
-                           "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                   IF "OK Value" = 0 THEN
-                       "Pass to Sales/Marketing" := TRUE;
-               end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(82; "Seat operation"; Option)
         {
@@ -1825,7 +1836,7 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /* trigger OnValidate()
+            trigger OnValidate()
             begin
                 TESTFIELD("VRI Inspector Code");
                 TESTFIELD("VRI Supervisor No");
@@ -1848,7 +1859,7 @@ table 50058 "VRI Table"
 
                 IF "OK Value" = 0 THEN
                     "Pass to Sales/Marketing" := TRUE;
-            end; */
+            end;
         }
         field(83; "Cigarrette lighter"; Option)
         {
@@ -1856,30 +1867,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*   trigger OnValidate()
-              begin
-                  TESTFIELD("VRI Inspector Code");
-                  TESTFIELD("VRI Supervisor No");
-                  TESTFIELD("VRI Date");
-                  IF "Cigarrette lighter" = "Cigarrette lighter"::"Not OK" THEN BEGIN
-                      "Pass to Sales/Marketing" := FALSE;
-                      "GR Problems" := TRUE;
-                      "Problem Vehicle" := TRUE;
-                      "OK Value" := "OK Value" + 1;
-                  END ELSE BEGIN
-                      "GR Problems" := FALSE;
-                      "Problem Vehicle" := FALSE;
-                      IF "OK Value" <> 0 THEN
-                          "OK Value" := "OK Value" - 1;
-                  END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Cigarrette lighter" = "Cigarrette lighter"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "GR Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "GR Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                  IF "OK Value" <> 0 THEN
-                      IF Fixed = FALSE THEN
-                          "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                  IF "OK Value" = 0 THEN
-                      "Pass to Sales/Marketing" := TRUE;
-              end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(84; "Steering wheel"; Option)
         {
@@ -1887,30 +1898,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*  trigger OnValidate()
-             begin
-                 TESTFIELD("VRI Inspector Code");
-                 TESTFIELD("VRI Supervisor No");
-                 TESTFIELD("VRI Date");
-                 IF "Steering wheel" = "Steering wheel"::"Not OK" THEN BEGIN
-                     "Pass to Sales/Marketing" := FALSE;
-                     "GR Problems" := TRUE;
-                     "Problem Vehicle" := TRUE;
-                     "OK Value" := "OK Value" + 1;
-                 END ELSE BEGIN
-                     "GR Problems" := FALSE;
-                     "Problem Vehicle" := FALSE;
-                     IF "OK Value" <> 0 THEN
-                         "OK Value" := "OK Value" - 1;
-                 END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Steering wheel" = "Steering wheel"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "GR Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "GR Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                 IF "OK Value" <> 0 THEN
-                     IF Fixed = FALSE THEN
-                         "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                 IF "OK Value" = 0 THEN
-                     "Pass to Sales/Marketing" := TRUE;
-             end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(85; "Air condition"; Option)
         {
@@ -1918,30 +1929,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*  trigger OnValidate()
-             begin
-                 TESTFIELD("VRI Inspector Code");
-                 TESTFIELD("VRI Supervisor No");
-                 TESTFIELD("VRI Date");
-                 IF "Air condition" = "Air condition"::"Not OK" THEN BEGIN
-                     "Pass to Sales/Marketing" := FALSE;
-                     "GR Problems" := TRUE;
-                     "Problem Vehicle" := TRUE;
-                     "OK Value" := "OK Value" + 1;
-                 END ELSE BEGIN
-                     "GR Problems" := FALSE;
-                     "Problem Vehicle" := FALSE;
-                     IF "OK Value" <> 0 THEN
-                         "OK Value" := "OK Value" - 1;
-                 END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Air condition" = "Air condition"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "GR Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "GR Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                 IF "OK Value" <> 0 THEN
-                     IF Fixed = FALSE THEN
-                         "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                 IF "OK Value" = 0 THEN
-                     "Pass to Sales/Marketing" := TRUE;
-             end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(86; "Sun roof"; Option)
         {
@@ -1949,7 +1960,7 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /* trigger OnValidate()
+            trigger OnValidate()
             begin
                 TESTFIELD("VRI Inspector Code");
                 TESTFIELD("VRI Supervisor No");
@@ -1972,7 +1983,7 @@ table 50058 "VRI Table"
 
                 IF "OK Value" = 0 THEN
                     "Pass to Sales/Marketing" := TRUE;
-            end; */
+            end;
         }
         field(87; "Hand brake"; Option)
         {
@@ -1980,7 +1991,7 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /* trigger OnValidate()
+            trigger OnValidate()
             begin
                 TESTFIELD("VRI Inspector Code");
                 TESTFIELD("VRI Supervisor No");
@@ -2003,7 +2014,7 @@ table 50058 "VRI Table"
 
                 IF "OK Value" = 0 THEN
                     "Pass to Sales/Marketing" := TRUE;
-            end; */
+            end;
         }
         field(88; Headphone; Option)
         {
@@ -2011,30 +2022,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*  trigger OnValidate()
-             begin
-                 TESTFIELD("VRI Inspector Code");
-                 TESTFIELD("VRI Supervisor No");
-                 TESTFIELD("VRI Date");
-                 IF Headphone = Headphone::"Not OK" THEN BEGIN
-                     "Pass to Sales/Marketing" := FALSE;
-                     "Missing Accessories" := TRUE;
-                     "Problem Vehicle" := TRUE;
-                     "OK Value" := "OK Value" + 1;
-                 END ELSE BEGIN
-                     "Missing Accessories" := FALSE;
-                     "Problem Vehicle" := FALSE;
-                     IF "OK Value" <> 0 THEN
-                         "OK Value" := "OK Value" - 1;
-                 END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF Headphone = Headphone::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "Missing Accessories" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "Missing Accessories" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                 IF "OK Value" <> 0 THEN
-                     IF Fixed = FALSE THEN
-                         "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                 IF "OK Value" = 0 THEN
-                     "Pass to Sales/Marketing" := TRUE;
-             end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(89; "Interior floor mat"; Option)
         {
@@ -2042,7 +2053,7 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /* trigger OnValidate()
+            trigger OnValidate()
             begin
                 TESTFIELD("VRI Inspector Code");
                 TESTFIELD("VRI Supervisor No");
@@ -2065,7 +2076,7 @@ table 50058 "VRI Table"
 
                 IF "OK Value" = 0 THEN
                     "Pass to Sales/Marketing" := TRUE;
-            end; */
+            end;
         }
         field(90; "Interior roof"; Option)
         {
@@ -2073,30 +2084,30 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*  trigger OnValidate()
-             begin
-                 TESTFIELD("VRI Inspector Code");
-                 TESTFIELD("VRI Supervisor No");
-                 TESTFIELD("VRI Date");
-                 IF "Interior roof" = "Interior roof"::"Not OK" THEN BEGIN
-                     "Pass to Sales/Marketing" := FALSE;
-                     "GR Problems" := TRUE;
-                     "Problem Vehicle" := TRUE;
-                     "OK Value" := "OK Value" + 1;
-                 END ELSE BEGIN
-                     "GR Problems" := FALSE;
-                     "Problem Vehicle" := FALSE;
-                     IF "OK Value" <> 0 THEN
-                         "OK Value" := "OK Value" - 1;
-                 END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Interior roof" = "Interior roof"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "GR Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "GR Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                 IF "OK Value" <> 0 THEN
-                     IF Fixed = FALSE THEN
-                         "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                 IF "OK Value" = 0 THEN
-                     "Pass to Sales/Marketing" := TRUE;
-             end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(91; "Sun visor"; Option)
         {
@@ -2104,48 +2115,48 @@ table 50058 "VRI Table"
             NotBlank = true;
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*    trigger OnValidate()
-               begin
-                   TESTFIELD("VRI Inspector Code");
-                   TESTFIELD("VRI Supervisor No");
-                   TESTFIELD("VRI Date");
-                   IF "Sun visor" = "Sun visor"::"Not OK" THEN BEGIN
-                       "Pass to Sales/Marketing" := FALSE;
-                       "GR Problems" := TRUE;
-                       "Problem Vehicle" := TRUE;
-                       "OK Value" := "OK Value" + 1;
-                   END ELSE BEGIN
-                       "GR Problems" := FALSE;
-                       "Problem Vehicle" := FALSE;
-                       IF "OK Value" <> 0 THEN
-                           "OK Value" := "OK Value" - 1;
-                   END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Sun visor" = "Sun visor"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "GR Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "GR Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                   IF "OK Value" <> 0 THEN
-                       IF Fixed = FALSE THEN
-                           "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                   IF "OK Value" = 0 THEN
-                       "Pass to Sales/Marketing" := TRUE;
-               end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(92; "Inner Mirror"; Boolean)
         {
             BlankZero = true;
 
-            /*  trigger OnValidate()
-             begin
-                 TESTFIELD("VRI Inspector Code");
-                 TESTFIELD("VRI Supervisor No");
-                 TESTFIELD("VRI Date");
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
 
-                 IF "OK Value" <> 0 THEN
-                     IF Fixed = FALSE THEN
-                         "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                 IF "OK Value" = 0 THEN
-                     "Pass to Sales/Marketing" := TRUE;
-             end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(94; "VRI Approval Name"; Text[30])
         {
@@ -2187,53 +2198,53 @@ table 50058 "VRI Table"
         Boolean)
         {
 
-            /*   trigger OnValidate()
-              begin
-                  TESTFIELD("Send to Workshop Aprroval", TRUE);
-                  IF "Responsible Customer" = '' THEN
-                      ERROR('You must specify the responsible customer!');
+            trigger OnValidate()
+            begin
+                TESTFIELD("Send to Workshop Aprroval", TRUE);
+                IF "Responsible Customer" = '' THEN
+                    ERROR('You must specify the responsible customer!');
 
-                  IF "COF false" <> '' THEN
-                      ERROR('COF has been created before!') ELSE BEGIN
-                      IF Not ServiceItem.GET("VRI Code") THEN BEGIN
-                          TESTFIELD("Responsible Customer");
-                          ServiceItem.INIT;
-                          ServiceItem."No." := "VRI Code";
-                          ServiceItem."Model No." := "Model No.";
-                          ServiceItem.Make := "Model Name";
-                          ServiceItem."Engine No." := "Engine No.";
-                          ServiceItem."Serial No." := "Item Serial No.";
+                IF "COF No" <> '' THEN
+                    ERROR('COF has been created before!') ELSE BEGIN
+                    IF Not ServiceItem.GET("VRI Code") THEN BEGIN
+                        TESTFIELD("Responsible Customer");
+                        ServiceItem.INIT;
+                        ServiceItem."No." := "VRI Code";
+                        ServiceItem."Model No." := "Model No.";
+                        ServiceItem.Make := "Model Name";
+                        ServiceItem."Engine No." := "Engine No.";
+                        ServiceItem."Serial No." := "Item Serial No.";
 
-                          ServiceItem.VALIDATE(ServiceItem."Customer No.", "Responsible Customer");
-                          ServiceItem.INSERT(TRUE);
-                      END;
+                        ServiceItem.VALIDATE(ServiceItem."Customer No.", "Responsible Customer");
+                        ServiceItem.INSERT(TRUE);
+                    END;
 
-                      COFrec.INIT;
-                      COFrec.VALIDATE(COFrec."Customer No.", "Customer Account");
-                      COFrec.VALIDATE(COFrec."Vehicle Registration No.", "VRI Code");
-                      COFrec.VALIDATE(COFrec."Job Details", "Comment to Workshop");
-                      COFrec.VALIDATE(COFrec."COF Origin", "COF Origin"::VRI);
-                      COFrec."Frame No./VIN" := "Item Serial No.";
-                      COFrec."(Engine false)" := "Engine No.";
-                      COFrec."Model Name" := "Model Name";
-                      Servicesetup.GET();
-                      Servicesetup.TESTFIELD(Servicesetup.VCOF);
-                      COFrec."No. Series" := Servicesetup.VCOF;
-                      COFrec.INSERT(TRUE);
-                      "COF false" := COFrec."Customer Order Form No.";
-                      "COF Creation Date" := CURRENTDATETIME;
-                      "COF Created By" := USERID;
-                  END;
+                    COFrec.INIT;
+                    COFrec.VALIDATE(COFrec."Customer No.", "Customer Account");
+                    COFrec.VALIDATE(COFrec."Vehicle Registration No.", "VRI Code");
+                    COFrec.VALIDATE(COFrec."Job Details", "Comment to Workshop");
+                    COFrec.VALIDATE(COFrec."COF Origin", "COF Origin"::VRI);
+                    COFrec."Frame No./VIN" := "Item Serial No.";
+                    COFrec."(Engine No)" := "Engine No.";
+                    COFrec."Model Name" := "Model Name";
+                    Servicesetup.GET();
+                    Servicesetup.TESTFIELD(Servicesetup.VCOF);
+                    COFrec."No. Series" := Servicesetup.VCOF;
+                    COFrec.INSERT(TRUE);
+                    "COF No" := COFrec."Customer Order Form No.";
+                    "COF Creation Date" := CURRENTDATETIME;
+                    "COF Created By" := USERID;
+                END;
 
-                  IF "Responsible Customer" = '970000' THEN BEGIN  //VRI-TNL (falsen-Recoverable)
-                      "VRI Approved Ok" := TRUE;
-                      "VRI Approved Ok By" := 'SYSTEM';
-                      "Estimate Approved" := TRUE;
-                      "Estimate Approve By" := 'SYSTEM';
-                      "Estimate Approve Date&Time" := CURRENTDATETIME;
-                      MODIFY;
-                  END;
-              end; */
+                IF "Responsible Customer" = '970000' THEN BEGIN  //VRI-TNL (falsen-Recoverable)
+                    "VRI Approved Ok" := TRUE;
+                    "VRI Approved Ok By" := 'SYSTEM';
+                    "Estimate Approved" := TRUE;
+                    "Estimate Approve By" := 'SYSTEM';
+                    "Estimate Approve Date&Time" := CURRENTDATETIME;
+                    MODIFY;
+                END;
+            end;
         }
         field(104; "VRI Next Action"; Option)
         {
@@ -2241,41 +2252,46 @@ table 50058 "VRI Table"
             OptionCaption = ' ,Pending Waranty,Send to operation& Logistic';
             OptionMembers = " ","Pending Waranty","Send to operation& Logistic";
 
-            /*   trigger OnValidate()
-              begin
-                  IF "VRI Next Action" = "VRI Next Action"::"Pending Waranty" THEN
-                      IF Not CONFIRM('Are you sure you Warranty is Pending?', FALSE) THEN
-                          "VRI Next Action" := VRIREC."VRI Next Action"::" "
-                      ELSE BEGIN
-                          UserSetup.GET(USERID);
-                          SenderEmail := UserSetup."E-Mail";
-                          SenderName := UserSetup.Initials;
-                          ToName := 'eot@toyotanigeria.com';
+            trigger OnValidate()
+            begin
+                IF "VRI Next Action" = "VRI Next Action"::"Pending Waranty" THEN
+                    IF Not CONFIRM('Are you sure you Warranty is Pending?', FALSE) THEN
+                        "VRI Next Action" := VRIREC."VRI Next Action"::" "
+                    ELSE BEGIN
+                        UserSetup.GET(USERID);
+                        SenderEmail := UserSetup."E-Mail";
+                        SenderName := UserSetup.Initials;
+                        ToName := 'eot@toyotanigeria.com';
 
-                          WITH TempEmailItem DO BEGIN
-                              "Send to" := ToName;
-                              "Send CC" := SenderEmail;
-                              "Send BCC" := '';
-                              Subject := STRSUBSTfalse(Text011, "VRI Code");
+                        Subject := StrSubstNo(Text011, "VRI Code");
+                        Body := StrSubstNo(Text013, "VRI Code");
+                        CreateEmailBody("VRI Code", Body, '');
+                        SendEmail(ToName, Subject, EmailBody, SenderEmail, CCName);
 
-                              CRLF := '';
-                              CRLF[1] := 13;
-                              CRLF[2] := 10;
+                        /*    WITH TempEmailItem DO BEGIN
+                               "Send to" := ToName;
+                               "Send CC" := SenderEmail;
+                               "Send BCC" := '';
+                               Subject := StrSubstNo(Text011, "VRI Code");
 
-                              BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                              BodyStream.WRITETEXT('Hello,');
-                              BodyStream.WRITETEXT(CRLF + CRLF);
-                              BodyStream.WRITETEXT(STRSUBSTfalse(Text013, "VRI Code") + CRLF + CRLF +
-                              Text018);
-                              BodyStream.WRITETEXT(SenderName);
-                              BodyStream.WRITETEXT(CRLF + CRLF);
-                              BodyStream.WRITETEXT('This is a system generated mail. Please do Not reply to this email ID.');
-                              Body := BodyBlob.Blob;
-                              Send(FALSE);
-                          END;
-                          VALIDATE("Responsible Customer", '980000');
-                      END;
-              end; */
+                               CRLF := '';
+                               CRLF[1] := 13;
+                               CRLF[2] := 10;
+
+                               BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                               BodyStream.WRITETEXT('Hello,');
+                               BodyStream.WRITETEXT(CRLF + CRLF);
+                               BodyStream.WRITETEXT(StrSubstNo(Text013, "VRI Code") + CRLF + CRLF +
+                               Text018);
+                               BodyStream.WRITETEXT(SenderName);
+                               BodyStream.WRITETEXT(CRLF + CRLF);
+                               BodyStream.WRITETEXT('This is a system generated mail. Please do Not reply to this email ID.');
+                               Body := BodyBlob.Blob;
+                               Send(FALSE);
+                           END; */
+                        VALIDATE("Responsible Customer", '980000');
+                    END;
+            end;
         }
         field(105; "Logistic Action"; Option)
         {
@@ -2287,15 +2303,15 @@ table 50058 "VRI Table"
         {
             TableRelation = Customer."No.";
 
-            /*  trigger OnValidate()
-             begin
-                 IF CustRec.GET("Responsible Customer") THEN BEGIN
-                     "Responsible Customer Name" := CustRec.Name;
-                     CustRec.INIT;
-                     CustRec.VALIDATE(CustRec."No.", "Customer Account");
-                     ServiceItem.VALIDATE(ServiceItem."Chasis No.", "VRI Code");
-                 END;
-             end; */
+            trigger OnValidate()
+            begin
+                IF CustRec.GET("Responsible Customer") THEN BEGIN
+                    "Responsible Customer Name" := CustRec.Name;
+                    CustRec.INIT;
+                    CustRec.VALIDATE(CustRec."No.", "Customer Account");
+                    ServiceItem.VALIDATE(ServiceItem."Chasis No.", "VRI Code");
+                END;
+            end;
         }
         field(107; "Responsible Customer Name"; Text[30])
         {
@@ -2310,12 +2326,12 @@ table 50058 "VRI Table"
         {
             Editable = true;
 
-            /*   trigger OnValidate()
-              begin
-                  TESTFIELD("VRI Inspector Code");
-                  TESTFIELD("VRI Supervisor No");
-                  TESTFIELD("VRI Date");
-              end; */
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+            end;
         }
         field(111; "VRI  Type"; Option)
         {
@@ -2336,34 +2352,34 @@ table 50058 "VRI Table"
         field(114; "Problem Vehicle"; Boolean)
         {
 
-            /*  trigger OnValidate()
-             begin
-                 IF "Problem Vehicle" THEN BEGIN
-                     TESTFIELD("VRI Inspector Code");
-                     TESTFIELD("VRI Supervisor No");
-                     TESTFIELD("VRI Date");
-                 END;
+            trigger OnValidate()
+            begin
+                IF "Problem Vehicle" THEN BEGIN
+                    TESTFIELD("VRI Inspector Code");
+                    TESTFIELD("VRI Supervisor No");
+                    TESTFIELD("VRI Date");
+                END;
 
-                 UserSetup.GET(USERID);
-                 IF Not UserSetup."Problem Vehicle" THEN
-                     ERROR(Text016);
-             end; */
+                UserSetup.GET(USERID);
+                IF Not UserSetup."Problem Vehicle" THEN
+                    ERROR(Text016);
+            end;
         }
         field(115; "VRI Inspector Code"; Code[10])
         {
             TableRelation = "VRI Inspector".Code WHERE(Status = filter(Inspector));
 
-            /*   trigger OnValidate()
-              begin
-                  IF VRec.GET("VRI Inspector Code") THEN BEGIN
-                      "VRI Inspector Name" := VRec.Name;
-                      "VRI Inspector Department" := VRec.Department;
-                      "VRI Operative Location" := VRec.Location;
-                      "VRI Operative Unit" := VRec.Unit;
-                      "VRI Inspector Address" := VRec.Address;
-                      "VRI Inspector Phone No." := VRec."Phone falses";
-                  END;
-              end; */
+            trigger OnValidate()
+            begin
+                IF VRec.GET("VRI Inspector Code") THEN BEGIN
+                    "VRI Inspector Name" := VRec.Name;
+                    "VRI Inspector Department" := VRec.Department;
+                    "VRI Operative Location" := VRec.Location;
+                    "VRI Operative Unit" := VRec.Unit;
+                    "VRI Inspector Address" := VRec.Address;
+                    "VRI Inspector Phone No." := VRec."Phone Nos";
+                END;
+            end;
         }
         field(116; "VRI Inspector Name"; Text[30])
         {
@@ -2392,7 +2408,7 @@ table 50058 "VRI Table"
         field(124; "Send For Approval"; Boolean)
         {
 
-            /* trigger OnValidate()
+            trigger OnValidate()
             begin
                 //TESTFIELD(""Problem Vehicle"");
                 //TESTFIELD("BnP Problems");
@@ -2405,37 +2421,37 @@ table 50058 "VRI Table"
                 TESTFIELD("Estimate Approved", FALSE);
                 TESTFIELD(Arrived, TRUE);
                 TESTFIELD("Problem Vehicle", TRUE);
-            end; */
+            end;
         }
         field(125; "Approved for Sales&Mkt"; Boolean)
         {
 
-            /*      trigger OnValidate()
-                 begin
-                     IF "Approved for Sales&Mkt" THEN
-                         IF (Fixed = FALSE) AND ("Not Fixed" = FALSE) THEN
-                             ERROR('Please specify if vehicle is Fixed or Not Fixed!');
+            trigger OnValidate()
+            begin
+                IF "Approved for Sales&Mkt" THEN
+                    IF (Fixed = FALSE) AND ("Not Fixed" = FALSE) THEN
+                        ERROR('Please specify if vehicle is Fixed or Not Fixed!');
 
 
-                     UserRec.GET(USERID);
-                     IF Not UserRec."Approved for Sales&Mkt" THEN
-                         ERROR('Unauthorized action. Contact your system administrator!');
+                UserRec.GET(USERID);
+                IF Not UserRec."Approved for Sales&Mkt" THEN
+                    ERROR('Unauthorized action. Contact your system administrator!');
 
-                     IF UserRec."User ID" = 'ALAMU' THEN
-                         IF "Problem Vehicle" = TRUE THEN
-                             ERROR('Unauthorized action. Contact your system administrator!');
+                IF UserRec."User ID" = 'ALAMU' THEN
+                    IF "Problem Vehicle" = TRUE THEN
+                        ERROR('Unauthorized action. Contact your system administrator!');
 
-                     IF "Approved for Sales&Mkt" = TRUE THEN BEGIN
-                         UserRec.GET(USERID);
-                         "Approve for Sales&mkt By" := USERID;
-                         "Approved Date&Time" := CURRENTDATETIME;
-                         "Pass to Sales/Marketing" := TRUE;
-                     END ELSE BEGIN
-                         "Approve for Sales&mkt By" := USERID;
-                         "Approved Date&Time" := CURRENTDATETIME;
-                         "Pass to Sales/Marketing" := FALSE;
-                     END;
-                 end; */
+                IF "Approved for Sales&Mkt" = TRUE THEN BEGIN
+                    UserRec.GET(USERID);
+                    "Approve for Sales&mkt By" := USERID;
+                    "Approved Date&Time" := CURRENTDATETIME;
+                    "Pass to Sales/Marketing" := TRUE;
+                END ELSE BEGIN
+                    "Approve for Sales&mkt By" := USERID;
+                    "Approved Date&Time" := CURRENTDATETIME;
+                    "Pass to Sales/Marketing" := FALSE;
+                END;
+            end;
         }
         field(126; "Approved for Workshop"; Boolean)
         {
@@ -2506,7 +2522,7 @@ table 50058 "VRI Table"
         }
         field(134; "Open COF  Approval"; Integer)
         {
-            /* CalcFormula = Count("VRI Table" WHERE(Arrived = filter(true),
+            CalcFormula = Count("VRI Table" WHERE(Arrived = filter(true),
                                                    "Problem Vehicle" = filter(true),
                                                    "Pass to Sales/Marketing" = filter(false),
                                                    "Send For Approval" = filter(true),
@@ -2517,12 +2533,12 @@ table 50058 "VRI Table"
                                                    "VRI Approved Ok" = filter(false),
                                                    Delivered = filter(false),
                                                    "VRI Location" = FIELD("Location Filter"),
-                                                   "Model Name" = FIELD(Model Filter),
-                                                   "Estimate Approved"=filter(false),
-                                                   "Send for Est. Verification"=filter(false),
-                                                   Sold=filter(false)));
+                                                   "Model Name" = FIELD("Model Filter"),
+                                                   "Estimate Approved" = filter(false),
+                                                   "Send for Est. Verification" = filter(false),
+                                                   Sold = filter(false)));
             Description = 'k';
-            FieldClass = FlowField;  */
+            FieldClass = FlowField;
         }
         field(135; "Pass to Sales/Marketing COUNT"; Integer)
         {
@@ -2573,7 +2589,7 @@ table 50058 "VRI Table"
         }
         field(138; "Estimate Approval"; Integer)
         {
-            /* CalcFormula = Count("VRI Table" WHERE(Arrived = filter(true),
+            CalcFormula = Count("VRI Table" WHERE(Arrived = filter(true),
                                                    "Problem Vehicle" = filter(true),
                                                    "Pass to Sales/Marketing" = filter(false),
                                                    "Send For Approval" = filter(true),
@@ -2584,11 +2600,11 @@ table 50058 "VRI Table"
                                                    "VRI Approved Ok" = filter(true),
                                                    Delivered = filter(false),
                                                    "VRI Location" = FIELD("Location Filter"),
-                                                   "Model Name" = FIELD(Model Filter),
-                                                   "Estimate Approved"=filter(false),
-                                                   Sold=filter(false)));
+                                                   "Model Name" = FIELD("Model Filter"),
+                                                   "Estimate Approved" = filter(false),
+                                                   Sold = filter(false)));
             Description = 'k';
-            FieldClass = FlowField;  */
+            FieldClass = FlowField;
         }
         field(139; Comment; Boolean)
         {
@@ -2615,59 +2631,61 @@ table 50058 "VRI Table"
         field(143; "Send to Workshop Aprroval"; Boolean)
         {
 
-            /*        trigger OnValidate()
-                   begin
-                       TESTFIELD(""Op./Log.  Approval"", TRUE);
+            trigger OnValidate()
+            begin
+                //TESTFIELD("Op./Log.  Approval", TRUE);
 
-                       IF Not CONFIRM('Are you sure you want to send to Workshop Approval?', FALSE) THEN
-                           "Send to Workshop Aprroval" := FALSE
-                       ELSE BEGIN
-                           "Send to Workshop By" := USERID;
-                           "Send to Workshp Date&time" := CURRENTDATETIME;
-                           "Comment to WorkshopII" := "Comment to Workshop";
-                           Servicesetup.GET;
-                           ToName := Servicesetup."Send To Workshop Approval";
-                           CCName := 'eot@toyotanigeria.com';
-                           Bcc := '';
-                           //  Subject := STRSUBSTfalse(Text005,"VRI Code");
-                           //  Body += STRSUBSTfalse(Text006,"VRI Code","Comment to WorkshopII");
-                           //  NL := 10;
-                           //  LF := 13;
-                           //  Body += 'We hereby request the following:';
-                           //  Body += FORMAT(NL)+FORMAT(LF);
-                           //  Body += "Comment to WorkshopII";
-                           //  Body += FORMAT(NL)+FORMAT(LF);
-                           //  Body += 'Kindly attend to this request with urgency.';
-                           UserSetup.GET(USERID);
-                           SenderEmail := UserSetup."E-Mail";
-                           SenderName := UserSetup.Initials;
+                IF Not CONFIRM('Are you sure you want to send to Workshop Approval?', FALSE) THEN
+                    "Send to Workshop Aprroval" := FALSE
+                ELSE BEGIN
+                    "Send to Workshop By" := USERID;
+                    "Send to Workshp Date&time" := CURRENTDATETIME;
+                    "Comment to WorkshopII" := "Comment to Workshop";
+                    Servicesetup.GET;
+                    ToName := Servicesetup."Send To Workshop Approval";
+                    CCName := 'eot@toyotanigeria.com';
+                    Bcc := '';
 
-                           WITH TempEmailItem DO BEGIN
-                               "Send to" := ToName;
-                               "Send CC" := SenderEmail + ';' + CCName;
-                               "Send BCC" := '';
-                               Subject := STRSUBSTfalse(Text005, "VRI Code");
+                    UserSetup.GET(USERID);
+                    SenderEmail := UserSetup."E-Mail";
+                    SenderName := UserSetup.Initials;
 
-                               CRLF := '';
-                               CRLF[1] := 13;
-                               CRLF[2] := 10;
+                    Subject := StrSubstNo(Text005, "VRI Code");
+                    Body := StrSubstNo(Text006, "VRI Code", "Comment to WorkshopII") +
+                        'We hereby request the following:/' +
+                        "Comment to WorkshopII" + 'Kindly attend to this request with urgency.';
 
-                               BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                               BodyStream.WRITETEXT('Hello,');
-                               BodyStream.WRITETEXT(CRLF + CRLF);
-                               BodyStream.WRITETEXT(STRSUBSTfalse(Text006, "VRI Code", "Comment to WorkshopII") + CRLF + CRLF +
-                               'We hereby request the following:' + CRLF + CRLF +
-                               "Comment to WorkshopII" + CRLF + CRLF +
-                               'Kindly attend to this request with urgency.' + CRLF + CRLF +
-                               Text018);
-                               BodyStream.WRITETEXT(SenderName);
-                               BodyStream.WRITETEXT(CRLF + CRLF);
-                               BodyStream.WRITETEXT('This is a system generated mail. Please do Not reply to this email ID.');
-                               Body := BodyBlob.Blob;
-                               Send(FALSE);
-                           END;
-                       END;
-                   end; */
+                    Subject := StrSubstNo(Text005, "VRI Code");
+                    CreateEmailBody("VRI Code", Body, '');
+                    SendEmail(ToName, Subject, EmailBody, SenderEmail, CCName);
+
+                    /*   WITH TempEmailItem DO BEGIN
+                          "Send to" := ToName;
+                          "Send CC" := SenderEmail + ';' + CCName;
+                          "Send BCC" := '';
+                          Subject := StrSubstNo(Text005, "VRI Code");
+
+                          CRLF := '';
+                          CRLF[1] := 13;
+                          CRLF[2] := 10;
+
+                          BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                          BodyStream.WRITETEXT('Hello,');
+                          BodyStream.WRITETEXT(CRLF + CRLF);
+                          BodyStream.WRITETEXT(StrSubstNo(Text006, "VRI Code", "Comment to WorkshopII") + CRLF + CRLF +
+                          'We hereby request the following:' + CRLF + CRLF +
+                          "Comment to WorkshopII" + CRLF + CRLF +
+                          'Kindly attend to this request with urgency.' + CRLF + CRLF +
+                          Text018);
+                          BodyStream.WRITETEXT(SenderName);
+                          BodyStream.WRITETEXT(CRLF + CRLF);
+                          BodyStream.WRITETEXT('This is a system generated mail. Please do Not reply to this email ID.');
+                          Body := BodyBlob.Blob;
+                          Send(FALSE);
+                      END; */
+
+                END;
+            end;
         }
         field(144; "Part Order"; Boolean)
         {
@@ -2706,8 +2724,8 @@ table 50058 "VRI Table"
                                 Servicesetup.GET;
                                 ToName := Servicesetup."Estimate Approved";
                                 CCName := 'eot@toyotanigeria.com';
-                                Subject := STRSUBSTfalse(Text011, "VRI Code");
-                                Body := STRSUBSTfalse(Text012, "VRI Code", "O/Log Comment");
+                                Subject := StrSubstNo(Text011, "VRI Code");
+                                Body := StrSubstNo(Text012, "VRI Code", "O/Log Comment");
                                 UserSetup.GET(USERID);
                                 SenderEmail := UserSetup."E-Mail";
                                 SenderName := UserSetup.Initials;
@@ -2716,7 +2734,7 @@ table 50058 "VRI Table"
                                     "Send to" := ToName;
                                     "Send CC" := SenderEmail + ';' + CCName;
                                     "Send BCC" := '';
-                                    Subject := STRSUBSTfalse(Text011, "VRI Code");
+                                    Subject := StrSubstNo(Text011, "VRI Code");
 
                                     CRLF := '';
                                     CRLF[1] := 13;
@@ -2725,7 +2743,7 @@ table 50058 "VRI Table"
                                     BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
                                     BodyStream.WRITETEXT('Hello,');
                                     BodyStream.WRITETEXT(CRLF + CRLF);
-                                    BodyStream.WRITETEXT(STRSUBSTfalse(Text012, "VRI Code", "O/Log Comment") + CRLF + CRLF +
+                                    BodyStream.WRITETEXT(StrSubstNo(Text012, "VRI Code", "O/Log Comment") + CRLF + CRLF +
                                     Text018);
                                     BodyStream.WRITETEXT(SenderName);
                                     BodyStream.WRITETEXT(CRLF + CRLF);
@@ -2738,8 +2756,7 @@ table 50058 "VRI Table"
         }
         field(148; Arrived; Boolean)
         {
-
-            /* trigger OnValidate()
+            trigger OnValidate()
             begin
                 IF Arrived = TRUE THEN BEGIN
                     "Arrive Approve by" := USERID;
@@ -2750,17 +2767,17 @@ table 50058 "VRI Table"
                     "Time of Arrival" := 0T;
                     "Date Of Arrival" := 0D;
                 END;
-            end; */
+            end;
         }
         field(149; "VRI Supervisor No"; Code[20])
         {
             TableRelation = "VRI Inspector".Code WHERE(Status = filter('Supervisor'));
 
-            /*  trigger OnValidate()
-             begin
-                 IF VRec.GET("VRI Supervisor No") THEN
-                     "VRI Supervisor Name" := VRec.Name;
-             end; */
+            trigger OnValidate()
+            begin
+                IF VRec.GET("VRI Supervisor No") THEN
+                    "VRI Supervisor Name" := VRec.Name;
+            end;
         }
         field(150; "VRI Supervisor Name"; Text[30])
         {
@@ -2807,7 +2824,7 @@ table 50058 "VRI Table"
                       TESTFIELD("1st Apprv. Status",0);
                        "Current pending Person" := "1st Approval to";
                        ToName  := UserSetup."E-Mail";
-                       Subject := STRSUBSTfalse(text001,"No.");
+                       Subject := StrSubstNo(text001,"No.");
                        SMTPMail.CreateMessage(USERID,SenderEmail,ToName,Subject,Body,FALSE);
                        SMTPMail.Send;
                        MESSAGE('Mail sent successfully');
@@ -2836,18 +2853,18 @@ table 50058 "VRI Table"
         }
         field(183; "PENDING OP/LOG  Approval COUNT"; Integer)
         {
-            /*  CalcFormula = Count("VRI Table" WHERE("Send For Approval" = filter(true),
+            CalcFormula = Count("VRI Table" WHERE("Send For Approval" = filter(true),
                                                     "Send Request to Logistics" = filter(false),
                                                     "Send VRI Request" = filter(true),
                                                     "Problem Vehicle" = filter(true),
                                                     "Op./Log.  Approval" = filter(true),
                                                     "Pass to Sales/Marketing" = filter(false),
-                                                    Workshop Approval=filter(false),
-                                                    Arrived=filter(true),
-                                                    "VRI Location"=FIELD("Location Filter"),
-                                                    "Model Name"=FIELD("Model Filter")));
-             Description = 'k';
-             FieldClass = FlowField;  */
+                                                    "Workshop Approval" = filter(false),
+                                                    Arrived = filter(true),
+                                                    "VRI Location" = FIELD("Location Filter"),
+                                                    "Model Name" = FIELD("Model Filter")));
+            Description = 'k';
+            FieldClass = FlowField;
         }
         field(184; "Estimate Approve By"; Text[30])
         {
@@ -2866,40 +2883,40 @@ table 50058 "VRI Table"
         }
         field(189; "Completion of Service Delivrd"; Integer)
         {
-            /* CalcFormula = Count("VRI Table" WHERE (Arrived=filter(true),
-                                                   "Problem Vehicle"=filter(true),
-                                                   "Pass to Sales/Marketing"=filter(false),
-                                                   "Send For Approval"=filter(true),
-                                                   "Send VRI Request"=filter(true),
-                                                   "Op./Log.  Approval"=filter(true),
-                                                   "Send to Workshop Aprroval"=filter(true),
-                                                   "Open COF"=filter(true),
-                                                   "Estimate Approved"=filter(true),
-                                                   Delivered=filter(true),
-                                                   "VRI Location"=FIELD("Location Filter"),
-                                                   "Model Name"=FIELD("Model Filter")));
+            CalcFormula = Count("VRI Table" WHERE(Arrived = filter(true),
+                                                   "Problem Vehicle" = filter(true),
+                                                   "Pass to Sales/Marketing" = filter(false),
+                                                   "Send For Approval" = filter(true),
+                                                   "Send VRI Request" = filter(true),
+                                                   "Op./Log.  Approval" = filter(true),
+                                                   "Send to Workshop Aprroval" = filter(true),
+                                                   "Open COF" = filter(true),
+                                                   "Estimate Approved" = filter(true),
+                                                   Delivered = filter(true),
+                                                   "VRI Location" = FIELD("Location Filter"),
+                                                   "Model Name" = FIELD("Model Filter")));
             Description = 'k';
-            FieldClass = FlowField; */
+            FieldClass = FlowField;
         }
         field(190; "Pass To Sales JOB DONE"; Integer)
         {
-            /* CalcFormula = Count("VRI Table" WHERE ("Pass to Sales/Marketing"=filter(true),
-                                                   "VRI Location"=FIELD("Location Filter"),
-                                                   "Model Name"=FIELD("Model Filter")));
+            CalcFormula = Count("VRI Table" WHERE("Pass to Sales/Marketing" = filter(true),
+                                                   "VRI Location" = FIELD("Location Filter"),
+                                                   "Model Name" = FIELD("Model Filter")));
             Description = 'k';
-            FieldClass = FlowField; */
+            FieldClass = FlowField;
         }
         field(191; "VRI Form Arrived count"; Integer)
         {
-            /* CalcFormula = Count("VRI Table" WHERE (Arrived=filter(true),
-                                                   "Send For Approval"=filter(false),
-                                                   "VRI Location"=FIELD("Location Filter"),
-                                                   "Model Name"=FIELD("Model Filter"),
-                                                   "Problem Vehicle"=filter(false),
-                                                   "Pass to Sales/Marketing"=filter(false),
-                                                   Sold=filter(false)));
+            CalcFormula = Count("VRI Table" WHERE(Arrived = filter(true),
+                                                   "Send For Approval" = filter(false),
+                                                   "VRI Location" = FIELD("Location Filter"),
+                                                   "Model Name" = FIELD("Model Filter"),
+                                                   "Problem Vehicle" = filter(false),
+                                                   "Pass to Sales/Marketing" = filter(false),
+                                                   Sold = filter(false)));
             Description = 'k';
-            FieldClass = FlowField; */
+            FieldClass = FlowField;
         }
         field(192; "Arrive Approve by"; Text[30])
         {
@@ -2957,8 +2974,8 @@ table 50058 "VRI Table"
                   Servicesetup.GET;
                   ToName  :=Servicesetup.""Estimate Approved"";
                   CCName := 'eot@toyotanigeria.com';
-                  Subject := STRSUBSTfalse(Text009,"VRI Code");
-                  Body:=  STRSUBSTfalse( Text010,"VRI Code","O/Log Comment");
+                  Subject := StrSubstNo(Text009,"VRI Code");
+                  Body:=  StrSubstNo( Text010,"VRI Code","O/Log Comment");
                   UserSetup.GET(USERID);
                   SenderEmail := UserSetup."E-Mail";
                   SenderName := UserSetup.Initials;
@@ -2967,7 +2984,7 @@ table 50058 "VRI Table"
                     "Send to" := ToName;
                     "Send CC" := SenderEmail + ';' + CCName;
                     "Send BCC" := '';
-                    Subject := STRSUBSTfalse(Text009,"VRI Code");
+                    Subject := StrSubstNo(Text009,"VRI Code");
 
                     CRLF := '';
                     CRLF[1] := 13;
@@ -2976,7 +2993,7 @@ table 50058 "VRI Table"
                     BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
                     BodyStream.WRITETEXT('Hello,');
                     BodyStream.WRITETEXT(CRLF + CRLF);
-                    BodyStream.WRITETEXT(STRSUBSTfalse(Text010,"VRI Code","O/Log Comment") + CRLF + CRLF +
+                    BodyStream.WRITETEXT(StrSubstNo(Text010,"VRI Code","O/Log Comment") + CRLF + CRLF +
                     Text018);
                     BodyStream.WRITETEXT(SenderName);
                     BodyStream.WRITETEXT(CRLF + CRLF);
@@ -3000,13 +3017,13 @@ table 50058 "VRI Table"
         {
             TableRelation = "VRI Inspector".Code WHERE(Status = filter(Supervisor));
 
-            /* trigger OnValidate()
+            trigger OnValidate()
             begin
                 IF VRec.GET("VRI Supervisor") THEN BEGIN
-                 "VRI Supervisor Name." :=VRec.Name;
-                 SETFILTER(""Location Filter"",VRec.Location);
+                    "VRI Supervisor Name." := VRec.Name;
+                    SETFILTER("Location Filter", VRec.Location);
                 END;
-            end; */
+            end;
         }
         field(208; "VRI Supervisor Name."; Text[30])
         {
@@ -3026,465 +3043,465 @@ table 50058 "VRI Table"
         {
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*   trigger OnValidate()
-             begin
-                 TESTFIELD("VRI Inspector Code");
-                 TESTFIELD("VRI Supervisor No");
-                 TESTFIELD("VRI Date");
-                 IF "Window winding" = "Window winding"::"Not OK" THEN BEGIN
-                   "Pass to Sales/Marketing" := FALSE;
-                   "GR Problems" := TRUE;
-                   "Problem Vehicle" := TRUE;
-                   "OK Value" := "OK Value" + 1;
-                 END ELSE BEGIN
-                   "GR Problems" := FALSE;
-                   "Problem Vehicle" := FALSE;
-                   IF "OK Value" <> 0 THEN
-                   "OK Value" := "OK Value" - 1;
-                 END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Window winding" = "Window winding"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "GR Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "GR Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                 IF "OK Value" <> 0 THEN
-                   IF Fixed = FALSE THEN
-                   "Pass to Sales/Marketing" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                 IF "OK Value" = 0 THEN
-                   "Pass to Sales/Marketing" := TRUE;
-             end; */ 
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(213; "Side mirror oprtn"; Option)
         {
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /* trigger OnValidate()
+            trigger OnValidate()
             begin
                 TESTFIELD("VRI Inspector Code");
                 TESTFIELD("VRI Supervisor No");
                 TESTFIELD("VRI Date");
                 IF "Side mirror oprtn" = "Side mirror oprtn"::"Not OK" THEN BEGIN
-                  ""Pass to Sales/Marketing"" := FALSE;
-                  "GR Problems" := TRUE;
-                  ""Problem Vehicle"" := TRUE;
-                  "OK Value" := "OK Value" + 1;
+                    "Pass to Sales/Marketing" := FALSE;
+                    "GR Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
                 END ELSE BEGIN
-                  "GR Problems" := FALSE;
-                  ""Problem Vehicle"" := FALSE;
-                  IF "OK Value" <> 0 THEN
-                  "OK Value" := "OK Value" - 1;
+                    "GR Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
                 END;
 
                 IF "OK Value" <> 0 THEN
-                  IF Fixed = FALSE THEN
-                  ""Pass to Sales/Marketing"" := FALSE;
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
                 IF "OK Value" = 0 THEN
-                  ""Pass to Sales/Marketing"" := TRUE;
-            end; */
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(214; "Inner lights"; Option)
         {
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*  trigger OnValidate()
-             begin
-                 TESTFIELD("VRI Inspector Code");
-                 TESTFIELD("VRI Supervisor No");
-                 TESTFIELD("VRI Date");
-                 IF "Inner lights" = "Inner lights"::"Not OK" THEN BEGIN
-                   ""Pass to Sales/Marketing"" := FALSE;
-                   "GR Problems" := TRUE;
-                   ""Problem Vehicle"" := TRUE;
-                   "OK Value" := "OK Value" + 1;
-                 END ELSE BEGIN
-                   "GR Problems" := FALSE;
-                   ""Problem Vehicle"" := FALSE;
-                   IF "OK Value" <> 0 THEN
-                   "OK Value" := "OK Value" - 1;
-                 END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Inner lights" = "Inner lights"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "GR Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "GR Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                 IF "OK Value" <> 0 THEN
-                   IF Fixed = FALSE THEN
-                   ""Pass to Sales/Marketing"" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                 IF "OK Value" = 0 THEN
-                   ""Pass to Sales/Marketing"" := TRUE;
-             end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(215; "Windscreen Cotton"; Option)
         {
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*     trigger OnValidate()
-                begin
-                    TESTFIELD("VRI Inspector Code");
-                    TESTFIELD("VRI Supervisor No");
-                    TESTFIELD("VRI Date");
-                    IF "Windscreen Cotton" = "Windscreen Cotton"::"Not OK" THEN BEGIN
-                      ""Pass to Sales/Marketing"" := FALSE;
-                      "Missing Accessories" := TRUE;
-                      ""Problem Vehicle"" := TRUE;
-                      "OK Value" := "OK Value" + 1;
-                    END ELSE BEGIN
-                      "Missing Accessories" := FALSE;
-                      ""Problem Vehicle"" := FALSE;
-                      IF "OK Value" <> 0 THEN
-                      "OK Value" := "OK Value" - 1;
-                    END;
-
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Windscreen Cotton" = "Windscreen Cotton"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "Missing Accessories" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "Missing Accessories" := FALSE;
+                    "Problem Vehicle" := FALSE;
                     IF "OK Value" <> 0 THEN
-                      IF Fixed = FALSE THEN
-                      ""Pass to Sales/Marketing"" := FALSE;
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                    IF "OK Value" = 0 THEN
-                      ""Pass to Sales/Marketing"" := TRUE;
-                end; */
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
+
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(216; "Spare tyre inflation"; Option)
         {
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*   trigger OnValidate()
-              begin
-                  TESTFIELD("VRI Inspector Code");
-                  TESTFIELD("VRI Supervisor No");
-                  TESTFIELD("VRI Date");
-                  IF "Spare tyre inflation" = "Spare tyre inflation"::"Not OK" THEN BEGIN
-                    ""Pass to Sales/Marketing"" := FALSE;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Spare tyre inflation" = "Spare tyre inflation"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
                     "Missing Accessories" := TRUE;
-                    ""Problem Vehicle"" := TRUE;
+                    "Problem Vehicle" := TRUE;
                     "OK Value" := "OK Value" + 1;
-                  END ELSE BEGIN
+                END ELSE BEGIN
                     "Missing Accessories" := FALSE;
-                    ""Problem Vehicle"" := FALSE;
+                    "Problem Vehicle" := FALSE;
                     IF "OK Value" <> 0 THEN
-                    "OK Value" := "OK Value" - 1;
-                  END;
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                  IF "OK Value" <> 0 THEN
+                IF "OK Value" <> 0 THEN
                     IF Fixed = FALSE THEN
-                    ""Pass to Sales/Marketing"" := FALSE;
+                        "Pass to Sales/Marketing" := FALSE;
 
-                  IF "OK Value" = 0 THEN
-                    ""Pass to Sales/Marketing"" := TRUE;
-              end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(217; Jack; Option)
         {
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*   trigger OnValidate()
-              begin
-                  TESTFIELD("VRI Inspector Code");
-                  TESTFIELD("VRI Supervisor No");
-                  TESTFIELD("VRI Date");
-                  IF Jack = Jack::"Not OK" THEN BEGIN
-                    ""Pass to Sales/Marketing"" := FALSE;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF Jack = Jack::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
                     "Missing Accessories" := TRUE;
-                    ""Problem Vehicle"" := TRUE;
+                    "Problem Vehicle" := TRUE;
                     "OK Value" := "OK Value" + 1;
-                  END ELSE BEGIN
+                END ELSE BEGIN
                     "Missing Accessories" := FALSE;
-                    ""Problem Vehicle"" := FALSE;
+                    "Problem Vehicle" := FALSE;
                     IF "OK Value" <> 0 THEN
-                    "OK Value" := "OK Value" - 1;
-                  END;
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                  IF "OK Value" <> 0 THEN
+                IF "OK Value" <> 0 THEN
                     IF Fixed = FALSE THEN
-                    ""Pass to Sales/Marketing"" := FALSE;
+                        "Pass to Sales/Marketing" := FALSE;
 
-                  IF "OK Value" = 0 THEN
-                    ""Pass to Sales/Marketing"" := TRUE;
-              end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(218; "Wheel covers boot"; Option)
         {
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*       trigger OnValidate()
-                  begin
-                      TESTFIELD("VRI Inspector Code");
-                      TESTFIELD("VRI Supervisor No");
-                      TESTFIELD("VRI Date");
-                      IF "Wheel covers boot" = "Wheel covers boot"::"Not OK" THEN BEGIN
-                        ""Pass to Sales/Marketing"" := FALSE;
-                        "Missing Accessories" := TRUE;
-                        ""Problem Vehicle"" := TRUE;
-                        "OK Value" := "OK Value" + 1;
-                      END ELSE BEGIN
-                        "Missing Accessories" := FALSE;
-                        ""Problem Vehicle"" := FALSE;
-                        IF "OK Value" <> 0 THEN
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Wheel covers boot" = "Wheel covers boot"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "Missing Accessories" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "Missing Accessories" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
                         "OK Value" := "OK Value" - 1;
-                      END;
+                END;
 
-                      IF "OK Value" <> 0 THEN
-                        IF Fixed = FALSE THEN
-                        ""Pass to Sales/Marketing"" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                      IF "OK Value" = 0 THEN
-                        ""Pass to Sales/Marketing"" := TRUE;
-                  end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(219; "Rear boot speakers"; Option)
         {
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*      trigger OnValidate()
-                 begin
-                     TESTFIELD("VRI Inspector Code");
-                     TESTFIELD("VRI Supervisor No");
-                     TESTFIELD("VRI Date");
-                     IF "Rear boot speakers" = "Rear boot speakers"::"Not OK" THEN BEGIN
-                       ""Pass to Sales/Marketing"" := FALSE;
-                       "Missing Accessories" := TRUE;
-                       ""Problem Vehicle"" := TRUE;
-                       "OK Value" := "OK Value" + 1;
-                     END ELSE BEGIN
-                       "Missing Accessories" := FALSE;
-                       ""Problem Vehicle"" := FALSE;
-                       IF "OK Value" <> 0 THEN
-                       "OK Value" := "OK Value" - 1;
-                     END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Rear boot speakers" = "Rear boot speakers"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "Missing Accessories" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "Missing Accessories" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                     IF "OK Value" <> 0 THEN
-                       IF Fixed = FALSE THEN
-                       ""Pass to Sales/Marketing"" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                     IF "OK Value" = 0 THEN
-                       ""Pass to Sales/Marketing"" := TRUE;
-                 end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(220; "Fire Extinguisher"; Option)
         {
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*  trigger OnValidate()
-             begin
-                 TESTFIELD("VRI Inspector Code");
-                 TESTFIELD("VRI Supervisor No");
-                 TESTFIELD("VRI Date");
-                 IF "Fire Extinguisher" = "Fire Extinguisher"::"Not OK" THEN BEGIN
-                   ""Pass to Sales/Marketing"" := FALSE;
-                   "Missing Accessories" := TRUE;
-                   ""Problem Vehicle"" := TRUE;
-                   "OK Value" := "OK Value" + 1;
-                 END ELSE BEGIN
-                   "Missing Accessories" := FALSE;
-                   ""Problem Vehicle"" := FALSE;
-                   IF "OK Value" <> 0 THEN
-                   "OK Value" := "OK Value" - 1;
-                 END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Fire Extinguisher" = "Fire Extinguisher"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "Missing Accessories" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "Missing Accessories" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                 IF "OK Value" <> 0 THEN
-                   IF Fixed = FALSE THEN
-                   ""Pass to Sales/Marketing"" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                 IF "OK Value" = 0 THEN
-                   ""Pass to Sales/Marketing"" := TRUE;
-             end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(221; "C caution"; Option)
         {
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*   trigger OnValidate()
-              begin
-                  TESTFIELD("VRI Inspector Code");
-                  TESTFIELD("VRI Supervisor No");
-                  TESTFIELD("VRI Date");
-                  IF "C caution" = "C caution"::"Not OK" THEN BEGIN
-                    ""Pass to Sales/Marketing"" := FALSE;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "C caution" = "C caution"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
                     "Missing Accessories" := TRUE;
-                    ""Problem Vehicle"" := TRUE;
+                    "Problem Vehicle" := TRUE;
                     "OK Value" := "OK Value" + 1;
-                  END ELSE BEGIN
+                END ELSE BEGIN
                     "Missing Accessories" := FALSE;
-                    ""Problem Vehicle"" := FALSE;
+                    "Problem Vehicle" := FALSE;
                     IF "OK Value" <> 0 THEN
-                    "OK Value" := "OK Value" - 1;
-                  END;
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                  IF "OK Value" <> 0 THEN
+                IF "OK Value" <> 0 THEN
                     IF Fixed = FALSE THEN
-                    ""Pass to Sales/Marketing"" := FALSE;
+                        "Pass to Sales/Marketing" := FALSE;
 
-                  IF "OK Value" = 0 THEN
-                    ""Pass to Sales/Marketing"" := TRUE;
-              end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(222; "Body plug"; Option)
         {
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*     trigger OnValidate()
-                begin
-                    TESTFIELD("VRI Inspector Code");
-                    TESTFIELD("VRI Supervisor No");
-                    TESTFIELD("VRI Date");
-                    IF "Body plug" = "Body plug"::"Not OK" THEN BEGIN
-                      ""Pass to Sales/Marketing"" := FALSE;
-                      "Missing Accessories" := TRUE;
-                      ""Problem Vehicle"" := TRUE;
-                      "OK Value" := "OK Value" + 1;
-                    END ELSE BEGIN
-                      "Missing Accessories" := FALSE;
-                      ""Problem Vehicle"" := FALSE;
-                      IF "OK Value" <> 0 THEN
-                      "OK Value" := "OK Value" - 1;
-                    END;
-
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Body plug" = "Body plug"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "Missing Accessories" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "Missing Accessories" := FALSE;
+                    "Problem Vehicle" := FALSE;
                     IF "OK Value" <> 0 THEN
-                      IF Fixed = FALSE THEN
-                      ""Pass to Sales/Marketing"" := FALSE;
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                    IF "OK Value" = 0 THEN
-                      ""Pass to Sales/Marketing"" := TRUE;
-                end; */
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
+
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(223; "Mud Guards"; Option)
         {
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*  trigger OnValidate()
-             begin
-                 TESTFIELD("VRI Inspector Code");
-                 TESTFIELD("VRI Supervisor No");
-                 TESTFIELD("VRI Date");
-                 IF "Mud Guards" = "Mud Guards"::"Not OK" THEN BEGIN
-                   ""Pass to Sales/Marketing"" := FALSE;
-                   "Missing Accessories" := TRUE;
-                   ""Problem Vehicle"" := TRUE;
-                   "OK Value" := "OK Value" + 1;
-                 END ELSE BEGIN
-                   "Missing Accessories" := FALSE;
-                   ""Problem Vehicle"" := FALSE;
-                   IF "OK Value" <> 0 THEN
-                   "OK Value" := "OK Value" - 1;
-                 END;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Mud Guards" = "Mud Guards"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "Missing Accessories" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "Missing Accessories" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                 IF "OK Value" <> 0 THEN
-                   IF Fixed = FALSE THEN
-                   ""Pass to Sales/Marketing"" := FALSE;
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
 
-                 IF "OK Value" = 0 THEN
-                   ""Pass to Sales/Marketing"" := TRUE;
-             end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(224; "Suspension mechanism"; Option)
         {
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*   trigger OnValidate()
-              begin
-                  TESTFIELD("VRI Inspector Code");
-                  TESTFIELD("VRI Supervisor No");
-                  TESTFIELD("VRI Date");
-                  IF "Suspension mechanism" = "Suspension mechanism"::"Not OK" THEN BEGIN
-                    ""Pass to Sales/Marketing"" := FALSE;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Suspension mechanism" = "Suspension mechanism"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
                     "GR Problems" := TRUE;
-                    ""Problem Vehicle"" := TRUE;
+                    "Problem Vehicle" := TRUE;
                     "OK Value" := "OK Value" + 1;
-                  END ELSE BEGIN
+                END ELSE BEGIN
                     "GR Problems" := FALSE;
-                    ""Problem Vehicle"" := FALSE;
+                    "Problem Vehicle" := FALSE;
                     IF "OK Value" <> 0 THEN
-                    "OK Value" := "OK Value" - 1;
-                  END;
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                  IF "OK Value" <> 0 THEN
+                IF "OK Value" <> 0 THEN
                     IF Fixed = FALSE THEN
-                    ""Pass to Sales/Marketing"" := FALSE;
+                        "Pass to Sales/Marketing" := FALSE;
 
-                  IF "OK Value" = 0 THEN
-                    ""Pass to Sales/Marketing"" := TRUE;
-              end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(225; "Brake pipes"; Option)
         {
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*   trigger OnValidate()
-              begin
-                  TESTFIELD("VRI Inspector Code");
-                  TESTFIELD("VRI Supervisor No");
-                  TESTFIELD("VRI Date");
-                  IF "Brake pipes" = "Brake pipes"::"Not OK" THEN BEGIN
-                    ""Pass to Sales/Marketing"" := FALSE;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Brake pipes" = "Brake pipes"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
                     "GR Problems" := TRUE;
-                    ""Problem Vehicle"" := TRUE;
+                    "Problem Vehicle" := TRUE;
                     "OK Value" := "OK Value" + 1;
-                  END ELSE BEGIN
+                END ELSE BEGIN
                     "GR Problems" := FALSE;
-                    ""Problem Vehicle"" := FALSE;
+                    "Problem Vehicle" := FALSE;
                     IF "OK Value" <> 0 THEN
-                    "OK Value" := "OK Value" - 1;
-                  END;
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                  IF "OK Value" <> 0 THEN
+                IF "OK Value" <> 0 THEN
                     IF Fixed = FALSE THEN
-                    ""Pass to Sales/Marketing"" := FALSE;
+                        "Pass to Sales/Marketing" := FALSE;
 
-                  IF "OK Value" = 0 THEN
-                    ""Pass to Sales/Marketing"" := TRUE;
-              end; */
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(226; "Exhaust pipe"; Option)
         {
             OptionMembers = OK,"Not OK","Not Applicable";
-            /* 
-                        trigger OnValidate()
-                        begin
-                            TESTFIELD("VRI Inspector Code");
-                            TESTFIELD("VRI Supervisor No");
-                            TESTFIELD("VRI Date");
-                            IF "Exhaust pipe" = "Exhaust pipe"::"Not OK" THEN BEGIN
-                              ""Pass to Sales/Marketing"" := FALSE;
-                              "GR Problems" := TRUE;
-                              ""Problem Vehicle"" := TRUE;
-                              "OK Value" := "OK Value" + 1;
-                            END ELSE BEGIN
-                              "GR Problems" := FALSE;
-                              ""Problem Vehicle"" := FALSE;
-                              IF "OK Value" <> 0 THEN
-                              "OK Value" := "OK Value" - 1;
-                            END;
 
-                            IF "OK Value" <> 0 THEN
-                              IF Fixed = FALSE THEN
-                              ""Pass to Sales/Marketing"" := FALSE;
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Exhaust pipe" = "Exhaust pipe"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "GR Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "GR Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
+                    IF "OK Value" <> 0 THEN
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                            IF "OK Value" = 0 THEN
-                              ""Pass to Sales/Marketing"" := TRUE;
-                        end; */
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
+
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(227; "Tyre damages"; Option)
         {
             OptionMembers = OK,"Not OK","Not Applicable";
 
-            /*     trigger OnValidate()
-                begin
-                    TESTFIELD("VRI Inspector Code");
-                    TESTFIELD("VRI Supervisor No");
-                    TESTFIELD("VRI Date");
-                    IF "Tyre damages" = "Tyre damages"::"Not OK" THEN BEGIN
-                      ""Pass to Sales/Marketing"" := FALSE;
-                      "GR Problems" := TRUE;
-                      ""Problem Vehicle"" := TRUE;
-                      "OK Value" := "OK Value" + 1;
-                    END ELSE BEGIN
-                      "GR Problems" := FALSE;
-                      ""Problem Vehicle"" := FALSE;
-                      IF "OK Value" <> 0 THEN
-                      "OK Value" := "OK Value" - 1;
-                    END;
-
+            trigger OnValidate()
+            begin
+                TESTFIELD("VRI Inspector Code");
+                TESTFIELD("VRI Supervisor No");
+                TESTFIELD("VRI Date");
+                IF "Tyre damages" = "Tyre damages"::"Not OK" THEN BEGIN
+                    "Pass to Sales/Marketing" := FALSE;
+                    "GR Problems" := TRUE;
+                    "Problem Vehicle" := TRUE;
+                    "OK Value" := "OK Value" + 1;
+                END ELSE BEGIN
+                    "GR Problems" := FALSE;
+                    "Problem Vehicle" := FALSE;
                     IF "OK Value" <> 0 THEN
-                      IF Fixed = FALSE THEN
-                      ""Pass to Sales/Marketing"" := FALSE;
+                        "OK Value" := "OK Value" - 1;
+                END;
 
-                    IF "OK Value" = 0 THEN
-                      ""Pass to Sales/Marketing"" := TRUE;
-                end; */
+                IF "OK Value" <> 0 THEN
+                    IF Fixed = FALSE THEN
+                        "Pass to Sales/Marketing" := FALSE;
+
+                IF "OK Value" = 0 THEN
+                    "Pass to Sales/Marketing" := TRUE;
+            end;
         }
         field(228; "Body Paint"; Option)
         {
@@ -3495,10 +3512,10 @@ table 50058 "VRI Table"
         }
         field(230; "Total VRI"; Integer)
         {
-            /* CalcFormula = Count("VRI Table" WHERE (Arrived=filter(true),
-                                                   "VRI Location"=FIELD("Location Filter"),
-                                                   "Model Name"=FIELD(Model Filter)));
-            FieldClass = FlowField; */
+            CalcFormula = Count("VRI Table" WHERE(Arrived = filter(true),
+                                                   "VRI Location" = FIELD("Location Filter"),
+                                                   "Model Name" = FIELD("Model Filter")));
+            FieldClass = FlowField;
         }
         field(231; Odometer; Decimal)
         {
@@ -3507,29 +3524,29 @@ table 50058 "VRI Table"
         field(232; "Fixed"; Boolean)
         {
 
-            /*  trigger OnValidate()
-             begin
-                 IF Delivered = FALSE THEN
-                   ERROR('You can Not choose Fixed because the vehicle has Not been delivered by workshop!');
+            trigger OnValidate()
+            begin
+                IF Delivered = FALSE THEN
+                    ERROR('You can Not choose Fixed because the vehicle has Not been delivered by workshop!');
 
-                 UserRec.GET(USERID);
-                 IF UserRec."User ID" <> 'TOYOTANIGERIA\EOT' THEN
-                   ERROR('Unauthorised action. Contact your system administrator!');
+                UserRec.GET(USERID);
+                IF UserRec."User ID" <> 'TOYOTANIGERIA\EOT' THEN
+                    ERROR('Unauthorised action. Contact your system administrator!');
 
-                 IF ""Problem Vehicle"" = FALSE THEN
-                   ERROR('This must be a problem vehicle!');
-             end; */
+                IF "Problem Vehicle" = FALSE THEN
+                    ERROR('This must be a problem vehicle!');
+            end;
         }
         field(233; "PV Sales & Marketing"; Integer)
         {
-            /* CalcFormula = Count("VRI Table" WHERE ("Problem Vehicle"=filter(true),
-                                                   Arrived=filter(true),
-                                                   "Pass to Sales/Marketing"=filter(true),
-                                                   "VRI Location"=FIELD("Location Filter"),
-                                                   "Model Name"=FIELD(Model Filter),
-                                                   Sold=filter(false),
-                                                   Transferred=filter(false)));
-            FieldClass = FlowField; */
+            CalcFormula = Count("VRI Table" WHERE("Problem Vehicle" = filter(true),
+                                                   Arrived = filter(true),
+                                                   "Pass to Sales/Marketing" = filter(true),
+                                                   "VRI Location" = FIELD("Location Filter"),
+                                                   "Model Name" = FIELD("Model Filter"),
+                                                   Sold = filter(false),
+                                                   Transferred = filter(false)));
+            FieldClass = FlowField;
         }
         field(234; Transferred; Boolean)
         {
@@ -3541,64 +3558,64 @@ table 50058 "VRI Table"
         }
         field(235; "Available for Transfer"; Integer)
         {
-            /* CalcFormula = Count("VRI Table" WHERE ("Problem Vehicle"=filter(false),
-                                                   Arrived=filter(true),
-                                                   "Pass to Sales/Marketing"=filter(true),
-                                                   "VRI Location"=FIELD("Location Filter"),
-                                                   "Model Name"=FIELD(Model Filter),
-                                                   Transferred=filter(false),
-                                                   Sold=filter(false)));
-            FieldClass = FlowField; */
+            CalcFormula = Count("VRI Table" WHERE("Problem Vehicle" = filter(false),
+                                                   Arrived = filter(true),
+                                                   "Pass to Sales/Marketing" = filter(true),
+                                                   "VRI Location" = FIELD("Location Filter"),
+                                                   "Model Name" = FIELD("Model Filter"),
+                                                   Transferred = filter(false),
+                                                   Sold = filter(false)));
+            FieldClass = FlowField;
         }
         field(236; "Under Repairs"; Integer)
         {
-            /* CalcFormula = Count("VRI Table" WHERE (Arrived=filter(true),
-                                                   "Problem Vehicle"=filter(true),
-                                                   "Pass to Sales/Marketing"=filter(false),
-                                                   "Send For Approval"=filter(true),
-                                                   "Send VRI Request"=filter(true),
-                                                   "Op./Log.  Approval"=filter(true),
-                                                   "Send to Workshop Aprroval"=filter(true),
-                                                   "Open COF"=filter(true),
-                                                   "VRI Approved Ok"=filter(true),
-                                                   Delivered=filter(false),
-                                                   "VRI Location"=FIELD("Location Filter"),
-                                                   "Model Name"=FIELD(Model Filter),
-                                                   "Estimate Approved"=filter(true),
-                                                   Sold=filter(false)));
-            FieldClass = FlowField; */
+            CalcFormula = Count("VRI Table" WHERE(Arrived = filter(true),
+                                                   "Problem Vehicle" = filter(true),
+                                                   "Pass to Sales/Marketing" = filter(false),
+                                                   "Send For Approval" = filter(true),
+                                                   "Send VRI Request" = filter(true),
+                                                   "Op./Log.  Approval" = filter(true),
+                                                   "Send to Workshop Aprroval" = filter(true),
+                                                   "Open COF" = filter(true),
+                                                   "VRI Approved Ok" = filter(true),
+                                                   Delivered = filter(false),
+                                                   "VRI Location" = FIELD("Location Filter"),
+                                                   "Model Name" = FIELD("Model Filter"),
+                                                   "Estimate Approved" = filter(true),
+                                                   Sold = filter(false)));
+            FieldClass = FlowField;
         }
         field(237; "Not Fixed"; Boolean)
         {
 
-            /*     trigger OnValidate()
-                begin
-                    IF Delivered = TRUE THEN
-                      ERROR('You can Not choose Not Fixed because the vehicle has been delivered by workshop!');
+            trigger OnValidate()
+            begin
+                IF Delivered = TRUE THEN
+                    ERROR('You can Not choose Not Fixed because the vehicle has been delivered by workshop!');
 
-                    UserRec.GET(USERID);
-                    IF UserRec."User ID" <> 'TOYOTANIGERIA\EOT' THEN
-                      ERROR('Unauthorised action. Contact your system administrator!');
+                UserRec.GET(USERID);
+                IF UserRec."User ID" <> 'TOYOTANIGERIA\EOT' THEN
+                    ERROR('Unauthorised action. Contact your system administrator!');
 
-                    IF ""Problem Vehicle"" = FALSE THEN
-                      ERROR('This must be a "problem vehicle"!');
-                end; */
+                IF "Problem Vehicle" = FALSE THEN
+                    ERROR('This must be a "problem vehicle"!');
+            end;
         }
         field(238; "Confirmed Physically"; Boolean)
         {
 
-            /*  trigger OnValidate()
-             begin
-                 TESTFIELD(""Problem Vehicle"",FALSE);
+            trigger OnValidate()
+            begin
+                TESTFIELD("Problem Vehicle", FALSE);
 
-                 UserRec.GET(USERID);
+                UserRec.GET(USERID);
 
-                 IF ((UserRec."User ID" <> 'TOYOTANIGERIA\ALAMU') AND (UserRec."User ID" <> 'TOYOTANIGERIA\EOT'))   THEN
-                   ERROR('You can Not perform this operation!');
+                IF ((UserRec."User ID" <> 'ALAMU') AND (UserRec."User ID" <> 'EOT')) THEN
+                    ERROR('You can Not perform this operation!');
 
-                 "Physically By" := UserRec."User ID";
-                 "Physically Date Time" := CURRENTDATETIME;
-             end; */
+                "Physically By" := UserRec."User ID";
+                "Physically Date Time" := CURRENTDATETIME;
+            end;
         }
         field(239; "Physically By"; Code[20])
         {
@@ -3609,79 +3626,84 @@ table 50058 "VRI Table"
         field(241; "Send for Est. Verification"; Boolean)
         {
 
-            /*  trigger OnValidate()
-             begin
-                 IF Not CONFIRM('Are you sure you want to send for Estimate Verification?', FALSE) THEN
-                   "Send for Est. Verification" := FALSE
-                 ELSE BEGIN
-                   ToName  := 'alamu@toyotanigeria.com';
-                   CCName := 'eot@toyotanigeria.com';
-                   Subject := STRSUBSTfalse(Text014,"VRI Code");
-                   Body:=  STRSUBSTfalse(Text015);
-                   UserSetup.GET(USERID);
-                   SenderEmail := UserSetup."E-Mail";
-                   SenderName := UserSetup.Initials;
+            trigger OnValidate()
+            begin
+                IF Not CONFIRM('Are you sure you want to send for Estimate Verification?', FALSE) THEN
+                    "Send for Est. Verification" := FALSE
+                ELSE BEGIN
+                    ToName := 'alamu@toyotanigeria.com';
+                    CCName := 'eot@toyotanigeria.com';
+                    Subject := StrSubstNo(Text014, "VRI Code");
+                    Body := StrSubstNo(Text015);
+                    UserSetup.GET(USERID);
+                    SenderEmail := UserSetup."E-Mail";
+                    SenderName := UserSetup.Initials;
 
-                   WITH TempEmailItem DO BEGIN
-                     "Send to" := ToName;
-                     "Send CC" := SenderEmail + ';' + CCName;
-                     "Send BCC" := '';
-                     Subject := STRSUBSTfalse(Text014,"VRI Code");
+                    Subject := StrSubstNo(Text014, "VRI Code");
+                    CreateEmailBody("VRI Code", Text015, '');
+                    SendEmail(ToName, Subject, EmailBody, SenderEmail, CCName);
 
-                     CRLF := '';
-                     CRLF[1] := 13;
-                     CRLF[2] := 10;
+                    /* WITH TempEmailItem DO BEGIN
+                        "Send to" := ToName;
+                        "Send CC" := SenderEmail + ';' + CCName;
+                        "Send BCC" := '';
+                        Subject := StrSubstNo(Text014, "VRI Code");
 
-                     BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                     BodyStream.WRITETEXT('Hello,');
-                     BodyStream.WRITETEXT(CRLF + CRLF);
-                     BodyStream.WRITETEXT(STRSUBSTfalse(Text015) + CRLF + CRLF +
-                     Text018);
-                     BodyStream.WRITETEXT(SenderName);
-                     BodyStream.WRITETEXT(CRLF + CRLF);
-                     BodyStream.WRITETEXT('This is a system generated mail. Please do Not reply to this email ID.');
-                     Body := BodyBlob.Blob;
-                     Send(FALSE);
-                   END;
-                 END;
-             end; */
+                        CRLF := '';
+                        CRLF[1] := 13;
+                        CRLF[2] := 10;
+
+                        BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                        BodyStream.WRITETEXT('Hello,');
+                        BodyStream.WRITETEXT(CRLF + CRLF);
+                        BodyStream.WRITETEXT(StrSubstNo(Text015) + CRLF + CRLF +
+                        Text018);
+                        BodyStream.WRITETEXT(SenderName);
+                        BodyStream.WRITETEXT(CRLF + CRLF);
+                        BodyStream.WRITETEXT('This is a system generated mail. Please do Not reply to this email ID.');
+                        Body := BodyBlob.Blob;
+                        Send(FALSE);
+                    END; */
+
+                END;
+            end;
         }
         field(242; "Open COF Aprroval2"; Integer)
         {
-            /*   CalcFormula = Count("VRI Table" WHERE (Arrived=filter(true),
-                                                     "Problem Vehicle"=filter(true),
-                                                     "Pass to Sales/Marketing"=filter(false),
-                                                     "Send For Approval"=filter(true),
-                                                     "Send VRI Request"=filter(true),
-                                                     "Op./Log.  Approval"=filter(true),
-                                                     "Send to Workshop Aprroval"=filter(true),
-                                                     "Open COF"=filter(true),
-                                                     "VRI Approved Ok"=filter(false),
-                                                     Delivered=filter(false),
-                                                     "VRI Location"=FIELD("Location Filter"),
-                                                     "Model Name"=FIELD(Model Filter),
-                                                     "Estimate Approved"=filter(false),
-                                                     Send for Est. Verification=filter(true),
-                                                     Sold=filter(false)));
-              Description = 'k';
-              FieldClass = FlowField; */
+            CalcFormula = Count("VRI Table" WHERE(Arrived = filter(true),
+                                                     "Problem Vehicle" = filter(true),
+                                                     "Pass to Sales/Marketing" = filter(false),
+                                                     "Send For Approval" = filter(true),
+                                                     "Send VRI Request" = filter(true),
+                                                     "Op./Log.  Approval" = filter(true),
+                                                     "Send to Workshop Aprroval" = filter(true),
+                                                     "Open COF" = filter(true),
+                                                     "VRI Approved Ok" = filter(false),
+                                                     Delivered = filter(false),
+                                                     "VRI Location" = FIELD("Location Filter"),
+                                                     "Model Name" = FIELD("Model Filter"),
+                                                     "Estimate Approved" = filter(false),
+                                                     "Send for Est. Verification" = filter(true),
+                                                     Sold = filter(false)));
+            Description = 'k';
+            FieldClass = FlowField;
         }
         field(243; "In-Stock"; Boolean)
         {
         }
         field(244; "In-Stock Count"; Integer)
         {
-            /* CalcFormula = Count("VRI Table" WHERE (In-Stock=filter(true),
-                                                   "Pass to Sales/Marketing"=filter(false)));
-            FieldClass = FlowField; */
+            CalcFormula = Count("VRI Table" WHERE("In-Stock" = filter(true),
+                                                   "Pass to Sales/Marketing" = filter(false)));
+            FieldClass = FlowField;
         }
         field(245; "Vehicles Sold"; Integer)
         {
-            /* CalcFormula = Count("VRI Table" WHERE (Arrived=filter(true),
-                                                   "VRI Location"=FIELD("Location Filter"),
-                                                   "Model Name"=FIELD(Model Filter),
-                                                   Sold=filter(true)));
-            FieldClass = FlowField; */
+            CalcFormula = Count("VRI Table" WHERE(Arrived = filter(true),
+                                                   "VRI Location" = FIELD("Location Filter"),
+                                                   "Model Name" = FIELD("Model Filter"),
+                                                   Sold = filter(true)));
+            FieldClass = FlowField;
         }
         field(246; Sold; Boolean)
         {
@@ -3704,11 +3726,11 @@ table 50058 "VRI Table"
         }
         field(252; "Confirmed PhysicallyCOUNT"; Integer)
         {
-            /* CalcFormula = Count("VRI Table" WHERE (Arrived=filter(true),
-                                                   "VRI Location"=FIELD("Location Filter"),
-                                                   "Model Name"=FIELD(Model Filter),
-                                                   Confirmed Physically=filter(true)));
-            FieldClass = FlowField; */
+            CalcFormula = Count("VRI Table" WHERE(Arrived = filter(true),
+                                                   "VRI Location" = FIELD("Location Filter"),
+                                                   "Model Name" = FIELD("Model Filter"),
+                                                   "Confirmed Physically" = filter(true)));
+            FieldClass = FlowField;
         }
         field(253; "Send To VRI"; Code[20])
         {
@@ -3738,148 +3760,148 @@ table 50058 "VRI Table"
         }
         field(258; "NWAwaiting VRI 3days"; Integer)
         {
-            /* CalcFormula = Count("VRI Table" WHERE (Arrived=filter(true),
-                                                   "VRI Location"=FIELD("Location Filter"),
-                                                   "Model Name"=FIELD(Model Filter),
-                                                   Confirmed Physically=filter(true)));
-            FieldClass = FlowField; */
+            CalcFormula = Count("VRI Table" WHERE(Arrived = filter(true),
+                                                   "VRI Location" = FIELD("Location Filter"),
+                                                   "Model Name" = FIELD("Model Filter"),
+                                                   "Confirmed Physically" = filter(true)));
+            FieldClass = FlowField;
         }
         field(259; "NWVRI AWAITING GR"; Integer)
         {
-            /*  CalcFormula = Count("VRI Table" WHERE (Arrived=filter(true),
-                                                    GR Problems=filter(true),
-                                                    "Pass to Sales/Marketing"=filter(false),
-                                                    "Send For Approval"=filter(true),
-                                                    "Send VRI Request"=filter(false),
-                                                    "Op./Log.  Approval"=filter(false),
-                                                    "Send to Workshop Aprroval"=filter(false),
-                                                    "Open COF"=filter(false),
-                                                    "Estimate Approved"=filter(false),
-                                                    Delivered=filter(false),
-                                                    "VRI Location"=FIELD("Location Filter"),
-                                                    "Model Name"=FIELD(Model Filter),
-                                                    Sold=filter(false)));
-             FieldClass = FlowField; */
+            CalcFormula = Count("VRI Table" WHERE(Arrived = filter(true),
+                                                    "GR Problems" = filter(true),
+                                                    "Pass to Sales/Marketing" = filter(false),
+                                                    "Send For Approval" = filter(true),
+                                                    "Send VRI Request" = filter(false),
+                                                    "Op./Log.  Approval" = filter(false),
+                                                    "Send to Workshop Aprroval" = filter(false),
+                                                    "Open COF" = filter(false),
+                                                    "Estimate Approved" = filter(false),
+                                                    Delivered = filter(false),
+                                                    "VRI Location" = FIELD("Location Filter"),
+                                                    "Model Name" = FIELD("Model Filter"),
+                                                    Sold = filter(false)));
+            FieldClass = FlowField;
         }
         field(260; "NWAWAITING BnP"; Integer)
         {
-            /*  CalcFormula = Count("VRI Table" WHERE (Arrived=filter(true),
-                                                    BnP Problems=filter(true),
-                                                    "Pass to Sales/Marketing"=filter(false),
-                                                    "Send For Approval"=filter(true),
-                                                    "Send VRI Request"=filter(false),
-                                                    "Op./Log.  Approval"=filter(false),
-                                                    "Send to Workshop Aprroval"=filter(false),
-                                                    "Open COF"=filter(false),
-                                                    "Estimate Approved"=filter(false),
-                                                    Delivered=filter(false),
-                                                    "VRI Location"=FIELD("Location Filter"),
-                                                    "Model Name"=FIELD(Model Filter),
-                                                    Sold=filter(false)));
-             FieldClass = FlowField; */
+            CalcFormula = Count("VRI Table" WHERE(Arrived = filter(true),
+                                                    "BnP Problems" = filter(true),
+                                                    "Pass to Sales/Marketing" = filter(false),
+                                                    "Send For Approval" = filter(true),
+                                                    "Send VRI Request" = filter(false),
+                                                    "Op./Log.  Approval" = filter(false),
+                                                    "Send to Workshop Aprroval" = filter(false),
+                                                    "Open COF" = filter(false),
+                                                    "Estimate Approved" = filter(false),
+                                                    Delivered = filter(false),
+                                                    "VRI Location" = FIELD("Location Filter"),
+                                                    "Model Name" = FIELD("Model Filter"),
+                                                    Sold = filter(false)));
+            FieldClass = FlowField;
         }
         field(261; "NWAWAITING ACCESSORIES"; Integer)
         {
-            /* CalcFormula = Count("VRI Table" WHERE (Arrived=filter(true),
-                                                   Missing Accessories=filter(true),
-                                                   "Pass to Sales/Marketing"=filter(false),
-                                                   "Send For Approval"=filter(true),
-                                                   "Send VRI Request"=filter(false),
-                                                   "Op./Log.  Approval"=filter(false),
-                                                   "Send to Workshop Aprroval"=filter(false),
-                                                   "Open COF"=filter(false),
-                                                   "Estimate Approved"=filter(false),
-                                                   Delivered=filter(false),
-                                                   "VRI Location"=FIELD("Location Filter"),
-                                                   "Model Name"=FIELD(Model Filter),
-                                                   Sold=filter(false)));
-            FieldClass = FlowField; */
+            CalcFormula = Count("VRI Table" WHERE(Arrived = filter(true),
+                                                   "Missing Accessories" = filter(true),
+                                                   "Pass to Sales/Marketing" = filter(false),
+                                                   "Send For Approval" = filter(true),
+                                                   "Send VRI Request" = filter(false),
+                                                   "Op./Log.  Approval" = filter(false),
+                                                   "Send to Workshop Aprroval" = filter(false),
+                                                   "Open COF" = filter(false),
+                                                   "Estimate Approved" = filter(false),
+                                                   Delivered = filter(false),
+                                                   "VRI Location" = FIELD("Location Filter"),
+                                                   "Model Name" = FIELD("Model Filter"),
+                                                   Sold = filter(false)));
+            FieldClass = FlowField;
         }
         field(262; "NWfalse PROBLEM"; Integer)
         {
-            /*   CalcFormula = Count("VRI Table" WHERE (Arrived=filter(true),
-                                                     Missing Accessories=filter(false),
-                                                     "Pass to Sales/Marketing"=filter(false),
-                                                     "Send For Approval"=filter(true),
-                                                     "Send VRI Request"=filter(false),
-                                                     "Op./Log.  Approval"=filter(false),
-                                                     "Send to Workshop Aprroval"=filter(false),
-                                                     "Open COF"=filter(false),
-                                                     "Estimate Approved"=filter(false),
-                                                     Delivered=filter(false),
-                                                     "VRI Location"=FIELD("Location Filter"),
-                                                     "Model Name"=FIELD(Model Filter),
-                                                     Sold=filter(false)));
-              FieldClass = FlowField; */
+            CalcFormula = Count("VRI Table" WHERE(Arrived = filter(true),
+                                                     "Missing Accessories" = filter(false),
+                                                     "Pass to Sales/Marketing" = filter(false),
+                                                     "Send For Approval" = filter(true),
+                                                     "Send VRI Request" = filter(false),
+                                                     "Op./Log.  Approval" = filter(false),
+                                                     "Send to Workshop Aprroval" = filter(false),
+                                                     "Open COF" = filter(false),
+                                                     "Estimate Approved" = filter(false),
+                                                     Delivered = filter(false),
+                                                     "VRI Location" = FIELD("Location Filter"),
+                                                     "Model Name" = FIELD("Model Filter"),
+                                                     Sold = filter(false)));
+            FieldClass = FlowField;
         }
         field(263; "NWAwaiting BnP / Awaiting GR"; Integer)
         {
-            /*  CalcFormula = Count("VRI Table" WHERE (Arrived=filter(true),
-                                                    "Problem Vehicle"=filter(true),
-                                                    "Pass to Sales/Marketing"=filter(false),
-                                                    "Send For Approval"=filter(true),
-                                                    "Send VRI Request"=filter(true),
-                                                    "Op./Log.  Approval"=filter(true),
-                                                    "Send to Workshop Aprroval"=filter(false),
-                                                    "Open COF"=filter(false),
-                                                    "Estimate Approved"=filter(false),
-                                                    Delivered=filter(false),
-                                                    "VRI Location"=FIELD("Location Filter"),
-                                                    "Model Name"=FIELD(Model Filter),
-                                                    Sold=filter(false)));
-             FieldClass = FlowField; */
+            CalcFormula = Count("VRI Table" WHERE(Arrived = filter(true),
+                                                    "Problem Vehicle" = filter(true),
+                                                    "Pass to Sales/Marketing" = filter(false),
+                                                    "Send For Approval" = filter(true),
+                                                    "Send VRI Request" = filter(true),
+                                                    "Op./Log.  Approval" = filter(true),
+                                                    "Send to Workshop Aprroval" = filter(false),
+                                                    "Open COF" = filter(false),
+                                                    "Estimate Approved" = filter(false),
+                                                    Delivered = filter(false),
+                                                    "VRI Location" = FIELD("Location Filter"),
+                                                    "Model Name" = FIELD("Model Filter"),
+                                                    Sold = filter(false)));
+            FieldClass = FlowField;
         }
         field(264; "NWAwaiting DAD"; Integer)
         {
-            /* CalcFormula = Count("VRI Table" WHERE (Arrived=filter(true),
-                                                   "Problem Vehicle"=filter(true),
-                                                   "Pass to Sales/Marketing"=filter(false),
-                                                   "Send For Approval"=filter(true),
-                                                   "Send VRI Request"=filter(true),
-                                                   "Op./Log.  Approval"=filter(true),
-                                                   "Send to Workshop Aprroval"=filter(true),
-                                                   "Open COF"=filter(false),
-                                                   "Estimate Approved"=filter(false),
-                                                   Delivered=filter(false),
-                                                   "VRI Location"=FIELD("Location Filter"),
-                                                   "Model Name"=FIELD(Model Filter),
-                                                   Sold=filter(false)));
-            FieldClass = FlowField; */
+            CalcFormula = Count("VRI Table" WHERE(Arrived = filter(true),
+                                                   "Problem Vehicle" = filter(true),
+                                                   "Pass to Sales/Marketing" = filter(false),
+                                                   "Send For Approval" = filter(true),
+                                                   "Send VRI Request" = filter(true),
+                                                   "Op./Log.  Approval" = filter(true),
+                                                   "Send to Workshop Aprroval" = filter(true),
+                                                   "Open COF" = filter(false),
+                                                   "Estimate Approved" = filter(false),
+                                                   Delivered = filter(false),
+                                                   "VRI Location" = FIELD("Location Filter"),
+                                                   "Model Name" = FIELD("Model Filter"),
+                                                   Sold = filter(false)));
+            FieldClass = FlowField;
         }
         field(265; "NWAwaiting Estimate"; Integer)
         {
-            /* CalcFormula = Count("VRI Table" WHERE (Arrived=filter(true),
-                                                   "Problem Vehicle"=filter(true),
-                                                   "Pass to Sales/Marketing"=filter(false),
-                                                   "Send For Approval"=filter(true),
-                                                   "Send VRI Request"=filter(true),
-                                                   "Op./Log.  Approval"=filter(true),
-                                                   "Send to Workshop Aprroval"=filter(true),
-                                                   "Open COF"=filter(true),
-                                                   "Estimate Approved"=filter(false),
-                                                   Delivered=filter(false),
-                                                   "VRI Location"=FIELD("Location Filter"),
-                                                   "Model Name"=FIELD(Model Filter),
-                                                   Sold=filter(false)));
-            FieldClass = FlowField; */
+            CalcFormula = Count("VRI Table" WHERE(Arrived = filter(true),
+                                                   "Problem Vehicle" = filter(true),
+                                                   "Pass to Sales/Marketing" = filter(false),
+                                                   "Send For Approval" = filter(true),
+                                                   "Send VRI Request" = filter(true),
+                                                   "Op./Log.  Approval" = filter(true),
+                                                   "Send to Workshop Aprroval" = filter(true),
+                                                   "Open COF" = filter(true),
+                                                   "Estimate Approved" = filter(false),
+                                                   Delivered = filter(false),
+                                                   "VRI Location" = FIELD("Location Filter"),
+                                                   "Model Name" = FIELD("Model Filter"),
+                                                   Sold = filter(false)));
+            FieldClass = FlowField;
         }
         field(266; "NWO/Logistics awaiting Appr"; Integer)
         {
-            /* CalcFormula = Count("VRI Table" WHERE (Arrived=filter(true),
-                                                   "Problem Vehicle"=filter(true),
-                                                   "Pass to Sales/Marketing"=filter(false),
-                                                   "Send For Approval"=filter(true),
-                                                   "Send VRI Request"=filter(true),
-                                                   "Op./Log.  Approval"=filter(true),
-                                                   "Send to Workshop Aprroval"=filter(true),
-                                                   "Open COF"=filter(true),
-                                                   "Estimate Approved"=filter(true),
-                                                   Delivered=filter(false),
-                                                   "VRI Location"=FIELD("Location Filter"),
-                                                   "Model Name"=FIELD(Model Filter),
-                                                   Sold=filter(false),
-                                                   "VRI Approved Ok"=filter(true)));
-            FieldClass = FlowField; */
+            CalcFormula = Count("VRI Table" WHERE(Arrived = filter(true),
+                                                   "Problem Vehicle" = filter(true),
+                                                   "Pass to Sales/Marketing" = filter(false),
+                                                   "Send For Approval" = filter(true),
+                                                   "Send VRI Request" = filter(true),
+                                                   "Op./Log.  Approval" = filter(true),
+                                                   "Send to Workshop Aprroval" = filter(true),
+                                                   "Open COF" = filter(true),
+                                                   "Estimate Approved" = filter(true),
+                                                   Delivered = filter(false),
+                                                   "VRI Location" = FIELD("Location Filter"),
+                                                   "Model Name" = FIELD("Model Filter"),
+                                                   Sold = filter(false),
+                                                   "VRI Approved Ok" = filter(true)));
+            FieldClass = FlowField;
         }
         field(267; "NWAwaiting Part Order"; Integer)
         {
@@ -3999,15 +4021,12 @@ table 50058 "VRI Table"
         NL: Char;
         LF: Char;
         ModelRec: Record 50014;
-        Text013: Label 'The VRI %1 is a Warranty job. We hereby send it to you for processing.';
-        Text014: Label 'From WORKSHOP to O/L';
+        Text013: Label 'The VRI %1 is a warranty job. We hereby send it to you for processing.';
+        Text014: Label 'From Workshop to O/L';
         Text015: Label 'Kindly confirm the estimate and send to O/L for Approval';
         ItemLedgEntry: Record 32;
-        //SMTPMail: Codeunit "400";
-        Text016: Label 'You do Not have the permission please contact the service department';
-        //EmailBody: Record "99008535";
+        Text016: Label 'You do not have the permission please contact the service department';
         BodyTxt: Text;
-        //BodyBlob: Record "99008535";
         BodyStream: OutStream;
         SenderInitial: Text;
         SenderEmail: Text[50];
@@ -4026,6 +4045,8 @@ table 50058 "VRI Table"
         Text018: Label 'Regards,';
         Text019: Label 'Please Note that your leave request has been rejected.';
         Text020: Label 'Please Note that your leave request is on-hold.';
+        EmailBody: Text[1024];
+        Salutation: Label 'Hello,';
 
 
     procedure AssistEdit(var OldVRI2REC: Record 50058): Boolean
@@ -4043,5 +4064,40 @@ table 50058 "VRI Table"
             END;
         END; */
     end;
+
+    procedure CreateEmailBody(DocNo: Code[20]; BodyMsg: Text; RecipientInitials: Text);
+
+    var
+    begin
+
+        UserSetup.get(USERID);
+
+        EmailBody := Salutation;
+        EmailBody += '<br><br>';
+        EmailBody += FORMAT(STRSUBSTNO(BodyMsg, "VRI Code"));
+        EmailBody += '<br><br>';
+        EmailBody += 'Regards,';
+        EmailBody += '<br>';
+        EmailBody += UserSetup.Initials;
+        EmailBody += '<br><br>';
+        EmailBody += 'This is a system generated mail. Please do not reply to this email ID.';
+
+    end;
+
+    procedure SendEmail(ToRecipients: Text; Subject: Text; Body: Text; CCRecipients: Text; BCCRecipients: Text)
+    var
+
+        Email: Codeunit Email;
+        EmailMessage: Codeunit "Email Message";
+
+    begin
+
+        EmailMessage.Create(ToRecipients, Subject, EmailBody, true);
+        EmailMessage.AddRecipient(Enum::"Email Recipient Type"::Cc, CCRecipients);
+        EmailMessage.AddRecipient(Enum::"Email Recipient Type"::Bcc, BCCRecipients);
+        Email.OpenInEditorModally(EmailMessage, Enum::"Email Scenario"::Default)
+
+    end;
+
 }
 

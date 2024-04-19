@@ -1,5 +1,6 @@
 page 50459 "ISPV Folder"
 {
+    ApplicationArea = All;
     PageType = Card;
     SourceTable = "Logistics Order";
 

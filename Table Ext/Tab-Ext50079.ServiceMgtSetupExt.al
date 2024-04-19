@@ -155,5 +155,9 @@ tableextension 50079 "Service Mgt. Setup Ext" extends "Service Mgt. Setup"
         {
             TableRelation = "No. Series".Code;
         }
+        field(50044; "VRI Code Check List"; Code[10])
+        {
+            TableRelation = "No. Series".Code;
+        }
     }
 }

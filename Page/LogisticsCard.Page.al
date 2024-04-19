@@ -1,5 +1,6 @@
 page 50470 "Logistics Card"
 {
+    ApplicationArea = All;
     PageType = Card;
     SourceTable = "Logistics Order";
     SourceTableView = WHERE ("Notify VRI"=CONST(false));

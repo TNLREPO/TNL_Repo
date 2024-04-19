@@ -1,5 +1,6 @@
 page 50396 "VRI Problem Vehicle"
 {
+    ApplicationArea = All;
     PageType = Card;
     SourceTable = "VRI Table";
     SourceTableView = WHERE("Problem Vehicle" = FILTER(True));

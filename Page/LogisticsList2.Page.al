@@ -1,5 +1,6 @@
 page 50466 "Logistics List 2"
 {
+    ApplicationArea = All;
     PageType = Card;
     SourceTable = "Logistics Order";
 
