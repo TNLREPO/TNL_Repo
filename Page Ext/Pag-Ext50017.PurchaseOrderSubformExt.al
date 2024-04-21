@@ -1,22 +1,46 @@
 pageextension 50017 "Purchase Order Subform Ext" extends "Purchase Order Subform"
 {
-    actions
+    layout
     {
-        /* addafter(OrderTracking)
+        modify("Line No.")
+        {
+            Editable = false;
+        }
+
+        addafter("Unit Cost (LCY)")
         {
 
-            action(ImportBOL)
+            field("Year of Production"; Rec."Year of Production")
             {
                 ApplicationArea = All;
-                Caption = 'Import BOL';
-                Image = Document;
-                ToolTip = 'This function imports bill of laden for vehicles.';
-
-                trigger OnAction()
-                begin
-                    XMLPORT.RUN(50068, FALSE, TRUE);
-                end;
+                Visible = true;
             }
-        } */
+        }
+
+
+        addafter("Location Code")
+        {
+            field("Color Group"; Rec."Color Group")
+            {
+                ApplicationArea = All;
+                Visible = true;
+            }
+
+            field(Colour; Rec.Colour)
+            {
+                ApplicationArea = All;
+                Visible = true;
+            }
+
+            field("Colour Description"; Rec."Colour Description")
+            {
+                ApplicationArea = All;
+                Visible = true;
+                Editable = false;
+            }
+
+
+        }
+
     }
 }

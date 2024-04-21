@@ -24,6 +24,16 @@ pageextension 50009 "Item Tracking Lines Ext" extends "Item Tracking Lines"
                 ApplicationArea = All;
 
             }
+
+        }
+
+        addbefore("Serial No.")
+        {
+            field("VRI Code"; Rec."VRI Code")
+            {
+                ApplicationArea = All;
+                Editable = false;
+            }
         }
     }
 }

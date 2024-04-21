@@ -267,8 +267,8 @@ tableextension 50012 "Purchase Header Ext" extends "Purchase Header"
         ResevRec: Record 337;
     begin
         TESTFIELD("Vendor Shipment No.");
-        ResevRec.SETRANGE(ResevRec."Source ID", "No.");
-        IF ResevRec.FINDFIRST THEN
+        ResevRec.SETRANGE("Source ID", "No.");
+        IF ResevRec.FindFirst() THEN
             REPEAT
                 VRIRec.INIT;
                 VRIRec."VRI Code" := '';

@@ -38,7 +38,7 @@ pageextension 50018 "Purchase Order Ext" extends "Purchase Order"
 
                 trigger OnAction()
                 begin
-                    Rec.BreaktoLines();
+                    Rec.GenerateVRI();
                 end;
             }
         }

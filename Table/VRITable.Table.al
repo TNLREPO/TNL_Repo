@@ -3965,8 +3965,8 @@ table 50058 "VRI Table"
     begin
         IF "VRI Code" = '' THEN BEGIN
             Servicesetup.GET;
-            Servicesetup.TESTFIELD("Vri Code");
-            NoseriesMgt.InitSeries(Servicesetup."Vri Code", xRec."No. Series", 0D, "VRI Code", "No. Series");
+            Servicesetup.TESTFIELD("VRI Code");
+            NoseriesMgt.InitSeries(Servicesetup."VRI Code", xRec."No. Series", 0D, "VRI Code", "No. Series");
         END;
     end;
 
