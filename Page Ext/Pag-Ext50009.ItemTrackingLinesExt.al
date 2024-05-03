@@ -7,22 +7,22 @@ pageextension 50009 "Item Tracking Lines Ext" extends "Item Tracking Lines"
             field("Engine No."; Rec."Engine No.")
             {
                 ApplicationArea = All;
-
+                Editable = false;
             }
             field("Exterior Colour Code"; Rec."Exterior Colour Code")
             {
                 ApplicationArea = All;
-
+                Editable = false;
             }
             field("Exterior Colour Name"; Rec."Exterior Colour Name")
             {
                 ApplicationArea = All;
-
+                Editable = false;
             }
             field("Key No."; Rec."Key No.")
             {
                 ApplicationArea = All;
-
+                Editable = false;
             }
 
         }

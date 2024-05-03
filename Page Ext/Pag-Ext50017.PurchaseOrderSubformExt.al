@@ -17,7 +17,6 @@ pageextension 50017 "Purchase Order Subform Ext" extends "Purchase Order Subform
             }
         }
 
-
         addafter("Location Code")
         {
             field("Color Group"; Rec."Color Group")

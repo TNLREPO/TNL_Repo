@@ -2,6 +2,7 @@ page 70185 "Direct Warranty Page"
 {
     PageType = List;
     SourceTable = "Direct Warranty Coupon";
+    ApplicationArea = All;
 
     layout
     {

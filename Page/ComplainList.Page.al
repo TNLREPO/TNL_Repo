@@ -1,5 +1,6 @@
-page 50369 "Complain List"
+page 50371 "Complain List"
 {
+    ApplicationArea = All;
     DeleteAllowed = false;
     ModifyAllowed = false;
     PageType = Card;

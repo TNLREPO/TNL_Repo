@@ -170,6 +170,11 @@ tableextension 50009 "Item Ledger Entry Ext" extends "Item Ledger Entry"
             CalcFormula = Lookup(Item."Item No Category" WHERE("No." = FIELD("Item No.")));
             FieldClass = FlowField;
         }
+        field(60124; "Problem Vehicle"; Boolean)
+        {
+
+        }
+
 
     }
     keys

@@ -3,9 +3,9 @@ page 50111 "Warranty Couporn"
     ApplicationArea = All;
     AutoSplitKey = true;
     Caption = 'Warranty Couporn';
-    CardPageID = "Toyota Warranty Registration";
+    //CardPageID = "Toyota Warranty Registration";
     DelayedInsert = true;
-    Editable = false;
+    Editable = true;
     MultipleNewLines = true;
     PageType = List;
     PopulateAllFields = true;

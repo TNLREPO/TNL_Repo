@@ -1,5 +1,6 @@
 page 80008 "Service Index List-Treated"
 {
+    ApplicationArea = All;
     AutoSplitKey = true;
     CardPageID = "PSFU Card";
     DelayedInsert = true;

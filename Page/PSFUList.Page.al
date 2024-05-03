@@ -1,5 +1,6 @@
 page 80048 "PSFU List"
 {
+    ApplicationArea = All;
     AutoSplitKey = true;
     CardPageID = "PSFU Card";
     DelayedInsert = true;
