@@ -1,6 +1,7 @@
 page 70086 "Customer Order Pg Appt/WI Card"
 {
     SourceTable = "Customer Order Table.";
+    ApplicationArea = All;
 
     layout
     {

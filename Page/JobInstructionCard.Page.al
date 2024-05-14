@@ -1,6 +1,7 @@
 page 70089 "Job Instruction Card."
 {
     SourceTable = "Customer Order Table.";
+    ApplicationArea = All;
 
     layout
     {

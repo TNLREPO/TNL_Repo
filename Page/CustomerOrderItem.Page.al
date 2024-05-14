@@ -4,6 +4,7 @@ page 50241 "Customer Order Item"
     DelayedInsert = true;
     PageType = ListPart;
     SourceTable = "Customer Order Line";
+    ApplicationArea = All;
 
     layout
     {

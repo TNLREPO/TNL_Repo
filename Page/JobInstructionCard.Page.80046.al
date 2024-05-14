@@ -1,6 +1,7 @@
 page 80046 "Job Instruction Card"
 {
     SourceTable = "Customer Order HeaderX";
+    ApplicationArea = All;
 
     layout
     {

@@ -4,6 +4,7 @@ page 70074 "Customer Order List"
     PageType = List;
     SourceTable = "Customer Order Table.";
     SourceTableView = WHERE(Delivered = filter(true));
+    ApplicationArea = All;
 
     layout
     {

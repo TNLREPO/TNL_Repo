@@ -8,6 +8,7 @@ page 70088 "Job Instruction List."
                             "For Part Arrival"=filter(True),
                             "For Production"=filter (True),
                             "For Invoice"=filter (false));
+    ApplicationArea = All;
 
     layout
     {

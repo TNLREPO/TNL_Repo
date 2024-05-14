@@ -2,6 +2,7 @@ page 70069 "SSC/SC Subpage"
 {
     PageType = ListPart;
     SourceTable = "SSC/SC";
+    ApplicationArea = All;
 
     layout
     {

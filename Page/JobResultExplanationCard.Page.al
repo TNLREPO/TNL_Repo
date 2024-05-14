@@ -1,6 +1,7 @@
 page 70075 "Job Result Explanation Card"
 {
     SourceTable = "Customer Order Table.";
+    ApplicationArea = All;
 
     layout
     {

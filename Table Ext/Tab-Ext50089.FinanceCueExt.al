@@ -81,9 +81,9 @@ tableextension 50089 "Finance Cue Ext" extends "Finance Cue"
         field(50011; "Responsibility Center Filter"; Code[100])
         {
         }
-        field(50012; "Date Filter"; Date)
+        /* field(50012; "Date Filter"; Date)
         {
-        }
+        } */
         field(50013; "Approved Service Orders"; Integer)
         {
             CalcFormula = Count("Service Header" WHERE("Document Type" = CONST(Order),

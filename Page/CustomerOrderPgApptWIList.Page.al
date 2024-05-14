@@ -8,6 +8,7 @@ page 70085 "Customer Order Pg Appt/WI List"
                             Delivered = filter(false),
                             "For Part Arrival" = filter(true),
                             "For Production" = filter(false));
+    ApplicationArea = All;
 
     layout
     {

@@ -4,6 +4,7 @@ page 80045 "Job Instruction List"
     Editable = false;
     PageType = List;
     SourceTable = "Customer Order HeaderX";
+    ApplicationArea = All;
 
     layout
     {

@@ -2,6 +2,7 @@ page 70080 "SSC/SC List"
 {
     PageType = List;
     SourceTable = "SSC/SC";
+    ApplicationArea = All;
 
     layout
     {

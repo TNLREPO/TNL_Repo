@@ -138,9 +138,9 @@ table 50129 "Service Adviser Cue"
         }
         field(26; "PSFU-Treated"; Integer)
         {
-           /*  CalcFormula = Count("Service IndexX" WHERE(Done = filter(true),
-                                                        "Call Due Date" = FILTER(01/01/23..)));
-            FieldClass = FlowField; */
+            CalcFormula = Count("Service IndexX" WHERE(Done = filter(true),
+                                                        "Call Due Date" = FILTER('01/01/23..')));
+            FieldClass = FlowField;
         }
         field(27; "Confirmed Appointments"; Integer)
         {

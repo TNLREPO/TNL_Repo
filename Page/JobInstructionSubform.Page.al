@@ -4,6 +4,7 @@ page 80012 "Job Instruction Subform"
     DelayedInsert = true;
     PageType = ListPart;
     SourceTable = "Customer Order LineX";
+    ApplicationArea = All;
 
     layout
     {

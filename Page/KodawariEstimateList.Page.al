@@ -8,6 +8,7 @@ page 50210 "Kodawari Estimate List"
                             Delivered = filter(false),
                             "For Part Arrival" = CONST(false),
                             "For Production" = CONST(false));
+    ApplicationArea = All;
 
     layout
     {

@@ -1,6 +1,7 @@
 page 50211 "Kodawari Estimate Card"
 {
     SourceTable = "Customer Order Table.";
+    ApplicationArea = All;
 
     layout
     {

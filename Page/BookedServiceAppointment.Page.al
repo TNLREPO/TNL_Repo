@@ -5,6 +5,7 @@ page 70067 "Booked Service Appointment"
     InsertAllowed = false;
     PageType = List;
     SourceTable = "Service Appointment Scheduled";
+    ApplicationArea = All;
 
     layout
     {

@@ -113,13 +113,14 @@ table 50058 "VRI Table"
                 SenderName := UserSetup.Initials;
                 CCName := '';
                 Bcc := '';
+                Body := StrSubstNo(Text002, "VRI Code", "Problem Statement");
 
                 IF Not CONFIRM('Are you sure the vehicle is Not SUITABLE?', FALSE) THEN
                     "Send VRI Request" := FALSE
                 ELSE BEGIN
 
                     Subject := StrSubstNo(Text001, "VRI Code");
-                    CreateEmailBody("VRI Code", Text002, '');
+                    CreateEmailBody("VRI Code", Body, '');
                     SendEmail(ToName, Subject, EmailBody, SenderEmail, CCName);
 
                     /*  WITH TempEmailItem DO BEGIN
@@ -175,7 +176,6 @@ table 50058 "VRI Table"
 
                         CCName := '';
                         Bcc := '';
-
 
                         Subject := StrSubstNo(Text003, "VRI Code");
                         Body := StrSubstNo(Text004, "VRI Code", "O/Log Comment");
@@ -2699,60 +2699,63 @@ table 50058 "VRI Table"
         field(147; "Estimate Approved"; Boolean)
         {
 
-            /*             trigger OnValidate()
-                        begin
-                            IF "Claim No." = '' THEN
-                                ERROR('Claim No. can Not be blank!');
+            trigger OnValidate()
+            begin
+                IF "Claim No." = '' THEN
+                    ERROR('Claim No. can Not be blank!');
 
-                            IF Not CONFIRM('Are you sure you want to Approve Estimate?', FALSE) THEN
-                                "Estimate Approved" := FALSE
-                            ELSE BEGIN
+                IF Not CONFIRM('Are you sure you want to Approve Estimate?', FALSE) THEN
+                    "Estimate Approved" := FALSE
+                ELSE BEGIN
 
-                                IF "Estimate Approved" THEN BEGIN
-                                    "Estimate Approve By" := USERID;
-                                    "Estimate Approve Date&Time" := CURRENTDATETIME;
+                    IF "Estimate Approved" THEN BEGIN
+                        "Estimate Approve By" := USERID;
+                        "Estimate Approve Date&Time" := CURRENTDATETIME;
 
-                                    IF COFrec.GET("COF false") THEN
-                                        COFrec.VALIDATE(COFrec."VRI Estimate Approved", TRUE);
-                                    COFrec.MODIFY;
-                                END ELSE BEGIN
-                                    IF COFrec.GET("COF false") THEN
-                                        COFrec.VALIDATE(COFrec."VRI Estimate Approved", FALSE);
-                                    COFrec.MODIFY;
-                                END;
+                        IF COFrec.GET("COF No") THEN
+                            COFrec.VALIDATE(COFrec."VRI Estimate Approved", TRUE);
+                        COFrec.MODIFY;
+                    END ELSE BEGIN
+                        IF COFrec.GET("COF No") THEN
+                            COFrec.VALIDATE(COFrec."VRI Estimate Approved", FALSE);
+                        COFrec.MODIFY;
+                    END;
 
-                                Servicesetup.GET;
-                                ToName := Servicesetup."Estimate Approved";
-                                CCName := 'eot@toyotanigeria.com';
-                                Subject := StrSubstNo(Text011, "VRI Code");
-                                Body := StrSubstNo(Text012, "VRI Code", "O/Log Comment");
-                                UserSetup.GET(USERID);
-                                SenderEmail := UserSetup."E-Mail";
-                                SenderName := UserSetup.Initials;
+                    Servicesetup.GET;
+                    ToName := Servicesetup."Estimate Approved";
+                    CCName := 'eot@toyotanigeria.com';
+                    Subject := StrSubstNo(Text011, "VRI Code");
+                    Body := StrSubstNo(Text012, "VRI Code", "O/Log Comment");
+                    UserSetup.GET(USERID);
+                    SenderEmail := UserSetup."E-Mail";
+                    SenderName := UserSetup.Initials;
 
-                                WITH TempEmailItem DO BEGIN
-                                    "Send to" := ToName;
-                                    "Send CC" := SenderEmail + ';' + CCName;
-                                    "Send BCC" := '';
-                                    Subject := StrSubstNo(Text011, "VRI Code");
+                    CreateEmailBody("VRI Code", Body, '');
+                    SendEmail(ToName, Subject, EmailBody, SenderEmail, CCName);
 
-                                    CRLF := '';
-                                    CRLF[1] := 13;
-                                    CRLF[2] := 10;
+                    /*  WITH TempEmailItem DO BEGIN
+                         "Send to" := ToName;
+                         "Send CC" := SenderEmail + ';' + CCName;
+                         "Send BCC" := '';
+                         Subject := StrSubstNo(Text011, "VRI Code");
 
-                                    BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                    BodyStream.WRITETEXT('Hello,');
-                                    BodyStream.WRITETEXT(CRLF + CRLF);
-                                    BodyStream.WRITETEXT(StrSubstNo(Text012, "VRI Code", "O/Log Comment") + CRLF + CRLF +
-                                    Text018);
-                                    BodyStream.WRITETEXT(SenderName);
-                                    BodyStream.WRITETEXT(CRLF + CRLF);
-                                    BodyStream.WRITETEXT('This is a system generated mail. Please do Not reply to this email ID.');
-                                    Body := BodyBlob.Blob;
-                                    Send(FALSE);
-                                END;
-                            END;
-                        end; */
+                         CRLF := '';
+                         CRLF[1] := 13;
+                         CRLF[2] := 10;
+
+                         BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                         BodyStream.WRITETEXT('Hello,');
+                         BodyStream.WRITETEXT(CRLF + CRLF);
+                         BodyStream.WRITETEXT(StrSubstNo(Text012, "VRI Code", "O/Log Comment") + CRLF + CRLF +
+                         Text018);
+                         BodyStream.WRITETEXT(SenderName);
+                         BodyStream.WRITETEXT(CRLF + CRLF);
+                         BodyStream.WRITETEXT('This is a system generated mail. Please do Not reply to this email ID.');
+                         Body := BodyBlob.Blob;
+                         Send(FALSE);
+                     END; */
+                END;
+            end;
         }
         field(148; Arrived; Boolean)
         {
@@ -2810,26 +2813,6 @@ table 50058 "VRI Table"
         field(160; "Send for Approval2"; Boolean)
         {
 
-            /*   trigger OnValidate()
-              begin
-                  IF ""Send for Approval"" = TRUE THEN
-                  IF UserSetup.GET("1st Approval to") THEN
-                    BEGIN
-                       Sender := USERID;
-                      "Sent Time"  := CURRENTDATETIME;
-                      UserSetup2.GET(USERID);
-                      SenderEmail := UserSetup2."E-Mail";
-                      TESTFIELD(Amount);
-                      TESTFIELD("1st Approval to");
-                      TESTFIELD("1st Apprv. Status",0);
-                       "Current pending Person" := "1st Approval to";
-                       ToName  := UserSetup."E-Mail";
-                       Subject := StrSubstNo(text001,"No.");
-                       SMTPMail.CreateMessage(USERID,SenderEmail,ToName,Subject,Body,FALSE);
-                       SMTPMail.Send;
-                       MESSAGE('Mail sent successfully');
-                    END;
-              end; */
         }
         field(161; Sender; Text[50])
         {
@@ -2951,7 +2934,7 @@ table 50058 "VRI Table"
         field(200; "Approved Date&Time"; DateTime)
         {
         }
-        field(201; "Claim falses"; Code[20])
+        field(201; "Claim Nos"; Code[20])
         {
         }
         field(202; "Job Estimate ValueII"; Decimal)
@@ -2960,49 +2943,54 @@ table 50058 "VRI Table"
         field(203; "VRI Approved Ok"; Boolean)
         {
 
-            /* trigger OnValidate()
+            trigger OnValidate()
             begin
                 IF Not CONFIRM('Are you sure VRI is approved Okay?', FALSE) THEN
-                  "VRI Approved Ok" := FALSE
+                    "VRI Approved Ok" := FALSE
                 ELSE BEGIN
 
-                  "VRI Approved Ok By":=USERID;
-                  "VRI Approved OK Date&Time":=CURRENTDATETIME;
-                  "Job Estimate ValueII":="Job Estimate Value";
-                  "Claim No.":="Claim falses";
+                    "VRI Approved Ok By" := USERID;
+                    "VRI Approved OK Date&Time" := CURRENTDATETIME;
+                    "Job Estimate ValueII" := "Job Estimate Value";
+                    "Claim No." := "Claim Nos";
 
-                  Servicesetup.GET;
-                  ToName  :=Servicesetup.""Estimate Approved"";
-                  CCName := 'eot@toyotanigeria.com';
-                  Subject := StrSubstNo(Text009,"VRI Code");
-                  Body:=  StrSubstNo( Text010,"VRI Code","O/Log Comment");
-                  UserSetup.GET(USERID);
-                  SenderEmail := UserSetup."E-Mail";
-                  SenderName := UserSetup.Initials;
+                    Servicesetup.GET;
+                    ToName := Servicesetup."Estimate Approved";
+                    CCName := 'eot@toyotanigeria.com';
+                    Subject := StrSubstNo(Text009, "VRI Code");
+                    Body := StrSubstNo(Text010, "VRI Code", "O/Log Comment");
+                    UserSetup.GET(USERID);
+                    SenderEmail := UserSetup."E-Mail";
+                    SenderName := UserSetup.Initials;
 
-                  WITH TempEmailItem DO BEGIN
-                    "Send to" := ToName;
-                    "Send CC" := SenderEmail + ';' + CCName;
-                    "Send BCC" := '';
-                    Subject := StrSubstNo(Text009,"VRI Code");
+                    Subject := StrSubstNo(Text009, "VRI Code");
+                    CreateEmailBody("VRI Code", Body, '');
+                    SendEmail(ToName, Subject, EmailBody, SenderEmail, CCName);
 
-                    CRLF := '';
-                    CRLF[1] := 13;
-                    CRLF[2] := 10;
 
-                    BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                    BodyStream.WRITETEXT('Hello,');
-                    BodyStream.WRITETEXT(CRLF + CRLF);
-                    BodyStream.WRITETEXT(StrSubstNo(Text010,"VRI Code","O/Log Comment") + CRLF + CRLF +
-                    Text018);
-                    BodyStream.WRITETEXT(SenderName);
-                    BodyStream.WRITETEXT(CRLF + CRLF);
-                    BodyStream.WRITETEXT('This is a system generated mail. Please do Not reply to this email ID.');
-                    Body := BodyBlob.Blob;
-                    Send(FALSE);
-                  END;
+                    /* WITH TempEmailItem DO BEGIN
+                      "Send to" := ToName;
+                      "Send CC" := SenderEmail + ';' + CCName;
+                      "Send BCC" := '';
+                      Subject := StrSubstNo(Text009,"VRI Code");
+
+                      CRLF := '';
+                      CRLF[1] := 13;
+                      CRLF[2] := 10;
+
+                      BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                      BodyStream.WRITETEXT('Hello,');
+                      BodyStream.WRITETEXT(CRLF + CRLF);
+                      BodyStream.WRITETEXT(StrSubstNo(Text010,"VRI Code","O/Log Comment") + CRLF + CRLF +
+                      Text018);
+                      BodyStream.WRITETEXT(SenderName);
+                      BodyStream.WRITETEXT(CRLF + CRLF);
+                      BodyStream.WRITETEXT('This is a system generated mail. Please do Not reply to this email ID.');
+                      Body := BodyBlob.Blob;
+                      Send(FALSE);
+                    END; */
                 END;
-            end; */
+            end;
         }
         field(204; "VRI Approved Ok By"; Text[30])
         {
@@ -3640,7 +3628,7 @@ table 50058 "VRI Table"
                     SenderName := UserSetup.Initials;
 
                     Subject := StrSubstNo(Text014, "VRI Code");
-                    CreateEmailBody("VRI Code", Text015, '');
+                    CreateEmailBody("VRI Code", Body, '');
                     SendEmail(ToName, Subject, EmailBody, SenderEmail, CCName);
 
                     /* WITH TempEmailItem DO BEGIN
@@ -3817,7 +3805,7 @@ table 50058 "VRI Table"
                                                    Sold = filter(false)));
             FieldClass = FlowField;
         }
-        field(262; "NWfalse PROBLEM"; Integer)
+        field(262; "NWNO PROBLEM"; Integer)
         {
             CalcFormula = Count("VRI Table" WHERE(Arrived = filter(true),
                                                      "Missing Accessories" = filter(false),
@@ -4053,16 +4041,14 @@ table 50058 "VRI Table"
     var
         VRI: Record 50058;
     begin
-        /* WITH VRI DO BEGIN
-            VRI := Rec;
+        VRI := Rec;
+        Servicesetup.GET;
+        IF NoseriesMgt.SelectSeries(Servicesetup."Vri Code", OldVRI2REC."No. Series", VRI."No. Series") THEN BEGIN
             Servicesetup.GET;
-            IF NoseriesMgt.SelectSeries(Servicesetup."Vri Code", OldVRI2REC."No. Series", "No. Series") THEN BEGIN
-                Servicesetup.GET;
-                NoseriesMgt.SetSeries("VRI Code");
-                Rec := VRI;
-                EXIT(TRUE);
-            END;
-        END; */
+            NoseriesMgt.SetSeries(VRI."VRI Code");
+            Rec := VRI;
+            EXIT(TRUE);
+        END;
     end;
 
     procedure CreateEmailBody(DocNo: Code[20]; BodyMsg: Text; RecipientInitials: Text);

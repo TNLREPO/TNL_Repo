@@ -1,6 +1,5 @@
 page 80056 "Parts Customer Order"
 {
-    ApplicationArea = All;
     Caption = 'Customer Order Form Card';
     PageType = Card;
     SourceTable = "Customer Order HeaderX";
@@ -11,65 +10,8 @@ page 80056 "Parts Customer Order"
         {
             group(General)
             {
-                group("1. Reception")
-                {
-                    Editable = false;
-                    field("Reception Date"; Rec."Reception Date")
-                    {
-                        Caption = 'Date';
-                    }
-                    field("Reception Time"; Rec."Reception Time")
-                    {
-                        Caption = 'Time';
-                    }
-                    field("Reception Type"; Rec."Reception Type")
-                    {
-                        Caption = 'Type';
-                    }
-                    field("Courtesy Vehicle"; Rec."Courtesy Vehicle")
-                    {
-                    }
-                }
-                group("2. Delivery")
-                {
-                    Editable = false;
-                    field("Expected Delivery Date"; Rec."Expected Delivery Date")
-                    {
-                        Caption = 'Date';
-                    }
-                    field("Expected Delivery Time"; Rec."Expected Delivery Time")
-                    {
-                        Caption = 'Time';
-                    }
-                    field("Delivery Type"; Rec."Delivery Type")
-                    {
-                        Caption = 'Type';
-                    }
-                    field("User ID"; Rec."User ID")
-                    {
-                    }
-                }
-                group("3. Confirmation")
-                {
-                    Editable = false;
-                    field("Confirmation Date"; Rec."Confirmation Date")
-                    {
-                        Caption = 'Date';
-                    }
-                    field("Confirmation Time"; Rec."Confirmation Time")
-                    {
-                        Caption = 'Time';
-                    }
-                    field("N-3 Confirmation"; Rec."N-3 Confirmation")
-                    {
-                    }
-                    field("N-3 Confirmation Date"; Rec."N-3 Confirmation Date")
-                    {
-                    }
-                }
                 group("4. Parts Ordered")
                 {
-                    Editable = false;
                     field("Parts Ordered Date"; Rec."Parts Ordered Date")
                     {
                         Caption = 'Date';
@@ -93,9 +35,6 @@ page 80056 "Parts Customer Order"
                 group("6. Vehicle Details")
                 {
                     field("Vehicle Registration No."; Rec."Vehicle Registration No.")
-                    {
-                    }
-                    field("Vehicle Registered Date"; Rec."Vehicle Registered Date")
                     {
                     }
                     field(Brand; Rec.Brand)
@@ -132,17 +71,11 @@ page 80056 "Parts Customer Order"
                     field("Odometer At Appointment"; Rec."Odometer At Appointment")
                     {
                     }
-                    field("Total Time Taken"; Rec."Total Time Taken")
-                    {
-                        Editable = false;
-                    }
-                    field("Job Clock Time"; Rec."Job Clock Time")
-                    {
-                    }
                 }
                 group("7. Customer Name / Address / Telephone No.")
                 {
                     Editable = true;
+                    Visible = false;
                     field("Customer No."; Rec."Customer No.")
                     {
                     }
@@ -180,6 +113,7 @@ page 80056 "Parts Customer Order"
                 }
                 group("8. Contact Info.")
                 {
+                    Visible = false;
                     field("Vehicle Driven By Type"; Rec."Vehicle Driven By Type")
                     {
                     }
@@ -199,6 +133,7 @@ page 80056 "Parts Customer Order"
                 }
                 group("9. Customer's Request")
                 {
+                    Visible = false;
                     field(Appointment; Rec.Appointment)
                     {
                     }
@@ -231,17 +166,11 @@ page 80056 "Parts Customer Order"
                         MultiLine = true;
                         Visible = RepeatRepairVisible;
                     }
-                    field("Initial Job No."; Rec."Initial Job No.")
-                    {
-                    }
-                    field("DADs Only"; Rec."DADs Only")
-                    {
-                        Caption = 'Skip PSFU';
-                    }
                 }
             }
             group("Service Details")
             {
+                Visible = false;
                 group("10. Job Details")
                 {
                     field("Job Type2"; Rec."Job Type2")
@@ -401,20 +330,19 @@ page 80056 "Parts Customer Order"
             }
             group("Service Items")
             {
-                Editable = ServiceItemEditable;
             }
-            part("Parts and Labour"; "Customer Order Subform")
+            part("Parts and Labour"; 80007)
             {
-                SubPageLink = "Document No." = FIELD("No.");
+                SubPageLink = "Document No." = FIELD("No."),
+                              Type = FILTER(Item);
             }
             group(Workflow)
             {
                 field(Stage; Rec.Stage)
                 {
                 }
-                field("COF Delivery D  ate"; Rec."Actual Delivery Date")
+                field("Actual Delivery Date"; Rec."Actual Delivery Date")
                 {
-                    Caption = 'COF Delivery Date';
                 }
             }
         }
@@ -424,164 +352,6 @@ page 80056 "Parts Customer Order"
     {
         area(navigation)
         {
-            action("Service History")
-            {
-                Image = History;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
-                RunObject = Page 80021;
-                RunPageLink = "Vehicle Registration No." = FIELD("Vehicle Registration No.");
-
-                trigger OnAction()
-                begin
-                    //Rec.SETRANGE("Vehicle Registration No.", "Vehicle Registration No.");
-                end;
-            }
-            action("New DQ")
-            {
-                Image = Form;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
-                RunObject = Page 80054;
-
-                trigger OnAction()
-                begin
-
-                    SalesSetup.GET;
-                    SalesSetup.TESTFIELD("Auto Sale Invoice No.");
-                    DQ.INIT;
-                    DQ."DQ No." := NoSeriesMgt.GetNextNo(SalesSetup."Auto Sale Invoice No.", 0D, TRUE);
-                    DQ.INSERT(TRUE);
-                    DQ.VALIDATE("Customer Order No.", Rec."No.");
-                    DQ.MODIFY;
-                    COMMIT;
-
-                    DQ2.SETRANGE("Customer Order No.", Rec."No.");
-                    IF DQ2.FINDLAST THEN
-                        PAGE.RUNMODAL(80054, DQ2);
-                end;
-            }
-            separator(Control1)
-            {
-            }
-            action("All DQs")
-            {
-                Image = Form;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
-                RunObject = Page 80054;
-
-                trigger OnAction()
-                begin
-
-                    DQ3.SETRANGE("Customer Order No.", Rec."No.");
-                    IF DQ3.FINDFIRST THEN
-                        PAGE.RUN(80054, DQ3);
-                end;
-            }
-            action("SSC/SC")
-            {
-                Caption = 'SSC/SC';
-                Image = Entries;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
-
-                trigger OnAction()
-                begin
-                    ServCamp.SETRANGE(VDS, Rec.VDS);
-                    ServCamp.SETRANGE(VMI, Rec.VMI);
-                    //ServCamp.SETFILTER("Range From",'<=%1',VIS);
-                    //ServCamp.SETFILTER("Range To",'>=%1',VIS);
-                    //ServCamp.SETFILTER("SSC/SC Date From",'<=%1',TODAY);
-                    //ServCamp.SETFILTER("SSC/SC Date To",'>=%1',TODAY);
-                    //ServCamp.SETRANGE("SCSC Status",ServCamp."SCSC Status"::Active);
-                    //ServCamp.SETRANGE(Applied,FALSE);
-                    IF ServCamp.FINDFIRST THEN
-                        PAGE.RUNMODAL(50354, ServCamp) ELSE
-                        MESSAGE(Text003);
-                end;
-            }
-            action("BP Worksheet")
-            {
-                Image = Worksheet;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
-
-                trigger OnAction()
-                begin
-                    IF NOT BPWSHeader.GET(Rec."No.") THEN BEGIN
-                        BPWSHeader.INIT;
-                        BPWSHeader."No." := Rec."No.";
-                        BPWSHeader.INSERT;
-                    END;
-
-                    BPWSHeader.GET(Rec."No.");
-                    PAGE.RUN(70507, BPWSHeader);
-                end;
-            }
-            action("Job Instruction")
-            {
-                Image = Job;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
-                RunObject = Page 80046;
-                RunPageLink = "No." = FIELD("No.");
-            }
-            action(Complaints)
-            {
-                Caption = 'Complaints';
-                Image = ListPage;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
-                RunObject = Page 50371;
-                RunPageLink = "COF No." = FIELD("No.");
-            }
-            action("Request Additional Parts")
-            {
-                Image = RegisterPick;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
-
-                trigger OnAction()
-                begin
-                    Rec.CreateTransferOrder;
-                end;
-            }
-            action(Estimate)
-            {
-                Image = Print;
-                Promoted = true;
-                PromotedCategory = "Report";
-                Visible = false;
-
-                trigger OnAction()
-                begin
-                    COFRec.SETRANGE("No.", Rec."No.");
-                    IF COFRec.FINDFIRST THEN
-                        REPORT.RUNMODAL(50309, TRUE, TRUE, COFRec);
-                end;
-            }
-            action("Update Cost Changed")
-            {
-                Caption = 'Update Cost Changed';
-                Image = UpdateUnitCost;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
-
-                trigger OnAction()
-                begin
-                    Rec.CostChanged;
-                end;
-            }
             action("Customer Order Form")
             {
                 Image = Print;
@@ -608,25 +378,6 @@ page 80056 "Parts Customer Order"
                         PAGE.RUN(5742, TransferHeader)
                     ELSE
                         MESSAGE('There is no transfer order!');
-                end;
-            }
-            action("Parts Order Parts")
-            {
-                RunObject = Page 80058;
-            }
-            action("Service Order")
-            {
-                Image = Form;
-                Promoted = true;
-                PromotedCategory = Process;
-
-                trigger OnAction()
-                begin
-                    ServiceOrder.SETRANGE("Customer Order No.", Rec."No.");
-                    IF ServiceOrder.FINDFIRST THEN
-                        PAGE.RUN(5900, ServiceOrder)
-                    ELSE
-                        MESSAGE('There is no invoice for this order!');
                 end;
             }
             action("Requested Vs Received")
@@ -659,31 +410,6 @@ page 80056 "Parts Customer Order"
             action("Create Sublet")
             {
             }
-            action("Create Service Order")
-            {
-                Image = Invoice;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
-
-                trigger OnAction()
-                begin
-
-                    // IF Posted THEN
-                    //  ERROR('Service Order has been created');
-
-
-                    IF (Rec."Job Classification" = Rec."Job Classification"::Internal) OR (Rec."Job Classification" = Rec."Job Classification"::"PDI/VRI") THEN
-                        ERROR('Select Billabe in Job Classification before you can create a Service Invoice')
-                    ELSE BEGIN
-                        Rec.CreateServiceInvoice;
-                        Rec.Posted := TRUE;
-                    END;
-
-                    //IF Stage = Stage::"Parts Ordered" THEN
-                    //  ERROR('Stage must be Parts Arrived before service Order can be created');
-                end;
-            }
             action("&Email COF")
             {
                 Caption = '&Email COF';
@@ -712,44 +438,12 @@ page 80056 "Parts Customer Order"
                         REPORT.RUNMODAL(50315, TRUE, TRUE, COFRec);
                 end;
             }
-            action("Approved Estimate")
-            {
-                Image = Print;
-                Promoted = true;
-                PromotedCategory = "Report";
-                //RunObject = Report 50636;
-            }
-            action("Post Internal Job")
-            {
-                Image = Form;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
-
-                trigger OnAction()
-                begin
-                    IF Rec.Posted THEN
-                        ERROR('This record has been posted');
-
-                    IF (Rec."Job Classification" = Rec."Job Classification"::Internal) OR (Rec."Job Classification" = Rec."Job Classification"::"PDI/VRI") THEN
-                        IF NOT CONFIRM('Are you sure you want to post Internal Job?', TRUE) THEN
-                            CurrPage.CLOSE
-                        ELSE BEGIN
-                            Rec.PostIssue;
-                            MESSAGE('Internal Job Posted successfully');
-                            Rec.Posted := TRUE;
-                            Rec."Posted By" := USERID;
-                            Rec."Posted DateTime" := CURRENTDATETIME;
-                        END;
-                end;
-            }
             action("Raise LPP")
             {
                 Image = RegisterPick;
                 Promoted = true;
                 PromotedCategory = Process;
                 PromotedIsBig = true;
-                Visible = false;
 
                 trigger OnAction()
                 begin
@@ -760,11 +454,17 @@ page 80056 "Parts Customer Order"
                     MESSAGE('LPP Raised');
                 end;
             }
+            action("View LPP")
+            {
+                Image = Form;
+                Promoted = true;
+                PromotedCategory = Process;
+                RunObject = Page 70205;
+                RunPageLink = "TCOF No." = FIELD("No.");
+            }
             action("Request for Quote")
             {
                 Caption = 'Request for Quote';
-                Image = ResourcePlanning;
-                Visible = false;
 
                 trigger OnAction()
                 begin
@@ -777,62 +477,79 @@ page 80056 "Parts Customer Order"
             }
             action("View Request for Quote")
             {
-                Image = AnalysisView;
-                Promoted = true;
-                PromotedCategory = Process;
                 RunObject = Page 70061;
                 RunPageLink = "TCOF No." = FIELD("No.");
             }
-            action("View LPP")
+            action("Create TransferOrder")
+            {
+                Image = TransferOrder;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+
+                trigger OnAction()
+                begin
+                    Rec.TESTFIELD("Service Location", '120ISO');
+                    Rec.CreateTransferOrder;
+                    MESSAGE('Transfer Order Created');
+                end;
+            }
+            action("Create Lekki Transfer")
+            {
+                Image = TransferOrder;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+
+                trigger OnAction()
+                begin
+                    Rec.TESTFIELD("Service Location", '113LEK');
+                    Rec.CreateTransferOrderLekki;
+                    MESSAGE('Transfer Order Created');
+                end;
+            }
+            action("Stock Issue Voucher ")
+            {
+                //RunObject = Report 50631;
+            }
+            action("Service Order")
             {
                 Image = Form;
                 Promoted = true;
                 PromotedCategory = Process;
-                RunObject = Page 70193;
-                RunPageLink = "TCOF No." = FIELD("No.");
-            }
-            action("Create Order")
-            {
 
                 trigger OnAction()
                 begin
+                    ServiceOrder.SETRANGE("Customer Order No.", Rec."No.");
+                    IF ServiceOrder.FINDFIRST THEN
+                        PAGE.RUN(5900, ServiceOrder)
+                    ELSE
+                        MESSAGE('There is no invoice for this order!');
+                end;
+            }
+            action("Create Service Order")
+            {
+                Image = Invoice;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+
+                trigger OnAction()
+                begin
+
                     IF Rec.Posted THEN
-                        ERROR('This record has been posted');
+                        ERROR('Service Order has been created');
 
 
                     IF (Rec."Job Classification" = Rec."Job Classification"::Internal) OR (Rec."Job Classification" = Rec."Job Classification"::"PDI/VRI") THEN
                         ERROR('Select Billabe in Job Classification before you can create a Service Invoice');
 
+                    //IF Stage = Stage::"Parts Ordered" THEN
+                    //  ERROR('Stage must be Parts Arrived before service Order can be created');
 
-                    Rec.GenerateService;
+                    Rec.CreateServiceInvoice;
 
-
-                    //Posted := TRUE;
-                end;
-            }
-            action("Posted Voucher ")
-            {
-                //RunObject = Report 50630;
-
-                trigger OnAction()
-                begin
-                    ItemLedgerEntry.SETRANGE("Document No.", Rec."No.");
-                    IF ItemLedgerEntry.FindFirst() THEN
-                        REPORT.RUNMODAL(50630, TRUE, TRUE, ItemLedgerEntry);
-                end;
-            }
-            action("Stock Issue Voucher")
-            {
-                Image = Tools;
-                Promoted = true;
-                PromotedCategory = "Report";
-                PromotedIsBig = true;
-
-                trigger OnAction()
-                begin
-                    CustOrderLine.SETRANGE("Document No.", Rec."No.");
-                    IF CustOrderLine.FINDFIRST THEN
-                        REPORT.RUNMODAL(50631, TRUE, TRUE, CustOrderLine);
+                    Rec.Posted := TRUE;
                 end;
             }
         }
@@ -847,9 +564,6 @@ page 80056 "Parts Customer Order"
             RepeatRepairVisible := TRUE
         ELSE
             RepeatRepairVisible := FALSE;
-
-        IF Rec.Posted THEN
-            ServiceItemEditable := FALSE;
     end;
 
     trigger OnDeleteRecord(): Boolean
@@ -870,12 +584,8 @@ page 80056 "Parts Customer Order"
             RepeatRepairVisible := FALSE;
 
 
-        IF Rec.Delivered THEN
-            CurrPage.EDITABLE := FALSE;
-
-
-        IF Rec.Posted THEN
-            ServiceItemEditable := FALSE;
+        //IF Posted THEN
+        //CurrPage.EDITABLE := FALSE;
     end;
 
     var
@@ -922,8 +632,6 @@ page 80056 "Parts Customer Order"
         BPWSHeader: Record 70046;
         RepeatRepairVisible: Boolean;
         LocalPartPurchase: Record 70018;
-        ServiceItemEditable: Boolean;
-        ItemLedgerEntry: Record 32;
 
     procedure CreatePurchaseRequisition()
     var

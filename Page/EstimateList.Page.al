@@ -3,6 +3,7 @@ page 80009 "Estimate List"
     CardPageID = "Estimate Card";
     PageType = List;
     SourceTable = "Estimate Header";
+    ApplicationArea = All;
 
     layout
     {

@@ -1,5 +1,6 @@
 page 50380 "Vehicles Delivered"
 {
+    ApplicationArea = All;
     AutoSplitKey = true;
     DelayedInsert = true;
     Editable = false;

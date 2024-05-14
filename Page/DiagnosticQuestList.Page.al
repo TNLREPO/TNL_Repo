@@ -5,6 +5,7 @@ page 50239 "Diagnostic Quest. List"
     ModifyAllowed = false;
     PageType = List;
     SourceTable = "Diagnostic Questionnaire";
+    ApplicationArea = All;
 
     layout
     {

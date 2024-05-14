@@ -2,6 +2,7 @@ page 80053 "Customer Type"
 {
     PageType = List;
     SourceTable = "Customer Type";
+    ApplicationArea = All;
 
     layout
     {
