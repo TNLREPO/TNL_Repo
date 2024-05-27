@@ -1,8 +1,8 @@
 table 70034 "Customer Order HeaderX"
 {
 
-    /*  DrillDownPageID = 80043;
-     LookupPageID = 80043; */
+    DrillDownPageID = 80043;
+    LookupPageID = 80043;
 
     fields
     {
@@ -1765,181 +1765,181 @@ table 70034 "Customer Order HeaderX"
             OptionCaption = 'Greater than 10,N-10,N-9,N-8,N-7,N-6,N-5,N-4,N-3,N-2,N-1,Parts Ordered,Parts Arrived,Today,Waiting for Service,Next Job,Being Serviced,Waiting for Inspection,Waiting for Washing,Waiting for Invoicing,Awaiting Delivery,Waiting for Settlement,Waiting for Decision,Waiting for Approval,Waiting for Parts,Waiting for Sublet,Awaiting DAD,Awaiting Estimate,Job Stoppage,Delivered';
             OptionMembers = "Greater than 10","N-10","N-9","N-8","N-7","N-6","N-5","N-4","N-3","N-2","N-1","Parts Ordered","Parts Arrived",Today,"Waiting for Service","Next Job","Being Serviced","Waiting for Inspection","Waiting for Washing","Waiting for Invoicing","Awaiting Delivery","Waiting for Settlement","Waiting for Decision","Waiting for Approval","Waiting for Parts","Waiting for Sublet","Awaiting DAD","Awaiting Estimate","Job Stoppage",Delivered;
 
-    /*         trigger OnValidate()
-            begin
+            /*         trigger OnValidate()
+                    begin
 
-                //Isolo Mail
-                IF "Service Location" = '120ISO' THEN BEGIN
-                    CASE Stage OF
-                        Stage::"Parts Ordered":
-                            IF NOT CONFIRM('Are you sure you want to request for Parts', FALSE) THEN
-                                Stage := Stage::"N-1"
-                            ELSE BEGIN
-                                TESTFIELD("Confirmation Date");
-                                TESTFIELD("Confirmation Time");
-                                "Parts Ordered Date" := TODAY;
-                                "Parts Ordered Time" := TIME;
-                                "Parts Ordered Staff Name" := USERID;
-                                ToAddresses := 'ayodeji@toyotanigeria.com';
-                                Addressee := 'Sir';
-                                CcAddresses := 'isuekebho@toyotanigeria.com;uzonwanne@toyotanigeria.com';
-                                BccAddresses := '';
-                                Subject := STRSUBSTNO(Text005, "No.");
-                                UserSetup3.GET(USERID);
-                                SendersName := UserSetup3.Initials;
+                        //Isolo Mail
+                        IF "Service Location" = '120ISO' THEN BEGIN
+                            CASE Stage OF
+                                Stage::"Parts Ordered":
+                                    IF NOT CONFIRM('Are you sure you want to request for Parts', FALSE) THEN
+                                        Stage := Stage::"N-1"
+                                    ELSE BEGIN
+                                        TESTFIELD("Confirmation Date");
+                                        TESTFIELD("Confirmation Time");
+                                        "Parts Ordered Date" := TODAY;
+                                        "Parts Ordered Time" := TIME;
+                                        "Parts Ordered Staff Name" := USERID;
+                                        ToAddresses := 'ayodeji@toyotanigeria.com';
+                                        Addressee := 'Sir';
+                                        CcAddresses := 'isuekebho@toyotanigeria.com;uzonwanne@toyotanigeria.com';
+                                        BccAddresses := '';
+                                        Subject := STRSUBSTNO(Text005, "No.");
+                                        UserSetup3.GET(USERID);
+                                        SendersName := UserSetup3.Initials;
 
-                                WITH TempEmailItem DO BEGIN
-                                    "Send to" := ToAddresses;
-                                    "Send CC" := 'csc-reception@toyotanigeria.com;isuekebho@toyotanigeria.com;uzonwanne@toyotanigeria.com;afolabi@toyotanigeria.com;isolopartswarehouse@toyotanigeria.com';
-                                    "Send BCC" := BccAddresses;
-                                    Subject := STRSUBSTNO(Text005, "No.");
+                                        WITH TempEmailItem DO BEGIN
+                                            "Send to" := ToAddresses;
+                                            "Send CC" := 'csc-reception@toyotanigeria.com;isuekebho@toyotanigeria.com;uzonwanne@toyotanigeria.com;afolabi@toyotanigeria.com;isolopartswarehouse@toyotanigeria.com';
+                                            "Send BCC" := BccAddresses;
+                                            Subject := STRSUBSTNO(Text005, "No.");
 
-                                    CRLF := '';
-                                    CRLF[1] := 13;
-                                    CRLF[2] := 10;
+                                            CRLF := '';
+                                            CRLF[1] := 13;
+                                            CRLF[2] := 10;
 
-                                    BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                    BodyStream.WRITETEXT(Text006 + ' ' + Addressee + ',');
-                                    BodyStream.WRITETEXT(CRLF + CRLF);
-                                    BodyStream.WRITETEXT(STRSUBSTNO(Text007, "No.") + CRLF + CRLF +
-                                    Text008 + CRLF + CRLF +
-                                    SendersName);
-                                    BodyStream.WRITETEXT(CRLF + CRLF);
-                                    BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                    Body := BodyBlob.Blob;
-                                    Send(FALSE);
-                                END;
+                                            BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                                            BodyStream.WRITETEXT(Text006 + ' ' + Addressee + ',');
+                                            BodyStream.WRITETEXT(CRLF + CRLF);
+                                            BodyStream.WRITETEXT(STRSUBSTNO(Text007, "No.") + CRLF + CRLF +
+                                            Text008 + CRLF + CRLF +
+                                            SendersName);
+                                            BodyStream.WRITETEXT(CRLF + CRLF);
+                                            BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                                            Body := BodyBlob.Blob;
+                                            Send(FALSE);
+                                        END;
+                                    END;
+
+                                Stage::"Parts Arrived":
+                                    IF NOT CONFIRM('Are you sure of availability for Parts', FALSE) THEN
+                                        Stage := Stage::"Parts Ordered"
+                                    ELSE BEGIN
+                                        "Parts Arrived Date" := TODAY;
+                                        "Parts Arrived Time" := TIME;
+                                        "Parts Arrived Staff Name" := USERID;
+                                        ToAddresses := 'uzonwanne@toyotanigeria.com;isaac@toyotanigeria.com;csc-reception@toyotanigeria.com;csc-appointment@toyotanigeria.com';
+                                        Addressee := UserSetup5.Initials;
+                                        CcAddresses := 'afolabi@toyotanigeria.com;isuekebho@toyotanigeria.com;ayodeji@toyotanigeria.com';
+                                        BccAddresses := '';
+                                        Subject := STRSUBSTNO(Text010, "No.");
+                                        UserSetup4.GET(USERID);
+                                        SendersName := UserSetup4.Initials;
+                                        WITH TempEmailItem DO BEGIN
+                                            "Send to" := ToAddresses;
+                                            "Send CC" := CcAddresses;
+                                            "Send BCC" := BccAddresses;
+                                            Subject := STRSUBSTNO(Text010, "No.");
+
+                                            CRLF := '';
+                                            CRLF[1] := 13;
+                                            CRLF[2] := 10;
+
+                                            BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                                            BodyStream.WRITETEXT(Text006 + ' ' + Addressee + ',');
+                                            BodyStream.WRITETEXT(CRLF + CRLF);
+                                            BodyStream.WRITETEXT(STRSUBSTNO(Text011, "No.") + CRLF + CRLF +
+                                            Text008 + CRLF + CRLF +
+                                            SendersName);
+                                            BodyStream.WRITETEXT(CRLF + CRLF);
+                                            BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                                            Body := BodyBlob.Blob;
+                                            Send(FALSE);
+                                        END;
+                                    END;
                             END;
+                        END;
 
-                        Stage::"Parts Arrived":
-                            IF NOT CONFIRM('Are you sure of availability for Parts', FALSE) THEN
-                                Stage := Stage::"Parts Ordered"
-                            ELSE BEGIN
-                                "Parts Arrived Date" := TODAY;
-                                "Parts Arrived Time" := TIME;
-                                "Parts Arrived Staff Name" := USERID;
-                                ToAddresses := 'uzonwanne@toyotanigeria.com;isaac@toyotanigeria.com;csc-reception@toyotanigeria.com;csc-appointment@toyotanigeria.com';
-                                Addressee := UserSetup5.Initials;
-                                CcAddresses := 'afolabi@toyotanigeria.com;isuekebho@toyotanigeria.com;ayodeji@toyotanigeria.com';
-                                BccAddresses := '';
-                                Subject := STRSUBSTNO(Text010, "No.");
-                                UserSetup4.GET(USERID);
-                                SendersName := UserSetup4.Initials;
-                                WITH TempEmailItem DO BEGIN
-                                    "Send to" := ToAddresses;
-                                    "Send CC" := CcAddresses;
-                                    "Send BCC" := BccAddresses;
-                                    Subject := STRSUBSTNO(Text010, "No.");
+                        //Lekki Mail
+                        IF "Service Location" = '113LEK' THEN BEGIN
+                            CASE Stage OF
+                                Stage::"Parts Ordered":
+                                    IF NOT CONFIRM('Are you sure you want to request for Parts', FALSE) THEN
+                                        Stage := Stage::"N-1"
+                                    ELSE BEGIN
+                                        TESTFIELD("Confirmation Date");
+                                        TESTFIELD("Confirmation Time");
+                                        "Parts Ordered Date" := TODAY;
+                                        "Parts Ordered Time" := TIME;
+                                        "Parts Ordered Staff Name" := USERID;
 
-                                    CRLF := '';
-                                    CRLF[1] := 13;
-                                    CRLF[2] := 10;
+                                        IF UserSetup5.GET(USERID) THEN
+                                            SenderAddress := UserSetup5."E-Mail";
+                                        ToAddresses := 'remigus@toyotanigeria.com'; //isolopartswarehouse@toyotanigeria.com;';
+                                        Addressee := 'Sir';
+                                        CcAddresses := 'irabor@toyotanigeria.com;mudashiru@toyotanigeria.com;badejoko@toyotanigeria.com';
+                                        BccAddresses := '';
+                                        Subject := STRSUBSTNO(Text005, "No.");
+                                        UserSetup3.GET(USERID);
+                                        SendersName := UserSetup3.Initials;
 
-                                    BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                    BodyStream.WRITETEXT(Text006 + ' ' + Addressee + ',');
-                                    BodyStream.WRITETEXT(CRLF + CRLF);
-                                    BodyStream.WRITETEXT(STRSUBSTNO(Text011, "No.") + CRLF + CRLF +
-                                    Text008 + CRLF + CRLF +
-                                    SendersName);
-                                    BodyStream.WRITETEXT(CRLF + CRLF);
-                                    BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                    Body := BodyBlob.Blob;
-                                    Send(FALSE);
-                                END;
+                                        WITH TempEmailItem DO BEGIN
+                                            "Send to" := ToAddresses;
+                                            "Send CC" := CcAddresses + ';' + SenderAddress;
+                                            "Send BCC" := BccAddresses;
+                                            Subject := STRSUBSTNO(Text005, "No.");
+
+                                            CRLF := '';
+                                            CRLF[1] := 13;
+                                            CRLF[2] := 10;
+
+                                            BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                                            BodyStream.WRITETEXT(Text006 + ' ' + Addressee + ',');
+                                            BodyStream.WRITETEXT(CRLF + CRLF);
+                                            BodyStream.WRITETEXT(STRSUBSTNO(Text007, "No.") + CRLF + CRLF +
+                                            Text008 + CRLF + CRLF +
+                                            SendersName);
+                                            BodyStream.WRITETEXT(CRLF + CRLF);
+                                            BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                                            Body := BodyBlob.Blob;
+                                            Send(FALSE);
+                                        END;
+                                    END;
+
+
+                                Stage::"Parts Arrived":
+                                    IF NOT CONFIRM('Are you sure of availability for Parts', FALSE) THEN
+                                        Stage := Stage::"Parts Ordered"
+                                    ELSE BEGIN
+                                        "Parts Arrived Date" := TODAY;
+                                        "Parts Arrived Time" := TIME;
+                                        "Parts Arrived Staff Name" := USERID;
+
+                                        IF UserSetup5.GET(USERID) THEN
+                                            SenderAddress := UserSetup5."E-Mail";
+                                        ToAddresses := 'servicedojo@toyotanigeria.com';//uzonwanne@toyotanigeria.com;
+                                        Addressee := 'Dear Sir,';
+                                        CcAddresses := 'irabor@toyotanigeria.com;remigus@toyotanigeria.com;badejoko@toyotanigeria.com;mudashiru@toyotanigeria.com';
+                                        BccAddresses := '';
+                                        Subject := STRSUBSTNO(Text010, "No.");
+                                        UserSetup4.GET(USERID);
+                                        SendersName := UserSetup4.Initials;
+
+                                        WITH TempEmailItem DO BEGIN
+                                            "Send to" := ToAddresses;
+                                            "Send CC" := CcAddresses + ';' + SenderAddress;
+                                            "Send BCC" := BccAddresses;
+                                            Subject := STRSUBSTNO(Text010, "No.");
+
+                                            CRLF := '';
+                                            CRLF[1] := 13;
+                                            CRLF[2] := 10;
+
+                                            BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                                            BodyStream.WRITETEXT(Addressee + ',');
+                                            BodyStream.WRITETEXT(CRLF + CRLF);
+                                            BodyStream.WRITETEXT(STRSUBSTNO(Text011, "No.") + CRLF + CRLF +
+                                            Text008 + CRLF + CRLF +
+                                            SendersName);
+                                            BodyStream.WRITETEXT(CRLF + CRLF);
+                                            BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                                            Body := BodyBlob.Blob;
+                                            Send(FALSE);
+                                        END;
+                                    END;
                             END;
-                    END;
-                END;
-
-                //Lekki Mail
-                IF "Service Location" = '113LEK' THEN BEGIN
-                    CASE Stage OF
-                        Stage::"Parts Ordered":
-                            IF NOT CONFIRM('Are you sure you want to request for Parts', FALSE) THEN
-                                Stage := Stage::"N-1"
-                            ELSE BEGIN
-                                TESTFIELD("Confirmation Date");
-                                TESTFIELD("Confirmation Time");
-                                "Parts Ordered Date" := TODAY;
-                                "Parts Ordered Time" := TIME;
-                                "Parts Ordered Staff Name" := USERID;
-
-                                IF UserSetup5.GET(USERID) THEN
-                                    SenderAddress := UserSetup5."E-Mail";
-                                ToAddresses := 'remigus@toyotanigeria.com'; //isolopartswarehouse@toyotanigeria.com;';
-                                Addressee := 'Sir';
-                                CcAddresses := 'irabor@toyotanigeria.com;mudashiru@toyotanigeria.com;badejoko@toyotanigeria.com';
-                                BccAddresses := '';
-                                Subject := STRSUBSTNO(Text005, "No.");
-                                UserSetup3.GET(USERID);
-                                SendersName := UserSetup3.Initials;
-
-                                WITH TempEmailItem DO BEGIN
-                                    "Send to" := ToAddresses;
-                                    "Send CC" := CcAddresses + ';' + SenderAddress;
-                                    "Send BCC" := BccAddresses;
-                                    Subject := STRSUBSTNO(Text005, "No.");
-
-                                    CRLF := '';
-                                    CRLF[1] := 13;
-                                    CRLF[2] := 10;
-
-                                    BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                    BodyStream.WRITETEXT(Text006 + ' ' + Addressee + ',');
-                                    BodyStream.WRITETEXT(CRLF + CRLF);
-                                    BodyStream.WRITETEXT(STRSUBSTNO(Text007, "No.") + CRLF + CRLF +
-                                    Text008 + CRLF + CRLF +
-                                    SendersName);
-                                    BodyStream.WRITETEXT(CRLF + CRLF);
-                                    BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                    Body := BodyBlob.Blob;
-                                    Send(FALSE);
-                                END;
-                            END;
-
-
-                        Stage::"Parts Arrived":
-                            IF NOT CONFIRM('Are you sure of availability for Parts', FALSE) THEN
-                                Stage := Stage::"Parts Ordered"
-                            ELSE BEGIN
-                                "Parts Arrived Date" := TODAY;
-                                "Parts Arrived Time" := TIME;
-                                "Parts Arrived Staff Name" := USERID;
-
-                                IF UserSetup5.GET(USERID) THEN
-                                    SenderAddress := UserSetup5."E-Mail";
-                                ToAddresses := 'servicedojo@toyotanigeria.com';//uzonwanne@toyotanigeria.com;
-                                Addressee := 'Dear Sir,';
-                                CcAddresses := 'irabor@toyotanigeria.com;remigus@toyotanigeria.com;badejoko@toyotanigeria.com;mudashiru@toyotanigeria.com';
-                                BccAddresses := '';
-                                Subject := STRSUBSTNO(Text010, "No.");
-                                UserSetup4.GET(USERID);
-                                SendersName := UserSetup4.Initials;
-
-                                WITH TempEmailItem DO BEGIN
-                                    "Send to" := ToAddresses;
-                                    "Send CC" := CcAddresses + ';' + SenderAddress;
-                                    "Send BCC" := BccAddresses;
-                                    Subject := STRSUBSTNO(Text010, "No.");
-
-                                    CRLF := '';
-                                    CRLF[1] := 13;
-                                    CRLF[2] := 10;
-
-                                    BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                    BodyStream.WRITETEXT(Addressee + ',');
-                                    BodyStream.WRITETEXT(CRLF + CRLF);
-                                    BodyStream.WRITETEXT(STRSUBSTNO(Text011, "No.") + CRLF + CRLF +
-                                    Text008 + CRLF + CRLF +
-                                    SendersName);
-                                    BodyStream.WRITETEXT(CRLF + CRLF);
-                                    BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                    Body := BodyBlob.Blob;
-                                    Send(FALSE);
-                                END;
-                            END;
-                    END;
-                END;
-            end; */
+                        END;
+                    end; */
         }
         field(313; Right; Boolean)
         {
@@ -2180,7 +2180,7 @@ table 70034 "Customer Order HeaderX"
         SendersName: Text;
         Addressee: Text;
         UserSetup2: Record "User Setup";
-       // Mail: Codeunit Mail;
+        // Mail: Codeunit Mail;
         CcAddresses: Text;
         BccAddresses: Text;
         SenderAddress: Text;
@@ -2274,7 +2274,8 @@ table 70034 "Customer Order HeaderX"
                     CustOrderLine.VALIDATE(CustOrderLine."Quantity Received", Faultsetup.Quantity);
                     CustOrderLine.INSERT;
                 UNTIL Faultsetup.NEXT = 0;
-        END */;
+        END */
+        ;
     end;
 
     procedure GeneratEstimate()

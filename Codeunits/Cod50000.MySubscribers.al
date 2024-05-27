@@ -7,10 +7,10 @@ codeunit 50000 MySubscribers
     procedure UpdateGLEntry_OnAfterCopyGLEntryFromGenJnlLine(var GLEntry: Record "G/L Entry"; var GenJournalLine: Record "Gen. Journal Line")
 
     var
-        GenJnlLine: Record "Gen. Journal Line";
+
     begin
 
-        GLEntry."Procument No." := GenJnlLine."Procurement No."; //codeware Table 17
+        GLEntry."Procument No." := GenJournalLine."Procurement No.";
     end;
 
 
@@ -19,12 +19,12 @@ codeunit 50000 MySubscribers
     procedure UpdateCustLedEntry_OnAfterCopyCustLedgerEntryFromGenJnlLine(var CustLedgerEntry: Record "Cust. Ledger Entry"; GenJournalLine: Record "Gen. Journal Line")
 
     var
-        GenJnlLine: Record "Gen. Journal Line";
+
 
     Begin
-        CustLedgerEntry."Serial No" := GenJnlLine."Serial No";
-        CustLedgerEntry."Loan ID" := GenJnlLine."Loan ID";
-        CustLedgerEntry."Loan Type" := GenJnlLine."Loan Type";
+        CustLedgerEntry."Serial No" := GenJournalLine."Serial No";
+        CustLedgerEntry."Loan ID" := GenJournalLine."Loan ID";
+        CustLedgerEntry."Loan Type" := GenJournalLine."Loan Type";
     End;
 
 

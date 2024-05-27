@@ -5,6 +5,8 @@ page 50013 "Purchase Requisition."
     DelayedInsert = true;
     PageType = List;
     SourceTable = "Purchase Requisition";
+    UsageCategory = Lists;
+    Caption = 'Dynamic Ordering System';
 
     layout
     {
@@ -12,9 +14,9 @@ page 50013 "Purchase Requisition."
         {
             repeater(Group)
             {
-                field("Line No"; Rec."Line No")
-                {
-                }
+                /*  field("Line No"; Rec."Line No")
+                 {
+                 } */
                 field("Item No."; Rec."Item No.")
                 {
                 }

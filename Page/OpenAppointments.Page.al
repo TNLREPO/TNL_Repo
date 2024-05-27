@@ -3,6 +3,7 @@ page 80037 "Open Appointments"
     CardPageID = "Appointment Card";
     PageType = List;
     SourceTable = "Service AppointmentsX";
+    ApplicationArea = All;
 
     layout
     {

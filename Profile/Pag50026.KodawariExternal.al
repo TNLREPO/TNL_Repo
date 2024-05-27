@@ -2,6 +2,7 @@ page 50026 "Kodawari External"
 {
     Caption = 'Kodawari External';
     PageType = RoleCenter;
+    ApplicationArea = All;
 
     layout
     {
@@ -85,31 +86,15 @@ page 50026 "Kodawari External"
     {
         area(embedding)
         {
-            ToolTip = 'Manage sales processes, view KPIs, and access your favorite items and customers.';
-            action(SalesOrders)
+            ToolTip = 'Manage service processes, view KPIs, and access your service items and customers.';
+
+            action(ServiceItem)
             {
-                ApplicationArea = Basic, Suite;
-                Caption = 'Sales Orders';
-                Image = "Order";
-                RunObject = Page "Sales Order List";
-                ToolTip = 'Record your agreements with customers to sell certain products on certain delivery and payment terms. Sales orders, unlike sales invoices, allow you to ship partially, deliver directly from your vendor to your customer, initiate warehouse handling, and print various customer-facing documents. Sales invoicing is integrated in the sales order process.';
-            }
-            action(SalesOrdersShptNotInv)
-            {
-                ApplicationArea = Basic, Suite;
-                Caption = 'Shipped Not Invoiced';
-                RunObject = Page "Sales Order List";
-                RunPageView = where("Shipped Not Invoiced" = const(true));
-                ToolTip = 'View sales documents that are shipped but not yet invoiced.';
-            }
-            action(SalesOrdersComplShtNotInv)
-            {
-                ApplicationArea = Basic, Suite;
-                Caption = 'Completely Shipped Not Invoiced';
-                RunObject = Page "Sales Order List";
-                RunPageView = where("Completely Shipped" = const(true),
-                                    "Shipped Not Invoiced" = const(true));
-                ToolTip = 'View sales documents that are fully shipped but not fully invoiced.';
+                ApplicationArea = All;
+                Caption = 'Service Items New';
+                Image = Item;
+                RunObject = Page "Service Item List New";
+                ToolTip = 'View or edit detailed information for the service items.';
             }
             action(Items)
             {
@@ -127,34 +112,7 @@ page 50026 "Kodawari External"
                 RunObject = Page "Customer List";
                 ToolTip = 'View or edit detailed information for the customers that you trade with. From each customer card, you can open related information, such as sales statistics and ongoing orders, and you can define special prices and line discounts that you grant if certain conditions are met.';
             }
-            action("Item Journals")
-            {
-                ApplicationArea = Basic, Suite;
-                Caption = 'Item Journals';
-                RunObject = Page "Item Journal Batches";
-                RunPageView = where("Template Type" = const(Item),
-                                    Recurring = const(false));
-                ToolTip = 'Post item transactions directly to the item ledger to adjust inventory in connection with purchases, sales, and positive or negative adjustments without using documents. You can save sets of item journal lines as standard journals so that you can perform recurring postings quickly. A condensed version of the item journal function exists on item cards for quick adjustment of an items inventory quantity.';
-            }
-            action(SalesJournals)
-            {
-                ApplicationArea = Basic, Suite;
-                Caption = 'Sales Journals';
-                RunObject = Page "General Journal Batches";
-                RunPageView = where("Template Type" = const(Sales),
-                                    Recurring = const(false));
-                ToolTip = 'Post any sales-related transaction directly to a customer, bank, or general ledger account instead of using dedicated documents. You can post all types of financial sales transactions, including payments, refunds, and finance charge amounts. Note that you cannot post item quantities with a sales journal.';
-            }
-            action(CashReceiptJournals)
-            {
-                ApplicationArea = Basic, Suite;
-                Caption = 'Cash Receipt Journals';
-                Image = Journals;
-                RunObject = Page "General Journal Batches";
-                RunPageView = where("Template Type" = const("Cash Receipts"),
-                                    Recurring = const(false));
-                ToolTip = 'Register received payments by manually applying them to the related customer, vendor, or bank ledger entries. Then, post the payments to G/L accounts and thereby close the related ledger entries.';
-            }
+
             action("Transfer Orders")
             {
                 ApplicationArea = Location;
@@ -208,83 +166,6 @@ page 50026 "Kodawari External"
                     RunObject = Page "Posted Sales Shipments";
                     ToolTip = 'Open the list of posted sales shipments.';
                 }
-
-            }
-
-            group(WarrantyProcess)
-            {
-                Caption = 'Warranty Process';
-                action("WarrantyCoupon")
-                {
-                    ApplicationArea = CostAccounting;
-                    Caption = 'Warranty Coupon';
-                    RunObject = Page "Warranty Couporn";
-                }
-
-                action("DirectWarrantyCoupon")
-                {
-                    ApplicationArea = CostAccounting;
-                    Caption = 'Direct Warranty Coupon';
-                    RunObject = Page "Direct Warranty Page";
-                }
-
-                action("WarrantyDataUploaded")
-                {
-                    ApplicationArea = CostAccounting;
-                    Caption = 'Warranty Data Uploaded';
-                    RunObject = Page "Warranty Data Uploaded";
-                }
-
-            }
-
-            group(Kodawari)
-            {
-                Caption = 'Kodawari';
-                action(OpenJob)
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Open Job';
-                    Image = Job;
-                    RunObject = Page "Customer Order List WIP";
-                    ToolTip = 'Review open jobs at the workshop.';
-                }
-
-                action(DeliveredJob)
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Delivered Job';
-                    Image = Job;
-                    RunObject = Page Delivered;
-                    ToolTip = 'Review delivered jobs at the workshop.';
-                }
-
-                action(PSFUList)
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'PSFU - Open';
-                    Image = Job;
-                    RunObject = Page "PSFU List";
-                    ToolTip = 'Review open post service follow-up.';
-                }
-
-                action(PSFUTreated)
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'PSFU - Treated';
-                    Image = Job;
-                    RunObject = Page "Service Index List-Treated";
-                    ToolTip = 'Review treated post service follow-up.';
-                }
-                action(PSFUListToday)
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'PSFU - Today';
-                    Image = Job;
-                    RunObject = Page "PSFU List Today";
-                    ToolTip = 'Review todays post service follow-up.';
-                }
-
-
 
             }
 
@@ -342,7 +223,6 @@ page 50026 "Kodawari External"
                     ToolTip = 'View treated IOUs.';
                 }
             }
-
 
             group(OpexMgt)
             {

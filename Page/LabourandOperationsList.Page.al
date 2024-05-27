@@ -7,6 +7,7 @@ page 70090 "Labour and Operations List"
     PageType = List;
     SourceTable = "Service Header";
     SourceTableView = WHERE("Document Type" = FILTER(Order));
+    ApplicationArea = All;
 
     layout
     {

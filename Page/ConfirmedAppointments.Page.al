@@ -3,6 +3,7 @@ page 50159 "Confirmed Appointments."
     Editable = false;
     PageType = Card;
     SourceTable = "Service Appointment Scheduled";
+    ApplicationArea = All;
 
     layout
     {

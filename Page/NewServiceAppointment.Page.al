@@ -3,6 +3,7 @@ page 50238 "New Service Appointment"
     CardPageID = "Service Appointment Mgt. Card";
     PageType = List;
     SourceTable = "Service Appointment Scheduled";
+    ApplicationArea = All;
 
     layout
     {

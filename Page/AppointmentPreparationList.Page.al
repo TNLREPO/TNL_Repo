@@ -5,8 +5,9 @@ page 70078 "Appointment Preparation List"
     PageType = List;
     SourceTable = "Customer Order Table.";
     SourceTableView = WHERE("Service Type" = filter('General Workshop'),
-                            "Delivered" = filter('No'),
-                            "For Part Arrival" = filter('No'));
+                            "Delivered" = filter(false),
+                            "For Part Arrival" = filter(false));
+    ApplicationArea = All;
 
     layout
     {

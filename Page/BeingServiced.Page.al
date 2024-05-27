@@ -4,6 +4,7 @@ page 80028 "Being Serviced"
     PageType = List;
     SourceTable = "Customer Order HeaderX";
     SourceTableView = WHERE(Stage = filter('Being Serviced'));
+    ApplicationArea = All;
 
     layout
     {

@@ -5,6 +5,7 @@ page 80002 "Confirmed Appointments"
     PageType = List;
     SourceTable = "Service AppointmentsX";
     SourceTableView = WHERE("Appointment Status" = CONST("Confirmed Appointment"));
+    ApplicationArea = All;
 
     layout
     {

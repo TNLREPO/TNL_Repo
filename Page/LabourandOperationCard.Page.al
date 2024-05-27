@@ -6,6 +6,7 @@ page 70091 "Labour and Operation Card"
     RefreshOnActivate = true;
     SourceTable = "Service Header";
     SourceTableView = WHERE("Document Type" = FILTER(Order));
+    ApplicationArea = All;
 
     layout
     {

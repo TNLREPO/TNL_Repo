@@ -111,6 +111,15 @@ page 50023 "Service"
                                     "Shipped Not Invoiced" = const(true));
                 ToolTip = 'View sales documents that are fully shipped but not fully invoiced.';
             }
+
+            action(ServiceItem)
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Service Items';
+                Image = Item;
+                RunObject = Page "Service Item List";
+                ToolTip = 'View or edit detailed information for the service items.';
+            }
             action(Items)
             {
                 ApplicationArea = Basic, Suite;

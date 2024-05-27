@@ -162,6 +162,24 @@ page 50009 Parts
                 RunObject = Page "Transfer Orders";
                 ToolTip = 'Move inventory items between company locations. With transfer orders, you ship the outbound transfer from one location and receive the inbound transfer at the other location. This allows you to manage the involved warehouse activities and provides more certainty that inventory quantities are updated correctly.';
             }
+
+            action(DynamicOrdering)
+            {
+                ApplicationArea = Location;
+                Caption = 'Dynamic Ordering';
+                RunObject = Page "Purchase Requisition.";
+                ToolTip = 'Create dynamic ordering With sales and purchases history.';
+            }
+
+            action(SearchTracker)
+            {
+                ApplicationArea = Location;
+                Caption = 'Search Tracker';
+                RunObject = Page "Search Tracker List";
+                ToolTip = 'Create sales orders from orders placed by customers online.';
+            }
+
+
         }
         area(sections)
         {

@@ -9,17 +9,18 @@ table 70036 "Customer Order LineX"
         }
         field(2; "No."; Code[20])
         {
-            /* TableRelation = IF (Type = CONST(Item)) Item."No."
+            TableRelation = IF (Type = CONST(Item)) Item."No."
             ELSE
-            IF (Type = CONST('Resource')) Resource."No."
+            IF (Type = CONST(Resource)) Resource."No."
             ELSE
-            IF (Type = CONST('Cost')) "Service Cost".Code WHERE(Model = FIELD("Model No."))
+            IF (Type = CONST(Cost)) "Service Cost".Code WHERE(Model = FIELD("Model No."))
             ELSE
-            IF (Type = CONST('G/L Account')) "G/L Account"."No." WHERE("Account Type" = filter('Posting'));
-            ValidateTableRelation = false; */
+            IF (Type = CONST("G/L Account")) "G/L Account"."No." WHERE("Account Type" = const(Posting));
 
-         /*   trigger OnValidate()
-             begin
+            ValidateTableRelation = false;
+
+            trigger OnValidate()
+            begin
                 CustOrderRec.GET("Document No.");
 
                 CASE Type OF
@@ -83,7 +84,7 @@ table 70036 "Customer Order LineX"
                 CustOrderLine."Additional Jobs" := CustOrderRec."Additional Job Confirmation";
 
                 "VAT Category" := "VAT Category"::VAT;
-            end; */
+            end;
         }
         field(3; Description; Text[50])
         {
@@ -94,35 +95,35 @@ table 70036 "Customer Order LineX"
 
             trigger OnValidate()
             begin
-                /*
+
                 "Cost Amount" := "Quantity Received" * "Unit Cost";
-                VALIDATE(Amount,"Unit Price" * "Quantity Received");
-                
+                VALIDATE(Amount, "Unit Price" * "Quantity Received");
+
                 IF "Discount %" = 0 THEN
-                  "Line Discount Amount" := 0
+                    "Line Discount Amount" := 0
                 ELSE
-                  "Line Discount Amount" := ("Discount %"/100) * Amount;
-                
-                "Line Amount" := Amount - "Line Discount Amount";"VAT Amount" := "Line Amount" * 0.075;
-                
+                    "Line Discount Amount" := ("Discount %" / 100) * Amount;
+
+                "Line Amount" := Amount - "Line Discount Amount";
+                "VAT Amount" := "Line Amount" * 0.075;
+
                 IF "VAT Category" = "VAT Category"::VAT THEN
-                "VAT Amount" := "Line Amount" * 0.075
+                    "VAT Amount" := "Line Amount" * 0.075
                 ELSE
-                "VAT Amount" := 0.0;
-                
+                    "VAT Amount" := 0.0;
+
                 "Amount Inc. VAT" := "Line Amount" + "VAT Amount";
-                */
 
                 //"Quantity Outstanding" := "Quantity Requested" - "Quantity Received";
 
-                /*
+
                 IF "VAT Category" = "VAT Category"::VAT THEN BEGIN
-                  IF VATPostingSetup.GET("VAT Category"::VAT,"VAT Category"::VAT) THEN
-                    "VAT Amount" := "Line Amount" * VATPostingSetup."VAT %";
+                    IF VATPostingSetup.GET("VAT Category"::VAT, "VAT Category"::VAT) THEN
+                        "VAT Amount" := "Line Amount" * VATPostingSetup."VAT %";
                 END ELSE BEGIN
                     "VAT Amount" := "Line Amount" * VATPostingSetup."VAT %";
-                 END;
-                */
+                END;
+
 
             end;
         }
@@ -157,16 +158,16 @@ table 70036 "Customer Order LineX"
         {
             Editable = true;
 
-            /*   trigger OnValidate()
-              begin
-                  Amount := "Unit Price" * "Quantity Requested";
-                  "Line Amount" := "Unit Price" * "Quantity Requested";
+            trigger OnValidate()
+            begin
+                Amount := "Unit Price" * "Quantity Requested";
+                "Line Amount" := "Unit Price" * "Quantity Requested";
 
-                  IF VATPostingSetup.GET("VAT Category"::VAT, "VAT Category"::VAT) THEN BEGIN
-                      "VAT Amount" := Amount * VATPostingSetup."VAT %" / 100;
-                      "Amount Inc. VAT" := Amount + "VAT Amount";
-                  END;
-              end; */
+                IF VATPostingSetup.GET("VAT Category"::VAT, "VAT Category"::VAT) THEN BEGIN
+                    "VAT Amount" := Amount * VATPostingSetup."VAT %" / 100;
+                    "Amount Inc. VAT" := Amount + "VAT Amount";
+                END;
+            end;
         }
         field(12; Amount; Decimal)
         {
@@ -177,8 +178,8 @@ table 70036 "Customer Order LineX"
         }
         field(14; "Location Code"; Code[20])
         {
-            /*  TableRelation = IF (Type = FILTER(Cost)) Location.Code WHERE(Code = FILTER(120ISO|113LEK))
-                             ELSE IF (Type=FILTER(Item)) Location.Code WHERE (Code=FILTER(150ISOLO|131PWISOLO|118LKS)); */
+            TableRelation = IF (Type = FILTER(Cost)) Location.Code WHERE(Code = FILTER('120ISO|113LEK'))
+            ELSE IF (Type = FILTER(Item)) Location.Code WHERE(Code = FILTER('150ISOLO|131PWISOLO|118LKS'));
 
             trigger OnValidate()
             begin
@@ -239,7 +240,7 @@ table 70036 "Customer Order LineX"
 
             trigger OnValidate()
             begin
-                //VALIDATE("Quantity Requested");
+                VALIDATE("Quantity Requested");
             end;
         }
         field(24; "Cost Amount"; Decimal)
@@ -256,7 +257,7 @@ table 70036 "Customer Order LineX"
 
             trigger OnValidate()
             begin
-                //VALIDATE("Quantity Requested");
+                VALIDATE("Quantity Requested");
             end;
         }
         field(222; "Amount Inc. VAT"; Decimal)
@@ -276,46 +277,44 @@ table 70036 "Customer Order LineX"
         field(226; "Duration in Hrs"; Decimal)
         {
 
-            /*  trigger OnValidate()
-             begin
-                 IF Servrec.Operations = TRUE THEN
-                     "FR Amount" := "Unit Price" * "Duration in Hrs";
-                 "FR VAT Amount" := "FR Amount" * 0.075;
-                 "FR Amount Inc VAT" := "FR Amount" + "FR VAT Amount";
-             end; */
+            trigger OnValidate()
+            begin
+                IF Servrec.Operations = TRUE THEN
+                    "FR Amount" := "Unit Price" * "Duration in Hrs";
+                "FR VAT Amount" := "FR Amount" * 0.075;
+                "FR Amount Inc VAT" := "FR Amount" + "FR VAT Amount";
+            end;
         }
         field(227; "Dealer Hourly Rate"; Decimal)
         {
 
-            /*    trigger OnValidate()
-               begin
-                   IF Servrec.Operations = TRUE THEN
-                       "FR Amount" := "Unit Price" * "Duration in Hrs";
-                   "FR VAT Amount" := "FR Amount" * 0.075;
-                   "FR Amount Inc VAT" := "FR Amount" + "FR VAT Amount";
-               end; */
+            trigger OnValidate()
+            begin
+                IF Servrec.Operations = TRUE THEN
+                    "FR Amount" := "Unit Price" * "Duration in Hrs";
+                "FR VAT Amount" := "FR Amount" * 0.075;
+                "FR Amount Inc VAT" := "FR Amount" + "FR VAT Amount";
+            end;
         }
         field(228; "Flat Rate"; Decimal)
         {
-
-            /*  trigger OnValidate()
-             begin
-                 IF Servrec.Operations = TRUE THEN
-                     "FR Amount" := "Unit Price" * "Duration in Hrs";
-                 "FR VAT Amount" := "FR Amount" * 0.075;
-                 "FR Amount Inc VAT" := "FR Amount" + "FR VAT Amount";
-             end; */
+            trigger OnValidate()
+            begin
+                IF Servrec.Operations = TRUE THEN
+                    "FR Amount" := "Unit Price" * "Duration in Hrs";
+                "FR VAT Amount" := "FR Amount" * 0.075;
+                "FR Amount Inc VAT" := "FR Amount" + "FR VAT Amount";
+            end;
         }
         field(229; "FR Amount"; Decimal)
         {
-
-            /*  trigger OnValidate()
-             begin
-                 IF Servrec.Operations = TRUE THEN
-                     "FR Amount" := "Unit Price" * "Duration in Hrs";
-                 "FR VAT Amount" := "FR Amount" * 0.075;
-                 "FR Amount Inc VAT" := "FR Amount" + "FR VAT Amount";
-             end; */
+            trigger OnValidate()
+            begin
+                IF Servrec.Operations = TRUE THEN
+                    "FR Amount" := "Unit Price" * "Duration in Hrs";
+                "FR VAT Amount" := "FR Amount" * 0.075;
+                "FR Amount Inc VAT" := "FR Amount" + "FR VAT Amount";
+            end;
         }
         field(230; "FR VAT Amount"; Decimal)
         {
@@ -325,16 +324,15 @@ table 70036 "Customer Order LineX"
         }
         field(232; Confirmed; Boolean)
         {
-
-            /*  trigger OnValidate()
-             begin
-                 IF Confirmed THEN BEGIN
-                     UserSetup.GET;
-                     "Confirmed by" := USERID
-                 END
-                 ELSE
-                     "Confirmed by" := '';
-             end; */
+            trigger OnValidate()
+            begin
+                IF Confirmed THEN BEGIN
+                    UserSetup.GET;
+                    "Confirmed by" := USERID
+                END
+                ELSE
+                    "Confirmed by" := '';
+            end;
         }
         field(233; "Confirmed by"; Code[20])
         {
@@ -402,16 +400,16 @@ table 70036 "Customer Order LineX"
         {
             TableRelation = "Sublet Service"."Sublet Code";
 
-            /*  trigger OnValidate()
-             begin
-                 IF subrec.GET("Sublet Code") THEN BEGIN
-                     subrec.TESTFIELD(subrec."Debit Account");
-                     Description := subrec."Sublet Descriptions";
-                     VALIDATE("Unit Price", subrec."Standard Price");
-                     //VALIDATE("Quantity Received",1);
-                     "No." := subrec."Debit Account";
-                 END;
-             end; */
+            trigger OnValidate()
+            begin
+                IF subrec.GET("Sublet Code") THEN BEGIN
+                    subrec.TESTFIELD(subrec."Debit Account");
+                    Description := subrec."Sublet Descriptions";
+                    VALIDATE("Unit Price", subrec."Standard Price");
+                    //VALIDATE("Quantity Received",1);
+                    "No." := subrec."Debit Account";
+                END;
+            end;
         }
         field(50015; "Unit of Measure"; Text[10])
         {
@@ -483,14 +481,14 @@ table 70036 "Customer Order LineX"
         {
             TableRelation = "Service Cost".Code;
 
-            /* trigger OnValidate()
+            trigger OnValidate()
             begin
                 IF Type = Type::" " THEN
                     IF Servrec.GET("Job Category") THEN BEGIN
                         Type := Type::Cost;
                         VALIDATE("No.", "Job Category");
                     END;
-            end; */
+            end;
         }
         field(50021; "Line Discount Amount"; Decimal)
         {
@@ -612,14 +610,14 @@ table 70036 "Customer Order LineX"
         AfterDiscountCost: Decimal;
         VATPostingSetup: Record 325;
 
-    
+
     procedure GetUnitPrice() UnitPrice: Decimal
     begin
         IF CustOrderRec.GET("Document No.") THEN BEGIN
 
             /* SalesPrice.SETRANGE("Item No.", "No.");
             SalesPrice.SETRANGE("Sales Code", 'ISOLO-PRIC');
-            SalesPrice.SETFILTER("Ending Date", '%1', 0D); */
+            SalesPrice.SETFILTER("Ending Date", '%1', 0D);
             //SalesPrice.SETFILTER("Variant Code",'%1|%2',"Variant Code",'');
             //SalesPrice.SETFILTER("Ending Date",'%1|>=%2',0D,CustOrderRec."Parts Ordered Date");
             //SalesPrice.SETFILTER("Unit of Measure Code",'%1|%2',"Unit of Measure",'');
@@ -627,7 +625,7 @@ table 70036 "Customer Order LineX"
             IF SalesPrice.FINDLAST THEN BEGIN
                 VALIDATE("Unit Price", SalesPrice."Unit Price");
                 UnitPrice := SalesPrice."Unit Price"
-            END;
+            END; */
 
             IF ItemRec.GET("No.") THEN
                 Description := ItemRec.Description;

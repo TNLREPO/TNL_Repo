@@ -123,7 +123,7 @@ table 50129 "Service Adviser Cue"
         field(23; "Received Appointments"; Integer)
         {
             CalcFormula = Count("Service AppointmentsX" WHERE("Appointment Status" = filter('Received Appointment'),
-                                                               Closed = filter('No')));
+                                                               Closed = filter(false)));
             FieldClass = FlowField;
         }
         field(24; Tray; Integer)
@@ -145,7 +145,7 @@ table 50129 "Service Adviser Cue"
         field(27; "Confirmed Appointments"; Integer)
         {
             CalcFormula = Count("Service AppointmentsX" WHERE("Appointment Status" = filter('Confirmed Appointment'),
-                                                               Closed = filter('No')));
+                                                               Closed = filter(false)));
             FieldClass = FlowField;
         }
         field(28; Delivered; Integer)

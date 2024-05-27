@@ -65,6 +65,10 @@ table 70038 ClockingX
                     "Technician Name" := '';
             end;
         }
+        field(11; "DQ ?"; boolean)
+        {
+
+        }
     }
 
     keys
