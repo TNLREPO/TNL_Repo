@@ -224,8 +224,6 @@ table 70008 "Procurement Header"
                          PurJus := ProcurementLine.Description;
                      end; */
 
-
-
                     //sender
                     IF UserSetup2.GET(USERID) THEN BEGIN
                         "Sent By" := UserSetup2."User ID";
@@ -3219,7 +3217,6 @@ table 70008 "Procurement Header"
         BodyStream: OutStream;
         SenderInitial: Text;
         Text063: Label 'The above %1 with document number %2 requires your approval.';
-
         EmailBody: Text[1024];
 
     procedure CreateLPP()

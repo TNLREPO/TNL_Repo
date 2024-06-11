@@ -6,6 +6,10 @@ pageextension 50000 "Sales Order Subform Ext" extends "Sales Order Subform"
         {
             Editable = false;
         }
+        modify("Variant Code")
+        {
+            Visible = true;
+        }
 
         addafter("Location Code")
         {
@@ -14,6 +18,7 @@ pageextension 50000 "Sales Order Subform Ext" extends "Sales Order Subform"
                 ApplicationArea = All;
                 Editable = false;
             }
+
         }
     }
 }

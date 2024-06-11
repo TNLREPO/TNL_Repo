@@ -106,6 +106,14 @@ table 70019 "LPP Line"
             Editable = false;
             FieldClass = FlowField;
         }
+        field(50000; "Document Link"; Text[250])
+        {
+            Caption = 'Document Link';
+            DataClassification = ToBeClassified;
+            //ExtendedDatatype = URL;
+        }
+
+
     }
 
     keys

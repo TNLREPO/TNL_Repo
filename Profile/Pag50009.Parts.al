@@ -423,6 +423,95 @@ page 50009 Parts
                 }
 
             }
+
+            group(LocalPartsPurchase)
+            {
+                Caption = 'Local Parts Purchase';
+
+                action(LLPurchase)
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'LPP';
+                    RunObject = page "LPP List";
+                }
+                action(HODPartApprv)
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'HOD Part Approval';
+                    RunObject = page "HOD Part Approval";
+                }
+
+                action(CompCheck)
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Compliance Check';
+                    RunObject = page "Compliance Check LPP";
+                }
+                action(HODAuditApprv)
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'HOD Audit Approval';
+                    RunObject = page "HOD Audit Approval LPP";
+                }
+
+                action(HODProcApproval)
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'HOD Procurement Approval';
+                    //RunObject = page HOD pro;
+                }
+                action(GMApprv)
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'GM Approval';
+                    RunObject = page "GM procurement Approval";
+                }
+                action(MDProcApproval)
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'MD';
+                    RunObject = page "MD Procurement Approval";
+                }
+                action(MDIsolo)
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'MD Isolo';
+                    RunObject = page "MD Proc Apprv Isolo";
+                }
+                action(DeptFloat)
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Departmental Float';
+                    RunObject = page "Departmental Float";
+                }
+                action(GenLPO)
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Generate LPO';
+                    RunObject = page "Generate LPO";
+                }
+                action(LPPLPO)
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Print LPP LPO';
+                    RunObject = page "Print LPP LPO";
+                }
+                action(PaymentApprv)
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Payment Approved';
+                    RunObject = page "Payment Approved";
+                }
+                action(PaymentVouch)
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Payment Voucher';
+                    RunObject = page "Payment Voucher";
+                }
+
+
+            }
+
             group(WarrantyProcess)
             {
                 Caption = 'Warranty Process';

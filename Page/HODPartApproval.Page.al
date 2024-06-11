@@ -1,10 +1,12 @@
-page 70193 "LPP List"
+page 70194 "HOD Part Approval"
 {
+    ApplicationArea = All;
     CardPageID = "LPP Card2";
     PageType = List;
     SourceTable = "Local Part Purchase Register";
-    SourceTableView = WHERE(Send = CONST(false));
-    ApplicationArea = All;
+    SourceTableView = WHERE(HoDPartApproval = CONST(true),
+                            ComplianceCheck = CONST(false),
+                            Rejected = CONST(false));
 
     layout
     {
@@ -17,7 +19,6 @@ page 70193 "LPP List"
                 }
                 field("Requester Name"; Rec."Requester Name")
                 {
-                    Editable = false;
                 }
                 field("Requester Department"; Rec."Requester Department")
                 {
@@ -29,9 +30,6 @@ page 70193 "LPP List"
                 {
                 }
                 field("Total Purchase Value"; Rec."Total Purchase Value")
-                {
-                }
-                field("TCOF No."; Rec."TCOF No.")
                 {
                 }
             }

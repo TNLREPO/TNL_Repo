@@ -1,10 +1,15 @@
-page 70193 "LPP List"
+page 70198 "GM procurement Approval"
 {
+    ApplicationArea = All;
     CardPageID = "LPP Card2";
     PageType = List;
     SourceTable = "Local Part Purchase Register";
-    SourceTableView = WHERE(Send = CONST(false));
-    ApplicationArea = All;
+    SourceTableView = WHERE("Procurement Approval" = CONST(false),
+                            "GM Approval" = CONST(true),
+                            "MD Approval" = CONST(false),
+                            "Genarate LPO" = CONST(false),
+                            "Total Purchase Value" = FILTER('100,001..499,000.99'),
+                            Rejected = CONST(false));
 
     layout
     {
@@ -17,7 +22,6 @@ page 70193 "LPP List"
                 }
                 field("Requester Name"; Rec."Requester Name")
                 {
-                    Editable = false;
                 }
                 field("Requester Department"; Rec."Requester Department")
                 {
@@ -29,9 +33,6 @@ page 70193 "LPP List"
                 {
                 }
                 field("Total Purchase Value"; Rec."Total Purchase Value")
-                {
-                }
-                field("TCOF No."; Rec."TCOF No.")
                 {
                 }
             }

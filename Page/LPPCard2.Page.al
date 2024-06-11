@@ -1,13 +1,15 @@
 page 70205 "LPP Card2"
 {
     PageType = Card;
+    Caption = 'LPP Card';
     SourceTable = "Local Part Purchase Register";
+    ApplicationArea = All;
 
     layout
     {
         area(content)
         {
-            group("SUPPLIER'S DETAIL")
+            group("Supplier")
             {
                 Editable = SendEdit;
                 field("Suppliers Code"; Rec."Suppliers Code")
@@ -26,7 +28,7 @@ page 70205 "LPP Card2"
                 {
                 }
             }
-            group(REQUESTER)
+            group(Requester)
             {
                 field("LPP No."; Rec."LPP No.")
                 {
@@ -62,16 +64,17 @@ page 70205 "LPP Card2"
             }
             part("LPP Subform"; "LPP Subform")
             {
-                Caption = 'LPP Subform';
+                Caption = 'Lines';
                 SubPageLink = "Document No." = FIELD("LPP No.");
             }
-            group(AUTHORIZATION)
+            group(Authorization)
             {
                 grid(Control01)
                 {
                     group(Control02)
                     {
                         Editable = HeadEdit;
+                        ShowCaption = false;
                         field("Head of Department"; Rec."Head of Department")
                         {
                         }
@@ -87,6 +90,7 @@ page 70205 "LPP Card2"
                     group(Control03)
                     {
                         Editable = CompliancEdit;
+                        ShowCaption = false;
                         field("Compliance check"; Rec."Compliance check")
                         {
                         }
@@ -99,26 +103,28 @@ page 70205 "LPP Card2"
                             Editable = false;
                         }
                     }
+                    group(Control04)
+                    {
+                        Editable = HODAuditEdit;
+                        Visible = AuditVisible;
+                        ShowCaption = false;
+                        field("Head of Audit"; Rec."Head of Audit")
+                        {
+                        }
+                        field("Name Head of Audit"; Rec."Name Head of Audit")
+                        {
+                        }
+                        field(TimeDate4; Rec.TimeDate4)
+                        {
+                        }
+                        group(Control05)
+                        {
+                        }
+                    }
                 }
-                group(Control04)
-                {
-                    Editable = HODAuditEdit;
-                    Visible = AuditVisible;
-                    field("Head of Audit"; Rec."Head of Audit")
-                    {
-                    }
-                    field("Name Head of Audit"; Rec."Name Head of Audit")
-                    {
-                    }
-                    field(TimeDate4; Rec.TimeDate4)
-                    {
-                    }
-                    group(Control05)
-                    {
-                    }
-                }
+
             }
-            group("Procurement  Approval HOD")
+            group("Procurement Approval HOD")
             {
                 Visible = HeadApprovalVisible;
                 group(Control06)

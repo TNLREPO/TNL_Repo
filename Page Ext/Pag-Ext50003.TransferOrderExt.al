@@ -83,5 +83,9 @@ pageextension 50003 "Transfer Order Ext" extends "Transfer Order"
             }
 
         }
+        modify("Assigned User ID")
+        {
+            Editable = true;
+        }
     }
 }

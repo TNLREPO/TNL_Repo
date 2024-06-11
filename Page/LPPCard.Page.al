@@ -2,12 +2,13 @@ page 70192 "LPP Card"
 {
     PageType = Card;
     SourceTable = "Local Part Purchase Register";
+    ApplicationArea = All;
 
     layout
     {
         area(content)
         {
-            group("SUPPLIER'S DETAIL")
+            group("Supplier")
             {
                 Editable = SendEdit;
                 field("Supplier's Name"; Rec."Supplier's Name")
@@ -30,7 +31,7 @@ page 70192 "LPP Card"
                     Editable = false;
                 }
             }
-            group(REQUESTER)
+            group(Requester)
             {
                 field("LPP No."; Rec."LPP No.")
                 {
@@ -56,10 +57,10 @@ page 70192 "LPP Card"
             }
             part("LPP Subform"; "LPP Subform")
             {
-                Caption = 'LPP Subform';
+                Caption = 'Lines';
                 SubPageLink = "Document No." = FIELD("LPP No.");
             }
-            group(AUTHORIZATION)
+            group(Authorization)
             {
                 grid(Control01)
                 {
@@ -103,9 +104,7 @@ page 70192 "LPP Card"
                         {
                         }
                     }
-                    group(Control05)
-                    {
-                    }
+
                 }
             }
             group("Procurement  Approval HOD")

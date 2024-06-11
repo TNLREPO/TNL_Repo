@@ -5,6 +5,7 @@ tableextension 50011 "Sales Line Ext" extends "Sales Line"
         field(50000; "Search Code"; Code[20])
         {
             TableRelation = "Parts Enquiry"."Search Code" WHERE("Document No." = FIELD("Document No."));
+            
         }
         field(50002; "Search Line"; Integer)
         {

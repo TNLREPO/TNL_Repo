@@ -1,10 +1,11 @@
-page 70193 "LPP List"
+page 70203 "Payment Voucher"
 {
-    CardPageID = "LPP Card2";
+    ApplicationArea = All;
+    CardPageID = "LPP Card";
     PageType = List;
     SourceTable = "Local Part Purchase Register";
-    SourceTableView = WHERE(Send = CONST(false));
-    ApplicationArea = All;
+    SourceTableView = WHERE(GenaratePayment = CONST(true),
+                            "Voucher Raised" = CONST(true));
 
     layout
     {
@@ -17,7 +18,6 @@ page 70193 "LPP List"
                 }
                 field("Requester Name"; Rec."Requester Name")
                 {
-                    Editable = false;
                 }
                 field("Requester Department"; Rec."Requester Department")
                 {
@@ -31,7 +31,7 @@ page 70193 "LPP List"
                 field("Total Purchase Value"; Rec."Total Purchase Value")
                 {
                 }
-                field("TCOF No."; Rec."TCOF No.")
+                field(Date; Rec.Date)
                 {
                 }
             }

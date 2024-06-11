@@ -49,7 +49,7 @@ table 70034 "Customer Order HeaderX"
 
             trigger OnValidate()
             begin
-                /* IF CustRec.GET("Customer No.") THEN BEGIN
+                IF CustRec.GET("Customer No.") THEN BEGIN
                     "Customer Name" := COPYSTR(CustRec.Name, 1, MAXSTRLEN("Customer Name"));
                     Address := COPYSTR(CustRec.Address, 1, MAXSTRLEN(Address));
                     Address2 := COPYSTR(CustRec."Address 2", 1, MAXSTRLEN(Address2));
@@ -58,7 +58,7 @@ table 70034 "Customer Order HeaderX"
                     "Customer Address2" := COPYSTR(CustRec.Address, 1, MAXSTRLEN(Address));
                     Mobile := CustRec."Phone No.";
                     "E-mail" := CustRec."E-Mail";
-                END; */
+                END;
             end;
         }
         field(8; "Customer Name"; Text[50])
@@ -2077,16 +2077,25 @@ table 70034 "Customer Order HeaderX"
     }
 
     trigger OnDelete()
+    var
+        CustOrderLinex: Record "Customer Order LineX";
+
     begin
-        ERROR('You cannot delete this record');
+        //ERROR('You cannot delete this record');
+        CustOrderLinex.SetRange("Document No.", Rec."No.");
+        CustOrderLinex.DeleteAll();
+
     end;
 
     trigger OnInsert()
+    var
+        NoSeriesMgt: codeunit NoSeriesManagement;
+
     begin
         IF "No." = '' THEN BEGIN
             SalesSetup.GET;
             SalesSetup.TESTFIELD("Customer Order No.");
-            //NoSeriesMgt.InitSeries(SalesSetup."Customer Order No.",xRec."No. Series",0D,"No.","No. Series");
+            NoSeriesMgt.InitSeries(SalesSetup."Customer Order No.", xRec."No. Series", 0D, "No.", "No. Series");
         END;
         Date := TODAY;
 

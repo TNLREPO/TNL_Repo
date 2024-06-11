@@ -1,10 +1,17 @@
-page 70193 "LPP List"
+page 70217 "MD Proc Apprv Isolo"
 {
+    ApplicationArea = All;
     CardPageID = "LPP Card2";
     PageType = List;
     SourceTable = "Local Part Purchase Register";
-    SourceTableView = WHERE(Send = CONST(false));
-    ApplicationArea = All;
+    SourceTableView = WHERE("Procurement Approved" = CONST(false),
+                            "GM Approval" = CONST(false),
+                            "MD Approval" = CONST(true),
+                            "Genarate LPO" = CONST(false),
+                            Rejected = CONST(false),
+                            "Compliance check" = CONST(Satisfactory),
+                            "Total Purchase Value" = FILTER('>499,999.99'),
+                            "Order Type" = FILTER('Isolo Store'));
 
     layout
     {
@@ -17,7 +24,6 @@ page 70193 "LPP List"
                 }
                 field("Requester Name"; Rec."Requester Name")
                 {
-                    Editable = false;
                 }
                 field("Requester Department"; Rec."Requester Department")
                 {
@@ -31,9 +37,6 @@ page 70193 "LPP List"
                 field("Total Purchase Value"; Rec."Total Purchase Value")
                 {
                 }
-                field("TCOF No."; Rec."TCOF No.")
-                {
-                }
             }
         }
     }
@@ -41,5 +44,8 @@ page 70193 "LPP List"
     actions
     {
     }
+
+    var
+        ProcurementHeader: Record 70008;
 }
 

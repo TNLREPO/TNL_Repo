@@ -14,47 +14,60 @@ page 70191 "LPP Subform"
         {
             repeater(Group)
             {
-                field("Document No.";Rec."Document No.")
+                field("Document No."; Rec."Document No.")
+                {
+                    Visible = false;
+                }
+                field("Order Type"; Rec."Order Type")
                 {
                 }
-                field("Order Type";Rec."Order Type")
+                field("Item No"; Rec."Item No")
                 {
                 }
-                field("Item No";Rec."Item No")
+                field("Item Name"; Rec."Item Name")
                 {
                 }
-                field("Item Name";Rec."Item Name")
+                field(Quantity; Rec.Quantity)
                 {
                 }
-                field(Quantity;Rec.Quantity)
+                field("Quantity Available"; Rec."Quantity Available")
                 {
                 }
-                field("Quantity Available";Rec."Quantity Available")
+                field("Unit Cost"; Rec."Unit Cost")
                 {
                 }
-                field("Unit Cost";Rec."Unit Cost")
+                field(Amount; Rec.Amount)
                 {
                 }
-                field(Amount;Rec.Amount)
-                {
-                }
-                field("Incoming Document Entry No.";Rec."Incoming Document Entry No.")
-                {
+                /*   field("Incoming Document Entry No.";Rec."Incoming Document Entry No.")
+                  {
 
+                      trigger OnAssistEdit()
+                      begin
+                          IF Rec."Incoming Document Entry No." > 0 THEN
+                              HYPERLINK(Rec.GetIncomingDocumentURL);
+                      end;
+
+                      trigger OnLookup(var Text: Text): Boolean
+                      begin
+                          IncomingDocument.SETRANGE("Entry No.", Rec."Incoming Document Entry No.");
+                          IF PAGE.RUNMODAL(0, IncomingDocument) = ACTION::LookupOK THEN
+                              Rec."Incoming Document Entry No." := IncomingDocument."Entry No.";
+                      end;
+                  } */
+
+                field("Document Link"; Rec."Document Link")
+                {
+                    ApplicationArea = All;
+                    Visible = true;
+                    ExtendedDatatype = URL;
                     trigger OnAssistEdit()
                     begin
-                        IF Rec."Incoming Document Entry No." > 0 THEN
-                            HYPERLINK(Rec.GetIncomingDocumentURL);
-                    end;
-
-                    trigger OnLookup(var Text: Text): Boolean
-                    begin
-                        IncomingDocument.SETRANGE("Entry No.", Rec."Incoming Document Entry No.");
-                        IF PAGE.RUNMODAL(0, IncomingDocument) = ACTION::LookupOK THEN
-                            Rec."Incoming Document Entry No." := IncomingDocument."Entry No.";
+                        if Rec."Document Link" <> '' then
+                            HyperLink(Rec."Document Link");
                     end;
                 }
-                field(Description;Rec.Description)
+                field(Description; Rec.Description)
                 {
                 }
             }
@@ -67,7 +80,7 @@ page 70191 "LPP Subform"
 
     var
         IncomingDocument: Record 130;
-    
+
     procedure CustGetIncomingDocumentURL(): Text[1000]
     var
         IncomingDocument: Record 130;

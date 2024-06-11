@@ -42,6 +42,10 @@ page 80007 "Customer Order Subform"
                 field(Description; Rec.Description)
                 {
                 }
+                field("Variant Code"; Rec."Variant Code")
+                {
+                    Visible = true;
+                }
                 field("Location Code"; Rec."Location Code")
                 {
                 }
@@ -101,10 +105,6 @@ page 80007 "Customer Order Subform"
                 }
                 field("Model Description"; Rec."Model Description")
                 {
-                }
-                field("Variant Code"; Rec."Variant Code")
-                {
-                    Visible = false;
                 }
                 field("VAT Category"; Rec."VAT Category")
                 {

@@ -1,10 +1,16 @@
-page 70193 "LPP List"
+page 70196 "HOD Audit Approval LPP"
 {
+    ApplicationArea = All;
     CardPageID = "LPP Card2";
     PageType = List;
     SourceTable = "Local Part Purchase Register";
-    SourceTableView = WHERE(Send = CONST(false));
-    ApplicationArea = All;
+    SourceTableView = WHERE(ComplianceCheck = CONST(true),
+                            HoDAuditApproval = CONST(true),
+                            "Procurement Approval" = CONST(false),
+                            "MD Approval" = CONST(false),
+                            "GM Approval" = CONST(false),
+                            "Order Type" = FILTER('<>Isolo Store'),
+                            Rejected = CONST(false));
 
     layout
     {
@@ -17,7 +23,6 @@ page 70193 "LPP List"
                 }
                 field("Requester Name"; Rec."Requester Name")
                 {
-                    Editable = false;
                 }
                 field("Requester Department"; Rec."Requester Department")
                 {
@@ -29,9 +34,6 @@ page 70193 "LPP List"
                 {
                 }
                 field("Total Purchase Value"; Rec."Total Purchase Value")
-                {
-                }
-                field("TCOF No."; Rec."TCOF No.")
                 {
                 }
             }

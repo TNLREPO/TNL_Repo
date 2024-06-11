@@ -776,7 +776,7 @@ page 80016 "Customer Order Card"
                 Image = AnalysisView;
                 Promoted = true;
                 PromotedCategory = Process;
-                RunObject = Page 70061;
+                RunObject = Page "Request For Quote card";
                 RunPageLink = "TCOF No." = FIELD("No.");
             }
             action("View LPP")
@@ -850,7 +850,7 @@ page 80016 "Customer Order Card"
 
     trigger OnDeleteRecord(): Boolean
     begin
-        ERROR('You cannot delete this record');
+        //ERROR('You cannot delete this record');
     end;
 
     trigger OnNewRecord(BelowxRec: Boolean)
