@@ -37,25 +37,6 @@ table 50017 "Monthly Variables Lines."
 
             trigger OnLookup()
             begin
-                //Dada
-
-                /*CLEAR(EDForm);
-                NewEDRec.FILTERGROUP(7);
-                NewEDRec.SETRANGE(NewEDRec."Monthly Variable",TRUE);
-                NewEDRec.FILTERGROUP(0);
-                
-                IF NewEDRec.GET("E/D Code") THEN ;
-                EDForm.SETTABLEVIEW(NewEDRec);
-                EDForm.SETRECORD(NewEDRec);
-                EDForm.EDITABLE(FALSE);
-                EDForm.LOOKUPMODE(TRUE);
-                
-                
-                IF EDForm.RUNMODAL = ACTION::LookupOK THEN
-                  EDForm.GETRECORD(NewEDRec);
-                
-                IF NewEDRec."E/D Code"<>'' THEN VALIDATE("E/D Code",NewEDRec."E/D Code");
-                */
 
             end;
 
@@ -1236,7 +1217,6 @@ table 50017 "Monthly Variables Lines."
 
     end;
 
-
     procedure ChangeDueToDelete(DeletedRec: Record "Monthly Variables Lines.")
     begin
 
@@ -1259,7 +1239,6 @@ table 50017 "Monthly Variables Lines."
         EXIT;
 
     end;
-
 
     procedure ChkRoundMaxMin(EDRecord: Record "Payroll-E/D Codes."; TheAmount: Decimal): Decimal
     begin

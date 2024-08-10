@@ -1,7 +1,7 @@
 table 50150 "Employee Cadre History"
 {
-    /* DrillDownPageID = 50308;
-    LookupPageID = 50308; */
+    DrillDownPageID = 50308;
+    LookupPageID = 50308;
 
     fields
     {

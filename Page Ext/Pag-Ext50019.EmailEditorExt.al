@@ -16,14 +16,19 @@ pageextension 50019 "Email Editor Ext" extends "Email Editor"
                 var
                     EmailUsersList: page "Email Users List";
                     EmailUsers: Record "Email Users";
+                    EmailEditor: Record "Email Address Lookup";
 
                 begin
                     if EmailUsersList.RunModal = Action::OK then begin
                         EmailUsers.SetRange(Select, true);
                         if EmailUsers.FindFirst() then begin
                             repeat
-                                //AddCc += EmailUsers."Email" + ';';
+                                AddCc += EmailUsers."Email" + ';';
                                 CcRecipient += EmailUsers."Email" + ';';
+                                EmailEditor."E-Mail Address" += EmailUsers.Email;
+                                EmailEditor.Name := EmailUsers.User;
+                                EmailEditor."Entity type" := EmailEditor."Entity type"::User;
+                                EmailEditor.Insert();
 
                             until EmailUsers.Next() = 0;
                         end

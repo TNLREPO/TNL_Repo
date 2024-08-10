@@ -1,8 +1,7 @@
-page 70111 "Service Test"
+page 90064 "Parts Order Line"
 {
     PageType = List;
-    SourceTable = "Service Test";
-    ApplicationArea = All;
+    SourceTable = "Parts Order Line";
 
     layout
     {
@@ -10,16 +9,16 @@ page 70111 "Service Test"
         {
             repeater(Group)
             {
-                field("Serial No."; Rec."Serial No.")
+                field("Document No."; Rec."Document No.")
                 {
                 }
-                field("Customer No."; Rec."Customer No.")
+                field(Line; Rec.Line)
                 {
                 }
-                field("Customer Name"; Rec."Customer Name")
+                field("Part Name"; Rec."Part Name")
                 {
                 }
-                field(Date; Rec.Date)
+                field(Quantity; Rec.Quantity)
                 {
                 }
             }

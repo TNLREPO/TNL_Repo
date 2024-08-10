@@ -26,6 +26,10 @@ pageextension 50005 "Customer Card Ext" extends "Customer Card"
                 {
                     ApplicationArea = All;
                 }
+                field("Remove Credit Limit"; Rec."Remove Credit Limit")
+                {
+                    ApplicationArea = All;
+                }
             }
 
         }

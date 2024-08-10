@@ -249,81 +249,81 @@ table 50001 "Payroll-E/D Codes."
         }
         field(50; "ED Amount"; Decimal)
         {
-            CalcFormula = Sum ("Payroll-Payslip Lines.".Amount WHERE ("Payroll Period"=FIELD("Payroll Period Filter"),
-                                                                     "E/D Code"=FIELD("E/D Code"),
-                                                                     "Global Dimension 1 Code"=FIELD("Global Dimension 1 Filter"),
-                                                                     "Posting Group"=FIELD("Posting Group Filter")));
+            CalcFormula = Sum("Payroll-Payslip Lines.".Amount WHERE("Payroll Period" = FIELD("Payroll Period Filter"),
+                                                                     "E/D Code" = FIELD("E/D Code"),
+                                                                     "Global Dimension 1 Code" = FIELD("Global Dimension 1 Filter"),
+                                                                     "Posting Group" = FIELD("Posting Group Filter")));
             FieldClass = FlowField;
         }
-        field(51;"Global Dimension 1 Filter";Code[20])
+        field(51; "Global Dimension 1 Filter"; Code[20])
         {
             CaptionClass = '1,3,1';
             FieldClass = FlowFilter;
-            TableRelation = "Dimension Value".Code WHERE ("Global Dimension No."=CONST(1));
+            TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(1));
         }
-        field(52;"Payroll Period Filter";Code[20])
+        field(52; "Payroll Period Filter"; Code[20])
         {
             FieldClass = FlowFilter;
             TableRelation = "Payroll-Periods.";
         }
-        field(53;"Posting Group Filter";Code[20])
+        field(53; "Posting Group Filter"; Code[20])
         {
             FieldClass = FlowFilter;
             TableRelation = "Payroll-Posting Group Header.";
         }
-        field(54;"Grade Filter";Code[20])
+        field(54; "Grade Filter"; Code[20])
         {
             FieldClass = FlowFilter;
             TableRelation = "Payroll-Posting Group Header.";
         }
-        field(55;"Global Dimension 2 Filter";Code[20])
+        field(55; "Global Dimension 2 Filter"; Code[20])
         {
             CaptionClass = '1,3,1';
             FieldClass = FlowFilter;
-            TableRelation = "Dimension Value".Code WHERE ("Global Dimension No."=CONST(2));
+            TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(2));
         }
-        field(56;"Bold Print";Boolean)
+        field(56; "Bold Print"; Boolean)
         {
         }
-        field(57;Taxable;Boolean)
+        field(57; Taxable; Boolean)
         {
             Description = 'Added by sharafadeen for Tax elment in variable pay';
         }
-        field(58;"Basic Salary";Boolean)
+        field(58; "Basic Salary"; Boolean)
         {
         }
-        field(100;Totaling;Code[250])
+        field(100; Totaling; Code[250])
         {
             TableRelation = "Payroll-E/D Codes.";
             //This property is currently not supported
             //TestTableRelation = false;
             ValidateTableRelation = false;
         }
-        field(50036;"ED Type2";Option)
+        field(50036; "ED Type2"; Option)
         {
             OptionMembers = " ",Basic,"Overtime Weekday","Overtime Weekend","Leave Allowance";
         }
-        field(50037;"Up-Front Payment";Boolean)
+        field(50037; "Up-Front Payment"; Boolean)
         {
         }
-        field(50038;"Deduction E/D";Code[20])
+        field(50038; "Deduction E/D"; Code[20])
         {
-            TableRelation = "Payroll-E/D Codes."."E/D Code" WHERE ("Up-Front Payment"=CONST(false));
+            TableRelation = "Payroll-E/D Codes."."E/D Code" WHERE("Up-Front Payment" = CONST(false));
         }
-        field(50039;"CC Amount";Decimal)
+        field(50039; "CC Amount"; Decimal)
         {
-          /*   CalcFormula = Sum("Payroll-Payslip Lines.".Amount WHERE ("E/D Code"=FIELD("E/D Code"),
-                                                                     "E/D Code"=FIELD(FILTER(Totaling)),
-                                                                     "Payroll Period"=FIELD("Payroll Period Filter"),
-                                                                     "Global Dimension 1 Code"=FIELD("Global Dimension 1 Filter"),
-                                                                     "Global Dimension 2 Code"=FIELD("Global Dimension 2 Filter"),
-                                                                     Grade=FIELD("Grade Filter")));
-            FieldClass = FlowField; */
+            CalcFormula = Sum("Payroll-Payslip Lines.".Amount WHERE("E/D Code" = FIELD("E/D Code"),
+                                                                       "E/D Code" = FIELD(FILTER(Totaling)),
+                                                                       "Payroll Period" = FIELD("Payroll Period Filter"),
+                                                                       "Global Dimension 1 Code" = FIELD("Global Dimension 1 Filter"),
+                                                                       "Global Dimension 2 Code" = FIELD("Global Dimension 2 Filter"),
+                                                                       Grade = FIELD("Grade Filter")));
+            FieldClass = FlowField;
         }
-        field(50040;"Allow Posting Group";Boolean)
+        field(50040; "Allow Posting Group"; Boolean)
         {
         }
-        field(50041;Hide;Boolean)
+        field(50041; Hide; Boolean)
         {
             DataClassification = ToBeClassified;
         }
@@ -331,29 +331,29 @@ table 50001 "Payroll-E/D Codes."
 
     keys
     {
-        key(Key1;"E/D Code")
+        key(Key1; "E/D Code")
         {
             Clustered = true;
         }
-        key(Key2;"Search Name")
+        key(Key2; "Search Name")
         {
         }
-        key(Key3;"ED Type")
+        key(Key3; "ED Type")
         {
         }
-        key(Key4;"Monthly Variable")
+        key(Key4; "Monthly Variable")
         {
         }
-        key(Key5;"Payslip Group ID")
+        key(Key5; "Payslip Group ID")
         {
         }
-        key(Key6;"Loan (Y/N)")
+        key(Key6; "Loan (Y/N)")
         {
         }
-        key(Key7;"Wages Sequence")
+        key(Key7; "Wages Sequence")
         {
         }
-        key(Key8;"Sequence No")
+        key(Key8; "Sequence No")
         {
         }
     }

@@ -186,7 +186,7 @@ table 50009 "Payroll-Employee Group Header."
         PGrpCode: Code[10];
         EDRec: Record "Payroll-E/D Codes.";
         GrossEDCode: Code[20];
-        //GenPCode: Codeunit "50004";
+        GenPCode: Codeunit 50004;
         EDType: Option " ","NSITF Employee","NSITF Employer","Gross Salary","Pension Employee","Pension Employer";
         EmpContRec: Record "Employment Contract";
         EmpGrp: Code[10];
@@ -283,7 +283,6 @@ table 50009 "Payroll-Employee Group Header."
         ELSE
             EXIT(GrossEDCode);
     end;
-
 
     procedure GetBasic(EmpGrpCode: Code[10]): Decimal
     begin

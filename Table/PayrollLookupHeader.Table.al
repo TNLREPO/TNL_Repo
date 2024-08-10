@@ -104,7 +104,7 @@ table 50002 "Payroll-Lookup Header."
     var
         LookLinesRec: Record 50003;
 
-    
+
     procedure SpecialRelation("FieldNo.": Integer)
     begin
         EXIT;

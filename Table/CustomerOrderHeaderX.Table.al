@@ -2044,6 +2044,22 @@ table 70034 "Customer Order HeaderX"
         field(50020; "Payment for Estimate"; Boolean)
         {
         }
+        field(60000; "PM Amount"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(60001; "GR Amount"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(60002; "VAT Amount"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(60003; "App. No."; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     keys

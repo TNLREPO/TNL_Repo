@@ -309,21 +309,25 @@ codeunit 50000 MySubscribers
                     ERROR('Please enter the TCOF number!');
             END;
 
-            IF Rec."Sell-to Customer No." <> '' THEN BEGIN
-                SalesLine.SETCURRENTKEY("Document No.", "Sell-to Customer No.");
-                SalesLine.SETRANGE(SalesLine."Document No.", Rec."No.");
-                SalesLine.SETRANGE(SalesLine."Sell-to Customer No.", Rec."Sell-to Customer No.");
-                IF SalesLine.FINDFIRST THEN
-                    SalesLine.CALCSUMS("Amount Including VAT");
-                SalesOrderAmount := SalesLine."Amount Including VAT";
-                CustRec.GET(Rec."Sell-to Customer No.");
-                IF (CustRec."Credit Limit (LCY)" <> 0) THEN BEGIN
-                    //IF ("Customer Posting Group" <> 'STAFF') THEN BEGIN
-                    CustRec.CALCFIELDS("Balance (LCY)");
-                    IF (CustRec."Balance (LCY)" + SalesOrderAmount) > CustRec."Credit Limit (LCY)" THEN
-                        ERROR('Credit limit has been reach. So, you can not sell to this customer!');
+
+            CustRec.GET(Rec."Sell-to Customer No.");
+            IF NOT CustRec."Remove Credit Limit" THEN begin
+                IF Rec."Sell-to Customer No." <> '' then begin
+                    SalesLine.SETCURRENTKEY("Document No.", "Sell-to Customer No.");
+                    SalesLine.SETRANGE(SalesLine."Document No.", Rec."No.");
+                    SalesLine.SETRANGE(SalesLine."Sell-to Customer No.", Rec."Sell-to Customer No.");
+                    IF SalesLine.FINDFIRST THEN
+                        SalesLine.CALCSUMS("Amount Including VAT");
+                    SalesOrderAmount := SalesLine."Amount Including VAT";
+                    CustRec.GET(Rec."Sell-to Customer No.");
+                    IF (CustRec."Credit Limit (LCY)" <> 0) THEN BEGIN
+                        //IF ("Customer Posting Group" <> 'STAFF') THEN BEGIN
+                        CustRec.CALCFIELDS("Balance (LCY)");
+                        IF (CustRec."Balance (LCY)" + SalesOrderAmount) > CustRec."Credit Limit (LCY)" THEN
+                            ERROR('Credit limit has been reach. So, you can not sell to this customer!');
+                    END;
                 END;
-            END;
+            end;
 
             SalesLine.SETCURRENTKEY("Document No.");
             SalesLine.SETRANGE("Document No.", Rec."No.");

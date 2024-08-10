@@ -8,7 +8,8 @@ page 70133 "Managing Dir. Appr."
     SourceTableView = WHERE(ListMD = FILTER(true),
                             "Head of Audit" = CONST(Approved),
                             "General Manager" = CONST(" "),
-                            "Managing Director" = FILTER('<>Approved|Rejected'),
+                            //"Managing Director" = FILTER('<>Approved|Rejected'),
+                            "Managing Director" = FILTER(" " | "On-hold"),
                             Reject = CONST(false),
                             "Document Type" = CONST(Opex),
                             Reject = CONST(false));

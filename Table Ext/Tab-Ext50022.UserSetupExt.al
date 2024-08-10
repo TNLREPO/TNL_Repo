@@ -296,5 +296,9 @@ tableextension 50022 "User Setup Ext" extends "User Setup"
         field(50248; "Problem Vehicle"; Boolean)
         {
         }
+        field(50253; "System Admin"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 }

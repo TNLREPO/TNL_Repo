@@ -217,7 +217,7 @@ tableextension 50004 "Customer Ext." extends Customer
         {
             //FieldClass = FlowField;
             //CalcFormula = Sum("Warranty Claim Detail".Amount WHERE("Dealer Code" = FIELD("No."),
-                                                                   // "TNL Approved" = CONST(No)));
+            // "TNL Approved" = CONST(No)));
 
         }
         field(50256; "Outstanding Material Claims"; Decimal)
@@ -316,6 +316,14 @@ tableextension 50004 "Customer Ext." extends Customer
         field(50272; "Remove Account Link"; Boolean)
         {
             Editable = true;
+            trigger OnValidate()
+            var
+
+            begin
+                IF NOT userrec."System Admin" THEN
+                    ERROR('You do not have permission for this action!');
+
+            end;
         }
         field(50273; "Removed Date"; Date)
         {
@@ -326,14 +334,55 @@ tableextension 50004 "Customer Ext." extends Customer
         field(50275; "Customer Line Discount"; Decimal)
         {
         }
-        field(50276; "Customer Type"; Code[20])
-        {
-            //TableRelation = "Customer Type".Code;
-        }
+
         field(50277; "Customer Template"; Code[10])
         {
             //TableRelation = "Customer Template".Code;
         }
+
+        field(50278; "Remove Credit Limit"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(60000; "Customer Type"; Option)
+        {
+            OptionMembers = Private,Corporate,Government;
+            OptionCaption = 'Private,Corporate,Government';
+        }
+        field(60001; "Assigned User Name"; Text[50])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(60002; "Assigned User Email"; Text[30])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(60003; "Assigned User No."; Text[30])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(60004; "Contact Designation"; Text[30])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(60005; "Customer Phone No."; Text[30])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(60006; "Customer Email"; Text[30])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(60007; Username; Text[50])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(60008; Password; Text[250])
+        {
+            DataClassification = ToBeClassified;
+        }
+
+
 
     }
     keys
@@ -351,7 +400,7 @@ tableextension 50004 "Customer Ext." extends Customer
         CusRec: Record Customer;
         ContactRec: Record Contact;
         UserSetup: Record "User Setup";
-        //CustomerTemplate: Record "Customer Template";
+    //CustomerTemplate: Record "Customer Template";
 
     trigger OnInsert()
     var

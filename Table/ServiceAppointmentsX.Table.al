@@ -1,6 +1,7 @@
 table 70033 "Service AppointmentsX"
 {
-
+    Permissions = tabledata 70033 = rimd;
+    
     fields
     {
         field(1; "Service Item"; Code[20])
@@ -829,13 +830,99 @@ table 70033 "Service AppointmentsX"
         field(50004; Closed; Boolean)
         {
         }
-        field(50005; "Job Type"; Option)
+        field(50005; "Nature of Repair"; Blob)
         {
-            OptionCaption = 'General Repair,Periodic Maintenance,Body and Paint';
-            OptionMembers = "General Repair","Periodic Maintenance","Body and Paint";
+            DataClassification = ToBeClassified;
         }
         field(50006; "Model Name"; Text[50])
         {
+        }
+
+
+        field(50007; "Other Requests"; Text[250])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50008; "Towing Service Required"; Option)
+        {
+            DataClassification = ToBeClassified;
+            OptionCaption = ' ,Yes,No';
+            OptionMembers = " ",Yes,No;
+        }
+
+        field(50009; "Checked In"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50010; "Checked In By"; Text[30])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50011; "Checked In Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50012; "Checked In Time"; Time)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50013; "Pickup Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50014; "Pickup Time"; Time)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50015; Picture1; Text[150])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50016; Picture2; Text[150])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50017; Picture3; Text[150])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50018; Picture4; Text[150])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50019; Type; Option)
+        {
+            DataClassification = ToBeClassified;
+            OptionCaption = 'PM,GR';
+            OptionMembers = PM,GR;
+        }
+        field(50020; "Towing Address"; Text[150])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50021; "Amount Paid"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50022; "Payment Ref."; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50023; "Approve Estimate"; Option)
+        {
+            DataClassification = ToBeClassified;
+            OptionCaption = 'Approve,Contact Service Adviser';
+            OptionMembers = Approve,"Contact Service Adviser";
+        }
+        field(50024; "Estimate Approved"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50025; "Job Type"; Option)
+        {
+            DataClassification = ToBeClassified;
+            OptionCaption = 'General Repair,Periodic Maintenance,Body and Paint';
+            OptionMembers = "General Repair","Periodic Maintenance","Body and Paint";
         }
     }
 

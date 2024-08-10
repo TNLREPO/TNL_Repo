@@ -7,68 +7,68 @@ table 50000 "Payroll-Emolument Header"
         {
             NotBlank = true;
 
-            /* trigger OnValidate()
+            trigger OnValidate()
             begin
                 IF (1 < CursorPos) AND (CursorPos < MAXSTRLEN("Search Name")) THEN BEGIN
-                    "Search Name" := DELCHR(COPYSTR(Code, CursorPos), '<>');
-                    "Search Name" := PADSTR("Search Name" + ' ' + DELCHR(COPYSTR(Code, 1, CursorPos - 1), '<>'), MAXSTRLEN("Search Name"));
+                    "Search Name" := DELCHR(COPYSTR("No.", CursorPos), '<>');
+                    "Search Name" := PADSTR("Search Name" + ' ' + DELCHR(COPYSTR("No.", 1, CursorPos - 1), '<>'), MAXSTRLEN("Search Name"));
                 END
                 ELSE
-                    "Search Name" := Code;
+                    "Search Name" := "No.";
                 "Search Name" := DELCHR("Search Name", '<');
-            end; */
+            end;
         }
         field(2; "Search Name"; Code[10])
         {
         }
         field(5; "Gross Pay"; Decimal)
         {
-            /* CalcFormula = Sum ("Payroll-Employee Group Lines."."Default Amount" WHERE (Employee Group=FIELD(Code),
-                                                                                      Payslip Group ID=CONST(GROSS PAY)));
-            DecimalPlaces = 2:2;
+            CalcFormula = Sum("Payroll-Employee Group Lines."."Default Amount" WHERE("Employee Group" = FIELD("No."),
+                                                                                      "Payslip Group ID" = const("GROSS PAY")));
+            DecimalPlaces = 2 : 2;
             Editable = false;
-            FieldClass = FlowField; */
+            FieldClass = FlowField;
         }
         field(6; "Tax Charged"; Decimal)
         {
-            /*  CalcFormula = Sum("Payroll-Employee Group Lines."."Default Amount" WHERE (Employee Group=FIELD(Code),
-                                                                                       Payslip Group ID=CONST(TAX CHARGED)));
-             DecimalPlaces = 2:2;
-             Editable = false;
-             FieldClass = FlowField; */
+            CalcFormula = Sum("Payroll-Employee Group Lines."."Default Amount" WHERE("Employee Group" = FIELD("No."),
+                                                                                       "Payslip Group ID" = const("TAX CHARGED")));
+            DecimalPlaces = 2 : 2;
+            Editable = false;
+            FieldClass = FlowField;
         }
         field(7; "Tax Deducted"; Decimal)
         {
-            /* CalcFormula = Sum("Payroll-Employee Group Lines."."Default Amount" WHERE (Employee Group=FIELD(Code),
-                                                                                      Payslip Group ID=CONST(TAX DEDUCTED)));
-            DecimalPlaces = 2:2;
+            CalcFormula = Sum("Payroll-Employee Group Lines."."Default Amount" WHERE("Employee Group" = FIELD("No."),
+                                                                                      "Payslip Group ID" = const("TAX DEDUCTED")));
+            DecimalPlaces = 2 : 2;
             Editable = false;
-            FieldClass = FlowField; */
+            FieldClass = FlowField;
         }
         field(8; "Taxable Pay"; Decimal)
         {
-            /* CalcFormula = Sum("Payroll-Employee Group Lines."."Default Amount" WHERE (Employee Group=FIELD(Code),
-                                                                                      Payslip Group ID=CONST(TAXABLE PAY)));
-            DecimalPlaces = 2:2;
+            CalcFormula = Sum("Payroll-Employee Group Lines."."Default Amount" WHERE("Employee Group" = FIELD("No."),
+                                                                                      "Payslip Group ID" = const("TAXABLE PAY")));
+            DecimalPlaces = 2 : 2;
             Editable = false;
-            FieldClass = FlowField; */
+            FieldClass = FlowField;
         }
         field(9; "Total Deductions"; Decimal)
         {
-            /* CalcFormula = Sum("Payroll-Employee Group Lines."."Default Amount" WHERE (Employee Group=FIELD(Code),
-                                                                                      Payslip Group ID=CONST(TOTAL DEDUCTIONS)));
-            DecimalPlaces = 2:2;
+            CalcFormula = Sum("Payroll-Employee Group Lines."."Default Amount" WHERE("Employee Group" = FIELD("No."),
+                                                                                      "Payslip Group ID" = const("TOTAL DEDUCTIONS")));
+            DecimalPlaces = 2 : 2;
             Editable = false;
-            FieldClass = FlowField; */
+            FieldClass = FlowField;
         }
         field(10; "Net Pay Due"; Decimal)
         {
             BlankZero = true;
-            /* CalcFormula = Sum("Payroll-Employee Group Lines."."Default Amount" WHERE (Employee Group=FIELD(Code),
-                                                                                      Payslip Group ID=CONST(NET PAY DUE)));
-            DecimalPlaces = 2:2;
+            CalcFormula = Sum("Payroll-Employee Group Lines."."Default Amount" WHERE("Employee Group" = FIELD("No."),
+                                                                                      "Payslip Group ID" = const("NET PAY DUE")));
+            DecimalPlaces = 2 : 2;
             Editable = false;
-            FieldClass = FlowField; */
+            FieldClass = FlowField;
         }
         field(11; "Posting Group Code"; Code[10])
         {
@@ -155,7 +155,7 @@ table 50000 "Payroll-Emolument Header"
         PGrpCode: Code[10];
         EDRec: Record 50001;
         GrossEDCode: Code[20];
-        //GenPCode: Codeunit 50004;
+        GenPCode: Codeunit 50004;
         EDType: Option " ","NSITF Employee","NSITF Employer","Gross Salary","Pension Employee","Pension Employer","NSITF Gross",NHF,"Net Pay","Other Emoluments";
         EmpContRec: Record 5211;
         EmpGrp: Code[10];
@@ -225,7 +225,7 @@ table 50000 "Payroll-Emolument Header"
 
     procedure GetGroupFromGross(GrossAmount: Decimal; Criteria: Option LT,GT,EQ,LE,GE,NE): Code[10]
     begin
-        /*
+
         GrossEDCode := GenPCode.GetGrossED(EDType::"Gross Salary");
 
         CASE Criteria OF
@@ -252,7 +252,7 @@ table 50000 "Payroll-Emolument Header"
             EXIT(GrpLinesRec."Emolument Group")
         ELSE
             EXIT(GrossEDCode);
-            */
+
     end;
 
 

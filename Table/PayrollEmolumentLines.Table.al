@@ -14,52 +14,52 @@ table 50005 "Payroll-Emolument Lines"
             NotBlank = true;
             TableRelation = "Payroll-E/D Codes.";
 
-            /*  trigger OnValidate()
-              begin
+            trigger OnValidate()
+            begin
 
 
-                  "E/DFileRec".GET("E/D Code");
+                "E/DFileRec".GET("E/D Code");
 
-                  // Transfer Units and Rate
-                  BEGIN
-                      Rate := "E/DFileRec".Rate;
-                      Units := "E/DFileRec".Units;
-                      "Payslip Group ID" := "E/DFileRec"."Payslip Group ID";
-                      "Control Type" := "E/DFileRec"."Control Type";
-                      "ED Category" := "E/DFileRec"."ED Type";
-                  END;
+                // Transfer Units and Rate
+                BEGIN
+                    Rate := "E/DFileRec".Rate;
+                    Units := "E/DFileRec".Units;
+                    "Payslip Group ID" := "E/DFileRec"."Payslip Group ID";
+                    "Control Type" := "E/DFileRec"."Control Type";
+                    "ED Category" := "E/DFileRec"."ED Type";
+                END;
 
-                  //Calculate the amount if neither quantities nor yes flag are required
-                  IF (Units = '') AND NOT ("E/DFileRec"."Yes/No Req.") THEN BEGIN
-                      "Default Amount" := CalcAmount("E/DFileRec",
-                                                       Rec, "Default Amount");
-                      IF Rec."Default Amount" <>
-                         xRec."Default Amount" THEN BEGIN
-                          // Change the entries that are computed using this new amount 
-                          CalcCompute(Rec, "Default Amount", TRUE);
+                //Calculate the amount if neither quantities nor yes flag are required
+                IF (Units = '') AND NOT ("E/DFileRec"."Yes/No Req.") THEN BEGIN
+                    "Default Amount" := CalcAmount("E/DFileRec",
+                                                     Rec, "Default Amount");
+                    IF Rec."Default Amount" <>
+                       xRec."Default Amount" THEN BEGIN
+                        // Change the entries that are computed using this new amount 
+                        CalcCompute(Rec, "Default Amount", TRUE);
 
-                          //If this new entry is a contributory factor for the value of another
-                          //line, then compute that other line's value and insert it appropriately
-                          CalcFactor1(Rec);
+                        //If this new entry is a contributory factor for the value of another
+                        //line, then compute that other line's value and insert it appropriately
+                        CalcFactor1(Rec);
 
-                          // Go through all the lines and make any appropriate Changes 
-                          ChangeAllOver(Rec, FALSE);
+                        // Go through all the lines and make any appropriate Changes 
+                        ChangeAllOver(Rec, FALSE);
 
-                          // Set the 'Change' flags to false in all the lines 
-                          ResetChangeFlags(Rec);
+                        // Set the 'Change' flags to false in all the lines 
+                        ResetChangeFlags(Rec);
 
-                      END;
-                  END;
+                    END;
+                END;
 
-                  "E/DFileRec".GET("E/D Code");
+                "E/DFileRec".GET("E/D Code");
 
-                  IF ("E/DFileRec"."ED Type" = "E/DFileRec"."ED Type"::"Gross Salary") THEN
-                      "ED Category" := "ED Category"::"Pension Employer";
+                IF ("E/DFileRec"."ED Type" = "E/DFileRec"."ED Type"::"Gross Salary") THEN
+                    "ED Category" := "ED Category"::"Pension Employer";
 
-                  IF ("E/DFileRec"."Payslip Print Column" = "E/DFileRec"."Payslip Print Column"::"Net Earning") THEN
-                      "ED Category" := "ED Category"::"NSITF Gross";
+                IF ("E/DFileRec"."Payslip Print Column" = "E/DFileRec"."Payslip Print Column"::"Net Earning") THEN
+                    "ED Category" := "ED Category"::"NSITF Gross";
 
-              end; */
+            end;
         }
         field(3; Units; Text[10])
         {
@@ -68,55 +68,55 @@ table 50005 "Payroll-Emolument Lines"
         {
             DecimalPlaces = 0 : 5;
 
-            /*   trigger OnValidate()
-              begin
-                  IF (Units = '') THEN
-                      // User cannot edit the rate if the E/D code has no units
+            trigger OnValidate()
+            begin
+                IF (Units = '') THEN
+                    // User cannot edit the rate if the E/D code has no units
                     Rec.Rate := xRec.Rate
-                  ELSE BEGIN
-                      "Default Amount" := Quantity * Rate;
+                ELSE BEGIN
+                    "Default Amount" := Quantity * Rate;
 
-                      // Check for rounding and Maximum/Minimum 
-                      "E/DFileRec".GET("E/D Code");
-                      "Default Amount" := ChkRoundMaxMin("E/DFileRec", "Default Amount");
+                    // Check for rounding and Maximum/Minimum 
+                    "E/DFileRec".GET("E/D Code");
+                    "Default Amount" := ChkRoundMaxMin("E/DFileRec", "Default Amount");
 
-                  END
+                END
 
-              end; */
+            end;
         }
         field(5; Quantity; Decimal)
         {
             DecimalPlaces = 0 : 5;
 
-            /*   trigger OnValidate()
-              begin
-                  IF (Units = '') THEN
-                      // User cannot enter quantity if the E/D code has no units
+            trigger OnValidate()
+            begin
+                IF (Units = '') THEN
+                    // User cannot enter quantity if the E/D code has no units
                     Rec.Quantity := xRec.Quantity
-                  ELSE BEGIN
-                      "Default Amount" := Quantity * Rate;
+                ELSE BEGIN
+                    "Default Amount" := Quantity * Rate;
 
-                      // Check for rounding and Maximum/Minimum 
-                      "E/DFileRec".GET("E/D Code");
-                      "Default Amount" := ChkRoundMaxMin("E/DFileRec", "Default Amount");
+                    // Check for rounding and Maximum/Minimum 
+                    "E/DFileRec".GET("E/D Code");
+                    "Default Amount" := ChkRoundMaxMin("E/DFileRec", "Default Amount");
 
-                  END
+                END
 
-              end; */
+            end;
         }
         field(6; Flag; Boolean)
         {
 
-            /*   trigger OnValidate()
-              begin
-                  "E/DFileRec".GET("E/D Code");
-                  IF NOT ("E/DFileRec"."Yes/No Req.") THEN
-                      Flag := FALSE
-                  ELSE BEGIN
-                      "Default Amount" := CalcAmount("E/DFileRec", Rec,
-                                                       "Default Amount");
-                  END
-              end; */
+            trigger OnValidate()
+            begin
+                "E/DFileRec".GET("E/D Code");
+                IF NOT ("E/DFileRec"."Yes/No Req.") THEN
+                    Flag := FALSE
+                ELSE BEGIN
+                    "Default Amount" := CalcAmount("E/DFileRec", Rec,
+                                                     "Default Amount");
+                END
+            end;
         }
         field(7; "Default Amount"; Decimal)
         {
@@ -124,50 +124,50 @@ table 50005 "Payroll-Emolument Lines"
             InitValue = 0;
             NotBlank = true;
 
-            /*  trigger OnValidate()
-              begin
+            trigger OnValidate()
+            begin
 
-                  "E/DFileRec".GET("E/D Code");
-                  IF NOT ("E/DFileRec"."Edit Grp. Amount") THEN
-                      Rec."Default Amount" :=
-                      xRec."Default Amount"
-                  ELSE
-                      // Check for rounding and Maximum/Minimum 
+                "E/DFileRec".GET("E/D Code");
+                IF NOT ("E/DFileRec"."Edit Grp. Amount") THEN
+                    Rec."Default Amount" :=
+                    xRec."Default Amount"
+                ELSE
+                    // Check for rounding and Maximum/Minimum 
                     "Default Amount" := ChkRoundMaxMin("E/DFileRec", "Default Amount");
 
-                  "E/DFileRec".GET("E/D Code");
-                  IF "E/DFileRec"."ED Type2" = 1 THEN BEGIN
-                      "E/DFileRec".SETRANGE("E/DFileRec"."ED Type2", 2);
-                      IF "E/DFileRec".FIND('+') THEN BEGIN
-                          GroupLineRec.SETRANGE(GroupLineRec."Emolument Group", "Emolument Group");
-                          GroupLineRec.SETRANGE(GroupLineRec."E/D Code", "E/DFileRec"."E/D Code");
-                          IF GroupLineRec.FIND('+') THEN BEGIN
-                              GroupLineRec.Rate := ("Default Amount" / 176) * 1.5;
-                              GroupLineRec.MODIFY;
-                          END;
-                      END;
-                      "E/DFileRec".SETRANGE("E/DFileRec"."ED Type2", 3);
-                      IF "E/DFileRec".FIND('+') THEN BEGIN
-                          GroupLineRec.SETRANGE(GroupLineRec."Emolument Group", "Emolument Group");
-                          GroupLineRec.SETRANGE(GroupLineRec."E/D Code", "E/DFileRec"."E/D Code");
-                          IF GroupLineRec.FIND('+') THEN BEGIN
-                              GroupLineRec.Rate := ("Default Amount" / 176) * 2;
-                              GroupLineRec.MODIFY;
-                          END;
-                      END;
-                      "E/DFileRec".SETRANGE("E/DFileRec"."ED Type2", 4);
-                      IF "E/DFileRec".FIND('+') THEN BEGIN
-                          GroupLineRec.SETRANGE(GroupLineRec."Emolument Group", "Emolument Group");
-                          GroupLineRec.SETRANGE(GroupLineRec."E/D Code", "E/DFileRec"."E/D Code");
-                          IF GroupLineRec.FIND('+') THEN BEGIN
-                              GroupLineRec."Yearly Allowance" := "Default Amount" * 0.1 * 12;
-                              GroupLineRec.MODIFY;
-                          END;
-                      END;
+                "E/DFileRec".GET("E/D Code");
+                IF "E/DFileRec"."ED Type2" = 1 THEN BEGIN
+                    "E/DFileRec".SETRANGE("E/DFileRec"."ED Type2", 2);
+                    IF "E/DFileRec".FIND('+') THEN BEGIN
+                        GroupLineRec.SETRANGE(GroupLineRec."Emolument Group", "Emolument Group");
+                        GroupLineRec.SETRANGE(GroupLineRec."E/D Code", "E/DFileRec"."E/D Code");
+                        IF GroupLineRec.FIND('+') THEN BEGIN
+                            GroupLineRec.Rate := ("Default Amount" / 176) * 1.5;
+                            GroupLineRec.MODIFY;
+                        END;
+                    END;
+                    "E/DFileRec".SETRANGE("E/DFileRec"."ED Type2", 3);
+                    IF "E/DFileRec".FIND('+') THEN BEGIN
+                        GroupLineRec.SETRANGE(GroupLineRec."Emolument Group", "Emolument Group");
+                        GroupLineRec.SETRANGE(GroupLineRec."E/D Code", "E/DFileRec"."E/D Code");
+                        IF GroupLineRec.FIND('+') THEN BEGIN
+                            GroupLineRec.Rate := ("Default Amount" / 176) * 2;
+                            GroupLineRec.MODIFY;
+                        END;
+                    END;
+                    "E/DFileRec".SETRANGE("E/DFileRec"."ED Type2", 4);
+                    IF "E/DFileRec".FIND('+') THEN BEGIN
+                        GroupLineRec.SETRANGE(GroupLineRec."Emolument Group", "Emolument Group");
+                        GroupLineRec.SETRANGE(GroupLineRec."E/D Code", "E/DFileRec"."E/D Code");
+                        IF GroupLineRec.FIND('+') THEN BEGIN
+                            GroupLineRec."Yearly Allowance" := "Default Amount" * 0.1 * 12;
+                            GroupLineRec.MODIFY;
+                        END;
+                    END;
 
-                  END;
+                END;
 
-              end; */
+            end;
         }
         field(8; ChangeOthers; Boolean)
         {
@@ -301,27 +301,27 @@ table 50005 "Payroll-Emolument Lines"
 
     trigger OnModify()
     begin
-        
+
         IF Rec."Default Amount" <>
            xRec."Default Amount" THEN BEGIN
             MARK(TRUE);
             // If this new entry contributes in computing another, then compute that
-              //value for that computed entry and insert it appropriately
+            //value for that computed entry and insert it appropriately
             CalcCompute(Rec, "Default Amount", FALSE);
 
             //If this new entry is a contributory factor for the value of another line,
-              //then compute that other line's value and insert it appropriately
+            //then compute that other line's value and insert it appropriately
             CalcFactor1(Rec);
 
             //The new entry in this line has already been used to Compute another and
-             //also entries where it is a Factor, therefore set ChangeOthers to false
+            //also entries where it is a Factor, therefore set ChangeOthers to false
             ChangeOthers := FALSE;
 
             // Go through all the lines and make any appropriate Changes
             ChangeAllOver(Rec, FALSE);
 
             // Set the 'Change' flags to false in all the lines 
-            
+
 
             MARK(FALSE)
         END;
@@ -352,10 +352,10 @@ table 50005 "Payroll-Emolument Lines"
         EMPGRPHEADER: Record 50000;
         GroupLineRec: Record 50005;
 
-    
+
     procedure SpecialRelation("FieldNo.": Integer)
     begin
-        
+
 
         /* Force NO-EDIT of field already has a value*/
         IF "E/D Code" <> '' THEN
@@ -363,7 +363,7 @@ table 50005 "Payroll-Emolument Lines"
 
     end;
 
-    
+
     procedure CalcAmount(EDFileRec: Record 50001; EntryLineRec: Record 50005; EntryLineAmount: Decimal): Decimal
     begin
         /*Š
@@ -507,7 +507,7 @@ table 50005 "Payroll-Emolument Lines"
 
     end;
 
-    
+
     procedure CalcCompute(EntryRecParam: Record 50005; AmountInLine: Decimal; "CalledFromEdCode?": Boolean)
     begin
         /*Š
@@ -619,7 +619,7 @@ table 50005 "Payroll-Emolument Lines"
 
     end;
 
-    
+
     procedure CalcFactor1(CurrentEntryLine: Record 50005)
     begin
         /*Š
@@ -661,7 +661,7 @@ table 50005 "Payroll-Emolument Lines"
 
     end;
 
-    
+
     procedure "CalcFactor1.1"(CurrLineRec: Record 50005; LineToChangeRec: Record 50005; EDFileRec: Record 50001): Decimal
     begin
         /*Š
@@ -785,7 +785,7 @@ table 50005 "Payroll-Emolument Lines"
 
     end;
 
-    
+
     procedure ChangeAllOver(CurrentRec: Record 50005; CurrWasDeleted: Boolean)
     begin
         /*Š
@@ -834,7 +834,7 @@ table 50005 "Payroll-Emolument Lines"
 
     end;
 
-    
+
     procedure ComputeAgain(ParamLine: Record 50005; CurrentRec: Record 50005; CurrWasDeleted: Boolean)
     begin
         /*Š
@@ -945,7 +945,7 @@ table 50005 "Payroll-Emolument Lines"
 
     end;
 
-    
+
     procedure CalcFactorAgain(ParamLine: Record 50005; CurrentRec: Record 50005; CurrWasDeleted: Boolean)
     begin
         /*Š
@@ -997,7 +997,7 @@ table 50005 "Payroll-Emolument Lines"
 
     end;
 
-    
+
     procedure ResetChangeFlags(CurrentRec: Record 50005)
     begin
         /*Š
@@ -1027,7 +1027,7 @@ table 50005 "Payroll-Emolument Lines"
 
     end;
 
-    
+
     procedure CalcTaxAmt(var LDetailsRec: Record 50003; TaxTableInput: Decimal): Decimal
     begin
         /*Š
@@ -1073,7 +1073,7 @@ table 50005 "Payroll-Emolument Lines"
 
     end;
 
-    
+
     procedure CalcGraduated(var WantedLookRec: Record 50003; InputToTable: Decimal): Decimal
     begin
         /*Š
@@ -1106,7 +1106,7 @@ table 50005 "Payroll-Emolument Lines"
 
     end;
 
-    
+
     procedure AmountIsComputed(var ReturnAmount: Decimal; EntryRecParam: Record 50005; NewAmount: Decimal): Boolean
     begin
         /*Š
@@ -1161,7 +1161,7 @@ table 50005 "Payroll-Emolument Lines"
 
     end;
 
-    
+
     procedure ChangeDueToDelete(DeletedRec: Record 50005)
     begin
         /*Š
@@ -1187,7 +1187,7 @@ table 50005 "Payroll-Emolument Lines"
 
     end;
 
-    
+
     procedure ChkRoundMaxMin(EDRecord: Record 50001; TheAmount: Decimal): Decimal
     begin
         /*Š

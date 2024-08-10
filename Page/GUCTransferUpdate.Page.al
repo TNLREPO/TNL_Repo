@@ -2,6 +2,7 @@ page 50377 "GUC Transfer Update"
 {
     PageType = List;
     SourceTable = "Item Ledger Entry";
+    ApplicationArea = All;
 
     layout
     {

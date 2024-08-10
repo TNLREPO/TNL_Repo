@@ -366,7 +366,7 @@ table 70008 "Procurement Header"
 
                     PurchSetup.GET;
                     ToAddresses := 'adewumi@toyotanigeria.com';
-                    CcAddresses := 'agbesua@toyotanigeria.com';
+                    //CcAddresses := ;
                     BccAddresses := '';
                     Subject := STRSUBSTNO(Text013, "Document Type", "No.");
 
@@ -1472,7 +1472,7 @@ table 70008 "Procurement Header"
                     PurchSetup.GET;
                     ToAddresses := 'adewumi@toyotanigeria.com';
                     Addressee := 'STA';
-                    CcAddresses := 'agbesua@toyotanigeria.com';
+                    //CcAddresses := 'agbesua@toyotanigeria.com';
                     BccAddresses := '';
 
                     UserSetup4.GET(USERID);
@@ -1910,7 +1910,7 @@ table 70008 "Procurement Header"
                     Addressee := UserSetup.Initials;
 
                     UserSetup2.GET("Send To");
-                    CcAddresses := 'adewumi@toyotanigeria.com; agbesua@toyotanigeria.com' + ';' + UserSetup2."E-Mail";
+                    CcAddresses := 'adewumi@toyotanigeria.com' + ';' + UserSetup2."E-Mail";
                     BccAddresses := '';
 
                     UserSetup4.GET(USERID);
@@ -1926,7 +1926,7 @@ table 70008 "Procurement Header"
                     /* 
                                         WITH TempEmailItem DO BEGIN
                                             "Send to" := ToAddresses;
-                                            "Send CC" := 'adewumi@toyotanigeria.com; agbesua@toyotanigeria.com' + ';' + UserSetup2."E-Mail" + ';' + SenderAddress;
+                                            "Send CC" := 'adewumi@toyotanigeria.com;  + ';' + UserSetup2."E-Mail" + ';' + SenderAddress;
                                             "Send BCC" := BccAddresses;
                                             Subject := STRSUBSTNO(Text010, "Document Type", "No.");
 
@@ -2127,7 +2127,7 @@ table 70008 "Procurement Header"
                     UserSetup2.GET("Send To");
                     PurchSetup.GET;
                     ToAddresses := UserSetup."E-Mail";
-                    CcAddresses := 'adewumi@toyotanigeria.com;agbesua@toyotanigeria.com';// + ';' + UserSetup2."E-Mail" ;
+                    CcAddresses := 'adewumi@toyotanigeria.com';
                     BccAddresses := '';
 
                     UserSetup4.GET(USERID);
@@ -2573,7 +2573,7 @@ table 70008 "Procurement Header"
 
                     UserSetup.GET("Send To");
                     ToAddresses := 'paa@toyotanigeria.com';
-                    CcAddresses := 'albert@toyotanigeria.com;adewumi@toyotanigeria.com;agbesua@toyotanigeria.com' + ';' + UserSetup2."E-Mail" + ';' + SenderAddress;
+                    CcAddresses := 'albert@toyotanigeria.com;adewumi@toyotanigeria.com;' + UserSetup2."E-Mail" + ';' + SenderAddress;
                     BccAddresses := '';
 
                     Subject := STRSUBSTNO(Text047, "Document Type", "No.");

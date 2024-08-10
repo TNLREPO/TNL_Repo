@@ -320,7 +320,7 @@ pageextension 50006 "Sales Order Ext" extends "Sales Order"
 
 
     actions
-    {
+    {        
         addlast(Navigation)
         {
             group(Category11)

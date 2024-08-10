@@ -1,5 +1,6 @@
 page 50213 "Request Approvals (Event Mgr)"
 {
+    ApplicationArea = All;
     CardPageID = "Motor Show Repair Card";
     PageType = List;
     SourceTable = "Motor Show Repair";

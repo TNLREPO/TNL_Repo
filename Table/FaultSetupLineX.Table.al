@@ -157,6 +157,12 @@ table 70032 "Fault Setup LineX"
         field(19; "Model Description"; Text[30])
         {
         }
+
+        field(20; "Model No."; Code[30])
+        {
+            DataClassification = ToBeClassified;
+        }
+
     }
 
     keys

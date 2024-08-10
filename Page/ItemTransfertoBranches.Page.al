@@ -1,5 +1,6 @@
 page 70225 "Item Transfer to Branches"
 {
+    ApplicationArea = All;
     PageType = List;
     SourceTable = "Item Ledger Entry";
     SourceTableView = WHERE("Inventory Posting Group" = FILTER('N_PARTS'),

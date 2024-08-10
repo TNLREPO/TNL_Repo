@@ -869,6 +869,10 @@ tableextension 50008 "Item Ext" extends Item
         {
             DataClassification = ToBeClassified;
         }
+        field(80000; "Picture Url"; Text[250])
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     fieldgroups

@@ -5,6 +5,7 @@ page 50122 "Item Tracking Entries Form"
     PageType = List;
     SaveValues = true;
     SourceTable = "Item Ledger Entry";
+    ApplicationArea = All;
 
     layout
     {
