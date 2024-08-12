@@ -2,6 +2,7 @@ page 50024 "Loan Card."
 {
     PageType = Card;
     SourceTable = "Loan.";
+    ApplicationArea = All;
 
     layout
     {
@@ -10,7 +11,7 @@ page 50024 "Loan Card."
             group(General)
             {
                 Caption = 'General';
-                field("Loan ID";Rec."Loan ID")
+                field("Loan ID"; Rec."Loan ID")
                 {
 
                     trigger OnAssistEdit()
@@ -20,89 +21,89 @@ page 50024 "Loan Card."
                             CurrPage.UPDATE;
                     end;
                 }
-                field("Staff No.";Rec."Staff No.")
+                field("Staff No."; Rec."Staff No.")
                 {
                 }
-                field("Staff Name";Rec."Staff Name")
+                field("Staff Name"; Rec."Staff Name")
                 {
                 }
-                field("Loan Type";Rec."Loan Type")
+                field("Loan Type"; Rec."Loan Type")
                 {
                 }
-                field(Description;Rec. Description)
+                field(Description; Rec.Description)
                 {
                 }
-                field("Loan ED Regular";Rec."Loan ED Regular")
+                field("Loan ED Regular"; Rec."Loan ED Regular")
                 {
                 }
-                field("Journal Batch";Rec."Journal Batch")
+                field("Journal Batch"; Rec."Journal Batch")
                 {
                 }
-                field("Loan Created";Rec."Loan Created")
+                field("Loan Created"; Rec."Loan Created")
                 {
                 }
             }
             group(Posting)
             {
                 Caption = 'Posting';
-                field("Acct. Type";Rec."Acct. Type")
+                field("Acct. Type"; Rec."Acct. Type")
                 {
                 }
-                field("Acct. No.";Rec."Acct. No.")
+                field("Acct. No."; Rec."Acct. No.")
                 {
                 }
-                field("Loan Posting Date";Rec."Loan Posting Date")
+                field("Loan Posting Date"; Rec."Loan Posting Date")
                 {
                 }
-                field("Voucher No. for Loan";Rec."Voucher No. for Loan")
+                field("Voucher No. for Loan"; Rec."Voucher No. for Loan")
                 {
                 }
-                field("Counter Acct. Type";Rec."Counter Acct. Type")
+                field("Counter Acct. Type"; Rec."Counter Acct. Type")
                 {
                 }
-                field("Counter Acct. No.";Rec."Counter Acct. No.")
+                field("Counter Acct. No."; Rec."Counter Acct. No.")
                 {
                 }
             }
             group(Status)
             {
                 Caption = 'Status';
-                field("Loan Amount";Rec."Loan Amount")
+                field("Loan Amount"; Rec."Loan Amount")
                 {
                 }
-                field("Number of Payments";Rec."Number of Payments")
+                field("Number of Payments"; Rec."Number of Payments")
                 {
                 }
-                field("Interest Percent";Rec."Interest Percent")
+                field("Interest Percent"; Rec."Interest Percent")
                 {
                 }
-                field(LPlusInt;Rec. LPlusInt)
+                field(LPlusInt; Rec.LPlusInt)
                 {
                     Caption = 'Principal+Interest';
                     Editable = false;
                     Style = StrongAccent;
                     StyleExpr = TRUE;
                 }
-                field("Monthly Repayment";Rec."Monthly Repayment")
+                field("Monthly Repayment"; Rec."Monthly Repayment")
                 {
                     Style = Standard;
                     StyleExpr = TRUE;
                 }
-                field("Remaining Amount";Rec."Remaining Amount")
+                field("Remaining Amount"; Rec."Remaining Amount")
                 {
                     Style = StrongAccent;
                     StyleExpr = TRUE;
                 }
-                field("Cust Ldg Entry No";Rec."Cust Ldg Entry No")
+                field("Cust Ldg Entry No"; Rec."Cust Ldg Entry No")
                 {
                 }
-                field("Start Period";Rec."Start Period")
+                field("Start Period"; Rec."Start Period")
                 {
                 }
-                field("Open(Y/N)";Rec."Open(Y/N)")
+                field("Open(Y/N)"; Rec."Open(Y/N)")
                 {
                 }
-                field("Suspended(Y/N)";Rec."Suspended(Y/N)")
+                field("Suspended(Y/N)"; Rec."Suspended(Y/N)")
                 {
                 }
             }
@@ -122,7 +123,7 @@ page 50024 "Loan Card."
 
                     trigger OnAction()
                     begin
-                        employee.SETRANGE("No.",Rec. "Staff No.");
+                        employee.SETRANGE("No.", Rec."Staff No.");
                         //REPORT.RUN(REPORT::"Create Customer Acct. forStaff",FALSE,FALSE,employee);
 
                         MESSAGE('Staff Vendor Account Created');

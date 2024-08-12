@@ -6,6 +6,7 @@ page 70514 "Blocked Employee List"
     PageType = List;
     SourceTable = "Employee";
     SourceTableView = WHERE(Blocked = filter('Yes'));
+    ApplicationArea = All;
 
     layout
     {

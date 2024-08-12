@@ -5,6 +5,7 @@ page 50008 "Payslip Lines List"
     ModifyAllowed = false;
     PageType = Card;
     SourceTable = "Payroll-Payslip Lines.";
+    ApplicationArea = All;
 
     layout
     {

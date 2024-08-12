@@ -1597,7 +1597,6 @@ page 60005 "Accountant RC"
 
             }
 
-
             group(LeavePlan)
             {
                 Caption = 'Leave Plan';
@@ -1672,7 +1671,6 @@ page 60005 "Accountant RC"
                     ApplicationArea = All;
 
                 }
-
 
             }
 
@@ -1809,6 +1807,102 @@ page 60005 "Accountant RC"
                     RunObject = Page "Cost Budget Registers";
                     ToolTip = 'View auditing details for all cost accounting budget entries. Every time an entry is posted, a register is created in which you can see the first and last number of its entries in order to document when entries were posted.';
                 }
+            }
+
+            group(PayrollAdministration)
+            {
+                Caption = 'Payroll Administration';
+                Image = Payroll;
+                ToolTip = 'View payroll information.';
+
+                action(MyPaySlips)
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'My Payslips';
+                    RunObject = Page "My payslip";
+                    ToolTip = '';
+                }
+
+                action(EmployeeList)
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Employees';
+                    RunObject = Page "Employee List";
+                    ToolTip = '';
+                }
+                action(BlockedEmployees)
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Blocked Employees';
+                    RunObject = Page "Blocked Employee List";
+                    ToolTip = '';
+                }
+                action(PayrollPeriods)
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Payroll Periods';
+                    RunObject = Page "Payroll Periods.";
+                    ToolTip = '';
+                }
+                action(PaySlips)
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Payslips';
+                    RunObject = Page "Payslip Header Survey.";
+                    ToolTip = '';
+                }
+                action(MonthlyVariables)
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Monthly Variables';
+                    RunObject = Page "Monthly Var. Header Survey.";
+                    ToolTip = '';
+                }
+                action(Banks)
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Banks';
+                    RunObject = Page "Bank Account List";
+                    ToolTip = '';
+                }
+                action(EDCodes)
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'E/D Codes';
+                    RunObject = Page "Payroll-E/D Codes";
+                    ToolTip = '';
+                }
+                action(LoanList)
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Loan';
+                    RunObject = Page "Loan List";
+                    ToolTip = '';
+                }
+                action(PayslipSurvey)
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Payslip Survey';
+                    RunObject = Page "Payslip Survey";
+                    ToolTip = '';
+                }
+                action(TaxRelief)
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Tax Relief';
+                    RunObject = Page "Tax Relief";
+                    ToolTip = '';
+                }
+
+                action(PayrollGroup)
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Employee Group';
+                    RunObject = Page "Payroll-Employee Group List";
+                    ToolTip = '';
+                }
+
+
             }
         }
         area(creation)

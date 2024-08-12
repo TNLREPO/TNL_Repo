@@ -1,7 +1,6 @@
-page 50296 "Payroll Survey"
+page 60007 "Payroll Periods."
 {
-    Editable = false;
-    PageType = Card;
+    PageType = List;
     SourceTable = "Payroll-Periods.";
     ApplicationArea = All;
 
@@ -9,7 +8,7 @@ page 50296 "Payroll Survey"
     {
         area(content)
         {
-            repeater(Group)
+            repeater(Control1)
             {
                 field("Period Code"; Rec."Period Code")
                 {
@@ -24,9 +23,6 @@ page 50296 "Payroll Survey"
                 {
                 }
                 field("Search Name"; Rec."Search Name")
-                {
-                }
-                field("Mid Month"; Rec."Mid Month")
                 {
                 }
                 field(Closed; Rec.Closed)
@@ -45,7 +41,7 @@ page 50296 "Payroll Survey"
                 Caption = '&Create Pay Period';
                 Promoted = true;
                 PromotedCategory = Process;
-                //RunObject = Report 50044;
+                RunObject = Report 50044;
             }
         }
     }

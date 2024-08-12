@@ -2,6 +2,8 @@ page 50015 "Employee Group Header."
 {
     PageType = Card;
     SourceTable = "Payroll-Employee Group Header.";
+    Caption = 'Employee Group Card';
+    ApplicationArea = All;
 
     layout
     {
@@ -37,8 +39,9 @@ page 50015 "Employee Group Header."
                 {
                 }
             }
-            part("Employee Group"; "Employee Group Lines.")
+            part(Lines; "Employee Group Lines.")
             {
+                Caption = 'Lines';
                 SubPageLink = "Employee Group" = FIELD(Code);
             }
         }

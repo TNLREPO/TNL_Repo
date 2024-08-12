@@ -4,6 +4,7 @@ page 50017 "Employee Groups Survey."
     Editable = false;
     PageType = List;
     SourceTable = "Payroll-Employee Group Header.";
+    ApplicationArea = All;
 
     layout
     {

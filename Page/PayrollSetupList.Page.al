@@ -3,6 +3,7 @@ page 70041 "Payroll Setup List"
     CardPageID = "Payroll Setup";
     PageType = List;
     SourceTable = "Payroll Setup.";
+    ApplicationArea = All;
 
     layout
     {

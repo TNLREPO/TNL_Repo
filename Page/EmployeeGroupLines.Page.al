@@ -1,9 +1,9 @@
 page 50016 "Employee Group Lines."
 {
-    CardPageID = "Payroll Employee Group Card";
     PageType = ListPart;
     SourceTable = "Payroll-Employee Group Lines.";
-    SourceTableView = WHERE (Hide = Filter (false));
+    SourceTableView = WHERE(Hide = Filter(false));
+    ApplicationArea = All;
 
     layout
     {
@@ -11,53 +11,53 @@ page 50016 "Employee Group Lines."
         {
             repeater(Group)
             {
-                field("Employee Name";Rec."Employee Name")
+                field("Employee Name"; Rec."Employee Name")
                 {
                     Visible = false;
                 }
-                field("Employee Group";Rec."Employee Group")
+                field("Employee Group"; Rec."Employee Group")
                 {
                     Visible = false;
                 }
-                field("E/D Code";Rec."E/D Code")
+                field("E/D Code"; Rec."E/D Code")
                 {
                     Lookup = true;
                     LookupPageID = "E/D Survey.";
                 }
-                field("Payslip Text";Rec."Payslip Text")
+                field("Payslip Text"; Rec."Payslip Text")
                 {
                 }
-                field("Posting Group";Rec."Posting Group")
+                field("Posting Group"; Rec."Posting Group")
                 {
                 }
-                field("Default Amount";Rec."Default Amount")
+                field("Default Amount"; Rec."Default Amount")
                 {
                     DecimalPlaces = 0 :;
                     NotBlank = true;
                     //Numeric = false;
                 }
-                field("Yearly Allowance";Rec."Yearly Allowance")
+                field("Yearly Allowance"; Rec."Yearly Allowance")
                 {
                 }
-                field(Units;Rec.Units)
+                field(Units; Rec.Units)
                 {
                 }
-                field("Basic Salary";Rec."Basic Salary")
+                field("Basic Salary"; Rec."Basic Salary")
                 {
                 }
-                field(Rate;Rec. Rate)
+                field(Rate; Rec.Rate)
                 {
                 }
-                field(Quantity;Rec. Quantity)
+                field(Quantity; Rec.Quantity)
                 {
                 }
-                field(Flag;Rec. Flag)
+                field(Flag; Rec.Flag)
                 {
                 }
-                field("Old Default Amount";Rec."Old Default Amount")
+                field("Old Default Amount"; Rec."Old Default Amount")
                 {
                 }
-                field("Date Changed";Rec."Date Changed")
+                field("Date Changed"; Rec."Date Changed")
                 {
                 }
             }
@@ -84,7 +84,7 @@ page 50016 "Employee Group Lines."
     var
         EDRec: Record 50001;
 
-    
+
     procedure GetEDName(): Text[30]
     begin
         // This code was disabled by Adams

@@ -296,7 +296,54 @@ tableextension 50022 "User Setup Ext" extends "User Setup"
         field(50248; "Problem Vehicle"; Boolean)
         {
         }
+        field(50249; "Payroll-Admin"; Boolean)
+        {
+        }
         field(50253; "System Admin"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50254; "Audit Approval"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50255; "Admin Approval"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50256; "Market Approval"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50257; "Logistic Approval"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50258; "Finance Approval"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50259; "HRAdmin Approval"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50260; "Parts Approval"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50261; "HOD1 Approval"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50262; "Branch Approval"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50263; "FG Approval"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50264; "Dealer Dev. Approval"; Boolean)
         {
             DataClassification = ToBeClassified;
         }

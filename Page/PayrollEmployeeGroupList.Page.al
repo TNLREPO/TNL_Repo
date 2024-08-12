@@ -5,6 +5,7 @@ page 50002 "Payroll-Employee Group List"
     ModifyAllowed = false;
     PageType = List;
     SourceTable = "Payroll-Employee Group Header.";
+    ApplicationArea = All;
 
     layout
     {
@@ -18,8 +19,9 @@ page 50002 "Payroll-Employee Group List"
                 field(Code; Rec.Code)
                 {
                 }
-                field("Staff Name"; Rec."Staff Name")
+                field(EmpName; Rec.GetEmpName(Rec.Code))
                 {
+                    Caption = 'Employee Name';
                 }
                 field("Gross Pay"; Rec."Gross Pay")
                 {

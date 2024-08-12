@@ -2,6 +2,7 @@ page 50300 "Employee Group Lines sub."
 {
     PageType = Card;
     SourceTable = "Payroll-Employee Group Lines.";
+    ApplicationArea = All;
 
     layout
     {

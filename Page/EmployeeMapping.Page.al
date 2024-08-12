@@ -2,6 +2,7 @@ page 50391 "Employee Mapping"
 {
     PageType = Card;
     SourceTable = "Employee Mapping";
+    ApplicationArea = All;
 
     layout
     {

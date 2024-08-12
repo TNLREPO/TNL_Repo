@@ -6,6 +6,7 @@ page 50025 "Loan List"
     ModifyAllowed = false;
     PageType = List;
     SourceTable = "Loan.";
+    ApplicationArea = All;
 
     layout
     {

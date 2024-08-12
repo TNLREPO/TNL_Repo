@@ -2,6 +2,7 @@ page 50030 "Payroll Setup."
 {
     PageType = ListPlus;
     SourceTable = "Payroll Setup.";
+    ApplicationArea = All;
 
     layout
     {

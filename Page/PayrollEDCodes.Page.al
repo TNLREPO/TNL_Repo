@@ -2,6 +2,7 @@ page 50003 "Payroll-E/D Codes"
 {
     PageType = List;
     SourceTable = "Payroll-E/D Codes.";
+    ApplicationArea = All;
 
     layout
     {

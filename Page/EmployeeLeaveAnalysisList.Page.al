@@ -3,6 +3,7 @@ page 70058 "Employee Leave Analysis List"
     CardPageID = "Leave Analysis By Date";
     PageType = List;
     SourceTable = "Employee";
+    ApplicationArea = All;
 
     layout
     {

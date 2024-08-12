@@ -3,6 +3,7 @@ page 50033 "Payslip Survey"
     Editable = false;
     PageType = List;
     SourceTable = "Payroll-Payslip Lines.";
+    ApplicationArea = All;
 
     layout
     {

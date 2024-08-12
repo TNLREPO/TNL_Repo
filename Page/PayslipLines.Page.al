@@ -1,8 +1,9 @@
 page 50006 "Payslip Lines"
 {
-    PageType = List;
+    PageType = ListPart;
     SourceTable = "Payroll-Payslip Lines.";
     SourceTableView = WHERE(Hide = filter(false));
+    ApplicationArea = All;
 
     layout
     {
