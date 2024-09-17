@@ -331,13 +331,13 @@ table 50006 "Payroll-Payslip Lines."
         {
             OptionMembers = "Non-zero & Code","Always & Code","Always & Text","Non-zero & Text","Does not appear",Heading;
         }
-        field(17; "Debit Acc. Type"; Option)
+        field(17; "Debit Acc. Type"; Enum "Gen. Journal Account Type")
         {
-            OptionMembers = Finance,Customer,Supplier;
+            //OptionMembers = Finance,Customer,Supplier;
         }
-        field(18; "Credit Acc. Type"; Option)
+        field(18; "Credit Acc. Type"; Enum "Gen. Journal Account Type")
         {
-            OptionMembers = Finance,Customer,Supplier;
+            //OptionMembers = Finance,Customer,Supplier;
         }
         field(19; ChangeOthers; Boolean)
         {

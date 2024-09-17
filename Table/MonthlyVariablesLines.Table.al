@@ -236,19 +236,19 @@ table 50017 "Monthly Variables Lines."
         }
         field(9; "Debit Account"; Code[20])
         {
-            TableRelation = IF ("Debit Acc. Type" = filter('Finance')) "G/L Account"
+            TableRelation = IF ("Debit Acc. Type" = filter("G/L Account")) "G/L Account"
             ELSE
-            IF ("Debit Acc. Type" = filter('Customer')) Customer;
+            IF ("Debit Acc. Type" = filter(Customer)) Customer;
 
             trigger OnValidate()
             begin
                 IF "Debit Account" <> '' THEN
                     CASE "Debit Acc. Type" OF
-                        0:
+                        "Debit Acc. Type"::"G/L Account":
                             FinanceAccRec.GET("Debit Account");
-                        1:
+                        "Debit Acc. Type"::Customer:
                             CustomerAccRec.GET("Debit Account");
-                        2:
+                        "Debit Acc. Type"::Vendor:
                             SupplierAccRec.GET("Debit Account");
                     END;
             end;
@@ -263,11 +263,11 @@ table 50017 "Monthly Variables Lines."
             begin
                 IF "Credit Account" <> '' THEN
                     CASE "Credit Acc. Type" OF
-                        0:
+                        "Credit Acc. Type"::"G/L Account":
                             FinanceAccRec.GET("Credit Account");
-                        1:
+                        "Credit Acc. Type"::Customer:
                             CustomerAccRec.GET("Credit Account");
-                        2:
+                        "Credit Acc. Type"::Vendor:
                             SupplierAccRec.GET("Credit Account");
                     END;
             end;
@@ -310,13 +310,13 @@ table 50017 "Monthly Variables Lines."
         {
             OptionMembers = "Non-zero & Code","Always & Code","Always & Text","Non-zero & Text","Does not appear",Heading;
         }
-        field(17; "Debit Acc. Type"; Option)
+        field(17; "Debit Acc. Type"; Enum "Gen. Journal Account Type")
         {
-            OptionMembers = Finance,Customer,Supplier;
+            //OptionMembers = Finance,Customer,Supplier;
         }
-        field(18; "Credit Acc. Type"; Option)
+        field(18; "Credit Acc. Type"; Enum "Gen. Journal Account Type")
         {
-            OptionMembers = Finance,Customer,Supplier;
+            //OptionMembers = Finance,Customer,Supplier;
         }
         field(19; ChangeOthers; Boolean)
         {

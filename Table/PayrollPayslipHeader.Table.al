@@ -174,7 +174,7 @@ table 50007 "Payroll-Payslip Header."
             Description = 'Added by Adams for User Access';
             TableRelation = "Payroll-Posting Group Header.";
         }
-        field(50121; Grade; Code[10])
+        field(50121; Grade; Code[15])
         {
             TableRelation = "Employee Grade";
         }
@@ -318,11 +318,11 @@ table 50007 "Payroll-Payslip Header."
                     IF PayLinesRec."Global Dimension 2 Code" = '' THEN
                         PayLinesRec."Global Dimension 2 Code" := EmployeeRec."Global Dimension 2 Code";
 
-                IF BookGrLinesRec."Debit Acc. Type" = 1 THEN
+                IF BookGrLinesRec."Debit Acc. Type" = BookGrLinesRec."Debit Acc. Type"::Customer THEN
                     IF EmployeeRec."SAM Number" <> '' THEN
                         PayLinesRec."Debit Account" := EmployeeRec."SAM Number";
 
-                IF BookGrLinesRec."Credit Acc. Type" = 1 THEN
+                IF BookGrLinesRec."Credit Acc. Type" = BookGrLinesRec."Credit Acc. Type"::Customer THEN
                     IF EmployeeRec."SAM Number" <> '' THEN
                         PayLinesRec."Credit Account" := EmployeeRec."SAM Number";
             END;

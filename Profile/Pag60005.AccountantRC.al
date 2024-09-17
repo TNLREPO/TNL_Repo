@@ -1901,7 +1901,14 @@ page 60005 "Accountant RC"
                     RunObject = Page "Payroll-Employee Group List";
                     ToolTip = '';
                 }
+                action(ModifyLoanID)
+                {
+                    Caption = 'Modify Loan ID';
+                    Image = Workflow;
+                    RunObject = xmlport "Modify Loan ID Cust. Ledg. Ent";
+                    ApplicationArea = All;
 
+                }
 
             }
         }

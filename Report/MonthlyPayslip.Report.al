@@ -1,15 +1,17 @@
 report 50045 "Monthly Payslip-"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './MonthlyPayslip.rdlc';
+    RDLCLayout = 'Layout/MonthlyPayslip.rdl';
 
     dataset
     {
-        dataitem(DataItem7528; Employee)
+        dataitem(Employee; Employee)
         {
-            //DataItemTableView = SORTING ("Global Dimension 1 Code");
-            PrintOnlyIfDetail = true;
+            DataItemTableView = SORTING("No.");
+            //PrintOnlyIfDetail = true;
             RequestFilterHeading = 'Payslip Filters';
+            RequestFilterFields = "No.", "Period Filter";
+
             column(Employee_No_; "No.")
             {
             }
@@ -28,10 +30,10 @@ report 50045 "Monthly Payslip-"
             column(BusinessUnit; BusinessUnit)
             {
             }
-            dataitem("Payroll-Payslip Header."; "Payroll-Payslip Header.")
+            dataitem(DataItem2942; "Payroll-Payslip Header.")
             {
-                DataItemLink = "Employee No" = FIELD("No."),
-                               "Payroll Period" = FIELD("Period Filter");
+                DataItemLink = "Employee No" = FIELD("No."), "Payroll Period" = FIELD("Period Filter");
+
                 DataItemTableView = SORTING("Payroll Period", "Employee No");
                 RequestFilterFields = "Payroll Period", "Employee No";
                 RequestFilterHeading = 'Parameters for payslips';
@@ -50,41 +52,41 @@ report 50045 "Monthly Payslip-"
                 column(DeptName; DeptName)
                 {
                 }
-                dataitem("Payroll-Payslip Lines."; "Payroll-Payslip Lines.")
+                dataitem(DataItem1581; "Payroll-Payslip Lines.")
                 {
                     DataItemLink = "Payroll Period" = FIELD("Payroll Period"),
                                    "Employee No" = FIELD("Employee No");
-                    DataItemTableView = SORTING("Payslip Print Column", "E/D Code")
-                                        WHERE("ED Type" = FILTER(<> "Other Emoluments" & <> "Gross Emolument" & <> "Emolument Net" & <> "Deduction Emolument"));
+                    DataItemTableView = SORTING("Payslip Print Column", "E/D Code");
+                    //WHERE("ED Type" = FILTER(<> "Other Emoluments" & <> "Gross Emolument" & <> "Emolument Net" & <> "Deduction Emolument"));
                     PrintOnlyIfDetail = false;
-                    column(EDCode_PayrollPayslipLines; "Payroll-Payslip Lines."."E/D Code")
+                    column(EDCode_PayrollPayslipLines; "E/D Code")
                     {
                     }
-                    column(Units_PayrollPayslipLines; "Payroll-Payslip Lines.".Units)
+                    column(Units_PayrollPayslipLines; Units)
                     {
                     }
-                    column(Rate_PayrollPayslipLines; "Payroll-Payslip Lines.".Rate)
+                    column(Rate_PayrollPayslipLines; Rate)
                     {
                     }
-                    column(Quantity_PayrollPayslipLines; "Payroll-Payslip Lines.".Quantity)
+                    column(Quantity_PayrollPayslipLines; Quantity)
                     {
                     }
-                    column(Flag_PayrollPayslipLines; "Payroll-Payslip Lines.".Flag)
+                    column(Flag_PayrollPayslipLines; Flag)
                     {
                     }
-                    column(Amount_PayrollPayslipLines; "Payroll-Payslip Lines.".Amount)
+                    column(Amount_PayrollPayslipLines; Amount)
                     {
                     }
-                    column(GlobalDimension1Code_PayrollPayslipLines; "Payroll-Payslip Lines."."Global Dimension 1 Code")
+                    column(GlobalDimension1Code_PayrollPayslipLines; "Global Dimension 1 Code")
                     {
                     }
-                    column(GlobalDimension2Code_PayrollPayslipLines; "Payroll-Payslip Lines."."Global Dimension 2 Code")
+                    column(GlobalDimension2Code_PayrollPayslipLines; "Global Dimension 2 Code")
                     {
                     }
-                    column(PayslipText_PayrollPayslipLines; "Payroll-Payslip Lines."."Payslip Text")
+                    column(PayslipText_PayrollPayslipLines; "Payslip Text")
                     {
                     }
-                    column(PayslipPrintColumn_PayrollPayslipLines; "Payroll-Payslip Lines."."Payslip Print Column")
+                    column(PayslipPrintColumn_PayrollPayslipLines; "Payslip Print Column")
                     {
                     }
 
@@ -163,23 +165,25 @@ report 50045 "Monthly Payslip-"
                         /*ELSE
                          UNDEFINED('genSELECTLINES',0,'A');*/
 
+                        PayAdviceTitle := 'Test';
+
                     end;
                 }
 
                 trigger OnAfterGetRecord()
                 begin
-                    IF NOT Payrec.GET("Payroll-Payslip Header."."Employee No") THEN   // Adam
-                        CurrReport.SKIP;
+                    /* IF NOT Payrec.GET("Employee No") THEN   // Adam
+                        CurrReport.SKIP; */
 
 
-                    UserSetup.GET(USERID);
-                    IF NOT UserSetup."Payroll-Admin" THEN BEGIN
-                        IF UserSetup."Employee No." <> "Payroll-Payslip Header."."Employee No" THEN
-                            ERROR('You cannot view another Employee record, kindly mind your business!');
-                    END;
+                    /*  UserSetup.GET(USERID);
+                     IF NOT UserSetup."Payroll-Admin" THEN BEGIN
+                         IF UserSetup."Employee No." <> "Employee No" THEN
+                             ERROR('You cannot view another Employee record, kindly mind your business!');
+                     END; */
 
 
-                    IF Payrec.Blocked THEN CurrReport.SKIP;
+                    /* IF Payrec.Blocked THEN CurrReport.SKIP;
                     EmployeeName := Payrec."First Name" + '  ' + Payrec."Last Name";
                     DeptName := Payrec."Global Dimension 1 Code";
 
@@ -194,7 +198,9 @@ report 50045 "Monthly Payslip-"
 
                     PeriodRec.GET("Payroll Period");
                     IF PeriodRec.Name <> '' THEN
-                        PayAdviceTitle := 'SALARY SLIP FOR ' + DELCHR(PeriodRec.Name, '<>');
+                        PayAdviceTitle := 'SALARY SLIP FOR ' + DELCHR(PeriodRec.Name, '<>'); */
+
+
                 end;
             }
         }

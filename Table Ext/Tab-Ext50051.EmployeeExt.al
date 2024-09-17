@@ -569,6 +569,22 @@ tableextension 50051 "Employee Ext" extends "Employee"
             DecimalPlaces = 0 : 0;
         }
     }
+
+    keys
+    {
+        Key(ExtKey1; Bank)
+        {
+
+        }
+        key(ExtKey2; "Global Dimension 1 Code", "Global Dimension 2 Code")
+        {
+
+        }
+        key(ExtKey3; "Posting Group")
+        {
+
+        }
+    }
     var
         UserRec: Record User;
         Employee: Record Employee;

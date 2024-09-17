@@ -509,6 +509,64 @@ page 50009 Parts
                     RunObject = page "Payment Voucher";
                 }
 
+            }
+
+            group(AirOrderGranule)
+            {
+                Caption = 'Air Order';
+                action(AirOder)
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Air Order';
+                    RunObject = page "Air Online Order List";
+
+                }
+                action(AirOderHODPart)
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'HOD Part Approval-AOO';
+                    RunObject = page "HOD Part Approval FM";
+
+                }
+                action(AirOderCompl)
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Compliance Check-AOO';
+                    RunObject = page "Compliance Check FM";
+                }
+
+                action(AirOderAudit)
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'HOD Audit-AOO';
+                    RunObject = page "Head of Audit Approval FM";
+                }
+
+                action(AirOderGM)
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'GM-AOO';
+                    RunObject = page "General Manager Approval FM";
+                }
+                action(AirOderMD)
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'MD List-AOO';
+                    RunObject = page "MD Approval FM";
+                }
+                action(AirOderApproved)
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Approved-AOO';
+                    RunObject = page "Approved Form M";
+                }
+
+
+
+
+
+
+
 
             }
 

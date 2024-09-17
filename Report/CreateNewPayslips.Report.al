@@ -286,6 +286,7 @@ report 50051 "Create New Payslips"
                 field("Period Code"; PayPeriodRec."Period Code")
                 {
                     TableRelation = "Payroll-Periods.";
+                    ApplicationArea = All;
                 }
             }
         }

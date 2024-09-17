@@ -38,7 +38,7 @@ table 50013 "Loan."
             begin
                 LoanTypes.GET("Loan Type");
                 Description := LoanTypes.Description;
-                "Counter Acct. Type" := "Counter Acct. Type"::Finance;
+                "Counter Acct. Type" := "Counter Acct. Type"::"G/L Account";
                 "Counter Acct. No." := LoanTypes."Loan Control Account";
                 VALIDATE("Interest Percent", LoanTypes."Default Interest Percent");
                 VALIDATE("Loan ED Regular", LoanTypes."Loan ED");
@@ -51,31 +51,31 @@ table 50013 "Loan."
         {
             NotBlank = true;
         }
-        field(6; "Acct. Type"; Option)
+        field(6; "Acct. Type"; enum "Gen. Journal Account Type")
         {
-            OptionMembers = Finance,Customer,Supplier;
+            //OptionMembers = Finance,Customer,Supplier;
         }
         field(7; "Acct. No."; Code[20])
         {
-            TableRelation = IF ("Acct. Type" = filter('Finance')) "G/L Account"."No."
+            TableRelation = IF ("Acct. Type" = filter("G/L Account")) "G/L Account"."No."
             ELSE
-            IF ("Acct. Type" = filter('Customer')) Customer."No."
+            IF ("Acct. Type" = filter(Customer)) Customer."No."
             ELSE
-            IF ("Acct. Type" = filter('Supplier')) Vendor."No.";
+            IF ("Acct. Type" = filter(Vendor)) Vendor."No.";
         }
-        field(8; "Counter Acct. Type"; Option)
+        field(8; "Counter Acct. Type"; Enum "Gen. Journal Account Type")
         {
-            OptionMembers = Finance,Staff,Supplier,Bank;
+            //OptionMembers = Finance,Staff,Supplier,Bank;
         }
         field(9; "Counter Acct. No."; Code[20])
         {
-            TableRelation = IF ("Counter Acct. Type" = filter('Finance')) "G/L Account"."No."
+            TableRelation = IF ("Counter Acct. Type" = filter("G/L Account")) "G/L Account"."No."
             ELSE
-            IF ("Counter Acct. Type" = CONST(Staff)) Customer."No."
+            IF ("Counter Acct. Type" = CONST(Customer)) Customer."No."
             ELSE
-            IF ("Counter Acct. Type" = CONST(Supplier)) Vendor."No."
+            IF ("Counter Acct. Type" = CONST(Vendor)) Vendor."No."
             ELSE
-            IF ("Counter Acct. Type" = CONST(Bank)) "Bank Account"."No.";
+            IF ("Counter Acct. Type" = CONST("Bank Account")) "Bank Account"."No.";
         }
         field(10; "Loan Amount"; Decimal)
         {
@@ -404,7 +404,7 @@ table 50013 "Loan."
             PaySetup.TESTFIELD(PaySetup."Loan Nos.");
             NoSeriesMgt.InitSeries(PaySetup."Loan Nos.", PaySetup."Loan Nos.", 0D, "Loan ID", PaySetup."Loan Nos.");
 
-            "Counter Acct. Type" := "Counter Acct. Type"::Finance;
+            "Counter Acct. Type" := "Counter Acct. Type"::"G/L Account";
             "Counter Acct. No." := PaySetup."Staff Loans Control Account";
         END;
     end;
@@ -577,21 +577,21 @@ table 50013 "Loan."
 
     procedure AssistEdit(LRec: Record "Loan."): Boolean
     begin
-       /*  WITH LoanRec DO BEGIN
-            LoanRec := Rec;
-            ACSETREC.GET;
+        /*  WITH LoanRec DO BEGIN
+             LoanRec := Rec;
+             ACSETREC.GET;
 
-            ACSETREC.TESTFIELD(ACSETREC."Loan Number Series");
+             ACSETREC.TESTFIELD(ACSETREC."Loan Number Series");
 
-            IF NoSeriesMgt.SelectSeries(ACSETREC."Loan Number Series", ACSETREC."Loan Number Series", ACSETREC."Loan Number Series")
-            THEN BEGIN
-                ACSETREC.GET;
-                ACSETREC.TESTFIELD(ACSETREC."Loan Number Series");
-                NoSeriesMgt.SetSeries("Loan ID");
-                Rec := LoanRec;
-                EXIT(TRUE);
-            END;
-        END; */
+             IF NoSeriesMgt.SelectSeries(ACSETREC."Loan Number Series", ACSETREC."Loan Number Series", ACSETREC."Loan Number Series")
+             THEN BEGIN
+                 ACSETREC.GET;
+                 ACSETREC.TESTFIELD(ACSETREC."Loan Number Series");
+                 NoSeriesMgt.SetSeries("Loan ID");
+                 Rec := LoanRec;
+                 EXIT(TRUE);
+             END;
+         END; */
     end;
 
 

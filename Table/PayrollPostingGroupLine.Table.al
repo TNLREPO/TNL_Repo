@@ -20,53 +20,53 @@ table 50010 "Payroll-Posting Group Line."
         }
         field(3; "Debit Account No."; Code[20])
         {
-            TableRelation = IF ("Debit Acc. Type" = CONST(Finance)) "G/L Account"
+            TableRelation = IF ("Debit Acc. Type" = CONST("G/L Account")) "G/L Account"
             ELSE
             IF ("Debit Acc. Type" = CONST(Customer)) Customer
             ELSE
-            IF ("Debit Acc. Type" = CONST(Supplier)) Vendor;
+            IF ("Debit Acc. Type" = CONST(Vendor)) Vendor;
 
             trigger OnValidate()
             begin
                 IF "Debit Account No." <> '' THEN
                     CASE "Debit Acc. Type" OF
-                        "Debit Acc. Type"::Finance:
+                        "Debit Acc. Type"::"G/L Account":
                             FinanceAccRec.GET("Debit Account No.");
                         "Debit Acc. Type"::Customer:
                             CustomerAccRec.GET("Debit Account No.");
-                        "Debit Acc. Type"::Supplier:
+                        "Debit Acc. Type"::Vendor:
                             VendorRec.GET("Debit Account No.");
                     END;
             end;
         }
         field(4; "Credit Account No."; Code[20])
         {
-            TableRelation = IF ("Credit Acc. Type" = CONST(Finance)) "G/L Account"
+            TableRelation = IF ("Credit Acc. Type" = CONST("G/L Account")) "G/L Account"
             ELSE
             IF ("Credit Acc. Type" = CONST(Customer)) Customer
             ELSE
-            IF ("Credit Acc. Type" = CONST(Supplier)) Vendor;
+            IF ("Credit Acc. Type" = CONST(Vendor)) Vendor;
 
             trigger OnValidate()
             begin
                 IF "Credit Account No." <> '' THEN
                     CASE "Credit Acc. Type" OF
-                        "Credit Acc. Type"::Finance:
+                        "Credit Acc. Type"::"G/L Account":
                             FinanceAccRec.GET("Credit Account No.");
                         "Credit Acc. Type"::Customer:
                             CustomerAccRec.GET("Credit Account No.");
-                        "Credit Acc. Type"::Supplier:
+                        "Credit Acc. Type"::Vendor:
                             VendorRec.GET("Credit Account No.");
                     END;
             end;
         }
-        field(5; "Debit Acc. Type"; Option)
+        field(5; "Debit Acc. Type"; Enum "Gen. Journal Account Type")
         {
-            OptionMembers = Finance,Customer,Supplier;
+            //OptionMembers = Finance,Customer,Supplier;
         }
-        field(6; "Credit Acc. Type"; Option)
+        field(6; "Credit Acc. Type"; Enum "Gen. Journal Account Type")
         {
-            OptionMembers = Finance,Customer,Supplier;
+            //OptionMembers = Finance,Customer,Supplier;
         }
         field(7; "Global Dimension 1 Code"; Code[20])
         {
