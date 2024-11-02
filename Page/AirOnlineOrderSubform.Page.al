@@ -1,5 +1,6 @@
 page 71208 "Air Online Order Subform"
 {
+    ApplicationArea = All;
     AutoSplitKey = true;
     DelayedInsert = true;
     MultipleNewLines = true;
@@ -14,6 +15,7 @@ page 71208 "Air Online Order Subform"
             {
                 field("Document No."; Rec."Document No.")
                 {
+                    Visible = false;
                 }
                 field("Order Type"; Rec."Order Type")
                 {

@@ -5,7 +5,7 @@ table 50110 "Fault Setup Line"
     {
         field(1; "Operation code"; Code[20])
         {
-            TableRelation = "Fault Setup Header"."Operation Code";
+            //TableRelation = "Fault Setup Header"."Operation Code";
         }
         field(2; "Line No."; Integer)
         {

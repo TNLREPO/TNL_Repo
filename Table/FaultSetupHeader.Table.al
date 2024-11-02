@@ -9,11 +9,11 @@ table 50109 "Fault Setup Header"
 
             trigger OnValidate()
             begin
-                IF "Operation Code" <> xRec."Operation Code" THEN BEGIN
+                /* IF "Operation Code" <> xRec."Operation Code" THEN BEGIN
                     SerSetup.GET;
                     NoSeriesMgt.TestManual(SerSetup."Fault Code No.s");
                     "No. Series" := '';
-                END;
+                END; */
             end;
         }
         field(2; Description; Text[50])

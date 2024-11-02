@@ -8,11 +8,11 @@ table 70031 "Fault Setup HeaderX"
 
             trigger OnValidate()
             begin
-                IF "Operation Code" <> xRec."Operation Code" THEN BEGIN
+                /* IF "Operation Code" <> xRec."Operation Code" THEN BEGIN
                     SerSetup.GET;
                     NoSeriesMgt.TestManual(SerSetup."Fault Code No.s");
                     "No. Series" := '';
-                END;
+                END; */
             end;
         }
         field(2; Description; Text[50])
@@ -104,11 +104,11 @@ table 70031 "Fault Setup HeaderX"
 
     trigger OnInsert()
     begin
-        IF "Operation Code" = '' THEN BEGIN
+        /* IF "Operation Code" = '' THEN BEGIN
             SerSetup.GET;
             SerSetup.TESTFIELD(SerSetup."Fault Code No.s");
             NoSeriesMgt.InitSeries(SerSetup."Fault Code No.s", xRec."No. Series", 0D, "Operation Code", "No. Series");
-        END;
+        END; */
     end;
 
     var

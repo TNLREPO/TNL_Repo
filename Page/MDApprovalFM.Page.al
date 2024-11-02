@@ -3,6 +3,7 @@ page 70215 "MD Approval FM"
     CardPageID = "Air Online Order Card";
     Editable = false;
     PageType = List;
+    ApplicationArea = All;
     SourceTable = "Air Online Header";
     SourceTableView = WHERE(Send = CONST(true),
                             "Head of Department" = CONST(Approved),

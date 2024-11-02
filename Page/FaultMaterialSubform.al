@@ -1,9 +1,9 @@
-page 50237 "Fault Material Setup Line"
+page 80079 "Fault Material Subform"
 {
     Caption = 'Lines';
     MultipleNewLines = true;
     PageType = ListPart;
-    SourceTable = "Fault Setup Line";
+    SourceTable = "Fault Setup LineX";
     ApplicationArea = All;
 
     layout

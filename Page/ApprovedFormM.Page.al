@@ -2,6 +2,7 @@ page 70216 "Approved Form M"
 {
     CardPageID = "Air Online Order Card";
     PageType = List;
+    ApplicationArea = All;
     SourceTable = "Air Online Header";
     SourceTableView = WHERE(Send = CONST(true),
                             HoDPartApproval = CONST(true),

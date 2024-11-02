@@ -5,6 +5,7 @@ page 70208 "Online Form Sub"
     MultipleNewLines = true;
     PageType = ListPart;
     SourceTable = "Air Online Order Line";
+    ApplicationArea = All;
 
     layout
     {

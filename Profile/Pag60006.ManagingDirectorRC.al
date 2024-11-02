@@ -13,24 +13,24 @@ page 60006 "Managing Director Role Center"
             {
                 ApplicationArea = Basic, Suite;
             }
-            part(Control16; "O365 Activities")
+            /* part(Control16; "O365 Activities")
             {
                 AccessByPermission = TableData "Activities Cue" = I;
                 ApplicationArea = Basic, Suite;
-            }
+            } */
             part(CustomApprovals; "MD Cue")
             {
                 ApplicationArea = All;
             }
-            part("User Tasks Activities"; "User Tasks Activities")
-            {
-                ApplicationArea = Suite;
-            }
+            /*  part("User Tasks Activities"; "User Tasks Activities")
+             {
+                 ApplicationArea = Suite;
+             } */
 
-            part("Emails"; "Email Activities")
-            {
-                ApplicationArea = Basic, Suite;
-            }
+            /*  part("Emails"; "Email Activities")
+             {
+                 ApplicationArea = Basic, Suite;
+             } */
             /* part(ApprovalsActivities; "Approvals Activities")
             {
                 ApplicationArea = Suite;
@@ -63,16 +63,16 @@ page 60006 "Managing Director Role Center"
                 AccessByPermission = TableData "Power BI Context Settings" = I;
                 ApplicationArea = Basic, Suite;
             }
-            part("My Job Queue"; "My Job Queue")
-            {
-                ApplicationArea = Basic, Suite;
-                Visible = false;
-            }
-            part(Control96; "Report Inbox Part")
-            {
-                AccessByPermission = TableData "Report Inbox" = IMD;
-                ApplicationArea = Suite;
-            }
+            /*  part("My Job Queue"; "My Job Queue")
+             {
+                 ApplicationArea = Basic, Suite;
+                 Visible = false;
+             } */
+            /*  part(Control96; "Report Inbox Part")
+             {
+                 AccessByPermission = TableData "Report Inbox" = IMD;
+                 ApplicationArea = Suite;
+             } */
             part(PowerBIEmbeddedReportPart2; "Power BI Embedded Report Part")
             {
                 AccessByPermission = TableData "Power BI Context Settings" = I;
@@ -486,8 +486,14 @@ page 60006 "Managing Director Role Center"
             action(ProcApprIsolo)
             {
                 ApplicationArea = All;
-                Caption = 'Local Purchase';
+                Caption = 'Local Purchase - Isolo';
                 RunObject = page "MD Proc Apprv Isolo";
+            }
+            action(AirOrder)
+            {
+                ApplicationArea = All;
+                Caption = 'Air Order';
+                RunObject = page "MD Approval FM";
             }
 
         }

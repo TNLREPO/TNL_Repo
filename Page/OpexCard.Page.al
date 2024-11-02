@@ -3,6 +3,7 @@ page 70126 "Opex Card"
     ApplicationArea = All;
     PageType = Card;
     SourceTable = "Procurement Header";
+    Editable = true;
 
     layout
     {
@@ -570,6 +571,8 @@ page 70126 "Opex Card"
             END;
             EditApproval;
         END;
+
+
     end;
 
     var

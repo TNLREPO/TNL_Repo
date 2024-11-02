@@ -33,5 +33,17 @@ pageextension 50005 "Customer Card Ext" extends "Customer Card"
             }
 
         }
+
+        addafter("Balance Due (LCY)")
+        {
+            field("CustSalesLCY"; Rec."Sales (LCY)")
+            {
+                ApplicationArea = Basic, Suite;
+                AutoFormatType = 1;
+                Caption = 'Sales (LCY)';
+                ToolTip = 'Specifies how much sales you have made from the customer from inception.';
+            }
+
+        }
     }
 }

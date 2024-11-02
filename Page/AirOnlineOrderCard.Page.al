@@ -1,6 +1,7 @@
 page 70209 "Air Online Order Card"
 {
     SourceTable = "Air Online Header";
+    ApplicationArea = All;
 
     layout
     {
@@ -61,17 +62,18 @@ page 70209 "Air Online Order Card"
                 {
                 }
             }
-            part(Lines; 70208)
+            part(Lines; 71208)
             {
                 Caption = 'Lines';
                 SubPageLink = "Document No." = FIELD("No.");
             }
-            group(AUTHORIZATION)
+            group(Authorization)
             {
                 grid(Control6)
                 {
                     group(Control7)
                     {
+                        ShowCaption = false;
                         field("Head of Department"; Rec."Head of Department")
                         {
                         }
@@ -80,10 +82,12 @@ page 70209 "Air Online Order Card"
                         }
                         field(TimeDate2; Rec.TimeDate2)
                         {
+                            Caption = 'Date/Time';
                         }
                     }
                     group(Control1)
                     {
+                        ShowCaption = false;
                         field("Compliance check"; Rec."Compliance check")
                         {
                         }
@@ -92,10 +96,12 @@ page 70209 "Air Online Order Card"
                         }
                         field(TimeDate3; Rec.TimeDate3)
                         {
+                            Caption = 'Date/Time';
                         }
                     }
                     group(Control2)
                     {
+                        ShowCaption = false;
                         field("Head of Audit"; Rec."Head of Audit")
                         {
                         }
@@ -104,6 +110,7 @@ page 70209 "Air Online Order Card"
                         }
                         field(TimeDate4; Rec.TimeDate4)
                         {
+                            Caption = 'Date/Time';
                         }
                     }
                 }
@@ -121,6 +128,7 @@ page 70209 "Air Online Order Card"
                     }
                     field(TimeDate6; Rec.TimeDate6)
                     {
+                        Caption = 'Date/Time';
                     }
                 }
                 group(Control4)
@@ -134,6 +142,7 @@ page 70209 "Air Online Order Card"
                     }
                     field(TimeDate5; Rec.TimeDate5)
                     {
+                        Caption = 'Date/Time';
                     }
                 }
             }

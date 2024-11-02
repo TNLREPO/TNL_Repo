@@ -4,6 +4,7 @@ page 70212 "Compliance Check FM"
     Editable = false;
     PageType = List;
     SourceTable = "Air Online Header";
+    ApplicationArea = All;
     SourceTableView = WHERE(Send = CONST(true),
                             HoDPartApproval = CONST(true),
                             ComplianceCheck = CONST(true),

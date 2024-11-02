@@ -3,6 +3,8 @@ page 70214 "General Manager Approval FM"
     CardPageID = "Air Online Order Card";
     Editable = false;
     PageType = List;
+    ApplicationArea = All;
+    
     SourceTable = "Air Online Header";
     SourceTableView = WHERE(Send = CONST(true),
                             HoDPartApproval = CONST(true),

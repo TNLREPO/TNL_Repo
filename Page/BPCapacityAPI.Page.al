@@ -2,6 +2,7 @@ page 81056 "BP Capacity API"
 {
     PageType = List;
     SourceTable = "BP Capacity";
+    ApplicationArea = All;
 
     layout
     {

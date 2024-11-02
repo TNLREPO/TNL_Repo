@@ -2,6 +2,7 @@ page 70210 "Air Online Order List"
 {
     CardPageID = "Air Online Order Card";
     PageType = List;
+    ApplicationArea = All;
     SourceTable = "Air Online Header";
     SourceTableView = WHERE(Send = CONST(false),
                             HoDPartApproval = CONST(false));

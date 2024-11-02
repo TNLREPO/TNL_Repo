@@ -4,6 +4,7 @@ page 50236 "Fault Material Setup List."
     InsertAllowed = true;
     PageType = List;
     SourceTable = "Fault Setup Header";
+    ApplicationArea = All;
 
     layout
     {
