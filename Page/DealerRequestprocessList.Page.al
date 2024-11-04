@@ -5,7 +5,7 @@ page 50184 "Dealer Request process List"
     ModifyAllowed = false;
     PageType = Card;
     SourceTable = "Dealer Request Process header";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

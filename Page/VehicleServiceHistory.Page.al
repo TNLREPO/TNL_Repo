@@ -4,6 +4,7 @@ page 80021 "Vehicle Service History"
     PageType = List;
     SourceTable = "Customer Order HeaderX";
     SourceTableView = SORTING("No.") ORDER(Descending);
+    ApplicationArea = All;
 
     layout
     {

@@ -4,6 +4,7 @@ page 70093 "CSI Form List"
     Editable = false;
     PageType = List;
     SourceTable = "CSI Table";
+    ApplicationArea = All;
 
     layout
     {

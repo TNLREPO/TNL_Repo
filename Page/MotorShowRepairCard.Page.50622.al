@@ -2,7 +2,7 @@ page 50622 "Motor Show Repair Card"
 {
     PageType = Card;
     SourceTable = "Motor Show Repair";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

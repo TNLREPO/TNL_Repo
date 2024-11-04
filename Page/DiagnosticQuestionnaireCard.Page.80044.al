@@ -1,7 +1,7 @@
 page 80044 "Diagnostic Questionnaire Card"
 {
     SourceTable = "Diagnostic QuestionnaireX";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

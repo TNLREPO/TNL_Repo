@@ -5,6 +5,7 @@ page 80060 "Awaiting DAD"
     SourceTable = "Customer Order HeaderX";
     SourceTableView = WHERE(Stage = filter('Awaiting DAD'),
                             Delivered = CONST(false));
+    ApplicationArea = All;
 
     layout
     {

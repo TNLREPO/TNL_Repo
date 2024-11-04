@@ -5,7 +5,7 @@ page 50149 "Purch. Line Comment List"
     Editable = false;
     PageType = Card;
     SourceTable = "Comment Line";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

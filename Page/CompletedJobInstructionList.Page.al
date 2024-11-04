@@ -7,6 +7,7 @@ page 70076 "Completed Job Instruction List"
     PageType = List;
     SourceTable = "Customer Order Table.";
     SourceTableView = WHERE(Delivered = filter(true));
+    ApplicationArea = All;
 
     layout
     {

@@ -3,6 +3,7 @@ page 50090 "Casual Employees subform"
     Editable = false;
     PageType = Card;
     SourceTable = "Casual Employees";
+    ApplicationArea = All;
 
     layout
     {

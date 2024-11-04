@@ -2,7 +2,7 @@ page 50437 "Other Customers"
 {
     PageType = Card;
     SourceTable = Customer;
-
+    ApplicationArea = All;
     layout
     {
         area(content)

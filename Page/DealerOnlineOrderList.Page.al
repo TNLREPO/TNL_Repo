@@ -5,7 +5,7 @@ page 50158 "Dealer Online Order List"
     ModifyAllowed = false;
     PageType = Card;
     SourceTable = "Dealer Online Order Header";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

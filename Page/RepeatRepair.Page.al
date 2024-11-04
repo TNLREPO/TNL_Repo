@@ -5,6 +5,7 @@ page 80047 "Repeat Repair"
     PageType = List;
     SourceTable = "Customer Order HeaderX";
     SourceTableView = WHERE("Repeat Repair" = CONST(true));
+    ApplicationArea = All;
 
     layout
     {

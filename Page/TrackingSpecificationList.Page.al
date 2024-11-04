@@ -5,6 +5,7 @@ page 50229 "Tracking Specification List"
     ModifyAllowed = false;
     PageType = Card;
     SourceTable = "Tracking Specification";
+    ApplicationArea = All;
 
     layout
     {

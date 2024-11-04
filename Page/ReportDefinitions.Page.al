@@ -2,6 +2,7 @@ page 50019 "Report Definitions"
 {
     PageType = List;
     SourceTable = "Report Definitions";
+    ApplicationArea = All;
 
     layout
     {

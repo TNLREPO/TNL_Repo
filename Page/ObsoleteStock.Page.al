@@ -2,7 +2,7 @@ page 50034 "Obsolete Stock"
 {
     PageType = Card;
     SourceTable = "Poss Data";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

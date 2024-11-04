@@ -4,6 +4,7 @@ page 50321 "Estimate Material Requirment"
     DelayedInsert = true;
     PageType = Card;
     SourceTable = "Estimated Materia Requirement";
+    ApplicationArea = All;
 
     layout
     {
@@ -11,43 +12,43 @@ page 50321 "Estimate Material Requirment"
         {
             repeater(Group)
             {
-                field("Operation Code";Rec."Operation Code")
+                field("Operation Code"; Rec."Operation Code")
                 {
                 }
-                field("Estimate Code";Rec."Estimate Code")
-                {
-                    Visible = false;
-                }
-                field("Line no.";Rec."Line no.")
+                field("Estimate Code"; Rec."Estimate Code")
                 {
                     Visible = false;
                 }
-                field("Additional Jobs";Rec."Additional Jobs")
+                field("Line no."; Rec."Line no.")
                 {
                     Visible = false;
                 }
-                field("Line Type";Rec."Line Type")
+                field("Additional Jobs"; Rec."Additional Jobs")
+                {
+                    Visible = false;
+                }
+                field("Line Type"; Rec."Line Type")
                 {
                 }
-                field("No.";Rec."No.")
+                field("No."; Rec."No.")
                 {
                 }
-                field(Description;Rec.Description)
+                field(Description; Rec.Description)
                 {
                 }
-                field(Variant;Rec.Variant)
+                field(Variant; Rec.Variant)
                 {
                 }
-                field("Location Code";Rec."Location Code")
+                field("Location Code"; Rec."Location Code")
                 {
                 }
-                field("Quantity/Labour Hrs";Rec."Quantity/Labour Hrs")
+                field("Quantity/Labour Hrs"; Rec."Quantity/Labour Hrs")
                 {
                 }
-                field("Unit Price";Rec."Unit Price")
+                field("Unit Price"; Rec."Unit Price")
                 {
                 }
-                field(Amount;Rec.Amount)
+                field(Amount; Rec.Amount)
                 {
                 }
             }

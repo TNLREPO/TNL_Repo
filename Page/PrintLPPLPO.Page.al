@@ -4,7 +4,7 @@ page 70206 "Print LPP LPO"
     PageType = List;
     SourceTable = "Local Part Purchase Register";
     SourceTableView = WHERE("Genarate LPO" = CONST(true));
-
+    ApplicationArea = All;
     layout
     {
         area(content)

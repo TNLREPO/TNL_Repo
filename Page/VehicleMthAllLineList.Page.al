@@ -5,6 +5,7 @@ page 50187 "Vehicle Mth All. Line List"
     ModifyAllowed = false;
     PageType = Card;
     SourceTable = "Vehicle Mth. Allocation Line";
+    ApplicationArea = All;
 
     layout
     {

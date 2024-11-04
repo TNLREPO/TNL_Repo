@@ -4,6 +4,7 @@ page 70188 "Partially Issued"
     SourceTable = "Warranty Claim Header";
     SourceTableView = WHERE("Issued Option" = FILTER("Partially Issued"),
                             "Replace Dealer Material Claim" = filter(true));
+    ApplicationArea = All;
 
     layout
     {

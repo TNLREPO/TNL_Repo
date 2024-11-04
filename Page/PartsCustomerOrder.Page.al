@@ -3,7 +3,7 @@ page 80056 "Parts Customer Order"
     Caption = 'Customer Order Form Card';
     PageType = Card;
     SourceTable = "Customer Order HeaderX";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

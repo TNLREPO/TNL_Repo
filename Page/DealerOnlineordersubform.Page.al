@@ -2,7 +2,7 @@ page 50157 "Dealer Online order subform"
 {
     PageType = ListPart;
     SourceTable = "Warranty Claim Header";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

@@ -5,7 +5,7 @@ page 50080 "Scholarship Register List"
     ModifyAllowed = false;
     PageType = Card;
     SourceTable = "Scholarship Register";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

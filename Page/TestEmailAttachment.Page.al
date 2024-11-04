@@ -2,6 +2,7 @@ page 50001 "Test Email Attachment"
 {
     PageType = List;
     SourceTable = "Test Email Attachment";
+    ApplicationArea = All;
 
     layout
     {

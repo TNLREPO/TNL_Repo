@@ -4,6 +4,7 @@ page 70513 "POS Receipt Card"
     PageType = Card;
     SourceTable = "Payment/Receipt.";
     SourceTableView = SORTING("Document Type", "Cash/Cheque", "No.");
+    ApplicationArea = All;
 
     layout
     {

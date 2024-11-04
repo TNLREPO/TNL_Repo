@@ -5,6 +5,7 @@ page 50294 "E/D Codes."
     MultipleNewLines = true;
     PageType = Card;
     SourceTable = "Payroll-E/D Codes.";
+    ApplicationArea = All;
 
     layout
     {

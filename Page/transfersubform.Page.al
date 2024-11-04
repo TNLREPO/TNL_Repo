@@ -5,6 +5,7 @@ page 50108 "transfer subform"
     SourceTable = "Item Ledger Entry";
     SourceTableView = SORTING("Entry Type", "Item No.", "Location Code", "Posting Date", "Document No.")
                       WHERE(Quantity = FILTER(> 0));
+    ApplicationArea = All;
 
     layout
     {

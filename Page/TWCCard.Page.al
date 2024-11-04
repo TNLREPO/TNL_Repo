@@ -3,6 +3,7 @@ page 50113 "TWC Card"
     DelayedInsert = true;
     PageType = Card;
     SourceTable = "TWC";
+    ApplicationArea = All;
 
     layout
     {

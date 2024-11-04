@@ -293,7 +293,7 @@ page 70017 "Journal Voucher Card"
         Text19077769: Label 'Branch Code';
         MultiLineEditable: Boolean;
         GLEntry2: Record 17;
-  
+
     procedure UpdatePosting()
     begin
         GLEntry.SETCURRENTKEY("Document No.", "Posting Date");

@@ -2,7 +2,7 @@ page 50401 "Purch/sales-Delivery Monitor"
 {
     PageType = Card;
     SourceTable = "Purch/Sales-Delivery Monitor";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

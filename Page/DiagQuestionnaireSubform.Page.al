@@ -5,6 +5,7 @@ page 50359 "Diag. Questionnaire Subform"
     MultipleNewLines = true;
     PageType = ListPart;
     SourceTable = "DQ Inspection Details/Result";
+    ApplicationArea = All;
 
     layout
     {

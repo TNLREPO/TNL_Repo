@@ -2,7 +2,7 @@ page 70047 "Document Approval Card"
 {
     PageType = Card;
     SourceTable = "Document Approval";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

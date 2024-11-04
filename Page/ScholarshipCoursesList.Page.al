@@ -4,6 +4,7 @@ page 50077 "Scholarship Courses List"
     ModifyAllowed = false;
     PageType = Card;
     SourceTable = "Scholarship Courses";
+    ApplicationArea = All;
 
     layout
     {

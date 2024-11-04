@@ -3,6 +3,7 @@ page 50277 "Treasury Activities"
     Caption = 'Activities';
     PageType = CardPart;
     SourceTable = "Finance Cue";
+    ApplicationArea = All;
 
     layout
     {

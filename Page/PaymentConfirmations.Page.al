@@ -6,6 +6,7 @@ page 50244 "Payment-Confirmations"
     SourceTableView = WHERE("Send for Approval" = filter(true),
                             "Send Estimate" = FILTER(true),
                             Close = FILTER(false));
+    ApplicationArea = All;
 
     layout
     {

@@ -6,6 +6,7 @@ page 50457 "Problem Vehicles"
                       WHERE(Arrived = filter(true),
                             "Problem Vehicle" = filter(true),
                             Fixed = filter(false));
+    ApplicationArea = All;
 
     layout
     {

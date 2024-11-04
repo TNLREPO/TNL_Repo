@@ -4,6 +4,7 @@ page 70233 "Return GRN Report"
     SourceTable = "Item Ledger Entry";
     SourceTableView = WHERE("Inventory Posting Group" = CONST('N_PARTS'),
                            "Document Type" = CONST("Sales Return Receipt"));
+    ApplicationArea = All;
 
     layout
     {

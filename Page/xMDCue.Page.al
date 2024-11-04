@@ -2,7 +2,7 @@ page 51615 "xMD Cue"
 {
     PageType = CardPart;
     SourceTable = "Procument Cue";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

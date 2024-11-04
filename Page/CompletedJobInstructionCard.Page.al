@@ -3,6 +3,7 @@ page 70077 "Completed Job Instruction Card"
     DeleteAllowed = false;
     Editable = false;
     SourceTable = "Customer Order Table.";
+    ApplicationArea = All;
 
     layout
     {

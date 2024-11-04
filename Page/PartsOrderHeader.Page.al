@@ -2,7 +2,7 @@ page 90063 "Parts Order Header"
 {
     PageType = List;
     SourceTable = "Parts Order Header";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

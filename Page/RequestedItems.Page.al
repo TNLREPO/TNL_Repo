@@ -2,6 +2,7 @@ page 50172 "Requested Items"
 {
     PageType = Card;
     SourceTable = "Parts Enquiry";
+    ApplicationArea = All;
 
     layout
     {

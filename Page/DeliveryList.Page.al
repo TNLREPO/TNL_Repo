@@ -10,6 +10,7 @@ page 70096 "Delivery List"
                             "For Part Arrival" = filter(True),
                            "For Production" = filter(True),
                            "For Invoice" = Filter(True));
+    ApplicationArea = All;
 
     layout
     {

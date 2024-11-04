@@ -1,7 +1,7 @@
 page 50160 "Dealer Online Menu"
 {
     PageType = Card;
-
+    ApplicationArea = All;
     layout
     {
     }
@@ -16,7 +16,7 @@ page 50160 "Dealer Online Menu"
                 Promoted = true;
                 PromotedCategory = Process;
                 RunObject = Page 50225;
-                RunPageView = WHERE (Inventory = FILTER (> 0));
+                RunPageView = WHERE(Inventory = FILTER(> 0));
             }
             action("Place Order")
             {

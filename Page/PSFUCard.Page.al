@@ -2,6 +2,7 @@ page 80051 "PSFU Card"
 {
     Editable = true;
     SourceTable = "Service IndexX";
+    ApplicationArea = All;
 
     layout
     {

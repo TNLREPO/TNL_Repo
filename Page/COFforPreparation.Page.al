@@ -3,7 +3,7 @@ page 50189 "COF for Preparation"
     Editable = false;
     PageType = Card;
     SourceTable = "Customer Order Table.";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

@@ -6,6 +6,7 @@ page 70167 "Awaiting Bal. Pay. Appr.-Capex"
     SourceTableView = WHERE("Document Type" = filter('Capex'),
                             "Advance Voucher" = filter(true),
                             Compliance = filter(false));
+    ApplicationArea = All;
 
     layout
     {

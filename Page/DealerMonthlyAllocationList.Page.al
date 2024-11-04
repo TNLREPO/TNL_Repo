@@ -5,7 +5,7 @@ page 50185 "Dealer Monthly Allocation List"
     ModifyAllowed = false;
     PageType = Card;
     SourceTable = "Vehicle Mth. Allocation Header";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

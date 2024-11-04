@@ -6,6 +6,7 @@ page 70222 "Part Sales by TCSC"
                             "Posting Date" = FILTER('01/01/22..31/12/23'),
                             "Document Type" = CONST("Transfer Receipt"),
                             "Location Code" = CONST('150ISOLO'));
+    ApplicationArea = All;
 
     layout
     {

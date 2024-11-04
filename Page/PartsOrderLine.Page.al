@@ -2,7 +2,7 @@ page 90064 "Parts Order Line"
 {
     PageType = List;
     SourceTable = "Parts Order Line";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

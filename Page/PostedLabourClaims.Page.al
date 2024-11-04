@@ -6,6 +6,7 @@ page 50203 "Posted Labour Claims"
     SourceTableView = WHERE("Warranty Closed" = filter(false),
                             "Claim Materials Posted" = filter(true),
                             "Claim Charges Posted" = filter(true));
+    ApplicationArea = All;
 
     layout
     {

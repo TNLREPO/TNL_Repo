@@ -5,6 +5,7 @@ page 50088 "Casual Employees List"
     ModifyAllowed = false;
     PageType = Card;
     SourceTable = "Casual Employees";
+    ApplicationArea = All;
 
     layout
     {

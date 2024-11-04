@@ -8,6 +8,7 @@ page 80049 "PSFU Treated"
     SourceTable = "Service IndexX";
     SourceTableView = WHERE(Done = FILTER(true),
                             "Service Location" = FILTER('120ISO'));
+    ApplicationArea = All;
 
     layout
     {

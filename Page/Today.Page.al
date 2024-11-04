@@ -4,6 +4,7 @@ page 80025 Today
     PageType = List;
     SourceTable = "Customer Order HeaderX";
     SourceTableView = WHERE(Stage = filter(Today));
+    ApplicationArea = All;
 
     layout
     {

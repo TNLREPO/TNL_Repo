@@ -2,6 +2,7 @@ page 50036 "TNL-Work Order Card"
 {
     PageType = Card;
     SourceTable = "TNL Work Order";
+    ApplicationArea = All;
 
     layout
     {
@@ -432,11 +433,11 @@ page 50036 "TNL-Work Order Card"
         "Invoice Confirmation": Boolean;
         "Payment Confirmation": Boolean;
         "Transaction Closure": Boolean;
-        
+
         "1st Approval toEditable": Boolean;
-        
+
         "2nd Approval toEditable": Boolean;
-        
+
         "Send for ApprovalEditable": Boolean;
         "1st Approval StatusEditable": Boolean;
         "2nd Approval StatusEditable": Boolean;

@@ -1,6 +1,6 @@
 page 70156 "Gen. Manager Appr.-Capex"
 {
-     ApplicationArea = All;
+    ApplicationArea = All;
     CardPageID = "Capex Card";
     PageType = List;
     SourceTable = "Procurement Header";

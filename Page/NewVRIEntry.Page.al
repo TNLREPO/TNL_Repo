@@ -4,6 +4,7 @@ page 50432 "New VRI Entry"
     SourceTable = "VRI Table";
     SourceTableView = SORTING("VRI Code")
                       WHERE("VRI Code" = FILTER('TVI*'));
+    ApplicationArea = All;
 
     layout
     {

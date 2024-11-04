@@ -3,8 +3,9 @@ page 50381 "FIFO Lists"
     Editable = true;
     PageType = List;
     SourceTable = "Item Ledger Entry";
-    SourceTableView = SORTING ("Purchase Date")
-                      WHERE ("Remaining Quantity"=FILTER(<>0));
+    SourceTableView = SORTING("Purchase Date")
+                      WHERE("Remaining Quantity" = FILTER(<> 0));
+    ApplicationArea = All;
 
     layout
     {
@@ -12,34 +13,34 @@ page 50381 "FIFO Lists"
         {
             repeater(Group)
             {
-                field("Purchase Date";Rec."Purchase Date")
+                field("Purchase Date"; Rec."Purchase Date")
                 {
                 }
-                field("Location Code";Rec."Location Code")
+                field("Location Code"; Rec."Location Code")
                 {
                 }
-                field("Item No.";Rec."Item No.")
+                field("Item No."; Rec."Item No.")
                 {
                 }
-                field(Description;Rec.Description)
+                field(Description; Rec.Description)
                 {
                 }
-                field("Serial No.";Rec."Serial No.")
+                field("Serial No."; Rec."Serial No.")
                 {
                 }
-                field("Engine No.";Rec."Engine No.")
+                field("Engine No."; Rec."Engine No.")
                 {
                 }
-                field("Exterior Colour Name";Rec."Exterior Colour Name")
+                field("Exterior Colour Name"; Rec."Exterior Colour Name")
                 {
                 }
-                field("Exterior Colour Code";Rec."Exterior Colour Code")
+                field("Exterior Colour Code"; Rec."Exterior Colour Code")
                 {
                 }
-                field("Key No.";Rec."Key No.")
+                field("Key No."; Rec."Key No.")
                 {
                 }
-                field("Remaining Quantity";Rec."Remaining Quantity")
+                field("Remaining Quantity"; Rec."Remaining Quantity")
                 {
                     Caption = 'Quantity';
                 }
@@ -53,7 +54,7 @@ page 50381 "FIFO Lists"
 
     trigger OnOpenPage()
     begin
-       Rec.SETCURRENTKEY("Purchase Date");
+        Rec.SETCURRENTKEY("Purchase Date");
     end;
 }
 

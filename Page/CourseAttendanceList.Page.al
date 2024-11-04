@@ -2,6 +2,7 @@ page 50067 "Course Attendance List"
 {
     PageType = List;
     SourceTable = "Course Attendance";
+    ApplicationArea = All;
 
     layout
     {

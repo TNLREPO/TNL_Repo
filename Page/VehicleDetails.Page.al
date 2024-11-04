@@ -2,6 +2,7 @@ page 50121 "Vehicle Details"
 {
     PageType = List;
     SourceTable = "Reservation Entry";
+    ApplicationArea = All;
 
     layout
     {

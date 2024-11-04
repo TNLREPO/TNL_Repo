@@ -2,6 +2,7 @@ page 50011 "Table Lookup Lines."
 {
     PageType = Card;
     SourceTable = "Payroll-Lookup Lines.";
+    ApplicationArea = All;
 
     layout
     {

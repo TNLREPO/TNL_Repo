@@ -8,6 +8,7 @@ page 70218 "Awaiting Part to be Issue"
                             "Claim Refund by TMC" = filter('No'),
                             "Replace Dealer Material Claim" = filter('No'),
                             "Refund Dealer Labour Claim" = filter('No'));
+    ApplicationArea = All;
 
     layout
     {

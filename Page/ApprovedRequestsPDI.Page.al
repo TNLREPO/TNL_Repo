@@ -6,6 +6,7 @@ page 50216 "Approved Requests (PDI)"
     SourceTableView = WHERE("Send for Approval" = filter(true),
                             "2nd Approval Status" = FILTER('Approved'),
                             "Send Estimate" = filter(false));
+    ApplicationArea = All;
 
     layout
     {

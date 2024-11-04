@@ -1,6 +1,6 @@
 page 50096 "Leave Payment List Rev2"
 {
-   ApplicationArea = All;
+    ApplicationArea = All;
     //CardPageID = "Actual Leave Card";
     PageType = ListPart;
     SourceTable = "Leave Payment Rev 2";

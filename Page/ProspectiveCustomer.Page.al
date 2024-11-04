@@ -5,6 +5,7 @@ page 70505 "Prospective Customer"
     SourceTable = "Takata Customer";
     SourceTableView = WHERE(Email = FILTER(<> ''),
                             "Not Reachable" = FILTER(false));
+    ApplicationArea = All;
 
     layout
     {

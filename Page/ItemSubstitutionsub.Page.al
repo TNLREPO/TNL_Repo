@@ -3,7 +3,7 @@ page 50154 "Item Substitution sub"
     Editable = false;
     PageType = Card;
     SourceTable = "Item Substitution";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

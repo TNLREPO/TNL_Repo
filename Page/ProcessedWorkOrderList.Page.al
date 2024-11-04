@@ -4,6 +4,7 @@ page 70006 "Processed Work Order List"
     PageType = List;
     SourceTable = "Admin Work Order";
     SourceTableView = WHERE("Send To W/shop" = filter(true));
+    ApplicationArea = All;
 
     layout
     {

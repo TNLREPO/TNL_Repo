@@ -3,6 +3,7 @@ page 70115 "TNL Vehicle Serial No."
     PageType = List;
     SourceTable = "Item Ledger Entry";
     SourceTableView = WHERE("Inventory Posting Group" = FILTER('N_CARS'));
+    ApplicationArea = All;
 
     layout
     {

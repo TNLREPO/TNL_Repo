@@ -2,7 +2,7 @@ page 50406 "Document Apprv. List"
 {
     PageType = Card;
     SourceTable = "Document Approval";
-
+    ApplicationArea = All;
     layout
     {
         area(content)
@@ -10,13 +10,13 @@ page 50406 "Document Apprv. List"
             repeater(group)
             {
                 Editable = false;
-                field(Date;Rec. Date)
+                field(Date; Rec.Date)
                 {
                 }
-                field("No.";Rec. "No.")
+                field("No."; Rec."No.")
                 {
                 }
-                field("Vendor Name";Rec. "Vendor Name")
+                field("Vendor Name"; Rec."Vendor Name")
                 {
                 }
             }

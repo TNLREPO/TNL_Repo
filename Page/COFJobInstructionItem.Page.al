@@ -5,7 +5,7 @@ page 50332 "COF Job Instruction Item"
     DelayedInsert = true;
     PageType = ListPart;
     SourceTable = "Customer Order Line";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

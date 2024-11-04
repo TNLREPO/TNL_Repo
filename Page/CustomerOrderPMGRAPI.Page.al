@@ -2,7 +2,7 @@ page 90049 CustomerOrderPMGRAPI
 {
     PageType = List;
     SourceTable = "Customer Order HeaderX";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

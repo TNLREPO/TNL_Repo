@@ -1,6 +1,6 @@
 page 50260 "VRI Inspector List"
 {
-     ApplicationArea = All;
+    ApplicationArea = All;
     DeleteAllowed = false;
     ModifyAllowed = false;
     PageType = Card;

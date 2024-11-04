@@ -4,7 +4,7 @@ page 50477 "Posted Bulk Issue"
     PageType = List;
     SourceTable = "Bulk Issue";
     SourceTableView = WHERE(Issued = filter(false));
-
+    ApplicationArea = All;
     layout
     {
         area(content)

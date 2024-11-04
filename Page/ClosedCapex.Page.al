@@ -6,6 +6,7 @@ page 70164 "Closed Capex"
     SourceTable = "Procurement Header";
     SourceTableView = WHERE("Document Type" = CONST(Capex),
                             Closed = filter(true));
+    ApplicationArea = All;
 
     layout
     {

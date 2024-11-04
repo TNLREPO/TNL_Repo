@@ -4,6 +4,7 @@ page 50222 "Deposit Card"
     SourceTable = "Deposit Management";
     SourceTableView = SORTING("Deposit No.")
                       WHERE(Posted = filter(false));
+    ApplicationArea = All;
 
     layout
     {

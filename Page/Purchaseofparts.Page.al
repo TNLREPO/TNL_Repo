@@ -5,6 +5,7 @@ page 70231 "Purchase of parts"
     SourceTableView = WHERE("Inventory Posting Group" = FILTER('N_PARTS'),
                             "Posting Date" = FILTER('01/01/22..31/12/22'),
                             "Entry Type" = FILTER(Purchase));
+    ApplicationArea = All;
 
     layout
     {

@@ -4,7 +4,7 @@ page 70510 "Not Reachable Customer"
     PageType = List;
     SourceTable = "Takata Customer";
     SourceTableView = WHERE("Not Reachable" = FILTER(true));
-
+    ApplicationArea = All;
     layout
     {
         area(content)

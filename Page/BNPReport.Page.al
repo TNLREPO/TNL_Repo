@@ -5,6 +5,7 @@ page 70223 "BNP Report"
     SourceTableView = WHERE("Location Code" = filter('BNP'),
                             "Posting Date" = FILTER('01/01/22..31/12/22'),
                             "Document Type" = FILTER('Transfer Shipment|Sales Shipment|Sales Invoice|Sales Return Receipt|Sales Credit Memo'));
+    ApplicationArea = All;
 
     layout
     {

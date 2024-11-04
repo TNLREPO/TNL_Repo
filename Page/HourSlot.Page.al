@@ -2,7 +2,7 @@ page 50352 "Hour Slot"
 {
     PageType = Card;
     SourceTable = "Hour Slot";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

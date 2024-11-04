@@ -10,6 +10,7 @@ page 70136 "Payment Vouncher"
                             Closed = CONST(false),
                             "Document Type" = CONST(Opex),
                             Reject = CONST(false));
+    ApplicationArea = All;
 
     layout
     {

@@ -5,7 +5,7 @@ page 50240 "Awaiting Payment Confirmations"
     SourceTable = "TNL Work Order";
     SourceTableView = WHERE("Invoice Received" = FILTER('Yes'),
                             "Payment Confirmed" = FILTER('Yes'));
-
+    ApplicationArea = All;
     layout
     {
         area(content)

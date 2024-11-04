@@ -9,6 +9,7 @@ page 70182 "Confirmation of Warranty"
                             "Replace Dealer Material Claim" = filter(true),
                             "Claim Refund by TMC" = filter(true),
                             "Warranty Closed" = filter(false));
+    ApplicationArea = All;
 
     layout
     {

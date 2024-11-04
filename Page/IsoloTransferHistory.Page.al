@@ -5,6 +5,7 @@ page 70511 "Isolo Transfer History"
     SourceTable = "Transfer Shipment Line";
     SourceTableView = WHERE("Transfer-from Code" = FILTER('120ISO'),
                             "Transfer-to Code" = FILTER('150ISOLO'));
+    ApplicationArea = All;
 
     layout
     {

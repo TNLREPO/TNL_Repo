@@ -4,6 +4,7 @@ page 50442 Profitability
     MultipleNewLines = true;
     PageType = List;
     SourceTable = "Profitability";
+    ApplicationArea = All;
 
     layout
     {

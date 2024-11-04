@@ -2,6 +2,7 @@ page 90058 "CustomerStatement API"
 {
     PageType = List;
     SourceTable = "Cust. Ledger Entry";
+    ApplicationArea = All;
 
     layout
     {

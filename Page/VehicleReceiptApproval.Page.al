@@ -3,6 +3,7 @@ page 50411 "Vehicle Receipt Approval"
     PageType = Card;
     SourceTable = "VRI Table";
     ApplicationArea = All;
+    
 
     layout
     {

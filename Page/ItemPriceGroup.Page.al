@@ -2,7 +2,7 @@ page 50150 "Item Price Group"
 {
     PageType = Card;
     SourceTable = "Item Price Group";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

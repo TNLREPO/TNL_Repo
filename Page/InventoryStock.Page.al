@@ -4,6 +4,7 @@ page 50283 "Inventory - Stock"
     SourceTable = "Item Ledger Entry";
     SourceTableView = WHERE("Remaining Quantity" = FILTER('1'),
                             "Inventory Posting Group" = FILTER('N_CARS'));
+    ApplicationArea = All;
 
     layout
     {
@@ -53,20 +54,20 @@ page 50283 "Inventory - Stock"
                 {
                     Editable = false;
                 }
-            /*     field("Date of Arrival"; Rec."Date of Arrival")
-                {
-                }
-                field("No. of Days in Stock"; "No. of Days in Stock")
-                {
-                }
-                field("Current Date"; "Current Date")
-                {
+                /*     field("Date of Arrival"; Rec."Date of Arrival")
+                    {
+                    }
+                    field("No. of Days in Stock"; "No. of Days in Stock")
+                    {
+                    }
+                    field("Current Date"; "Current Date")
+                    {
 
-                    trigger OnValidate()
-                    begin
-                        "No. of Days in Stock" := "Current Date" - "Date of Arrival";
-                    end;
-                } */
+                        trigger OnValidate()
+                        begin
+                            "No. of Days in Stock" := "Current Date" - "Date of Arrival";
+                        end;
+                    } */
             }
         }
     }
@@ -75,10 +76,10 @@ page 50283 "Inventory - Stock"
     {
     }
 
-   /*  trigger OnAfterGetRecord()
-    begin
-        IF Rec."Current Date" <> 0D THEN
-            VALIDATE("Current Date", WORKDATE);
-    end; */
+    /*  trigger OnAfterGetRecord()
+     begin
+         IF Rec."Current Date" <> 0D THEN
+             VALIDATE("Current Date", WORKDATE);
+     end; */
 }
 

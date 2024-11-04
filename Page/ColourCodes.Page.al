@@ -3,7 +3,7 @@ page 50131 "Colour Codes"
     CardPageID = "Colour Code card";
     PageType = List;
     SourceTable = "Colour Codes";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

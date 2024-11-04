@@ -2,6 +2,7 @@ page 70113 "Item List2"
 {
     PageType = List;
     SourceTable = "Item";
+    ApplicationArea = All;
 
     layout
     {

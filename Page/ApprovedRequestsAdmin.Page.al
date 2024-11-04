@@ -5,6 +5,7 @@ page 50135 "Approved Requests (Admin)"
     SourceTable = "TNL Work Order";
     SourceTableView = WHERE("Send Invoice File" = filter(false),
                             "2nd Approval Status" = FILTER('Approved'));
+    ApplicationArea = All;
 
     layout
     {

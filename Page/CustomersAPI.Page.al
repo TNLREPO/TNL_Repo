@@ -2,7 +2,7 @@ page 90047 CustomersAPI
 {
     PageType = List;
     SourceTable = Customer;
-
+    ApplicationArea = All;
     layout
     {
         area(content)

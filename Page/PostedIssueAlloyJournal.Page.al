@@ -5,6 +5,7 @@ page 50392 "Posted Issue Alloy Journal"
     PageType = Card;
     SourceTable = "Item Register";
     SourceTableView = WHERE("Journal Batch Name" = FILTER('TISA*'));
+    ApplicationArea = All;
 
     layout
     {

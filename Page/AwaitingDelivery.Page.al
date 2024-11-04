@@ -4,7 +4,7 @@ page 80059 "Awaiting Delivery"
     PageType = List;
     SourceTable = "Customer Order HeaderX";
     SourceTableView = WHERE(Stage = filter('Awaiting Delivery'));
-
+    ApplicationArea = All;
     layout
     {
         area(content)

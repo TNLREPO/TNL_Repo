@@ -5,7 +5,7 @@ page 70224 "Parts Sales and Transfers_lek"
     SourceTableView = WHERE("Posting Date" = FILTER('01/01/22..31/12/22'),
                             "Document Type" = FILTER("Transfer Shipment" | "Sales Shipment" | "Sales Invoice" | "Sales Return Receipt" | "Sales Credit Memo"),
                             "Inventory Posting Group" = FILTER('N_PARTS'));
-
+    ApplicationArea = All;
     layout
     {
         area(content)

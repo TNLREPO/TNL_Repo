@@ -3,6 +3,7 @@ page 70509 "BP Worksheet List"
     CardPageID = "BP Worksheet";
     PageType = List;
     SourceTable = "BP Worksheet Header";
+    ApplicationArea = All;
 
     layout
     {

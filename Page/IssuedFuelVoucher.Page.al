@@ -4,7 +4,7 @@ page 50243 "Issued Fuel Voucher"
     PageType = Card;
     SourceTable = "Fuel Vouchers.";
     SourceTableView = WHERE(Issue = FILTER(True));
-
+    ApplicationArea = All;
     layout
     {
         area(content)

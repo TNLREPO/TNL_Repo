@@ -4,6 +4,7 @@ page 50174 "Part Order Celling List"
     ModifyAllowed = false;
     PageType = Card;
     SourceTable = "Part Order Celling";
+    ApplicationArea = All;
 
     layout
     {

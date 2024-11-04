@@ -3,7 +3,7 @@ page 50004 "E/D Survey."
     Editable = true;
     PageType = List;
     SourceTable = "Payroll-E/D Codes.";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

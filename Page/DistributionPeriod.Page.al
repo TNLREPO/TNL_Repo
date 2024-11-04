@@ -2,7 +2,7 @@ page 50183 "Distribution Period"
 {
     PageType = Card;
     SourceTable = "Production Period";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

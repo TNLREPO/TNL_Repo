@@ -7,7 +7,7 @@ page 50201 "Payment Approval Comment List"
     LinksAllowed = false;
     PageType = Card;
     SourceTable = "Payment Approval Comment Line";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

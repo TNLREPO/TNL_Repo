@@ -3,7 +3,7 @@ page 50322 "Estimation Header"
     PageType = Card;
     RefreshOnActivate = true;
     SourceTable = "Estimate Header";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

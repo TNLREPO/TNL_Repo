@@ -2,7 +2,7 @@ page 50412 "Stock by Location"
 {
     PageType = List;
     SourceTable = "Item";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

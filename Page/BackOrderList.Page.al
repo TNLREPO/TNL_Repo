@@ -3,6 +3,7 @@ page 70512 "Back Order List"
     PageType = List;
     SourceTable = "Customer Order LineX";
     SourceTableView = WHERE("Stock Status" = FILTER('Not Available' | 'Not Established' | 'Local Part Purch'));
+    ApplicationArea = All;
 
     layout
     {

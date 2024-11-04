@@ -2,7 +2,7 @@ page 50109 "Non Registrated Parts"
 {
     PageType = Card;
     SourceTable = "Parts Enquiry";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

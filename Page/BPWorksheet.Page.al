@@ -2,6 +2,7 @@ page 70507 "BP Worksheet"
 {
     PageType = Card;
     SourceTable = "BP Worksheet Header";
+    ApplicationArea = All;
 
     layout
     {

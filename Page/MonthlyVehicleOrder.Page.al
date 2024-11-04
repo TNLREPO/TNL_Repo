@@ -2,44 +2,44 @@ page 50134 "Monthly Vehicle Order"
 {
     PageType = Card;
     SourceTable = "Monthly Vehicle Order";
-
+    ApplicationArea = All;
     layout
     {
         area(content)
         {
             repeater(Group)
             {
-                field("Period Starting";Rec. "Period Starting")
+                field("Period Starting"; Rec."Period Starting")
                 {
                 }
-                field("PO Number";Rec. "PO Number")
+                field("PO Number"; Rec."PO Number")
                 {
                 }
-                field(Purchaser;Rec. Purchaser)
+                field(Purchaser; Rec.Purchaser)
                 {
                 }
-                field("Customer Gen Bus Posting Group";Rec. "Customer Gen Bus Posting Group")
+                field("Customer Gen Bus Posting Group"; Rec."Customer Gen Bus Posting Group")
                 {
                 }
-                field(Customer;Rec. Customer)
+                field(Customer; Rec.Customer)
                 {
                 }
-                field("Line Vehicle Count";Rec. "Line Vehicle Count")
+                field("Line Vehicle Count"; Rec."Line Vehicle Count")
                 {
                 }
-                field("Vehicle Count";Rec. "Vehicle Count")
+                field("Vehicle Count"; Rec."Vehicle Count")
                 {
                 }
-                field("Currency Code";Rec. "Currency Code")
+                field("Currency Code"; Rec."Currency Code")
                 {
                 }
-                field("Exchange Rate";Rec. "Exchange Rate")
+                field("Exchange Rate"; Rec."Exchange Rate")
                 {
                 }
-                field("PO Created";Rec. "PO Created")
+                field("PO Created"; Rec."PO Created")
                 {
                 }
-                field("Posted Invoice No.";Rec. "Posted Invoice No.")
+                field("Posted Invoice No."; Rec."Posted Invoice No.")
                 {
                 }
             }

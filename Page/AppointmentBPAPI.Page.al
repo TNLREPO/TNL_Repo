@@ -3,7 +3,7 @@ page 80052 AppointmentBPAPI
     CardPageID = "Next Job";
     PageType = List;
     SourceTable = "EARQ Header";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

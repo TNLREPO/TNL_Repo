@@ -4,6 +4,7 @@ page 50389 "Time & Attendance Setup"
     InsertAllowed = false;
     PageType = Card;
     SourceTable = "Time & Attendance  Setup";
+    ApplicationArea = All;
 
     layout
     {

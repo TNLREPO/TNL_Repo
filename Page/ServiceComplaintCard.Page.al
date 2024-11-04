@@ -2,6 +2,7 @@ page 80014 "Service Complaint Card"
 {
     PageType = Card;
     SourceTable = "Complain TableX";
+    ApplicationArea = All;
 
     layout
     {

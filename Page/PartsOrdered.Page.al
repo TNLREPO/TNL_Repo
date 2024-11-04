@@ -4,7 +4,7 @@ page 80023 "Parts Ordered"
     PageType = List;
     SourceTable = "Customer Order HeaderX";
     SourceTableView = WHERE(Stage = filter('Parts Ordered'));
-
+    ApplicationArea = All;
     layout
     {
         area(content)

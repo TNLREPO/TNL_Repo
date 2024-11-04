@@ -4,6 +4,7 @@ page 70039 "Processed Stock Capital List"
     PageType = List;
     SourceTable = "Stock Capitalisation";
     SourceTableView = WHERE(Processed = FILTER(True));
+    ApplicationArea = All;
 
     layout
     {

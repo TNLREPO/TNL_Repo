@@ -2,6 +2,7 @@ page 50611 "Change Management Card"
 {
     PageType = Card;
     SourceTable = "Change Management";
+    ApplicationArea = All;
 
     layout
     {

@@ -6,6 +6,7 @@ page 50347 "Pending Purchase Requests"
     SourceTable = "Requisition Wksh. Name";
     SourceTableView = WHERE("Worksheet Template Name" = CONST('REQ.'),
                             "Request Type" = CONST(Parts));
+    ApplicationArea = All;
 
     layout
     {

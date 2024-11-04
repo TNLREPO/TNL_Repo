@@ -4,6 +4,7 @@ page 50215 "Posted COF Report"
     PageType = List;
     SourceTable = "Service Line";
     SourceTableView = WHERE(Posted = filter(true));
+    ApplicationArea = All;
 
     layout
     {

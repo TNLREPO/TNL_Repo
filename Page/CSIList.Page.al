@@ -6,6 +6,7 @@ page 50366 "CSI List"
     ModifyAllowed = false;
     PageType = List;
     SourceTable = "CSI Table";
+    ApplicationArea = All;
 
     layout
     {

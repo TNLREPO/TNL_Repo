@@ -3,7 +3,7 @@ page 50388 "Attendance Register 2"
     PageType = Card;
     SourceTable = "Attendance Register 2";
     SourceTableView = SORTING("TnA ID") WHERE(Status = FILTER('Complete'));
-
+    ApplicationArea = All;
     layout
     {
         area(content)

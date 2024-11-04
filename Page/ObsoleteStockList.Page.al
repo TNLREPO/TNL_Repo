@@ -3,7 +3,7 @@ page 50035 "Obsolete Stock List"
     DeleteAllowed = false;
     PageType = Card;
     SourceTable = "Poss Data";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

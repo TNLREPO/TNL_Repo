@@ -9,6 +9,7 @@ page 70219 "Awaiting Settlement"
                             "Replace Dealer Material Claim" = filter('No'),
                             "Refund Dealer Labour Claim" = filter('Yes'),
                             "Claim Materials Posted" = filter('Yes'));
+    ApplicationArea = All;
 
     layout
     {

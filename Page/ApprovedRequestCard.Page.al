@@ -2,7 +2,7 @@ page 50219 "Approved Request-Card"
 {
     PageType = Card;
     SourceTable = "Motor Show Repair";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

@@ -6,6 +6,7 @@ page 50148 "Send Estimate Requests"
     SourceTableView = WHERE("Send for Approval" = FILTER(True),
                             "1st Approval Status" = FILTER(Approved),
                             "Send Estimate" = FILTER(false));
+    ApplicationArea = All;
 
     layout
     {

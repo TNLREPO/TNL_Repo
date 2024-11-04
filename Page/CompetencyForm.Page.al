@@ -2,7 +2,7 @@ page 50329 "Competency Form"
 {
     PageType = Card;
     SourceTable = Employee;
-
+    ApplicationArea = All;
     layout
     {
         area(content)

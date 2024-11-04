@@ -2,7 +2,7 @@ page 50151 "Emolument Group Lines."
 {
     PageType = ListPart;
     SourceTable = "Payroll-Emolument Lines";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

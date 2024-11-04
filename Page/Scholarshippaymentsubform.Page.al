@@ -7,6 +7,7 @@ page 50082 "Scholarship payment subform"
     PageType = Card;
     SourceTable = "Scholarship Payment";
     SourceTableView = SORTING("Register No", "Employee No", "No.");
+    ApplicationArea = All;
 
     layout
     {

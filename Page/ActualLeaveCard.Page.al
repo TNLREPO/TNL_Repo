@@ -3,6 +3,7 @@ page 70056 "Actual Leave Card"
     ApplicationArea = All;
     PageType = Card;
     SourceTable = "Leave Plan Lines Rev 2";
+    
 
     layout
     {

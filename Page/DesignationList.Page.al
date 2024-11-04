@@ -2,7 +2,7 @@ page 50043 "Designation List"
 {
     PageType = Card;
     SourceTable = "Designation";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

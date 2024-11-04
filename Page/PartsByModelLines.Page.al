@@ -4,7 +4,7 @@ page 50128 "Parts By Model Lines"
     PageType = List;
     SourceTable = "Parts By Model";
     SourceTableView = SORTING("Model Code", "Part No.");
-
+    ApplicationArea = All;
     layout
     {
         area(content)

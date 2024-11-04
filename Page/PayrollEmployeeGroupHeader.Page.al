@@ -3,7 +3,7 @@ page 50293 "Payroll-Employee Group Header"
     PageType = Card;
     SourceTable = "Payroll-Employee Group Header.";
     ApplicationArea = All;
-
+    
     layout
     {
         area(content)

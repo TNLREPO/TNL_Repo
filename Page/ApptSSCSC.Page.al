@@ -4,6 +4,7 @@ page 50354 "Appt SSC/SC"
     DelayedInsert = true;
     PageType = List;
     SourceTable = "Appointment SSC/SC";
+    ApplicationArea = All;
 
     layout
     {

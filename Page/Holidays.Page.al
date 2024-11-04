@@ -2,6 +2,7 @@ page 50317 Holidays
 {
     PageType = List;
     SourceTable = "Holidays";
+    ApplicationArea = All;
 
     layout
     {

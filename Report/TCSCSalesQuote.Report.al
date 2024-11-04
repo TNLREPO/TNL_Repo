@@ -813,14 +813,17 @@ report 50181 "TCSC Sales - Quote"
                     field(NoOfCopies; NoOfCopies)
                     {
                         Caption = 'No. of Copies';
+                        ApplicationArea = All;
                     }
                     field(ShowInternalInfo; ShowInternalInfo)
                     {
                         Caption = 'Show Internal Information';
+                        ApplicationArea = All;
                     }
                     field(ArchiveDocument; ArchiveDocument)
                     {
                         Caption = 'Archive Document';
+                        ApplicationArea = All;
 
                         trigger OnValidate()
                         begin
@@ -832,6 +835,7 @@ report 50181 "TCSC Sales - Quote"
                     {
                         Caption = 'Log Interaction';
                         Enabled = LogInteractionEnable;
+                        ApplicationArea = All;
 
                         trigger OnValidate()
                         begin

@@ -5,6 +5,7 @@ page 50126 "Request Approvals (Mgr)"
     SourceTable = "TNL Work Order";
     SourceTableView = WHERE("Send for Approval" = filter(true),
                             "1st Approval Status" = FILTER(' ' | "On hold" | Rejected));
+    ApplicationArea = All;
 
     layout
     {

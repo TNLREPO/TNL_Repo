@@ -2,6 +2,7 @@ page 50441 "HR Work Order"
 {
     PageType = Card;
     SourceTable = "HR Work Order";
+    ApplicationArea = All;
 
     layout
     {

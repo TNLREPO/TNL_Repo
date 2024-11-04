@@ -526,7 +526,7 @@ page 70089 "Job Instruction Card."
         VRIRec: Record 50058;
         COFLine: Record 50122;
 
-   
+
     procedure CreatePurchaseRequisition()
     var
         RequisitionLine: Record 246;
@@ -607,7 +607,7 @@ page 70089 "Job Instruction Card."
             UNTIL CustOrderLine.NEXT = 0;
     end;
 
-   
+
     procedure CreatEstimateRequestion()
     var
         RequisitionLine: Record 246;
@@ -681,7 +681,7 @@ page 70089 "Job Instruction Card."
             UNTIL CustOrderLine.NEXT = 0;
     end;
 
-   
+
     procedure AddOperations()
     var
         ServiceLine: Record 5902;

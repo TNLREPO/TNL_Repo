@@ -7,6 +7,7 @@ page 50173 "Awaiting Checks"
                             "Payment Confirmed" = FILTER('Yes'),
                             "Transaction Close" = FILTER('No'),
                             "Payment Raised" = filter('No'));
+    ApplicationArea = All;
 
     layout
     {

@@ -6,6 +6,7 @@ page 70062 "Request For Quote Subform"
     MultipleNewLines = true;
     PageType = ListPart;
     SourceTable = "Procurement Line";
+    ApplicationArea = All;
 
     layout
     {

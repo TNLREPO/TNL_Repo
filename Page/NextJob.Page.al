@@ -4,6 +4,7 @@ page 80027 "Next Job"
     PageType = List;
     SourceTable = "Customer Order HeaderX";
     SourceTableView = WHERE(Stage = filter('Next Job'));
+    ApplicationArea = All;
 
     layout
     {

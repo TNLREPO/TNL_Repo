@@ -2,7 +2,7 @@ page 50156 "Dealer Online Order Request"
 {
     PageType = Card;
     SourceTable = "Dealer Online Order Header";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

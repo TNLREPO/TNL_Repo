@@ -2,7 +2,7 @@ page 50132 "Colour Code card"
 {
     PageType = Card;
     SourceTable = "Colour Codes";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

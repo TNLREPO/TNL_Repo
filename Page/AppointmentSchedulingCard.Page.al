@@ -3,6 +3,7 @@ page 50351 "Appointment Scheduling Card"
     DelayedInsert = true;
     PageType = Card;
     SourceTable = "Appointment Scheduling";
+    ApplicationArea = All;
 
     layout
     {

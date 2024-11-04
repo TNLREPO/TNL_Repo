@@ -2,6 +2,7 @@ page 70503 "Takata Customer Card"
 {
     PageType = Card;
     SourceTable = "Takata Customer";
+    ApplicationArea = All;
 
     layout
     {

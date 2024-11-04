@@ -3,7 +3,6 @@ page 80042 "Fault Material Card"
     PageType = Card;
     SourceTable = "Fault Setup HeaderX";
     ApplicationArea = All;
-
     layout
     {
         area(content)

@@ -4,7 +4,7 @@ page 80061 "Awaiting Estimate"
     PageType = List;
     SourceTable = "Customer Order HeaderX";
     SourceTableView = WHERE(Stage = filter('Awaiting DAD'));
-
+    ApplicationArea = All;
     layout
     {
         area(content)

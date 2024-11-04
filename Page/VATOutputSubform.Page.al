@@ -6,6 +6,7 @@ page 70500 "VAT Output Subform"
     MultipleNewLines = true;
     PageType = ListPart;
     SourceTable = "Vat Input Template Line";
+    ApplicationArea = All;
 
     layout
     {

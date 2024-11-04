@@ -2,6 +2,7 @@ page 50386 "Sublet Register Card"
 {
     PageType = Card;
     SourceTable = "Sublet Service";
+    ApplicationArea = All;
 
     layout
     {

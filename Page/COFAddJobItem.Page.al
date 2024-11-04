@@ -5,7 +5,7 @@ page 50334 "COF Add. Job Item"
     PageType = ListPart;
     SourceTable = "Customer Order Line";
     SourceTableView = WHERE("Additional Jobs" = filter(true));
-
+    ApplicationArea = All;
     layout
     {
         area(content)

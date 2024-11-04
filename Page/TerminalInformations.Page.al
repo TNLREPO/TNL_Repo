@@ -3,6 +3,7 @@ page 50143 "Terminal Informations"
     DelayedInsert = true;
     PageType = Card;
     SourceTable = "Terminal Informations";
+    ApplicationArea = All;
 
     layout
     {

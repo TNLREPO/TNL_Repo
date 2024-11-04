@@ -6,6 +6,7 @@ page 50323 "Pending Estimate Requests"
     SourceTable = "Requisition Wksh. Name";
     SourceTableView = WHERE("Worksheet Template Name" = CONST('REQ.'),
                             "Request Type" = CONST(Estimate));
+    ApplicationArea = All;
 
     layout
     {

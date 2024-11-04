@@ -5,6 +5,7 @@ page 50055 "Leave Roster List"
     ModifyAllowed = false;
     PageType = Card;
     SourceTable = "Leave Roster";
+    ApplicationArea = All;
 
     layout
     {

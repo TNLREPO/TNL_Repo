@@ -4,6 +4,7 @@ page 50193 "Resource Register List"
     ModifyAllowed = false;
     PageType = Card;
     SourceTable = "Resource Job Register";
+    ApplicationArea = All;
 
     layout
     {

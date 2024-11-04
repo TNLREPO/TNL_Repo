@@ -2,6 +2,7 @@ page 70061 "Request For Quote card"
 {
     PageType = Card;
     SourceTable = "Procurement Header";
+    ApplicationArea = All;
 
     layout
     {

@@ -5,6 +5,7 @@ page 50145 "Received Invoices (Admin)"
     SourceTable = "TNL Work Order";
     SourceTableView = WHERE("Invoice Received" = FILTER(true),
                             "Payment Confirmed" = FILTER(false));
+    ApplicationArea = All;
 
     layout
     {

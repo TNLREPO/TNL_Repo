@@ -2,6 +2,7 @@ page 50010 "Table Lookup Header."
 {
     PageType = ListPlus;
     SourceTable = "Payroll-Lookup Header.";
+    ApplicationArea = All;
 
     layout
     {

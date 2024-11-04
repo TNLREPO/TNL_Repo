@@ -2,6 +2,7 @@ page 50130 "Online Dealer Order"
 {
     PageType = Card;
     SourceTable = "Online Dealer Order";
+    ApplicationArea = All;
 
     layout
     {

@@ -4,6 +4,7 @@ page 70171 "Complaint List"
     PageType = List;
     SourceTable = "CRM Register";
     SourceTableView = WHERE("Type of Call" = CONST(Complain));
+    ApplicationArea = All;
 
     layout
     {

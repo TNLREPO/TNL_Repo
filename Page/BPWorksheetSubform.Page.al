@@ -5,6 +5,7 @@ page 70508 "BP Worksheet Subform"
     MultipleNewLines = true;
     PageType = ListPart;
     SourceTable = "BP Worksheet Line";
+    ApplicationArea = All;
 
     layout
     {

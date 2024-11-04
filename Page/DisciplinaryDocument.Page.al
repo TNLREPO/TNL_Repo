@@ -3,7 +3,7 @@ page 50310 "Disciplinary Document"
     AutoSplitKey = true;
     PageType = Card;
     SourceTable = "Employee Disciplinary Document";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

@@ -2,6 +2,7 @@ page 50538 "Product Grp List"
 {
     PageType = List;
     SourceTable = "Product Grp";
+    ApplicationArea = All;
 
     layout
     {

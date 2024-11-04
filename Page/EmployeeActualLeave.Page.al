@@ -3,7 +3,7 @@ page 50063 "Employee Actual Leave"
     PageType = Card;
     SaveValues = true;
     SourceTable = "Employee";
-
+    ApplicationArea = All;
     layout
     {
     }

@@ -6,7 +6,7 @@ page 70229 "Part Sales To Dealer"
                             "Posting Date" = FILTER('01/01/22..31/12/23'),
                             "Entry Type" = CONST(Sale),
                             "Source No." = FILTER('TDP*'));
-
+    ApplicationArea = All;
     layout
     {
         area(content)

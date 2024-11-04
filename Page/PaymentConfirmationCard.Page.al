@@ -2,7 +2,7 @@ page 50181 "Payment Confirmation Card"
 {
     PageType = Card;
     SourceTable = "TNL Work Order";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

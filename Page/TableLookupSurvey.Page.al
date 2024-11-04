@@ -4,6 +4,7 @@ page 50012 "Table Lookup Survey."
     Editable = false;
     PageType = List;
     SourceTable = "Payroll-Lookup Header.";
+    ApplicationArea = All;
 
     layout
     {

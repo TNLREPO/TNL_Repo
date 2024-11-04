@@ -5,7 +5,7 @@ page 80066 "B&P Posted Service Invoices"
     Editable = false;
     PageType = List;
     SourceTable = "Service Invoice Header";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

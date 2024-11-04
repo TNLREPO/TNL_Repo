@@ -4,6 +4,7 @@ page 50435 "TNL Staff"
     PageType = Card;
     SourceTable = "Customer";
     SourceTableView = WHERE("No." = FILTER('8*|CT*|IT*|TS*'));
+    ApplicationArea = All;
 
     layout
     {

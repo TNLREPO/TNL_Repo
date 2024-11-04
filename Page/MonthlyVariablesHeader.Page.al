@@ -2,7 +2,7 @@ page 50297 "Monthly Variables Header."
 {
     PageType = Card;
     SourceTable = "Monthly Variables Header.";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

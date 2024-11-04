@@ -3,6 +3,7 @@ page 50220 "Reject IOU"
     PageType = List;
     SourceTable = "IOU Register";
     SourceTableView = WHERE(Reject = FILTER(True));
+    ApplicationArea = All;
 
     layout
     {

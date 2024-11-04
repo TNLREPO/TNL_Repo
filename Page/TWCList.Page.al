@@ -8,6 +8,7 @@ page 50114 "TWC List"
     ModifyAllowed = false;
     PageType = Card;
     SourceTable = "TWC";
+    ApplicationArea = All;
 
     layout
     {

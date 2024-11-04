@@ -3,6 +3,7 @@ page 50613 "Change Management List"
     CardPageID = "Change Management Card";
     PageType = List;
     SourceTable = "Change Management";
+    ApplicationArea = All;
 
     layout
     {

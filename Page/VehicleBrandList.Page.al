@@ -2,7 +2,7 @@ page 70019 "Vehicle Brand List"
 {
     PageType = List;
     SourceTable = "Vehicle Brand";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

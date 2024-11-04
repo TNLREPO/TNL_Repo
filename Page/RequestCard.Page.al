@@ -1,6 +1,7 @@
 page 70181 "Request Card"
 {
     SourceTable = "CRM Register";
+    ApplicationArea = All;
 
     layout
     {

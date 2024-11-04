@@ -1,7 +1,7 @@
 page 70094 "CSI Form"
 {
     SourceTable = "CSI Table";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

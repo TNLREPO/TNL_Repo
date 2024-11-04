@@ -9,6 +9,7 @@ page 50291 "Payment Approval Comments"
     MultipleNewLines = true;
     PageType = Card;
     SourceTable = "Payment Comment Line";
+    ApplicationArea = All;
     layout
     {
         area(content)

@@ -3,7 +3,7 @@ page 50233 "Invoice Confirmations"
     CardPageID = "Motor Show Repair Card";
     PageType = List;
     SourceTable = "Motor Show Repair";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

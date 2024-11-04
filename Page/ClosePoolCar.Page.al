@@ -3,7 +3,6 @@ page 50599 "Close Pool Car"
     ApplicationArea = All;
     PageType = Card;
     SourceTable = "Pool Car Allocation";
-
     layout
     {
         area(content)

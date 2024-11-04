@@ -2,6 +2,7 @@ page 90051 "AppointmentPMGRAPI"
 {
     PageType = List;
     SourceTable = "Service AppointmentsX";
+    ApplicationArea = All;
 
     layout
     {

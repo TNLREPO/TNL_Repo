@@ -5,32 +5,31 @@ page 80012 "Job Instruction Subform"
     PageType = ListPart;
     SourceTable = "Customer Order LineX";
     ApplicationArea = All;
-
     layout
     {
         area(content)
         {
             repeater(Group)
             {
-                field("Additional Jobs";Rec. "Additional Jobs")
+                field("Additional Jobs"; Rec."Additional Jobs")
                 {
                 }
-                field("No.";Rec. "No.")
+                field("No."; Rec."No.")
                 {
                 }
-                field(Description;Rec. Description)
+                field(Description; Rec.Description)
                 {
                 }
-                field("Quantity Requested";Rec. "Quantity Requested")
+                field("Quantity Requested"; Rec."Quantity Requested")
                 {
                 }
-                field(Results;Rec. Results)
+                field(Results; Rec.Results)
                 {
                 }
-                field("Stock Status";Rec. "Stock Status")
+                field("Stock Status"; Rec."Stock Status")
                 {
                 }
-                field(ETA;Rec. ETA)
+                field(ETA; Rec.ETA)
                 {
                 }
             }
@@ -54,7 +53,7 @@ page 80012 "Job Instruction Subform"
     var
         CustOrderLine: Record 50122;
         CustOrderRec: Record 50119;
-        
+
         "Unit CostEditable": Boolean;
 
     local procedure CustOnAfterGetCurrRecord()

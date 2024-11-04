@@ -4,6 +4,7 @@ page 50170 "Variant Duty Certificate No."
     InsertAllowed = false;
     PageType = Card;
     SourceTable = "Stockkeeping Unit";
+    ApplicationArea = All;
 
     layout
     {

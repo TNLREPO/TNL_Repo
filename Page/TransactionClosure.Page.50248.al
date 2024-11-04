@@ -4,6 +4,7 @@ page 50248 "Transaction-Closure"
     PageType = List;
     SourceTable = "Motor Show Repair";
     SourceTableView = WHERE(Close = FILTER(true));
+    ApplicationArea = All;
 
     layout
     {

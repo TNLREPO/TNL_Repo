@@ -163,9 +163,11 @@ report 50059 "Create Payroll Journal"
             {
                 field("Posting Date"; BookingDate)
                 {
+                    ApplicationArea = All;
                 }
                 field("Document No."; VoucherNo)
                 {
+                    ApplicationArea = All;
                 }
             }
         }

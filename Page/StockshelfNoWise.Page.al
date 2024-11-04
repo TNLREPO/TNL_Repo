@@ -1,5 +1,6 @@
 page 70227 "Stock shelf No. Wise"
 {
+    ApplicationArea = All;
     PageType = List;
     SourceTable = "Item Ledger Entry";
     SourceTableView = WHERE("Inventory Posting Group" = FILTER('N_PARTS|N_PARTCONS'),

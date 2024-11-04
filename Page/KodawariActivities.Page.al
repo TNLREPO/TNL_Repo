@@ -2,6 +2,7 @@ page 50064 "Kodawari Activities"
 {
     PageType = CardPart;
     SourceTable = "Service Department Cue";
+    ApplicationArea = All;
 
     layout
     {

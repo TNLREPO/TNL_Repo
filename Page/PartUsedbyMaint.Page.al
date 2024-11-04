@@ -4,7 +4,7 @@ page 50413 "Part Used by Maint."
     SourceTable = "Item Ledger Entry";
     SourceTableView = WHERE("Entry Type" = FILTER("Negative Adjmt."),
                             "Document No." = FILTER('TCFO*'));
-
+    ApplicationArea = All;
     layout
     {
         area(content)

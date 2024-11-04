@@ -5,6 +5,7 @@ page 50357 "Posted Issue Journal"
     PageType = List;
     SourceTable = "Item Register";
     SourceTableView = WHERE("Source Code" = FILTER('ISSUE'));
+    ApplicationArea = All;
 
     layout
     {

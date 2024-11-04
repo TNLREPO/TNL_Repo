@@ -1,6 +1,6 @@
 page 70155 "Head of Dept. Appr.-Capex"
 {
-     ApplicationArea = All;
+    ApplicationArea = All;
     CardPageID = "Capex Card";
     PageType = List;
     SourceTable = "Procurement Header";

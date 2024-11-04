@@ -2,7 +2,7 @@ page 70071 "CSI Card"
 {
     PageType = Card;
     SourceTable = "CSI Table";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

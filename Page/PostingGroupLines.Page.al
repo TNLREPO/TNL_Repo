@@ -2,6 +2,7 @@ page 50014 "Posting Group Lines."
 {
     PageType = List;
     SourceTable = "Payroll-Posting Group Line.";
+    ApplicationArea = All;
 
     layout
     {

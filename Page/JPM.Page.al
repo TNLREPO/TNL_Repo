@@ -3,7 +3,6 @@ page 70112 JPM
     ApplicationArea = All;
     PageType = List;
     SourceTable = "JPM List";
-
     layout
     {
         area(content)

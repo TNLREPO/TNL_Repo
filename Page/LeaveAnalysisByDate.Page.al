@@ -4,18 +4,18 @@ page 50059 "Leave Analysis By Date"
     PageType = Card;
     SaveValues = true;
     SourceTable = "Employee";
-
+    ApplicationArea = All;
     layout
     {
         area(content)
         {
-            field("Region Filter";Rec. "Region Filter")
+            field("Region Filter"; Rec."Region Filter")
             {
             }
-            field("Global Dimension 1 Code";Rec. "Global Dimension 1 Code")
+            field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
             {
             }
-            field("Global Dimension 2 Code";Rec. "Global Dimension 2 Code")
+            field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
             {
             }
         }

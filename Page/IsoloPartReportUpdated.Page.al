@@ -4,6 +4,7 @@ page 80072 "Isolo Part Report Updated"
     SourceTable = "Item Ledger Entry";
     SourceTableView = WHERE("Source No." = FILTER('TCSC*'),
                             "Inventory Posting Group" = FILTER('N_PARTCONS|N_PARTS'));
+    ApplicationArea = All;
 
     layout
     {

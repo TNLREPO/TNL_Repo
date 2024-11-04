@@ -2,7 +2,7 @@ page 50282 "Periodic - Maintenance"
 {
     PageType = List;
     SourceTable = "VRI Table";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

@@ -10,7 +10,7 @@ page 70162 "Full  Payment Appr.-Capex"
                             "Document Type" = filter(Capex),
                             Reject = filter(false),
                             "Bal. Paymt. Audit" = FILTER(<> Approved | Rejected));
-
+    ApplicationArea = All;
     layout
     {
         area(content)

@@ -3,6 +3,7 @@ page 70052 "Transfer Route List"
     CardPageID = "Transfer Routes";
     PageType = List;
     SourceTable = "Location";
+    ApplicationArea = All;
 
     layout
     {

@@ -4,7 +4,7 @@ page 50333 "COF Job Instruction Subform"
     DelayedInsert = true;
     PageType = ListPart;
     SourceTable = "Customer Order Line";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

@@ -2,6 +2,7 @@ page 50214 "Request Approval."
 {
     PageType = Card;
     SourceTable = "Motor Show Repair";
+    ApplicationArea = All;
 
     layout
     {

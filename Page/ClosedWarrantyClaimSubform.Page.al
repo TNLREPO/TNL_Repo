@@ -4,7 +4,7 @@ page 50169 "Closed Warranty Claim Subform"
     DelayedInsert = true;
     PageType = ListPart;
     SourceTable = "Warranty Claim Detail";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

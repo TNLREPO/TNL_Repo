@@ -4,7 +4,7 @@ page 50153 "Emolument Groups Survey"
     Editable = false;
     PageType = List;
     SourceTable = "Payroll-Emolument Header";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

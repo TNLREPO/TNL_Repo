@@ -2,6 +2,7 @@ page 80055 "Service Index Card-Treated"
 {
     PageType = Card;
     SourceTable = "Service IndexX";
+    ApplicationArea = All;
 
     layout
     {

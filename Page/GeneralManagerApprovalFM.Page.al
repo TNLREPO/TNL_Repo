@@ -4,7 +4,7 @@ page 70214 "General Manager Approval FM"
     Editable = false;
     PageType = List;
     ApplicationArea = All;
-    
+
     SourceTable = "Air Online Header";
     SourceTableView = WHERE(Send = CONST(true),
                             HoDPartApproval = CONST(true),

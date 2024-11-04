@@ -3,6 +3,7 @@ page 50385 "Sublet List"
     CardPageID = "Sublet Register Card";
     PageType = List;
     SourceTable = "Sublet Service";
+    ApplicationArea = All;
 
     layout
     {

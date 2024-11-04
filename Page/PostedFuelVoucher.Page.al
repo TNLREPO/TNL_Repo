@@ -3,7 +3,7 @@ page 50167 "Posted Fuel Voucher"
     PageType = Card;
     SourceTable = "Fuel Vouchers.";
     SourceTableView = WHERE(Posted = filter(true));
-
+    ApplicationArea = All;
     layout
     {
         area(content)

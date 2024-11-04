@@ -8,6 +8,7 @@ page 50040 "POS Receipt List"
                             "Cash/Cheque" = FILTER(Cash),
                             Posted = filter(false),
                             Reject = filter(false));
+    ApplicationArea = All;
 
     layout
     {

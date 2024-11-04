@@ -2,7 +2,7 @@ page 90061 "Item Picture API"
 {
     PageType = List;
     SourceTable = Item;
-
+    ApplicationArea = All;
     layout
     {
         area(content)

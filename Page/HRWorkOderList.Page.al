@@ -3,6 +3,7 @@ page 50453 "HR Work Oder List"
     CardPageID = "HR Work Order";
     PageType = List;
     SourceTable = "HR Work Order";
+    ApplicationArea = All;
 
     layout
     {

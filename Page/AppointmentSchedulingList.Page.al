@@ -2,6 +2,7 @@ page 50370 "Appointment Scheduling List"
 {
     PageType = Card;
     SourceTable = "Appointment Scheduling";
+    ApplicationArea = All;
 
     layout
     {

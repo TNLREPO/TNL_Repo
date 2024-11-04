@@ -3,6 +3,7 @@ page 50476 "Bulk Issue"
     PageType = List;
     SourceTable = "Bulk Issue";
     SourceTableView = WHERE(Issued = filter(false));
+    ApplicationArea = All;
 
     layout
     {

@@ -54,6 +54,7 @@ report 50086 "Leave PLan Updates"
                 field(PlanDate; PlanDate)
                 {
                     Caption = 'Select Start Period';
+                    ApplicationArea = All;
                 }
             }
         }

@@ -2,6 +2,7 @@ page 80022 "Reminder Calls"
 {
     PageType = List;
     SourceTable = "Reminder Calls";
+    ApplicationArea = All;
 
     layout
     {

@@ -5,7 +5,7 @@ page 50356 "Parts Reserved Line"
     PageType = Card;
     SourceTable = "Service Line";
     SourceTableView = WHERE("Confirmed (Parts)" = filter(true));
-
+    ApplicationArea = All;
     layout
     {
         area(content)

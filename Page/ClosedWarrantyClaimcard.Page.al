@@ -4,7 +4,7 @@ page 50168 "Closed Warranty Claim card"
     PageType = Card;
     SourceTable = "Warranty Claim Header";
     SourceTableView = WHERE("Warranty Closed" = filter(true));
-
+    ApplicationArea = All;
     layout
     {
         area(content)

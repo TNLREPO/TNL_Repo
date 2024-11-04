@@ -2,7 +2,7 @@ page 50404 "Warehouse Parts"
 {
     PageType = Card;
     SourceTable = "Stockkeeping Unit";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

@@ -2,7 +2,7 @@ page 70172 "Complaint Card"
 {
     PageType = Card;
     SourceTable = "CRM Register";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

@@ -2,6 +2,7 @@ page 50274 "Periodic Maintenance Card"
 {
     PageType = Card;
     SourceTable = "Periodic Maintenance";
+    ApplicationArea = All;
 
     layout
     {

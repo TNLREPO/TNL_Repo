@@ -4,7 +4,7 @@ page 50178 "Customer Mth Vehicle Request"
     DelayedInsert = true;
     PageType = Card;
     SourceTable = "Dealer Mth. Vehicle Request";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

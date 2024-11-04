@@ -4,6 +4,7 @@ page 50212 "Transaction Closure"
     PageType = List;
     SourceTable = "TNL Work Order";
     SourceTableView = WHERE("Transaction Close" = FILTER(True));
+    ApplicationArea = All;
 
     layout
     {

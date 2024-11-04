@@ -2,7 +2,7 @@ page 70170 "Colour Code"
 {
     PageType = List;
     SourceTable = "Colour Codes";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

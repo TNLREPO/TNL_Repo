@@ -5,6 +5,7 @@ page 70060 "Request For Quotes COF"
     SourceTable = "Procurement Header";
     SourceTableView = WHERE(Compliance = CONST(false),
                             Send = CONST(false), "Document Type" = CONST(Opex), Reject = CONST(false));
+    ApplicationArea = All;
 
     layout
     {

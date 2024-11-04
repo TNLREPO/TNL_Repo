@@ -3,6 +3,7 @@ page 80013 "Clocking Sheet"
     AutoSplitKey = true;
     PageType = List;
     SourceTable = "ClockingX";
+    ApplicationArea = All;
 
     layout
     {

@@ -5,6 +5,7 @@ page 50612 "Chanage Management Subform"
     MultipleNewLines = true;
     PageType = ListPart;
     SourceTable = "Change Management Line";
+    ApplicationArea = All;
 
     layout
     {

@@ -2,7 +2,6 @@ page 70169 "Approved Capex Card5"
 {
     ApplicationArea = All;
     SourceTable = "Procurement Header";
-
     layout
     {
         area(content)

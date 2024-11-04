@@ -3,7 +3,7 @@ page 50141 "Data Capture"
     Editable = false;
     PageType = Card;
     SourceTable = "Data Capture";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

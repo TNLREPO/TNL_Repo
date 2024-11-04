@@ -2,7 +2,7 @@ page 50152 "Emolument Group Header"
 {
     PageType = Card;
     SourceTable = "Payroll-Emolument Header";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

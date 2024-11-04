@@ -3,7 +3,6 @@ page 70151 "Approved Capex Card3"
     ApplicationArea = All;
     PageType = Card;
     SourceTable = "Procurement Header";
-
     layout
     {
         area(content)

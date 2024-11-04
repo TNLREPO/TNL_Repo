@@ -4,7 +4,7 @@ page 70201 "Departmental Float"
     PageType = List;
     SourceTable = "Local Part Purchase Register";
     SourceTableView = WHERE(Float = CONST(true));
-
+    ApplicationArea = All;
     layout
     {
         area(content)

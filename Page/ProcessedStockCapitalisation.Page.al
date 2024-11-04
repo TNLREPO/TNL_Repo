@@ -3,6 +3,7 @@ page 50234 "Processed Stock Capitalisation"
     PageType = Card;
     SourceTable = "Stock Capitalisation";
     SourceTableView = WHERE(Processed = FILTER(True));
+    ApplicationArea = All;
 
     layout
     {

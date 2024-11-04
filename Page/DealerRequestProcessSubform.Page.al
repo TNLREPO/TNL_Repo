@@ -2,7 +2,7 @@ page 50182 "Dealer Request Process Subform"
 {
     PageType = Card;
     SourceTable = "Dealer Mth. Vehicle Request";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

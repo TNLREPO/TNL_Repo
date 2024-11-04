@@ -6,6 +6,7 @@ page 70504 "Pending Takata Customer List"
     SourceTableView = WHERE(Email = FILTER(''),
                             "KIV Customer" = FILTER(false),
                             "Not Reachable" = FILTER(false));
+    ApplicationArea = All;
 
     layout
     {

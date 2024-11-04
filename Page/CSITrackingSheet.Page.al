@@ -2,6 +2,7 @@ page 50252 "CSI Tracking Sheet"
 {
     PageType = Card;
     SourceTable = "CSI Table";
+    ApplicationArea = All;
 
     layout
     {

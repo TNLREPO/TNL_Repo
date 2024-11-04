@@ -1,6 +1,7 @@
 page 70101 "TNL Sales Parts"
 {
     PageType = RoleCenter;
+    ApplicationArea = All;
 
     layout
     {

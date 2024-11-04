@@ -1,6 +1,5 @@
 page 70010 "Cheque Payment List"
 {
-    
     ApplicationArea = All;
     CardPageID = "Cheque Payment Card";
     PageType = List;

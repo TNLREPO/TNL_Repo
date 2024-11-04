@@ -4,26 +4,26 @@ page 50311 "Monthly Regular Variable List"
     ModifyAllowed = false;
     PageType = Card;
     SourceTable = "Monthly Variables Header.";
-
+    ApplicationArea = All;
     layout
     {
         area(content)
         {
             repeater(Group)
             {
-                field("Payroll Period";Rec."Payroll Period")
+                field("Payroll Period"; Rec."Payroll Period")
                 {
                 }
-                field("E/d Code";Rec. "E/d Code")
+                field("E/d Code"; Rec."E/d Code")
                 {
                 }
-                field("Recorded By";Rec."Recorded By")
+                field("Recorded By"; Rec."Recorded By")
                 {
                 }
-                field(Date;Rec.Date)
+                field(Date; Rec.Date)
                 {
                 }
-                field(Closed;Rec.Closed)
+                field(Closed; Rec.Closed)
                 {
                 }
             }

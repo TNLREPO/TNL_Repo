@@ -2,6 +2,7 @@ page 50623 "TNL_Work Order Card"
 {
     PageType = Card;
     SourceTable = "TNL Work Order";
+    ApplicationArea = All;
 
     layout
     {

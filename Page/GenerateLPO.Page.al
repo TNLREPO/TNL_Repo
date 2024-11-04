@@ -1,6 +1,6 @@
 page 70204 "Generate LPO"
 {
-     ApplicationArea = All;
+    ApplicationArea = All;
     CardPageID = "LPP Card";
     PageType = List;
     SourceTable = "Local Part Purchase Register";

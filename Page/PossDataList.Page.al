@@ -4,7 +4,7 @@ page 50175 "Poss Data List"
     ModifyAllowed = false;
     PageType = Card;
     SourceTable = "Poss Data";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

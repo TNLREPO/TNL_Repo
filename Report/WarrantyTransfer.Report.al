@@ -77,9 +77,11 @@ report 50396 "Warranty Transfer"
             {
                 field("Start Date"; StartDate)
                 {
+                    ApplicationArea = All;
                 }
                 field("End Date"; EndDate)
                 {
+                    ApplicationArea = All;
                 }
             }
         }

@@ -2,7 +2,7 @@ page 90050 CustomerOrderBPAPI
 {
     PageType = List;
     SourceTable = "Repair Order";
-
+    ApplicationArea = All;
     layout
     {
         area(content)

@@ -4,6 +4,7 @@ page 50083 "New Leave Payment List"
     ModifyAllowed = false;
     PageType = Card;
     SourceTable = "Leave Payment Rev 2";
+    ApplicationArea = All;
 
     layout
     {

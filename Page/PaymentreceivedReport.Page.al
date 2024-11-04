@@ -6,6 +6,7 @@ page 70232 "Payment received Report"
                             "Posting Date" = FILTER('01/01/22..31/12/22'),
                             "Document Type" = FILTER(' ' | Payment),
                             "Global Dimension 1 Code" = FILTER('05PARTS'));
+    ApplicationArea = All;
 
     layout
     {

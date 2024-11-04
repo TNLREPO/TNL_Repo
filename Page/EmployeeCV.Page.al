@@ -3,12 +3,12 @@ page 50314 "Employee CV"
     Caption = 'Employee Picture';
     PageType = Card;
     SourceTable = "Employee";
-
+    ApplicationArea = All;
     layout
     {
         area(content)
         {
-            field("Curriculum Vitae";Rec. "Curriculum Vitae")
+            field("Curriculum Vitae"; Rec."Curriculum Vitae")
             {
             }
         }

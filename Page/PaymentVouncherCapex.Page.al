@@ -7,6 +7,7 @@ page 70160 "Payment Vouncher-Capex"
                             "Voucher Raised" = filter(true),
                             Closed = filter(false),
                             Reject = filter(false));
+    ApplicationArea = All;
 
     layout
     {

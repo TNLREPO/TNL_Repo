@@ -136,7 +136,7 @@ page 50377 "GUC Transfer Update"
                 field("Derived from Blanket Order"; Rec."Derived from Blanket Order")
                 {
                 }
-               
+
                 field("Originally Ordered No."; Rec."Originally Ordered No.")
                 {
                 }
@@ -155,7 +155,7 @@ page 50377 "GUC Transfer Update"
                 field("Purchasing Code"; Rec."Purchasing Code")
                 {
                 }
-                
+
                 field("Completely Invoiced"; Rec."Completely Invoiced")
                 {
                 }

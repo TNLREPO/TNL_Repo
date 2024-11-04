@@ -7,6 +7,7 @@ page 70234 "Payment Outstanding 4r Dealers"
                             "Document Type" = FILTER(Invoice),
                             "Global Dimension 1 Code" = FILTER('05PARTS'),
                             "Remaining Amount" = FILTER('<>0'));
+    ApplicationArea = All;
 
     layout
     {
