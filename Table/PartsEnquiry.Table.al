@@ -338,40 +338,40 @@ table 50095 "Parts Enquiry"
 
     trigger OnInsert()
     begin
-        IF "Reference No." <> '' THEN BEGIN
-            IF "Search Code" = '' THEN BEGIN
-                InvSetup.GET;
-                InvSetup.TESTFIELD("Search Tracker Nos.");
-                NoseriesMgt.InitSeries(InvSetup."Search Tracker Nos.", xRec."No. Series", 0D, "Search Code", "No. Series");
-                "Entry No" := 10000;
-            END;
-        END
-        ELSE
-            IF CONFIRM('Search for Next Customer ?', FALSE) THEN BEGIN
-                IF "Search Code" = '' THEN BEGIN
-                    InvSetup.GET;
-                    InvSetup.TESTFIELD("Search Tracker Nos.");
-                    NoseriesMgt.InitSeries(InvSetup."Search Tracker Nos.", xRec."No. Series", 0D, "Search Code", "No. Series");
-                    "Entry No" := 10000;
-                END;
-            END ELSE BEGIN
-                "Search Code" := xRec."Search Code";
-                RecPart.SETRANGE(RecPart."Search Code", xRec."Search Code");
-                IF RecPart.FIND('+') THEN
-                    "Entry No" := RecPart."Entry No" + 10000;
-                "Request Date" := xRec."Request Date";
-                "Location Code" := xRec."Location Code";
-                VALIDATE("Request by", xRec."Request by");
-                "No. Series" := xRec."No. Series";
+        /*  IF "Reference No." <> '' THEN BEGIN
+             IF "Search Code" = '' THEN BEGIN
+                 InvSetup.GET;
+                 InvSetup.TESTFIELD("Search Tracker Nos.");
+                 NoseriesMgt.InitSeries(InvSetup."Search Tracker Nos.", xRec."No. Series", 0D, "Search Code", "No. Series");
+                 "Entry No" := 10000;
+             END;
+         END
+         ELSE
+             //IF CONFIRM('Search for Next Customer ?', FALSE) THEN BEGIN
+             IF "Search Code" = '' THEN BEGIN
+                 InvSetup.GET;
+                 InvSetup.TESTFIELD("Search Tracker Nos.");
+                 NoseriesMgt.InitSeries(InvSetup."Search Tracker Nos.", xRec."No. Series", 0D, "Search Code", "No. Series");
+                 "Entry No" := 10000;
+                 //END;
+             END ELSE BEGIN
+                 "Search Code" := xRec."Search Code";
+                 RecPart.SETRANGE(RecPart."Search Code", xRec."Search Code");
+                 IF RecPart.FIND('+') THEN
+                     "Entry No" := RecPart."Entry No" + 10000;
+                 "Request Date" := xRec."Request Date";
+                 "Location Code" := xRec."Location Code";
+                 VALIDATE("Request by", xRec."Request by");
+                 "No. Series" := xRec."No. Series";
 
-            END;
-        IF UserRec.GET(USERID) THEN
-            "Department Code" := UserRec.Department;
-        "Location Code" := UserRec."Location Code";
-        "User ID" := USERID;
-        "Time of Request" := TIME;
-        "Last Time Modified" := TIME;
-        "Last Date Modified" := TODAY;
+             END;
+         IF UserRec.GET(USERID) THEN
+             "Department Code" := UserRec.Department;
+         "Location Code" := UserRec."Location Code";
+         "User ID" := USERID;
+         "Time of Request" := TIME;
+         "Last Time Modified" := TIME;
+         "Last Date Modified" := TODAY; */
     end;
 
     trigger OnModify()

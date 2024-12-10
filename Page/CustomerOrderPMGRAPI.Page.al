@@ -60,6 +60,10 @@ page 90049 CustomerOrderPMGRAPI
                 field("VAT Amount"; Rec."VAT Amount")
                 {
                 }
+                field(Job_Type; Rec."Job Type2")
+                {
+
+                }
             }
         }
     }

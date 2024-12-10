@@ -549,18 +549,7 @@ page 60006 "Managing Director Role Center"
                     RunObject = Page "Financial Reports";
                     ToolTip = 'Get insight into the financial data stored in your chart of accounts. Financial reports analyze figures in G/L accounts, and compare general ledger entries with general ledger budget entries. For example, you can view the general ledger entries as percentages of the budget entries. Financial reports provide the data for core financial statements and views, such as the Cash Flow chart.';
                 }
-#if not CLEAN22
-                action("Intrastat Journals")
-                {
-                    ApplicationArea = BasicEU;
-                    Caption = 'Intrastat Journals';
-                    RunObject = Page "Intrastat Jnl. Batches";
-                    ToolTip = 'Summarize the value of your purchases and sales with business partners in the EU for statistical purposes and prepare to send it to the relevant authority.';
-                    ObsoleteState = Pending;
-                    ObsoleteTag = '22.0';
-                    ObsoleteReason = 'Intrastat related functionalities are moved to Intrastat extensions.';
-                }
-#endif
+
                 action("Sales Budgets")
                 {
                     ApplicationArea = SalesBudget;

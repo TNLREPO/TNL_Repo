@@ -31,19 +31,19 @@ tableextension 50077 "Service Line Ext" extends "Service Line"
 
             trigger OnValidate()
             begin
-                 /*   IF ((Type = Type::Resource) OR (Type = Type::Cost)) THEN BEGIN
-                     IF "End Date" <> 0D THEN BEGIN
-                       ServMgtSetup.GET;
-                       ServMgtSetup.TESTFIELD("Break Begin Time");
-                       ServMgtSetup.TESTFIELD("Break End Time");
-                       "End Time" := TIME;
-                       IF (("Start Time" < ServMgtSetup."Break Begin Time") AND ("End Time" > ServMgtSetup."Break End Time")) THEN BEGIN
-                         "Duration in Hrs":=(("End Time" - ServMgtSetup."Break End Time") + (ServMgtSetup."Break Begin Time" -"Start Time"))/(3600000);
-                       END
-                       ELSE
-                         "Duration in Hrs" := (("End Time" - "Start Time")/(3600000));
-                     END;
-                   END; */
+                /*   IF ((Type = Type::Resource) OR (Type = Type::Cost)) THEN BEGIN
+                    IF "End Date" <> 0D THEN BEGIN
+                      ServMgtSetup.GET;
+                      ServMgtSetup.TESTFIELD("Break Begin Time");
+                      ServMgtSetup.TESTFIELD("Break End Time");
+                      "End Time" := TIME;
+                      IF (("Start Time" < ServMgtSetup."Break Begin Time") AND ("End Time" > ServMgtSetup."Break End Time")) THEN BEGIN
+                        "Duration in Hrs":=(("End Time" - ServMgtSetup."Break End Time") + (ServMgtSetup."Break Begin Time" -"Start Time"))/(3600000);
+                      END
+                      ELSE
+                        "Duration in Hrs" := (("End Time" - "Start Time")/(3600000));
+                    END;
+                  END; */
             end;
         }
         field(50006; "Start Time"; Time)

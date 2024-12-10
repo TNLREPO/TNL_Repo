@@ -261,28 +261,7 @@ page 90019 "XMD Role Center"
                 ToolTip = 'Calculate VAT amounts from sales, and submit the amounts to a tax authority.';
             }
 
-            action("&Intrastat - Checklist")
-            {
-                ApplicationArea = Basic, Suite;
-                Caption = '&Intrastat - Checklist';
-                Image = "Report";
-#pragma warning disable AL0432
-                RunObject = Report 502;
-#pragma warning restore AL0432
-                ToolTip = 'View a checklist that you can use to find possible errors before printing and also as documentation for what is printed. You can use the report to check the Intrastat journal before you use the Intrastat - Make Disk Tax Auth batch job.';
-            }
-            action("Intrastat - For&m")
-            {
-                ApplicationArea = Basic, Suite;
-                Caption = 'Intrastat - For&m';
-                Image = "Report";
-#pragma warning disable AL0432
-                RunObject = Report 501;
-#pragma warning restore AL0432
-                ToolTip = 'View all the information that must be transferred to the printed Intrastat form.';
-            }
-
-            action("Cost Accounting P/L Statement")
+              action("Cost Accounting P/L Statement")
             {
                 ApplicationArea = CostAccounting;
                 Caption = 'Cost Accounting P/L Statement';

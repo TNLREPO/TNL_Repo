@@ -339,37 +339,6 @@ page 60005 "Accountant RC"
 
             }
 
-#if not CLEAN22
-            group(Action60)
-            {
-                Caption = 'Intrastat';
-                ObsoleteState = Pending;
-                ObsoleteTag = '22.0';
-                ObsoleteReason = 'Intrastat related functionalities are moved to Intrastat extensions.';
-                action("&Intrastat - Checklist")
-                {
-                    ApplicationArea = BasicEU;
-                    Caption = '&Intrastat - Checklist';
-                    Image = "Report";
-                    RunObject = Report "Intrastat - Checklist";
-                    ToolTip = 'View a checklist that you can use to find possible errors before printing and also as documentation for what is printed. You can use the report to check the Intrastat journal before you use the Intrastat - Make Disk Tax Auth batch job.';
-                    ObsoleteState = Pending;
-                    ObsoleteTag = '22.0';
-                    ObsoleteReason = 'Intrastat related functionalities are moved to Intrastat extensions.';
-                }
-                action("Intrastat - For&m")
-                {
-                    ApplicationArea = BasicEU;
-                    Caption = 'Intrastat - For&m';
-                    Image = "Report";
-                    RunObject = Report "Intrastat - Form";
-                    ToolTip = 'View all the information that must be transferred to the printed Intrastat form.';
-                    ObsoleteState = Pending;
-                    ObsoleteTag = '22.0';
-                    ObsoleteReason = 'Intrastat related functionalities are moved to Intrastat extensions.';
-                }
-            }
-#endif
             group("Cost Accounting")
             {
                 Caption = 'Cost Accounting';
@@ -510,18 +479,7 @@ page 60005 "Accountant RC"
                 RunObject = Page "VAT Statement Names";
                 ToolTip = 'View a statement of posted VAT amounts, calculate your VAT settlement amount for a certain period, such as a quarter, and prepare to send the settlement to the tax authorities.';
             }
-#if not CLEAN22
-            action(Intrastat)
-            {
-                ApplicationArea = BasicEU;
-                Caption = 'Intrastat';
-                RunObject = Page "Intrastat Jnl. Batches";
-                ToolTip = 'Report your trade with other EU countries/regions for Intrastat reporting.';
-                ObsoleteState = Pending;
-                ObsoleteTag = '22.0';
-                ObsoleteReason = 'Intrastat related functionalities are moved to Intrastat extensions.';
-            }
-#endif
+
         }
         area(sections)
         {
@@ -545,8 +503,7 @@ page 60005 "Accountant RC"
                     ApplicationArea = Basic, Suite;
                     Caption = 'Recurring General Journals';
                     RunObject = Page "General Journal Batches";
-                    RunPageView = WHERE("Template Type" = CONST(General),
-                                        Recurring = CONST(true));
+                    RunPageView = WHERE("Template Type" = CONST(General), Recurring = CONST(true));
                     ToolTip = 'Define how to post transactions that recur with few or no changes to general ledger, bank, customer, vendor, or fixed asset accounts';
                 }
                 action(Action170)
@@ -822,19 +779,7 @@ page 60005 "Accountant RC"
                                         Recurring = CONST(false));
                     ToolTip = 'Post intercompany transactions. IC general journal lines must contain either an IC partner account or a customer or vendor account that has been assigned an intercompany partner code.';
                 }
-#if not CLEAN22
-                action(Action1102601002)
-                {
-                    ApplicationArea = BasicEU;
-                    Caption = 'Intrastat Journals';
-                    Image = "Report";
-                    RunObject = Page "Intrastat Jnl. Batches";
-                    ToolTip = 'Summarize the value of your purchases and sales with business partners in the EU for statistical purposes and prepare to send it to the relevant authority.';
-                    ObsoleteState = Pending;
-                    ObsoleteTag = '22.0';
-                    ObsoleteReason = 'Intrastat related functionalities are moved to Intrastat extensions.';
-                }
-#endif
+
                 action(PostedGeneralJournals)
                 {
                     ApplicationArea = Basic, Suite;
@@ -2042,19 +1987,7 @@ page 60005 "Accountant RC"
                     RunObject = Report "Post Inventory Cost to G/L";
                     ToolTip = 'Record the quantity and value changes to the inventory in the item ledger entries and the value entries when you post inventory transactions, such as sales shipments or purchase receipts.';
                 }
-#if not CLEAN22
-                action("Intrastat &Journal")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Intrastat &Journal';
-                    Image = Journal;
-                    RunObject = Page "Intrastat Jnl. Batches";
-                    ToolTip = 'Summarize the value of your purchases and sales with business partners in the EU for statistical purposes and prepare to send it to the relevant authority.';
-                    ObsoleteState = Pending;
-                    ObsoleteTag = '22.0';
-                    ObsoleteReason = 'Intrastat related functionalities are moved to Intrastat extensions.';
-                }
-#endif
+
                 action("Calc. and Pos&t VAT Settlement")
                 {
                     ApplicationArea = VAT;
