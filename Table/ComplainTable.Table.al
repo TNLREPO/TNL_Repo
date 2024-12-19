@@ -100,9 +100,9 @@ table 50052 "Complain Table"
                     "COF Date" := COFRec."Customer Order Form Date";
                 END;
 
-               /*  IF COFRec.GET("COF No.") THEN
-                    "Repeat Repair" := COFRec."Repeat Repair";
-                VALIDATE("Vehicle Registration No."); */
+                /*  IF COFRec.GET("COF No.") THEN
+                     "Repeat Repair" := COFRec."Repeat Repair";
+                 VALIDATE("Vehicle Registration No."); */
             end;
         }
         field(19; "Vehicle Registration No."; Code[20])
@@ -247,7 +247,11 @@ table 50052 "Complain Table"
         IF "Complain Code" = '' THEN BEGIN
             ServMgtSetup.GET;
             ServMgtSetup.TESTFIELD("Complain Nos");
-            NoSeriesMgt.InitSeries(ServMgtSetup."Complain Nos", xRec."Complain Code", 0D, "Complain Code", "No. Series");
+            Rec."No. Series" := ServMgtSetup."Complain Nos";
+            if NoSeriesMgt.AreRelated(Rec."No. Series", xRec."No. Series") then
+                Rec."No. Series" := xRec."No. Series";
+            Rec."Complain Code" := NoSeriesMgt.GetNextNo("No. Series");
+
         END;
         "Date of Complaint" := TODAY;
     end;
@@ -255,13 +259,13 @@ table 50052 "Complain Table"
     var
         ServMgtSetup: Record "Service Mgt. Setup";
         CompRec: Record "Complain Table";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Customer: Record Customer;
         ServiceItem: Record "Service Item";
         Vendor: Record Vendor;
         COFRec: Record "Customer Order Table.";
 
-       procedure AssistEdit(OldComplain: Record "Complain Table"): Boolean
+    procedure AssistEdit(OldComplain: Record "Complain Table"): Boolean
     begin
         /* WITH CompRec DO BEGIN
             CompRec := Rec;

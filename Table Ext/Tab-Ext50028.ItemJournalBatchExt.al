@@ -101,7 +101,7 @@ tableextension 50028 "Item Journal Batch Ext" extends "Item Journal Batch"
         ReqLine: Record "Requisition Line";
         ReqLine2: Record "Requisition Line";
         PurchSetup: Record "Purchases & Payables Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         WorksheetName: Code[10];
         Window: Dialog;
         NoOfRecords: Integer;

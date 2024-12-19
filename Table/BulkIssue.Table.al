@@ -75,13 +75,16 @@ table 50173 "Bulk Issue"
         IF "No." = '' THEN BEGIN
             InvtSetup.GET;
             InvtSetup.TESTFIELD("Bulk Issue");
-            NoSeriesMgt.InitSeries(InvtSetup."Bulk Issue", xRec."No. Series", 0D, "No.", "No. Series");
+            "No. Series" := InvtSetup."Bulk Issue";
+            if NoSeriesMgt.AreRelated("No. Series", xRec."No. Series") then
+                "No. Series" := xRec."No. Series";
+            "No." := NoSeriesMgt.GetNextNo("No. Series");
         END;
     end;
 
     var
         ItemRec: Record Item;
         InvtSetup: Record "Inventory Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
 }
 

@@ -75,6 +75,6 @@ report 50086 "Leave PLan Updates"
         PlanDate: Date;
         LeaveNo: Code[25];
         HumanResSetup: Record 5218;
-        NoSeriesMgt: Codeunit 396;
+        NoSeriesMgt: Codeunit "No. Series";
 }
 

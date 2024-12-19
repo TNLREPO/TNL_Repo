@@ -63,8 +63,8 @@ table 50072 Applicants
 
             trigger OnValidate()
             begin
-               /*  IF PostCode.GET("Post Code") THEN
-                    City := PostCode.City; */
+                /*  IF PostCode.GET("Post Code") THEN
+                     City := PostCode.City; */
             end;
         }
         field(12; County; Text[30])
@@ -81,218 +81,218 @@ table 50072 Applicants
         }
         field(16; "Alt. Address Code"; Code[10])
         {
-            TableRelation = "Alternative Address".Code WHERE("Employee No."=FIELD("No."));
+            TableRelation = "Alternative Address".Code WHERE("Employee No." = FIELD("No."));
         }
-        field(17;"Alt. Address Start Date";Date)
+        field(17; "Alt. Address Start Date"; Date)
         {
         }
-        field(18;"Alt. Address End Date";Date)
+        field(18; "Alt. Address End Date"; Date)
         {
         }
-        field(19;Picture;BLOB)
+        field(19; Picture; BLOB)
         {
             SubType = Bitmap;
         }
-        field(20;"Birth Date";Date)
+        field(20; "Birth Date"; Date)
         {
         }
-        field(24;Sex;Option)
+        field(24; Sex; Option)
         {
             OptionMembers = Male,Female;
         }
-        field(25;"Country Code";Code[10])
+        field(25; "Country Code"; Code[10])
         {
             TableRelation = "Country/Region";
         }
-        
-        field(31;"Application Status";Option)
+
+        field(31; "Application Status"; Option)
         {
             OptionMembers = " ","Under Interview","Short Listed",Accepted,Rejected;
-          
+
         }
-        field(36;"Global Dimension 1 Code";Code[20])
+        field(36; "Global Dimension 1 Code"; Code[20])
         {
-            
+
         }
-        field(37;"Global Dimension 2 Code";Code[20])
+        field(37; "Global Dimension 2 Code"; Code[20])
         {
         }
-        field(39;Comment;Boolean)
+        field(39; Comment; Boolean)
         {
-            
+
         }
-        field(40;"Last Date Modified";Date)
+        field(40; "Last Date Modified"; Date)
         {
             Editable = false;
         }
-        field(48;Pager;Text[30])
+        field(48; Pager; Text[30])
         {
         }
-        field(49;"Fax No.";Text[30])
+        field(49; "Fax No."; Text[30])
         {
         }
-        field(50;"Company E-Mail";Text[80])
+        field(50; "Company E-Mail"; Text[80])
         {
         }
-        field(51;Title;Text[30])
+        field(51; Title; Text[30])
         {
         }
-        field(52;"Salespers./Purch. Code";Code[10])
+        field(52; "Salespers./Purch. Code"; Code[10])
         {
             TableRelation = "Salesperson/Purchaser";
         }
-        field(53;"No. Series";Code[10])
+        field(53; "No. Series"; Code[10])
         {
             Editable = false;
             TableRelation = "No. Series";
         }
-        field(50000;"Region Code";Code[10])
+        field(50000; "Region Code"; Code[10])
         {
             TableRelation = "Business Unit".Code;
         }
-        field(50015;"Posting Group";Code[20])
+        field(50015; "Posting Group"; Code[20])
         {
             TableRelation = "Payroll-Posting Group Header."."Posting Group Code";
         }
-        field(50016;"Employee Group";Code[20])
+        field(50016; "Employee Group"; Code[20])
         {
-            
+
         }
-        field(50071;Blocked;Boolean)
+        field(50071; Blocked; Boolean)
         {
         }
-        field(50073;"Modified By";Code[10])
+        field(50073; "Modified By"; Code[10])
         {
             Editable = false;
         }
-        field(50076;Class;Code[10])
+        field(50076; Class; Code[10])
         {
             TableRelation = TWC."Distributors Code";
         }
-        field(50086;"Date Offer Made";Date)
+        field(50086; "Date Offer Made"; Date)
         {
         }
-        field(50088;"Position Applied For";Code[10])
+        field(50088; "Position Applied For"; Code[10])
         {
-            
+
         }
-        field(50089;"Position Description";Text[30])
+        field(50089; "Position Description"; Text[30])
         {
             Editable = false;
         }
-        field(50092;"Agreed Start Date";Date)
+        field(50092; "Agreed Start Date"; Date)
         {
         }
-        field(50093;"Assigned Employee No";Code[10])
+        field(50093; "Assigned Employee No"; Code[10])
         {
 
             trigger OnValidate()
             begin
-                IF "Assigned Employee No"<>'' THEN
-                "Application Status" := "Application Status"::Accepted
+                IF "Assigned Employee No" <> '' THEN
+                    "Application Status" := "Application Status"::Accepted
                 ELSE
-                IF "Application Status" = "Application Status"::Accepted THEN
-                "Application Status" := "Application Status"::" ";
+                    IF "Application Status" = "Application Status"::Accepted THEN
+                        "Application Status" := "Application Status"::" ";
             end;
         }
-        field(50094;"Date Accepted/Rejected";Date)
+        field(50094; "Date Accepted/Rejected"; Date)
         {
         }
-        field(50095;"Next of Kin";Text[30])
+        field(50095; "Next of Kin"; Text[30])
         {
-            
+
         }
-        field(50096;Staffed;Boolean)
+        field(50096; Staffed; Boolean)
         {
             InitValue = false;
         }
-        field(50097;"Last Renumeration";Decimal)
+        field(50097; "Last Renumeration"; Decimal)
         {
             BlankZero = true;
-            DecimalPlaces = 2:2;
+            DecimalPlaces = 2 : 2;
         }
-        field(53000;"First Interview";Boolean)
+        field(53000; "First Interview"; Boolean)
         {
         }
-        field(53001;"First Interview Date";Date)
+        field(53001; "First Interview Date"; Date)
         {
         }
-        field(53002;"First Interview Result";Decimal)
+        field(53002; "First Interview Result"; Decimal)
         {
-            DecimalPlaces = 1:1;
+            DecimalPlaces = 1 : 1;
 
             trigger OnValidate()
             begin
                 "First Interview Maximum" := "First Interview Result";
             end;
         }
-        field(53003;"Second Interview";Boolean)
+        field(53003; "Second Interview"; Boolean)
         {
         }
-        field(53004;"Second Interview Date";Date)
+        field(53004; "Second Interview Date"; Date)
         {
         }
-        field(53005;"Second Interview Result";Decimal)
+        field(53005; "Second Interview Result"; Decimal)
         {
-            DecimalPlaces = 1:1;
+            DecimalPlaces = 1 : 1;
 
             trigger OnValidate()
             begin
                 "Second Interview Maximum" := "Second Interview Result";
             end;
         }
-        field(53006;"Final Interview";Boolean)
+        field(53006; "Final Interview"; Boolean)
         {
         }
-        field(53007;"Final Interview Date";Date)
+        field(53007; "Final Interview Date"; Date)
         {
         }
-        field(53008;"Final Interview Result";Decimal)
+        field(53008; "Final Interview Result"; Decimal)
         {
-            DecimalPlaces = 1:1;
+            DecimalPlaces = 1 : 1;
 
             trigger OnValidate()
             begin
                 "Final Interview Maximum" := "Final Interview Result";
             end;
         }
-        field(53009;"First Interview Maximum";Decimal)
+        field(53009; "First Interview Maximum"; Decimal)
         {
         }
-        field(53010;"Second Interview Maximum";Decimal)
+        field(53010; "Second Interview Maximum"; Decimal)
         {
 
             trigger OnValidate()
             begin
                 IF ("Second Interview Result" > "Second Interview Maximum") THEN
-                  ERROR('Maximum Score attainable in this interview is %1',FORMAT("Second Interview Maximum"));
+                    ERROR('Maximum Score attainable in this interview is %1', FORMAT("Second Interview Maximum"));
             end;
         }
-        field(53011;"Final Interview Maximum";Decimal)
+        field(53011; "Final Interview Maximum"; Decimal)
         {
 
             trigger OnValidate()
             begin
                 IF ("Final Interview Result" > "Final Interview Maximum") THEN
-                  ERROR('Maximum Score attainable in this interview is %1',FORMAT("Final Interview Maximum"));
+                    ERROR('Maximum Score attainable in this interview is %1', FORMAT("Final Interview Maximum"));
             end;
         }
-        field(53012;"Advert Ref No";Code[20])
+        field(53012; "Advert Ref No"; Code[20])
         {
         }
-        
+
     }
 
     keys
     {
-        key(Key1;"No.")
+        key(Key1; "No.")
         {
             Clustered = true;
         }
-        key(Key2;Surname,"First Name","Middle Name")
+        key(Key2; Surname, "First Name", "Middle Name")
         {
         }
-      
+
     }
 
     fieldgroups
@@ -301,21 +301,21 @@ table 50072 Applicants
 
     trigger OnDelete()
     begin
-        
+
     end;
 
     trigger OnInsert()
     begin
         IF "No." = '' THEN BEGIN
-          HumanResSetup.GET;
-          HumanResSetup.TESTFIELD("Application Nos.");
-          //NoSeriesMgt.InitSeries(HumanResSetup."Application Nos.",xRec."No. Series",0D,"No.","No. Series");
+            HumanResSetup.GET;
+            HumanResSetup.TESTFIELD("Application Nos.");
+            //NoSeriesMgt.InitSeries(HumanResSetup."Application Nos.",xRec."No. Series",0D,"No.","No. Series");
         END;
     end;
 
     trigger OnModify()
     begin
-        
+
 
     end;
 
@@ -335,11 +335,11 @@ table 50072 Applicants
         EmployeeQualification: Record "Employee Qualification";
         Relative: Record Relative;
         EmployeeAbsence: Record "Employee Absence";
-        MiscArticleInformation: Record  "Misc. Article Information";
+        MiscArticleInformation: Record "Misc. Article Information";
         ConfidentialInformation: Record "Confidential Information";
         HumanResComment: Record "Human Resource Comment Line";
         SalespersonPurchaser: Record "Salesperson/Purchaser";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         EmployeeResUpdate: Codeunit "Employee/Resource Update";
         EmployeeSalespersonUpdate: Codeunit "Employee/Salesperson Update";
         DepartRec: Record "Dimension Value";
@@ -353,7 +353,7 @@ table 50072 Applicants
         RegRec: Record "Business Unit";
         BCRec: Record "Dimension Value";
         CCRec: Record "Dimension Value";
-        DimMgt: codeunit noseriesmanagement;
+        DimMgt: codeunit "No. Series";
 
     /*
     procedure AssistEdit(OldApplicant: Record "50072"): Boolean

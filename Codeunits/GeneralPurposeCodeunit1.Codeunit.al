@@ -802,7 +802,7 @@ codeunit 50004 "General Purpose Codeunit-1"
         GenJnlBatch: Record 232;
         GenJnlLine: Record 81;
         PayRecpt: Record 50103;
-        NoSeriesMgt: Codeunit 396;
+        NoSeriesMgt: Codeunit "No. Series";
         LineNo: Integer;
         DocNo: Code[20];
         AcctType: array[3] of Option "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset";
@@ -1731,7 +1731,7 @@ codeunit 50004 "General Purpose Codeunit-1"
     end;
 
 
-    procedure ShowItemAvailFromSearchTracker(VAR SearchTracker: Record "Parts Enquiry"; AvailabilityType: Option Date,Variant,Location,Bin,"Event")
+    procedure ShowItemAvailFromSearchTracker(VAR SearchTracker: Record "Parts Enquiry"; AvailabilityType: Enum "Item Availability Type")
     var
 
         ItemAvailFormsMgt: Codeunit "Item Availability Forms Mgt";
@@ -1749,17 +1749,17 @@ codeunit 50004 "General Purpose Codeunit-1"
         ItemAvailFormsMgt.FilterItem(Item, SearchTracker."Location Code", SearchTracker.Variant, SearchTracker."Request Date");
 
         CASE AvailabilityType OF
-            AvailabilityType::Date:
-                IF ItemAvailFormsMgt.ShowItemAvailByDate(Item, SearchTracker.FIELDCAPTION(SearchTracker."Request Date"), SearchTracker."Request Date", NewDate) THEN
+            AvailabilityType::Period:
+                IF ItemAvailFormsMgt.ShowItemAvailabilityByPeriod(Item, SearchTracker.FIELDCAPTION(SearchTracker."Request Date"), SearchTracker."Request Date", NewDate) THEN
                     SearchTracker.VALIDATE(SearchTracker."Request Date", NewDate);
             AvailabilityType::Variant:
-                IF ItemAvailFormsMgt.ShowItemAvailVariant(Item, SearchTracker.FIELDCAPTION(SearchTracker.Variant), SearchTracker.Variant, NewVariantCode) THEN
+                IF ItemAvailFormsMgt.ShowItemAvailabilityByVariant(Item, SearchTracker.FIELDCAPTION(SearchTracker.Variant), SearchTracker.Variant, NewVariantCode) THEN
                     SearchTracker.VALIDATE(SearchTracker.Variant, NewVariantCode);
             AvailabilityType::Location:
-                IF ItemAvailFormsMgt.ShowItemAvailByLoc(Item, SearchTracker.FIELDCAPTION(SearchTracker."Location Code"), SearchTracker."Location Code", NewLocationCode) THEN
+                IF ItemAvailFormsMgt.ShowItemAvailabilityByLocation(Item, SearchTracker.FIELDCAPTION(SearchTracker."Location Code"), SearchTracker."Location Code", NewLocationCode) THEN
                     SearchTracker.VALIDATE(SearchTracker."Location Code", NewLocationCode);
             AvailabilityType::"Event":
-                IF ItemAvailFormsMgt.ShowItemAvailByEvent(Item, SearchTracker.FIELDCAPTION(SearchTracker."Request Date"), SearchTracker."Request Date", NewDate, FALSE) THEN
+                IF ItemAvailFormsMgt.ShowItemAvailabilityByEvent(Item, SearchTracker.FIELDCAPTION(SearchTracker."Request Date"), SearchTracker."Request Date", NewDate, FALSE) THEN
                     SearchTracker.VALIDATE(SearchTracker."Request Date", NewDate);
         END;
     END;
@@ -1782,7 +1782,7 @@ codeunit 50004 "General Purpose Codeunit-1"
         //ItemAvailFormsMgt.FilterItem(Item,Location,Variant,TODAY);
         CASE AvailabilityType OF
             AvailabilityType::Location:
-                IF ItemAvailFormsMgt.ShowItemAvailByLoc(Item, FaultSetupLine.FIELDCAPTION(FaultSetupLine.Location), FaultSetupLine.Location, NewLocationCode) THEN
+                IF ItemAvailFormsMgt.ShowItemAvailabilityByLocation(Item, FaultSetupLine.FIELDCAPTION(FaultSetupLine.Location), FaultSetupLine.Location, NewLocationCode) THEN
                     FaultSetupLine.VALIDATE(FaultSetupLine.Location, NewLocationCode);
         END;
     End;

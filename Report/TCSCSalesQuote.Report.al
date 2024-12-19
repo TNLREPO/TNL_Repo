@@ -131,7 +131,9 @@ report 50181 "TCSC Sales - Quote"
                     column(CompanyInfoEmail; CompanyInfo."E-Mail")
                     {
                     }
+#pragma warning disable AL0432
                     column(CompanyInfoHomePage; CompanyInfo."Home Page")
+#pragma warning restore AL0432
                     {
                     }
                     column(CompanyInfoPhoneNo; CompanyInfo."Phone No.")
@@ -913,7 +915,9 @@ report 50181 "TCSC Sales - Quote"
         CompanyInfo2: Record 79;
         CompanyInfo3: Record 79;
         SalesSetup: Record 311;
+#pragma warning disable AL0432
         VATAmountLine: Record 290 temporary;
+#pragma warning restore AL0432
         SalesLine: Record 37 temporary;
         DimSetEntry1: Record 480;
         DimSetEntry2: Record 480;

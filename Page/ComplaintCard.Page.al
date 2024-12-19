@@ -245,7 +245,7 @@ page 70172 "Complaint Card"
     end;
 
     var
-        NoSeriesMgt: Codeunit 396;
+        NoSeriesMgt: Codeunit "No. Series";
         PurchSetup: Record 312;
         UserSetup: Record 91;
         ToAddresses: Text;

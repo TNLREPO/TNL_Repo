@@ -71,12 +71,15 @@ table 50099 "Dealer Online Order Header"
     trigger OnInsert()
     begin
 
-
         IF "Order No." = '' THEN BEGIN
             GenSetup.GET;
-            GenSetup.TESTFIELD(GenSetup."Dealer Order Request");
-            NoseriesMgt.InitSeries(GenSetup."Dealer Order Request", xRec."No. Series", 0D, "Order No.", "No. Series");
+            GenSetup.TESTFIELD("Dealer Order Request");
+            "No. Series" := GenSetup."Dealer Order Request";
+            if NoseriesMgt.AreRelated("No. Series", xRec."No. Series") then
+                "No. Series" := xRec."No. Series";
+            "Order No." := NoseriesMgt.GetNextNo("No. Series");
         END;
+
         IF UserRec.GET(USERID) THEN BEGIN
             VALIDATE("Dealer No.", UserRec."Dealer Code");
             "Transaction Date" := TODAY;
@@ -86,26 +89,26 @@ table 50099 "Dealer Online Order Header"
 
     var
         GenSetup: Record "General Ledger Setup";
-        NoseriesMgt: Codeunit NoSeriesManagement;
+        NoseriesMgt: Codeunit "No. Series";
         DealOrd: Record "Dealer Online Order Header";
         CustRec: Record Customer;
         UserRec: Record "User Setup";
 
-    
+
     procedure AssistEdit(OldOrd: Record "Dealer Online Order Header"): Boolean
     begin
-       /*  WITH DealOrd DO BEGIN
-            DealOrd := Rec;
-            GenSetup.GET;
-            GenSetup.TESTFIELD(GenSetup."Dealer Order Request");
-            IF NoseriesMgt.SelectSeries(GenSetup."Dealer Order Request", OldOrd."Order No.", "No. Series") THEN BEGIN
-                GenSetup.GET;
-                GenSetup.TESTFIELD(GenSetup."Dealer Order Request");
-                NoseriesMgt.SetSeries("Order No.");
-                Rec := DealOrd;
-                EXIT(TRUE);
-            END;
-        END; */
+        /*  WITH DealOrd DO BEGIN
+             DealOrd := Rec;
+             GenSetup.GET;
+             GenSetup.TESTFIELD(GenSetup."Dealer Order Request");
+             IF NoseriesMgt.SelectSeries(GenSetup."Dealer Order Request", OldOrd."Order No.", "No. Series") THEN BEGIN
+                 GenSetup.GET;
+                 GenSetup.TESTFIELD(GenSetup."Dealer Order Request");
+                 NoseriesMgt.SetSeries("Order No.");
+                 Rec := DealOrd;
+                 EXIT(TRUE);
+             END;
+         END; */
     end;
 }
 

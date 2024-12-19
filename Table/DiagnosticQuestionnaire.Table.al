@@ -567,13 +567,16 @@ table 50120 "Diagnostic Questionnaire"
         IF "Diagnostic Questionnier No." = '' THEN BEGIN
             SalesSetup.GET;
             SalesSetup.TESTFIELD("Auto Sale Invoice No.");
-            NoSeriesMgt.InitSeries(SalesSetup."Auto Sale Invoice No.", xRec."No. Series", 0D, "Diagnostic Questionnier No.", "No. Series");
+            "No. Series" := SalesSetup."Auto Sale Invoice No.";
+            if NoSeriesMgt.AreRelated("No. Series", xRec."No. Series") then
+                "No. Series" := xRec."No. Series";
+            "Diagnostic Questionnier No." := NoSeriesMgt.GetNextNo("No. Series");
         END;
     end;
 
     var
         SalesSetup: Record "Sales & Receivables Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         COFRec: Record "Customer Order Table.";
         CusRec: Record Customer;
         ServItemRec: Record "Service Item";

@@ -236,7 +236,7 @@ page 50205 "Stores Requisition Card"
         StoreReqLine2: Record "Stores Req. Line.";
         UserRec: Record "User Setup";
         InvtSetup: Record "Inventory Setup";
-        NoSeriesMgt: Codeunit 396;
+        NoSeriesMgt: Codeunit "No. Series";
         Noseriesrec: Record "No. Series";
         NoseriesLinerec: Record "No. Series Line";
         storeReqHead: Record "Stores Requisition Header.";
@@ -255,9 +255,7 @@ page 50205 "Stores Requisition Card"
         InvtSetup.GET;
         IF Rec."No." = '' THEN BEGIN
             InvtSetup.TESTFIELD(InvtSetup."Material Requisition Nos");
-
-            NoSeriesMgt.InitSeries(InvtSetup."Material Requisition Nos", InvtSetup."Material Requisition Nos", 0D, Rec."No.",
-            InvtSetup."Material Requisition Nos");
+            NoSeriesMgt.GetNextNo(InvtSetup."Material Requisition Nos");
             Rec."Workshop Document" := TRUE;
         END;
     end;
@@ -267,8 +265,7 @@ page 50205 "Stores Requisition Card"
         InvtSetup.GET;
         IF Rec."No." = '' THEN BEGIN
             InvtSetup.TESTFIELD(InvtSetup."Alloy Rim Requisition Nos");
-            NoSeriesMgt.InitSeries(InvtSetup."Alloy Rim Requisition Nos", InvtSetup."Alloy Rim Requisition Nos", 0D, Rec."No.",
-            InvtSetup."Alloy Rim Requisition Nos");
+            NoSeriesMgt.GetNextNo(InvtSetup."Alloy Rim Requisition Nos");
             Rec."Workshop Document" := TRUE;
         END;
     end;

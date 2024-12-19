@@ -248,7 +248,11 @@ table 70039 "Complain TableX"
         IF "Complain Code" = '' THEN BEGIN
             ServMgtSetup.GET;
             ServMgtSetup.TESTFIELD("Complain Nos");
-            NoSeriesMgt.InitSeries(ServMgtSetup."Complain Nos", xRec."Complain Code", 0D, "Complain Code", "No. Series");
+            Rec."No. Series" := ServMgtSetup."Complain Nos";
+            if NoSeriesMgt.AreRelated(Rec."No. Series", xRec."No. Series") then
+                Rec."No. Series" := xRec."No. Series";
+            Rec."Complain Code" := NoSeriesMgt.GetNextNo("No. Series");
+
         END;
         "Date of Complaint" := TODAY;
     end;
@@ -256,7 +260,7 @@ table 70039 "Complain TableX"
     var
         ServMgtSetup: Record "Service Mgt. Setup";
         CompRec: Record "Complain TableX";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Customer: Record Customer;
         ServiceItem: Record "Service Item";
         Vendor: Record Vendor;
@@ -265,18 +269,18 @@ table 70039 "Complain TableX"
 
     procedure AssistEdit(OldComplain: Record "Complain TableX"): Boolean
     begin
-     /*    WITH CompRec DO BEGIN
-            CompRec := Rec;
-            ServMgtSetup.GET;
-            ServMgtSetup.TESTFIELD("Complain Nos");
-            IF NoSeriesMgt.SelectSeries(ServMgtSetup."Complain Nos", OldComplain."Complain Code", "No. Series") THEN BEGIN
-                ServMgtSetup.GET;
-                ServMgtSetup.TESTFIELD("Complain Nos");
-                NoSeriesMgt.SetSeries("Complain Code");
-                Rec := CompRec;
-                EXIT(TRUE);
-            END;
-        END; */
+        /*    WITH CompRec DO BEGIN
+               CompRec := Rec;
+               ServMgtSetup.GET;
+               ServMgtSetup.TESTFIELD("Complain Nos");
+               IF NoSeriesMgt.SelectSeries(ServMgtSetup."Complain Nos", OldComplain."Complain Code", "No. Series") THEN BEGIN
+                   ServMgtSetup.GET;
+                   ServMgtSetup.TESTFIELD("Complain Nos");
+                   NoSeriesMgt.SetSeries("Complain Code");
+                   Rec := CompRec;
+                   EXIT(TRUE);
+               END;
+           END; */
     end;
 }
 

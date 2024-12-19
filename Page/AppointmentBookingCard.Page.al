@@ -347,7 +347,10 @@ page 80004 "Appointment Booking Card"
         IF Rec."Appointment No." = '' THEN BEGIN
             SalesSetup.GET;
             SalesSetup.TESTFIELD("Appointment Nos.");
-            NoSeriesMgt.InitSeries(SalesSetup."Appointment Nos.", xRec."No. Series", 0D, Rec."Appointment No.", Rec."No. Series");
+            Rec."No. Series" := SalesSetup."Appointment Nos.";
+            if NoSeriesMgt.AreRelated(Rec."No. Series", xRec."No. Series") then
+                Rec."No. Series" := SalesSetup."Appointment Nos.";
+            NoSeriesMgt.GetNextNo(Rec."No. Series");
         END;
 
         Rec."User ID" := USERID;
@@ -369,7 +372,7 @@ page 80004 "Appointment Booking Card"
         COFRec: Record 50119;
         UserSetup: Record 91;
         SalesSetup: Record 311;
-        NoSeriesMgt: Codeunit 396;
+        NoSeriesMgt: Codeunit "No. Series";
 
     local procedure ViewEstimate()
     begin

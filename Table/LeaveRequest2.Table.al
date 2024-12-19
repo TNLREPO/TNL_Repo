@@ -773,7 +773,7 @@ table 50545 "Leave Request2"
         }
         field(74; "Global Dimension 2 Code"; Code[20])
         {
-            TableRelation = "Dimension Value".Code WHERE("Global Dimension No."=CONST(2));
+            TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(2));
 
             trigger OnValidate()
             begin
@@ -783,13 +783,13 @@ table 50545 "Leave Request2"
         }
         field(75; "Total Leaves Due"; Decimal)
         {
-           /*  BlankZero = true;
-            CalcFormula = Sum("Leave Plan Lines Rev 2"."Annual Duration" WHERE("Employee No." = FIELD("Employee No."),
-                                                                                "Leave Period" = FIELD("Period Filter"),
-                                                                                "Entry Type" = filter('PLAN')));
-            DecimalPlaces = 0 : 0;
-            Editable = false;
-            FieldClass = FlowField; */
+            /*  BlankZero = true;
+             CalcFormula = Sum("Leave Plan Lines Rev 2"."Annual Duration" WHERE("Employee No." = FIELD("Employee No."),
+                                                                                 "Leave Period" = FIELD("Period Filter"),
+                                                                                 "Entry Type" = filter('PLAN')));
+             DecimalPlaces = 0 : 0;
+             Editable = false;
+             FieldClass = FlowField; */
         }
         field(76; "Total Compassionate"; Integer)
         {
@@ -801,7 +801,7 @@ table 50545 "Leave Request2"
             Editable = false;
             FieldClass = FlowField; */
         }
-        field(77;"Total Exam";Integer)
+        field(77; "Total Exam"; Integer)
         {
             /* BlankZero = true;
             CalcFormula = Count("Leave Roster" WHERE ("Employee No"=FIELD("Employee No."),
@@ -811,17 +811,17 @@ table 50545 "Leave Request2"
             Editable = false;
             FieldClass = FlowField; */
         }
-        field(78;"Total Others";Integer)
+        field(78; "Total Others"; Integer)
         {
-           /*  BlankZero = true;
-            CalcFormula = Count("Leave Roster" WHERE ("Employee No"=FIELD("Employee No."),
-                                                      LeaveDate=FIELD(Date Filter),
-                                                      Leave Category=CONST(OTHERS),
-                                                      Leave Period=FIELD(Period Filter)));
-            Editable = false;
-            FieldClass = FlowField; */
+            /*  BlankZero = true;
+             CalcFormula = Count("Leave Roster" WHERE ("Employee No"=FIELD("Employee No."),
+                                                       LeaveDate=FIELD(Date Filter),
+                                                       Leave Category=CONST(OTHERS),
+                                                       Leave Period=FIELD(Period Filter)));
+             Editable = false;
+             FieldClass = FlowField; */
         }
-        field(79;"Total Consuming";Integer)
+        field(79; "Total Consuming"; Integer)
         {
             BlankZero = true;
             /* CalcFormula = Count("Leave Roster" WHERE (Employee No=FIELD(Employee No.),
@@ -831,17 +831,17 @@ table 50545 "Leave Request2"
             Editable = false;
             FieldClass = FlowField; */
         }
-        field(80;"Total Annual";Integer)
+        field(80; "Total Annual"; Integer)
         {
-           /*  BlankZero = true;
-            CalcFormula = Count("Leave Roster" WHERE (Employee No=FIELD(Employee No.),
-                                                      LeaveDate=FIELD(Date Filter),
-                                                      Leave Category=CONST(ANNUAL),
-                                                      Leave Period=FIELD(Period Filter)));
-            Editable = false;
-            FieldClass = FlowField; */
+            /*  BlankZero = true;
+             CalcFormula = Count("Leave Roster" WHERE (Employee No=FIELD(Employee No.),
+                                                       LeaveDate=FIELD(Date Filter),
+                                                       Leave Category=CONST(ANNUAL),
+                                                       Leave Period=FIELD(Period Filter)));
+             Editable = false;
+             FieldClass = FlowField; */
         }
-        field(81;"Total Commuted To Cash";Integer)
+        field(81; "Total Commuted To Cash"; Integer)
         {
             /* BlankZero = true;
             CalcFormula = Count("Leave Roster" WHERE (Employee No=FIELD(Employee No.),
@@ -851,57 +851,57 @@ table 50545 "Leave Request2"
             Editable = false;
             FieldClass = FlowField; */
         }
-        field(82;"Start Date1";Date)
+        field(82; "Start Date1"; Date)
         {
 
-           /*  trigger OnValidate()
-            begin
-                //IF xRec.Registered THEN ERROR('You cannot MODIFY a Registered Leave Record');
+            /*  trigger OnValidate()
+             begin
+                 //IF xRec.Registered THEN ERROR('You cannot MODIFY a Registered Leave Record');
 
-                IF "Start Date1"=0D THEN
-                  BEGIN
-                    "No. Days1" :=0;
-                    EXIT;
-                  END;
+                 IF "Start Date1"=0D THEN
+                   BEGIN
+                     "No. Days1" :=0;
+                     EXIT;
+                   END;
 
-                IF ("End Date1"<"Start Date1") AND ("End Date1"<>0D) THEN
-                   ERROR(FIELDCAPTION("Start Date1")+'Must be on or after '+FIELDCAPTION("End Date1"));
+                 IF ("End Date1"<"Start Date1") AND ("End Date1"<>0D) THEN
+                    ERROR(FIELDCAPTION("Start Date1")+'Must be on or after '+FIELDCAPTION("End Date1"));
 
-                IF "End Date1"<>0D THEN
-                  "No. Days1" := GenPCode.GetNoOfDays("Start Date1","End Date1")
-                ELSE
-                  IF "No. Days1"<>0 THEN
-                   "End Date1" := GenPCode.GetEndDate("Start Date1","No. Days1");
+                 IF "End Date1"<>0D THEN
+                   "No. Days1" := GenPCode.GetNoOfDays("Start Date1","End Date1")
+                 ELSE
+                   IF "No. Days1"<>0 THEN
+                    "End Date1" := GenPCode.GetEndDate("Start Date1","No. Days1");
 
-                CheckTotalDuration(1);
-            end; */
+                 CheckTotalDuration(1);
+             end; */
         }
-        field(83;"End Date1";Date)
+        field(83; "End Date1"; Date)
         {
 
-           /*  trigger OnValidate()
-            begin
-                //IF xRec.Registered THEN ERROR('You cannot MODIFY a Registered Leave Record');
+            /*  trigger OnValidate()
+             begin
+                 //IF xRec.Registered THEN ERROR('You cannot MODIFY a Registered Leave Record');
 
-                IF "End Date1"=0D THEN
-                BEGIN
-                  "No. Days1" :=0;
-                  EXIT;
-                END;
+                 IF "End Date1"=0D THEN
+                 BEGIN
+                   "No. Days1" :=0;
+                   EXIT;
+                 END;
 
-                IF ("End Date1"<"Start Date1") AND ("Start Date1"<>0D) THEN ERROR(FORMAT("Start Date1") + ' == ' + FORMAT("End Date1"));
-                //   ERROR(FIELDCAPTION("End Date1")+'Must be on or before '+FIELDCAPTION("Start Date1"));
+                 IF ("End Date1"<"Start Date1") AND ("Start Date1"<>0D) THEN ERROR(FORMAT("Start Date1") + ' == ' + FORMAT("End Date1"));
+                 //   ERROR(FIELDCAPTION("End Date1")+'Must be on or before '+FIELDCAPTION("Start Date1"));
 
-                IF "Start Date1"<>0D THEN
-                  "No. Days1" := GenPCode.GetNoOfDays("Start Date1","End Date1")
-                ELSE
-                  IF "No. Days1"<>0 THEN
-                   "Start Date1" := GenPCode.GetStartDate("End Date1","No. Days1");
+                 IF "Start Date1"<>0D THEN
+                   "No. Days1" := GenPCode.GetNoOfDays("Start Date1","End Date1")
+                 ELSE
+                   IF "No. Days1"<>0 THEN
+                    "Start Date1" := GenPCode.GetStartDate("End Date1","No. Days1");
 
-                CheckTotalDuration(1);
-            end; */
+                 CheckTotalDuration(1);
+             end; */
         }
-        field(84;"No. Days1";Integer)
+        field(84; "No. Days1"; Integer)
         {
 
             trigger OnValidate()
@@ -921,7 +921,7 @@ table 50545 "Leave Request2"
                 IF  EmpRec.GET("Employee No.") THEN EmpGrpCode := EmpRec."Employee Group";
                 
                 CheckTotalDuration(1); */
-                
+
                 /*
                 IF ("Leave Category" = 'CASH') AND NOT(Registered) AND ("No. Days" > 0)THEN
                 BEGIN
@@ -937,32 +937,32 @@ table 50545 "Leave Request2"
 
             end;
         }
-        field(85;"Start Date2";Date)
+        field(85; "Start Date2"; Date)
         {
 
-           /* trigger OnValidate()
-             begin
-                //IF xRec.Registered THEN ERROR('You cannot MODIFY a Registered Leave Record');
+            /* trigger OnValidate()
+              begin
+                 //IF xRec.Registered THEN ERROR('You cannot MODIFY a Registered Leave Record');
 
-                IF "Start Date2"=0D THEN
-                  BEGIN
-                    "No. Days2" :=0;
-                    EXIT;
-                  END;
+                 IF "Start Date2"=0D THEN
+                   BEGIN
+                     "No. Days2" :=0;
+                     EXIT;
+                   END;
 
-                IF ("End Date2"<"Start Date2") AND ("End Date2"<>0D) THEN
-                   ERROR(FIELDCAPTION("Start Date2")+'Must be on or after '+FIELDCAPTION("End Date2"));
+                 IF ("End Date2"<"Start Date2") AND ("End Date2"<>0D) THEN
+                    ERROR(FIELDCAPTION("Start Date2")+'Must be on or after '+FIELDCAPTION("End Date2"));
 
-                IF "End Date2"<>0D THEN
-                  "No. Days2" := GenPCode.GetNoOfDays("Start Date2","End Date2")
-                ELSE
-                  IF "No. Days2"<>0 THEN
-                    "End Date2" := GenPCode.GetEndDate("Start Date2","No. Days2");
+                 IF "End Date2"<>0D THEN
+                   "No. Days2" := GenPCode.GetNoOfDays("Start Date2","End Date2")
+                 ELSE
+                   IF "No. Days2"<>0 THEN
+                     "End Date2" := GenPCode.GetEndDate("Start Date2","No. Days2");
 
-                CheckTotalDuration(1);
-            end; */
+                 CheckTotalDuration(1);
+             end; */
         }
-        field(86;"End Date2";Date)
+        field(86; "End Date2"; Date)
         {
 
             /* trigger OnValidate()
@@ -987,27 +987,27 @@ table 50545 "Leave Request2"
                 CheckTotalDuration(1);
             end; */
         }
-        field(87;"No. Days2";Integer)
+        field(87; "No. Days2"; Integer)
         {
 
             trigger OnValidate()
             begin
-              /*   //error('There');
-                
-                IF "No. Days2"=0 THEN EXIT;
-                
-                IF ("Start Date2"=0D) AND ("End Date2"=0D) THEN EXIT;
-                
-                IF "Start Date2"<>0D THEN
-                  "End Date2" := GenPCode.GetEndDate("Start Date2","No. Days2")
-                ELSE
-                  "Start Date2" := GenPCode.GetStartDate("End Date2","No. Days2");
-                
-                IF  EmpRec.GET("Employee No.") THEN EmpGrpCode := EmpRec."Employee Group";
-                
-                CheckTotalDuration(1); */
-                
-                
+                /*   //error('There');
+
+                  IF "No. Days2"=0 THEN EXIT;
+
+                  IF ("Start Date2"=0D) AND ("End Date2"=0D) THEN EXIT;
+
+                  IF "Start Date2"<>0D THEN
+                    "End Date2" := GenPCode.GetEndDate("Start Date2","No. Days2")
+                  ELSE
+                    "Start Date2" := GenPCode.GetStartDate("End Date2","No. Days2");
+
+                  IF  EmpRec.GET("Employee No.") THEN EmpGrpCode := EmpRec."Employee Group";
+
+                  CheckTotalDuration(1); */
+
+
                 /*
                 IF ("Leave Category" = 'CASH') AND NOT(Registered) AND ("No. Days" > 0)THEN
                 BEGIN
@@ -1023,54 +1023,54 @@ table 50545 "Leave Request2"
 
             end;
         }
-        field(88;"Start Date3";Date)
+        field(88; "Start Date3"; Date)
         {
 
-           /*  trigger OnValidate()
-            begin
+            /*  trigger OnValidate()
+             begin
 
-                IF "Start Date3"=0D THEN BEGIN
-                "No. Days3" :=0;
-                EXIT;
-                END;
+                 IF "Start Date3"=0D THEN BEGIN
+                 "No. Days3" :=0;
+                 EXIT;
+                 END;
 
-                IF ("End Date3"<"Start Date3") AND ("End Date3"<>0D) THEN
-                   ERROR(FIELDCAPTION("Start Date3")+'Must be on or after '+FIELDCAPTION("End Date3"));
+                 IF ("End Date3"<"Start Date3") AND ("End Date3"<>0D) THEN
+                    ERROR(FIELDCAPTION("Start Date3")+'Must be on or after '+FIELDCAPTION("End Date3"));
 
-                IF "End Date3"<>0D THEN
-                  "No. Days3" := GenPCode.GetNoOfDays("Start Date3","End Date3")
-                ELSE
-                  IF "No. Days3"<>0 THEN
-                    "End Date3" := GenPCode.GetEndDate("Start Date3","No. Days3");
+                 IF "End Date3"<>0D THEN
+                   "No. Days3" := GenPCode.GetNoOfDays("Start Date3","End Date3")
+                 ELSE
+                   IF "No. Days3"<>0 THEN
+                     "End Date3" := GenPCode.GetEndDate("Start Date3","No. Days3");
 
-                CheckTotalDuration(1);
-            end; */
+                 CheckTotalDuration(1);
+             end; */
         }
-        field(89;"End Date3";Date)
+        field(89; "End Date3"; Date)
         {
 
-           /*  trigger OnValidate()
-            begin
+            /*  trigger OnValidate()
+             begin
 
-                IF "End Date3"=0D THEN
-                BEGIN
-                  "No. Days3" :=0;
-                  EXIT;
-                END;
+                 IF "End Date3"=0D THEN
+                 BEGIN
+                   "No. Days3" :=0;
+                   EXIT;
+                 END;
 
-                IF ("End Date3"<"Start Date3") AND ("Start Date3"<>0D) THEN
-                   ERROR(FIELDCAPTION("End Date3")+'Must be on or before '+FIELDCAPTION("Start Date3"));
+                 IF ("End Date3"<"Start Date3") AND ("Start Date3"<>0D) THEN
+                    ERROR(FIELDCAPTION("End Date3")+'Must be on or before '+FIELDCAPTION("Start Date3"));
 
-                IF "Start Date3"<>0D THEN
-                  "No. Days3" := GenPCode.GetNoOfDays("Start Date3","End Date3")
-                ELSE
-                  IF "No. Days3"<>0 THEN
-                    "Start Date3" := GenPCode.GetStartDate("End Date3","No. Days3");
+                 IF "Start Date3"<>0D THEN
+                   "No. Days3" := GenPCode.GetNoOfDays("Start Date3","End Date3")
+                 ELSE
+                   IF "No. Days3"<>0 THEN
+                     "Start Date3" := GenPCode.GetStartDate("End Date3","No. Days3");
 
-                CheckTotalDuration(1);
-            end; */
+                 CheckTotalDuration(1);
+             end; */
         }
-        field(90;"No. Days3";Integer)
+        field(90; "No. Days3"; Integer)
         {
 
             trigger OnValidate()
@@ -1091,7 +1091,7 @@ table 50545 "Leave Request2"
                 IF  EmpRec.GET("Employee No.") THEN EmpGrpCode := EmpRec."Employee Group";
                 
                 CheckTotalDuration(1); */
-                
+
                 /*
                 IF ("Leave Category" = 'CASH') AND NOT(Registered) AND ("No. Days" > 0)THEN
                 BEGIN
@@ -1107,32 +1107,32 @@ table 50545 "Leave Request2"
 
             end;
         }
-        field(91;"Start Date4";Date)
+        field(91; "Start Date4"; Date)
         {
 
-           /*  trigger OnValidate()
-            begin
-                //IF xRec.Registered THEN ERROR('You cannot MODIFY a Registered Leave Record');
+            /*  trigger OnValidate()
+             begin
+                 //IF xRec.Registered THEN ERROR('You cannot MODIFY a Registered Leave Record');
 
-                IF "Start Date4"=0D THEN
-                  BEGIN
-                    "No. Days4" :=0;
-                    EXIT;
-                  END;
+                 IF "Start Date4"=0D THEN
+                   BEGIN
+                     "No. Days4" :=0;
+                     EXIT;
+                   END;
 
-                IF ("End Date4"<"Start Date4") AND ("End Date4"<>0D) THEN
-                   ERROR(FIELDCAPTION("Start Date4")+'Must be on or after '+FIELDCAPTION("End Date4"));
+                 IF ("End Date4"<"Start Date4") AND ("End Date4"<>0D) THEN
+                    ERROR(FIELDCAPTION("Start Date4")+'Must be on or after '+FIELDCAPTION("End Date4"));
 
-                IF "End Date4"<>0D THEN
-                    "No. Days4" := GenPCode.GetNoOfDays("Start Date4","End Date4")
-                ELSE
-                  IF "No. Days4"<>0 THEN
-                    "End Date4" := GenPCode.GetEndDate("Start Date4","No. Days4");
+                 IF "End Date4"<>0D THEN
+                     "No. Days4" := GenPCode.GetNoOfDays("Start Date4","End Date4")
+                 ELSE
+                   IF "No. Days4"<>0 THEN
+                     "End Date4" := GenPCode.GetEndDate("Start Date4","No. Days4");
 
-                CheckTotalDuration(1);
-            end; */
+                 CheckTotalDuration(1);
+             end; */
         }
-        field(92;"End Date4";Date)
+        field(92; "End Date4"; Date)
         {
 
             /* trigger OnValidate()
@@ -1157,28 +1157,28 @@ table 50545 "Leave Request2"
                 CheckTotalDuration(1);
             end; */
         }
-        field(93;"No. Days4";Integer)
+        field(93; "No. Days4"; Integer)
         {
 
             trigger OnValidate()
             begin
-               /*  //IF xRec.Registered THEN ERROR('You cannot MODIFY a Registered Leave Record');
-                
-                //GetAmountDue;
-                
-                IF "No. Days4"=0 THEN EXIT;
-                
-                IF ("Start Date4"=0D) AND ("End Date4"=0D) THEN EXIT;
-                
-                IF "Start Date4"<>0D THEN
-                  "End Date4" := GenPCode.GetEndDate("Start Date4","No. Days4")
-                ELSE
-                  "Start Date4" := GenPCode.GetStartDate("End Date4","No. Days4");
-                
-                IF  EmpRec.GET("Employee No.") THEN EmpGrpCode := EmpRec."Employee Group";
-                
-                CheckTotalDuration(1); */
-                
+                /*  //IF xRec.Registered THEN ERROR('You cannot MODIFY a Registered Leave Record');
+
+                 //GetAmountDue;
+
+                 IF "No. Days4"=0 THEN EXIT;
+
+                 IF ("Start Date4"=0D) AND ("End Date4"=0D) THEN EXIT;
+
+                 IF "Start Date4"<>0D THEN
+                   "End Date4" := GenPCode.GetEndDate("Start Date4","No. Days4")
+                 ELSE
+                   "Start Date4" := GenPCode.GetStartDate("End Date4","No. Days4");
+
+                 IF  EmpRec.GET("Employee No.") THEN EmpGrpCode := EmpRec."Employee Group";
+
+                 CheckTotalDuration(1); */
+
                 /*
                 IF ("Leave Category" = 'CASH') AND NOT(Registered) AND ("No. Days" > 0)THEN
                 BEGIN
@@ -1194,29 +1194,27 @@ table 50545 "Leave Request2"
 
             end;
         }
-        field(94;"Employee No.";Code[30])
+        field(94; "Employee No."; Code[30])
         {
             TableRelation = Employee."No.";
 
             trigger OnValidate()
             begin
-                IF EmpRec.GET("Employee No.") THEN
-                  BEGIN
-                   // "Request Type":= EmplyRec."Leave Grade";
+                IF EmpRec.GET("Employee No.") THEN BEGIN
+                    // "Request Type":= EmplyRec."Leave Grade";
                     "Business Unit" := EmpRec."Business Unit";
                     "Global Dimension 1 code" := EmpRec."Global Dimension 1 Code";
                     "Global Dimension 2 Code" := EmpRec."Global Dimension 2 Code";
-                     EmpGrpCode := EmpRec."Employee Group";
-                  END;
+                    EmpGrpCode := EmpRec."Employee Group";
+                END;
 
 
-                IF ("Entry Type" = "Entry Type"::PLAN) AND (EmpGrpRec.GET(EmpGrpCode)) THEN
-                  BEGIN
-                     "Amount Due" := 15*(EmpRec."Basic Salary")/100;
-                  END;
+                IF ("Entry Type" = "Entry Type"::PLAN) AND (EmpGrpRec.GET(EmpGrpCode)) THEN BEGIN
+                    "Amount Due" := 15 * (EmpRec."Basic Salary") / 100;
+                END;
             end;
         }
-        field(95;"Entry Type";Option)
+        field(95; "Entry Type"; Option)
         {
             OptionMembers = PLAN,ACTUAL;
 
@@ -1225,61 +1223,61 @@ table 50545 "Leave Request2"
                 //IF xRec.Registered THEN ERROR('You cannot MODIFY a Registered Leave Record');
             end;
         }
-        field(96;"Leave Category";Code[30])
+        field(96; "Leave Category"; Code[30])
         {
             TableRelation = "Leave Categories".Code;
 
             trigger OnValidate()
             begin
-                IF ("Leave Category" = 'CASUAL') AND( "Actual Duration"> 3 ) THEN
-                   ERROR('Casual leave cannot be more than 3 working days');
+                IF ("Leave Category" = 'CASUAL') AND ("Actual Duration" > 3) THEN
+                    ERROR('Casual leave cannot be more than 3 working days');
 
-                IF ("Request Type" = "Request Type"::HOD) AND ("Leave Category" = 'ANNUAL')  AND(("Actual Start Date"-"Entry Date") < 30) THEN
+                IF ("Request Type" = "Request Type"::HOD) AND ("Leave Category" = 'ANNUAL') AND (("Actual Start Date" - "Entry Date") < 30) THEN
                     ERROR('You can only request for annual Leave 30 days ahead the plan actual start leave date');
 
-                IF ("Request Type" = "Request Type"::Manager) AND ("Leave Category" = 'ANNUAL')  AND(("Actual Start Date"-"Entry Date") < 30) THEN
-                   ERROR('You can only request for annual Leave 30 days ahead the plan actual start leave date');
+                IF ("Request Type" = "Request Type"::Manager) AND ("Leave Category" = 'ANNUAL') AND (("Actual Start Date" - "Entry Date") < 30) THEN
+                    ERROR('You can only request for annual Leave 30 days ahead the plan actual start leave date');
 
-                IF ("Request Type" = "Request Type"::"Junior staff - Deputy Manager") AND ("Leave Category" = 'ANNUAL')  AND(("Actual Start Date"-"Entry Date") < 14) THEN
-                   ERROR('You can only request for annual Leave 14 days ahead the plan actual start leave date');
+                IF ("Request Type" = "Request Type"::"Junior staff - Deputy Manager") AND ("Leave Category" = 'ANNUAL') AND (("Actual Start Date" - "Entry Date") < 14) THEN
+                    ERROR('You can only request for annual Leave 14 days ahead the plan actual start leave date');
 
-                IF ("Request Type" = "Request Type"::Branch) AND ("Leave Category" = 'ANNUAL')  AND(("Actual Start Date"-"Entry Date") < 14) THEN
-                   ERROR('You can only request for annual Leave 14 days ahead the plan actual start leave date');
+                IF ("Request Type" = "Request Type"::Branch) AND ("Leave Category" = 'ANNUAL') AND (("Actual Start Date" - "Entry Date") < 14) THEN
+                    ERROR('You can only request for annual Leave 14 days ahead the plan actual start leave date');
 
-                IF  ( "Actual Duration") > ("Total Leaves Due" - "Total Consuming") THEN
-                ERROR('Your Leave request is greater than the number of actual leave due');
+                IF ("Actual Duration") > ("Total Leaves Due" - "Total Consuming") THEN
+                    ERROR('Your Leave request is greater than the number of actual leave due');
 
-                IF  ("Leave Category" = 'ANNUAL')  AND  ("Actual Duration" >15 ) THEN
+                IF ("Leave Category" = 'ANNUAL') AND ("Actual Duration" > 15) THEN
                     ERROR('Annual leave cannot be more than 15 working days');
             end;
         }
-        field(97;LeaveDate;Date)
+        field(97; LeaveDate; Date)
         {
         }
-        field(98;"Entry Type Filter";Code[10])
+        field(98; "Entry Type Filter"; Code[10])
         {
             FieldClass = FlowFilter;
             TableRelation = "Leave Roster Summary"."Unit of Measure";
         }
-        field(99;"Date Filter";Date)
+        field(99; "Date Filter"; Date)
         {
             FieldClass = FlowFilter;
         }
-        field(100;"Period Filter";Integer)
+        field(100; "Period Filter"; Integer)
         {
             FieldClass = FlowFilter;
         }
-        field(101;HOD;Boolean)
+        field(101; HOD; Boolean)
         {
         }
-        field(102;"Send to MD for Approval";Boolean)
+        field(102; "Send to MD for Approval"; Boolean)
         {
         }
     }
 
     keys
     {
-        key(Key1;"Request No.")
+        key(Key1; "Request No.")
         {
             Clustered = true;
         }
@@ -1292,22 +1290,23 @@ table 50545 "Leave Request2"
     trigger OnInsert()
     begin
         HRSetup.GET;
-         IF "Request No." = '' THEN BEGIN
-          HRSetup.GET;
-          HRSetup.TESTFIELD(HRSetup."Leave Approval No.");
-          NoSeriesMgt.InitSeries(HRSetup."Leave Approval No.",HRSetup."Leave Approval No.",0D,"Request No.",HRSetup."Leave Approval No.");
-         END;
+        IF "Request No." = '' THEN BEGIN
+            HRSetup.GET;
+            HRSetup.TESTFIELD("Leave Approval No.");
+            "Request No." := NoSeriesMgt.GetNextNo(HRSetup."Leave Plan No");
 
-          UserSetup.GET(USERID);
-          "Entry Date" := TODAY;
-          "Requester Name" := UserSetup.Name;
-          Requester := UserSetup."User ID";
+        END;
+
+        UserSetup.GET(USERID);
+        "Entry Date" := TODAY;
+        "Requester Name" := UserSetup.Name;
+        Requester := UserSetup."User ID";
     end;
 
     var
         HRSetup: Record 5218;
         LeaveReg: Record 50545;
-        NoSeriesMgt: Codeunit 396;
+        NoSeriesMgt: Codeunit "No. Series";
         UserSetup: Record 91;
         EmplyRec: Record 5200;
         Mail: Codeunit 397;
@@ -1357,55 +1356,55 @@ table 50545 "Leave Request2"
         HumanResSetup: Record 5218;
         SenderName: Text[70];
 
-    
+
     procedure CheckTotalDuration(Cnt: Integer)
     begin
-        CALCFIELDS("Total Leaves Due","Total Compassionate","Total Exam","Total Others","Total Consuming","Total Annual");
+        CALCFIELDS("Total Leaves Due", "Total Compassionate", "Total Exam", "Total Others", "Total Consuming", "Total Annual");
 
         CASE Cnt OF
-         1:
-           BEGIN
-             OldTotal   := xRec."No. Days1" + xRec."No. Days2" + xRec."No. Days3" + xRec."No. Days4";
-             TakenTotal := "No. Days1" + "No. Days2" + "No. Days3" + "No. Days4";
-             RemDur := "Annual Duration" - TakenTotal;
-             OldRemDur := "Annual Duration" - OldTotal;
-             IF ((RemDur<0) AND (LCategory."Category Type"<>LCategory."Category Type"::Maternity)) THEN
-               ERROR('%1 Have %2 Leave Days Left!!',"Employee No.",OldRemDur);
+            1:
+                BEGIN
+                    OldTotal := xRec."No. Days1" + xRec."No. Days2" + xRec."No. Days3" + xRec."No. Days4";
+                    TakenTotal := "No. Days1" + "No. Days2" + "No. Days3" + "No. Days4";
+                    RemDur := "Annual Duration" - TakenTotal;
+                    OldRemDur := "Annual Duration" - OldTotal;
+                    IF ((RemDur < 0) AND (LCategory."Category Type" <> LCategory."Category Type"::Maternity)) THEN
+                        ERROR('%1 Have %2 Leave Days Left!!', "Employee No.", OldRemDur);
 
-           END;
-         9:
-           BEGIN
-             OldTotal   := "Total Consuming";
-             TakenTotal := OldTotal + "Actual Duration" - xRec."Actual Duration";
+                END;
+            9:
+                BEGIN
+                    OldTotal := "Total Consuming";
+                    TakenTotal := OldTotal + "Actual Duration" - xRec."Actual Duration";
 
-             RemDur := "Total Leaves Due" - TakenTotal;
-             OldRemDur := "Total Leaves Due" - OldTotal;
+                    RemDur := "Total Leaves Due" - TakenTotal;
+                    OldRemDur := "Total Leaves Due" - OldTotal;
 
-             LCategory.GET("Leave Category");
-             IF ((RemDur<0) AND IsConsuming("Leave Category") AND
-                 (LCategory."Category Type"<>LCategory."Category Type"::Maternity)) THEN
-               ERROR('%1 Have %2 Leave Days Left!!',"Employee No.",OldRemDur);
-           END;
+                    LCategory.GET("Leave Category");
+                    IF ((RemDur < 0) AND IsConsuming("Leave Category") AND
+                        (LCategory."Category Type" <> LCategory."Category Type"::Maternity)) THEN
+                        ERROR('%1 Have %2 Leave Days Left!!', "Employee No.", OldRemDur);
+                END;
         END;
     end;
 
-    
+
     procedure IsConsuming(LCat: Code[10]): Boolean
     begin
         IF LCategory.GET(LCat) THEN
-          EXIT(LCategory.Consuming)
+            EXIT(LCategory.Consuming)
         ELSE
-          EXIT(FALSE);
+            EXIT(FALSE);
     end;
 
-        procedure ValidateShortcutDimCode(FieldNo: Integer;var ShortcutDimCode: Code[20])
+    procedure ValidateShortcutDimCode(FieldNo: Integer; var ShortcutDimCode: Code[20])
     begin
-        DimMgt.ValidateDimValueCode(FieldNo,ShortcutDimCode);
-        DimMgt.SaveDefaultDim(DATABASE::"Leave Plan Lines Rev 2","Employee No.",FieldNo,ShortcutDimCode);
+        DimMgt.ValidateDimValueCode(FieldNo, ShortcutDimCode);
+        DimMgt.SaveDefaultDim(DATABASE::"Leave Plan Lines Rev 2", "Employee No.", FieldNo, ShortcutDimCode);
         MODIFY;
     end;
 
-        procedure RemainingLeave(): Integer
+    procedure RemainingLeave(): Integer
     begin
         CALCFIELDS("Total Consuming");
         EXIT("Total Leaves Due" - "Total Consuming");

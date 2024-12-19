@@ -1627,7 +1627,7 @@ table 70018 "Local Part Purchase Register"
 
     var
         PurchSetup: Record "Purchases & Payables Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Employee: Record Employee;
         DimValue: Record "Dimension Value";
         ToAddresses: Text;

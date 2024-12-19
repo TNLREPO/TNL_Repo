@@ -1134,7 +1134,7 @@ table 70022 "Air Online Header"
     var
         CRLF: Text[2];
         UserSetup: Record "User Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         PurchSetup: Record "Purchases & Payables Setup";
         UserSetup2: Record "User Setup";
         //Mail: Codeunit Mail;

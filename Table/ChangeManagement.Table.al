@@ -59,90 +59,90 @@ table 70027 "Change Management"
                 //  ("MDs Status" <> "MDs Status"::Approved) THEN
                 //  ERROR(Text042);
 
-               /*  CRLF := '';
-                CRLF[1] := 13;
-                CRLF[2] := 10;
+                /*  CRLF := '';
+                 CRLF[1] := 13;
+                 CRLF[2] := 10;
 
-                IF Status = Status::Approved THEN BEGIN
-                    UserSetup.GET("Send To");
-                    IF UserSetup."User ID" <> "Send To" THEN
-                        ERROR(Text040);
-                    ToAddresses := 'adewumi@toyotanigeria.com';
-                    CcAddresses := 'agbesua@toyotanigeria.com;';
-                    BccAddresses := '';
-                    Subject := STRSUBSTNO(Text013, "No.");
-                    UserSetup4.GET(USERID);
-                    SendersName := UserSetup4.Initials;
-                    "Requetsers Hod Name" := UserSetup4.Name;
-                    SenderAddress := UserSetup4."E-Mail";
-                    "Date Hod" := CURRENTDATETIME;
-                    Body := Text025 + 'STA,' +
-                    CRLF + CRLF + STRSUBSTNO(Text037, "No.") + CRLF + CRLF + CRLF +
-                    Text029 + FORMAT("Request Type") + CRLF +
-                    Text030 + FORMAT(Description) + CRLF +
-                    Text027 + CRLF + CRLF + SendersName;
-                    IF CURRENTCLIENTTYPE = CLIENTTYPE::Windows THEN
-                        Mail.NewMessage(ToAddresses, CcAddresses, BccAddresses, Subject, Body, '', TRUE);
-                    IF CURRENTCLIENTTYPE = CLIENTTYPE::Web THEN BEGIN
-                        SMTPMail.CreateMessage(SendersName, SenderAddress, ToAddresses, Subject, Body, TRUE);
-                        SMTPMail.Send;
-                        MESSAGE(Text032);
-                    END;
-                END;
+                 IF Status = Status::Approved THEN BEGIN
+                     UserSetup.GET("Send To");
+                     IF UserSetup."User ID" <> "Send To" THEN
+                         ERROR(Text040);
+                     ToAddresses := 'adewumi@toyotanigeria.com';
+                     CcAddresses := 'agbesua@toyotanigeria.com;';
+                     BccAddresses := '';
+                     Subject := STRSUBSTNO(Text013, "No.");
+                     UserSetup4.GET(USERID);
+                     SendersName := UserSetup4.Initials;
+                     "Requetsers Hod Name" := UserSetup4.Name;
+                     SenderAddress := UserSetup4."E-Mail";
+                     "Date Hod" := CURRENTDATETIME;
+                     Body := Text025 + 'STA,' +
+                     CRLF + CRLF + STRSUBSTNO(Text037, "No.") + CRLF + CRLF + CRLF +
+                     Text029 + FORMAT("Request Type") + CRLF +
+                     Text030 + FORMAT(Description) + CRLF +
+                     Text027 + CRLF + CRLF + SendersName;
+                     IF CURRENTCLIENTTYPE = CLIENTTYPE::Windows THEN
+                         Mail.NewMessage(ToAddresses, CcAddresses, BccAddresses, Subject, Body, '', TRUE);
+                     IF CURRENTCLIENTTYPE = CLIENTTYPE::Web THEN BEGIN
+                         SMTPMail.CreateMessage(SendersName, SenderAddress, ToAddresses, Subject, Body, TRUE);
+                         SMTPMail.Send;
+                         MESSAGE(Text032);
+                     END;
+                 END;
 
-                IF Status = Status::"On-hold" THEN BEGIN
-                    UserSetup.GET("User ID");
-                    ToAddresses := UserSetup."E-Mail";
-                    Addressee := UserSetup.Name;
-                    CcAddresses := '';
-                    BccAddresses := '';
-                    Subject := STRSUBSTNO(Text017, "No.");
+                 IF Status = Status::"On-hold" THEN BEGIN
+                     UserSetup.GET("User ID");
+                     ToAddresses := UserSetup."E-Mail";
+                     Addressee := UserSetup.Name;
+                     CcAddresses := '';
+                     BccAddresses := '';
+                     Subject := STRSUBSTNO(Text017, "No.");
 
-                    UserSetup4.GET(USERID);
-                    SendersName := UserSetup4.Initials;
-                    "Requetsers Hod Name" := UserSetup4.Name;
-                    SenderAddress := UserSetup4."E-Mail";
-                    "Date Hod" := CURRENTDATETIME;
-                    Body := Text025 + UserSetup.Initials + ',' + CRLF + CRLF +
-                    STRSUBSTNO(Text033, "No.") + CRLF + CRLF + CRLF +
-                    Text029 + FORMAT("Request Type") + CRLF +
-                    Text030 + FORMAT(Description) + CRLF +
-                    Text027 + CRLF + CRLF + SendersName;
-                    IF CURRENTCLIENTTYPE = CLIENTTYPE::Windows THEN
-                        Mail.NewMessage(ToAddresses, CcAddresses, BccAddresses, Subject, Body, '', TRUE);
-                    IF CURRENTCLIENTTYPE = CLIENTTYPE::Web THEN BEGIN
-                        SMTPMail.CreateMessage(SendersName, SenderAddress, ToAddresses, Subject, Body, TRUE);
-                        SMTPMail.Send;
-                        MESSAGE(Text032);
-                    END;
-                END;
+                     UserSetup4.GET(USERID);
+                     SendersName := UserSetup4.Initials;
+                     "Requetsers Hod Name" := UserSetup4.Name;
+                     SenderAddress := UserSetup4."E-Mail";
+                     "Date Hod" := CURRENTDATETIME;
+                     Body := Text025 + UserSetup.Initials + ',' + CRLF + CRLF +
+                     STRSUBSTNO(Text033, "No.") + CRLF + CRLF + CRLF +
+                     Text029 + FORMAT("Request Type") + CRLF +
+                     Text030 + FORMAT(Description) + CRLF +
+                     Text027 + CRLF + CRLF + SendersName;
+                     IF CURRENTCLIENTTYPE = CLIENTTYPE::Windows THEN
+                         Mail.NewMessage(ToAddresses, CcAddresses, BccAddresses, Subject, Body, '', TRUE);
+                     IF CURRENTCLIENTTYPE = CLIENTTYPE::Web THEN BEGIN
+                         SMTPMail.CreateMessage(SendersName, SenderAddress, ToAddresses, Subject, Body, TRUE);
+                         SMTPMail.Send;
+                         MESSAGE(Text032);
+                     END;
+                 END;
 
-                IF Status = Status::Rejected THEN BEGIN
-                    UserSetup.GET("User ID");
-                    ToAddresses := UserSetup."E-Mail";
-                    Addressee := UserSetup.Name;
-                    CcAddresses := '';
-                    BccAddresses := '';
-                    Subject := STRSUBSTNO(Text018, "No.");
-                    UserSetup4.GET(USERID);
-                    SendersName := UserSetup4.Initials;
-                    "Requetsers Hod Name" := UserSetup4.Name;
-                    SenderAddress := UserSetup4."E-Mail";
-                    "Date Hod" := CURRENTDATETIME;
+                 IF Status = Status::Rejected THEN BEGIN
+                     UserSetup.GET("User ID");
+                     ToAddresses := UserSetup."E-Mail";
+                     Addressee := UserSetup.Name;
+                     CcAddresses := '';
+                     BccAddresses := '';
+                     Subject := STRSUBSTNO(Text018, "No.");
+                     UserSetup4.GET(USERID);
+                     SendersName := UserSetup4.Initials;
+                     "Requetsers Hod Name" := UserSetup4.Name;
+                     SenderAddress := UserSetup4."E-Mail";
+                     "Date Hod" := CURRENTDATETIME;
 
-                    Body := Text025 + UserSetup.Initials + ',' + CRLF + CRLF +
-                    STRSUBSTNO(Text034, "No.") + CRLF + CRLF + CRLF +
-                    Text029 + FORMAT("Request Type") + CRLF +
-                    Text030 + FORMAT(Description) + CRLF +
-                    Text027 + CRLF + CRLF + SendersName;
-                    IF CURRENTCLIENTTYPE = CLIENTTYPE::Windows THEN
-                        Mail.NewMessage(ToAddresses, CcAddresses, BccAddresses, Subject, Body, '', TRUE);
-                    IF CURRENTCLIENTTYPE = CLIENTTYPE::Web THEN BEGIN
-                        SMTPMail.CreateMessage(SendersName, SenderAddress, ToAddresses, Subject, Body, TRUE);
-                        SMTPMail.Send;
-                        MESSAGE(Text032);
-                    END;
-                END; */
+                     Body := Text025 + UserSetup.Initials + ',' + CRLF + CRLF +
+                     STRSUBSTNO(Text034, "No.") + CRLF + CRLF + CRLF +
+                     Text029 + FORMAT("Request Type") + CRLF +
+                     Text030 + FORMAT(Description) + CRLF +
+                     Text027 + CRLF + CRLF + SendersName;
+                     IF CURRENTCLIENTTYPE = CLIENTTYPE::Windows THEN
+                         Mail.NewMessage(ToAddresses, CcAddresses, BccAddresses, Subject, Body, '', TRUE);
+                     IF CURRENTCLIENTTYPE = CLIENTTYPE::Web THEN BEGIN
+                         SMTPMail.CreateMessage(SendersName, SenderAddress, ToAddresses, Subject, Body, TRUE);
+                         SMTPMail.Send;
+                         MESSAGE(Text032);
+                     END;
+                 END; */
             end;
         }
         field(14; "Date Hod"; DateTime)
@@ -309,13 +309,13 @@ table 70027 "Change Management"
                     STRSUBSTNO(Text036, "No.") + CRLF + CRLF +
                       Text029 + FORMAT("Request Type") + CRLF +
                    Text027 + CRLF + CRLF + SendersName;
-                   /*  IF CURRENTCLIENTTYPE = CLIENTTYPE::Windows THEN
-                        Mail.NewMessage(ToAddresses, CcAddresses, BccAddresses, Subject, Body, '', TRUE);
-                    IF CURRENTCLIENTTYPE = CLIENTTYPE::Web THEN BEGIN
-                        SMTPMail.CreateMessage(SendersName, SenderAddress, ToAddresses, Subject, Body, TRUE);
-                        SMTPMail.Send;
-                        MESSAGE(Text032);
-                    END; */
+                    /*  IF CURRENTCLIENTTYPE = CLIENTTYPE::Windows THEN
+                         Mail.NewMessage(ToAddresses, CcAddresses, BccAddresses, Subject, Body, '', TRUE);
+                     IF CURRENTCLIENTTYPE = CLIENTTYPE::Web THEN BEGIN
+                         SMTPMail.CreateMessage(SendersName, SenderAddress, ToAddresses, Subject, Body, TRUE);
+                         SMTPMail.Send;
+                         MESSAGE(Text032);
+                     END; */
                 END;
 
                 IF "MDs Status" = "MDs Status"::"On-hold" THEN BEGIN
@@ -335,13 +335,13 @@ table 70027 "Change Management"
                       Text029 + FORMAT("Request Type") + CRLF +
                       Text030 + FORMAT(Description) + CRLF +
                   Text027 + CRLF + CRLF + SendersName;
-                   /*  IF CURRENTCLIENTTYPE = CLIENTTYPE::Windows THEN
-                        Mail.NewMessage(ToAddresses, CcAddresses, BccAddresses, Subject, Body, '', TRUE);
-                    IF CURRENTCLIENTTYPE = CLIENTTYPE::Web THEN BEGIN
-                        SMTPMail.CreateMessage(SendersName, SenderAddress, ToAddresses, Subject, Body, TRUE);
-                        SMTPMail.Send;
-                        MESSAGE(Text032);
-                    END; */
+                    /*  IF CURRENTCLIENTTYPE = CLIENTTYPE::Windows THEN
+                         Mail.NewMessage(ToAddresses, CcAddresses, BccAddresses, Subject, Body, '', TRUE);
+                     IF CURRENTCLIENTTYPE = CLIENTTYPE::Web THEN BEGIN
+                         SMTPMail.CreateMessage(SendersName, SenderAddress, ToAddresses, Subject, Body, TRUE);
+                         SMTPMail.Send;
+                         MESSAGE(Text032);
+                     END; */
                 END;
 
                 IF "MDs Status" = "MDs Status"::Rejected THEN BEGIN
@@ -362,14 +362,14 @@ table 70027 "Change Management"
                       Text029 + FORMAT("Request Type") + CRLF +
                       Text030 + FORMAT(Description) + CRLF +
                       Text027 + CRLF + CRLF + SendersName;
-                 /*    IF CURRENTCLIENTTYPE = CLIENTTYPE::Windows THEN
-                        Mail.NewMessage(ToAddresses, CcAddresses, BccAddresses, Subject, Body, '', TRUE);
-                    IF CURRENTCLIENTTYPE = CLIENTTYPE::Web THEN BEGIN
-                        SMTPMail.CreateMessage(SendersName, SenderAddress, ToAddresses, Subject, Body, TRUE);
-                        SMTPMail.Send;
-                        MESSAGE(Text032);
+                    /*    IF CURRENTCLIENTTYPE = CLIENTTYPE::Windows THEN
+                           Mail.NewMessage(ToAddresses, CcAddresses, BccAddresses, Subject, Body, '', TRUE);
+                       IF CURRENTCLIENTTYPE = CLIENTTYPE::Web THEN BEGIN
+                           SMTPMail.CreateMessage(SendersName, SenderAddress, ToAddresses, Subject, Body, TRUE);
+                           SMTPMail.Send;
+                           MESSAGE(Text032);
 
-                    END; */
+                       END; */
                 END;
             end;
         }
@@ -470,13 +470,13 @@ table 70027 "Change Management"
                     Text029 + FORMAT("Request Type") + CRLF +
                     Text030 + FORMAT(Description) + CRLF +
                     Text027 + CRLF + CRLF + SendersName;
-                   /*  IF CURRENTCLIENTTYPE = CLIENTTYPE::Windows THEN
-                        Mail.NewMessage(ToAddresses, CcAddresses, BccAddresses, Subject, Body, '', TRUE);
-                    IF CURRENTCLIENTTYPE = CLIENTTYPE::Web THEN BEGIN
-                        SMTPMail.CreateMessage(SendersName, SenderAddress, ToAddresses, Subject, Body, TRUE);
-                        SMTPMail.Send;
-                        MESSAGE(Text032);
-                    END; */
+                    /*  IF CURRENTCLIENTTYPE = CLIENTTYPE::Windows THEN
+                         Mail.NewMessage(ToAddresses, CcAddresses, BccAddresses, Subject, Body, '', TRUE);
+                     IF CURRENTCLIENTTYPE = CLIENTTYPE::Web THEN BEGIN
+                         SMTPMail.CreateMessage(SendersName, SenderAddress, ToAddresses, Subject, Body, TRUE);
+                         SMTPMail.Send;
+                         MESSAGE(Text032);
+                     END; */
                 END;
             end;
         }
@@ -655,7 +655,11 @@ table 70027 "Change Management"
         IF "No." = '' THEN BEGIN
             PurchSetup.GET;
             PurchSetup.TESTFIELD("Change Mangment No");
-            NoSeriesMgt.InitSeries(PurchSetup."Change Mangment No", xRec."No. Series", 0D, "No.", "No. Series");
+            Rec."No. Series" := PurchSetup."Change Mangment No";
+            if NoSeriesMgt.AreRelated("No. Series", xRec."No. Series") then
+                "No. Series" := xRec."No. Series";
+            "No." := NoSeriesMgt.GetNextNo("No. Series");
+
         END;
 
         UserSetup.GET(USERID);
@@ -674,7 +678,7 @@ table 70027 "Change Management"
 
     var
         PurchSetup: Record "Purchases & Payables Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Employee: Record Employee;
         DimValue: Record "Dimension Value";
         //Mail: Codeunit Mail;

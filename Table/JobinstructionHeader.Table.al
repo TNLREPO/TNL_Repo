@@ -59,61 +59,61 @@ table 50142 "Job instruction Header"
         {
             TableRelation = Customer."No.";
         }
-        field(12;"Customer Name";Text[30])
+        field(12; "Customer Name"; Text[30])
         {
         }
-        field(13;"Customer Name2";Text[30])
+        field(13; "Customer Name2"; Text[30])
         {
         }
-        field(14;"Model No.";Code[20])
+        field(14; "Model No."; Code[20])
         {
         }
-        field(15;"Model Name";Text[30])
+        field(15; "Model Name"; Text[30])
         {
         }
-        field(16;"Vehicle Registration No.";Code[10])
+        field(16; "Vehicle Registration No."; Code[10])
         {
         }
-        field(17;Model;Code[20])
+        field(17; Model; Code[20])
         {
         }
-        field(18;"Frame No./VIN";Code[20])
+        field(18; "Frame No./VIN"; Code[20])
         {
         }
-        field(19;"(Engine No)";Code[20])
+        field(19; "(Engine No)"; Code[20])
         {
         }
-        field(20;"Contact Telephone No.";Text[30])
+        field(20; "Contact Telephone No."; Text[30])
         {
         }
-        field(21;"Contact Telephone No. Type";Option)
+        field(21; "Contact Telephone No. Type"; Option)
         {
             OptionCaption = 'Home,Business,Mobile';
             OptionMembers = Home,Business,Mobile;
         }
-        field(22;"E-mail";Text[80])
+        field(22; "E-mail"; Text[80])
         {
         }
-        field(23;"EC Date";Date)
-        {
-            Description = 'EC means Estimation Completion';
-        }
-        field(24;"EC Time";Time)
+        field(23; "EC Date"; Date)
         {
             Description = 'EC means Estimation Completion';
         }
-        field(25;"EC Delivery Date";Date)
+        field(24; "EC Time"; Time)
         {
             Description = 'EC means Estimation Completion';
         }
-        field(26;"EC Delivery Time";Time)
+        field(25; "EC Delivery Date"; Date)
         {
             Description = 'EC means Estimation Completion';
         }
-        field(27;"Job Details / Replaced Parts";Text[50])
+        field(26; "EC Delivery Time"; Time)
+        {
+            Description = 'EC means Estimation Completion';
+        }
+        field(27; "Job Details / Replaced Parts"; Text[50])
         {
         }
-        field(28;"Part No.";Code[20])
+        field(28; "Part No."; Code[20])
         {
             TableRelation = Item."No.";
 
@@ -121,269 +121,269 @@ table 50142 "Job instruction Header"
             begin
 
                 IF ItemRec.GET("Part No.") THEN
-                "Parts Desciption" := ItemRec.Description;
+                    "Parts Desciption" := ItemRec.Description;
             end;
         }
-        field(29;Quantity;Decimal)
+        field(29; Quantity; Decimal)
         {
-            DecimalPlaces = 0:0;
+            DecimalPlaces = 0 : 0;
         }
-        field(30;Results;Option)
+        field(30; Results; Option)
         {
             OptionCaption = ' ,Inspected,Changed';
             OptionMembers = " ",Inspected,Changed;
         }
-        field(31;"Change of Delivery Time";Time)
+        field(31; "Change of Delivery Time"; Time)
         {
         }
-        field(32;"Necessary Part No.";Code[20])
+        field(32; "Necessary Part No."; Code[20])
         {
             TableRelation = Item."No.";
         }
-        field(33;Stock;Boolean)
+        field(33; Stock; Boolean)
         {
         }
-        field(34;ETA;Time)
+        field(34; ETA; Time)
         {
             Description = 'ETA means Expected Time of Delivery';
         }
-        field(35;EDA;Date)
+        field(35; EDA; Date)
         {
             Description = 'EDA means Expected Date of Delivery';
         }
-        field(36;"Cus C Date";Date)
+        field(36; "Cus C Date"; Date)
         {
             Description = 'CC means Customer Contact';
         }
-        field(37;"Cus C Time";Time)
+        field(37; "Cus C Time"; Time)
         {
             Description = 'CC means Customer Contact';
         }
-        field(38;"Cus C Staff Name";Code[20])
+        field(38; "Cus C Staff Name"; Code[20])
         {
         }
-        field(39;"Cmp C Date";Date)
-        {
-            Description = 'Cmp C means Completion Changed';
-        }
-        field(40;"Cmp C Time";Time)
+        field(39; "Cmp C Date"; Date)
         {
             Description = 'Cmp C means Completion Changed';
         }
-        field(41;"Del C Date";Date)
+        field(40; "Cmp C Time"; Time)
+        {
+            Description = 'Cmp C means Completion Changed';
+        }
+        field(41; "Del C Date"; Date)
         {
             Description = 'Del C means Delivery Changed';
         }
-        field(42;"Del C Time";Time)
+        field(42; "Del C Time"; Time)
         {
             Description = 'Del C means Delivery Changed';
         }
-        field(43;"Job Start Date";Date)
+        field(43; "Job Start Date"; Date)
         {
         }
-        field(44;"Job Start Time";Time)
+        field(44; "Job Start Time"; Time)
         {
         }
-        field(45;"Job C Date";Date)
-        {
-            Description = 'Job C means Job Completion';
-        }
-        field(46;"Job C Time";Time)
+        field(45; "Job C Date"; Date)
         {
             Description = 'Job C means Job Completion';
         }
-        field(47;"Actual Hours Clocked";Time)
+        field(46; "Job C Time"; Time)
+        {
+            Description = 'Job C means Job Completion';
+        }
+        field(47; "Actual Hours Clocked"; Time)
         {
         }
-        field(48;"Technician Name";Code[10])
+        field(48; "Technician Name"; Code[10])
         {
         }
-        field(49;"QC Staff name";Code[10])
+        field(49; "QC Staff name"; Code[10])
         {
             Description = 'QC means Quality Control';
         }
-        field(50;"Other Findings/Advice";Text[50])
+        field(50; "Other Findings/Advice"; Text[50])
         {
         }
-        field(51;Memo;Text[50])
+        field(51; Memo; Text[50])
         {
         }
-        field(52;Cleanliness;Boolean)
+        field(52; Cleanliness; Boolean)
         {
         }
-        field(53;"Cleanliness Type";Option)
+        field(53; "Cleanliness Type"; Option)
         {
             OptionCaption = ' ,Exterior,Interior';
             OptionMembers = " ",Exterior,Interior;
         }
-        field(54;Cleanliness2;Boolean)
+        field(54; Cleanliness2; Boolean)
         {
         }
-        field(55;"Courtesy Items Removal";Boolean)
+        field(55; "Courtesy Items Removal"; Boolean)
         {
         }
-        field(56;"Courtesy Items Removal2";Boolean)
+        field(56; "Courtesy Items Removal2"; Boolean)
         {
         }
-        field(57;"Outer Minor P / Seat P";Boolean)
-        {
-            Description = 'P means Position';
-        }
-        field(58;"Outer Minor P / Seat P2";Boolean)
+        field(57; "Outer Minor P / Seat P"; Boolean)
         {
             Description = 'P means Position';
         }
-        field(59;"Clock Adj / Radio Setting";Boolean)
+        field(58; "Outer Minor P / Seat P2"; Boolean)
+        {
+            Description = 'P means Position';
+        }
+        field(59; "Clock Adj / Radio Setting"; Boolean)
         {
             Description = 'Adj means Adjustment';
         }
-        field(60;"Clock Adj / Radio Setting2";Boolean)
+        field(60; "Clock Adj / Radio Setting2"; Boolean)
         {
             Description = 'Adj means Adjustment';
         }
-        field(61;"Pre-d C Staff Name";Code[10])
+        field(61; "Pre-d C Staff Name"; Code[10])
         {
             Description = 'Pre-d means Pre-delivery Cofirmation';
         }
-        field(62;"Pre-d C Confirmed by";Code[10])
+        field(62; "Pre-d C Confirmed by"; Code[10])
         {
             Description = 'Pre-d means Pre-delivery Cofirmation';
         }
-        field(63;"P.S.F.U. (Plan) Date";Date)
+        field(63; "P.S.F.U. (Plan) Date"; Date)
         {
         }
-        field(64;"P.S.F.U. (Plan) Time";Time)
+        field(64; "P.S.F.U. (Plan) Time"; Time)
         {
         }
-        field(65;Other;Text[30])
+        field(65; Other; Text[30])
         {
         }
-        field(66;"P.S.F.U. (Actual) Date";Date)
+        field(66; "P.S.F.U. (Actual) Date"; Date)
         {
         }
-        field(67;"P.S.F.U. (Actual) Time";Time)
+        field(67; "P.S.F.U. (Actual) Time"; Time)
         {
         }
-        field(68;"Customer Type";Option)
+        field(68; "Customer Type"; Option)
         {
             OptionCaption = 'Owner,Family,Other';
             OptionMembers = Owner,Family,Other;
         }
-        field(69;"If Other Cus Type";Text[30])
+        field(69; "If Other Cus Type"; Text[30])
         {
         }
-        field(70;"Fixed";Boolean)
-        {
-            Description = 'P.S.F.U. (GJ)';
-        }
-        field(71;"Followup Status";Boolean)
+        field(70; "Fixed"; Boolean)
         {
             Description = 'P.S.F.U. (GJ)';
         }
-        field(72;"FollowupAgain Date";Date)
+        field(71; "Followup Status"; Boolean)
         {
             Description = 'P.S.F.U. (GJ)';
         }
-        field(73;"FollowupAgain Time";Time)
+        field(72; "FollowupAgain Date"; Date)
         {
             Description = 'P.S.F.U. (GJ)';
         }
-        field(74;"Not Fixed";Boolean)
+        field(73; "FollowupAgain Time"; Time)
         {
             Description = 'P.S.F.U. (GJ)';
         }
-        field(75;"Appointment Date for RR";Date)
+        field(74; "Not Fixed"; Boolean)
+        {
+            Description = 'P.S.F.U. (GJ)';
+        }
+        field(75; "Appointment Date for RR"; Date)
         {
             Description = 'RR means Repeate Repair';
         }
-        field(76;"Appointment Time for RR";Time)
+        field(76; "Appointment Time for RR"; Time)
         {
             Description = 'RR means Repeate Repair';
         }
-        field(77;"Job CN Date";Date)
+        field(77; "Job CN Date"; Date)
         {
             Description = 'Job Completion Notification';
         }
-        field(78;"Job CN Time";Time)
+        field(78; "Job CN Time"; Time)
         {
             Description = 'Job Completion Notification';
         }
-        field(79;"Job CN Staff Name";Code[10])
+        field(79; "Job CN Staff Name"; Code[10])
         {
             Description = 'Job Completion Notification';
         }
-        field(80;"Job Details Explanation";Boolean)
+        field(80; "Job Details Explanation"; Boolean)
         {
             Description = 'Job Results Explanation';
         }
-        field(81;"Free Explanation";Boolean)
+        field(81; "Free Explanation"; Boolean)
         {
             Description = 'Job Results Explanation';
         }
-        field(82;"Results Confirmation w / Cust.";Boolean)
+        field(82; "Results Confirmation w / Cust."; Boolean)
         {
             Description = 'Job Results Explanation';
         }
-        field(83;"Walk-around Check";Boolean)
+        field(83; "Walk-around Check"; Boolean)
         {
             Description = 'Job Results Explanation';
         }
-        field(84;"P.S.F.U. (Plan)";Boolean)
+        field(84; "P.S.F.U. (Plan)"; Boolean)
         {
             Description = 'Job Results Explanation';
         }
-        field(85;"Level-up";Boolean)
+        field(85; "Level-up"; Boolean)
         {
             Description = 'Job Results Explanation';
         }
-        field(86;"JRE Staff Name";Code[10])
+        field(86; "JRE Staff Name"; Code[10])
         {
             Description = 'Job Results Explanation';
         }
-        field(87;"Delivery Date";Date)
+        field(87; "Delivery Date"; Date)
         {
         }
-        field(88;"Delivery Time";Time)
+        field(88; "Delivery Time"; Time)
         {
         }
-        field(89;"Delivery Customer";Option)
+        field(89; "Delivery Customer"; Option)
         {
             OptionCaption = 'Owner,Family,Other';
             OptionMembers = Owner,Family,Other;
         }
-        field(90;"If Other Customer";Text[30])
+        field(90; "If Other Customer"; Text[30])
         {
         }
-        field(91;"Delivery Staff Name";Code[10])
+        field(91; "Delivery Staff Name"; Code[10])
         {
         }
-        field(92;"P.S.F.U. Staff Name";Code[10])
+        field(92; "P.S.F.U. Staff Name"; Code[10])
         {
         }
-        field(93;"P.S.F.U. Confirmed by";Code[10])
+        field(93; "P.S.F.U. Confirmed by"; Code[10])
         {
         }
-        field(94;"Job Type2";Text[50])
+        field(94; "Job Type2"; Text[50])
         {
         }
-        field(95;"Parts Desciption";Text[50])
+        field(95; "Parts Desciption"; Text[50])
         {
         }
-        field(96;"Job Category";Option)
+        field(96; "Job Category"; Option)
         {
             OptionCaption = 'Additional Jobs,Job Stoppage,Other';
             OptionMembers = "Additional Jobs","Job Stoppage",Other;
         }
-        field(97;"If Other Job Category";Text[30])
+        field(97; "If Other Job Category"; Text[30])
         {
         }
-        field(98;Fixed2;Boolean)
+        field(98; Fixed2; Boolean)
         {
         }
-        field(99;"Not Fixed2";Boolean)
+        field(99; "Not Fixed2"; Boolean)
         {
         }
-        field(100;"No. Series";Code[10])
+        field(100; "No. Series"; Code[10])
         {
             TableRelation = "No. Series";
         }
@@ -391,7 +391,7 @@ table 50142 "Job instruction Header"
 
     keys
     {
-        key(Key1;"Job Instruction No.")
+        key(Key1; "Job Instruction No.")
         {
             Clustered = true;
         }
@@ -405,27 +405,27 @@ table 50142 "Job instruction Header"
         FaultRec: Record "CSI Table";
         ItemRec: Record Item;
         SalesSetup: Record "Sales & Receivables Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         JobInstRec: Record "Job instruction Header";
 
-    
+
     procedure AssistEdit("OldJobInst.": Record "Job instruction Header"): Boolean
     var
         JobInstRec: Record "Job instruction Header";
     begin
 
-       /*  WITH JobInstRec DO BEGIN
-          JobInstRec := Rec;
-          SalesSetup.GET;
-          SalesSetup.TESTFIELD("Job Instruction No.");
-          IF NoSeriesMgt.SelectSeries(SalesSetup."Job Instruction No.","OldJobInst."."No. Series","No. Series") THEN BEGIN
-            SalesSetup.GET;
-            SalesSetup.TESTFIELD("Job Instruction No.");
-            NoSeriesMgt.SetSeries("Job Instruction No.");
-            Rec := JobInstRec;
-            EXIT(TRUE);
-          END;
-        END; */
+        /*  WITH JobInstRec DO BEGIN
+           JobInstRec := Rec;
+           SalesSetup.GET;
+           SalesSetup.TESTFIELD("Job Instruction No.");
+           IF NoSeriesMgt.SelectSeries(SalesSetup."Job Instruction No.","OldJobInst."."No. Series","No. Series") THEN BEGIN
+             SalesSetup.GET;
+             SalesSetup.TESTFIELD("Job Instruction No.");
+             NoSeriesMgt.SetSeries("Job Instruction No.");
+             Rec := JobInstRec;
+             EXIT(TRUE);
+           END;
+         END; */
     end;
 }
 

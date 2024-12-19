@@ -2145,7 +2145,7 @@ table 70009 "Leave Request3"
         IF "Request No." = '' THEN BEGIN
             HRSetup.GET;
             HRSetup.TESTFIELD(HRSetup."Leave Approval No.");
-            NoSeriesMgt.InitSeries(HRSetup."Leave Approval No.", HRSetup."Leave Approval No.", 0D, "Request No.", HRSetup."Leave Approval No.");
+            "Request No." := NoSeriesMgt.GetNextNo(HRSetup."Leave Approval No.");
         END;
 
         UserSetup.GET(USERID);
@@ -2158,7 +2158,7 @@ table 70009 "Leave Request3"
 
         HRSetup: Record 5218;
         LeaveReg: Record 70008;
-        NoSeriesMgt: Codeunit 396;
+        NoSeriesMgt: Codeunit "No. Series";
         UserSetup: Record 91;
         EmplyRec: Record 5200;
         Mail: Codeunit 397;

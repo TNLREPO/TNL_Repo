@@ -142,8 +142,12 @@ table 50108 "Deposit Management"
         GLSetup.GET;
         IF "Deposit No." = '' THEN BEGIN
             GLSetup.TESTFIELD(GLSetup."Deposit Nos.");
-            NoSeriesMgt.InitSeries(GLSetup."Deposit Nos.", xRec."Deposit No.", 0D, "Deposit No.", "No. Series");
+            "No. Series" := GLSetup."Deposit Nos.";
+            if NoSeriesMgt.AreRelated("No. Series", xRec."No. Series") then
+                "No. Series" := xRec."No. Series";
+            "Deposit No." := NoSeriesMgt.GetNextNo("No. Series");
         END;
+
         "Transaction Date" := WORKDATE;
     end;
 
@@ -151,9 +155,9 @@ table 50108 "Deposit Management"
         GLSetup: Record "General Ledger Setup";
         GLAcc: Record "G/L Account";
         DepositRec: Record "Deposit Management";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
 
-    
+
     procedure AssistEdit(OldDep: Record "Deposit Management"): Boolean
     begin
         /* WITH DepositRec DO BEGIN

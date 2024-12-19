@@ -140,7 +140,7 @@ table 50083 "Course Attendance"
     var
         CAtRec: Record "Course Attendance";
         HumanResSetup: Record "Human Resources Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         TCourseRec: Record "Training Courses";
         EmploRec: Record Employee;
         TotalCost: Decimal;

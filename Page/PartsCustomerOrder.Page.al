@@ -624,7 +624,7 @@ page 80056 "Parts Customer Order"
         DQ3: Record 70035;
         TransferHeader: Record 5740;
         SalesSetup: Record 311;
-        NoSeriesMgt: Codeunit 396;
+        NoSeriesMgt: Codeunit "No. Series";
         ServCamp: Record 50046;
         Text003: Label 'SSC/SC details are not available.';
         ClockedTime: Duration;

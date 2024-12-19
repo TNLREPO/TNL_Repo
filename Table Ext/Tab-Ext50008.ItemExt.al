@@ -869,6 +869,103 @@ tableextension 50008 "Item Ext" extends Item
         {
             DataClassification = ToBeClassified;
         }
+
+        field(70120; "Item Default"; Code[10])
+        {
+            DataClassification = ToBeClassified;
+
+            trigger OnValidate()
+            begin
+                IF ItemCat2.GET("Item Default") THEN BEGIN
+                    VALIDATE("Gen. Prod. Posting Group", ItemCat2."Gen. Prod. Posting Group");
+                    VALIDATE("VAT Prod. Posting Group", ItemCat2."VAT Prod. Posting Group");
+                    VALIDATE("Global Dimension 1 Code", ItemCat2."Department Code");
+                    VALIDATE("Global Dimension 2 Code", ItemCat2."Branch Code");
+                    VALIDATE("Product Code", ItemCat2."Product Grp Code");
+                    VALIDATE("Part Division", ItemCat2."Part Division");
+                    VALIDATE("Item Category Code", ItemCat2."Item Category Code");
+                    VALIDATE("Costing Method", ItemCat2."Costing Method");
+                    VALIDATE("Price/Profit Calculation", ItemCat2."Price/Profit Calculation");
+                    VALIDATE("Inventory Posting Group", ItemCat2."Inventory Posting Group");
+                    VALIDATE("Item Price Group", ItemCat2."Item Price Group");
+                    VALIDATE("Base Unit of Measure", ItemCat2."Base Unit of Measure");
+
+                END;
+            end;
+        }
+        field(70121; "Sales (Qty.)(6mths)"; Decimal)
+        {
+            CalcFormula = - Sum("Value Entry"."Invoiced Quantity" WHERE("Item Ledger Entry Type" = CONST(Sale),
+                                                                        "Item No." = FIELD("No."),
+                                                                        "Global Dimension 1 Code" = FIELD("Global Dimension 1 Filter"),
+                                                                        "Global Dimension 2 Code" = FIELD("Global Dimension 2 Filter"),
+                                                                        "Location Code" = FIELD("Location Filter"),
+                                                                        "Drop Shipment" = FIELD("Drop Shipment Filter"),
+                                                                        "Variant Code" = FIELD("Variant Filter"),
+                                                                        "Posting Date" = FIELD("Date Filter"),
+                                                                        "Posting Date" = FILTER('01/11/23..31/05/24')));
+            Caption = 'Sales (Qty.)(6mths)';
+            DecimalPlaces = 0 : 5;
+            Editable = false;
+            FieldClass = FlowField;
+        }
+        field(70122; BNPA; Decimal)
+        {
+            /* CalcFormula = Lookup("Sales Price"."Unit Price" WHERE("Item No." = FIELD("No."),
+                                                                   "Sales Code" = FILTER('BNPA')));
+            FieldClass = FlowField; */
+        }
+        field(70123; BNPB; Decimal)
+        {
+            /*  CalcFormula = Lookup("Sales Price"."Unit Price" WHERE("Item No."=FIELD("No."),
+                                                                    "Sales Code="FILTER('BNPB')));
+             FieldClass = FlowField; */
+        }
+        field(70124; BNPC; Decimal)
+        {
+            /*  CalcFormula = Lookup("Sales Price"."Unit Price" WHERE ("Item No."=FIELD("No."),
+                                                                    Sales Code=FILTER(BNPC)));
+             FieldClass = FlowField; */
+        }
+        field(70125; Allocated; Boolean)
+        {
+            DataClassification = ToBeClassified;
+
+            trigger OnValidate()
+            begin
+                TESTFIELD(Reserved, FALSE);
+            end;
+        }
+        field(70126; Reserved; Boolean)
+        {
+            DataClassification = ToBeClassified;
+
+            trigger OnValidate()
+            begin
+                TESTFIELD(Allocated, FALSE);
+            end;
+        }
+        field(70127; "Reservation Qty"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(70128; "Sellable Qty Available"; Decimal)
+        {
+            CalcFormula = Sum("Item Ledger Entry".Quantity WHERE("Item No." = FIELD("No."),
+                                                                  "Location Code" = FILTER('123ORE|129IKO|113LEK|CONSIGNMEN|EXIBITION')));
+            FieldClass = FlowField;
+        }
+        field(70129; Cubage; Decimal)
+        {
+            CalcFormula = Sum("Item Unit of Measure".Cubage WHERE("Item No." = FIELD("No.")));
+            FieldClass = FlowField;
+        }
+        field(70130; TGMO; Decimal)
+        {
+            /* CalcFormula = Lookup("Sales Price"."Unit Price" WHERE ("Item No."=FIELD("No."),
+                                                                   "Sales Code"=FILTER(TGMO)));
+            FieldClass = FlowField; */
+        }
         field(80000; "Picture Url"; Text[250])
         {
             DataClassification = ToBeClassified;
@@ -904,6 +1001,8 @@ tableextension 50008 "Item Ext" extends Item
         FixedExchRate: Decimal;
         FixedPrice: Record 50126;
         FixedPrice2: Record 50128;
+        ItemCat2: Record 50157;
+        ExchRate: Decimal;
 
     trigger OnInsert()
     var

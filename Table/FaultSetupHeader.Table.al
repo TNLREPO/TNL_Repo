@@ -108,17 +108,20 @@ table 50109 "Fault Setup Header"
         IF "Operation Code" = '' THEN BEGIN
             SerSetup.GET;
             SerSetup.TESTFIELD(SerSetup."Fault Code No.s");
-            NoSeriesMgt.InitSeries(SerSetup."Fault Code No.s", xRec."No. Series", 0D, "Operation Code", "No. Series");
+            "No. Series" := SerSetup."Fault Code No.s";
+            if NoSeriesMgt.AreRelated("No. Series", xRec."No. Series") then
+                "No. Series" := xRec."No. Series";
+            "Operation Code" := NoSeriesMgt.GetNextNo("Operation Code");
         END;
     end;
 
     var
         faultmaterial: Record "Fault Setup Line";
         SerSetup: Record "Service Mgt. Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Faultrec: Record "Fault Setup Header";
 
-    
+
     procedure AssistEdit(Oldfault: Record "Fault Setup Header"): Boolean
     begin
         /* WITH Faultrec DO BEGIN

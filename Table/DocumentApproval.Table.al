@@ -88,15 +88,14 @@ table 50162 "Document Approval"
 
         GLSetup.GET;
         GLSetup.TESTFIELD(GLSetup."Document Approval");
-        NoSeriesMgt.InitSeries(GLSetup."Document Approval", GLSetup."Document Approval", 0D,
-        "No.", GLSetup."Document Approval");
-
+        NoSeriesMgt.GetNextNo(GLSetup."Document Approval");
         Date := TODAY;
+
     end;
 
     var
         GLSetup: Record "General Ledger Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         VendRec: Record Vendor;
         UserSetup: Record "User Setup";
 }

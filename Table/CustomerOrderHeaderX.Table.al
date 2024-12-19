@@ -12,7 +12,7 @@ table 70034 "Customer Order HeaderX"
 
             trigger OnValidate()
             var
-                NoSeriesMgt: Codeunit NoSeriesManagement;
+                NoSeriesMgt: Codeunit "No. Series";
 
             begin
                 IF "No." <> xRec."No." THEN BEGIN
@@ -2105,14 +2105,18 @@ table 70034 "Customer Order HeaderX"
 
     trigger OnInsert()
     var
-        NoSeriesMgt: codeunit NoSeriesManagement;
+        NoSeriesMgt: codeunit "No. Series";
 
     begin
         IF "No." = '' THEN BEGIN
             SalesSetup.GET;
             SalesSetup.TESTFIELD("Customer Order No.");
-            NoSeriesMgt.InitSeries(SalesSetup."Customer Order No.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No. Series" := SalesSetup."Customer Nos.";
+            if NoSeriesMgt.AreRelated("No. Series", xRec."No. Series") then
+                "No. Series" := xRec."No. Series";
+            "No." := NoSeriesMgt.GetNextNo("No. Series");
         END;
+
         Date := TODAY;
 
         "User ID" := USERID;
@@ -2232,13 +2236,23 @@ table 70034 "Customer Order HeaderX"
 
     procedure InitRecord()
     var
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
+        SalesSetup: Record "Sales & Receivables Setup";
+
     begin
+        SalesSetup.Get();
         CASE "Job Type2" OF
             "Job Type2"::"General Repair":
-                NoSeriesMgt.SetDefaultSeries("No. Series", SalesSetup."Customer Order No.");
+                begin
+                    "No. Series" := SalesSetup."Customer Order No.";
+                    NoSeriesMgt.GetNextNo("No. Series");
+                end;
+
             "Job Type2"::"Periodic Maintenance":
-                NoSeriesMgt.SetDefaultSeries("No. Series", SalesSetup."Customer Order No. GN");
+                begin
+                    "No. Series" := SalesSetup."Customer Order No. GN";
+                    NoSeriesMgt.GetNextNo("No. Series");
+                end;
         END;
     end;
 
@@ -2310,7 +2324,7 @@ table 70034 "Customer Order HeaderX"
     procedure AssistEdit(OldCustOrderForm: Record "Customer Order Table."): Boolean
     var
         CustOrder: Record "Customer Order Table.";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
     begin
         /* WITH CustOrderRec DO BEGIN
             COPY(Rec);
@@ -3109,7 +3123,7 @@ table 70034 "Customer Order HeaderX"
 
     procedure CreateLPP()
     var
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
     begin
         PurchSetup.GET;
         NewLPPNo := NoSeriesMgt.GetNextNo(PurchSetup."LPP Nos.", 0D, TRUE);
@@ -3128,7 +3142,7 @@ table 70034 "Customer Order HeaderX"
 
     procedure CreateOpexX()
     var
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
     begin
         PurchSetup2.GET;
         NewOpexX := NoSeriesMgt.GetNextNo(PurchSetup2."Opex Nos.", 0D, TRUE);

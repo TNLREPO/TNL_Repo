@@ -405,7 +405,10 @@ table 60000 "EARQ Header"
         IF "No." = '' THEN BEGIN
             SalesSetup.GET;
             SalesSetup.TESTFIELD("Appointment BP Nos.");
-            NoSeriesMgt.InitSeries(SalesSetup."Repair Order Nos.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No. Series" := SalesSetup."Appointment BP Nos.";
+            if NoSeriesMgt.AreRelated("No. Series", xRec."No. Series") then
+                "No. Series" := xRec."No. Series";
+            "No." := NoSeriesMgt.GetNextNo("No. Series");
         END;
 
         "Booking Date" := TODAY;
@@ -415,7 +418,7 @@ table 60000 "EARQ Header"
     var
         ServiceItem: Record "Service Item";
         SalesSetup: Record "Sales & Receivables Setup";
-        NoSeriesMgt: Codeunit 396;
+        NoSeriesMgt: Codeunit "No. Series";
         RepairOrder: Record "Repair Order";
         RepairOrderLine: Record "Repair Order Line";
 }

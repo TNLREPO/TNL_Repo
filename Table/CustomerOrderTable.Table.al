@@ -1983,7 +1983,7 @@ table 50119 "Customer Order Table."
         SalesSetup.GET;
         IF "Customer Order Form No." = '' THEN BEGIN
             TestNoSeries;
-            NoSeriesMgt.InitSeries(GetNoSeriesCode, xRec."No. Series", 0D, "Customer Order Form No.", "No. Series");
+            NoSeriesMgt.GetNextNo("Customer Order Form No.");
         END;
         InitRecord;
 
@@ -1997,7 +1997,7 @@ table 50119 "Customer Order Table."
 
     var
         SalesSetup: Record "Sales & Receivables Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         CustRec: Record Customer;
         ModelRec: Record Model;
         ServiceRec: Record "Service Item";
@@ -2040,11 +2040,18 @@ table 50119 "Customer Order Table."
 
     procedure InitRecord()
     begin
+        SalesSetup.Get();
         CASE "Service Type" OF
             "Service Type"::"General Workshop":
-                NoSeriesMgt.SetDefaultSeries("No. Series", SalesSetup."Customer Order No.");
+                begin
+                    "No. Series" := SalesSetup."Customer Order No.";
+                    NoSeriesMgt.GetNextNo("No. Series");
+                end;
             "Service Type"::"Body and Paint":
-                NoSeriesMgt.SetDefaultSeries("No. Series", SalesSetup."Customer Order No. GN");
+                Begin
+                    "No. Series" := SalesSetup."Customer Order No. GN";
+                    NoSeriesMgt.GetNextNo("No. Series");
+                End;
         END;
     end;
 
@@ -2162,10 +2169,10 @@ table 50119 "Customer Order Table."
     end;
 
 
-   /*  procedure "Create Service Order"()
-    begin
-        
-    end; */
+    /*  procedure "Create Service Order"()
+     begin
+
+     end; */
 
 
     procedure GenService()

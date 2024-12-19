@@ -114,7 +114,7 @@ table 70031 "Fault Setup HeaderX"
     var
         faultmaterial: Record "Fault Setup LineX";
         SerSetup: Record "Service Mgt. Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Faultrec: Record "Fault Setup HeaderX";
 
     procedure AssistEdit(Oldfault: Record "Fault Setup Header"): Boolean

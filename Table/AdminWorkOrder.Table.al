@@ -128,14 +128,17 @@ table 50177 "Admin Work Order"
         IF "Work Order No." = '' THEN BEGIN
             ServMgtSetUp.GET;
             ServMgtSetUp.TESTFIELD("Work Order No.");
-            NoSeriesMgt.InitSeries(ServMgtSetUp."Work Order No.", xRec."No. Series", 0D, "Work Order No.", "No. Series");
+            Rec."No. Series" := ServMgtSetUp."Work Order No.";
+            if NoSeriesMgt.AreRelated(Rec."No. Series", xRec."No. Series") then
+                Rec."No. Series" := xRec."No. Series";
+            Rec."Work Order No." := NoSeriesMgt.GetNextNo("No. Series");
         END;
         Date := TODAY;
     end;
 
     var
         ServMgtSetUp: Record "Service Mgt. Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         ItemLedgEntry: Record "Item Ledger Entry";
         ModelRec: Record Model;
         ItemRec: Record Item;

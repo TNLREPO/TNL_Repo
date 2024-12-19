@@ -39,7 +39,9 @@ report 50010 "Vehicle - Invoice"
             column(CompanyAddress8; CompanyAddr[8])
             {
             }
+#pragma warning disable AL0432
             column(CompanyHomePage; CompanyInfo."Home Page")
+#pragma warning restore AL0432
             {
             }
             column(CompanyEMail; CompanyInfo."E-Mail")
@@ -429,10 +431,14 @@ report 50010 "Vehicle - Invoice"
             column(VATClause_Lbl; VATClause.TableCaption())
             {
             }
+#pragma warning disable AL0432
             column(PackageTrackingNo; "Package Tracking No.")
+#pragma warning restore AL0432
             {
             }
+#pragma warning disable AL0432
             column(PackageTrackingNo_Lbl; FieldCaption("Package Tracking No."))
+#pragma warning restore AL0432
             {
             }
             column(ShippingAgentCode; "Shipping Agent Code")
@@ -756,7 +762,9 @@ report 50010 "Vehicle - Invoice"
                     Header."Work Description".CreateInStream(WorkDescriptionInstream, TEXTENCODING::UTF8);
                 end;
             }
+#pragma warning disable AL0432
             dataitem(VATAmountLine; "VAT Amount Line")
+#pragma warning restore AL0432
             {
                 DataItemTableView = sorting("VAT Identifier", "VAT Calculation Type", "Tax Group Code", "Use Tax", Positive);
                 UseTemporary = true;
@@ -862,7 +870,9 @@ report 50010 "Vehicle - Invoice"
                     TotalVATAmountOnVATAmtLine := 0;
                 end;
             }
+#pragma warning disable AL0432
             dataitem(VATClauseLine; "VAT Amount Line")
+#pragma warning restore AL0432
             {
                 DataItemTableView = sorting("VAT Identifier", "VAT Calculation Type", "Tax Group Code", "Use Tax", Positive);
                 UseTemporary = true;
@@ -1592,7 +1602,9 @@ report 50010 "Vehicle - Invoice"
             RightHeader.DeleteAll();
 
             FillNameValueTable(RightHeader, EMailLbl, CompanyInfo."E-Mail");
+#pragma warning disable AL0432
             FillNameValueTable(RightHeader, HomePageLbl, CompanyInfo."Home Page");
+#pragma warning restore AL0432
             FillNameValueTable(RightHeader, CompanyInfoPhoneNoLbl, CompanyInfo."Phone No.");
             FillNameValueTable(RightHeader, CompanyInfo.GetRegistrationNumberLbl(), CompanyInfo.GetRegistrationNumber());
             FillNameValueTable(RightHeader, CompanyInfo.GetVATRegistrationNumberLbl(), CompanyInfo.GetVATRegistrationNumber());
@@ -1691,7 +1703,9 @@ report 50010 "Vehicle - Invoice"
         exit(true);
     end;
 
+#pragma warning disable AL0432
     local procedure InsertVATAmountLine(var VATAmountLine2: Record "VAT Amount Line"; SalesInvoiceLine: Record "Sales Invoice Line")
+#pragma warning restore AL0432
     var
         IsHandled: Boolean;
     begin
@@ -1736,7 +1750,10 @@ report 50010 "Vehicle - Invoice"
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnBeforeVATAmountLineInsertLine(var VATAmountLine: Record "VAT Amount Line"; SalesInvoiceLine: Record "Sales Invoice Line"; var IsHandled: Boolean)
+    local procedure OnBeforeVATAmountLineInsertLine
+#pragma warning disable AL0432
+(var VATAmountLine: Record "VAT Amount Line"; SalesInvoiceLine: Record "Sales Invoice Line"; var IsHandled: Boolean)
+#pragma warning restore AL0432
     begin
     end;
 

@@ -984,11 +984,11 @@ table 50105 "IOU Register"
             IOURec.SETFILTER(IOURec."IOU No.", '<>%1', '');
             IOURec.SETRANGE(IOURec.Amount, 0);
             IOURec.SETRANGE(IOURec."User Id", USERID);
-            IF IOURec.FIND('-') THEN
+            IF IOURec.FindFirst() THEN
                 ERROR('Created IOU No. %1 not used!\New IOU cannot be created', IOURec."IOU No.");
 
-            GLSetup.TESTFIELD(GLSetup."IOU Nos.");
-            NoSeriesMgt.InitSeries(GLSetup."IOU Nos.", GLSetup."IOU Nos.", 0D, "IOU No.", GLSetup."IOU Nos.");
+            GLSetup.TESTFIELD("IOU Nos.");
+            "IOU No." := NoSeriesMgt.GetNextNo(GLSetup."IOU Nos.");
 
         END;
 
@@ -1016,7 +1016,7 @@ table 50105 "IOU Register"
         VendorRec: Record Vendor;
         BankRec: Record "Bank Account";
         FixedAssetRec: Record "Fixed Asset";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         UserSetup: Record "User Setup";
         //approvalmessage: Codeunit Mail;
         mailsent: Boolean;

@@ -137,7 +137,11 @@ table 50121 "Estimate Header"
         IF "Estimate No" = '' THEN BEGIN
             serviceSetup.GET;
             serviceSetup.TESTFIELD("Complaint No.");
-            NoSeriesMgt.InitSeries(serviceSetup."Complaint No.", xRec."No. Series", 0D, "Estimate No", "No. Series");
+            "No. Series" := serviceSetup."Complaint No.";
+            if NoSeriesMgt.AreRelated("No. Series", xRec."No. Series") then
+                "No. Series" := xRec."No. Series";
+            "Estimate No" := NoSeriesMgt.GetNextNo("No. Series");
+
         END;
     end;
 
@@ -145,23 +149,23 @@ table 50121 "Estimate Header"
         Custrec: Record Customer;
         ServiceItemrec: Record "Service Item";
         serviceSetup: Record "Service Mgt. Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         comprec: Record "Estimate Header";
 
     procedure AssistEdit(OldComp: Record "Estimate Header"): Boolean
     begin
-   /*      WITH comprec DO BEGIN
-            comprec := Rec;
-            serviceSetup.GET;
-            serviceSetup.TESTFIELD("Complaint No.");
-            IF NoSeriesMgt.SelectSeries(serviceSetup."Complaint No.", OldComp."No. Series", "No. Series") THEN BEGIN
-                serviceSetup.GET;
-                serviceSetup.TESTFIELD("Complaint No.");
-                NoSeriesMgt.SetSeries("Estimate No");
-                Rec := comprec;
-                EXIT(TRUE);
-            END;
-        END; */
+        /*      WITH comprec DO BEGIN
+                 comprec := Rec;
+                 serviceSetup.GET;
+                 serviceSetup.TESTFIELD("Complaint No.");
+                 IF NoSeriesMgt.SelectSeries(serviceSetup."Complaint No.", OldComp."No. Series", "No. Series") THEN BEGIN
+                     serviceSetup.GET;
+                     serviceSetup.TESTFIELD("Complaint No.");
+                     NoSeriesMgt.SetSeries("Estimate No");
+                     Rec := comprec;
+                     EXIT(TRUE);
+                 END;
+             END; */
     end;
 }
 

@@ -111,7 +111,7 @@ page 50478 "Posted Stores Requisition"
         StoreReqLine2: Record 50102;
         UserRec: Record 91;
         InvtSetup: Record 313;
-        NoSeriesMgt: Codeunit 396;
+        NoSeriesMgt: Codeunit "No. Series";
         Noseriesrec: Record 308;
         NoseriesLinerec: Record 309;
         storeReqHead: Record 50101;

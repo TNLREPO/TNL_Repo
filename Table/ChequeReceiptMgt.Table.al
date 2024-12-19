@@ -215,7 +215,10 @@ table 50134 "Cheque Receipt Mgt."
         GLSetup.GET;
         IF Code = '' THEN BEGIN
             GLSetup.TESTFIELD("Cheque Receipt mgt");
-            NoSeriesMgt.InitSeries(GLSetup."Cheque Receipt mgt", xRec."No. Series", 0D, Code, "No. Series");
+            Rec."No. Series" := GLSetup."Cheque Receipt mgt";
+            if NoSeriesMgt.AreRelated(Rec."No. Series", xRec."No. Series") then
+                Rec."No. Series" := xRec."No. Series";
+            Rec.Code := NoSeriesMgt.GetNextNo(Rec."No. Series");
         END;
         "Transaction date" := WORKDATE;
     end;
@@ -232,7 +235,7 @@ table 50134 "Cheque Receipt Mgt."
         postrec: Codeunit "Gen. Jnl.-Post Line";
         GLSetup: Record "General Ledger Setup";
         ChequeRec: Record "Cheque Receipt Mgt.";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         wkd: Integer;
 
     procedure AssistEdit(OldChq: Record "Cheque Receipt Mgt."): Boolean

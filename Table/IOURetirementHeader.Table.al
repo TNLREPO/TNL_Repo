@@ -1158,8 +1158,7 @@ table 50107 "IOU Retirement Header"
                 ERROR('Created IOU Retirement No. %1 not used!\New Retirement cannot be created', RetireRec."No.");
 
             GLSetup.TESTFIELD(GLSetup."Retirement Nos.");
-            NoSeriesMgt.InitSeries(GLSetup."Retirement Nos.", GLSetup."Retirement Nos.", 0D, "No.", GLSetup."Retirement Nos.");
-
+            "No." := NoSeriesMgt.GetNextNo(GLSetup."Retirement Nos.");
         END;
 
         "User ID" := USERID;
@@ -1170,7 +1169,7 @@ table 50107 "IOU Retirement Header"
 
     var
         GLSetup: Record "General Ledger Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         RetireRec: Record "IOU Retirement Header";
         IOURec: Record "IOU Register";
         Text006: Label 'Previous Retirement for this IOU must first be posted';

@@ -568,13 +568,16 @@ table 70035 "Diagnostic QuestionnaireX"
         IF "DQ No." = '' THEN BEGIN
             SalesSetup.GET;
             SalesSetup.TESTFIELD("Auto Sale Invoice No.");
-            NoSeriesMgt.InitSeries(SalesSetup."Auto Sale Invoice No.", xRec."No. Series", 0D, "DQ No.", "No. Series");
+            "No. Series" := SalesSetup."Auto Sale Invoice No.";
+            if NoSeriesMgt.AreRelated("No. Series", xRec."No. Series") then
+                "No. Series" := xRec."No. Series";
+            "DQ No." := NoSeriesMgt.GetNextNo("No. Series");
         END;
     end;
 
     var
         SalesSetup: Record "Sales & Receivables Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         COFRec: Record "Customer Order Table.";
         CusRec: Record Customer;
         ServItemRec: Record "Service Item";
@@ -585,16 +588,16 @@ table 70035 "Diagnostic QuestionnaireX"
     var
         DiagQue: Record "Diagnostic QuestionnaireX";
     begin
-       /*  WITH DiagQue DO BEGIN
-            DiagQue := Rec;
-            SalesSetup.GET;
-            SalesSetup.TESTFIELD("Auto Sale Invoice No.");
-            IF NoSeriesMgt.SelectSeries(SalesSetup."Auto Sale Invoice No.", OldDiagQue."No. Series", "No. Series") THEN BEGIN
-                NoSeriesMgt.SetSeries("DQ No.");
-                Rec := DiagQue;
-                EXIT(TRUE);
-            END;
-        END; */
+        /*  WITH DiagQue DO BEGIN
+             DiagQue := Rec;
+             SalesSetup.GET;
+             SalesSetup.TESTFIELD("Auto Sale Invoice No.");
+             IF NoSeriesMgt.SelectSeries(SalesSetup."Auto Sale Invoice No.", OldDiagQue."No. Series", "No. Series") THEN BEGIN
+                 NoSeriesMgt.SetSeries("DQ No.");
+                 Rec := DiagQue;
+                 EXIT(TRUE);
+             END;
+         END; */
     end;
 }
 

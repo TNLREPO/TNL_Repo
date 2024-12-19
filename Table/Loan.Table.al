@@ -402,7 +402,7 @@ table 50013 "Loan."
             PaySetup.RESET;
             PaySetup.FIND('-');
             PaySetup.TESTFIELD(PaySetup."Loan Nos.");
-            NoSeriesMgt.InitSeries(PaySetup."Loan Nos.", PaySetup."Loan Nos.", 0D, "Loan ID", PaySetup."Loan Nos.");
+            "Loan ID" := NoSeriesMgt.GetNextNo(PaySetup."Loan Nos.");
 
             "Counter Acct. Type" := "Counter Acct. Type"::"G/L Account";
             "Counter Acct. No." := PaySetup."Staff Loans Control Account";
@@ -439,7 +439,7 @@ table 50013 "Loan."
         GlRec: Record "Gen. Journal Line";
         GlRec1: Record "Gen. Journal Line";
         ACSETREC: Record "General Ledger Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         LoanRec: Record "Loan.";
         Genbatch: Record "Gen. Journal Batch";
         PaySetup: Record "Payroll Setup.";

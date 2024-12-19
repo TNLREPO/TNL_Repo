@@ -32,7 +32,7 @@ table 50062 "Casual Employees"
         field(6; "Global Dimension 2 Code"; Code[20])
         {
             CaptionClass = '1,1,2';
-            TableRelation = "Dimension Value".Code WHERE("Global Dimension No."=CONST(2));
+            TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(2));
 
             trigger OnValidate()
             begin
@@ -58,7 +58,7 @@ table 50062 "Casual Employees"
         }
         field(12; "Global Dimension 2 Filter"; Code[10])
         {
-            
+
         }
         field(13; "Date Employed Filter"; Date)
         {
@@ -162,7 +162,10 @@ table 50062 "Casual Employees"
         IF "No." = '' THEN BEGIN
             HumanResSetup.GET;
             HumanResSetup.TESTFIELD("Casual Employees No.");
-            NoSeriesMgt.InitSeries(HumanResSetup."Casual Employees No.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No. Series" := HumanResSetup."Casual Employees No.";
+            if NoSeriesMgt.AreRelated("No. Series", xRec."No. Series") then
+                "No. Series" := xRec."No. Series";
+            "No." := NoSeriesMgt.GetNextNo("No. Series");
         END;
     end;
 
@@ -173,7 +176,7 @@ table 50062 "Casual Employees"
 
     var
         HumanResSetup: Record "Human Resources Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         CCRec: Record "Dimension Value";
         BCRec: Record "Dimension Value";
         Cemployee: Record "Casual Employees";
@@ -182,18 +185,18 @@ table 50062 "Casual Employees"
 
     procedure AssistEdit(OldEmployee: Record "Casual Employees"): Boolean
     begin
-       /*  WITH Cemployee DO BEGIN
-            Cemployee := Rec;
-            HumanResSetup.GET;
-            HumanResSetup.TESTFIELD("Casual Employees No.");
-            IF NoSeriesMgt.SelectSeries(HumanResSetup."Casual Employees No.", OldEmployee."No. Series", "No. Series") THEN BEGIN
-                HumanResSetup.GET;
-                HumanResSetup.TESTFIELD("Casual Employees No.");
-                NoSeriesMgt.SetSeries("No.");
-                Rec := Cemployee;
-                EXIT(TRUE);
-            END;
-        END; */
+        /*  WITH Cemployee DO BEGIN
+             Cemployee := Rec;
+             HumanResSetup.GET;
+             HumanResSetup.TESTFIELD("Casual Employees No.");
+             IF NoSeriesMgt.SelectSeries(HumanResSetup."Casual Employees No.", OldEmployee."No. Series", "No. Series") THEN BEGIN
+                 HumanResSetup.GET;
+                 HumanResSetup.TESTFIELD("Casual Employees No.");
+                 NoSeriesMgt.SetSeries("No.");
+                 Rec := Cemployee;
+                 EXIT(TRUE);
+             END;
+         END; */
     end;
 
     procedure ValidateShortcutDimCode(FieldNo: Integer; var ShortcutDimCode: Code[20])

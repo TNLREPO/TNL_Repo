@@ -11,8 +11,10 @@ table 50053 "Fuel Vouchers."
             begin
                 IF "Voucher No." <> xRec."Voucher No." THEN BEGIN
                     HRSetup.GET;
-                    NoSeriesMgt.TestManual(HRSetup."Fuel Voucher No.");
-                    "No. Series" := '';
+                    "No. Series" := HRSetup."Fuel Voucher No.";
+                    if NoSeriesMgt.AreRelated("No. Series", xRec."No. Series") then
+                        "No. Series" := xRec."No. Series";
+                    "Voucher No." := NoSeriesMgt.GetNextNo("No. Series");
                 END;
 
                 Requisition := TRUE;
@@ -297,13 +299,16 @@ table 50053 "Fuel Vouchers."
     begin
         HRSetup.GET;
         IF "Voucher No." = '' THEN BEGIN
-            HRSetup.TESTFIELD(HRSetup."Fuel Voucher No.");
-            NoSeriesMgt.InitSeries(HRSetup."Fuel Voucher No.", xRec."No. Series", 0D, "Voucher No.", "No. Series");
+            HRSetup.TESTFIELD("Fuel Voucher No.");
+            "No. Series" := HRSetup."Fuel Voucher No.";
+            if NoSeriesMgt.AreRelated("No. Series", xRec."No. Series") then
+                "No. Series" := xRec."No. Series";
+            "Voucher No." := NoSeriesMgt.GetNextNo("No. Series");
         END;
     end;
 
     var
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         HRSetup: Record "Human Resources Setup";
         FuelVouch: Record "Fuel Vouchers.";
         Item: Record Item;

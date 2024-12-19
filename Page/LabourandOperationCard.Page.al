@@ -503,7 +503,7 @@ page 70091 "Labour and Operation Card"
                         DemandOverview: Page 5830;
                     begin
                         DemandOverview.SetCalculationParameter(TRUE);
-                        DemandOverview.Initialize(0D, 4, Rec."No.", '', '');
+                        //DemandOverview.SetParameters(0D, 4, Rec."No.", '', '');
                         DemandOverview.RUNMODAL;
                     end;
                 }
@@ -667,9 +667,11 @@ page 70091 "Labour and Operation Card"
 
                     trigger OnAction()
                     var
-                        ReportPrint: Codeunit 228;
+                        //ReportPrint: Codeunit 228;
+                        ServTestReportPrint: Codeunit "Serv. Test Report Print";
+
                     begin
-                        ReportPrint.PrintServiceHeader(Rec);
+                        ServTestReportPrint.PrintServiceHeader(Rec);
                     end;
                 }
                 /* action(Post)
@@ -749,10 +751,13 @@ page 70091 "Labour and Operation Card"
 
                 trigger OnAction()
                 var
-                    DocPrint: Codeunit 229;
+                    DocPrint: Codeunit "Document-Print";
+                    
                 begin
                     CurrPage.UPDATE(TRUE);
+#pragma warning disable AL0432
                     DocPrint.PrintServiceHeader(Rec);
+#pragma warning restore AL0432
                 end;
             }
         }

@@ -279,8 +279,12 @@ table 70011 "CRM Register"
         IF "No." = '' THEN BEGIN
             PurchSetup.GET;
             PurchSetup.TESTFIELD(PurchSetup."Complaint No");
-            NoSeriesMgt.InitSeries(PurchSetup."Complaint No", xRec."No. Series", 0D, "No.", "No. Series");
+            Rec."No. Series" := PurchSetup."Complaint No";
+            if NoSeriesMgt.AreRelated(Rec."No. Series", xRec."No. Series") then
+                Rec."No. Series" := xRec."No. Series";
+            Rec."No." := NoSeriesMgt.GetNextNo("No. Series");
         END;
+
         UserSetup.GET(USERID);
         Date := TODAY;
         "User ID" := UserSetup."User ID";
@@ -289,7 +293,7 @@ table 70011 "CRM Register"
     end;
 
     var
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         PurchSetup: Record "Purchases & Payables Setup";
         UserSetup: Record "User Setup";
         ToAddresses: Text;

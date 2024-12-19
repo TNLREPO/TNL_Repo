@@ -347,7 +347,11 @@ page 80040 "Appointment Card"
         IF Rec."Appointment No." = '' THEN BEGIN
             SalesSetup.GET;
             SalesSetup.TESTFIELD("Appointment Nos.");
-            NoSeriesMgt.InitSeries(SalesSetup."Appointment Nos.", xRec."No. Series", 0D, Rec."Appointment No.", Rec."No. Series");
+            Rec."No. Series" := SalesSetup."Appointment Nos.";
+            
+            if NoSeriesMgt.AreRelated(Rec."No. Series", xRec."No. Series") then
+                Rec."No. Series" := xRec."No. Series";
+            NoSeriesMgt.GetNextNo(Rec."No. Series");
         END;
 
         Rec.VALIDATE("Next Call Date", TODAY);
@@ -369,7 +373,7 @@ page 80040 "Appointment Card"
         UserSetup: Record 91;
         Text001: Label 'SSC/SC details are not available.';
         SalesSetup: Record 311;
-        NoSeriesMgt: Codeunit 396;
+        NoSeriesMgt: Codeunit "No. Series";
 
     local procedure ViewEstimate()
     begin

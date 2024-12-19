@@ -637,7 +637,10 @@ table 50075 "Leave Plan Lines Rev 2"
         IF "Serial No" = '' THEN BEGIN
             HumanResSetup.GET;
             HumanResSetup.TESTFIELD("Leave Plan No");
-            NoSeriesMgt.InitSeries(HumanResSetup."Leave Plan No", xRec."No Series", 0D, "Serial No", "No Series");
+            "No Series" := HumanResSetup."Leave Plan No";
+            if NoSeriesMgt.AreRelated("No Series", xRec."No Series") then
+                "No Series" := xRec."No Series";
+            "Serial No" := NoSeriesMgt.GetNextNo("No Series");
         END;
     end;
 
@@ -645,7 +648,7 @@ table 50075 "Leave Plan Lines Rev 2"
         LeavPRec: Record "Leave Plan Lines Rev 2";
         LeavPRec2: Record "Leave Plan Lines Rev 2";
         HumanResSetup: Record "Human Resources Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         PayRec: Record "Leave Payment Rev 2";
         GenPCode: Codeunit 50004;
         LRosteRec: Record 50077;

@@ -38,7 +38,7 @@ page 50116 "Search Tracker Lines"
 
                     trigger OnDrillDown()
                     begin
-                        GPC.ShowItemAvailFromSearchTracker(Rec, ItemAvailFormsMgt.ByVariant)
+                        GPC.ShowItemAvailFromSearchTracker(Rec, "Item Availability Type"::Variant)
                     end;
                 }
                 field(Supplied; Rec.Supplied)
@@ -79,7 +79,7 @@ page 50116 "Search Tracker Lines"
 
                     trigger OnAction()
                     begin
-                        GPC.ShowItemAvailFromSearchTracker(Rec, ItemAvailFormsMgt.ByPeriod)
+                        GPC.ShowItemAvailFromSearchTracker(Rec, "Item Availability Type"::Period)
                     end;
                 }
                 action(VariantAction)
@@ -89,7 +89,7 @@ page 50116 "Search Tracker Lines"
 
                     trigger OnAction()
                     begin
-                        GPC.ShowItemAvailFromSearchTracker(Rec, ItemAvailFormsMgt.ByVariant)
+                        GPC.ShowItemAvailFromSearchTracker(Rec, "Item Availability Type"::Variant)
 
                     end;
                 }
@@ -101,7 +101,7 @@ page 50116 "Search Tracker Lines"
 
                     trigger OnAction()
                     begin
-                        GPC.ShowItemAvailFromSearchTracker(Rec, ItemAvailFormsMgt.ByLocation)
+                        GPC.ShowItemAvailFromSearchTracker(Rec, "Item Availability Type"::Location)
                     end;
                 }
             }
