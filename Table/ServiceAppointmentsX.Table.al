@@ -1,7 +1,7 @@
 table 70033 "Service AppointmentsX"
 {
     Permissions = tabledata 70033 = rimd;
-    
+
     fields
     {
         field(1; "Service Item"; Code[20])
@@ -949,7 +949,12 @@ table 70033 "Service AppointmentsX"
         IF "Appointment No." = '' THEN BEGIN
             SalesSetup.GET;
             SalesSetup.TESTFIELD("Appointment Nos.");
-            NoSeriesMgt.InitSeries(SalesSetup."Appointment Nos.", xRec."No. Series", 0D, "Appointment No.", "No. Series");
+            "No. Series" := SalesSetup."Appointment Nos.";
+            if NoSeriesMgt.AreRelated("No. Series", xRec."No. Series") then
+                "No. Series" := xRec."No. Series";
+            "Appointment No." := NoSeriesMgt.GetNextNo("No. Series");
+
+            //NoSeriesMgt.InitSeries(SalesSetup."Appointment Nos.", xRec."No. Series", 0D, "Appointment No.", "No. Series");
         END;
 
         "User ID" := USERID;
@@ -1001,7 +1006,7 @@ table 70033 "Service AppointmentsX"
         "COF No.": Code[20];
         FARec: Record 5600;
         ServHeader: Record 5900;
-        NoSeriesMgt: Codeunit 396;
+        NoSeriesMgt: Codeunit "No. Series";
         SalesSetup: Record 311;
         Text003: Label 'The date cannot be earlier than today!';
 

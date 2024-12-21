@@ -80,14 +80,18 @@ table 70010 LPO
         IF "LPO No." = '' THEN BEGIN
             PurchSetup.GET;
             PurchSetup.TESTFIELD("LPO Nos.");
-            NoSeriesMgt.InitSeries(PurchSetup."LPO Nos.", xRec."No. Series", 0D, "LPO No.", "No. Series");
+            "No. Series" := PurchSetup."LPO Nos.";
+            if NoSeriesMgt.AreRelated("No. Series", xRec."No. Series") then
+                "No. Series" := xRec."No. Series";
+            "LPO No." := NoSeriesMgt.GetNextNo("No. Series");
         END;
+
         "Purch.Requisition Date" := TODAY;
     end;
 
     var
         PurchSetup: Record "Purchases & Payables Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         LPO: Record LPO;
 }
 

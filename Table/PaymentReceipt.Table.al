@@ -811,10 +811,11 @@ table 50103 "Payment/Receipt."
         GenSetup.GET;
         IF "No." = '' THEN BEGIN
             TestNoSeries;
-            NoSeriesMgt.InitSeries(GetNoSeriesCode, xRec."No. Series", "Posting Date", "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(GetNoSeriesCode());
+            //NoSeriesMgt.InitSeries(GetNoSeriesCode, xRec."No. Series", "Posting Date", "No.", "No. Series");
         END;
         "Created By" := UserId;
-        
+
         InitRecord;
 
     end;
@@ -841,7 +842,7 @@ table 50103 "Payment/Receipt."
         bankrec: Record 270;
         GenSetup: Record 98;
         UserMgt: Codeunit 5700;
-        NoSeriesMgt: Codeunit 396;
+        NoSeriesMgt: Codeunit "No. Series";
         ReqReptLine: Record 50104;
         CurrExchRate: Record 330;
         Text002: Label 'Cannot be specified without  %1';
@@ -898,38 +899,46 @@ table 50103 "Payment/Receipt."
                 BEGIN
                     IF "Cash/Cheque" = "Cash/Cheque"::Cash THEN BEGIN
                         GenSetup.TESTFIELD("Cash Receipt No.");
-                        NoSeriesMgt.SetDefaultSeries("No. Series", GenSetup."Cash Receipt No.");
+                        //NoSeriesMgt.SetDefaultSeries("No. Series", GenSetup."Cash Receipt No.");
+                        "No. Series" := GenSetup."Cash Receipt No.";
                     END
                     ELSE BEGIN
                         GenSetup.TESTFIELD("Cheque Receipt No.");
-                        NoSeriesMgt.SetDefaultSeries("No. Series", GenSetup."Cheque Receipt No.");
+                        //NoSeriesMgt.SetDefaultSeries("No. Series", GenSetup."Cheque Receipt No.");
+                        "No. Series" := GenSetup."Cheque Receipt No.";
                     END;
                 END;
             "Document Type"::Requisition:
                 BEGIN
                     IF "Cash/Cheque" = "Cash/Cheque"::Cash THEN BEGIN
                         GenSetup.TESTFIELD("Cash Requisition No.");
-                        NoSeriesMgt.SetDefaultSeries("No. Series", GenSetup."Cash Requisition No.");
+                        //NoSeriesMgt.SetDefaultSeries("No. Series", GenSetup."Cash Requisition No.");
+                        "No. Series" := GenSetup."Cash Requisition No.";
                     END
                     ELSE BEGIN
                         GenSetup.TESTFIELD("Cheque Requisition No.");
-                        NoSeriesMgt.SetDefaultSeries("No. Series", GenSetup."Cheque Requisition No.");
+                        //NoSeriesMgt.SetDefaultSeries("No. Series", GenSetup."Cheque Requisition No.");
+                        "No. Series" := GenSetup."Cheque Requisition No.";
                     END
                 END;
             "Document Type"::Journal:
                 BEGIN
                     GenSetup.TESTFIELD("Journal Voucher No.");
-                    NoSeriesMgt.SetDefaultSeries("No. Series", GenSetup."Journal Voucher No.");
+                    //NoSeriesMgt.SetDefaultSeries("No. Series", GenSetup."Journal Voucher No.");
+                    "No. Series" := GenSetup."Journal Voucher No.";
                 END;
             "Document Type"::"e-Receipt":
                 BEGIN
                     GenSetup.TESTFIELD(GenSetup."E-Receipt Voucher No.");
-                    NoSeriesMgt.SetDefaultSeries("No. Series", GenSetup."E-Receipt Voucher No.");
+                    //NoSeriesMgt.SetDefaultSeries("No. Series", GenSetup."E-Receipt Voucher No.");
+                    "No. Series" := GenSetup."E-Receipt Voucher No.";
+
                 END;
             "Document Type"::"e-Pay":
                 BEGIN
                     GenSetup.TESTFIELD(GenSetup."E-Payment Voucher No.");
-                    NoSeriesMgt.SetDefaultSeries("No. Series", GenSetup."E-Payment Voucher No.");
+                    //NoSeriesMgt.SetDefaultSeries("No. Series", GenSetup."E-Payment Voucher No.");
+                    "No. Series" := GenSetup."E-Payment Voucher No.";
                 END;
         END;
 
@@ -946,68 +955,75 @@ table 50103 "Payment/Receipt."
             "OldP/R"."Document Type"::Receipt:
                 BEGIN
                     IF Rec."Cash/Cheque" = "OldP/R"."Cash/Cheque"::Cash THEN BEGIN
-                        IF NoSeriesMgt.SelectSeries(GenSetup."Cash Receipt No.", "OldP/R"."No. Series", "OldP/R"."No. Series") THEN BEGIN
-                            GenSetup.GET;
-                            NoSeriesMgt.SetSeries("OldP/R"."No.");
-                            Rec := "OldP/R";
-                            EXIT(TRUE);
-                        END;
+                        //IF NoSeriesMgt.SelectSeries(GenSetup."Cash Receipt No.", "OldP/R"."No. Series", "OldP/R"."No. Series") THEN BEGIN
+                        GenSetup.GET;
+                        //NoSeriesMgt.SetSeries("OldP/R"."No.");
+                        "OldP/R"."No." := NoSeriesMgt.GetNextNo(GenSetup."Cash Receipt No.");
+                        Rec := "OldP/R";
+                        EXIT(TRUE);
+                        //END;
                     END
                     ELSE BEGIN
-                        IF NoSeriesMgt.SelectSeries(GenSetup."Cheque Receipt No.", "OldP/R"."No. Series", "OldP/R"."No. Series") THEN BEGIN
-                            GenSetup.GET;
-                            NoSeriesMgt.SetSeries("OldP/R"."No.");
-                            Rec := "OldP/R";
-                            EXIT(TRUE);
-                        END;
+                        //IF NoSeriesMgt.SelectSeries(GenSetup."Cheque Receipt No.", "OldP/R"."No. Series", "OldP/R"."No. Series") THEN BEGIN
+                        GenSetup.GET;
+                        //NoSeriesMgt.SetSeries("OldP/R"."No.");
+                        "OldP/R"."No." := NoSeriesMgt.GetNextNo(GenSetup."Cheque Receipt No.");
+                        Rec := "OldP/R";
+                        EXIT(TRUE);
+                        //END;
                     END;
                 END;
 
             "OldP/R"."Document Type"::Requisition:
                 BEGIN
                     IF "OldP/R"."Cash/Cheque" = "OldP/R"."Cash/Cheque"::Cash THEN BEGIN
-                        IF NoSeriesMgt.SelectSeries(GenSetup."Cash Requisition No.", "OldP/R"."No. Series", "OldP/R"."No. Series") THEN BEGIN
-                            GenSetup.GET;
-                            NoSeriesMgt.SetSeries("OldP/R"."No.");
-                            Rec := "OldP/R";
-                            EXIT(TRUE);
-                        END;
+                        //IF NoSeriesMgt.SelectSeries(GenSetup."Cash Requisition No.", "OldP/R"."No. Series", "OldP/R"."No. Series") THEN BEGIN
+                        GenSetup.GET;
+                        //NoSeriesMgt.SetSeries("OldP/R"."No.");
+                        "OldP/R"."No." := NoSeriesMgt.GetNextNo(GenSetup."Cash Requisition No.");
+                        Rec := "OldP/R";
+                        EXIT(TRUE);
+                        //END;
                     END
                     ELSE BEGIN
-                        IF NoSeriesMgt.SelectSeries(GenSetup."Cheque Requisition No.", "OldP/R"."No. Series", "OldP/R"."No. Series") THEN BEGIN
-                            GenSetup.GET;
-                            NoSeriesMgt.SetSeries("OldP/R"."No.");
-                            Rec := "OldP/R";
-                            EXIT(TRUE);
-                        END;
+                        //IF NoSeriesMgt.SelectSeries(GenSetup."Cheque Requisition No.", "OldP/R"."No. Series", "OldP/R"."No. Series") THEN BEGIN
+                        GenSetup.GET;
+                        "OldP/R"."No." := NoSeriesMgt.GetNextNo(GenSetup."Cheque Requisition No.");
+                        //NoSeriesMgt.SetSeries("OldP/R"."No.");
+                        Rec := "OldP/R";
+                        EXIT(TRUE);
+                        //END;
                     END;
                 END;
             "OldP/R"."Document Type"::Journal:
                 BEGIN
-                    IF NoSeriesMgt.SelectSeries(GenSetup."Journal Voucher No.", "OldP/R"."No. Series", "OldP/R"."No. Series") THEN BEGIN
-                        GenSetup.GET;
-                        NoSeriesMgt.SetSeries("OldP/R"."No.");
-                        Rec := "OldP/R";
-                        EXIT(TRUE);
-                    END;
+                    //IF NoSeriesMgt.SelectSeries(GenSetup."Journal Voucher No.", "OldP/R"."No. Series", "OldP/R"."No. Series") THEN BEGIN
+                    GenSetup.GET;
+                    "OldP/R"."No." := NoSeriesMgt.GetNextNo(GenSetup."Journal Voucher No.");
+                    //NoSeriesMgt.SetSeries("OldP/R"."No.");
+                    Rec := "OldP/R";
+                    EXIT(TRUE);
+                    //END;
                 END;
             "OldP/R"."Document Type"::"e-Pay":
                 BEGIN
-                    IF NoSeriesMgt.SelectSeries(GenSetup."E-Payment Voucher No.", "OldP/R"."No. Series", "OldP/R"."No. Series") THEN BEGIN
-                        GenSetup.GET;
-                        NoSeriesMgt.SetSeries("OldP/R"."No.");
-                        Rec := "OldP/R";
-                        EXIT(TRUE);
-                    END;
+                    //IF NoSeriesMgt.SelectSeries(GenSetup."E-Payment Voucher No.", "OldP/R"."No. Series", "OldP/R"."No. Series") THEN BEGIN
+                    GenSetup.GET;
+                    "OldP/R"."No." := NoSeriesMgt.GetNextNo(GenSetup."E-Payment Voucher No.");
+                    //NoSeriesMgt.SetSeries("OldP/R"."No.");
+                    Rec := "OldP/R";
+                    EXIT(TRUE);
+                    //END;
                 END;
             "OldP/R"."Document Type"::"e-Receipt":
                 BEGIN
-                    IF NoSeriesMgt.SelectSeries(GenSetup."E-Receipt Voucher No.", "OldP/R"."No. Series", "OldP/R"."No. Series") THEN BEGIN
-                        GenSetup.GET;
-                        NoSeriesMgt.SetSeries("OldP/R"."No.");
-                        Rec := "OldP/R";
-                        EXIT(TRUE);
-                    END;
+                    //IF NoSeriesMgt.SelectSeries(GenSetup."E-Receipt Voucher No.", "OldP/R"."No. Series", "OldP/R"."No. Series") THEN BEGIN
+                    GenSetup.GET;
+                    "OldP/R"."No." := NoSeriesMgt.GetNextNo(GenSetup."E-Receipt Voucher No.");
+                    //NoSeriesMgt.SetSeries("OldP/R"."No.");
+                    Rec := "OldP/R";
+                    EXIT(TRUE);
+                    //END;
                 END
         END;
     end;

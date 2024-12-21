@@ -2,7 +2,7 @@ table 50154 "Search Tracker Header"
 {
     Caption = 'Search Tracker Header';
     DataClassification = ToBeClassified;
-    
+
 
     fields
     {
@@ -127,7 +127,11 @@ table 50154 "Search Tracker Header"
         InvSetup.GET;
         IF "No." = '' THEN BEGIN
             InvSetup.TESTFIELD("Search Tracker Nos.");
-            NoseriesMgt.InitSeries(InvSetup."Search Tracker Nos.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No. Series" := InvSetup."Search Tracker Nos.";
+            if NoSeriesMgt.AreRelated("No. Series", xRec."No. Series") then
+                "No. Series" := xRec."No. Series";
+            "No." := NoSeriesMgt.GetNextNo("No. Series");
+            //NoseriesMgt.InitSeries(InvSetup."Search Tracker Nos.", xRec."No. Series", 0D, "No.", "No. Series");
 
         END;
 
@@ -136,7 +140,7 @@ table 50154 "Search Tracker Header"
     var
         CustRec: Record Customer;
         InvSetup: Record "Inventory Setup";
-        NoseriesMgt: Codeunit NoSeriesManagement;
+        NoseriesMgt: Codeunit "No. Series";
 
 
 }

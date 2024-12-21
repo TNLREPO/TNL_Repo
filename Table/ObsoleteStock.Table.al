@@ -1508,7 +1508,7 @@ table 50098 "Obsolete Stock"
         Vend: Record Vendor;
         NonstockItem: Record "Nonstock Item";
         WebSite: Record "Web Source";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         MoveEntries: Codeunit MoveEntries;
         DimMgt: Codeunit DimensionManagement;
         NonstockItemMgt: Codeunit "Catalog Item Management";

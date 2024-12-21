@@ -10,8 +10,10 @@ table 70025 "TNL Work Order"
             begin
                 HRSetup.GET;
                 IF "Request No." = '' THEN BEGIN
-                    HRSetup.TESTFIELD(HRSetup."Work Order No.");
-                    NoSeriesMgt.InitSeries(HRSetup."Work Order No.", HRSetup."Work Order No.", 0D, "Request No.", HRSetup."Work Order No.");
+                    HRSetup.TESTFIELD("Work Order No.");
+                    "Request No." := NoSeriesMgt.GetNextNo(HRSetup."Work Order No.");
+
+                    //NoSeriesMgt.InitSeries(HRSetup."Work Order No.", HRSetup."Work Order No.", 0D, "Request No.", HRSetup."Work Order No.");
                     PoolCarReg.SETFILTER(PoolCarReg."Request No.", '<>%1', '');
                     PoolCarReg.SETRANGE(PoolCarReg."User ID", USERID);
                     IF PoolCarReg.FIND('-') THEN
@@ -1026,8 +1028,9 @@ table 70025 "TNL Work Order"
     begin
         HRSetup.GET;
         IF "Request No." = '' THEN BEGIN
-            HRSetup.TESTFIELD(HRSetup."Work Order No.");
-            NoSeriesMgt.InitSeries(HRSetup."Work Order No.", HRSetup."Work Order No.", 0D, "Request No.", HRSetup."Work Order No.");
+            HRSetup.TESTFIELD("Work Order No.");
+            "Request No." := NoSeriesMgt.GetNextNo(HRSetup."Work Order No.");
+            //NoSeriesMgt.InitSeries(HRSetup."Work Order No.", HRSetup."Work Order No.", 0D, "Request No.", HRSetup."Work Order No.");
         END;
 
         UserSetup.GET(USERID);
@@ -1041,7 +1044,7 @@ table 70025 "TNL Work Order"
     var
         HRSetup: Record 5218;
         PoolCarReg: Record 70002;
-        NoSeriesMgt: Codeunit 396;
+        NoSeriesMgt: Codeunit "No. Series";
         UserSetup: Record 91;
         EmplyRec: Record 5200;
         PoolCar: Record 70005;
@@ -1159,16 +1162,16 @@ table 70025 "TNL Work Order"
     var
         Cust: Record 70025;
     begin
-       /*  WITH Cust DO BEGIN
-            Cust := Rec;
-            HRSetup.GET;
-            HRSetup.TESTFIELD("Work Order No.");
-            IF NoSeriesMgt.SelectSeries(HRSetup."Work Order No.", HRSetup."Work Order No.", HRSetup."Work Order No.") THEN BEGIN
-                NoSeriesMgt.SetSeries("Request No.");
-                Rec := Cust;
-                EXIT(TRUE);
-            END;
-        END; */
+        /*  WITH Cust DO BEGIN
+             Cust := Rec;
+             HRSetup.GET;
+             HRSetup.TESTFIELD("Work Order No.");
+             IF NoSeriesMgt.SelectSeries(HRSetup."Work Order No.", HRSetup."Work Order No.", HRSetup."Work Order No.") THEN BEGIN
+                 NoSeriesMgt.SetSeries("Request No.");
+                 Rec := Cust;
+                 EXIT(TRUE);
+             END;
+         END; */
     end;
 }
 

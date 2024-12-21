@@ -77,7 +77,7 @@ table 50026 "Monthly Vehicle Order"
         }
         field(91; "Line Vehicle Count"; Decimal)
         {
-            CalcFormula = Sum("Monthly Vehicle Order Lines".Quantity WHERE("Period Starting" = FIELD("Period Starting"),"PO Number" = FIELD("PO Number")));
+            CalcFormula = Sum("Monthly Vehicle Order Lines".Quantity WHERE("Period Starting" = FIELD("Period Starting"), "PO Number" = FIELD("PO Number")));
             DecimalPlaces = 0 : 0;
             Editable = false;
             FieldClass = FlowField;
@@ -205,12 +205,14 @@ table 50026 "Monthly Vehicle Order"
         PurchSetup.GET;
         //IF "Period Starting" = 0D THEN BEGIN
         PurchSetup.TESTFIELD("Order Nos.");
-        NoSeriesMgt.InitSeries('P-ORD-CARS', xRec."No. Series", "Posting Date", "PO Number", "No. Series");
+        "No. Series" := PurchSetup."Order Nos.";
+        if NoSeriesMgt.AreRelated("No. Series", xRec."No. Series") then
+            "No. Series" := xRec."No. Series";
+        "PO Number" := NoSeriesMgt.GetNextNo("No. Series");
         //END;
 
         "Order Date" := WORKDATE;
         IF ("Posting Date" = 0D) THEN "Posting Date" := WORKDATE;
-
 
         "Created by" := USERID;
         "Creation date" := TODAY;
@@ -226,19 +228,19 @@ table 50026 "Monthly Vehicle Order"
         ItemRec2: Record Item;
         CustRec: Record Customer;
         PurchSetup: Record "Purchases & Payables Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Lines: Record "Monthly Vehicle Order Lines";
 
     procedure AssistEdit(OldMVO: Record "Monthly Vehicle Order"): Boolean
     begin
-        PurchSetup.GET;
+       /*  PurchSetup.GET;
         PurchSetup.TESTFIELD("Order Nos.");
         IF NoSeriesMgt.SelectSeries('P-ORD-CARS', OldMVO."No. Series", "No. Series") THEN BEGIN
             PurchSetup.GET;
             PurchSetup.TESTFIELD("Order Nos.");
             NoSeriesMgt.SetSeries("PO Number");
             EXIT(TRUE);
-        END;
+        END; */
     end;
 }
 

@@ -395,7 +395,12 @@ table 90054 "Repair Order"
         IF "No." = '' THEN BEGIN
             SalesSetup.GET;
             SalesSetup.TESTFIELD("Appointment BP Nos.");
-            NoSeriesMgt.InitSeries(SalesSetup."Appointment BP Nos.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No. Series" := SalesSetup."Appointment BP Nos.";
+            if NoSeriesMgt.AreRelated("No. Series", xRec."No. Series") then
+                "No. Series" := xRec."No. Series";
+            "No." := NoSeriesMgt.GetNextNo("No. Series");
+            
+            //NoSeriesMgt.InitSeries(SalesSetup."Appointment BP Nos.", xRec."No. Series", 0D, "No.", "No. Series");
         END;
 
         "Booking Date" := TODAY;
@@ -405,6 +410,6 @@ table 90054 "Repair Order"
     var
         ServiceItem: Record 5940;
         SalesSetup: Record 311;
-        NoSeriesMgt: Codeunit 396;
+        NoSeriesMgt: Codeunit "No. Series";
 }
 

@@ -643,8 +643,11 @@ table 50045 "Service Index"
     begin
         IF "Index No." = '' THEN BEGIN
             servicesetup.GET;
-            servicesetup.TESTFIELD(servicesetup."Service Index Nos.");
-            NoseriesMgt.InitSeries(servicesetup."Service Index Nos.", xRec."No. Series", 0D, "Index No.", "No. Series");
+            servicesetup.TESTFIELD("Service Index Nos.");
+            "No. Series" := servicesetup."Service Index Nos.";
+            if NoSeriesMgt.AreRelated("No. Series", xRec."No. Series") then
+                "No. Series" := xRec."No. Series";
+            "Index No." := NoSeriesMgt.GetNextNo("No. Series");
         END;
         VALIDATE("No of Persons interviewed");
     end;
@@ -652,7 +655,7 @@ table 50045 "Service Index"
     var
         ServInd: Record 50045;
         servicesetup: Record 5911;
-        NoseriesMgt: Codeunit 396;
+        NoseriesMgt: Codeunit "No. Series";
         CustRec: Record 18;
         ServInvHead: Record 5992;
         RetDay: Integer;
@@ -661,7 +664,7 @@ table 50045 "Service Index"
         Rec3: Integer;
         ResRec: Record 156;
 
-    
+
     procedure AssistEdit(OldInd: Record 50045): Boolean
     begin
         /* WITH ServInd DO BEGIN

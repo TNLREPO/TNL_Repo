@@ -3954,7 +3954,14 @@ table 50058 "VRI Table"
         IF "VRI Code" = '' THEN BEGIN
             Servicesetup.GET;
             Servicesetup.TESTFIELD("VRI Code");
-            NoseriesMgt.InitSeries(Servicesetup."VRI Code", xRec."No. Series", 0D, "VRI Code", "No. Series");
+
+            Servicesetup.TESTFIELD("VRI Code");
+            "No. Series" := Servicesetup."VRI Code";
+            if NoSeriesMgt.AreRelated("No. Series", xRec."No. Series") then
+                "No. Series" := xRec."No. Series";
+            "VRI Code" := NoSeriesMgt.GetNextNo("No. Series");
+
+            //NoseriesMgt.InitSeries(Servicesetup."VRI Code", xRec."No. Series", 0D, "VRI Code", "No. Series");
         END;
     end;
 
@@ -3972,7 +3979,7 @@ table 50058 "VRI Table"
         COFrec: Record 50119;
         ServiceItem: Record 5940;
         Servicesetup: Record 5911;
-        NoseriesMgt: Codeunit 396;
+        NoseriesMgt: Codeunit "No. Series";
         VRIREC: Record 50058;
         Itemrec: Record 32;
         ItemLedgerE: Record 32;
@@ -4041,14 +4048,14 @@ table 50058 "VRI Table"
     var
         VRI: Record 50058;
     begin
-        VRI := Rec;
+       /*  VRI := Rec;
         Servicesetup.GET;
         IF NoseriesMgt.SelectSeries(Servicesetup."Vri Code", OldVRI2REC."No. Series", VRI."No. Series") THEN BEGIN
             Servicesetup.GET;
             NoseriesMgt.SetSeries(VRI."VRI Code");
             Rec := VRI;
             EXIT(TRUE);
-        END;
+        END; */
     end;
 
     procedure CreateEmailBody(DocNo: Code[20]; BodyMsg: Text; RecipientInitials: Text);

@@ -1613,7 +1613,10 @@ table 70018 "Local Part Purchase Register"
         IF "LPP No." = '' THEN BEGIN
             PurchSetup.GET;
             PurchSetup.TESTFIELD("LPP Nos.");
-            NoSeriesMgt.InitSeries(PurchSetup."LPP Nos.", xRec."No. Series", 0D, "LPP No.", "No. Series");
+            "No. Series" := PurchSetup."LPP Nos.";
+            if NoSeriesMgt.AreRelated("No. Series", xRec."No. Series") then
+                "No. Series" := xRec."No. Series";
+            "LPP No." := NoSeriesMgt.GetNextNo("No. Series");
         END;
 
         UserSetup.GET(USERID);

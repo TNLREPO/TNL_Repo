@@ -82,14 +82,19 @@ table 70029 "Takata Customer"
     begin
         IF "No." = '' THEN BEGIN
             PurchSetup.GET;
-            PurchSetup.TESTFIELD(PurchSetup."Takata Customer");
-            NoSeriesMgt.InitSeries(PurchSetup."Takata Customer", xRec."No. Series", 0D, "No.", "No. Series");
+            PurchSetup.TESTFIELD("Takata Customer");
+            "No. Series" := PurchSetup."Takata Customer";
+            if NoSeriesMgt.AreRelated("No. Series", xRec."No. Series") then
+                "No. Series" := xRec."No. Series";
+            "No." := NoSeriesMgt.GetNextNo("No. Series");
+
+            //NoSeriesMgt.InitSeries(PurchSetup."Takata Customer", xRec."No. Series", 0D, "No.", "No. Series");
         END;
     end;
 
     var
         UserSetup: Record 91;
-        NoSeriesMgt: Codeunit 396;
+        NoSeriesMgt: Codeunit "No. Series";
         PurchSetup: Record 312;
         TakataCustomer: Record 70029;
 }

@@ -257,14 +257,18 @@ table 50172 "Logistics Order"
         IF "Order No." = '' THEN BEGIN
             ServMgtSetUp.GET;
             ServMgtSetUp.TESTFIELD("Logistic Nos.");
-            falseSeriesMgt.InitSeries(ServMgtSetUp."Logistic Nos.", xRec."No. Series", 0D, "Order No.", "No. Series");
+            "No. Series" := ServMgtSetUp."Logistic Nos.";
+            if NoSeriesMgt.AreRelated("No. Series", xRec."No. Series") then
+                "No. Series" := xRec."No. Series";
+            "Order No." := NoSeriesMgt.GetNextNo("No. Series");
         END;
+        
         Date := TODAY;
     end;
 
     var
         ServMgtSetUp: Record "Service Mgt. Setup";
-        falseSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         ItemLedgEntry: Record "Item Ledger Entry";
         VRIRec: Record "VRI Table";
         ModelRec: Record Model;

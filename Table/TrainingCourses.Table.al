@@ -155,7 +155,13 @@ table 50082 "Training Courses"
         IF "Course Code" = '' THEN BEGIN
             HumanResSetup.GET;
             HumanResSetup.TESTFIELD("Course Attendance No");
-            NoSeriesMgt.InitSeries(HumanResSetup."Course Attendance No", xRec."No Series", 0D, "Course Code", "No Series");
+
+            "No Series" := HumanResSetup."Course Attendance No";
+            if NoSeriesMgt.AreRelated("No Series", xRec."No Series") then
+                "No Series" := xRec."No Series";
+            "Course Code" := NoSeriesMgt.GetNextNo("No Series");
+
+            //NoSeriesMgt.InitSeries(HumanResSetup."Course Attendance No", xRec."No Series", 0D, "Course Code", "No Series");
         END;
 
         //"Course Start Date" := TODAY;
@@ -164,14 +170,14 @@ table 50082 "Training Courses"
     var
         TCourseRec: Record 50082;
         HumanResSetup: Record 5218;
-        NoSeriesMgt: Codeunit 396;
+        NoSeriesMgt: Codeunit "No. Series";
         VendRec: Record 23;
         CattRec: Record 50083;
         CTypeRec: Record 50081;
         CCount: Integer;
         DimMgt: Codeunit 408;
 
-    
+
     procedure ValidateShortcutDimCode(FieldNo: Integer; var ShortcutDimCode: Code[20])
     begin
         DimMgt.ValidateDimValueCode(FieldNo, ShortcutDimCode);
@@ -179,21 +185,21 @@ table 50082 "Training Courses"
         MODIFY;
     end;
 
-    
+
     procedure AssistEdit(OldTrain: Record 50082): Boolean
     begin
-       /*  WITH TCourseRec DO BEGIN
-            TCourseRec := Rec;
-            HumanResSetup.GET;
-            HumanResSetup.TESTFIELD("Course Attendance No");
-            IF NoSeriesMgt.SelectSeries(HumanResSetup."Course Attendance No", OldTrain."No Series", "No Series") THEN BEGIN
-                HumanResSetup.GET;
-                HumanResSetup.TESTFIELD("Course Attendance No");
-                NoSeriesMgt.SetSeries("Course Code");
-                Rec := TCourseRec;
-                EXIT(TRUE);
-            END;
-        END; */
+        /*  WITH TCourseRec DO BEGIN
+             TCourseRec := Rec;
+             HumanResSetup.GET;
+             HumanResSetup.TESTFIELD("Course Attendance No");
+             IF NoSeriesMgt.SelectSeries(HumanResSetup."Course Attendance No", OldTrain."No Series", "No Series") THEN BEGIN
+                 HumanResSetup.GET;
+                 HumanResSetup.TESTFIELD("Course Attendance No");
+                 NoSeriesMgt.SetSeries("Course Code");
+                 Rec := TCourseRec;
+                 EXIT(TRUE);
+             END;
+         END; */
     end;
 }
 

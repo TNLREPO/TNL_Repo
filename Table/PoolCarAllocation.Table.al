@@ -274,7 +274,8 @@ table 70003 "Pool Car Allocation"
         HRSetup.GET;
         IF "Allocation No." = '' THEN BEGIN
             HRSetup.TESTFIELD("Allocation No.");
-            NoSeriesMgt.InitSeries(HRSetup."Allocation No.", HRSetup."Allocation No.", 0D, "Allocation No.", HRSetup."Allocation No.");
+            "Allocation No." := NoSeriesMgt.GetNextNo(HRSetup."Allocation No.");
+            //NoSeriesMgt.InitSeries(HRSetup."Allocation No.", HRSetup."Allocation No.", 0D, "Allocation No.", HRSetup."Allocation No.");
         END;
 
         UserSetup.GET(USERID);
@@ -291,7 +292,7 @@ table 70003 "Pool Car Allocation"
         PoolCarAvail: Record "Pool Car Availability";
         PoolCar: Record "Pool Cars";
         HRSetup: Record "Human Resources Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         text004: Label 'Pool Car Request  ''%1''  Vehicle Allocated.';
         text005: Label 'Return date cannot be earlier than pickup date!';
         Employee: Record Employee;

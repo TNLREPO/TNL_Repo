@@ -3404,7 +3404,7 @@ table 70014 "VRI Table Copy"
         COFrec: Record 50119;
         ServiceItem: Record 5940;
         Servicesetup: Record 5911;
-        NoseriesMgt: Codeunit 396;
+        NoseriesMgt: Codeunit "No. Series";
         VRIREC: Record 50058;
         Itemrec: Record 32;
         ItemLedgerE: Record 32;
@@ -3444,7 +3444,7 @@ table 70014 "VRI Table Copy"
         Text015: Label 'Kindly confirm the estimate and send to O/L for Approval';
         ItemLedgEntry: Record 32;
 
-    
+
     procedure AssistEdit(var OldVRI2REC: Record 50058): Boolean
     var
         VRI: Record 50058;

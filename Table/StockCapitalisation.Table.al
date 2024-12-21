@@ -273,7 +273,12 @@ table 50135 "Stock Capitalisation"
         IF Code = '' THEN BEGIN
             InventorySetup.GET;
             InventorySetup.TESTFIELD("Stock Capitalisation No.");
-            NoseriesMgt.InitSeries(InventorySetup."Stock Capitalisation No.", xRec."No. Series", 0D, Code, "No. Series");
+
+            "No. Series" := InventorySetup."Stock Capitalisation No.";
+            if NoSeriesMgt.AreRelated("No. Series", xRec."No. Series") then
+                "No. Series" := xRec."No. Series";
+            Code := NoSeriesMgt.GetNextNo("No. Series");
+
         END;
     end;
 
@@ -292,7 +297,7 @@ table 50135 "Stock Capitalisation"
         "G/lJrnl2": Record 81;
         ItemPost: Codeunit 22;
         PostFarec: Codeunit 12;
-        NoseriesMgt: Codeunit 396;
+        NoseriesMgt: Codeunit "No. Series";
         Stockrec: Record 50135;
         InventorySetup: Record 313;
         itemledg: Record 32;
@@ -301,9 +306,9 @@ table 50135 "Stock Capitalisation"
         UserSetup: Record 91;
 
 
-    procedure AssistEdit(OldStockCap: Record 50135): Boolean
+    procedure AssistEdit(OldStockCap: Record "Stock Capitalisation"): Boolean
     begin
-        Stockrec := Rec;
+        /* Stockrec := Rec;
         InventorySetup.GET;
         InventorySetup.TESTFIELD("Stock Capitalisation No.");
         IF NoseriesMgt.SelectSeries(InventorySetup."Stock Capitalisation No.", OldStockCap."No. Series", Stockrec."No. Series") THEN BEGIN
@@ -312,7 +317,7 @@ table 50135 "Stock Capitalisation"
             NoseriesMgt.SetSeries(Stockrec.Code);
             Rec := Stockrec;
             EXIT(TRUE);
-        END;
+        END; */
     end;
 }
 

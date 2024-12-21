@@ -298,10 +298,12 @@ table 50101 "Stores Requisition Header."
 
         InvtSetup.GET;
         IF "No." = '' THEN BEGIN
-            InvtSetup.TESTFIELD(InvtSetup."Material Requisition Nos");
+            InvtSetup.TESTFIELD("Material Requisition Nos");
+            "No." := NoSeriesMgt.GetNextNo(InvtSetup."Material Requisition Nos");
 
-            NoSeriesMgt.InitSeries(InvtSetup."Material Requisition Nos", InvtSetup."Material Requisition Nos", 0D, "No.",
-            InvtSetup."Material Requisition Nos");
+            /*  NoSeriesMgt.InitSeries(InvtSetup."Material Requisition Nos", InvtSetup."Material Requisition Nos", 0D, "No.",
+             InvtSetup."Material Requisition Nos"); */
+
             "Workshop Document" := TRUE;
         END;
 
@@ -327,7 +329,7 @@ table 50101 "Stores Requisition Header."
         StoreReqLine: Record 50102;
         StoreReqLine2: Record 50102;
         StoreReqLine3: Record 50102;
-        NoSeriesMgt: Codeunit 396;
+        NoSeriesMgt: Codeunit "No. Series";
         Itemrec: Record 27;
         FADEPRBOOK: Record 5612;
         FABOOKGROUP: Record 5606;
@@ -394,8 +396,10 @@ table 50101 "Stores Requisition Header."
         ItemJnlBatch."Journal Template Name" := ItemJnlTemplate.Name;
 
         //assign issues no series
-        InvtSetup.TESTFIELD(InvtSetup."Issues Nos");
-        NoSeriesMgt.InitSeries(InvtSetup."Issues Nos", InvtSetup."Issues Nos", 0D, ItemJnlBatch.Name, InvtSetup."Issues Nos");
+        InvtSetup.Get();
+        InvtSetup.TESTFIELD("Issues Nos");
+        ItemJnlBatch.Name := NoSeriesMgt.GetNextNo(InvtSetup."Issues Nos");
+        //NoSeriesMgt.InitSeries(InvtSetup."Issues Nos", InvtSetup."Issues Nos", 0D, ItemJnlBatch.Name, InvtSetup."Issues Nos");
         "SIV No." := ItemJnlBatch.Name;
 
         //delete existing item jnl lines
@@ -524,7 +528,8 @@ table 50101 "Stores Requisition Header."
         ItemJnlBatch."Journal Template Name" := ItemJnlTemplate.Name;
         //assign issues no series
         InvtSetup.TESTFIELD(InvtSetup."Issues Nos");
-        NoSeriesMgt.InitSeries(InvtSetup."Issue Nos Alloy", InvtSetup."Issue Nos Alloy", 0D, ItemJnlBatch.Name, InvtSetup."Issue Nos Alloy");
+        ItemJnlBatch.Name := NoSeriesMgt.GetNextNo(InvtSetup."Issue Nos Alloy");
+        //NoSeriesMgt.InitSeries(InvtSetup."Issue Nos Alloy", InvtSetup."Issue Nos Alloy", 0D, ItemJnlBatch.Name, InvtSetup."Issue Nos Alloy");
         "SIV No." := ItemJnlBatch.Name;
 
         //delete existing item jnl lines

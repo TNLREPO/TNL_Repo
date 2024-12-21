@@ -61,13 +61,17 @@ table 50138 "Sublet Service"
         IF "Sublet Code" = '' THEN BEGIN
             ServiceSetup.GET;
             ServiceSetup.TESTFIELD("Sublet Code");
-            NoseriesMgt.InitSeries(ServiceSetup."Sublet Code", xRec."No. Series", 0D, "Sublet Code", "No. Series");
+            "No. Series" := ServiceSetup."Sublet Code";
+            if NoSeriesMgt.AreRelated("No. Series", xRec."No. Series") then
+                "No. Series" := xRec."No. Series";
+            "Sublet Code" := NoSeriesMgt.GetNextNo("No. Series");
+            // NoseriesMgt.InitSeries(ServiceSetup."Sublet Code", xRec."No. Series", 0D, "Sublet Code", "No. Series");
         END;
     end;
 
     var
         ServiceSetup: Record 5911;
-        NoseriesMgt: Codeunit 396;
+        NoseriesMgt: Codeunit "No. Series";
         Subletrec: Record 50138;
 
     procedure AssistEdit(OldSublet: Record 50138): Boolean

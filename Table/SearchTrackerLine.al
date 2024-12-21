@@ -253,7 +253,7 @@ table 50155 "Search Tracker Line"
         NoRel: Record "No. Series Relationship";
         NoSeries: Record "No. Series";
         Item: Record Item;
-        NoseriesMgt: Codeunit NoSeriesManagement;
+        NoseriesMgt: Codeunit "No. Series";
         PartRec: Record "Parts Enquiry";
         InvSetup: Record "Inventory Setup";
         UserRec: Record "User Setup";

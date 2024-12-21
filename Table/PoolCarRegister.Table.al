@@ -507,11 +507,12 @@ table 70002 "Pool Car Register"
         HRSetup.GET;
         IF "Request No." = '' THEN BEGIN
             HRSetup.TESTFIELD(HRSetup."Pool Car Nos.");
-            NoSeriesMgt.InitSeries(HRSetup."Pool Car Nos.", HRSetup."Pool Car Nos.", 0D, "Request No.", HRSetup."Pool Car Nos.");
+            "Request No." := NoSeriesMgt.GetNextNo(HRSetup."Pool Car Nos.");
+            //NoSeriesMgt.InitSeries(HRSetup."Pool Car Nos.", HRSetup."Pool Car Nos.", 0D, "Request No.", HRSetup."Pool Car Nos.");
             PoolCarReg.SETFILTER(PoolCarReg."Request No.", '<>%1', '');
             PoolCarReg.SETRANGE(PoolCarReg."Send for Approval", FALSE);
             PoolCarReg.SETRANGE(PoolCarReg.Requester, USERID);
-            IF PoolCarReg.FIND('-') THEN
+            IF PoolCarReg.FindFirst() THEN
                 ERROR('Created Pool Car No. %1 not used!\New Pool Car cannot be created', PoolCarReg."Request No.");
         END;
 
@@ -525,7 +526,7 @@ table 70002 "Pool Car Register"
     var
         HRSetup: Record "Human Resources Setup";
         PoolCarReg: Record "Pool Car Register";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         UserSetup: Record "User Setup";
         EmplyRec: Record Employee;
         PoolCar: Record "Pool Cars";

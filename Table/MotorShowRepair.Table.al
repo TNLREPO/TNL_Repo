@@ -10,11 +10,13 @@ table 70026 "Motor Show Repair"
             begin
                 HRSetup.GET;
                 IF "Request No." = '' THEN BEGIN
-                    //HRSetup.TESTFIELD(HRSetup."Motor Show Repair No.");
-                    NoSeriesMgt.InitSeries(HRSetup."Motor Show Repair No.", HRSetup."Motor Show Repair No.", 0D, "Request No.", HRSetup."Motor Show Repair No.");
+                    HRSetup.Get();
+                    HRSetup.TESTFIELD("Motor Show Repair No.");
+                    "Request No." := NoSeriesMgt.GetNextNo(HRSetup."Motor Show Repair No.");
+
                     PoolCarReg.SETFILTER(PoolCarReg."Request No.", '<>%1', '');
                     PoolCarReg.SETRANGE(PoolCarReg."User ID", USERID);
-                    IF PoolCarReg.FIND('-') THEN
+                    IF PoolCarReg.FindFirst() THEN
                         ERROR('Created Request No. %1 not used!\New Request cannot be created', PoolCarReg."Request No.");
                 END;
             end;
@@ -81,32 +83,32 @@ table 70026 "Motor Show Repair"
                     //Addressee  := 'Akintoye@toyotanigeria.com';
                     subject := STRSUBSTNO(text001, "Request No.");
 
-                   /*  WITH TempEmailItem DO BEGIN
-                        "Send to" := Addressee;
-                        "Send CC" := SenderAddress;
-                        "Send BCC" := '';
-                        Subject := STRSUBSTNO(text001, "Request No.");
+                    /*  WITH TempEmailItem DO BEGIN
+                         "Send to" := Addressee;
+                         "Send CC" := SenderAddress;
+                         "Send BCC" := '';
+                         Subject := STRSUBSTNO(text001, "Request No.");
 
-                        CRLF := '';
-                        CRLF[1] := 13;
-                        CRLF[2] := 10;
+                         CRLF := '';
+                         CRLF[1] := 13;
+                         CRLF[2] := 10;
 
-                        BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                        BodyStream.WRITETEXT(text020 + ' ' + ToName + ',');
-                        BodyStream.WRITETEXT(CRLF + CRLF);
-                        BodyStream.WRITETEXT(text021 + ' ' + STRSUBSTNO(text022, "Request No.") + CRLF + CRLF + CRLF +
-                        text019 + ' ' + FORMAT(Reason) + CRLF + CRLF +
-                        text016 + ' ' + FORMAT("KM Covered") + CRLF + CRLF +
-                        text014 + ' ' + FORMAT(Make) + CRLF + CRLF +
-                        text015 + ' ' + FORMAT(Model) + CRLF + CRLF +
-                        text017 + ' ' + FORMAT("Auto Show Location") + CRLF + CRLF +
-                        text018 + CRLF +
-                        SenderName);
-                        BodyStream.WRITETEXT(CRLF + CRLF);
-                        BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                        Body := BodyBlob.Blob;
-                        Send(FALSE);
-                    END; */
+                         BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                         BodyStream.WRITETEXT(text020 + ' ' + ToName + ',');
+                         BodyStream.WRITETEXT(CRLF + CRLF);
+                         BodyStream.WRITETEXT(text021 + ' ' + STRSUBSTNO(text022, "Request No.") + CRLF + CRLF + CRLF +
+                         text019 + ' ' + FORMAT(Reason) + CRLF + CRLF +
+                         text016 + ' ' + FORMAT("KM Covered") + CRLF + CRLF +
+                         text014 + ' ' + FORMAT(Make) + CRLF + CRLF +
+                         text015 + ' ' + FORMAT(Model) + CRLF + CRLF +
+                         text017 + ' ' + FORMAT("Auto Show Location") + CRLF + CRLF +
+                         text018 + CRLF +
+                         SenderName);
+                         BodyStream.WRITETEXT(CRLF + CRLF);
+                         BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                         Body := BodyBlob.Blob;
+                         Send(FALSE);
+                     END; */
                 END;
             end;
         }
@@ -956,8 +958,8 @@ table 70026 "Motor Show Repair"
     begin
         HRSetup.GET;
         IF "Request No." = '' THEN BEGIN
-            HRSetup.TESTFIELD(HRSetup."Motor Show Repair No.");
-            NoSeriesMgt.InitSeries(HRSetup."Motor Show Repair No.", HRSetup."Motor Show Repair No.", 0D, "Request No.", HRSetup."Motor Show Repair No.");
+            HRSetup.TESTFIELD("Motor Show Repair No.");
+            "Request No." := NoSeriesMgt.GetNextNo(HRSetup."Motor Show Repair No.");
         END;
 
         UserSetup.GET(USERID);
@@ -970,7 +972,7 @@ table 70026 "Motor Show Repair"
     var
         HRSetup: Record "Human Resources Setup";
         PoolCarReg: Record "Pool Car Register";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         UserSetup: Record "User Setup";
         EmplyRec: Record Employee;
         PoolCar: Record "Pool Cars";

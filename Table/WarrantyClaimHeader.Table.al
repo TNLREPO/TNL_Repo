@@ -479,7 +479,7 @@ table 50038 "Warranty Claim Header"
     begin
         TESTFIELD("Claim Approved by TNL", FALSE);
         WarLine.SETRANGE(WarLine."Claim No.", "Claim No.");
-        IF WarLine.FIND('-') THEN WarLine.DELETEALL;
+        IF WarLine.FindFirst() THEN WarLine.DELETEALL;
     end;
 
     trigger OnInsert()
@@ -487,13 +487,18 @@ table 50038 "Warranty Claim Header"
         SaleSetup.GET;
         IF "Claim No." = '' THEN BEGIN
             SaleSetup.TESTFIELD("Warranty Claim No.");
-            NoSeriesMgt.InitSeries(SaleSetup."Warranty Claim No.", xRec."No. Series", 0D, "Claim No.", "No. Series");
+            "No. Series" := SaleSetup."Warranty Claim No.";
+            if NoSeriesMgt.AreRelated("No. Series", xRec."No. Series") then
+                "No. Series" := xRec."No. Series";
+            "Claim No." := NoSeriesMgt.GetNextNo("No. Series");
+
+            //NoSeriesMgt.InitSeries(SaleSetup."Warranty Claim No.", xRec."No. Series", 0D, "Claim No.", "No. Series");
         END;
     end;
 
     var
         SaleSetup: Record 311;
-        NoSeriesMgt: Codeunit 396;
+        NoSeriesMgt: Codeunit "No. Series";
         WarClaim: Record 50038;
         CustRec: Record 18;
         Model: Record 50014;

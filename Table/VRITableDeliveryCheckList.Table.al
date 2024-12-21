@@ -3921,7 +3921,7 @@ table 50160 "VRI Table Delivery Check List"
         COFrec: Record 50119;
         ServiceItem: Record 5940;
         Servicesetup: Record 5911;
-        NoseriesMgt: Codeunit 396;
+        NoseriesMgt: Codeunit "No. Series";
         VRIREC: Record 50058;
         Itemrec: Record 32;
         ItemLedgerE: Record 32;

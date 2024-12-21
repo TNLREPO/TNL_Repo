@@ -360,8 +360,9 @@ table 50095 "Parts Enquiry"
         IF "Search Code" = '' THEN BEGIN
             InvSetup.GET;
             InvSetup.TESTFIELD("Search Tracker Nos.");
-            NoseriesMgt.InitSeries(InvSetup."Search Tracker Nos.", xRec."No. Series", 0D, "Search Code", "No. Series"); //
-            
+            //NoseriesMgt.InitSeries(InvSetup."Search Tracker Nos.", xRec."No. Series", 0D, "Search Code", "No. Series"); //
+            NoseriesMgt.GetNextNo(InvSetup."Search Tracker Nos.");
+
             RecPart.SETRANGE(RecPart."Search Code", xRec."Search Code");
             IF RecPart.FindLast() THEN
                 "Entry No" := RecPart."Entry No" + 10000;
@@ -404,7 +405,7 @@ table 50095 "Parts Enquiry"
         NoRel: Record "No. Series Relationship";
         NoSeries: Record "No. Series";
         Item: Record Item;
-        NoseriesMgt: Codeunit NoSeriesManagement;
+        NoseriesMgt: Codeunit "No. Series";
         PartRec: Record "Parts Enquiry";
         InvSetup: Record "Inventory Setup";
         UserRec: Record "User Setup";
@@ -421,13 +422,19 @@ table 50095 "Parts Enquiry"
         PartRec := Rec;
         InvSetup.GET;
         InvSetup.TESTFIELD("Search Tracker Nos.");
-        IF NoseriesMgt.SelectSeries(InvSetup."Search Tracker Nos.", OldPart."No. Series", PartRec."No. Series") THEN BEGIN
+        "No. Series" := InvSetup."Search Tracker Nos.";
+        if NoseriesMgt.AreRelated("No. Series", xRec."No. Series") then
+            "No. Series" := xRec."No. Series";
+        "Search Code" := NoseriesMgt.GetNextNo("No. Series");
+
+
+        /* IF NoseriesMgt.SelectSeries(InvSetup."Search Tracker Nos.", OldPart."No. Series", PartRec."No. Series") THEN BEGIN
             InvSetup.GET;
             InvSetup.TESTFIELD(InvSetup."Search Tracker Nos.");
             NoseriesMgt.SetSeries(PartRec."Search Code");
             Rec := PartRec;
             EXIT(TRUE);
-        END;
+        END; */
     end;
 
 

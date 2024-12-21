@@ -3074,7 +3074,11 @@ table 70008 "Procurement Header"
                     IF "No." = '' THEN BEGIN
                         PurchSetup.GET;
                         PurchSetup.TESTFIELD("Opex Nos.");
-                        NoSeriesMgt.InitSeries(PurchSetup."Opex Nos.", xRec."No. Series", 0D, "No.", "No. Series");
+                        "No. Series" := PurchSetup."Opex Nos.";
+                        if NoSeriesMgt.AreRelated("No. Series", xRec."No. Series") then
+                            "No. Series" := xRec."No. Series";
+                        "No." := NoSeriesMgt.GetNextNo("No. Series");
+                        //NoSeriesMgt.InitSeries(PurchSetup."Opex Nos.", xRec."No. Series", 0D, "No.", "No. Series");
                     END;
                 END;
             "Document Type"::Capex:
@@ -3082,7 +3086,10 @@ table 70008 "Procurement Header"
                     IF "No." = '' THEN BEGIN
                         PurchSetup.GET;
                         PurchSetup.TESTFIELD("Opex Nos.");
-                        NoSeriesMgt.InitSeries(PurchSetup."Capex Nos.", xRec."No. Series", 0D, "No.", "No. Series");
+                        "No. Series" := PurchSetup."Opex Nos.";
+                        if NoSeriesMgt.AreRelated("No. Series", xRec."No. Series") then
+                            "No. Series" := xRec."No. Series";
+                        "No." := NoSeriesMgt.GetNextNo("No. Series");
                     END;
                 END;
         END;
@@ -3103,7 +3110,7 @@ table 70008 "Procurement Header"
 
     var
         PurchSetup: Record "Purchases & Payables Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Employee: Record Employee;
         DimValue: Record "Dimension Value";
         Mail: Codeunit Mail;
