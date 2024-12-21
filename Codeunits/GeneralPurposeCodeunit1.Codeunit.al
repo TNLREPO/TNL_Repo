@@ -1765,7 +1765,7 @@ codeunit 50004 "General Purpose Codeunit-1"
     END;
 
 
-    procedure ShowItemAvailFromFaultSetup(VAR FaultSetupLine: Record "Fault Setup Line"; AvailabilityType: Option Date,Variant,Location,Bin,"Event")
+    procedure ShowItemAvailFromFaultSetup(VAR FaultSetupLine: Record "Fault Setup Line"; AvailabilityType: Enum "Item Availability Type")
 
     var
         Item: Record Item;
