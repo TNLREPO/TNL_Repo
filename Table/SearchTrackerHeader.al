@@ -3,7 +3,6 @@ table 50154 "Search Tracker Header"
     Caption = 'Search Tracker Header';
     DataClassification = ToBeClassified;
 
-
     fields
     {
         field(1; "No."; Code[20])
@@ -11,6 +10,10 @@ table 50154 "Search Tracker Header"
         }
         field(2; "Request Date"; Date)
         {
+        }
+        field(9; "Location Code"; Code[20])
+        {
+            TableRelation = Location.Code WHERE("Use As In-Transit" = CONST(false));
         }
 
         field(10; "User ID"; Code[30])
@@ -59,6 +62,9 @@ table 50154 "Search Tracker Header"
         {
         }
         field(32; "Non Specification"; Boolean)
+        {
+        }
+        field(33; "Document No."; Code[20])
         {
         }
         field(34; "Department Code"; Code[20])
@@ -131,7 +137,6 @@ table 50154 "Search Tracker Header"
             if NoSeriesMgt.AreRelated("No. Series", xRec."No. Series") then
                 "No. Series" := xRec."No. Series";
             "No." := NoSeriesMgt.GetNextNo("No. Series");
-            //NoseriesMgt.InitSeries(InvSetup."Search Tracker Nos.", xRec."No. Series", 0D, "No.", "No. Series");
 
         END;
 
@@ -141,6 +146,46 @@ table 50154 "Search Tracker Header"
         CustRec: Record Customer;
         InvSetup: Record "Inventory Setup";
         NoseriesMgt: Codeunit "No. Series";
+        SalesHeader: Record "Sales Header";
+        SalesLine: Record "Sales Line";
+        SearchTrackerLine: Record "Search Tracker Line";
 
+    procedure CreateInvoice(DocType: Enum "Sales Document Type")
+
+    Begin
+
+        SalesHeader.Init();
+        SalesHeader."Document Type" := DocType;
+        SalesHeader.Insert(true);
+
+        SalesHeader.Validate("Sell-to Customer No.", "Request by");
+        SalesHeader."Tracker No." := "No.";
+        SalesHeader.Validate("Location Code", "Location Code");
+        SalesHeader."Online Order" := "Online Order";
+        //SalesHeader Dimension Code
+        SalesHeader.Modify();
+
+        SearchTrackerLine.SetRange("Document No.", "No.");
+        if SearchTrackerLine.FindFirst() then begin
+            repeat
+                SalesLine.INIT;
+                SalesLine."Document Type" := DocType;
+                SalesLine.VALIDATE("Document No.", SalesHeader."No.");
+                SalesLine."Line No." := SearchTrackerLine."Line No.";
+                SalesLine.VALIDATE("Sell-to Customer No.", SalesHeader."Sell-to Customer No.");
+                SalesLine.Type := SalesLine.Type::Item;
+                SalesLine.VALIDATE("No.", SearchTrackerLine."Part No");
+                SalesLine."Location Code" := "Location Code";
+                SalesLine.VALIDATE(SalesLine."Variant Code", SearchTrackerLine.Variant);
+                SalesLine."Quantity Demanded" := SearchTrackerLine."Quantity Demanded";
+                SalesLine.VALIDATE(SalesLine.Quantity, SearchTrackerLine."Quantity Supplied");
+                //SalesLine."Search Code" := SearchTrackerLine."Search Code";
+                //SalesLine."Search Line" := SearchTrackerLine."Entry No";
+                SalesLine.INSERT(TRUE);
+            until SearchTrackerLine.Next() = 0;
+        end;
+
+        "Document No." := SalesHeader."No.";
+    End;
 
 }

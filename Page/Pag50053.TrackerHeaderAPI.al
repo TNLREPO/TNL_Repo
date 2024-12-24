@@ -28,6 +28,18 @@ page 50053 TrackerHeaderAPI
                 {
                     ToolTip = 'Specifies the value of the Request Customer Address field.', Comment = '%';
                 }
+                field("Request Date"; Rec."Request Date")
+                {
+                    ToolTip = 'Specifies the value of the Request Date field.', Comment = '%';
+                }
+                field("Order Type"; Rec."Order Type")
+                {
+                    ToolTip = 'Specifies the value of the Order Type field.', Comment = '%';
+                }
+                field("Online Order"; Rec."Online Order")
+                {
+                    ToolTip = 'Specifies the value of the Online Order field.', Comment = '%';
+                }
             }
         }
     }

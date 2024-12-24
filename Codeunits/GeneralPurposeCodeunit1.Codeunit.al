@@ -1731,7 +1731,7 @@ codeunit 50004 "General Purpose Codeunit-1"
     end;
 
 
-    procedure ShowItemAvailFromSearchTracker(VAR SearchTracker: Record "Parts Enquiry"; AvailabilityType: Enum "Item Availability Type")
+    procedure ShowItemAvailFromSearchTracker(VAR SearchTracker: Record "Parts Enquiry"; AvailabilityType: Enum Microsoft.Inventory.Availability."Item Availability Type")
     var
 
         ItemAvailFormsMgt: Codeunit "Item Availability Forms Mgt";
@@ -1761,11 +1761,12 @@ codeunit 50004 "General Purpose Codeunit-1"
             AvailabilityType::"Event":
                 IF ItemAvailFormsMgt.ShowItemAvailabilityByEvent(Item, SearchTracker.FIELDCAPTION(SearchTracker."Request Date"), SearchTracker."Request Date", NewDate, FALSE) THEN
                     SearchTracker.VALIDATE(SearchTracker."Request Date", NewDate);
+
         END;
     END;
 
 
-    procedure ShowItemAvailFromFaultSetup(VAR FaultSetupLine: Record "Fault Setup Line"; AvailabilityType: Enum "Item Availability Type")
+    procedure ShowItemAvailFromFaultSetup(VAR FaultSetupLine: Record "Fault Setup Line"; AvailabilityType: Enum Microsoft.Inventory.Availability."Item Availability Type")
 
     var
         Item: Record Item;

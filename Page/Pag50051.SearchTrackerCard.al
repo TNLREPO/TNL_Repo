@@ -50,4 +50,60 @@ page 50051 "Search Tracker Card New"
         }
 
     }
+
+    actions
+    {
+        area(Navigation)
+        {
+            group(Documents)
+            {
+                Caption = '&Create Documents';
+                Image = NewDocument;
+                action(CreateQuote)
+                {
+                    Caption = 'Create Quote';
+                    Image = CreateDocument;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    trigger OnAction()
+                    Begin
+                        Rec.CreateInvoice("Sales Document Type"::Quote);
+                        MESSAGE(MsgQuote, Rec."Document No.");
+                    End;
+                }
+                action(CreateOrder)
+                {
+                    Caption = 'Create Order';
+                    Image = CreateFinanceChargememo;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    trigger OnAction()
+                    Begin
+                        Rec.CreateInvoice("Sales Document Type"::Order);
+                        MESSAGE(MsgOrder, Rec."Document No.");
+                    End;
+                }
+                action(CreateInvoice)
+                {
+                    Caption = 'Create Invoice';
+                    Image = DocumentEdit;
+                    Promoted = true;
+                    PromotedCategory = Process;
+
+                    trigger OnAction()
+                    Begin
+                        Rec.CreateInvoice("Sales Document Type"::Invoice);
+                        MESSAGE(MsgInvoice, Rec."Document No.");
+                    End;
+                }
+
+            }
+
+        }
+    }
+    var
+        MsgQuote: Label 'Sales quote %1 has been created.';
+        MsgOrder: Label 'Sales order %1 has been created.';
+        MsgInvoice: Label 'Sales invoice %1 has been created.';
+
 }

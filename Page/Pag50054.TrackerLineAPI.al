@@ -28,6 +28,10 @@ page 50054 TrackerLineAPI
                 {
                     ToolTip = 'Specifies the value of the Part No field.', Comment = '%';
                 }
+                field("Part Description"; Rec."Part Description")
+                {
+                    ToolTip = 'Specifies the value of the Part Description field.', Comment = '%';
+                }
 
                 field("Quantity Demanded"; Rec."Quantity Demanded")
                 {
