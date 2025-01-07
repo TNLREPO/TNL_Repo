@@ -1,4 +1,4 @@
-table 70062 "Parts Order Header"
+table 70162 "Parts Order Header"
 {
 
     fields

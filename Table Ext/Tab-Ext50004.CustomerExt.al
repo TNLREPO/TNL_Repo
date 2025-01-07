@@ -334,6 +334,10 @@ tableextension 50004 "Customer Ext." extends Customer
         field(50275; "Customer Line Discount"; Decimal)
         {
         }
+        field(50276; "Customer Type2"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
 
         field(50277; "Customer Template"; Code[10])
         {

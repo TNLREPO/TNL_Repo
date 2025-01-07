@@ -41,6 +41,11 @@ page 50051 "Search Tracker Card New"
                 {
                     ToolTip = 'Specifies the value of the Online Order field.', Comment = '%';
                 }
+                field("Document No."; Rec."Document No.")
+                {
+                    Editable = false;
+                    ToolTip = 'Specifies the value of the Document No. field.', Comment = '%';
+                }
             }
             part(Lines; "Search Tracker Subform")
             {
@@ -102,8 +107,8 @@ page 50051 "Search Tracker Card New"
         }
     }
     var
-        MsgQuote: Label 'Sales quote %1 has been created.';
-        MsgOrder: Label 'Sales order %1 has been created.';
-        MsgInvoice: Label 'Sales invoice %1 has been created.';
+        MsgQuote: Label 'Sales Quote %1 has been created.';
+        MsgOrder: Label 'Sales Order %1 has been created.';
+        MsgInvoice: Label 'Sales Invoice %1 has been created.';
 
 }

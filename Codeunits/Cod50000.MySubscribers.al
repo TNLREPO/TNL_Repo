@@ -271,7 +271,7 @@ codeunit 50000 MySubscribers
                 REPEAT
                     IF (Rec."Shortcut Dimension 1 Code" = '09MARKET') AND (SalesLine."Line Discount Amount" <> 0) THEN
                         IF Rec.Approved = FALSE THEN
-                            ERROR('This transaction needs to be Approved before posting!')
+                            ERROR('This transaction needs to be approved before posting!')
                 UNTIL SalesLine.NEXT = 0;
             END;
 

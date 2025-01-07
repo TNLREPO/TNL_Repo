@@ -5,7 +5,7 @@ tableextension 50011 "Sales Line Ext" extends "Sales Line"
         field(50000; "Search Code"; Code[20])
         {
             TableRelation = "Parts Enquiry"."Search Code" WHERE("Document No." = FIELD("Document No."));
-            
+
         }
         field(50002; "Search Line"; Integer)
         {
@@ -119,7 +119,24 @@ tableextension 50011 "Sales Line Ext" extends "Sales Line"
                 Contribution := "Unit Price" * 0.33;
             end;
         }
-        
+
+        field(60110; "Document Link"; Text[100])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(60111; "Vehicle Picked"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(60112; "Vehicle Released By"; Code[50])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(60113; "Vehicle Details Confirmed"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+
         modify("Location Code")
         {
             trigger OnAfterValidate()

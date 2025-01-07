@@ -75,5 +75,13 @@ tableextension 50042 "Reservation Entry Ext" extends "Reservation Entry"
         field(50019; "Vendor Shipment No."; Code[20])
         {
         }
+        field(50020; "Picked?"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50021; "Picked By"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 }

@@ -23,25 +23,50 @@ page 50052 "Search Tracker Subform"
                 {
                     ToolTip = 'Specifies the value of the Part Description field.', Comment = '%';
                 }
+                field("Stock Type"; Rec."Stock Type")
+                {
+                    ToolTip = 'Specifies the value of the Stock Type field.', Comment = '%';
+                }
+                field("Model No."; Rec."Model No.")
+                {
+                    ToolTip = 'Specifies the value of the Model No. field.', Comment = '%';
+                }
+                field("Model Name"; Rec."Model Name")
+                {
+                    ToolTip = 'Specifies the value of the Model Name field.', Comment = '%';
+                }
+                field("Location Code"; Rec."Location Code")
+                {
+                    ToolTip = 'Specifies the value of the Location Code field.', Comment = '%';
+                }
+                field(Variant; Rec.Variant)
+                {
+                    ToolTip = 'Specifies the value of the Variant field.', Comment = '%';
+                }
+                field(Supplied; Rec.Supplied)
+                {
+                    ToolTip = 'Specifies the value of the Supplied field.', Comment = '%';
+                }
+
+                field("Non Specification"; Rec."Non Specification")
+                {
+                    ToolTip = 'Specifies the value of the Non Specification field.', Comment = '%';
+                }
                 field("Quantity Demanded"; Rec."Quantity Demanded")
                 {
                     ToolTip = 'Specifies the value of the Quantity Demanded field.', Comment = '%';
                 }
-                field("Quantity On Hand"; Rec."Quantity On Hand")
-                {
-                    ToolTip = 'Specifies the value of the Quantity On Hand field.', Comment = '%';
-                }
-                field("Quantity On Purchase Order"; Rec."Quantity On Purchase Order")
-                {
-                    ToolTip = 'Specifies the value of the Quantity On Purchase Order field.', Comment = '%';
-                }
-                field("Quantity On Sales Order"; Rec."Quantity On Sales Order")
-                {
-                    ToolTip = 'Specifies the value of the Quantity On Sales Order field.', Comment = '%';
-                }
                 field("Quantity Supplied"; Rec."Quantity Supplied")
                 {
                     ToolTip = 'Specifies the value of the Quantity Supplied field.', Comment = '%';
+                }
+                field(Status; Rec.Status)
+                {
+                    ToolTip = 'Specifies the value of the Status field.', Comment = '%';
+                }
+                field("Unit Price"; Rec."Unit Price")
+                {
+                    ToolTip = 'Specifies the value of the Unit Price field.', Comment = '%';
                 }
             }
         }

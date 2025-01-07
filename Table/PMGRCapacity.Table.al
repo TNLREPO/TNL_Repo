@@ -1,4 +1,4 @@
-table 70050 "PM/GR Capacity"
+table 70150 "PM/GR Capacity"
 {
 
     fields

@@ -7,7 +7,6 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
             FieldClass = FlowField;
             CalcFormula = Sum("Sales Line".Quantity WHERE("Document No." = FIELD("No.")));
             DecimalPlaces = 0 : 5;
-
         }
         field(50003; "Order Type"; Option)
         {
@@ -55,26 +54,22 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
             begin
                 IF UserSetup2.GET(USERID) THEN
                     SenderEmail := UserSetup2."E-Mail";
+
                 IF "Send for Approval" = TRUE THEN
-                    IF UserSetup.GET("1st Approval to") THEN BEGIN
-                        Sender := USERID;
-                        "Sent Time" := CURRENTDATETIME;
-                        Addressee := UserSetup.Initials;
-                        TESTFIELD("1st Approval to");
-                        TESTFIELD("1st Apprv. Status", 0);
-                        "Current pending Person" := "1st Approval to";
-                        ToAddresses := UserSetup."E-Mail";
-                        "Mail Body" := STRSUBSTNO(Text073, "No.");
+                    TESTFIELD("1st Approval to");
+                TESTFIELD("1st Apprv. Status", 0);
+                "Current pending Person" := "1st Approval to";
 
-                        Subject := STRSUBSTNO(Text073, "No.");
-
-                        CreateEmailBody("No.", Addressee, "Mail Body");
-                        SendEmail(ToAddresses, Subject, EmailBody, CCName, SenderEmail);
-
-                        //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
-                        //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                        //.Send;
-                    END;
+                IF UserSetup.GET("1st Approval to") THEN BEGIN
+                    ReceiverEmail := UserSetup."E-Mail";
+                    ReceiverInitials := UserSetup.Initials;
+                    Subject := STRSUBSTNO(WaitingforApprovalText, "No.");
+                    "Mail Body" := STRSUBSTNO(WaitingforApprovalText, "No.");
+                    CreateEmailBody("No.", Addressee, "Mail Body");
+                    SendEmail(ReceiverEmail, Subject, EmailBody, CCName, SenderEmail);
+                    "Sent Time" := CURRENTDATETIME;
+                    Sender := USERID;
+                END;
             end;
         }
         field(50164; Sender; Code[30])
@@ -145,23 +140,24 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                     TESTFIELD("Send for Approval", TRUE);
                     TESTFIELD("1st Approval to", USERID);
                     "1st Approval Time" := 0DT;
+
                     CASE "1st Apprv. Status" OF
                         "1st Apprv. Status"::Approved:
                             BEGIN
                                 IF UserSetup2.GET(USERID) THEN
                                     SenderEmail := UserSetup2."E-Mail";
+
                                 TESTFIELD("2nd Approval to");
-                                "1st Approval Time" := CURRENTDATETIME;
                                 UserSetup.GET("2nd Approval to");
                                 "Current pending Person" := "2nd Approval to";
-                                ToName := UserSetup."E-Mail";
-                                Subject := STRSUBSTNO(Text073, "No.");
-                                "Mail Body" := STRSUBSTNO(Text073, "No.");
-                                // mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
-                                //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                                //.Send;
-                                MESSAGE('Mail Sent Successfully!');
+                                ReceiverEmail := UserSetup."E-Mail";
 
+                                Subject := STRSUBSTNO(WaitingforApprovalText, "No.");
+                                "Mail Body" := STRSUBSTNO(WaitingforApprovalText, "No.");
+
+
+
+                                "1st Approval Time" := CURRENTDATETIME;
 
                             END;
                         "1st Apprv. Status"::Rejected:
@@ -171,8 +167,8 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                                 "1st Approval Time" := CURRENTDATETIME;
                                 UserSetup.GET(Sender);
                                 ToName := UserSetup."E-Mail";
-                                Subject := STRSUBSTNO(Text075, "No.");
-                                "Mail Body" := STRSUBSTNO(Text075, "No.");
+                                Subject := STRSUBSTNO(RejectedText, "No.");
+                                "Mail Body" := STRSUBSTNO(RejectedText, "No.");
                                 // mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
                                 //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
                                 //.Send;
@@ -185,8 +181,8 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                                 "1st Approval Time" := CURRENTDATETIME;
                                 UserSetup.GET(Sender);
                                 ToName := UserSetup."E-Mail";
-                                Subject := STRSUBSTNO(Text076, "No.");
-                                "Mail Body" := STRSUBSTNO(Text076, "No.");
+                                Subject := STRSUBSTNO(OnholdText, "No.");
+                                "Mail Body" := STRSUBSTNO(OnholdText, "No.");
                                 //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
                                 //.Send;
                                 MESSAGE('Mail Sent Successfully!');
@@ -209,8 +205,8 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                                 "Current pending Person" := "2nd Approval to";
                                 ToName := UserSetup."E-Mail";
                                 CCName := 'ravinder@toyotanigeria.com;' + 'godwin@toyotanigeria.com;' + 'Ingale@toyotanigeria.com';
-                                Subject := STRSUBSTNO(Text073, "No.");
-                                "Mail Body" := STRSUBSTNO(Text073, "No.");
+                                Subject := STRSUBSTNO(WaitingforApprovalText, "No.");
+                                "Mail Body" := STRSUBSTNO(WaitingforApprovalText, "No.");
                                 //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
                                 //.Send;
                                 MESSAGE('Mail Sent Successfully!');
@@ -223,7 +219,7 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                                 UserSetup.GET(Sender);
                                 ToName := UserSetup."E-Mail";
                                 CCName := 'ravinder@toyotanigeria.com';
-                                Subject := STRSUBSTNO(Text075, "No.");
+                                Subject := STRSUBSTNO(RejectedText, "No.");
                                 //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
                                 //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
                                 //.Send;
@@ -236,8 +232,8 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                                 "1st Approval Time" := CURRENTDATETIME;
                                 UserSetup.GET(Sender);
                                 ToName := UserSetup."E-Mail";
-                                Subject := STRSUBSTNO(Text076, "No.");
-                                "Mail Body" := STRSUBSTNO(Text076, "No.");
+                                Subject := STRSUBSTNO(OnholdText, "No.");
+                                "Mail Body" := STRSUBSTNO(OnholdText, "No.");
                                 //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
                                 //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
                                 //.Send;
@@ -260,8 +256,8 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                                 "Current pending Person" := "2nd Approval to";
                                 ToName := UserSetup."E-Mail";
                                 CCName := 'agbesua@toyotanigeria.com;' + 'brano@toyotanigeria.com;' + 'ravinder@toyotanigeria.com';
-                                Subject := STRSUBSTNO(Text073, "No.");
-                                "Mail Body" := STRSUBSTNO(Text073, "No.");
+                                Subject := STRSUBSTNO(WaitingforApprovalText, "No.");
+                                "Mail Body" := STRSUBSTNO(WaitingforApprovalText, "No.");
                                 //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
                                 //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
                                 //.Send;
@@ -276,8 +272,8 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                                 UserSetup.GET(Sender);
                                 ToName := UserSetup."E-Mail";
                                 CCName := 'ravinder@toyotanigeria.com';
-                                Subject := STRSUBSTNO(Text075, "No.");
-                                "Mail Body" := STRSUBSTNO(Text075, "No.");
+                                Subject := STRSUBSTNO(RejectedText, "No.");
+                                "Mail Body" := STRSUBSTNO(RejectedText, "No.");
                                 //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
                                 //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
                                 //.Send;
@@ -290,8 +286,8 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                                     SenderEmail := UserSetup2."E-Mail";
                                 UserSetup.GET(Sender);
                                 ToName := UserSetup."E-Mail";
-                                Subject := STRSUBSTNO(Text076, "No.");
-                                "Mail Body" := STRSUBSTNO(Text076, "No.");
+                                Subject := STRSUBSTNO(OnholdText, "No.");
+                                "Mail Body" := STRSUBSTNO(OnholdText, "No.");
                                 //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
                                 //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
                                 //.Send;
@@ -314,8 +310,8 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                                 // "Current pending Person" := "2nd Approval to";
                                 ToName := UserSetup."E-Mail";
                                 CCName := 'agbesua@toyotanigeria.com;' + 'brano@toyotanigeria.com;' + 'ravinder@toyotanigeria.com';
-                                Subject := STRSUBSTNO(Text073, "No.");
-                                "Mail Body" := STRSUBSTNO(Text073, "No.");
+                                Subject := STRSUBSTNO(WaitingforApprovalText, "No.");
+                                "Mail Body" := STRSUBSTNO(WaitingforApprovalText, "No.");
                                 //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
                                 //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
                                 //.Send;
@@ -328,8 +324,8 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                                 UserSetup.GET(Sender);
                                 ToName := UserSetup."E-Mail";
                                 CCName := 'ravinder@toyotanigeria.com';
-                                Subject := STRSUBSTNO(Text075, "No.");
-                                "Mail Body" := STRSUBSTNO(Text075, "No.");
+                                Subject := STRSUBSTNO(RejectedText, "No.");
+                                "Mail Body" := STRSUBSTNO(RejectedText, "No.");
                                 //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
                                 //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
                                 //.Send;
@@ -342,8 +338,8 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                                     SenderEmail := UserSetup2."E-Mail";
                                 UserSetup.GET(Sender);
                                 ToName := UserSetup."E-Mail";
-                                Subject := STRSUBSTNO(Text076, "No.");
-                                "Mail Body" := STRSUBSTNO(Text076, "No.");
+                                Subject := STRSUBSTNO(OnholdText, "No.");
+                                "Mail Body" := STRSUBSTNO(OnholdText, "No.");
                                 //                   mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
                                 //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
                                 //.Send;
@@ -381,228 +377,6 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
             OptionCaption = ' ,on Hold,Approved,Rejected';
             OptionMembers = " ","on Hold",Approved,Rejected;
 
-            trigger OnValidate()
-            begin
-                IF "Shortcut Dimension 1 Code" = '09MARKET' THEN BEGIN
-                    TESTFIELD("Send for Approval", TRUE);
-                    TESTFIELD("1st Apprv. Status", 2);
-                    TESTFIELD("2nd Approval to", USERID);
-                    "2nd Approval Time" := 0DT;
-                    CASE "2nd Apprv. Status" OF
-                        "2nd Apprv. Status"::Approved:
-                            BEGIN
-                                // TESTFIELD("3rd Approval to");
-                                "2nd Approval Time" := CURRENTDATETIME;
-                                IF UserSetup2.GET(USERID) THEN
-                                    SenderEmail := UserSetup2."E-Mail";
-                                UserSetup.GET(Sender);
-                                //  "Current pending Person" := "3rd Approval to";
-                                ToName := UserSetup."E-Mail";
-                                //CCName  := 'oshunniyi@toyotanigeria.com'
-                                Subject := STRSUBSTNO(Text074, "No.");
-                                "Mail Body" := STRSUBSTNO(Text074, "No.");
-                                //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
-                                //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                                //.Send;
-
-                            END;
-                        "2nd Apprv. Status"::Rejected:
-                            BEGIN
-                                "2nd Approval Time" := CURRENTDATETIME;
-                                IF UserSetup2.GET(USERID) THEN
-                                    SenderEmail := UserSetup2."E-Mail";
-                                UserSetup.GET(Sender);
-                                ToName := UserSetup."E-Mail";
-                                Subject := STRSUBSTNO(Text075, "No.");
-                                //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
-                                //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                                //.Send;
-                                MESSAGE('Mail Sent Successfully!');
-                            END;
-                        "2nd Apprv. Status"::"on Hold":
-                            BEGIN
-                                "2nd Approval Time" := CURRENTDATETIME;
-                                IF UserSetup2.GET(USERID) THEN
-                                    SenderEmail := UserSetup2."E-Mail";
-                                UserSetup.GET(Sender);
-                                ToName := UserSetup."E-Mail";
-                                Subject := STRSUBSTNO(Text076, "No.");
-                                //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
-                                //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                                //.Send;
-                                MESSAGE('Mail Sent Successfully!');
-                            END;
-                    END;
-                END;
-                IF ("Shortcut Dimension 1 Code" = '05PARTS') AND ("Reason Code" = 'DEFECTIVE') THEN BEGIN
-                    TESTFIELD("Send for Approval", TRUE);
-                    TESTFIELD("1st Apprv. Status", 2);
-                    TESTFIELD("2nd Approval to", USERID);
-                    "2nd Approval Time" := 0DT;
-                    CASE "2nd Apprv. Status" OF
-                        "2nd Apprv. Status"::Approved:
-                            BEGIN
-                                // TESTFIELD("3rd Approval to");
-                                "2nd Approval Time" := CURRENTDATETIME;
-                                IF UserSetup2.GET(USERID) THEN
-                                    SenderEmail := UserSetup2."E-Mail";
-                                UserSetup.GET(Sender);
-                                //  "Current pending Person" := "3rd Approval to";
-                                ToName := UserSetup."E-Mail";
-                                CCName := 'agbesua@toyotanigeria.com;' + 'brano@toyotanigeria.com;' + 'oshunniyi@toyotanigeria.com;' + 'ravinder@toyotanigeria.com';
-                                Subject := STRSUBSTNO(Text073, "No.");
-                                "Mail Body" := STRSUBSTNO(Text073, "No.");
-                                //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
-                                //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                                //.Send;
-                                MESSAGE('Mail Sent Successfully!');
-
-                            END;
-                        "2nd Apprv. Status"::Rejected:
-                            BEGIN
-                                "2nd Approval Time" := CURRENTDATETIME;
-                                IF UserSetup2.GET(USERID) THEN
-                                    SenderEmail := UserSetup2."E-Mail";
-                                UserSetup.GET(Sender);
-                                ToName := UserSetup."E-Mail";
-                                CCName := 'oshunniyi@toyotanigeria.com;' + 'ravinder@toyotanigeria.com';
-                                Subject := STRSUBSTNO(Text075, "No.");
-                                "Mail Body" := STRSUBSTNO(Text075, "No.");
-                                //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
-                                //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                                //.Send;
-                                MESSAGE('Mail Sent Successfully!');
-                            END;
-                        "2nd Apprv. Status"::"on Hold":
-                            BEGIN
-                                "2nd Approval Time" := CURRENTDATETIME;
-                                IF UserSetup2.GET(USERID) THEN
-                                    SenderEmail := UserSetup2."E-Mail";
-                                UserSetup.GET(Sender);
-                                ToName := UserSetup."E-Mail";
-                                CCName := 'oshunniyi@toyotanigeria.com;' + 'ravinder@toyotanigeria.com';
-                                Subject := STRSUBSTNO(Text076, "No.");
-                                "Mail Body" := STRSUBSTNO(Text076, "No.");
-                                //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
-                                //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                                //.Send;
-                                MESSAGE('Mail Sent Successfully!');
-                            END;
-                    END;
-                END;
-
-                IF ("Shortcut Dimension 1 Code" = '05PARTS') AND ("Reason Code" = 'NDEFECTIVE') THEN BEGIN
-                    TESTFIELD("Send for Approval", TRUE);
-                    TESTFIELD("1st Apprv. Status", 2);
-                    TESTFIELD("2nd Approval to", USERID);
-                    "2nd Approval Time" := 0DT;
-                    CASE "2nd Apprv. Status" OF
-                        "2nd Apprv. Status"::Approved:
-                            BEGIN
-                                // TESTFIELD("3rd Approval to");
-                                "2nd Approval Time" := CURRENTDATETIME;
-                                IF UserSetup2.GET(USERID) THEN
-                                    SenderEmail := UserSetup2."E-Mail";
-                                UserSetup.GET(Sender);
-                                //  "Current pending Person" := "3rd Approval to";
-                                ToName := UserSetup."E-Mail";
-                                CCName := 'oshunniyi@toyotanigeria.com;' + 'ravinder@toyotanigeria.com;' + 'goc@toyotanigeria.com;' + 'agbesua@toyotanigeria.com';
-                                Subject := STRSUBSTNO(Text074, "No.");
-                                "Mail Body" := STRSUBSTNO(Text074, "No.");
-                                //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
-                                //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                                //.Send;
-                                MESSAGE('Mail Sent Successfully!');
-                            END;
-                        "2nd Apprv. Status"::Rejected:
-                            BEGIN
-                                "2nd Approval Time" := CURRENTDATETIME;
-                                IF UserSetup2.GET(USERID) THEN
-                                    SenderEmail := UserSetup2."E-Mail";
-                                UserSetup.GET(Sender);
-                                ToName := UserSetup."E-Mail";
-                                CCName := 'oshunniyi@toyotanigeria.com;' + 'ravinder@toyotanigeria.com;' + 'goc@toyotanigeria.com;' + 'agbesua@toyotanigeria.com';
-                                Subject := STRSUBSTNO(Text075, "No.");
-                                "Mail Body" := STRSUBSTNO(Text075, "No.");
-                                //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
-                                //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                                //.Send;
-                                MESSAGE('Mail Sent Successfully!');
-                            END;
-                        "2nd Apprv. Status"::"on Hold":
-                            BEGIN
-                                "2nd Approval Time" := CURRENTDATETIME;
-                                IF UserSetup2.GET(USERID) THEN
-                                    SenderEmail := UserSetup2."E-Mail";
-                                UserSetup.GET(Sender);
-                                ToName := UserSetup."E-Mail";
-                                CCName := 'oshunniyi@toyotanigeria.com;' + 'ravinder@toyotanigeria.com;' + 'goc@toyotanigeria.com;' + 'agbesua@toyotanigeria.com';
-                                Subject := STRSUBSTNO(Text076, "No.");
-                                "Mail Body" := STRSUBSTNO(Text076, "No.");
-                                //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
-                                //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                                //.Send;
-                                MESSAGE('Mail Sent Successfully!');
-                            END;
-                    END;
-                END;
-                IF ("Shortcut Dimension 1 Code" = '05PARTS') AND ("Reason Code" = 'ERROR') THEN BEGIN
-                    TESTFIELD("Send for Approval", TRUE);
-                    TESTFIELD("1st Apprv. Status", 2);
-                    TESTFIELD("2nd Approval to", USERID);
-                    "2nd Approval Time" := 0DT;
-                    CASE "2nd Apprv. Status" OF
-                        "2nd Apprv. Status"::Approved:
-                            BEGIN
-                                // TESTFIELD("3rd Approval to");
-                                "2nd Approval Time" := CURRENTDATETIME;
-                                IF UserSetup2.GET(USERID) THEN
-                                    SenderEmail := UserSetup2."E-Mail";
-                                UserSetup.GET(Sender);
-                                //  "Current pending Person" := "3rd Approval to";
-                                ToName := UserSetup."E-Mail";
-                                CCName := 'oshunniyi@toyotanigeria.com;' + 'ravinder@toyotanigeria.com;' + 'goc@toyotanigeria.com;' + 'agbesua@toyotanigeria.com';
-                                Subject := STRSUBSTNO(Text074, "No.");
-                                "Mail Body" := STRSUBSTNO(Text074, "No.");
-                                //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
-                                //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                                //.Send;
-                                MESSAGE('Mail Sent Successfully!');
-
-                            END;
-                        "2nd Apprv. Status"::Rejected:
-                            BEGIN
-                                "2nd Approval Time" := CURRENTDATETIME;
-                                IF UserSetup2.GET(USERID) THEN
-                                    SenderEmail := UserSetup2."E-Mail";
-                                UserSetup.GET(Sender);
-                                ToName := UserSetup."E-Mail";
-                                CCName := 'oshunniyi@toyotanigeria.com;' + 'ravinder@toyotanigeria.com;' + 'goc@toyotanigeria.com;' + 'agbesua@toyotanigeria.com';
-                                Subject := STRSUBSTNO(Text075, "No.");
-                                "Mail Body" := STRSUBSTNO(Text075, "No.");
-                                //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
-                                //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                                //.Send;
-                                MESSAGE('Mail Sent Successfully!');
-                            END;
-                        "2nd Apprv. Status"::"on Hold":
-                            BEGIN
-                                "2nd Approval Time" := CURRENTDATETIME;
-                                IF UserSetup2.GET(USERID) THEN
-                                    SenderEmail := UserSetup2."E-Mail";
-                                UserSetup.GET(Sender);
-                                ToName := UserSetup."E-Mail";
-                                CCName := 'oshunniyi@toyotanigeria.com;' + 'ravinder@toyotanigeria.com;' + 'goc@toyotanigeria.com' + 'agbesua@toyotanigeria.com';
-                                Subject := STRSUBSTNO(Text076, "No.");
-                                "Mail Body" := STRSUBSTNO(Text076, "No.");
-                                //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
-                                //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                                //.Send;
-                                MESSAGE('Mail Sent Successfully!');
-                            END;
-                    END;
-                END;
-            end;
         }
         field(50181; "2nd Approval Time"; DateTime)
         {
@@ -614,25 +388,6 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
         {
             TableRelation = "User Setup"."User ID";
 
-            trigger OnValidate()
-            begin
-                //IF UserSetup.GET("Final Approval to") THEN
-                //"Final Approver's Name" := UserSetup.Name;
-                IF ("Shortcut Dimension 1 Code" = '05PARTS') AND ("Reason Code" = 'ERROR') THEN
-                    ERROR('Final approval is not need for this transaction');
-
-                IF ("Shortcut Dimension 1 Code" = '05PARTS') AND ("Reason Code" = 'NDEFECTIVE') THEN
-                    ERROR('Final approval is not need for this transaction');
-
-                IF ("Shortcut Dimension 1 Code" = '09MARKET') THEN
-                    ERROR('Final approval is not need for this transaction');
-
-
-                IF UserSetup.GET("Final Approval to") THEN
-                    "Final Approver's Name" := UserSetup.Name;
-                "Final Approval to" := "Final Approval to";
-                MODIFY;
-            end;
         }
         field(50189; "Final Approver's Name"; Text[50])
         {
@@ -642,66 +397,6 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
             OptionCaption = ' ,on Hold,Approved,Rejected';
             OptionMembers = " ","on Hold",Approved,Rejected;
 
-            trigger OnValidate()
-            begin
-
-                IF "Shortcut Dimension 1 Code" = '05PARTS' THEN BEGIN
-                    TESTFIELD("Send for Approval", TRUE);
-                    "Final Approval Time" := 0DT;
-                    //"Final Approver's Name" := UserSetup.Name;
-
-                    CASE "Final Apprv. Status" OF
-                        "Final Apprv. Status"::Approved:
-                            BEGIN
-                                TESTFIELD("1st Approval to");
-                                "Final Approval Time" := CURRENTDATETIME;
-                                IF UserSetup2.GET(USERID) THEN
-                                    SenderEmail := UserSetup2."E-Mail";
-                                UserSetup.GET(Sender);
-                                //"Current pending Person" := "Final Approval to";
-                                ToName := UserSetup."E-Mail";
-                                CCName := 'oshunniyi@toyotanigeria.com;' + 'ravinder@toyotanigeria.com;' + 'goc@toyotanigeria.com' + 'agbesua@toyotanigeria.com';
-                                Subject := STRSUBSTNO(Text074, "No.");
-                                "Mail Body" := STRSUBSTNO(Text074, "No.");
-                                //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
-                                //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                                //.Send;
-                                MESSAGE('Mail Sent Successfully!');
-                            END;
-                        "Final Apprv. Status"::Rejected:
-                            BEGIN
-                                "Final Approval Time" := CURRENTDATETIME;
-                                IF UserSetup2.GET(USERID) THEN
-                                    SenderEmail := UserSetup2."E-Mail";
-                                UserSetup.GET(Sender);
-                                ToName := UserSetup."E-Mail";
-                                CCName := 'oshunniyi@toyotanigeria.com;' + 'ravinder@toyotanigeria.com;' + 'goc@toyotanigeria.com' + 'agbesua@toyotanigeria.com';
-                                Subject := STRSUBSTNO(Text075, "No.");
-                                "Mail Body" := STRSUBSTNO(Text075, "No.");
-                                //mailsent := approvalmessage.NewMessage(ToName,CCName,Subject,'',"Mail Body",attachement,TRUE);
-                                //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                                //.Send;
-                                MESSAGE('Mail Sent Successfully!');
-                            END;
-                        "Final Apprv. Status"::"on Hold":
-                            BEGIN
-                                "Final Approval Time" := CURRENTDATETIME;
-                                IF UserSetup2.GET(USERID) THEN
-                                    SenderEmail := UserSetup2."E-Mail";
-                                UserSetup.GET(Sender);
-                                ToName := UserSetup."E-Mail";
-                                CCName := 'oshunniyi@toyotanigeria.com;' + 'ravinder@toyotanigeria.com;' + 'goc@toyotanigeria.com' + 'agbesua@toyotanigeria.com';
-                                Subject := STRSUBSTNO(Text076, "No.");
-                                "Mail Body" := STRSUBSTNO(Text076, "No.");
-
-                                //mailsent := approvalmessage.NewMessage(ToName,CCName,Subject,'',"Mail Body",attachement,TRUE);
-                                //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                                //.Send;
-                                MESSAGE('Mail Sent Successfully!');
-                            END;
-                    END;
-                END;
-            end;
         }
         field(50191; "Final Approval Time"; DateTime)
         {
@@ -719,54 +414,11 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
         field(50196; "Send for 2nd Apprv."; Boolean)
         {
 
-            trigger OnValidate()
-            begin
-                IF UserRec.GET(USERID) THEN BEGIN
-                    Sender := UserRec.Name;
-                    "Sent Time" := CURRENTDATETIME;
-                    TESTFIELD(Amount);
-                    TESTFIELD("1st Approval to");
-                    TESTFIELD("1st Apprv. Status", 0);
-                    TESTFIELD("2nd Approval to");
-                    TESTFIELD("2nd Apprv. Status", 0);
-                    IF UserSetup2.GET(USERID) THEN
-                        SenderEmail := UserSetup2."E-Mail";
-                    UserSetup.GET("1st Approval to");
-                    "Current pending Person" := "1st Approval to";
-                    ToName := UserSetup."E-Mail";
-                    Subject := STRSUBSTNO(Text073, "No.");
-                    //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
-                    //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                    //.Send;
-                    MESSAGE('Mail Sent Successfully!');
 
-                END;
-            end;
         }
         field(50197; "Send for 3rd Apprv."; Boolean)
         {
 
-            trigger OnValidate()
-
-            begin
-                IF UserRec.GET(USERID, 15) THEN BEGIN
-                    Sender := UserRec.Name;
-                    "Sent Time" := CURRENTDATETIME;
-                    TESTFIELD(Amount);
-                    TESTFIELD("1st Approval to");
-                    TESTFIELD("1st Apprv. Status", 0);
-                    IF UserSetup2.GET(USERID) THEN
-                        SenderEmail := UserSetup2."E-Mail";
-                    UserSetup.GET("1st Approval to");
-                    "Current pending Person" := "1st Approval to";
-                    ToName := UserSetup."E-Mail";
-                    Subject := STRSUBSTNO(Text073, "No.");
-                    //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
-                    //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                    //.Send;
-                    MESSAGE('Mail Sent Successfully!');
-                END;
-            end;
         }
         field(50258; "Foreign Currency"; Boolean)
         {
@@ -789,6 +441,16 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
         field(50264; "Online Order"; Boolean)
         {
         }
+        field(50267; "Total Amount"; Decimal)
+        {
+            Editable = false;
+            FieldClass = FlowField;
+            CalcFormula = Sum("Sales Line"."Amount Including VAT" WHERE("Document No." = FIELD("No.")));
+        }
+        field(50268; "Vehicle Order No."; Code[30])
+        {
+
+        }
         field(60108; "Customer Line discount"; Decimal)
         {
         }
@@ -798,82 +460,71 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
         field(60110; "Inventory Group"; Code[10])
         {
         }
-        field(60111; "Finance Apprv Status"; Option)
+        field(60111; "Finance Apprv Status"; Enum "Document Status")
         {
-            OptionCaption = ' ,on Hold,Approved,Rejected';
-            OptionMembers = " ","on Hold",Approved,Rejected;
-
             trigger OnValidate()
             begin
 
-                TESTFIELD("Logistics Send for Approval", TRUE);
-                TESTFIELD("Logistics Send to", USERID);
+                TESTFIELD("Logistics Send to", USERID);   //why?
                 TESTFIELD("Finance Send to", USERID);
                 "Finance Approved Time" := 0DT;
+
+                "HOD Marketing Signature" := UserSetup.Signature; //why?
+
+                IF UserSetup2.GET(UserId) THEN
+                    SenderEmail := UserSetup2."E-Mail";
+
                 CASE "Finance Apprv Status" OF
                     "Finance Apprv Status"::Approved:
                         BEGIN
                             TESTFIELD("Marketing Send To");
-                            UserRec.GET("Finance Send to");
-                            "Finance Approved By" := UserRec.Name;
-                            "HOD Marketing Signature" := UserSetup.Signature;
-                            "Finance Approved Time" := CURRENTDATETIME;
-
                             UserSetup.GET("Marketing Send To");
+                            ReceiverEmail := UserSetup."E-Mail";
+                            ReceiverInitials := UserSetup.Initials;
 
-                            ToName := UserSetup."E-Mail";
-                            Subject := STRSUBSTNO(Text073, "No.");
-                            "Mail Body" := STRSUBSTNO(Text073, "No.");
-
-                            //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                            //.Send;
-                            MESSAGE('Mail Sent Successfully!');
-
+                            Subject := STRSUBSTNO(WaitingforApprovalText, "No.");
+                            "Mail Body" := STRSUBSTNO(WaitingforApprovalText, "No.");
+                            CreateEmailBody("No.", ReceiverInitials, "Mail Body");
+                            SendEmail(ReceiverEmail, Subject, EmailBody, CcAddresses, SenderEmail); //marketing gets email
                         END;
+
                     "Finance Apprv Status"::Rejected:
                         BEGIN
-                            UserRec.GET("Finance Send to");
-                            "Finance Approved By" := UserRec.Name;
-                            "HOD Marketing Signature" := UserSetup.Signature;
-                            "Finance Approved Time" := CURRENTDATETIME;
-                            IF UserSetup2.GET(USERID) THEN
-                                SenderEmail := UserSetup2."E-Mail";
                             UserSetup.GET("Logistics Sender");
-                            ToName := UserSetup."E-Mail";
-                            Subject := STRSUBSTNO(Text075, "No.");
-                            "Mail Body" := STRSUBSTNO(Text075, "No.");
+                            ReceiverEmail := UserSetup."E-Mail";
+                            ReceiverInitials := UserSetup.Initials;
 
-                            //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                            //.Send;
-                            MESSAGE('Mail Sent Successfully!');
+                            Subject := STRSUBSTNO(RejectedText, "No.");
+                            "Mail Body" := STRSUBSTNO(RejectedText, "No.");
+                            CreateEmailBody("No.", ReceiverInitials, "Mail Body");
+                            SendEmail(ReceiverEmail, Subject, EmailBody, CcAddresses, SenderEmail); //logistics sender gets email
                         END;
-                    "Finance Apprv Status"::"on Hold":
+
+                    "Finance Apprv Status"::"On-Hold":
                         BEGIN
 
-                            UserRec.GET("Finance Send to");
-                            "Finance Approved By" := UserRec.Name;
-                            "HOD Marketing Signature" := UserSetup.Signature;
-                            "Finance Approved Time" := CURRENTDATETIME;
-                            IF UserSetup2.GET(USERID) THEN
-                                SenderEmail := UserSetup2."E-Mail";
                             UserSetup.GET("Logistics Sender");
-                            ToName := UserSetup."E-Mail";
-                            Subject := STRSUBSTNO(Text076, "No.");
-                            "Mail Body" := STRSUBSTNO(Text076, "No.");
+                            ReceiverEmail := UserSetup."E-Mail";
+                            ReceiverInitials := UserSetup.Initials;
 
+                            Subject := STRSUBSTNO(OnholdText, "No.");
+                            "Mail Body" := STRSUBSTNO(OnholdText, "No.");
+                            CreateEmailBody("No.", ReceiverInitials, "Mail Body");
+                            SendEmail(ReceiverEmail, Subject, EmailBody, CcAddresses, SenderEmail) //logistics sender gets email
 
-                            //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                            //.Send;
-                            MESSAGE('Mail Sent Successfully!');
                         END;
                 END;
+
+                UserRec.GET(UserId);
+                "Finance Approved By" := UserRec.Name;
+                "Finance Approved Time" := CURRENTDATETIME;
             end;
         }
-        field(60112; "Finance Send to"; Code[10])
+        field(60112; "Finance Send to"; Code[30])
         {
             TableRelation = "User Setup"."User ID";
         }
-        field(60113; "Marketing Send To"; Code[10])
+        field(60113; "Marketing Send To"; Code[30])
         {
             TableRelation = "User Setup"."User ID";
 
@@ -884,152 +535,134 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                 "Marketing Sent Time" := CURRENTDATETIME;
             end;
         }
-        field(60114; "Marketing Apprv Status"; Option)
+        field(60114; "Marketing Apprv Status"; Enum "Document Status")
         {
-            OptionCaption = ' ,on Hold,Approved,Rejected';
-            OptionMembers = " ","on Hold",Approved,Rejected;
-
             trigger OnValidate()
             begin
-                TESTFIELD("Logistics Send for Approval", TRUE);
-                TESTFIELD("Logistics Send to", USERID);
-                TESTFIELD("Finance Send to", USERID);
-                //TESTFIELD("Finance Send to",USERID);
+                TESTFIELD("Marketing Send To", USERID);
                 "Marketing Approved Time" := 0DT;
-                CASE "Finance Apprv Status" OF
+
+                "HOD Finance Signature" := UserSetup.Signature;   //why?
+
+                IF UserSetup2.GET(USERID) THEN
+                    SenderEmail := UserSetup2."E-Mail";
+
+                CASE "Marketing Apprv Status" OF
                     "Marketing Apprv Status"::Approved:
                         BEGIN
+
                             TESTFIELD("Marketing Send To");
-                            UserRec.GET("Marketing Send To");
-                            "Marketing Approved By" := UserRec.Name;
-                            "HOD Finance Signature" := UserSetup.Signature;
-                            "Marketing Approved Time" := CURRENTDATETIME;
+                            UserSetup.GET("Marketing Send To"); // this is wrong. who should get email?
+                            ReceiverEmail := UserSetup."E-Mail";
+                            ReceiverInitials := UserSetup.Initials;
 
-                            IF UserSetup2.GET(USERID) THEN
-                                SenderEmail := UserSetup2."E-Mail";
+                            Subject := STRSUBSTNO(WaitingforApprovalText, "No.");
+                            "Mail Body" := STRSUBSTNO(WaitingforApprovalText, "No.");
+                            CreateEmailBody("No.", ReceiverInitials, "Mail Body");
+                            SendEmail(ReceiverEmail, Subject, EmailBody, CcAddresses, SenderEmail);
 
-                            UserSetup.GET("Marketing Send To");
-                            //"Current pending Person" := "2nd Approval to";
-                            ToName := UserSetup."E-Mail";
-                            Subject := STRSUBSTNO(Text073, "No.");
-                            "Mail Body" := STRSUBSTNO(Text073, "No.");
-
-                            //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                            //.Send;
-                            MESSAGE('Mail Sent Successfully!');
-
-
+                            IF VehicleOrderOnline.GET("Vehicle Order No.") THEN BEGIN
+                                VehicleOrderOnline.SETRANGE("Order No.", "Vehicle Order No.");
+                                VehicleOrderOnline."Approval Status Changed" := TRUE;
+                                VehicleOrderOnline.MODIFY;
+                            END;
                         END;
+
                     "Marketing Apprv Status"::Rejected:
                         BEGIN
-                            UserRec.GET("Marketing Send To");
-                            "Marketing Approved By" := UserRec.Name;
-                            "HOD Finance Signature" := UserSetup.Signature;
-                            "Marketing Approved Time" := CURRENTDATETIME;
-                            IF UserSetup2.GET(USERID) THEN
-                                SenderEmail := UserSetup2."E-Mail";
-                            UserSetup.GET("Logistics Sender");
-                            ToName := UserSetup."E-Mail";
-                            Subject := STRSUBSTNO(Text075, "No.");
-                            "Mail Body" := STRSUBSTNO(Text075, "No.");
 
-                            //SMTPMail.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                            //.Send;
-                            MESSAGE('Mail Sent Successfully!');
-                        END;
-                    "Marketing Apprv Status"::"on Hold":
-                        BEGIN
-                            UserRec.GET("Marketing Send To");
-                            "Marketing Approved By" := UserRec.Name;
-                            "HOD Finance Signature" := UserSetup.Signature;
-                            "Marketing Approved Time" := CURRENTDATETIME;
-                            IF UserSetup2.GET(USERID) THEN
-                                SenderEmail := UserSetup2."E-Mail";
                             UserSetup.GET("Logistics Sender");
-                            ToName := UserSetup."E-Mail";
-                            Subject := STRSUBSTNO(Text076, "No.");
-                            "Mail Body" := STRSUBSTNO(Text076, "No.");
-                            //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
-                            //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                            //.Send;
-                            MESSAGE('Mail Sent Successfully!');
+                            ReceiverEmail := UserSetup."E-Mail";
+                            ReceiverInitials := UserSetup.Initials;
+
+                            Subject := STRSUBSTNO(RejectedText, "No.");
+                            "Mail Body" := STRSUBSTNO(RejectedText, "No.");
+                            CreateEmailBody("No.", ReceiverInitials, "Mail Body");
+                            SendEmail(ReceiverEmail, Subject, EmailBody, CcAddresses, SenderEmail); //logistics sender gets email
+
+                        END;
+
+                    "Marketing Apprv Status"::"On-Hold":
+                        BEGIN
+
+
+                            UserSetup.GET("Logistics Sender");
+                            ReceiverEmail := UserSetup."E-Mail";
+                            ReceiverInitials := UserSetup.Initials;
+
+                            Subject := STRSUBSTNO(OnholdText, "No.");
+                            "Mail Body" := STRSUBSTNO(OnholdText, "No.");
+                            CreateEmailBody("No.", ReceiverInitials, "Mail Body");
+                            SendEmail(ReceiverEmail, Subject, EmailBody, CcAddresses, SenderEmail) //logistics sender gets email
                         END;
                 END;
+
+                UserRec.GET(UserId);
+                "Marketing Approved By" := UserRec.Name;
+                "Marketing Approved Time" := CURRENTDATETIME;
+
             end;
         }
-        field(60115; "Logistics Send to"; Code[10])
+        field(60115; "Logistics Send to"; Code[30])
         {
             TableRelation = "User Setup"."User ID";
         }
-        field(60116; "Logistics Apprv Status"; Option)
+        field(60116; "Logistics Apprv Status"; Enum "Document Status")
         {
-            OptionCaption = ' ,on Hold,Approved,Rejected';
-            OptionMembers = " ","on Hold",Approved,Rejected;
-
             trigger OnValidate()
             begin
 
-                TESTFIELD("Logistics Send for Approval", TRUE);
                 TESTFIELD("Logistics Send to", USERID);
                 "Logistics Approved Time" := 0DT;
+
+                "HOD Marketing Signature" := UserSetup.Signature; //why? which UserSetup?
+
+                IF UserSetup2.GET(USERID) THEN
+                    SenderEmail := UserSetup2."E-Mail";
+
                 CASE "Logistics Apprv Status" OF
                     "Logistics Apprv Status"::Approved:
                         BEGIN
+
                             TESTFIELD("Finance Send to");
-                            UserRec.GET("Logistics Send to");
-                            "Logistics Approved By" := UserRec.Name;
-                            "HOD Marketing Signature" := UserSetup.Signature;
-                            "Logistics Approved Time" := CURRENTDATETIME;
-
-                            IF UserSetup2.GET(USERID) THEN
-                                SenderEmail := UserSetup2."E-Mail";
-
                             UserSetup.GET("Finance Send to");
-                            //"Current pending Person" := "2nd Approval to";
-                            ToName := UserSetup."E-Mail";
-                            Subject := STRSUBSTNO(Text073, "No.");
-                            "Mail Body" := STRSUBSTNO(Text073, "No.");
-                            //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
-                            //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                            //.Send;
-                            MESSAGE('Mail Sent Successfully!');
+                            ReceiverEmail := UserSetup."E-Mail";
+                            ReceiverInitials := UserSetup.Initials;
 
+                            Subject := STRSUBSTNO(WaitingforApprovalText, "No.");
+                            "Mail Body" := STRSUBSTNO(WaitingforApprovalText, "No.");
+                            CreateEmailBody("No.", ReceiverInitials, "Mail Body");
+                            SendEmail(ReceiverEmail, Subject, EmailBody, CcAddresses, SenderEmail); //finance gets email
                         END;
+
                     "Logistics Apprv Status"::Rejected:
                         BEGIN
-                            UserRec.GET("Logistics Send to");
-                            "Logistics Approved By" := UserRec.Name;
-                            "HOD Marketing Signature" := UserSetup.Signature;
-                            "Logistics Approved Time" := CURRENTDATETIME;
-                            IF UserSetup2.GET(USERID) THEN
-                                SenderEmail := UserSetup2."E-Mail";
                             UserSetup.GET("Logistics Sender");
-                            ToName := UserSetup."E-Mail";
-                            Subject := STRSUBSTNO(Text075, "No.");
-                            "Mail Body" := STRSUBSTNO(Text075, "No.");
-                            //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
-                            //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                            //.Send;
-                            MESSAGE('Mail Sent Successfully!');
+                            ReceiverEmail := UserSetup."E-Mail";
+                            ReceiverInitials := UserSetup.Initials;
+
+                            Subject := STRSUBSTNO(RejectedText, "No.");
+                            "Mail Body" := STRSUBSTNO(RejectedText, "No.");
+                            CreateEmailBody("No.", ReceiverInitials, "Mail Body");
+                            SendEmail(ReceiverEmail, Subject, EmailBody, CcAddresses, SenderEmail); //logistics sender gets email
                         END;
-                    "Logistics Apprv Status"::"on Hold":
+
+                    "Logistics Apprv Status"::"On-Hold":
                         BEGIN
-                            UserRec.GET("Logistics Send to");
-                            "Logistics Approved By" := UserRec.Name;
-                            "HOD Marketing Signature" := UserSetup.Signature;
-                            "Logistics Approved Time" := CURRENTDATETIME;
-                            IF UserSetup2.GET(USERID) THEN
-                                SenderEmail := UserSetup2."E-Mail";
-                            UserSetup.GET("Logistics Sender");
-                            ToName := UserSetup."E-Mail";
-                            Subject := STRSUBSTNO(Text076, "No.");
-                            "Mail Body" := STRSUBSTNO(Text076, "No.");
-                            //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
-                            //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                            //.Send;
-                            MESSAGE('Mail Sent Successfully!');
+                            UserSetup.GET("Logistics Send to");
+                            ReceiverEmail := UserSetup."E-Mail";
+                            ReceiverInitials := UserSetup.Initials;
+
+                            Subject := STRSUBSTNO(OnholdText, "No.");
+                            "Mail Body" := STRSUBSTNO(OnholdText, "No.");
+                            CreateEmailBody("No.", ReceiverInitials, "Mail Body");
+                            SendEmail(ReceiverEmail, Subject, EmailBody, CcAddresses, SenderEmail); //logistics sender gets email
                         END;
                 END;
+
+                UserRec.GET("Logistics Send to");
+                "Logistics Approved By" := UserRec.Name;
+                "Logistics Approved Time" := CURRENTDATETIME;
             end;
         }
         field(60117; "Logistics Sent Time"; DateTime)
@@ -1038,19 +671,19 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
         field(60118; "Logistics Approved Time"; DateTime)
         {
         }
-        field(60119; "Logistics Approved By"; Code[10])
+        field(60119; "Logistics Approved By"; Code[30])
         {
         }
-        field(60120; "Logistics Sender"; Code[10])
+        field(60120; "Logistics Sender"; Code[30])
         {
         }
         field(60122; "Logistic Sent Time"; DateTime)
         {
         }
-        field(60123; "Finance Approved By"; Text[5])
+        field(60123; "Finance Approved By"; Text[30])
         {
         }
-        field(60124; "Marketing Sender"; Text[10])
+        field(60124; "Marketing Sender"; Text[30])
         {
         }
         field(60125; "Marketing Sent Time"; DateTime)
@@ -1059,7 +692,7 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
         field(60126; "Finance Approved Time"; DateTime)
         {
         }
-        field(60127; "Marketing Approved By"; Text[10])
+        field(60127; "Marketing Approved By"; Text[30])
         {
         }
         field(60128; "Marketing Approved Time"; DateTime)
@@ -1098,19 +731,22 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
             trigger OnValidate()
             begin
                 IF "Logistics Send for Approval" = TRUE THEN
-                    IF UserSetup.GET("Finance Send to") THEN BEGIN
+                    IF UserSetup.GET("Finance Send to") THEN BEGIN  //why finance send to?
                         "Logistics Sender" := USERID;
                         "Logistics Sent Time" := CURRENTDATETIME;
-                        TESTFIELD("Logistics Send for Approval");
+
+
                         TESTFIELD("Finance Apprv Status", 0);
+
                         IF UserSetup2.GET(USERID) THEN
                             SenderEmail := UserSetup2."E-Mail";
-                        //"Current pending Person" := "1st Approval to";
+
                         ToName := UserSetup."E-Mail";
-                        Subject := STRSUBSTNO(Text073, "No.");
+                        Subject := STRSUBSTNO(WaitingforApprovalText, "No.");
                         //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
                         //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
                         //.Send;
+
                         MESSAGE('Mail Sent Successfully!');
                     END;
             end;
@@ -1119,7 +755,161 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
         {
             DataClassification = ToBeClassified;
         }
+        field(60137; "Salesperson Name"; Text[50])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(60138; "Custom Doc. Availability"; Boolean)
+        {
+            DataClassification = ToBeClassified;
 
+            trigger OnValidate()
+            begin
+                TESTFIELD("Marketing Apprv Status", "Marketing Apprv Status"::Approved);
+                IF "Custom Doc. Availability" THEN
+                    "Document Sent" := TRUE
+                ELSE
+                    "Document Sent" := FALSE;
+            end;
+        }
+        field(60139; "Acknowledged Doc Link"; Text[250])
+        {
+            DataClassification = ToBeClassified;
+            ExtendedDatatype = URL;
+        }
+        field(60140; "Audit Confirmation"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+
+            trigger OnValidate()
+            begin
+                TESTFIELD("Custom Doc. Availability", TRUE);
+                IF UserSetup2.GET(USERID) THEN
+                    SenderEmail := UserSetup2."E-Mail";
+                IF "Audit Confirmation" = TRUE THEN
+                    IF not confirm('Are you sure you want to confirm this Sales Order?', FALSE) THEN
+                        "Audit Confirmation" := FALSE
+                    ELSE BEGIN
+                        Sender := USERID;
+                        //UserSetup.GET("Send to");
+                        "Sent Time" := CURRENTDATETIME;
+                        ToName := 'ojo@toyotanigeria.com';   //why Ojo?
+
+                        "Mail Body" := STRSUBSTNO(ApprovedText, "No.");
+                        Subject := STRSUBSTNO(ApprovedText, "No.");
+
+                        //UserSetup2.GET("1st Approval to");
+                        //SenderInitial := UserSetup2.Initials;
+                        //Initials := UserSetup.Initials;
+
+
+                        ReceiverEmail := UserSetup."E-Mail";
+                        ReceiverInitials := UserSetup.Initials;
+
+                        Subject := STRSUBSTNO(ApprovedText, "No.");
+                        "Mail Body" := STRSUBSTNO(ApprovedText, "No.");
+                        CreateEmailBody("No.", ReceiverInitials, "Mail Body");
+                        SendEmail(ReceiverEmail, Subject, EmailBody, CcAddresses, SenderEmail);
+
+
+                        "Approved Time" := CURRENTDATETIME;
+                        "Approved By" := USERID;
+                    END
+            end;
+
+        }
+        field(60141; test; Boolean)
+        {
+            DataClassification = ToBeClassified;
+
+            trigger OnValidate()
+            begin
+
+
+            end;
+        }
+        field(60142; "Security Confirmation"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+
+            trigger OnValidate()
+            begin
+                IF "Security Confirmation" THEN
+                    "Security Confirmation by" := USERID
+                ELSE
+                    "Security Confirmation by" := '';
+            end;
+        }
+        field(60143; "Security Confirmation by"; Code[30])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(60144; "Document Sent"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(60145; "Security No."; Code[30])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = Employee;
+
+            trigger OnValidate()
+            var
+                Employee: Record Employee;
+            begin
+                IF Employee.GET("Security No.") THEN
+                    "Security Name" := Employee.FullName
+                ELSE
+                    "Security Name" := '';
+            end;
+        }
+        field(60146; "Security Name"; Text[50])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(60147; "Send for Approval2"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+
+            trigger OnValidate()
+            begin
+                TESTFIELD("Logistics Send to");
+                
+                DesignatedApprovers.Get();
+                UserSetup2.GET(USERID);
+                SenderEmail := UserSetup2."E-Mail";
+                Sender := USERID;
+                "Sent Time" := CURRENTDATETIME;
+                "Current pending Person" := "Logistics Send to";
+
+                UserSetup.GET("Logistics Send to");
+                ReceiverEmail := UserSetup."E-Mail";
+                ReceiverInitials := UserSetup.Initials;
+                
+                CcAddresses := DesignatedApprovers."Logistics Notifications";
+                //CcAddresses := 'olukoya@toyotanigeria.com;sunday@toyotanigeria.com;tola@toyotanigeria.com;smo@toyotanigeria.com;gbenga@toyotanigeria.com;James@toyotanigeria.com;johnson@toyotanigeria.com;komolafe@toyotanigeria.com';
+
+                Subject := STRSUBSTNO(WaitingforApprovalText, "No.");
+                "Mail Body" := STRSUBSTNO(WaitingforApprovalText, "No.");
+                CreateEmailBody("No.", ReceiverInitials, "Mail Body");
+                SendEmail(ReceiverEmail, Subject, EmailBody, CcAddresses, SenderEmail);
+               
+            end;
+        }
+        field(60148; "Audit Confirmation by"; Text[50])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(60149; "Audit Summary"; Option)
+        {
+            DataClassification = ToBeClassified;
+            OptionCaption = ' ,Satisfactory,Non-Satisfactory';
+            OptionMembers = " ",Satisfactory,"Non-Satisfactory";
+        }
+        field(60150; "Audit Confirmation Date"; DateTime)
+        {
+            DataClassification = ToBeClassified;
+        }
 
     }
 
@@ -1138,16 +928,21 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
         UserSetup: Record "User Setup";
         UserSetup2: Record "User Setup";
         CustRec: Record Customer;
-        Text073: Label 'Document %1 is waiting for your approval.';
-        Text074: Label 'Document %1 has been approved.';
-        Text075: Label 'Document %1 has been rejected.';
-        Text076: Label 'Document %1 is on hold.';
+        WaitingforApprovalText: Label 'Document %1 is waiting for your approval.';
+        ApprovedText: Label 'Document %1 has been approved.';
+        RejectedText: Label 'Document %1 has been rejected.';
+        OnholdText: Label 'Document %1 is on hold.';
         SenderEmail: Text[40];
         UserRec: Record "User Setup";
         EmailBody: Text[1024];
-        ToAddresses: Text;
+        ReceiverEmail: Text;
         Addressee: Text;
         Salutation: Label 'Dear %1,';
+        CcAddresses: Text[100];
+        SenderAddress: Text[100];
+        ReceiverInitials: Text[10];
+        VehicleOrderOnline: Record "Vehicle Online Order";
+        DesignatedApprovers: Record "Designated Approvers";
 
 
     procedure CreateEmailBody(DocNo: Code[20]; RecipientInitials: Text; BodyMsg: Text);
@@ -1166,14 +961,14 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
 
     end;
 
-    procedure SendEmail(ToRecipients: Text; Subject: Text; Body: Text; CCRecipients: Text; BCCRecipients: Text)
+    procedure SendEmail(ReceiverEmail: Text; Subject: Text; Body: Text; CCRecipients: Text; BCCRecipients: Text)
     var
         Email: Codeunit Email;
         EmailMessage: Codeunit "Email Message";
 
     begin
 
-        EmailMessage.Create(ToRecipients, Subject, EmailBody, true);
+        EmailMessage.Create(ReceiverEmail, Subject, EmailBody, true);
         EmailMessage.AddRecipient(enum::"Email Recipient Type"::Cc, CCRecipients);
         EmailMessage.AddRecipient(Enum::"Email Recipient Type"::Bcc, BCCRecipients);
         Email.OpenInEditorModally(EmailMessage, Enum::"Email Scenario"::Default)
@@ -1219,6 +1014,224 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                 UNTIL Cust2.NEXT = 0;
         END;
     end;
+
+
+    procedure IncludeAccessory();
+
+    var
+
+        SalesLine: Record "Sales Line";
+        SalesLine2: Record "Sales Line";
+        SalesLine3: Record "Sales Line";
+        SalesLine4: Record "Sales Line";
+        LineNo: Integer;
+        ItemRec2: Record Item;
+
+    Begin
+        //TotalWithAccessory := 0;
+        SalesLine3.SETCURRENTKEY("Document No.");
+        SalesLine3.SETRANGE("Document No.", Rec."No.");
+        IF SalesLine3.FINDLAST THEN
+            LineNo := SalesLine3."Line No.";
+
+        SalesLine.RESET;
+        SalesLine.SETCURRENTKEY("Document No.", Accessory);
+        SalesLine.SETRANGE("Document No.", Rec."No.");
+        SalesLine.SETRANGE(Accessory, TRUE);
+        IF SalesLine.FINDFIRST THEN BEGIN
+            REPEAT
+                LineNo += 10000;
+                IF SalesLine."Location Code" IN ['BLORE1', 'BLEXHIBTN', 'BLCONSGNMT'] THEN BEGIN
+                    SalesLine2.INIT;
+                    SalesLine2."Document Type" := SalesLine."Document Type";
+                    SalesLine2."Document No." := SalesLine."Document No.";
+                    SalesLine2."Line No." := LineNo;
+                    SalesLine2.Type := SalesLine.Type;
+                    IF SalesLine.Degree = '45' THEN
+                        //SalesLine2.VALIDATE("No.",'XS242-TOD01'); JA
+                        SalesLine2.VALIDATE("No.", 'F2440-TOD72');
+                    IF SalesLine.Degree = '180' THEN
+                        SalesLine2.VALIDATE("No.", 'XS242-TOD02');
+                    SalesLine2."Location Code" := 'BLORE1';
+                    SalesLine2.VALIDATE(Quantity, SalesLine.Quantity);
+                    SalesLine2.INSERT(TRUE);
+                    LineNo += 10000;
+
+                    SalesLine2.INIT;
+                    SalesLine2."Document Type" := SalesLine."Document Type";
+                    SalesLine2."Document No." := SalesLine."Document No.";
+                    SalesLine2."Line No." := LineNo;
+                    SalesLine2.Type := SalesLine2.Type::Item;
+                    //SalesLine2.VALIDATE("No.",'S4201-TOD00');      JA
+                    SalesLine2.VALIDATE("No.", 'S3736-TD218');
+                    SalesLine2."Location Code" := 'BLORE1';
+                    SalesLine2.VALIDATE(Quantity, SalesLine.Quantity);
+                    SalesLine2.INSERT(TRUE);
+                    LineNo += 10000;
+
+                    SalesLine2.INIT;
+                    SalesLine2."Document Type" := SalesLine."Document Type";
+                    SalesLine2."Document No." := SalesLine."Document No.";
+                    SalesLine2."Line No." := LineNo;
+                    SalesLine2.Type := SalesLine2.Type::Item;
+                    ItemRec2.SETCURRENTKEY(Degree, "Item Color");
+                    ItemRec2.SETRANGE(Degree, SalesLine.Degree);
+                    ItemRec2.SETRANGE("Item Color", SalesLine.Colour);
+                    IF ItemRec2.FINDFIRST THEN
+                        SalesLine2.VALIDATE("No.", ItemRec2."No.");
+                    SalesLine2."Location Code" := 'BLORE1';
+                    SalesLine2.VALIDATE(Quantity, SalesLine.Quantity);
+                    SalesLine2.INSERT(TRUE);
+                    LineNo += 10000;
+
+                END;
+
+                IF SalesLine."Location Code" IN ['ACC-ORE1', 'ACC-CONSG', 'ACC-EXHBT'] THEN BEGIN
+                    SalesLine2.INIT;
+                    SalesLine2."Document Type" := SalesLine."Document Type";
+                    SalesLine2."Document No." := SalesLine."Document No.";
+                    SalesLine2."Line No." := LineNo;
+                    SalesLine2.Type := SalesLine2.Type::Item;
+                    IF SalesLine.Degree = '45' THEN
+                        // SalesLine2.VALIDATE("No.",'XS242-TOD01'); JA
+                        SalesLine2.VALIDATE("No.", 'F2440-TOD72');
+                    IF SalesLine.Degree = '180' THEN
+                        SalesLine2.VALIDATE("No.", 'XS242-TOD02');
+                    SalesLine2."Location Code" := 'BLORE1';
+                    SalesLine2.VALIDATE(Quantity, SalesLine.Quantity);
+                    SalesLine2.INSERT(TRUE);
+                    LineNo += 10000;
+
+                    SalesLine2.INIT;
+                    SalesLine2."Document Type" := SalesLine."Document Type";
+                    SalesLine2."Document No." := SalesLine."Document No.";
+                    SalesLine2."Line No." := LineNo;
+                    SalesLine2.Type := SalesLine2.Type::Item;
+                    SalesLine2.VALIDATE("No.", 'S3736-TD218');
+                    // SalesLine2.VALIDATE("No.",'S4201-TOD00');  JA
+                    SalesLine2."Location Code" := 'BLORE1';
+                    SalesLine2.VALIDATE(Quantity, SalesLine.Quantity);
+                    SalesLine2.INSERT(TRUE);
+                    LineNo += 10000;
+
+                    //Degree and color
+                    SalesLine2.INIT;
+                    SalesLine2."Document Type" := SalesLine."Document Type";
+                    SalesLine2."Document No." := SalesLine."Document No.";
+                    SalesLine2."Line No." := LineNo;
+                    SalesLine2.Type := SalesLine2.Type::Item;
+                    ItemRec2.SETCURRENTKEY(Degree, "Item Color");
+                    ItemRec2.SETRANGE(Degree, SalesLine.Degree);
+                    ItemRec2.SETRANGE("Item Color", SalesLine.Colour);
+                    IF ItemRec2.FINDFIRST THEN
+                        SalesLine2.VALIDATE("No.", ItemRec2."No.");
+                    SalesLine2."Location Code" := 'BLORE1';
+                    SalesLine2.VALIDATE(Quantity, SalesLine.Quantity);
+                    SalesLine2.INSERT(TRUE);
+                    LineNo += 10000;
+                END;
+            UNTIL SalesLine.NEXT = 0;
+        END;
+
+        SalesLine.RESET;
+        SalesLine.SETCURRENTKEY("Document No.", Accessory);
+        SalesLine.SETRANGE("Document No.", Rec."No.");
+        SalesLine.SETRANGE(Accessory, TRUE);
+        IF SalesLine.FINDFIRST THEN BEGIN
+            REPEAT
+                LineNo += 10000;
+                IF SalesLine."Location Code" IN ['CWORE1', 'CWEXHIBTN', 'CPORE1'] THEN BEGIN
+                    SalesLine2.INIT;
+                    SalesLine2."Document Type" := SalesLine."Document Type";
+                    SalesLine2."Document No." := SalesLine."Document No.";
+                    SalesLine2."Line No." := LineNo;
+                    SalesLine2.Type := SalesLine.Type;
+                    SalesLine2.VALIDATE("No.", 'S47B0-TOD2K');
+                    SalesLine2."Location Code" := 'BLORE1';
+                    SalesLine2.VALIDATE(Quantity, SalesLine.Quantity);
+                    SalesLine2.INSERT(TRUE);
+                    LineNo += 10000;
+
+                    SalesLine2.INIT;
+                    SalesLine2."Document Type" := SalesLine."Document Type";
+                    SalesLine2."Document No." := SalesLine."Document No.";
+                    SalesLine2."Line No." := LineNo;
+                    SalesLine2.Type := SalesLine2.Type::Item;
+                    SalesLine2.VALIDATE("No.", 'S35B0-TOD2K');
+                    SalesLine2."Location Code" := 'BLORE1';
+                    SalesLine2.VALIDATE(Quantity, SalesLine.Quantity);
+                    SalesLine2.INSERT(TRUE);
+                    LineNo += 10000;
+                END;
+            UNTIL SalesLine.NEXT = 0;
+
+        END;
+
+        IF Rec."Include Accessory" = FALSE THEN BEGIN
+            SalesLine4.SETRANGE("No.", 'XS242-TOD01');
+            IF SalesLine4.FINDFIRST THEN
+                SalesLine4.DELETEALL;
+
+            SalesLine4.SETRANGE("No.", 'XS242-TOD02');
+            IF SalesLine4.FINDFIRST THEN
+                SalesLine4.DELETEALL;
+
+
+            SalesLine4.SETRANGE("No.", 'S4201-TOD00');
+            IF SalesLine4.FINDFIRST THEN
+                SalesLine4.DELETEALL;
+
+            SalesLine4.SETRANGE("No.", 'F3712-TOD02');
+            IF SalesLine4.FINDFIRST THEN
+                SalesLine4.DELETEALL;
+
+            SalesLine4.SETRANGE("No.", 'S35B0-TOD2K');
+            IF SalesLine4.FINDFIRST THEN
+                SalesLine4.DELETEALL;
+
+            SalesLine4.SETRANGE("No.", 'S47B0-TOD2K');
+            IF SalesLine4.FINDFIRST THEN
+                SalesLine4.DELETEALL;
+
+            SalesLine4.SETRANGE("No.", 'XS371-TOD76');
+            IF SalesLine4.FINDFIRST THEN
+                SalesLine4.DELETEALL;
+
+            SalesLine4.SETRANGE("No.", 'XS371-TOD24');
+            IF SalesLine4.FINDFIRST THEN
+                SalesLine4.DELETEALL;
+
+            SalesLine4.SETRANGE("No.", 'XS371-TOD75');
+            IF SalesLine4.FINDFIRST THEN
+                SalesLine4.DELETEALL;
+
+            SalesLine4.SETRANGE("No.", 'XS371-TOD57');
+            IF SalesLine4.FINDFIRST THEN
+                SalesLine4.DELETEALL;
+
+            SalesLine4.SETRANGE("No.", 'XS374-TODW1');
+            IF SalesLine4.FINDFIRST THEN
+                SalesLine4.DELETEALL;
+
+            SalesLine4.SETRANGE("No.", 'XS374-TOD31');
+            IF SalesLine4.FINDFIRST THEN
+                SalesLine4.DELETEALL;
+
+            SalesLine4.SETRANGE("No.", 'XS374-TOD11');
+            IF SalesLine4.FINDFIRST THEN
+                SalesLine4.DELETEALL;
+
+            SalesLine4.SETRANGE("No.", 'XS374-TODM1');
+            IF SalesLine4.FINDFIRST THEN
+                SalesLine4.DELETEALL;
+
+            SalesLine4.SETRANGE("No.", 'XS374-TOD04');
+            IF SalesLine4.FINDFIRST THEN
+                SalesLine4.DELETEALL;
+
+        END;
+
+    End;
 
 }
 

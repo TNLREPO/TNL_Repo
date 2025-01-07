@@ -299,6 +299,10 @@ tableextension 50022 "User Setup Ext" extends "User Setup"
         field(50249; "Payroll-Admin"; Boolean)
         {
         }
+        field(50252; Designation; Text[40])
+        {
+            DataClassification = ToBeClassified;
+        }
         field(50253; "System Admin"; Boolean)
         {
             DataClassification = ToBeClassified;

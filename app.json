@@ -2,7 +2,7 @@
     "id": "7a9f58b2-c9fb-4628-bdc9-e6622044351a",
     "name": "AL_TNL",
     "publisher": "Codeware",
-    "version": "1.0.1.1",
+    "version": "1.0.1.8",
     "brief": "",
     "description": "",
     "privacyStatement": "",
@@ -21,9 +21,9 @@
         }
     ],
     "resourceExposurePolicy": {
-        "allowDebugging": true,
-        "allowDownloadingSource": true,
-        "includeSourceInSymbolFile": true
+        "allowDebugging": false,
+        "allowDownloadingSource": false,
+        "includeSourceInSymbolFile": false
     },
     "runtime": "12.0",
     "features": [

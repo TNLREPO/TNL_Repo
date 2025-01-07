@@ -3170,7 +3170,6 @@ table 70008 "Procurement Header"
         Text024: Label 'Opex %1 requires your approval.';
         ProcurementLine: Record "Procurement Line";
         ProcurementLine2: Record "Procurement Line";
-
         Text025: Label 'Dear %1,';
         Text026: Label 'The above %1 with document number %2 requires your approval.';
         Text027: Label 'Regards,';
@@ -3322,7 +3321,6 @@ table 70008 "Procurement Header"
         end;
 
     end;
-
 
     procedure SendEmail(ToRecipients: Text; Subject: Text; Body: Text; CCRecipients: Text; BCCRecipients: Text)
     var

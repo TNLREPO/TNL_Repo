@@ -2,7 +2,6 @@ pageextension 50006 "Sales Order Ext" extends "Sales Order"
 {
     layout
     {
-        //addbefore(Control1900201301)
         addbefore("Invoice Details")
         {
             group(Approval)
@@ -102,214 +101,9 @@ pageextension 50006 "Sales Order Ext" extends "Sales Order"
                 ApplicationArea = All;
 
                 trigger OnValidate()
-                var
-
                 begin
-                    TotalWithAccessory := 0;
 
-                    SalesLine3.SETCURRENTKEY("Document No.");
-                    SalesLine3.SETRANGE("Document No.", Rec."No.");
-                    IF SalesLine3.FINDLAST THEN
-                        LineNo := SalesLine3."Line No.";
-
-                    SalesLine.RESET;
-                    SalesLine.SETCURRENTKEY("Document No.", Accessory);
-                    SalesLine.SETRANGE("Document No.", Rec."No.");
-                    SalesLine.SETRANGE(Accessory, TRUE);
-                    IF SalesLine.FINDFIRST THEN BEGIN
-                        REPEAT
-                            LineNo += 10000;
-                            IF SalesLine."Location Code" IN ['BLORE1', 'BLEXHIBTN', 'BLCONSGNMT'] THEN BEGIN
-                                SalesLine2.INIT;
-                                SalesLine2."Document Type" := SalesLine."Document Type";
-                                SalesLine2."Document No." := SalesLine."Document No.";
-                                SalesLine2."Line No." := LineNo;
-                                SalesLine2.Type := SalesLine.Type;
-                                IF SalesLine.Degree = '45' THEN
-                                    //SalesLine2.VALIDATE("No.",'XS242-TOD01'); JA
-                                    SalesLine2.VALIDATE("No.", 'F2440-TOD72');
-                                IF SalesLine.Degree = '180' THEN
-                                    SalesLine2.VALIDATE("No.", 'XS242-TOD02');
-                                SalesLine2."Location Code" := 'BLORE1';
-                                SalesLine2.VALIDATE(Quantity, SalesLine.Quantity);
-                                SalesLine2.INSERT(TRUE);
-                                LineNo += 10000;
-
-                                SalesLine2.INIT;
-                                SalesLine2."Document Type" := SalesLine."Document Type";
-                                SalesLine2."Document No." := SalesLine."Document No.";
-                                SalesLine2."Line No." := LineNo;
-                                SalesLine2.Type := SalesLine2.Type::Item;
-                                //SalesLine2.VALIDATE("No.",'S4201-TOD00');      JA
-                                SalesLine2.VALIDATE("No.", 'S3736-TD218');
-                                SalesLine2."Location Code" := 'BLORE1';
-                                SalesLine2.VALIDATE(Quantity, SalesLine.Quantity);
-                                SalesLine2.INSERT(TRUE);
-                                LineNo += 10000;
-
-                                SalesLine2.INIT;
-                                SalesLine2."Document Type" := SalesLine."Document Type";
-                                SalesLine2."Document No." := SalesLine."Document No.";
-                                SalesLine2."Line No." := LineNo;
-                                SalesLine2.Type := SalesLine2.Type::Item;
-                                ItemRec2.SETCURRENTKEY(Degree, "Item Color");
-                                ItemRec2.SETRANGE(Degree, SalesLine.Degree);
-                                ItemRec2.SETRANGE("Item Color", SalesLine.Colour);
-                                IF ItemRec2.FINDFIRST THEN
-                                    SalesLine2.VALIDATE("No.", ItemRec2."No.");
-                                SalesLine2."Location Code" := 'BLORE1';
-                                SalesLine2.VALIDATE(Quantity, SalesLine.Quantity);
-                                SalesLine2.INSERT(TRUE);
-                                LineNo += 10000;
-
-                            END;
-
-                            IF SalesLine."Location Code" IN ['ACC-ORE1', 'ACC-CONSG', 'ACC-EXHBT'] THEN BEGIN
-                                SalesLine2.INIT;
-                                SalesLine2."Document Type" := SalesLine."Document Type";
-                                SalesLine2."Document No." := SalesLine."Document No.";
-                                SalesLine2."Line No." := LineNo;
-                                SalesLine2.Type := SalesLine2.Type::Item;
-                                IF SalesLine.Degree = '45' THEN
-                                    // SalesLine2.VALIDATE("No.",'XS242-TOD01'); JA
-                                    SalesLine2.VALIDATE("No.", 'F2440-TOD72');
-                                IF SalesLine.Degree = '180' THEN
-                                    SalesLine2.VALIDATE("No.", 'XS242-TOD02');
-                                SalesLine2."Location Code" := 'BLORE1';
-                                SalesLine2.VALIDATE(Quantity, SalesLine.Quantity);
-                                SalesLine2.INSERT(TRUE);
-                                LineNo += 10000;
-
-                                SalesLine2.INIT;
-                                SalesLine2."Document Type" := SalesLine."Document Type";
-                                SalesLine2."Document No." := SalesLine."Document No.";
-                                SalesLine2."Line No." := LineNo;
-                                SalesLine2.Type := SalesLine2.Type::Item;
-                                SalesLine2.VALIDATE("No.", 'S3736-TD218');
-                                // SalesLine2.VALIDATE("No.",'S4201-TOD00');  JA
-                                SalesLine2."Location Code" := 'BLORE1';
-                                SalesLine2.VALIDATE(Quantity, SalesLine.Quantity);
-                                SalesLine2.INSERT(TRUE);
-                                LineNo += 10000;
-
-                                //Degree and color
-                                SalesLine2.INIT;
-                                SalesLine2."Document Type" := SalesLine."Document Type";
-                                SalesLine2."Document No." := SalesLine."Document No.";
-                                SalesLine2."Line No." := LineNo;
-                                SalesLine2.Type := SalesLine2.Type::Item;
-                                ItemRec2.SETCURRENTKEY(Degree, "Item Color");
-                                ItemRec2.SETRANGE(Degree, SalesLine.Degree);
-                                ItemRec2.SETRANGE("Item Color", SalesLine.Colour);
-                                IF ItemRec2.FINDFIRST THEN
-                                    SalesLine2.VALIDATE("No.", ItemRec2."No.");
-                                SalesLine2."Location Code" := 'BLORE1';
-                                SalesLine2.VALIDATE(Quantity, SalesLine.Quantity);
-                                SalesLine2.INSERT(TRUE);
-                                LineNo += 10000;
-                            END;
-                        UNTIL SalesLine.NEXT = 0;
-                    END;
-
-                    SalesLine.RESET;
-                    SalesLine.SETCURRENTKEY("Document No.", Accessory);
-                    SalesLine.SETRANGE("Document No.", Rec."No.");
-                    SalesLine.SETRANGE(Accessory, TRUE);
-                    IF SalesLine.FINDFIRST THEN BEGIN
-                        REPEAT
-                            LineNo += 10000;
-                            IF SalesLine."Location Code" IN ['CWORE1', 'CWEXHIBTN', 'CPORE1'] THEN BEGIN
-                                SalesLine2.INIT;
-                                SalesLine2."Document Type" := SalesLine."Document Type";
-                                SalesLine2."Document No." := SalesLine."Document No.";
-                                SalesLine2."Line No." := LineNo;
-                                SalesLine2.Type := SalesLine.Type;
-                                SalesLine2.VALIDATE("No.", 'S47B0-TOD2K');
-                                SalesLine2."Location Code" := 'BLORE1';
-                                SalesLine2.VALIDATE(Quantity, SalesLine.Quantity);
-                                SalesLine2.INSERT(TRUE);
-                                LineNo += 10000;
-
-                                SalesLine2.INIT;
-                                SalesLine2."Document Type" := SalesLine."Document Type";
-                                SalesLine2."Document No." := SalesLine."Document No.";
-                                SalesLine2."Line No." := LineNo;
-                                SalesLine2.Type := SalesLine2.Type::Item;
-                                SalesLine2.VALIDATE("No.", 'S35B0-TOD2K');
-                                SalesLine2."Location Code" := 'BLORE1';
-                                SalesLine2.VALIDATE(Quantity, SalesLine.Quantity);
-                                SalesLine2.INSERT(TRUE);
-                                LineNo += 10000;
-                            END;
-                        UNTIL SalesLine.NEXT = 0;
-
-                    END;
-
-                    IF Rec."Include Accessory" = FALSE THEN BEGIN
-                        SalesLine4.SETRANGE("No.", 'XS242-TOD01');
-                        IF SalesLine4.FINDFIRST THEN
-                            SalesLine4.DELETEALL;
-
-                        SalesLine4.SETRANGE("No.", 'XS242-TOD02');
-                        IF SalesLine4.FINDFIRST THEN
-                            SalesLine4.DELETEALL;
-
-
-                        SalesLine4.SETRANGE("No.", 'S4201-TOD00');
-                        IF SalesLine4.FINDFIRST THEN
-                            SalesLine4.DELETEALL;
-
-                        SalesLine4.SETRANGE("No.", 'F3712-TOD02');
-                        IF SalesLine4.FINDFIRST THEN
-                            SalesLine4.DELETEALL;
-
-                        SalesLine4.SETRANGE("No.", 'S35B0-TOD2K');
-                        IF SalesLine4.FINDFIRST THEN
-                            SalesLine4.DELETEALL;
-
-                        SalesLine4.SETRANGE("No.", 'S47B0-TOD2K');
-                        IF SalesLine4.FINDFIRST THEN
-                            SalesLine4.DELETEALL;
-
-                        SalesLine4.SETRANGE("No.", 'XS371-TOD76');
-                        IF SalesLine4.FINDFIRST THEN
-                            SalesLine4.DELETEALL;
-
-                        SalesLine4.SETRANGE("No.", 'XS371-TOD24');
-                        IF SalesLine4.FINDFIRST THEN
-                            SalesLine4.DELETEALL;
-
-                        SalesLine4.SETRANGE("No.", 'XS371-TOD75');
-                        IF SalesLine4.FINDFIRST THEN
-                            SalesLine4.DELETEALL;
-
-                        SalesLine4.SETRANGE("No.", 'XS371-TOD57');
-                        IF SalesLine4.FINDFIRST THEN
-                            SalesLine4.DELETEALL;
-
-                        SalesLine4.SETRANGE("No.", 'XS374-TODW1');
-                        IF SalesLine4.FINDFIRST THEN
-                            SalesLine4.DELETEALL;
-
-                        SalesLine4.SETRANGE("No.", 'XS374-TOD31');
-                        IF SalesLine4.FINDFIRST THEN
-                            SalesLine4.DELETEALL;
-
-                        SalesLine4.SETRANGE("No.", 'XS374-TOD11');
-                        IF SalesLine4.FINDFIRST THEN
-                            SalesLine4.DELETEALL;
-
-                        SalesLine4.SETRANGE("No.", 'XS374-TODM1');
-                        IF SalesLine4.FINDFIRST THEN
-                            SalesLine4.DELETEALL;
-
-                        SalesLine4.SETRANGE("No.", 'XS374-TOD04');
-                        IF SalesLine4.FINDFIRST THEN
-                            SalesLine4.DELETEALL;
-
-
-
-                    END;
+                    Rec.IncludeAccessory();
 
                 end;
             }
@@ -320,7 +114,7 @@ pageextension 50006 "Sales Order Ext" extends "Sales Order"
 
 
     actions
-    {        
+    {
         addlast(Navigation)
         {
             group(Category11)
@@ -441,12 +235,8 @@ pageextension 50006 "Sales Order Ext" extends "Sales Order"
                             REPORT.RUNMODAL(50625, TRUE, TRUE, SalesHeader);
                     end;
                 }
-
-
             }
-
         }
-
     }
 
     var

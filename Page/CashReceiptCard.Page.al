@@ -161,11 +161,11 @@ page 70013 "Cash Receipt Card"
                 Promoted = true;
                 PromotedCategory = Process;
                 PromotedIsBig = true;
-                Visible = false;
+                Visible = true;
 
                 trigger OnAction()
                 begin
-                    //CallAPI.POSIntegration(Rec);
+                    CallAPI.SendPaymentRequest(Rec);
                 end;
             }
             action("Preview Posting")
@@ -218,14 +218,6 @@ page 70013 "Cash Receipt Card"
 
                 trigger OnAction()
                 begin
-
-                    /* ReqRec.SETRANGE(ReqRec."Document Type", Rec."Document Type");
-                    ReqRec.SETRANGE(ReqRec."No.", Rec."No.");
-                    IF ReqRec.FINDFIRST THEN BEGIN
-                        IF ReqRec."Multiple Balance Account" OR ReqRec."Multiple Account" THEN
-                            REPORT.RUNMODAL(50001, TRUE, TRUE, ReqRec) ELSE
-                            REPORT.RUNMODAL(50007, TRUE, TRUE, ReqRec);
-                    END; */
 
                     Clear(ReportSingle);
                     Clear(ReportMultiple);
@@ -327,8 +319,7 @@ page 70013 "Cash Receipt Card"
         GLEntry2: Record 17;
         ReportSingle: Report "Cash Receipt-Sing.";
         ReportMultiple: Report "Cash Receipt-Mult.";
-
-    //CallAPI: Codeunit 50005;
+        CallAPI: Codeunit 50005;
 
 
     procedure UpdatePosting()

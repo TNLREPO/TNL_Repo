@@ -1,4 +1,4 @@
-report 50014 "Customer Balance /Posting Grp"
+report 50114 "Customer Balance /Posting Grp"
 {
     DefaultLayout = RDLC;
     RDLCLayout = 'Layout/CustomerBalancePostingGrp.rdl';

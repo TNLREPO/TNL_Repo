@@ -10,10 +10,10 @@ page 50603 "Leave Request Card"
         {
             group(General)
             {
-                Editable = "1st Approval toEditable";
+                //Editable = "1st Approval toEditable";
                 field("Request No."; Rec."Request No.")
                 {
-                    Editable = false;
+                    Editable = IsPageEditable;
 
                     trigger OnValidate()
                     begin
@@ -23,7 +23,7 @@ page 50603 "Leave Request Card"
                 }
                 field("Entry Date"; Rec."Entry Date")
                 {
-                    Editable = true;
+                    //Editable = true;
                 }
 
 
@@ -691,80 +691,84 @@ page 50603 "Leave Request Card"
     trigger OnOpenPage()
     begin
 
+        IsPageEditable := true;
 
-        IF (Rec."Send for Approval" = TRUE) THEN
-            Level_1 := TRUE
 
-        ELSE
-            Level_1 := FALSE;
+        /*         IF (Rec."Send for Approval" = TRUE) THEN
+                    Level_1 := TRUE
 
-        IF Rec."1st Approval Status" <> Rec."1st Approval Status"::" " THEN
-            Level_2 := TRUE
+                ELSE
+                    Level_1 := FALSE;
 
-        ELSE
-            Level_2 := FALSE;
+                IF Rec."1st Approval Status" <> Rec."1st Approval Status"::" " THEN
+                    Level_2 := TRUE
 
-        IF Rec."Request Type" = Rec."Request Type"::FG THEN
-            Level_3 := TRUE;
+                ELSE
+                    Level_2 := FALSE;
 
-        //IF  ( "2nd Approval Status" <> "2nd Approval Status":: " " ) THEN
-        // Level_3 := TRUE;
-        //IF (Rec."Request Type"= Rec."Request Type":: Manager) OR ("Send for Approval" = TRUE) THEN
-        //  Level_2 := TRUE;
+                IF Rec."Request Type" = Rec."Request Type"::FG THEN
+                    Level_3 := TRUE;
 
-        IF Rec."Send for Approval" = TRUE THEN
-            "1st Approval toEditable" := FALSE
-        ELSE
-            "1st Approval toEditable" := TRUE;
-        IF Rec."1st Approval Status" = Rec."1st Approval Status"::Approved THEN BEGIN
-            "2nd Approval toEditable" := FALSE;
-            "Send for ApprovalEditable" := FALSE
-        END ELSE BEGIN
-            "2nd Approval toEditable" := TRUE;
-            "Send for ApprovalEditable" := TRUE
-        END;
-        IF Rec."2nd Approval Status" = Rec."2nd Approval Status"::Approved THEN BEGIN
-            "3rd Approval toEditable" := FALSE;
-            "1st Apprv. StatusEditable" := FALSE
-        END ELSE BEGIN
-            "3rd Approval toEditable" := TRUE;
-            "1st Apprv. StatusEditable" := TRUE
-        END;
-        IF Rec."3rd Approval Status" = Rec."3rd Approval Status"::Approved THEN BEGIN
-            "4th Approval toEditable" := TRUE;
-            "1st Apprv. StatusEditable" := FALSE
-        END ELSE BEGIN
-            "4th Approval toEditable" := FALSE;
-            "1st Apprv. StatusEditable" := TRUE
-        END;
+                //IF  ( "2nd Approval Status" <> "2nd Approval Status":: " " ) THEN
+                // Level_3 := TRUE;
+                //IF (Rec."Request Type"= Rec."Request Type":: Manager) OR ("Send for Approval" = TRUE) THEN
+                //  Level_2 := TRUE;
 
-        IF Rec."4th  Approval Status" = Rec."4th  Approval Status"::Approved THEN BEGIN
-            "2nd Apprv. StatusEditable" := FALSE;
-            "4th Approval toEditable" := FALSE
-        END ELSE BEGIN
-            "2nd Apprv. StatusEditable" := TRUE;
-            "4th Approval toEditable" := TRUE
-        END;
+                IF Rec."Send for Approval" = TRUE THEN
+                    "1st Approval toEditable" := FALSE
+                ELSE
+                    "1st Approval toEditable" := TRUE;
+                IF Rec."1st Approval Status" = Rec."1st Approval Status"::Approved THEN BEGIN
+                    "2nd Approval toEditable" := FALSE;
+                    "Send for ApprovalEditable" := FALSE
+                END ELSE BEGIN
+                    "2nd Approval toEditable" := TRUE;
+                    "Send for ApprovalEditable" := TRUE
+                END;
+                IF Rec."2nd Approval Status" = Rec."2nd Approval Status"::Approved THEN BEGIN
+                    "3rd Approval toEditable" := FALSE;
+                    "1st Apprv. StatusEditable" := FALSE
+                END ELSE BEGIN
+                    "3rd Approval toEditable" := TRUE;
+                    "1st Apprv. StatusEditable" := TRUE
+                END;
+                IF Rec."3rd Approval Status" = Rec."3rd Approval Status"::Approved THEN BEGIN
+                    "4th Approval toEditable" := TRUE;
+                    "1st Apprv. StatusEditable" := FALSE
+                END ELSE BEGIN
+                    "4th Approval toEditable" := FALSE;
+                    "1st Apprv. StatusEditable" := TRUE
+                END;
 
-        //IF "4th  Approval Status" ="4th  Approval Status"::Approved THEN
-        //  "2nd Apprv. StatusEditable" := FALSE
-        //ELSE
-        //  "2nd Apprv. StatusEditable" := TRUE;
+                IF Rec."4th  Approval Status" = Rec."4th  Approval Status"::Approved THEN BEGIN
+                    "2nd Apprv. StatusEditable" := FALSE;
+                    "4th Approval toEditable" := FALSE
+                END ELSE BEGIN
+                    "2nd Apprv. StatusEditable" := TRUE;
+                    "4th Approval toEditable" := TRUE
+                END;
 
-        IF Rec."4th  Approval Status" = Rec."4th  Approval Status"::Approved THEN
-            "3rd Apprv. StatusEditable" := FALSE
-        ELSE
-            "3rd Apprv. StatusEditable" := TRUE;
-        IF (Rec."3rd Approval Status" = Rec."3rd Approval Status"::Approved) AND
-           ((Rec."Request Type" = Rec."Request Type"::Branch) OR (Rec."Send to MD for Approval")) THEN
-            "4th Apprv. StatusEditable" := TRUE
-        ELSE
-            "4th Apprv. StatusEditable" := TRUE;
-        FastTabControl;
-        IF Rec."Request Type" = Rec."Request Type"::HOD THEN
-            To_Visible := FALSE
-        ELSE
-            To_Visible := TRUE;
+                //IF "4th  Approval Status" ="4th  Approval Status"::Approved THEN
+                //  "2nd Apprv. StatusEditable" := FALSE
+                //ELSE
+                //  "2nd Apprv. StatusEditable" := TRUE;
+
+                IF Rec."4th  Approval Status" = Rec."4th  Approval Status"::Approved THEN
+                    "3rd Apprv. StatusEditable" := FALSE
+                ELSE
+                    "3rd Apprv. StatusEditable" := TRUE;
+                IF (Rec."3rd Approval Status" = Rec."3rd Approval Status"::Approved) AND
+                   ((Rec."Request Type" = Rec."Request Type"::Branch) OR (Rec."Send to MD for Approval")) THEN
+                    "4th Apprv. StatusEditable" := TRUE
+                ELSE
+                    "4th Apprv. StatusEditable" := TRUE;
+                FastTabControl;
+                IF Rec."Request Type" = Rec."Request Type"::HOD THEN
+                    To_Visible := FALSE
+                ELSE
+                    To_Visible := TRUE;
+         */
+
     end;
 
     var
@@ -785,23 +789,16 @@ page 50603 "Leave Request Card"
         DateRec: Record 2000000007;
         DateForm: Page 50098;
         CurrentYr: Integer;
-
         Level_1: Boolean;
 
         Level_2: Boolean;
         Level_3: Boolean;
         "4th ApprovalVisible": Boolean;
-
         Level_4: Boolean;
-
         "No.Editable": Boolean;
-
         "1st Approval toEditable": Boolean;
-
         "2nd Approval toEditable": Boolean;
-
         "Send for ApprovalEditable": Boolean;
-
         "3rd Approval toEditable": Boolean;
         "4th Approval toEditable": Boolean;
 
@@ -821,6 +818,7 @@ page 50603 "Leave Request Card"
         To_Visible: Boolean;
         Name_Visible: Boolean;
         Send_Visible: Boolean;
+        IsPageEditable: Boolean;
 
     procedure EnableSubFrm()
     begin
