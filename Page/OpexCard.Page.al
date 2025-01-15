@@ -173,6 +173,7 @@ page 70126 "Opex Card"
                 {
                     group(Control019)
                     {
+                        ShowCaption = false;
                         field("Adv. Paymt. HOD"; Rec."Adv. Paymt. HOD")
                         {
                             Caption = 'Head of Department';
@@ -193,6 +194,7 @@ page 70126 "Opex Card"
                     }
                     group(Control017)
                     {
+                        ShowCaption = false;
                         field("Adv. Paymt. Audit"; Rec."Adv. Paymt. Audit")
                         {
                             Caption = 'Head of Audit';
@@ -220,6 +222,7 @@ page 70126 "Opex Card"
                 {
                     group(Control021)
                     {
+                        ShowCaption = false;
                         field("Service Delivery1"; Rec."Service Delivery1")
                         {
                             Caption = 'Requester';
@@ -240,6 +243,7 @@ page 70126 "Opex Card"
                     }
                     group(Control022)
                     {
+                        ShowCaption = false;
                         field("Service Delivery2"; Rec."Service Delivery2")
                         {
                             Caption = 'Auditor';
@@ -266,6 +270,7 @@ page 70126 "Opex Card"
                 {
                     group(Control013)
                     {
+                        ShowCaption = false;
                         field("Bal. Paymt. HOD"; Rec."Bal. Paymt. HOD")
                         {
                             Caption = 'Head of Department';

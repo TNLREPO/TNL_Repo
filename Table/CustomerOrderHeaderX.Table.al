@@ -2111,7 +2111,7 @@ table 70034 "Customer Order HeaderX"
         IF "No." = '' THEN BEGIN
             SalesSetup.GET;
             SalesSetup.TESTFIELD("Customer Order No.");
-            "No. Series" := SalesSetup."Customer Nos.";
+            "No. Series" := SalesSetup."Customer Order No.";
             if NoSeriesMgt.AreRelated("No. Series", xRec."No. Series") then
                 "No. Series" := xRec."No. Series";
             "No." := NoSeriesMgt.GetNextNo("No. Series");

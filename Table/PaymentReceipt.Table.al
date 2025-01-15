@@ -1154,7 +1154,7 @@ table 50103 "Payment/Receipt."
         IF GlJour."Account Type" <> GlJour."Account Type"::"Fixed Asset" THEN BEGIN
             GlJour."Depreciation Book Code" := '';
             GlJour."Maintenance Code" := '';
-            //GlJour."FA Posting Type" := 0;
+            GlJour."FA Posting Type" := GlJour."FA Posting Type"::" ";
         END
         ELSE BEGIN
             GlJour.VALIDATE(GlJour."FA Posting Type", reqrec."FA Posting Type");
@@ -1176,7 +1176,7 @@ table 50103 "Payment/Receipt."
             IF GlJour."Account Type" <> GlJour."Account Type"::"Fixed Asset" THEN BEGIN
                 GlJour."Depreciation Book Code" := '';
                 GlJour."Maintenance Code" := '';
-                //GlJour."FA Posting Type" := 0;
+                GlJour."FA Posting Type" := GlJour."FA Posting Type"::" ";
             END
             ELSE BEGIN
                 GlJour.VALIDATE(GlJour."FA Posting Type", reqrec."FA Posting Type");
@@ -1192,7 +1192,7 @@ table 50103 "Payment/Receipt."
             GlJour."Gen. Bus. Posting Group" := '';
             GlJour."VAT Bus. Posting Group" := '';
             GlJour."VAT Prod. Posting Group" := '';
-            //GlJour."Gen. Posting Type" := 0;
+            GlJour."Gen. Posting Type" := GlJour."Gen. Posting Type"::" ";
         END;
         GlJour."External Document No." := reqrec."External Document No.";
         GlJour."Document Date" := reqrec."Document Date";
@@ -1220,7 +1220,7 @@ table 50103 "Payment/Receipt."
                 "GlJou 2"."Gen. Bus. Posting Group" := '';
                 "GlJou 2"."VAT Bus. Posting Group" := '';
                 "GlJou 2"."VAT Prod. Posting Group" := '';
-                //"GlJou 2"."Gen. Posting Type" := 0;
+                "GlJou 2"."Gen. Posting Type" := "GlJou 2"."Gen. Posting Type"::" ";
             END;
             "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 1 Code", reqrec."Balance Department Code");
             "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 2 Code", reqrec."Balance Branch Code");
@@ -1236,7 +1236,7 @@ table 50103 "Payment/Receipt."
             IF "GlJou 2"."Account Type" <> "GlJou 2"."Account Type"::"Fixed Asset" THEN BEGIN
                 "GlJou 2"."Depreciation Book Code" := '';
                 "GlJou 2"."Maintenance Code" := '';
-                //"GlJou 2"."FA Posting Type" := 0;
+                "GlJou 2"."FA Posting Type" := "GlJou 2"."FA Posting Type"::" ";
             END
             ELSE BEGIN
                 "GlJou 2".VALIDATE("GlJou 2"."FA Posting Type", reqrec."FA Posting Type");
@@ -1299,12 +1299,12 @@ table 50103 "Payment/Receipt."
                         "GlJou 2"."Gen. Bus. Posting Group" := '';
                         "GlJou 2"."VAT Bus. Posting Group" := '';
                         "GlJou 2"."VAT Prod. Posting Group" := '';
-                        //"GlJou 2"."Gen. Posting Type" := 0;
+                        "GlJou 2"."Gen. Posting Type" := "GlJou 2"."Gen. Posting Type"::" ";
                     END;
                     IF "GlJou 2"."Account Type" <> "GlJou 2"."Account Type"::"Fixed Asset" THEN BEGIN
                         "GlJou 2"."Depreciation Book Code" := '';
                         "GlJou 2"."Maintenance Code" := '';
-                        //"GlJou 2"."FA Posting Type" := 0;
+                        "GlJou 2"."FA Posting Type" := "GlJou 2"."FA Posting Type"::" ";
                     END
                     ELSE BEGIN
                         "GlJou 2".VALIDATE("GlJou 2"."FA Posting Type", ReqReptLine."FA Posting Type");
@@ -1505,7 +1505,7 @@ table 50103 "Payment/Receipt."
         IF GlJour."Account Type" <> GlJour."Account Type"::"Fixed Asset" THEN BEGIN
             GlJour."Depreciation Book Code" := '';
             GlJour."Maintenance Code" := '';
-            //GlJour."FA Posting Type" := 0;
+            GlJour."FA Posting Type" := GlJour."FA Posting Type"::" ";
         END
         ELSE BEGIN
             GlJour.VALIDATE(GlJour."FA Posting Type", reqrec."FA Posting Type");
@@ -1543,7 +1543,7 @@ table 50103 "Payment/Receipt."
             GlJour."Gen. Bus. Posting Group" := '';
             GlJour."VAT Bus. Posting Group" := '';
             GlJour."VAT Prod. Posting Group" := '';
-            //GlJour."Gen. Posting Type" := 0;
+            GlJour."Gen. Posting Type" := GlJour."Gen. Posting Type"::" ";
         END;
         GlJour."External Document No." := reqrec."External Document No.";
         GlJour."Document Date" := reqrec."Document Date";

@@ -176,26 +176,26 @@ table 50022 "Warranty Coupon"
         field(39; "Chassis Number"; Code[30])
         {
 
-            /*  trigger OnLookup()
-             begin
-                 ItemLedger.SETCURRENTKEY("Entry Type", "Source No.", "Chasis Number");
-                 ItemLedger.SETRANGE(ItemLedger."Source No.", "Dealer's No.");
-                 ItemLedger.SETFILTER(ItemLedger."Serial No.", '<>%1', '');
-                 ItemLedger.FILTERGROUP(2);
-                 legercard.SETRECORD(ItemLedger);
-                 legercard.SETTABLEVIEW(ItemLedger);
-                 legercard.LOOKUPMODE(TRUE);
+            trigger OnLookup()
+            begin
+                ItemLedger.SETCURRENTKEY("Entry Type", "Source No.", "Chasis Number");
+                ItemLedger.SETRANGE(ItemLedger."Source No.", "Dealer's No.");
+                ItemLedger.SETFILTER(ItemLedger."Serial No.", '<>%1', '');
+                ItemLedger.FILTERGROUP(2);
+                legercard.SETRECORD(ItemLedger);
+                legercard.SETTABLEVIEW(ItemLedger);
+                legercard.LOOKUPMODE(TRUE);
 
-                 IF legercard.RUNMODAL = ACTION::LookupOK THEN BEGIN
-                     legercard.GETRECORD(ItemLedger);
-                     "Chassis Number" := ItemLedger."Serial No.";
-                     IF ItemLedger.FIND() THEN
-                         VALIDATE("Ledger No.", ItemLedger."Entry No.")
-                     ELSE
-                         ERROR('The Chasis No. is not found under this dealer');
-                 END;
-                 CLEAR(legercard);
-             end; */
+                IF legercard.RUNMODAL = ACTION::LookupOK THEN BEGIN
+                    legercard.GETRECORD(ItemLedger);
+                    "Chassis Number" := ItemLedger."Serial No.";
+                    IF ItemLedger.FIND() THEN
+                        VALIDATE("Ledger No.", ItemLedger."Entry No.")
+                    ELSE
+                        ERROR('The Chasis No. is not found under this dealer');
+                END;
+                CLEAR(legercard);
+            end;
 
             trigger OnValidate()
             begin
@@ -277,7 +277,7 @@ table 50022 "Warranty Coupon"
         Custrec: Record 18;
         stockrec: Record 5700;
         ItemLedger: Record 32;
-        //legercard: Page "50122";
+        legercard: Page "Item Tracking Entries Form";
         ItemTrackingMgt: Codeunit 6500;
         ItemRec: Record 27;
 }

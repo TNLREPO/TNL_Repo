@@ -13,6 +13,10 @@ page 80016 "Customer Order Card"
             {
                 group("1. Reception")
                 {
+                    field("No."; Rec."No.")
+                    {
+
+                    }
                     field("Reception Date"; Rec."Reception Date")
                     {
                         Caption = 'Date';

@@ -83,6 +83,14 @@ pageextension 50003 "Transfer Order Ext" extends "Transfer Order"
             }
 
         }
+
+        addafter("Posting Date")
+        {
+            field(Duration; Rec.Duration)
+            {
+                ApplicationArea = All;
+            }
+        }
         modify("Assigned User ID")
         {
             Editable = true;

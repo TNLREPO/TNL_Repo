@@ -13,5 +13,18 @@ tableextension 50098 "Price List Line Ext" extends "Price List Line"
             TableRelation = "Inventory Posting Group";
 
         }
+
+        modify("Product No.")
+        {
+            trigger OnAfterValidate()
+            var
+                Item: Record Item;
+            begin
+                if Item.Get("Product No.") then
+                    "Inventory Posting Group" := Item."Inventory Posting Group"
+                else
+                    "Inventory Posting Group" := '';
+            end;
+        }
     }
 }

@@ -58,7 +58,7 @@ table 70035 "Diagnostic QuestionnaireX"
             trigger OnValidate()
             begin
                 IF COFRec.GET("Customer Order No.") THEN BEGIN
-                    //Date := COFRec.Date;
+                    Date := COFRec.Date;
                     "SA Name" := COFRec."Service Advisor's Name";
                     "Reception Date" := COFRec."Reception Date";
                     "Reception Time" := COFRec."Reception Time";
@@ -73,7 +73,7 @@ table 70035 "Diagnostic QuestionnaireX"
                     "Contact Telephone" := COFRec.Home;
                     "Contact Available Time from" := COFRec."Available Time From";
                     "Contact Available Time to" := COFRec."Available Time To";
-                    //"Odometer Reading at Appointmen" := COFRec."Odometer At Appointment";
+                    "Odometer Reading at Appointmen" := COFRec."Odometer At Appointment";
                     "Key Assined No." := COFRec."Key Assigned No.";
                     "Stall No." := COFRec."Stall No.";
                     VALIDATE("Vehicle Registration No.", COFRec."Vehicle Registration No.");
@@ -578,7 +578,7 @@ table 70035 "Diagnostic QuestionnaireX"
     var
         SalesSetup: Record "Sales & Receivables Setup";
         NoSeriesMgt: Codeunit "No. Series";
-        COFRec: Record "Customer Order Table.";
+        COFRec: Record "Customer Order HeaderX";
         CusRec: Record Customer;
         ServItemRec: Record "Service Item";
         ResRec: Record Resource;

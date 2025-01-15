@@ -1,4 +1,4 @@
-report 50396 "Warranty Transfer"
+report 51396 "Warranty Transfer"
 {
     DefaultLayout = RDLC;
     RDLCLayout = 'Layout/WarrantyTransfer.rdl';

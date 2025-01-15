@@ -202,7 +202,7 @@ report 50117 "TNL Sales Picking List- Cars"
                     column(Sales_Line_Line_No_; "Line No.")
                     {
                     }
-                    dataitem(DataItem4003; "Reservation Entry")
+                    dataitem(ReservEntry; "Reservation Entry")
                     {
                         DataItemLink = "Source ID" = FIELD("Document No."),
                                        "Source Ref. No." = FIELD("Line No.");
@@ -222,7 +222,7 @@ report 50117 "TNL Sales Picking List- Cars"
                         {
                             DecimalPlaces = 0 : 0;
                         }
-                        column(Sales_Line__Description; Description)
+                        column(Sales_Line__Description; ItemDescrption)
                         {
                         }
                         column(Reservation_Entry_Entry_No_; "Entry No.")
@@ -248,7 +248,11 @@ report 50117 "TNL Sales Picking List- Cars"
                             IF ItemLedgEntry.FINDFIRST THEN BEGIN
                                 ColourName := ItemLedgEntry."Exterior Colour Name";
                                 "Exterior Colour Code" := ItemLedgEntry."Exterior Colour Name";
+                                //ItemDescrption := ItemLedgEntry.Description;
                             END;
+                            
+                            if itemRec.get("Item No.") then
+                                ItemDescrption := itemRec.Description;
                         end;
                     }
 
@@ -444,5 +448,6 @@ report 50117 "TNL Sales Picking List- Cars"
         CustomerDetails: array[8] of Text;
         ItemLedgEntry: Record 32;
         ColourName: Text;
+        ItemDescrption: Text;
 }
 

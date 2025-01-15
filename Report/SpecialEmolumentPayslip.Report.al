@@ -1,7 +1,7 @@
 report 50046 "Special Emolument Payslip"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './SpecialEmolumentPayslip.rdlc';
+    RDLCLayout = 'Layout/SpecialEmolumentPayslip.rdl';
 
     dataset
     {

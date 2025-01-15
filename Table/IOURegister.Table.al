@@ -1,6 +1,6 @@
 table 50105 "IOU Register"
 {
-
+    DrillDownPageId = 50078;
     fields
     {
         field(1; "IOU No."; Code[20])
@@ -86,8 +86,7 @@ table 50105 "IOU Register"
         }
         field(20; "Account Type"; Enum "Gen. Journal Account Type")
         {
-            /* OptionCaption = 'G/L Account,Customer,Vendor,Bank Account';
-            OptionMembers = "G/L Account",Customer,Vendor,"Bank Account"; */
+
 
             trigger OnValidate()
             begin
@@ -231,31 +230,6 @@ table 50105 "IOU Register"
                     CreateEmailBody("IOU No.", Addressee, Text001, "Staff Name", Description, Amount);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
-                    /*    WITH TempEmailItem DO BEGIN
-                           "Send to" := ToAddresses;
-                           "Send CC" := SenderAddress;
-                           "Send BCC" := BccAddresses;
-                           Subject := STRSUBSTNO(text001, "IOU No.");
-
-                           CRLF := '';
-                           CRLF[1] := 13;
-                           CRLF[2] := 10;
-
-                           BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                           BodyStream.WRITETEXT(text006 + ' ' + Addressee + ',');
-                           BodyStream.WRITETEXT(CRLF + CRLF);
-                           BodyStream.WRITETEXT(STRSUBSTNO(text007, "IOU No.") + CRLF +
-                           Text010 + FORMAT("Staff Name") + CRLF +
-                           Text011 + FORMAT(Purpose) + CRLF +
-                           Text012 + FORMAT(Amount) + CRLF + CRLF +
-                           Text008 + CRLF);
-                           BodyStream.WRITETEXT(SendersName);
-                           BodyStream.WRITETEXT(CRLF + CRLF);
-                           BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                           Body := BodyBlob.Blob;
-                           Send(FALSE);
-                       END; */
-
                 END;
             end;
         }
@@ -265,7 +239,7 @@ table 50105 "IOU Register"
 
             trigger OnValidate()
             begin
-                TESTFIELD("Account No.");
+                //TESTFIELD("Account No.");
             end;
         }
         field(32; "Sent Time"; DateTime)
@@ -289,6 +263,8 @@ table 50105 "IOU Register"
             IF (Department = FILTER('08AUDSYS')) "User Setup"."User ID" WHERE("User ID" = FILTER('ADEWUMI|AGBESUA|BRANO|OLAMIDE'))
             ELSE
             IF (Department = FILTER('09MARKET')) "User Setup"."User ID" WHERE("User ID" = FILTER('AJUYAH|BAYO|BUKUNOLA'));
+
+
 
             trigger OnValidate()
             begin
@@ -320,11 +296,10 @@ table 50105 "IOU Register"
                         Purpose := Description;
                         Amount := Amount;
 
-                        UserSetup.GET("2nd Approval to");
                         TESTFIELD("2nd Approval to");
+                        UserSetup.GET("2nd Approval to");
                         "1st Approval Time" := CURRENTDATETIME;
                         "Current pending Person" := "2nd Approval to";
-
                         ToAddresses := UserSetup."E-Mail";
                         Addressee := UserSetup.Initials;
                         CcAddresses := '';
@@ -338,31 +313,6 @@ table 50105 "IOU Register"
                         Subject := STRSUBSTNO(text001, "IOU No.");
                         CreateEmailBody("IOU No.", Addressee, Text001, "Account Name", Description, Amount);
                         SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
-
-                        /*   WITH TempEmailItem DO BEGIN
-                            "Send to" := ToAddresses;
-                            "Send CC" := SenderAddress;
-                            "Send BCC" := BccAddresses;
-                            Subject := STRSUBSTNO(text001,"IOU No.");
-
-                            CRLF := '';
-                            CRLF[1] := 13;
-                            CRLF[2] := 10;
-
-                            BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                            BodyStream.WRITETEXT(text006 + ' ' + Addressee + ',' );
-                            BodyStream.WRITETEXT(CRLF + CRLF);
-                            BodyStream.WRITETEXT(STRSUBSTNO(text007,"IOU No.") + CRLF+
-                            Text010 + FORMAT("Staff Name") + CRLF +
-                            Text011 + FORMAT(Purpose) + CRLF +
-                            Text012 + FORMAT(Amount)  + CRLF + CRLF +
-                            Text008 + CRLF);
-                            BodyStream.WRITETEXT(SendersName);
-                            BodyStream.WRITETEXT(CRLF + CRLF);
-                            BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                            Body := BodyBlob.Blob;
-                            Send(FALSE);
-                          END; */
 
                     END;
 
@@ -393,31 +343,6 @@ table 50105 "IOU Register"
                         CreateEmailBody("IOU No.", Addressee, Text004, "Account Name", Description, Amount);
                         SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
-                        /* WITH TempEmailItem DO BEGIN
-                          "Send to" := ToAddresses;
-                          "Send CC" := SenderAddress;
-                          "Send BCC" := BccAddresses;
-                          Subject := STRSUBSTNO(text004,"IOU No.");
-
-                          CRLF := '';
-                          CRLF[1] := 13;
-                          CRLF[2] := 10;
-
-                          BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                          BodyStream.WRITETEXT(text006 + ' ' + Addressee + ',' );
-                          BodyStream.WRITETEXT(CRLF + CRLF);
-                          BodyStream.WRITETEXT(STRSUBSTNO(text004,"IOU No.") + CRLF+
-                          Text010 + FORMAT("Staff Name") + CRLF +
-                          Text011 + FORMAT(Purpose) + CRLF +
-                          Text012 + FORMAT(Amount)  + CRLF + CRLF +
-                          Text008 + CRLF);
-                          BodyStream.WRITETEXT(SendersName);
-                          BodyStream.WRITETEXT(CRLF + CRLF);
-                          BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                          Body := BodyBlob.Blob;
-                          Send(FALSE);
-                        END;
-      */
                         Reject := TRUE;
                     END;
 
@@ -446,39 +371,13 @@ table 50105 "IOU Register"
                         CreateEmailBody("IOU No.", Addressee, Text005, "Account Name", Description, Amount);
                         SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
-                        /*  WITH TempEmailItem DO BEGIN
-                           "Send to" := ToAddresses;
-                           "Send CC" := SenderAddress;
-                           "Send BCC" := BccAddresses;
-                           Subject := STRSUBSTNO(text005,"IOU No.");
-
-                           CRLF := '';
-                           CRLF[1] := 13;
-                           CRLF[2] := 10;
-
-                           BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                           BodyStream.WRITETEXT(text006 + ' ' + Addressee + ',' );
-                           BodyStream.WRITETEXT(CRLF + CRLF);
-                           BodyStream.WRITETEXT(STRSUBSTNO(text005,"IOU No.") + CRLF+
-                           Text010 + FORMAT("Staff Name") + CRLF +
-                           Text011 + FORMAT(Purpose) + CRLF +
-                           Text012 + FORMAT(Amount)  + CRLF + CRLF +
-                           Text008 + CRLF);
-                           BodyStream.WRITETEXT(SendersName);
-                           BodyStream.WRITETEXT(CRLF + CRLF);
-                           BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                           Body := BodyBlob.Blob;
-                           Send(FALSE);
-                         END; */
-
                     END;
 
             end;
         }
         field(36; "1st Approval Time"; DateTime)
         {
-            //The property 'ValidateTableRelation' can only be set if the property 'TableRelation' is set
-            //ValidateTableRelation = false;
+
         }
         field(37; "1st Approver's Comment"; Boolean)
         {
@@ -486,7 +385,7 @@ table 50105 "IOU Register"
         }
         field(38; "2nd Approval to"; Code[25])
         {
-            TableRelation = "User Setup"."User ID" WHERE("User ID" = FILTER('ADEWUMI|AGBESUA|JOSHUA'));
+            TableRelation = "User Setup"."User ID";
 
             trigger OnValidate()
             begin
@@ -534,35 +433,10 @@ table 50105 "IOU Register"
                         CreateEmailBody("IOU No.", Addressee, Text001, "Account Name", Description, Amount);
                         SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
-                        /*   WITH TempEmailItem DO BEGIN
-                            "Send to" := ToAddresses;
-                            "Send CC" := SenderAddress;
-                            "Send BCC" := BccAddresses;
-                            Subject := STRSUBSTNO(text001,"IOU No.");
-
-                            CRLF := '';
-                            CRLF[1] := 13;
-                            CRLF[2] := 10;
-
-                            BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                            BodyStream.WRITETEXT(text006 + ' ' + Addressee + ',' );
-                            BodyStream.WRITETEXT(CRLF + CRLF);
-                            BodyStream.WRITETEXT(STRSUBSTNO(text007,"IOU No.") + CRLF+
-                            Text010 + FORMAT("Staff Name") + CRLF +
-                            Text011 + FORMAT(Purpose) + CRLF +
-                            Text012 + FORMAT(Amount)  + CRLF + CRLF +
-                            Text008 + CRLF);
-                            BodyStream.WRITETEXT(SendersName);
-                            BodyStream.WRITETEXT(CRLF + CRLF);
-                            BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                            Body := BodyBlob.Blob;
-                            Send(FALSE);
-                          END; */
-
                     END;
 
                 IF "2nd Apprv. Status" = "2nd Apprv. Status"::Rejected THEN
-                    IF NOT CONFIRM('Are you sure you want to REJECT', FALSE) THEN
+                    IF NOT CONFIRM('Are you sure you want to reject', FALSE) THEN
                         "2nd Apprv. Status" := IOURec."2nd Apprv. Status"::" "
                     ELSE BEGIN
                         "Staff Name" := "Account Name";
@@ -583,31 +457,6 @@ table 50105 "IOU Register"
 
                         CreateEmailBody("IOU No.", Addressee, Text004, "Account Name", Description, Amount);
                         SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
-
-                        /* WITH TempEmailItem DO BEGIN
-                          "Send to" := ToAddresses;
-                          "Send CC" := SenderAddress;
-                          "Send BCC" := BccAddresses;
-                          Subject := STRSUBSTNO(text004,"IOU No.");
-
-                          CRLF := '';
-                          CRLF[1] := 13;
-                          CRLF[2] := 10;
-
-                          BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                          BodyStream.WRITETEXT(text006 + ' ' + Addressee + ',' );
-                          BodyStream.WRITETEXT(CRLF + CRLF);
-                          BodyStream.WRITETEXT(STRSUBSTNO(text004,"IOU No.") + CRLF+
-                          Text010 + FORMAT("Staff Name") + CRLF +
-                          Text011 + FORMAT(Purpose) + CRLF +
-                          Text012 + FORMAT(Amount)  + CRLF + CRLF +
-                          Text008 + CRLF);
-                          BodyStream.WRITETEXT(SendersName);
-                          BodyStream.WRITETEXT(CRLF + CRLF);
-                          BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                          Body := BodyBlob.Blob;
-                          Send(FALSE);
-                        END; */
 
                         Reject := TRUE;
                     END;
@@ -632,31 +481,6 @@ table 50105 "IOU Register"
 
                         CreateEmailBody("IOU No.", Addressee, Text005, "Account Name", Description, Amount);
                         SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
-
-                        /*   WITH TempEmailItem DO BEGIN
-                            "Send to" := ToAddresses;
-                            "Send CC" := SenderAddress;
-                            "Send BCC" := BccAddresses;
-                            Subject := STRSUBSTNO(text005,"IOU No.");
-
-                            CRLF := '';
-                            CRLF[1] := 13;
-                            CRLF[2] := 10;
-
-                            BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                            BodyStream.WRITETEXT(text006 + ' ' + Addressee + ',' );
-                            BodyStream.WRITETEXT(CRLF + CRLF);
-                            BodyStream.WRITETEXT(STRSUBSTNO(text005,"IOU No.") + CRLF+
-                            Text010 + FORMAT("Staff Name") + CRLF +
-                            Text011 + FORMAT(Purpose) + CRLF +
-                            Text012 + FORMAT(Amount)  + CRLF + CRLF +
-                            Text008 + CRLF);
-                            BodyStream.WRITETEXT(SendersName);
-                            BodyStream.WRITETEXT(CRLF + CRLF);
-                            BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                            Body := BodyBlob.Blob;
-                            Send(FALSE);
-                          END; */
 
                     END;
             end;
@@ -744,30 +568,6 @@ table 50105 "IOU Register"
                         CreateEmailBody("IOU No.", Addressee, Text003, "Account Name", Description, Amount);
                         SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
-                        /*  WITH TempEmailItem DO BEGIN
-                             "Send to" := ToAddresses;
-                             "Send CC" := SenderAddress;
-                             "Send BCC" := BccAddresses;
-                             Subject := STRSUBSTNO(text003, "IOU No.");
-
-                             CRLF := '';
-                             CRLF[1] := 13;
-                             CRLF[2] := 10;
-
-                             BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                             BodyStream.WRITETEXT(text006 + ' ' + Addressee + ',');
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT(STRSUBSTNO(text003, "IOU No.") + CRLF +
-                             Text010 + FORMAT("Staff Name") + CRLF +
-                             Text011 + FORMAT(Purpose) + CRLF +
-                             Text012 + FORMAT(Amount) + CRLF + CRLF +
-                             Text008 + CRLF);
-                             BodyStream.WRITETEXT(SendersName);
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                             Body := BodyBlob.Blob;
-                             Send(FALSE);
-                         END; */
                     END;
 
                 IF "Final Apprv. Status" = "Final Apprv. Status"::Rejected THEN
@@ -793,33 +593,6 @@ table 50105 "IOU Register"
                         Subject := STRSUBSTNO(text004, "IOU No.");
                         CreateEmailBody("IOU No.", Addressee, Text004, "Account Name", Description, Amount);
                         SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
-
-
-                        /* WITH TempEmailItem DO BEGIN
-                            "Send to" := ToAddresses;
-                            "Send CC" := SenderAddress;
-                            "Send BCC" := BccAddresses;
-                            Subject := STRSUBSTNO(text004, "IOU No.");
-
-                            CRLF := '';
-                            CRLF[1] := 13;
-                            CRLF[2] := 10;
-
-                            //BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                            BodyStream.WRITETEXT(text006 + ' ' + Addressee + ',');
-                            BodyStream.WRITETEXT(CRLF + CRLF);
-                            BodyStream.WRITETEXT(STRSUBSTNO(text004, "IOU No.") + CRLF +
-                            Text010 + FORMAT("Staff Name") + CRLF +
-                            Text011 + FORMAT(Purpose) + CRLF +
-                            Text012 + FORMAT(Amount) + CRLF + CRLF +
-                            Text008 + CRLF);
-                            BodyStream.WRITETEXT(SendersName);
-                            BodyStream.WRITETEXT(CRLF + CRLF);
-                            BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                            Body := BodyBlob.Blob;
-                            Send(FALSE);
-                        END;
-                         */
                         Reject := TRUE;
                     END;
 
@@ -837,6 +610,7 @@ table 50105 "IOU Register"
                         UserSetup.GET(Sender);
                         ToAddresses := UserSetup."E-Mail";
                         Addressee := UserSetup.Initials;
+
                         CcAddresses := '';
                         BccAddresses := '';
 
@@ -847,31 +621,6 @@ table 50105 "IOU Register"
                         Subject := STRSUBSTNO(text005, "IOU No.");
                         CreateEmailBody("IOU No.", Addressee, Text005, "Account Name", Description, Amount);
                         SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
-
-                        /*   WITH TempEmailItem DO BEGIN
-                              "Send to" := ToAddresses;
-                              "Send CC" := SenderAddress;
-                              "Send BCC" := BccAddresses;
-                              Subject := STRSUBSTNO(text005, "IOU No.");
-
-                              CRLF := '';
-                              CRLF[1] := 13;
-                              CRLF[2] := 10;
-
-                              BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                              BodyStream.WRITETEXT(text006 + ' ' + Addressee + ',');
-                              BodyStream.WRITETEXT(CRLF + CRLF);
-                              BodyStream.WRITETEXT(STRSUBSTNO(text005, "IOU No.") + CRLF +
-                              Text010 + FORMAT("Staff Name") + CRLF +
-                              Text011 + FORMAT(Purpose) + CRLF +
-                              Text012 + FORMAT(Amount) + CRLF + CRLF +
-                              Text008 + CRLF);
-                              BodyStream.WRITETEXT(SendersName);
-                              BodyStream.WRITETEXT(CRLF + CRLF);
-                              BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                              Body := BodyBlob.Blob;
-                              Send(FALSE);
-                          END; */
 
                     END;
             end;
@@ -906,9 +655,7 @@ table 50105 "IOU Register"
         }
         field(59; Comment; Boolean)
         {
-            /* CalcFormula = Exist("Comment Line" WHERE("Table Name" = CONST(14),
-                                                       "No." = FIELD("IOU No.")));
-            FieldClass = FlowField; */
+
         }
         field(60; Treated; Boolean)
         {
@@ -970,7 +717,7 @@ table 50105 "IOU Register"
     trigger OnDelete()
     begin
 
-        //ERROR('Kindly contact your System Administrator');
+        ERROR('Kindly contact your system administrator!');
     end;
 
     trigger OnInsert()

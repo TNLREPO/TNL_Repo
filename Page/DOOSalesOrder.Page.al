@@ -294,7 +294,7 @@ page 70522 "DOO Sales Order"
                     trigger OnLookup(var Text: Text): Boolean
                     begin
                         IF Rec."Shortcut Dimension 1 Code" = '09MARKET' THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1|%2|%3|%4', 'TOYOTANIGERIA\SEGUN', 'TOYOTANIGERIA\TOLA', 'TOYOTANIGERIA\JAMES', 'TOYOTANIGERIA\GBENGA');
+                            UserSetup.SETFILTER("User ID", '%1|%2|%3|%4', 'SEGUN', 'TOLA', 'JAMES', 'GBENGA');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN
                                 Rec."1st Approval to" := UserSetup."User ID";
                             Rec."1st Approver" := UserSetup.Name;

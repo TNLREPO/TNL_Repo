@@ -88,6 +88,7 @@ page 70116 "Capex Card"
                 {
                     group(Control2)
                     {
+                        ShowCaption = false;
                         field("Head of Department"; Rec."Head of Department")
                         {
                             Caption = 'Head of Department';
@@ -106,6 +107,7 @@ page 70116 "Capex Card"
                     }
                     group(Control3)
                     {
+                        ShowCaption = false;
                         field("Head of Audit"; Rec."Head of Audit")
                         {
                             Caption = 'Head of Audit';
@@ -129,6 +131,7 @@ page 70116 "Capex Card"
                 {
                     group(Control5)
                     {
+                        ShowCaption = false;
                         field("General Manager"; Rec."General Manager")
                         {
                             Caption = 'General Manager';
@@ -150,6 +153,7 @@ page 70116 "Capex Card"
                     }
                     group(Control6)
                     {
+                        ShowCaption = false;
                         field("Managing Director"; Rec."Managing Director")
                         {
                             Caption = 'Managing Director';
@@ -179,6 +183,7 @@ page 70116 "Capex Card"
                 {
                     group(Control8)
                     {
+                        ShowCaption = false;
                         field("Adv. Paymt. HOD"; Rec."Adv. Paymt. HOD")
                         {
                             Caption = 'Head of Department';
@@ -197,6 +202,7 @@ page 70116 "Capex Card"
                     }
                     group(Control9)
                     {
+                        ShowCaption = false;
                         field("Adv. Paymt. Audit"; Rec."Adv. Paymt. Audit")
                         {
                             Caption = 'Head of Audit';
@@ -222,6 +228,7 @@ page 70116 "Capex Card"
                 {
                     group(Control11)
                     {
+                        ShowCaption = false;
                         field("Service Delivery1"; Rec."Service Delivery1")
                         {
                             Caption = 'Requester';
@@ -242,6 +249,7 @@ page 70116 "Capex Card"
                     }
                     group(Control12)
                     {
+                        ShowCaption = false;
                         field("Service Delivery2"; Rec."Service Delivery2")
                         {
                             Caption = 'Auditor';
@@ -268,6 +276,7 @@ page 70116 "Capex Card"
                 {
                     group(Control14)
                     {
+                        ShowCaption = false;
                         field("Bal. Paymt. HOD"; Rec."Bal. Paymt. HOD")
                         {
                             Caption = 'Head of Department';
@@ -287,6 +296,7 @@ page 70116 "Capex Card"
                     }
                     group(Control15)
                     {
+                        ShowCaption = false;
                         field("Bal. Paymt. Audit"; Rec."Bal. Paymt. Audit")
                         {
                             Caption = 'Head of Audit';
@@ -309,6 +319,7 @@ page 70116 "Capex Card"
                 {
                     group(Control17)
                     {
+                        ShowCaption = false;
                         Visible = BalGM;
                         field("Bal. Paymt. GM"; Rec."Bal. Paymt. GM")
                         {
@@ -329,6 +340,7 @@ page 70116 "Capex Card"
                     }
                     group(Control18)
                     {
+                        ShowCaption = false;
                         Visible = BalMD;
                         field("Bal. Paymt. MD"; Rec."Bal. Paymt. MD")
                         {

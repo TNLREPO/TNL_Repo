@@ -13,48 +13,49 @@ tableextension 50082 "Service Item Ext" extends "Service Item"
 
             trigger OnValidate()
             begin
-                /*                 IF "Chasis No." <> '' THEN BEGIN
-                                    VMI := COPYSTR("Chasis No.",1,3);
-                                    VDS := COPYSTR("Chasis No.",4,6);
-                                    VIS := COPYSTR("Chasis No.",10,8);
-                                   END;
-                                "SSC/SC".SETRANGE("SSC/SC".VDS,VDS);
-                                "SSC/SC".SETRANGE("SSC/SC".VMI,VMI);
-                                "SSC/SC".SETFILTER("SSC/SC"."Range From",'<=%1',VIS);
-                                "SSC/SC".SETFILTER("SSC/SC"."Range To",'>=%1',VIS);
-                                "SSC/SC".SETFILTER("SSC/SC"."SSC/SC Date From",'<=%1',TODAY);
-                                "SSC/SC".SETFILTER("SSC/SC"."SSC/SC Date To",'>=%1',TODAY);
-                                "SSC/SC".SETRANGE("SSC/SC"."SCSC Status","SSC/SC"."SCSC Status"::Active);
-                                "SSC/SC".SETRANGE("SSC/SC".Applied,FALSE);
-                                IF "SSC/SC".FINDFIRST THEN
-                                  REPEAT
-                                    "AppSSC/SC2".SETRANGE("AppSSC/SC2"."SSC/SC Code","SSC/SC"."SSC/SC Code");
-                                    "AppSSC/SC2".SETRANGE("AppSSC/SC2"."Line No.","SSC/SC"."Line No.");
-                                    "AppSSC/SC2".SETRANGE("AppSSC/SC2"."Service Item Code","No.");
-                                    //"AppSSC/SC2".SETRANGE("AppSSC/SC2"."Fault Code","Job Type");
-                                    IF "AppSSC/SC2".FINDLAST THEN
-                                      EXIT
-                                    ELSE
-                                    "AppSSC/SC".INIT;
-                                    "AppSSC/SC"."SSC/SC Code" := "SSC/SC"."SSC/SC Code";
-                                    "AppSSC/SC"."Line No." := "SSC/SC"."Line No.";
-                                    "AppSSC/SC"."Service Item Code" := "No.";
-                                    //"AppSSC/SC"."Fault Code" := "Job Type";
-                                    "AppSSC/SC"."SSC/SC Date From" := "SSC/SC"."SSC/SC Date From";
-                                    "AppSSC/SC"."SSC/SC Date To" := "SSC/SC"."SSC/SC Date To";
-                                    "AppSSC/SC"."Issue Date" := "SSC/SC"."Issue Date";
-                                    "AppSSC/SC"."SCSC Status" := "SSC/SC"."SCSC Status";
-                                    "AppSSC/SC"."SSC/SC Description" := "SSC/SC"."SSC/SC Description";
-                                    "AppSSC/SC".Applied := "SSC/SC".Applied;
-                                    "AppSSC/SC"."Model No." := "SSC/SC"."Model No.";
-                                    "AppSSC/SC"."C/I No" := "SSC/SC"."C/I No";
-                                    "AppSSC/SC".VDS := "SSC/SC".VDS;
-                                    "AppSSC/SC".VIS := VIS;
-                                    "AppSSC/SC".VMI := "SSC/SC".VMI;
-                                    "AppSSC/SC"."Range From" := "SSC/SC"."Range From";
-                                    "AppSSC/SC"."Range To" := "SSC/SC"."Range To";
-                                    "AppSSC/SC".INSERT;
-                                  UNTIL "SSC/SC".NEXT = 0; */
+                IF "Chasis No." <> '' THEN BEGIN
+                    VMI := COPYSTR("Chasis No.", 1, 3);
+                    VDS := COPYSTR("Chasis No.", 4, 6);
+                    VIS := COPYSTR("Chasis No.", 10, 8);
+                END;
+                
+                "SSC/SC".SETRANGE("SSC/SC".VDS, VDS);
+                "SSC/SC".SETRANGE("SSC/SC".VMI, VMI);
+                "SSC/SC".SETFILTER("SSC/SC"."Range From", '<=%1', VIS);
+                "SSC/SC".SETFILTER("SSC/SC"."Range To", '>=%1', VIS);
+                "SSC/SC".SETFILTER("SSC/SC"."SSC/SC Date From", '<=%1', TODAY);
+                "SSC/SC".SETFILTER("SSC/SC"."SSC/SC Date To", '>=%1', TODAY);
+                "SSC/SC".SETRANGE("SSC/SC"."SCSC Status", "SSC/SC"."SCSC Status"::Active);
+                "SSC/SC".SETRANGE("SSC/SC".Applied, FALSE);
+                IF "SSC/SC".FINDFIRST THEN
+                    REPEAT
+                        "AppSSC/SC2".SETRANGE("AppSSC/SC2"."SSC/SC Code", "SSC/SC"."SSC/SC Code");
+                        "AppSSC/SC2".SETRANGE("AppSSC/SC2"."Line No.", "SSC/SC"."Line No.");
+                        "AppSSC/SC2".SETRANGE("AppSSC/SC2"."Service Item Code", "No.");
+                        //"AppSSC/SC2".SETRANGE("AppSSC/SC2"."Fault Code","Job Type");
+                        IF "AppSSC/SC2".FINDLAST THEN
+                            EXIT
+                        ELSE
+                            "AppSSC/SC".INIT;
+                        "AppSSC/SC"."SSC/SC Code" := "SSC/SC"."SSC/SC Code";
+                        "AppSSC/SC"."Line No." := "SSC/SC"."Line No.";
+                        "AppSSC/SC"."Service Item Code" := "No.";
+                        //"AppSSC/SC"."Fault Code" := "Job Type";
+                        "AppSSC/SC"."SSC/SC Date From" := "SSC/SC"."SSC/SC Date From";
+                        "AppSSC/SC"."SSC/SC Date To" := "SSC/SC"."SSC/SC Date To";
+                        "AppSSC/SC"."Issue Date" := "SSC/SC"."Issue Date";
+                        "AppSSC/SC"."SCSC Status" := "SSC/SC"."SCSC Status";
+                        "AppSSC/SC"."SSC/SC Description" := "SSC/SC"."SSC/SC Description";
+                        "AppSSC/SC".Applied := "SSC/SC".Applied;
+                        "AppSSC/SC"."Model No." := "SSC/SC"."Model No.";
+                        "AppSSC/SC"."C/I No" := "SSC/SC"."C/I No";
+                        "AppSSC/SC".VDS := "SSC/SC".VDS;
+                        "AppSSC/SC".VIS := VIS;
+                        "AppSSC/SC".VMI := "SSC/SC".VMI;
+                        "AppSSC/SC"."Range From" := "SSC/SC"."Range From";
+                        "AppSSC/SC"."Range To" := "SSC/SC"."Range To";
+                        "AppSSC/SC".INSERT;
+                    UNTIL "SSC/SC".NEXT = 0;
             end;
         }
         field(50003; "Engine No."; Code[20])
@@ -133,7 +134,7 @@ tableextension 50082 "Service Item Ext" extends "Service Item"
         }
         field(50019; "Vehicle Brand"; Code[20])
         {
-            //TableRelation = "Vehicle Brand";
+            TableRelation = "Vehicle Brand";
         }
 
         field(50040; "Assigned User Name"; text[50])
@@ -168,8 +169,18 @@ tableextension 50082 "Service Item Ext" extends "Service Item"
         {
             DataClassification = ToBeClassified;
         }
+
+
+        modify("Location of Service Item")
+        {
+            TableRelation = Location.Code;
+        }
     }
     var
 
         ContactRec: Record Contact;
+        "SSC/SC": Record "SSC/SC";
+        "AppSSC/SC": Record "Appointment SSC/SC";
+        "AppSSC/SC2": Record "Appointment SSC/SC";
+        Customer: Record Customer;
 }

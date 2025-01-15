@@ -290,6 +290,54 @@ page 50007 "Marketing Role Center"
                 }
             }
 
+            group("Dealer Visit")
+            {
+                action(OnlineAllocation)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Online Allocation';
+                    RunObject = page "Allocation List";
+                    ToolTip = '';
+                }
+                action(VehicleOnlineOrder)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Vehicle Online Order';
+                    RunObject = page "Vehicle Online Order List";
+                    ToolTip = '';
+                }
+                action(OnlineSalesOrder)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Online Sales Order';
+                    RunObject = page "Online Sales Order List";
+                    RunPageView = where("Online Order" = const(true));
+                    ToolTip = '';
+                }
+                action(ItemToPick)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Item to Pick';
+                    RunObject = page "Item Picked";
+                    ToolTip = '';
+                }
+                action(SecuritySalesOrder)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Security Sales Order';
+                    RunObject = page "Security Sales Order List";
+                    ToolTip = '';
+                }
+                action(AuditorsList)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Auditors';
+                    RunObject = page "Sales Shipment Audit List";
+                    ToolTip = '';
+                }
+
+            }
+
             group(Action62)
             {
                 Caption = 'Inventory';

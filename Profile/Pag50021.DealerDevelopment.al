@@ -674,7 +674,7 @@ page 50021 "Dealer Development"
                     ApplicationArea = Basic, Suite;
                     Caption = 'Warranty Coupon';
                     Image = PostedOrder;
-                    RunObject = Page "Warranty Coupon2";
+                    RunObject = Page "Warranty Couporn";
                     ToolTip = 'Open the warranty coupon list.';
                 }
 

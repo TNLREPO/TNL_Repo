@@ -1,3 +1,7 @@
+namespace AL_TNL.AL_TNL;
+using Microsoft.Sales.Reports;
+using Microsoft.Sales.Customer;
+using Microsoft.Finance.Analysis;
 page 90019 "XMD Role Center"
 {
     Caption = 'President', Comment = '{Dependency=Match,"ProfileDescription_PRESIDENT"}';
@@ -53,7 +57,7 @@ page 90019 "XMD Role Center"
                 ApplicationArea = Basic, Suite;
                 Caption = 'Customer - &Balance';
                 Image = "Report";
-                RunObject = Report 121;
+                RunObject = Report "Customer - Balance to Date";
                 ToolTip = 'View a list with customers'' payment history up until a certain date. You can use the report to extract your total sales income at the close of an accounting period or fiscal year.';
             }
             action("Customer - T&op 10 List")
@@ -61,7 +65,7 @@ page 90019 "XMD Role Center"
                 ApplicationArea = Basic, Suite;
                 Caption = 'Customer - T&op 10 List';
                 Image = "Report";
-                RunObject = Report 111;
+                RunObject = Report "Customer - Top 10 List";
                 ToolTip = 'View which customers purchase the most or owe the most in a selected period. Only customers that have either purchases during the period or a balance at the end of the period will be included.';
             }
             action("Customer - S&ales List")
@@ -77,7 +81,7 @@ page 90019 "XMD Role Center"
                 ApplicationArea = Suite;
                 Caption = 'Sales &Statistics';
                 Image = "Report";
-                RunObject = Report 112;
+                RunObject = Report "Sales Statistics";
                 ToolTip = 'View customers'' total costs, sales, and profits over time, for example, to analyze earnings trends. The report shows amounts for original and adjusted costs, sales, profits, invoice discounts, payment discounts, and profit percentage in three adjustable periods.';
             }
 

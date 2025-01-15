@@ -791,7 +791,6 @@ page 60005 "Accountant RC"
 
             group("Dealer Visit")
             {
-
                 action(OnlineAllocation)
                 {
                     ApplicationArea = All;
@@ -1117,6 +1116,88 @@ page 60005 "Accountant RC"
                     ToolTip = 'View processed stock capitalization.';
                 }
 
+            }
+            group("Local Parts Purchase")
+            {
+                Caption = 'Local Parts Purchase';
+                action(LPP)
+                {
+                    Caption = 'LPP';
+                    RunObject = Page 70193;
+                    ApplicationArea = Basic, Suite;
+                }
+                action("HOD Part Approval")
+                {
+                    Caption = 'HOD Part Approval';
+                    RunObject = Page 70194;
+                    ApplicationArea = Basic, Suite;
+                }
+                action("Compliance Check")
+                {
+                    Caption = 'Compliance Check';
+                    RunObject = Page 70195;
+                    ApplicationArea = Basic, Suite;
+                }
+                action("HOD Audit")
+                {
+                    Caption = 'HOD Audit';
+                    RunObject = Page 70196;
+                    ApplicationArea = Basic, Suite;
+                }
+                action("HOD Procurement Approval")
+                {
+                    Caption = 'HOD Procurement Approval';
+                    RunObject = Page 70197;
+                    ApplicationArea = Basic, Suite;
+                }
+                action(GM)
+                {
+                    Caption = 'GM';
+                    RunObject = Page 70198;
+                    ApplicationArea = Basic, Suite;
+                }
+                action(MD)
+                {
+                    Caption = 'MD';
+                    RunObject = Page 70199;
+                    ApplicationArea = Basic, Suite;
+                }
+                action("MD Isolo")
+                {
+                    Caption = 'MD Isolo';
+                    RunObject = Page 70217;
+                    ApplicationArea = Basic, Suite;
+                }
+                action("Departmental Float")
+                {
+                    Caption = 'Departmental Float';
+                    RunObject = Page 70201;
+                    ApplicationArea = Basic, Suite;
+                }
+                action("Generate LPO")
+                {
+                    Caption = 'Generate LPO';
+                    RunObject = Page 70204;
+                    ApplicationArea = Basic, Suite;
+                }
+                action("Print LPP LPO")
+                {
+                    Caption = 'Print LPP LPO';
+                    RunObject = Page 70206;
+                    ApplicationArea = Basic, Suite;
+                }
+                action("Payment Approved")
+                {
+                    Caption = 'Payment Approved';
+                    RunObject = Page 70202;
+                    ApplicationArea = Basic, Suite;
+                }
+                action("Payment Voucher")
+                {
+                    Caption = 'Payment Voucher';
+                    RunObject = Page 70203;
+                    ApplicationArea = Basic, Suite;
+                }
             }
 
             group(Paymentprocess)

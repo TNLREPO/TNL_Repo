@@ -2192,13 +2192,14 @@ table 70008 "Procurement Header"
                         PurJus := CapexOpexLine.Description;
                     END; */
 
-                    UserSetup.GET("User ID");
+                    UserSetup.GET("Sent By");
+                    ToAddresses := UserSetup."E-Mail";
+                    CcAddresses := GetCCProcureApproval;
                     Addressee := UserSetup.Initials;
+
 
                     UserSetup2.GET("Send To");
                     PurchSetup.GET;
-                    ToAddresses := UserSetup."E-Mail";
-                    CcAddresses := PurchSetup."Audit Dept. Approvers";// + ';' + UserSetup2."E-Mail" ;
                     BccAddresses := '';
 
                     UserSetup4.GET(USERID);
@@ -2406,13 +2407,14 @@ table 70008 "Procurement Header"
                         PurJus := CapexOpexLine.Description;
                     END; */
 
-                    UserSetup.GET("User ID");
+                    UserSetup.GET("Sent By");
+                    Addressee := UserSetup.Initials;
+                    ToAddresses := UserSetup."E-Mail";
                     Addressee := UserSetup.Initials;
 
+                    CcAddresses := GetCCBalancePayment;
+
                     UserSetup2.GET("Send To");
-                    PurchSetup.GET;
-                    ToAddresses := UserSetup."E-Mail";
-                    CcAddresses := PurchSetup."Audit Dept. Approvers";// + ';' + UserSetup2."E-Mail" ;
                     BccAddresses := '';
 
                     UserSetup4.GET(USERID);
@@ -2427,30 +2429,6 @@ table 70008 "Procurement Header"
                     Subject := STRSUBSTNO(Text017, "Document Type", "No.");
                     CreateEmailBody("Document Type", "No.", Text033, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
-
-                    /* WITH TempEmailItem DO BEGIN
-                        "Send to" := ToAddresses;
-                        "Send CC" := CcAddresses;
-                        "Send BCC" := BccAddresses;
-                        Subject := STRSUBSTNO(Text017, "Document Type", "No.");
-
-                        BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                        BodyStream.WRITETEXT(Text025 + Addressee + ',');
-                        BodyStream.WRITETEXT(CRLF + CRLF);
-                        BodyStream.WRITETEXT(STRSUBSTNO(Text033, "Document Type", "No.") + CRLF + CRLF +
-                          Text029 + FORMAT(VendName) + CRLF +
-                          Text030 + FORMAT(VendAddr) + CRLF +
-                          Text031 + FORMAT(VendAmt) + CRLF +
-                          Text057 + FORMAT(Advance) + CRLF +
-                          Text058 + FORMAT(Balance) + CRLF +
-                          Text055 + FORMAT(PurJus) + CRLF + CRLF +
-                          Text027 + CRLF + CRLF);
-                        BodyStream.WRITETEXT(SendersName);
-                        BodyStream.WRITETEXT(CRLF + CRLF);
-                        BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                        Body := BodyBlob.Blob;
-                        Send(FALSE);
-                    END; */
 
                     "Balance Paymt." := FALSE;
                 END;
@@ -2580,47 +2558,10 @@ table 70008 "Procurement Header"
                     CreateEmailBody("Document Type", "No.", Text048, 'PAA');
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
-                    /*    WITH TempEmailItem DO BEGIN
-                           "Send to" := ToAddresses;
-                           "Send CC" := CcAddresses;
-                           "Send BCC" := BccAddresses;
-                           Subject := STRSUBSTNO(Text047, "Document Type", "No.");
-
-                           BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                           BodyStream.WRITETEXT(Text025 + 'PAA' + ',');
-                           BodyStream.WRITETEXT(CRLF + CRLF);
-                           BodyStream.WRITETEXT(STRSUBSTNO(Text048, "Document Type", "No.") + CRLF + CRLF +
-                             Text029 + FORMAT(VendName) + CRLF +
-                             Text030 + FORMAT(VendAddr) + CRLF +
-                             Text031 + FORMAT(VendAmt) + CRLF +
-                             Text057 + FORMAT(Advance) + CRLF +
-                             Text058 + FORMAT(Balance) + CRLF +
-                             Text055 + FORMAT(PurJus) + CRLF + CRLF +
-                             Text027 + CRLF + CRLF);
-                           BodyStream.WRITETEXT(SendersName);
-                           BodyStream.WRITETEXT(CRLF + CRLF);
-                           BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                           Body := BodyBlob.Blob;
-                           Send(FALSE);
-                       END; */
-
                     "Balance Paymt." := TRUE;
                 END;
 
                 IF "Bal. Paymt. GM" = "Bal. Paymt. GM"::"On-hold" THEN BEGIN
-
-                    /*  CapexOpexLine.SETRANGE("Document Type", "Document Type");
-                     CapexOpexLine.SETRANGE("Document No.", "No.");
-                     CapexOpexLine.SETRANGE(Preferred, TRUE);
-                     IF CapexOpexLine.FINDFIRST THEN BEGIN
-                         CapexOpexLine.CALCFIELDS(Amount);
-                         VendAmt := CapexOpexLine.Amount;
-                         Advance := CapexOpexLine."Advance Payment";
-                         Balance := CapexOpexLine.Balance;
-                         VendName := CapexOpexLine."Vendor Name";
-                         VendAddr := CapexOpexLine.Address;
-                         PurJus := CapexOpexLine.Description;
-                     END; */
 
                     UserSetup.GET("User ID");
                     Addressee := UserSetup.Initials;
@@ -3035,6 +2976,31 @@ table 70008 "Procurement Header"
         {
             DataClassification = ToBeClassified;
         }
+        field(145; ServDeliveryOwner; code[30])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(146; ServDeliveryComp; code[30])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(147; BalPymtHOD; code[30])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(148; BalPymtAudit; code[30])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(149; HeadDept; code[30])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(150; HeadAudit; code[30])
+        {
+            DataClassification = ToBeClassified;
+        }
+
     }
 
     keys
@@ -3224,6 +3190,8 @@ table 70008 "Procurement Header"
         SenderInitial: Text;
         Text063: Label 'The above %1 with document number %2 requires your approval.';
         EmailBody: Text[1024];
+        CopiedReceivers: Text;
+        CopiedReceiversApprval: Text;
 
     procedure CreateLPP()
     begin
@@ -3334,6 +3302,51 @@ table 70008 "Procurement Header"
         EmailMessage.AddRecipient(Enum::"Email Recipient Type"::Cc, CCRecipients);
         EmailMessage.AddRecipient(Enum::"Email Recipient Type"::Bcc, BCCRecipients);
         Email.OpenInEditorModally(EmailMessage, Enum::"Email Scenario"::Default)
+
+    end;
+
+    procedure GetCCBalancePayment() CCEmails: Text
+
+    var
+        UserSetup: Record "User Setup";
+        RC2: Text;
+        RC3: Text;
+        RC4: Text;
+
+    Begin
+        IF UserSetup.GET(ServDeliveryComp) THEN
+            RC2 := UserSetup."E-Mail";
+
+        IF UserSetup.GET(BalPymtHOD) THEN
+            RC3 := UserSetup."E-Mail";
+
+        IF UserSetup.GET(BalPymtAudit) THEN
+            RC4 := UserSetup."E-Mail";
+
+        CopiedReceivers := RC2 + ';' + RC3 + ';' + RC4;
+
+        EXIT(CopiedReceivers);
+    End;
+
+    procedure GetCCProcureApproval() CCEmailsApprv: Text
+
+    var
+        UserSetup: Record "User Setup";
+        RC2: Text;
+        RC3: Text;
+        RC4: Text;
+
+    begin
+
+        IF UserSetup.GET(HeadDept) THEN
+            RC2 := UserSetup."E-Mail";
+
+        IF UserSetup.GET(HeadAudit) THEN
+            RC3 := UserSetup."E-Mail";
+
+        CopiedReceiversApprval := RC2 + ';' + RC3;
+
+        EXIT(CopiedReceiversApprval);
 
     end;
 

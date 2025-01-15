@@ -1,7 +1,7 @@
 report 50181 "TCSC Sales - Quote"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = 'Layout/TCSCSalesQuote.rdlc';
+    RDLCLayout = 'Layout/TCSCSalesQuote.rdl';
     Caption = 'Sales - Quote';
     PreviewMode = PrintLayout;
 

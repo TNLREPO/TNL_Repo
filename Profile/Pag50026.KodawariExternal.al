@@ -166,9 +166,16 @@ page 50026 "Kodawari External"
                     RunObject = Page "Posted Sales Shipments";
                     ToolTip = 'Open the list of posted sales shipments.';
                 }
+                action("ServiceCost")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Service Cost';
+                    Image = PostedShipment;
+                    RunObject = Page "Service Costs";
+                    ToolTip = 'Open the list to see the service costs.';
+                }
 
             }
-
 
             group(Paymentprocess)
             {
@@ -414,14 +421,14 @@ page 50026 "Kodawari External"
                 action("BalFullPaymtApprovalGMCapex")
                 {
                     ApplicationArea = CostAccounting;
-                    Caption = 'Balance/Full Payment';
+                    Caption = 'Balance/Full Payment- GM';
                     RunObject = Page "Bal/Full Payment Capex-GM";
 
                 }
                 action("BalFullPaymtApprovalMDCapex")
                 {
                     ApplicationArea = CostAccounting;
-                    Caption = 'Balance/Full Payment';
+                    Caption = 'Balance/Full Payment- MD';
                     RunObject = Page "Bal/Full Payment Capex-MD";
 
                 }
@@ -463,14 +470,14 @@ page 50026 "Kodawari External"
                 action("BalancePaymentCapex")
                 {
                     ApplicationArea = CostAccounting;
-                    Caption = 'Awaiting Balance Payment';
+                    Caption = 'Balance Payment';
                     RunObject = Page "Balance Payment-Capex";
 
                 }
                 action("ClosedCapex")
                 {
                     ApplicationArea = CostAccounting;
-                    Caption = 'Awaiting Balance Payment';
+                    Caption = 'Closed Capex';
                     RunObject = Page "Closed Capex";
 
                 }

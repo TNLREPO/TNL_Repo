@@ -84,7 +84,7 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
 
             trigger OnValidate()
             begin
-                TESTFIELD("1st Approval to", USERID);
+
                 IF UserSetup.GET("Send to") THEN
                     UserSetup.TESTFIELD(UserSetup."Credit Memo Approval", TRUE);
                 IF Approved THEN
@@ -465,7 +465,6 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
             trigger OnValidate()
             begin
 
-                TESTFIELD("Logistics Send to", USERID);   //why?
                 TESTFIELD("Finance Send to", USERID);
                 "Finance Approved Time" := 0DT;
 
@@ -477,7 +476,7 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                 CASE "Finance Apprv Status" OF
                     "Finance Apprv Status"::Approved:
                         BEGIN
-                            TESTFIELD("Marketing Send To");
+
                             UserSetup.GET("Marketing Send To");
                             ReceiverEmail := UserSetup."E-Mail";
                             ReceiverInitials := UserSetup.Initials;
@@ -584,7 +583,6 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
 
                     "Marketing Apprv Status"::"On-Hold":
                         BEGIN
-
 
                             UserSetup.GET("Logistics Sender");
                             ReceiverEmail := UserSetup."E-Mail";
@@ -743,10 +741,6 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
 
                         ToName := UserSetup."E-Mail";
                         Subject := STRSUBSTNO(WaitingforApprovalText, "No.");
-                        //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
-                        //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                        //.Send;
-
                         MESSAGE('Mail Sent Successfully!');
                     END;
             end;
@@ -874,7 +868,7 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
             trigger OnValidate()
             begin
                 TESTFIELD("Logistics Send to");
-                
+
                 DesignatedApprovers.Get();
                 UserSetup2.GET(USERID);
                 SenderEmail := UserSetup2."E-Mail";
@@ -885,7 +879,7 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                 UserSetup.GET("Logistics Send to");
                 ReceiverEmail := UserSetup."E-Mail";
                 ReceiverInitials := UserSetup.Initials;
-                
+
                 CcAddresses := DesignatedApprovers."Logistics Notifications";
                 //CcAddresses := 'olukoya@toyotanigeria.com;sunday@toyotanigeria.com;tola@toyotanigeria.com;smo@toyotanigeria.com;gbenga@toyotanigeria.com;James@toyotanigeria.com;johnson@toyotanigeria.com;komolafe@toyotanigeria.com';
 
@@ -893,7 +887,7 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                 "Mail Body" := STRSUBSTNO(WaitingforApprovalText, "No.");
                 CreateEmailBody("No.", ReceiverInitials, "Mail Body");
                 SendEmail(ReceiverEmail, Subject, EmailBody, CcAddresses, SenderEmail);
-               
+
             end;
         }
         field(60148; "Audit Confirmation by"; Text[50])

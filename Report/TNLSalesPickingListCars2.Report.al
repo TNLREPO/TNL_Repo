@@ -224,7 +224,7 @@ report 50283 "TNL Sales Picking List Cars2"
                         {
                             DecimalPlaces = 0 : 0;
                         }
-                        column(Sales_Line__Description; SalesLineData.Description)
+                        column(Sales_Line__Description; ItemDescrption)
                         {
                         }
                         column(Reservation_Entry_Entry_No_; "Entry No.")
@@ -250,6 +250,7 @@ report 50283 "TNL Sales Picking List Cars2"
                             IF ItemLedgEntry.FINDFIRST THEN BEGIN
                                 ColourName := ItemLedgEntry."Exterior Colour Name";
                                 ReservEntry."Exterior Colour Code" := ItemLedgEntry."Exterior Colour Name";
+                                ItemDescrption := ItemLedgEntry.Description;
                             END;
                         end;
                     }
@@ -467,5 +468,6 @@ report 50283 "TNL Sales Picking List Cars2"
         MKTDesignation: Text[50];
         FADDesignation: Text[50];
         OLDesignation: Text[50];
+        ItemDescrption: Text;
 }
 

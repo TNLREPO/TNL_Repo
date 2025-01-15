@@ -145,25 +145,7 @@ page 50023 "Service"
                                     Recurring = const(false));
                 ToolTip = 'Post item transactions directly to the item ledger to adjust inventory in connection with purchases, sales, and positive or negative adjustments without using documents. You can save sets of item journal lines as standard journals so that you can perform recurring postings quickly. A condensed version of the item journal function exists on item cards for quick adjustment of an items inventory quantity.';
             }
-            action(SalesJournals)
-            {
-                ApplicationArea = Basic, Suite;
-                Caption = 'Sales Journals';
-                RunObject = Page "General Journal Batches";
-                RunPageView = where("Template Type" = const(Sales),
-                                    Recurring = const(false));
-                ToolTip = 'Post any sales-related transaction directly to a customer, bank, or general ledger account instead of using dedicated documents. You can post all types of financial sales transactions, including payments, refunds, and finance charge amounts. Note that you cannot post item quantities with a sales journal.';
-            }
-            action(CashReceiptJournals)
-            {
-                ApplicationArea = Basic, Suite;
-                Caption = 'Cash Receipt Journals';
-                Image = Journals;
-                RunObject = Page "General Journal Batches";
-                RunPageView = where("Template Type" = const("Cash Receipts"),
-                                    Recurring = const(false));
-                ToolTip = 'Register received payments by manually applying them to the related customer, vendor, or bank ledger entries. Then, post the payments to G/L accounts and thereby close the related ledger entries.';
-            }
+
             action("Transfer Orders")
             {
                 ApplicationArea = Location;
@@ -174,51 +156,7 @@ page 50023 "Service"
         }
         area(sections)
         {
-            group(Action76)
-            {
-                Caption = 'Sales';
-                Image = Sales;
-                ToolTip = 'Make quotes to customers. Manage customers and view transaction history.';
 
-                action("Sales Quotes")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Sales Quotes';
-                    RunObject = Page "Sales Quotes";
-                    ToolTip = 'Make offers to customers to sell certain products on certain delivery and payment terms. While you negotiate with a customer, you can change and resend the sales quote as much as needed. When the customer accepts the offer, you convert the sales quote to a sales invoice or a sales order in which you process the sale.';
-                }
-
-                action("Posted Sales Invoices")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Posted Sales Invoices';
-                    RunObject = Page "Posted Sales Invoices";
-                    ToolTip = 'Open the list of posted sales invoices.';
-                }
-                action("Posted Sales Credit Memos")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Posted Sales Credit Memos';
-                    RunObject = Page "Posted Sales Credit Memos";
-                    ToolTip = 'Open the list of posted sales credit memos.';
-                }
-                action("Posted Sales Return Receipts")
-                {
-                    ApplicationArea = SalesReturnOrder;
-                    Caption = 'Posted Sales Return Receipts';
-                    RunObject = Page "Posted Return Receipts";
-                    ToolTip = 'Open the list of posted sales return receipts.';
-                }
-                action("Posted Sales Shipments")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Posted Sales Shipments';
-                    Image = PostedShipment;
-                    RunObject = Page "Posted Sales Shipments";
-                    ToolTip = 'Open the list of posted sales shipments.';
-                }
-
-            }
 
             group(WarrantyProcess)
             {
@@ -380,8 +318,6 @@ page 50023 "Service"
                 }
 
             }
-
-
 
             group(Paymentprocess)
             {
@@ -689,6 +625,108 @@ page 50023 "Service"
 
                 }
 
+            }
+            group("Parts Operation")
+            {
+                Caption = 'Parts Operation';
+                Image = ExecuteBatch;
+                action("Pending Purchase Requests")
+                {
+                    Caption = 'Pending Purchase Requests';
+                    RunObject = Page 50347;
+                    ApplicationArea = CostAccounting;
+                }
+                action("Pending Estimate Requests")
+                {
+                    Caption = 'Pending Estimate Requests';
+                    RunObject = Page 50323;
+                    ApplicationArea = CostAccounting;
+
+                }
+                action("Bulk Issue")
+                {
+                    Caption = 'Bulk Issue';
+                    RunObject = Page 50476;
+                    ApplicationArea = CostAccounting;
+                }
+                action("Parts Order")
+                {
+                    Caption = 'Parts Order';
+                    RunObject = Page "Service List";
+                    RunPageView = where("Document Type" = filter(Order));
+                    ApplicationArea = All;
+                }
+                action("Sales Order")
+                {
+                    Caption = 'Sales Order';
+                    RunObject = Page 70070;
+                    ApplicationArea = CostAccounting;
+                }
+            }
+
+            group(Administration)
+            {
+                Caption = 'Administration';
+                Image = Setup;
+                action(Resource)
+                {
+                    Caption = 'Resource';
+                    RunObject = Page 77;
+                    ApplicationArea = CostAccounting;
+                }
+                action("Service Menu Setup")
+                {
+                    Caption = 'Service Menu Setup';
+                    RunObject = Page 50236;
+                    ApplicationArea = CostAccounting;
+                }
+                action("SSC/SC Setup")
+                {
+                    Caption = 'SSC/SC Setup';
+                    RunObject = Page 70080;
+                    ApplicationArea = CostAccounting;
+                }
+                action("Flat Rate Setup")
+                {
+                    Caption = 'Flat Rate Setup';
+                    RunObject = Page "Service Costs List";
+                    ApplicationArea = All;
+                }
+                action("DTC Setup")
+                {
+                    Caption = 'DTC Setup';
+                    RunObject = Page 50361;
+                    ApplicationArea = CostAccounting;
+                }
+                action("Service Item")
+                {
+                    Caption = 'Service Item';
+                    RunObject = Page "Service Item List New";
+                    ApplicationArea = CostAccounting;
+                }
+                action("Service Mgt. Setup")
+                {
+                    Caption = 'Service Mgt. Setup';
+                    ApplicationArea = CostAccounting;
+                }
+                action("VRI Administrator")
+                {
+                    Caption = 'VRI Administrator';
+                    RunObject = Page 50324;
+                    ApplicationArea = CostAccounting;
+                }
+                action("Takata Customer")
+                {
+                    Caption = 'Takata Customer';
+                    RunObject = Page 70504;
+                    ApplicationArea = CostAccounting;
+                }
+                action("Warranty Claim")
+                {
+                    Caption = 'Warranty Claim';
+                    RunObject = Page 50163;
+                    ApplicationArea = CostAccounting;
+                }
             }
 
             group(LeaveRequest1)

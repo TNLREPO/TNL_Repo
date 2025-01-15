@@ -40,7 +40,7 @@ page 50005 "HR RC"
             {
                 ApplicationArea = Suite;
             }
-            
+
             part(Control108; "Report Inbox Part")
             {
                 AccessByPermission = TableData "Report Inbox" = IMD;
@@ -209,7 +209,7 @@ page 50005 "HR RC"
                     RunObject = Page "Acutal Leave List";
                     ToolTip = 'Plan your annual leave.';
                 }
-                
+
             }
 
             group(FuelMgt)

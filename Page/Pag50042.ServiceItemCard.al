@@ -58,6 +58,49 @@ page 50042 "Service Item Card New"
 
                     ToolTip = 'Specifies the code of the Service Price Group associated with this item.';
                 }
+                field("Model No."; Rec."Model No.")
+                {
+                    ShowMandatory = true;
+                }
+                field("Model Year"; Rec."Model Year")
+                {
+                    ShowMandatory = true;
+                }
+                field("Vehicle Classification"; Rec."Vehicle Classification")
+                {
+                    ShowMandatory = true;
+                }
+                field("Vehicle Brand"; Rec."Vehicle Brand")
+                {
+                    ShowMandatory = true;
+                }
+                field(Make; Rec.Make)
+                {
+                    ShowMandatory = true;
+                }
+                field("Chasis No."; Rec."Chasis No.")
+                {
+                    ShowMandatory = true;
+                }
+                field(VIS; Rec.VIS)
+                {
+                }
+                field(VDS; Rec.VDS)
+                {
+                }
+                field(VMI; Rec.VMI)
+                {
+                }
+
+                field("Engine No."; Rec."Engine No.")
+                {
+                }
+                field("Location of Service Item"; Rec."Location of Service Item")
+                {
+                    ApplicationArea = Location;
+                    Importance = Promoted;
+                    ToolTip = 'Specifies the code of the location of this item.';
+                }
                 field("Variant Code"; Rec."Variant Code")
                 {
                     ApplicationArea = Planning;
@@ -246,12 +289,7 @@ page 50042 "Service Item Card New"
                     DrillDown = false;
                     ToolTip = 'Specifies the customer phone number.';
                 }
-                field("Location of Service Item"; Rec."Location of Service Item")
-                {
-                    ApplicationArea = Location;
-                    Importance = Promoted;
-                    ToolTip = 'Specifies the code of the location of this item.';
-                }
+
             }
             group(Shipping)
             {

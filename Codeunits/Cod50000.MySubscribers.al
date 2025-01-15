@@ -396,19 +396,5 @@ codeunit 50000 MySubscribers
 
 
 
-    [EventSubscriber(ObjectType::Codeunit, codeunit::"Purch.-Post", 'OnBeforeItemJnlPostLine', '', false, false)]
-    local procedure OnBeforeItemJnlPostLine(var ItemJournalLine: Record "Item Journal Line"; PurchaseLine: Record "Purchase Line"; PurchaseHeader: Record "Purchase Header"; CommitIsSupressed: Boolean; var IsHandled: Boolean; WhseReceiptHeader: Record "Warehouse Receipt Header"; WhseShipmentHeader: Record "Warehouse Shipment Header"; TempItemChargeAssignmentPurch: Record "Item Charge Assignment (Purch)" temporary; TempWarehouseReceiptHeader: Record "Warehouse Receipt Header" temporary; PurchInvHeader: Record "Purch. Inv. Header"; PurchCrMemoHeader: Record "Purch. Cr. Memo Hdr.")
-
-    begin
-        message('%1', PurchaseLine."No.");
-
-        ItemJournalLine.Description := PurchaseLine.Description;
-        ItemJournalLine.Modify();
-
-
-
-
-    end;
-
 }
 

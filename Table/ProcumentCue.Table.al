@@ -409,6 +409,311 @@ table 70015 "Procument Cue"
                                                            MDapproval = CONST(true)));
             FieldClass = FlowField;
         }
+
+        field(44; "Pool Car Approval"; Integer)
+        {
+            CalcFormula = Count("Pool Car Register" WHERE("Global Dimension 1 code" = CONST('08AUDSYS'),
+                                                           "1st Approval Status" = FILTER(' '),
+                                                           "Send for Approval" = FILTER(true)));
+            FieldClass = FlowField;
+        }
+        field(45; "Opex ApprovalDD- HOD"; Integer)
+        {
+            CalcFormula = Count("Procurement Header" WHERE(Send = CONST(true),
+                                                            "Head of Department" = FILTER(<> Approved),
+                                                            Reject = CONST(false),
+                                                            "Document Type" = CONST(Opex),
+                                                            "Department Code" = CONST('04DDEV')));
+            FieldClass = FlowField;
+        }
+        field(46; "Opex ApprovalDD-  Audit"; Integer)
+        {
+            CalcFormula = Count("Procurement Header" WHERE("Head of Department" = CONST(Approved),
+                                                            "Head of Audit" = FILTER(<> Approved),
+                                                            Reject = CONST(false),
+                                                            "Document Type" = CONST(Opex),
+                                                            "Department Code" = CONST('04DDEV')));
+            FieldClass = FlowField;
+        }
+        field(47; "Opex ApprovalDD- GM"; Integer)
+        {
+            CalcFormula = Count("Procurement Header" WHERE(ListGM = FILTER(true),
+                                                            "Head of Audit" = CONST(Approved),
+                                                            "General Manager" = FILTER(<> Approved | Rejected),
+                                                            "Managing Director" = CONST(" "),
+                                                            Reject = CONST(false),
+                                                            "Document Type" = CONST(Opex),
+                                                            "Department Code" = CONST('04DDEV')));
+            FieldClass = FlowField;
+        }
+        field(48; "Opex ApprovalDD- MD"; Integer)
+        {
+            CalcFormula = Count("Procurement Header" WHERE(ListMD = FILTER(true),
+                                                            "Head of Audit" = CONST(Approved),
+                                                            "General Manager" = CONST(" "),
+                                                            "Managing Director" = FILTER(<> Approved | Rejected),
+                                                            Reject = CONST(false),
+                                                            "Document Type" = CONST(Opex),
+                                                            "Department Code" = CONST('04DDEV')));
+            FieldClass = FlowField;
+        }
+        field(49; "Opex Adv. Apprv.DD"; Integer)
+        {
+
+            FieldClass = FlowField;
+            CalcFormula = Count("Procurement Header" WHERE("Adv. Pymt. Required" = CONST(true),
+                                                            "Adv. Paymt. Audit" = FILTER('On-hold' | " "),
+                                                            "Document Type" = CONST(Opex),
+                                                            Reject = CONST(false),
+                                                            "Adv. Paymt. HOD" = FILTER('Approved'),
+                                                            "Department Code" = CONST('04DDEV')));
+        }
+        field(50; "Opex Compliance CheckDD"; Integer)
+        {
+            CalcFormula = Count("Procurement Header" WHERE(Compliance = CONST(true),
+                                                            "Balance Paymt. Appr." = CONST(false),
+                                                            "Document Type" = CONST(Opex),
+                                                            Reject = CONST(false),
+                                                            "Department Code" = CONST('04DDEV')));
+            FieldClass = FlowField;
+        }
+        field(51; "Opex Balance/Full PaymentDD-MD"; Integer)
+        {
+            CalcFormula = Count("Procurement Header" WHERE("Bal. Paymt. Audit" = FILTER(Approved),
+                                                            ListMD = FILTER(true),
+                                                            Compliance = CONST(true),
+                                                            "Balance Paymt. Appr." = CONST(true),
+                                                            "Balance Paymt." = CONST(false),
+                                                            Closed = CONST(false),
+                                                            "Document Type" = CONST(Opex),
+                                                            Reject = CONST(false),
+                                                            "Department Code" = CONST('04DDEV')));
+            FieldClass = FlowField;
+        }
+        field(52; "OpexBalance/Full PaymtDD-Audit"; Integer)
+        {
+            CalcFormula = Count("Procurement Header" WHERE("Bal. Paymt. HOD" = FILTER(Approved),
+                                                            "Bal. Paymt. Audit" = FILTER(<> Approved | Rejected),
+                                                            Compliance = CONST(true),
+                                                            "Balance Paymt. Appr." = CONST(true),
+                                                            "Balance Paymt." = CONST(false),
+                                                            Closed = CONST(false),
+                                                            "Document Type" = CONST(Opex),
+                                                            Reject = CONST(false),
+                                                            "Department Code" = CONST('04DDEV')));
+            FieldClass = FlowField;
+        }
+        field(53; "Opex Balance/Full PaymtDD-GM"; Integer)
+        {
+            CalcFormula = Count("Procurement Header" WHERE("Bal. Paymt. Audit" = FILTER(Approved),
+                                                            ListGM = CONST(true),
+                                                            Compliance = CONST(true),
+                                                            "Balance Paymt. Appr." = CONST(true),
+                                                            "Balance Paymt." = CONST(false),
+                                                            Closed = CONST(false),
+                                                            "Document Type" = CONST(Opex),
+                                                            Reject = CONST(false),
+                                                            "Department Code" = CONST('04DDEV')));
+            FieldClass = FlowField;
+        }
+        field(54; "Opex Balance/Full PaymtDD-HOD"; Integer)
+        {
+            CalcFormula = Count("Procurement Header" WHERE("Bal. Paymt. HOD" = FILTER(<> Approved | Rejected),
+                                                            Compliance = CONST(true),
+                                                            "Balance Paymt. Appr." = CONST(true),
+                                                            "Balance Paymt." = CONST(false),
+                                                            Closed = CONST(false),
+                                                            "Document Type" = CONST(Opex),
+                                                            Reject = CONST(false),
+                                                            "Department Code" = CONST('04DDEV')));
+            FieldClass = FlowField;
+        }
+        field(55; "Approved OpexDD"; Integer)
+        {
+            CalcFormula = Count("Procurement Header" WHERE("Move to LPO" = CONST(true),
+                                                            "Voucher Raised" = CONST(false),
+                                                            Compliance = CONST(false),
+                                                            "Adv. Pymt. Required" = CONST(false),
+                                                            "Document Type" = CONST(Opex),
+                                                            Reject = CONST(false),
+                                                            "Department Code" = CONST('04DDEV')));
+            FieldClass = FlowField;
+        }
+        field(56; "Capex ApprovalDD- HOD"; Integer)
+        {
+            CalcFormula = Count("Procurement Header" WHERE(Send = CONST(true),
+                                                            "Head of Department" = FILTER(<> Approved),
+                                                            Reject = CONST(false),
+                                                            "Document Type" = CONST(Capex),
+                                                            Closed = CONST(false),
+                                                            "Department Code" = CONST('04DDEV')));
+            Enabled = false;
+            FieldClass = FlowField;
+        }
+        field(57; "Capex ApprovalDD-  Audit"; Integer)
+        {
+            CalcFormula = Count("Procurement Header" WHERE("Head of Department" = CONST(Approved),
+                                                            "Head of Audit" = FILTER(<> Approved),
+                                                            Reject = CONST(false),
+                                                            "Document Type" = CONST(Capex),
+                                                            "Department Code" = CONST('04DDEV')));
+            FieldClass = FlowField;
+        }
+        field(58; "Capex ApprovalDD- GM"; Integer)
+        {
+            CalcFormula = Count("Procurement Header" WHERE("Capex Type" = FILTER("Sundry Asset"),
+                                                            "Head of Audit" = CONST(Approved),
+                                                            "General Manager" = FILTER(<> Approved | Rejected),
+                                                            "Managing Director" = CONST(" "),
+                                                            Reject = CONST(false),
+                                                            "Document Type" = CONST(Capex),
+                                                            "Department Code" = CONST('04DDEV')));
+            FieldClass = FlowField;
+        }
+        field(59; "Capex ApprovaDDl- MD"; Integer)
+        {
+            CalcFormula = Count("Procurement Header" WHERE("Capex Type" = FILTER("Fixed Asset"),
+                                                            "Head of Audit" = CONST(Approved),
+                                                            "General Manager" = CONST(" "),
+                                                            "Managing Director" = FILTER(<> Approved | Rejected),
+                                                            Reject = CONST(false),
+                                                            "Document Type" = CONST(Capex),
+                                                            "Proposed Purchase Amount" = FILTER(> 100000),
+                                                            "Department Code" = CONST('04DDEV')));
+            FieldClass = FlowField;
+        }
+        field(60; "Capex Adv. Apprv.DD"; Integer)
+        {
+            CalcFormula = Count("Procurement Header" WHERE("Adv. Pymt. Required" = CONST(true),
+                                                            "Adv. Paymt. Audit" = FILTER(<> Approved),
+                                                            "Document Type" = CONST(Capex),
+                                                            Reject = CONST(false),
+                                                            "Department Code" = CONST('04DDEV')));
+            FieldClass = FlowField;
+        }
+        field(61; "Capex Compliance CheckDD"; Integer)
+        {
+            CalcFormula = Count("Procurement Header" WHERE(Compliance = CONST(true),
+                                                            "Balance Paymt. Appr." = CONST(false),
+                                                            "Document Type" = CONST(Capex),
+                                                            Reject = CONST(false),
+                                                            "Department Code" = CONST('04DDEV')));
+            FieldClass = FlowField;
+        }
+        field(62; "Capex Balance/Full PaymtDD-MD"; Integer)
+        {
+            CalcFormula = Count("Procurement Header" WHERE("Bal. Paymt. Audit" = FILTER(Approved),
+                                                            Compliance = CONST(true),
+                                                            "Balance Paymt. Appr." = CONST(true),
+                                                            "Balance Paymt." = CONST(false),
+                                                            Closed = CONST(false),
+                                                            "Document Type" = CONST(Capex),
+                                                            Reject = CONST(false),
+                                                            "Proposed Purchase Amount" = FILTER(>= 100000),
+                                                            "Bal. Paymt. MD" = FILTER(' ' | 'On-hold'),
+                                                            "Department Code" = CONST('04DDEV')));
+            FieldClass = FlowField;
+        }
+        field(63; "Capex Bal./Full PaymtDD-Audit"; Integer)
+        {
+            CalcFormula = Count("Procurement Header" WHERE("Bal. Paymt. HOD" = FILTER(Approved),
+                                                            "Bal. Paymt. Audit" = FILTER(<> Approved | Rejected),
+                                                            Compliance = CONST(true),
+                                                            "Balance Paymt. Appr." = CONST(true),
+                                                            "Balance Paymt." = CONST(false),
+                                                            Closed = CONST(false),
+                                                            "Document Type" = CONST(Capex),
+                                                            Reject = CONST(false),
+                                                            "Department Code" = CONST('04DDEV')));
+            FieldClass = FlowField;
+        }
+        field(64; "Capex Balance/Full PaymtDD-GM"; Integer)
+        {
+            CalcFormula = Count("Procurement Header" WHERE("Bal. Paymt. Audit" = FILTER(Approved),
+                                                            ListGM = CONST(true),
+                                                            Compliance = CONST(true),
+                                                            "Balance Paymt. Appr." = CONST(true),
+                                                            "Balance Paymt." = CONST(false),
+                                                            Closed = CONST(false),
+                                                            "Document Type" = CONST(Opex),
+                                                            Reject = CONST(false),
+                                                            "Department Code" = CONST('04DDEV')));
+            FieldClass = FlowField;
+        }
+        field(65; "Capex Balance/Full PaymtDD-HOD"; Integer)
+        {
+            CalcFormula = Count("Procurement Header" WHERE("Bal. Paymt. HOD" = FILTER(<> Approved | Rejected),
+                                                            Compliance = CONST(true),
+                                                            "Balance Paymt. Appr." = CONST(true),
+                                                            "Balance Paymt." = CONST(false),
+                                                            Closed = CONST(false),
+                                                            "Document Type" = CONST(Capex),
+                                                            Reject = CONST(false),
+                                                            "Department Code" = CONST('04DDEV')));
+            FieldClass = FlowField;
+        }
+        field(66; "Approved CapexDD"; Integer)
+        {
+            CalcFormula = Count("Procurement Header" WHERE("Move to LPO" = CONST(true),
+                                                            "Voucher Raised" = CONST(false),
+                                                            Compliance = CONST(false),
+                                                            "Adv. Pymt. Required" = CONST(false),
+                                                            "Document Type" = CONST(Capex),
+                                                            Reject = CONST(false),
+                                                            "Department Code" = CONST('04DDEV')));
+            FieldClass = FlowField;
+        }
+        field(67; "MD Approval LeaveDD"; Integer)
+        {
+            CalcFormula = Count("Leave Request3" WHERE("MD Leave Approval" = CONST(true),
+                                                        Approved2 = CONST(false),
+                                                        Treated = CONST(false),
+                                                        Reject = CONST(false),
+                                                        "Global Dimension 1 code" = CONST('04DDEV')));
+            FieldClass = FlowField;
+        }
+        field(68; "Leave Req. ApprovalDD"; Integer)
+        {
+            CalcFormula = Count("Leave Request3" WHERE("Global Dimension 1 code" = CONST('04DDEV'),
+                                                        "Send for Approval" = CONST(true),
+                                                        "1st Approval Status" = FILTER(' ' | 'On hold')));
+            FieldClass = FlowField;
+        }
+        field(69; "Leave Req. ApprovalDD/HR"; Integer)
+        {
+            CalcFormula = Count("Leave Request3" WHERE("Global Dimension 1 code" = CONST('04DDEV'),
+                                                        "Send for Approval" = CONST(true),
+                                                        "1st Approval Status" = FILTER(Approved),
+                                                        "2nd Approval Status" = FILTER(' ' | 'On hold')));
+            FieldClass = FlowField;
+        }
+        field(70; "IOU Retirement Audit"; Integer)
+        {
+            CalcFormula = Count("IOU Retirement Header" WHERE("2nd Approval to" = CONST('ADEWUMI'),
+                                                               "1st Apprv. Status" = FILTER(Approved),
+                                                               "3rd Approval to" = FILTER(''),
+                                                               "Send for Approval" = CONST(true)));
+            FieldClass = FlowField;
+        }
+        field(71; "IOU HOD Audit Approval"; Integer)
+        {
+            CalcFormula = Count("IOU Register" WHERE("1st Approval to" = FILTER('BRANO'),
+                                                      "1st Apprv. Status" = FILTER(' ' | 'on Hold'),
+                                                      "Send for Approval" = FILTER(true),
+                                                      Reject = CONST(false)));
+            FieldClass = FlowField;
+        }
+        field(72; "Audit Sales order"; Integer)
+        {
+            CalcFormula = Count("Sales Shipment Header" WHERE("Online Order" = CONST(true),
+                                                               "Audit Summary" = FILTER(' ' | 'Non-Satisfactory'),
+                                                               "Order No." = FILTER('TSOV*'),
+                                                               "Sell-to Customer No." = FILTER('TDV01020|TDV05020')));
+            FieldClass = FlowField;
+        }
+
+
+
     }
 
     keys

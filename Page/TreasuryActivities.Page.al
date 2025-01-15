@@ -25,11 +25,7 @@ page 50277 "Treasury Activities"
 
                 actions
                 {
-                    action("Edit Cash Receipt Journal")
-                    {
-                        Caption = 'Edit Cash Receipt Journal';
-                        RunObject = Page 255;
-                    }
+                    
                     action("Page Customer List")
                     {
                         Caption = 'View Customer Balances';
