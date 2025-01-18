@@ -229,6 +229,23 @@ page 50026 "Kodawari External"
                     RunObject = Page "Posted IOU Retirement List";
                     ToolTip = 'View treated IOUs.';
                 }
+                action("Journal Voucher")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Journal Voucher';
+                    Image = Journals;
+                    RunObject = Page "Journal Voucher List";
+                    ToolTip = 'Post journal entries to the general ledger.';
+                }
+
+                action("Posted Journal Voucher")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Posted Journal Voucher';
+                    Image = Journals;
+                    RunObject = Page "Posted Journal Voucher List";
+                    ToolTip = 'View posted journal entries in the general ledger.';
+                }
             }
 
             group(OpexMgt)
@@ -327,6 +344,13 @@ page 50026 "Kodawari External"
                     RunObject = Page "Advance Paymt Appr.";
 
                 }
+                action("BalFullPaymtApproval")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Balance/Full Payment Approval';
+                    RunObject = Page "Full  Payment Appr.";
+
+                }
                 action("BalFullPaymtApproved")
                 {
                     ApplicationArea = CostAccounting;
@@ -414,7 +438,7 @@ page 50026 "Kodawari External"
                 action("BalFullPaymtApprovalCapex")
                 {
                     ApplicationArea = CostAccounting;
-                    Caption = 'Balance/Full Payment';
+                    Caption = 'Full Payment Approvals';
                     RunObject = Page "Full  Payment Appr.-Capex";
 
                 }

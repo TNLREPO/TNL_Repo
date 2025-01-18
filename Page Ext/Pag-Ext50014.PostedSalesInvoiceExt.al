@@ -19,7 +19,7 @@ pageextension 50014 "Posted Sales Invoice Ext" extends "Posted Sales Invoice"
                     begin
                         SalesInvHeader.SETRANGE(SalesInvHeader."No.", Rec."No.");
                         IF Rec.FindFirst() THEN
-                            REPORT.RUNMODAL(50010, TRUE, TRUE, SalesInvHeader);
+                            REPORT.RUNMODAL(50606, TRUE, TRUE, SalesInvHeader);
                     end;
                 }
 

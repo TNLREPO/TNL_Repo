@@ -1609,15 +1609,6 @@ AooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiig
         <Field Name="SalespersonName_SalesHeader">
           <DataField>SalespersonName_SalesHeader</DataField>
         </Field>
-        <Field Name="FDSignature">
-          <DataField>FDSignature</DataField>
-        </Field>
-        <Field Name="OLSignature">
-          <DataField>OLSignature</DataField>
-        </Field>
-        <Field Name="MKTSignature">
-          <DataField>MKTSignature</DataField>
-        </Field>
         <Field Name="MKTDesignation">
           <DataField>MKTDesignation</DataField>
         </Field>

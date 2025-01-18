@@ -165,6 +165,7 @@ tableextension 50011 "Sales Line Ext" extends "Sales Line"
 
         }
 
+        
     }
 
     keys

@@ -1976,21 +1976,36 @@ table 50119 "Customer Order Table."
     begin
         //CustOrderLine.SETRANGE(CustOrderLine."Customer Order Form No.","Customer Order Form No.");
         //CustOrderLine.DELETEALL;
+        Error('You cannot delete this record!');
     end;
 
     trigger OnInsert()
     begin
         SalesSetup.GET;
-        IF "Customer Order Form No." = '' THEN BEGIN
-            TestNoSeries;
-            NoSeriesMgt.GetNextNo("Customer Order Form No.");
+        CASE "Service Type" OF
+            "Service Type"::"General Workshop":
+                begin
+                    SalesSetup.TestField("Customer Order No.");
+                    "No. Series" := SalesSetup."Customer Order No.";
+                    if NoSeriesMgt.AreRelated("No. Series", xRec."No. Series") then
+                        "No. Series" := xRec."No. Series";
+                    "Customer Order Form No." := NoSeriesMgt.GetNextNo("No. Series")
+                end;
+            "Service Type"::"Body and Paint":
+                Begin
+                    SalesSetup.TestField(SalesSetup."Customer Order No. GN");
+                    "No. Series" := SalesSetup."Customer Order No. GN";
+                    if NoSeriesMgt.AreRelated("No. Series", xRec."No. Series") then
+                        "No. Series" := xRec."No. Series";
+                    "Customer Order Form No." := NoSeriesMgt.GetNextNo("No. Series")
+                End;
         END;
-        InitRecord;
 
         IF "Customer Order Form No." <> '' THEN BEGIN
             "Estimate No." := "Customer Order Form No.";
             "Job Instruction No." := "Customer Order Form No.";
         END;
+
         "Customer Order Form Date" := TODAY;
         "Job Instruction Date" := TODAY
     end;

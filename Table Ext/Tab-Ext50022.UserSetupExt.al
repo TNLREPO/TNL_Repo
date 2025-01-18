@@ -290,9 +290,10 @@ tableextension 50022 "User Setup Ext" extends "User Setup"
         field(50246; "Employee No."; Code[20])
         {
         }
-        field(50247; Signature; BLOB)
+        /* field(50247; Signature; MediaSet)
         {
-        }
+            
+        } */
         field(50248; "Problem Vehicle"; Boolean)
         {
         }

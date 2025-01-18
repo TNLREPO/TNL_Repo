@@ -11,9 +11,9 @@ page 50615 "MD Cue"
     {
         area(content)
         {
-            cuegroup("Opex Approval")
+            cuegroup(OpexApprv)
             {
-                Caption = 'Opex/Capex';
+                Caption = 'Opex';
                 //ShowCaption = false;
                 field("Opex Approval- MD"; Rec."Opex Approval- MD")
                 {
@@ -21,7 +21,7 @@ page 50615 "MD Cue"
                     DrillDownPageID = "Managing Dir. Appr.";
                     Caption = 'Opex Approval';
                     Editable = true;
-                   
+
                 }
                 field("Opex Balance/Full Payment-MD"; Rec."Opex Balance/Full Payment-MD")
                 {
@@ -29,6 +29,11 @@ page 50615 "MD Cue"
                     DrillDownPageID = "Balance/Full Payment Opex-MD";
                     Caption = 'Opex Balance/Full Payment';
                 }
+
+            }
+            cuegroup(CapexApprv)
+            {
+                Caption = 'Capex';
                 field("Capex Approval- MD"; Rec."Capex Approval- MD")
                 {
                     ApplicationArea = Basic, Suite;
@@ -41,6 +46,7 @@ page 50615 "MD Cue"
                     DrillDownPageID = "Bal/Full Payment Capex-MD";
                     Caption = 'Capex Balance/Full Payment';
                 }
+
             }
             cuegroup(Others)
             {

@@ -468,7 +468,7 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                 TESTFIELD("Finance Send to", USERID);
                 "Finance Approved Time" := 0DT;
 
-                "HOD Marketing Signature" := UserSetup.Signature; //why?
+                //"HOD Marketing Signature" := UserSetup.Signature; //why?
 
                 IF UserSetup2.GET(UserId) THEN
                     SenderEmail := UserSetup2."E-Mail";
@@ -541,7 +541,7 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                 TESTFIELD("Marketing Send To", USERID);
                 "Marketing Approved Time" := 0DT;
 
-                "HOD Finance Signature" := UserSetup.Signature;   //why?
+                // "HOD Finance Signature" := UserSetup.Signature;   //why?
 
                 IF UserSetup2.GET(USERID) THEN
                     SenderEmail := UserSetup2."E-Mail";
@@ -613,7 +613,7 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                 TESTFIELD("Logistics Send to", USERID);
                 "Logistics Approved Time" := 0DT;
 
-                "HOD Marketing Signature" := UserSetup.Signature; //why? which UserSetup?
+                //"HOD Marketing Signature" := UserSetup.Signature; //why? which UserSetup?
 
                 IF UserSetup2.GET(USERID) THEN
                     SenderEmail := UserSetup2."E-Mail";
@@ -714,13 +714,13 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
         field(60131; "Original Profit %"; Decimal)
         {
         }
-        field(60132; "HOD Logistics Signature"; BLOB)
+        field(60132; "HOD Logistics Signature"; MediaSet)
         {
         }
-        field(60133; "HOD Finance Signature"; BLOB)
+        field(60133; "HOD Finance Signature"; MediaSet)
         {
         }
-        field(60134; "HOD Marketing Signature"; BLOB)
+        field(60134; "HOD Marketing Signature"; MediaSet)
         {
         }
         field(60135; "Logistics Send for Approval"; Boolean)

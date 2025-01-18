@@ -197,12 +197,12 @@ table 70049 "Vehicle Online Order"
 
     trigger OnDelete()
     begin
-        //ERROR('You Cannot delete this record, contact your system administrator');
+        ERROR('You Cannot delete this record, contact your system administrator!');
     end;
 
     trigger OnInsert()
     begin
-        //"Dealer Order Date" := CURRENTDATETIME;
+        "Dealer Order Date" := CURRENTDATETIME;
     end;
 
     var

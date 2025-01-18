@@ -69,6 +69,7 @@ table 50107 "IOU Retirement Header"
             trigger OnValidate()
             var
                 RetireHdr: Record "IOU Retirement Header";
+                Cust: Record Customer;
             begin
                 IF "IOU No." <> '' THEN BEGIN
                     //cannot create new retirement until previous one is posted
@@ -81,7 +82,8 @@ table 50107 "IOU Retirement Header"
                     "Original IOU Amount" := IOURec.Amount;
                     Description := IOURec.Description;
                     "Staff No." := IOURec."Account No.";
-                    "Staff Name" := IOURec."Account Name";
+                    Cust.get(IOURec."Account No.");
+                    "Staff Name" := Cust.Name;
                     "Global Dimension 1 Code" := IOURec."Global Dimension 1 Code";
                     "Global Dimension 2 Code" := IOURec."Global Dimension 2 Code";
                 END ELSE BEGIN
@@ -143,31 +145,6 @@ table 50107 "IOU Retirement Header"
                     CreateEmailBody("No.", Addressee, text001, "Staff Name", Purpose, "IOU Amount", Balance);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
-                    /*  WITH TempEmailItem DO BEGIN
-                         "Send to" := ToAddresses;
-                         "Send CC" := SenderAddress;
-                         "Send BCC" := BccAddresses;
-                         Subject := STRSUBSTNO(text001, "No.");
-
-                         CRLF := '';
-                         CRLF[1] := 13;
-                         CRLF[2] := 10;
-
-                         BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                         BodyStream.WRITETEXT(Text011 + ' ' + Addressee + ',');
-                         BodyStream.WRITETEXT(CRLF + CRLF);
-                         BodyStream.WRITETEXT(STRSUBSTNO(text001, "No.") + CRLF +
-                         Text009 + FORMAT("Staff Name") + CRLF + CRLF +
-                         Text010 + FORMAT(Purpose) + CRLF + CRLF +
-                         Text012 + FORMAT("IOU Amount") + CRLF + CRLF +
-                         Text013 + FORMAT(Balance) + CRLF + CRLF +
-                         Text007 + CRLF);
-                         BodyStream.WRITETEXT(SendersName);
-                         BodyStream.WRITETEXT(CRLF + CRLF);
-                         BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                         Body := BodyBlob.Blob;
-                         Send(FALSE);
-                     END; */
 
                 END;
             end;
@@ -187,21 +164,21 @@ table 50107 "IOU Retirement Header"
         }
         field(18; "1st Approval to"; Code[25])
         {
-            TableRelation = IF (Department = FILTER('02ADMINHR')) "User Setup"."User ID" WHERE("User ID" = FILTER('IBIDAPO-OBE|KOLAWOLE'))
+            TableRelation = IF ("Global Dimension 1 Code" = FILTER('02ADMINHR')) "User Setup"."User ID" WHERE("User ID" = FILTER('IBIDAPO-OBE|KOLAWOLE'))
             ELSE
-            IF (Department = FILTER('03OPLOGIC')) "User Setup"."User ID" WHERE("User ID" = FILTER('SEGUN|TOLA'))
+            IF ("Global Dimension 1 Code" = FILTER('03OPLOGIC')) "User Setup"."User ID" WHERE("User ID" = FILTER('SEGUN|TOLA'))
             ELSE
-            IF (Department = FILTER('04DDEV')) "User Setup"."User ID" WHERE("User ID" = FILTER('HENRY|OLUFEMI'))
+            IF ("Global Dimension 1 Code" = FILTER('04DDEV')) "User Setup"."User ID" WHERE("User ID" = FILTER('HENRY|OLUFEMI'))
             ELSE
-            IF (Department = FILTER('05PARTS')) "User Setup"."User ID" WHERE("User ID" = FILTER('AKINDELE|ISUEKEBHO|RAVINDER|SYLVESTER|IBIDAPO-OBE'))
+            IF ("Global Dimension 1 Code" = FILTER('05PARTS')) "User Setup"."User ID" WHERE("User ID" = FILTER('AKINDELE|ISUEKEBHO|RAVINDER|SYLVESTER|IBIDAPO-OBE'))
             ELSE
-            IF (Department = FILTER('06SERVICE')) "User Setup"."User ID" WHERE("User ID" = FILTER('BAMIDELE|SYLVESTER'))
+            IF ("Global Dimension 1 Code" = FILTER('06SERVICE')) "User Setup"."User ID" WHERE("User ID" = FILTER('BAMIDELE|SYLVESTER'))
             ELSE
-            IF (Department = FILTER('07FINACC')) "User Setup"."User ID" WHERE("User ID" = FILTER('ALBERT|BUNMI|PAA'))
+            IF ("Global Dimension 1 Code" = FILTER('07FINACC')) "User Setup"."User ID" WHERE("User ID" = FILTER('ALBERT|BUNMI|PAA'))
             ELSE
-            IF (Department = FILTER('08AUDSYS')) "User Setup"."User ID" WHERE("User ID" = FILTER('ADEWUMI|AGBESUA|BRANO|JOSHUA'))
+            IF ("Global Dimension 1 Code" = FILTER('08AUDSYS')) "User Setup"."User ID" WHERE("User ID" = FILTER('ADEWUMI|BRANO|JOSHUA'))
             ELSE
-            IF (Department = FILTER('09MARKET')) "User Setup"."User ID" WHERE("User ID" = FILTER('AJUYAH|BAYO|BUKUNOLA'));
+            IF ("Global Dimension 1 Code" = FILTER('09MARKET')) "User Setup"."User ID" WHERE("User ID" = FILTER('AJUYAH|BAYO|BUKUNOLA'));
 
             trigger OnValidate()
             begin
@@ -315,33 +292,6 @@ table 50107 "IOU Retirement Header"
                         Subject := STRSUBSTNO(text004, "No.");
                         CreateEmailBody("No.", Addressee, text004, "Staff Name", Purpose, "IOU Amount", Balance);
                         SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
-
-                        /*   WITH TempEmailItem DO BEGIN
-                              "Send to" := ToAddresses;
-                              "Send CC" := SenderAddress;
-                              "Send BCC" := BccAddresses;
-                              Subject := STRSUBSTNO(text004, "No.");
-
-                              CRLF := '';
-                              CRLF[1] := 13;
-                              CRLF[2] := 10;
-
-                              BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                              BodyStream.WRITETEXT(Text011 + ' ' + Addressee + ',');
-                              BodyStream.WRITETEXT(CRLF + CRLF);
-                              BodyStream.WRITETEXT(STRSUBSTNO(text004, "No.") + CRLF + CRLF +
-                              Text009 + FORMAT("Staff Name") + CRLF + CRLF +
-                              Text010 + FORMAT(Purpose) + CRLF + CRLF +
-                              Text012 + FORMAT("IOU Amount") + CRLF + CRLF +
-                              Text014 + FORMAT("Retire Amount") + CRLF + CRLF +
-                              Text013 + FORMAT(Balance) + CRLF + CRLF +
-                              Text007 + CRLF);
-                              BodyStream.WRITETEXT(SendersName);
-                              BodyStream.WRITETEXT(CRLF + CRLF);
-                              BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                              Body := BodyBlob.Blob;
-                              Send(FALSE);
-                          END; */
 
                         Reject := TRUE;
                     END;
@@ -1154,7 +1104,7 @@ table 50107 "IOU Retirement Header"
             RetireRec.SETRANGE(RetireRec."IOU No.", '');
             RetireRec.SETRANGE("Send for Approval", FALSE);
             //RetireRec.SETRANGE(RetireRec."User ID",USERID);
-            IF RetireRec.FIND('-') THEN
+            IF RetireRec.FindFirst() THEN
                 ERROR('Created IOU Retirement No. %1 not used!\New Retirement cannot be created', RetireRec."No.");
 
             GLSetup.TESTFIELD(GLSetup."Retirement Nos.");
@@ -1174,7 +1124,6 @@ table 50107 "IOU Retirement Header"
         IOURec: Record "IOU Register";
         Text006: Label 'Previous Retirement for this IOU must first be posted';
         UserSetup: Record "User Setup";
-        //approvalmessage: Codeunit Mail;
         mailsent: Boolean;
         ToName: Text[80];
         Bcc: Text[80];

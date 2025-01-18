@@ -4,7 +4,8 @@ pageextension 50000 "Sales Order Subform Ext" extends "Sales Order Subform"
     {
         modify("Unit Price")
         {
-            Editable = false;
+            Editable = EditableField;
+
         }
         modify("Variant Code")
         {
@@ -21,4 +22,18 @@ pageextension 50000 "Sales Order Subform Ext" extends "Sales Order Subform"
 
         }
     }
+
+    var
+        EditableField: Boolean;
+        UserSetup: Record "User Setup";
+
+    trigger OnAfterGetRecord()
+
+    Begin
+        UserSetup.get(UserId);
+        IF UserSetup."Unit Price Approval" then
+            EditableField := true
+        else
+            EditableField := false;
+    End;
 }

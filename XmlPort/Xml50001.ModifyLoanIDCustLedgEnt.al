@@ -3,7 +3,6 @@ xmlport 50001 "Modify Loan ID Cust. Ledg. Ent"
     Caption = 'Modify Loan ID Cust. Ledg. Ent';
     Format = VariableText;
     Permissions = tabledata "Detailed Cust. Ledg. Entry" = rimd;
-    
 
     schema
     {

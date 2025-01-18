@@ -189,13 +189,13 @@ tableextension 50092 "Sales Invoice Header Ext." extends "Sales Invoice Header"
         field(60131; "Original Profit %"; Decimal)
         {
         }
-        field(60132; "HOD Logistics Signature"; BLOB)
+        field(60132; "HOD Logistics Signature"; MediaSet)
         {
         }
-        field(60133; "HOD Finance Signature"; BLOB)
+        field(60133; "HOD Finance Signature"; MediaSet)
         {
         }
-        field(60134; "HOD Marketing Signature"; BLOB)
+        field(60134; "HOD Marketing Signature"; MediaSet)
         {
         }
         field(60135; "Logistics Send for Approval"; Boolean)

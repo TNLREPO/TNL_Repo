@@ -474,6 +474,23 @@ page 50007 "Marketing Role Center"
                     RunObject = Page "Posted IOU Retirement List";
                     ToolTip = 'View treated IOUs.';
                 }
+                action("Journal Voucher")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Journal Voucher';
+                    Image = Journals;
+                    RunObject = Page "Journal Voucher List";
+                    ToolTip = 'Post journal entries to the general ledger.';
+                }
+                            
+                action("Posted Journal Voucher")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Posted Journal Voucher';
+                    Image = Journals;
+                    RunObject = Page "Posted Journal Voucher List";
+                    ToolTip = 'View posted journal entries in the general ledger.';
+                }
             }
 
 
@@ -573,6 +590,13 @@ page 50007 "Marketing Role Center"
                     RunObject = Page "Advance Paymt Appr.";
 
                 }
+                 action("BalFullPaymtApproval")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Balance/Full Payment Approval';
+                    RunObject = Page "Full  Payment Appr.";
+
+                }
                 action("BalFullPaymtApproved")
                 {
                     ApplicationArea = CostAccounting;
@@ -660,21 +684,21 @@ page 50007 "Marketing Role Center"
                 action("BalFullPaymtApprovalCapex")
                 {
                     ApplicationArea = CostAccounting;
-                    Caption = 'Balance/Full Payment';
+                    Caption = 'Full Payment Approvals';
                     RunObject = Page "Full  Payment Appr.-Capex";
 
                 }
                 action("BalFullPaymtApprovalGMCapex")
                 {
                     ApplicationArea = CostAccounting;
-                    Caption = 'Balance/Full Payment';
+                    Caption = 'Balance/Full Payment -GM';
                     RunObject = Page "Bal/Full Payment Capex-GM";
 
                 }
                 action("BalFullPaymtApprovalMDCapex")
                 {
                     ApplicationArea = CostAccounting;
-                    Caption = 'Balance/Full Payment';
+                    Caption = 'Balance/Full Payment -MD';
                     RunObject = Page "Bal/Full Payment Capex-MD";
 
                 }
@@ -716,14 +740,14 @@ page 50007 "Marketing Role Center"
                 action("BalancePaymentCapex")
                 {
                     ApplicationArea = CostAccounting;
-                    Caption = 'Awaiting Balance Payment';
+                    Caption = 'Balance Payment';
                     RunObject = Page "Balance Payment-Capex";
 
                 }
                 action("ClosedCapex")
                 {
                     ApplicationArea = CostAccounting;
-                    Caption = 'Awaiting Balance Payment';
+                    Caption = 'Closed Capex';
                     RunObject = Page "Closed Capex";
 
                 }

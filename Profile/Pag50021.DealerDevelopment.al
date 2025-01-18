@@ -218,7 +218,7 @@ page 50021 "Dealer Development"
                 {
                     ApplicationArea = CostAccounting;
                     Caption = 'Warranty Coupon';
-                    RunObject = Page "Warranty Couporn";
+                    RunObject = Page "Warranty Coupon2";
                 }
 
                 action("DirectWarrantyCoupon")
@@ -226,6 +226,12 @@ page 50021 "Dealer Development"
                     ApplicationArea = CostAccounting;
                     Caption = 'Direct Warranty Coupon';
                     RunObject = Page "Direct Warranty Page";
+                }
+                action(ToyotaWarrantyRegistration)
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Toyota Warranty Registration';
+                    RunObject = Page "Toyota Warranty Registration";
                 }
 
                 action("WarrantyDataUploaded")
@@ -283,11 +289,7 @@ page 50021 "Dealer Development"
                     RunObject = Page "PSFU List Today";
                     ToolTip = 'Review todays post service follow-up.';
                 }
-
-
-
             }
-
 
             group(Paymentprocess)
             {
@@ -341,6 +343,23 @@ page 50021 "Dealer Development"
                     RunObject = Page "Posted IOU Retirement List";
                     ToolTip = 'View treated IOUs.';
                 }
+                action("Journal Voucher")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Journal Voucher';
+                    Image = Journals;
+                    RunObject = Page "Journal Voucher List";
+                    ToolTip = 'Post journal entries to the general ledger.';
+                }
+
+                action("Posted Journal Voucher")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Posted Journal Voucher';
+                    Image = Journals;
+                    RunObject = Page "Posted Journal Voucher List";
+                    ToolTip = 'View posted journal entries in the general ledger.';
+                }
             }
 
 
@@ -352,7 +371,6 @@ page 50021 "Dealer Development"
                     ApplicationArea = CostAccounting;
                     Caption = 'Opex';
                     RunObject = Page "Opex List";
-
                 }
 
                 action("HODApproval")
@@ -438,6 +456,13 @@ page 50021 "Dealer Development"
                     ApplicationArea = CostAccounting;
                     Caption = 'Advance Payment Approved';
                     RunObject = Page "Advance Paymt Appr.";
+
+                }
+                 action("BalFullPaymtApproval")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Balance/Full Payment Approval';
+                    RunObject = Page "Full  Payment Appr.";
 
                 }
                 action("BalFullPaymtApproved")
@@ -527,21 +552,21 @@ page 50021 "Dealer Development"
                 action("BalFullPaymtApprovalCapex")
                 {
                     ApplicationArea = CostAccounting;
-                    Caption = 'Balance/Full Payment';
+                    Caption = 'Full Payment Approvals';
                     RunObject = Page "Full  Payment Appr.-Capex";
 
                 }
                 action("BalFullPaymtApprovalGMCapex")
                 {
                     ApplicationArea = CostAccounting;
-                    Caption = 'Balance/Full Payment';
+                    Caption = 'Balance/Full Payment -GM';
                     RunObject = Page "Bal/Full Payment Capex-GM";
 
                 }
                 action("BalFullPaymtApprovalMDCapex")
                 {
                     ApplicationArea = CostAccounting;
-                    Caption = 'Balance/Full Payment';
+                    Caption = 'Balance/Full Payment -MD';
                     RunObject = Page "Bal/Full Payment Capex-MD";
 
                 }
@@ -663,22 +688,7 @@ page 50021 "Dealer Development"
                 }
 
             }
-            group("Warranty Coupon")
-            {
 
-                Caption = 'Warranty Coupon';
-                Image = FiledPosted;
-                ToolTip = 'View the warranty register.';
-                action(Warranty)
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Warranty Coupon';
-                    Image = PostedOrder;
-                    RunObject = Page "Warranty Couporn";
-                    ToolTip = 'Open the warranty coupon list.';
-                }
-
-            }
 
             group("Posted Documents")
             {
@@ -723,9 +733,6 @@ page 50021 "Dealer Development"
                     Caption = 'Sales Quote Archives';
                     RunObject = page "Sales Quote Archives";
                 }
-
-
-
 
 
             }

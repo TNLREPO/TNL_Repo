@@ -179,6 +179,69 @@ page 50009 Parts
                 ToolTip = 'Create sales orders from orders placed by customers online.';
             }
 
+            action(Vendors)
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Vendors';
+                Image = Vendor;
+                RunObject = Page "Vendor List";
+                ToolTip = 'View or edit detailed information for the vendors that you trade with. From each vendor card, you can open related information, such as purchase statistics and ongoing orders, and you can define special prices and line discounts that the vendor grants you if certain conditions are met.';
+            }
+            action(VendorsBalance)
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Balance';
+                Image = Balance;
+                RunObject = Page "Vendor List";
+                RunPageView = WHERE("Balance (LCY)" = FILTER(<> 0));
+                ToolTip = 'View a summary of the bank account balance in different periods.';
+            }
+            action("Purchase Orders")
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Purchase Orders';
+                RunObject = Page "Purchase Order List";
+                ToolTip = 'Create purchase orders to mirror sales documents that vendors send to you. This enables you to record the cost of purchases and to track accounts payable. Posting purchase orders dynamically updates inventory levels so that you can minimize inventory costs and provide better customer service. Purchase orders allow partial receipts, unlike with purchase invoices, and enable drop shipment directly from your vendor to your customer. Purchase orders can be created automatically from PDF or image files from your vendors by using the Incoming Documents feature.';
+            }
+            action("Purchase Invoices")
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Purchase Invoices';
+                Image = Invoice;
+                RunObject = Page "Purchase Invoices";
+                ToolTip = 'Create purchase invoices to mirror sales documents that vendors send to you. This enables you to record the cost of purchases and to track accounts payable. Posting purchase invoices dynamically updates inventory levels so that you can minimize inventory costs and provide better customer service. Purchase invoices can be created automatically from PDF or image files from your vendors by using the Incoming Documents feature.';
+            }
+
+            action("P&urchase Credit Memo")
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'P&urchase Credit Memo';
+                Image = Invoice;
+                RunObject = Page "Purchase Credit Memo";
+                ToolTip = 'Create a new purchase credit memo so you can manage returned items to a vendor.';
+            }
+            action(AllCOF)
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'All COF';
+                Image = Invoice;
+                RunObject = Page "Open COF";
+
+            }
+            action(COFPartsOrdered)
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'COF Parts Ordered ';
+                Image = Invoice;
+                RunObject = Page "Parts Ordered Parts";
+            }
+            action(ServiceOrderList)
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Service Orders';
+                Image = Invoice;
+                RunObject = Page "Service Orders";
+            }
 
         }
         area(sections)
@@ -508,93 +571,6 @@ page 50009 Parts
 
             }
 
-            group(LocalPartsPurchase)
-            {
-                Caption = 'Local Parts Purchase';
-
-                action(LLPurchase)
-                {
-                    ApplicationArea = CostAccounting;
-                    Caption = 'LPP';
-                    RunObject = page "LPP List";
-                }
-                action(HODPartApprv)
-                {
-                    ApplicationArea = CostAccounting;
-                    Caption = 'HOD Part Approval';
-                    RunObject = page "HOD Part Approval";
-                }
-
-                action(CompCheck)
-                {
-                    ApplicationArea = CostAccounting;
-                    Caption = 'Compliance Check';
-                    RunObject = page "Compliance Check LPP";
-                }
-                action(HODAuditApprv)
-                {
-                    ApplicationArea = CostAccounting;
-                    Caption = 'HOD Audit Approval';
-                    RunObject = page "HOD Audit Approval LPP";
-                }
-
-                action(HODProcApproval)
-                {
-                    ApplicationArea = CostAccounting;
-                    Caption = 'HOD Procurement Approval';
-                    //RunObject = page HOD pro;
-                }
-                action(GMApprv)
-                {
-                    ApplicationArea = CostAccounting;
-                    Caption = 'GM Approval';
-                    RunObject = page "GM procurement Approval";
-                }
-                action(MDProcApproval)
-                {
-                    ApplicationArea = CostAccounting;
-                    Caption = 'MD';
-                    RunObject = page "MD Procurement Approval";
-                }
-                action(MDIsolo)
-                {
-                    ApplicationArea = CostAccounting;
-                    Caption = 'MD Isolo';
-                    RunObject = page "MD Proc Apprv Isolo";
-                }
-                action(DeptFloat)
-                {
-                    ApplicationArea = CostAccounting;
-                    Caption = 'Departmental Float';
-                    RunObject = page "Departmental Float";
-                }
-                action(GenLPO)
-                {
-                    ApplicationArea = CostAccounting;
-                    Caption = 'Generate LPO';
-                    RunObject = page "Generate LPO";
-                }
-                action(LPPLPO)
-                {
-                    ApplicationArea = CostAccounting;
-                    Caption = 'Print LPP LPO';
-                    RunObject = page "Print LPP LPO";
-                }
-                action(PaymentApprv)
-                {
-                    ApplicationArea = CostAccounting;
-                    Caption = 'Payment Approved';
-                    RunObject = page "Payment Approved";
-                }
-                action(PaymentVouch)
-                {
-                    ApplicationArea = CostAccounting;
-                    Caption = 'Payment Voucher';
-                    RunObject = page "Payment Voucher";
-                }
-
-            }
-
             group(AirOrderGranule)
             {
                 Caption = 'Air Order';
@@ -645,13 +621,6 @@ page 50009 Parts
                     RunObject = page "Approved Form M";
                 }
 
-
-
-
-
-
-
-
             }
 
             group(WarrantyProcess)
@@ -693,7 +662,6 @@ page 50009 Parts
 
                 }
             }
-
 
             group(Paymentprocess)
             {
@@ -746,6 +714,23 @@ page 50009 Parts
                     Image = Payment;
                     RunObject = Page "Posted IOU Retirement List";
                     ToolTip = 'View treated IOUs.';
+                }
+                action("Journal Voucher")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Journal Voucher';
+                    Image = Journals;
+                    RunObject = Page "Journal Voucher List";
+                    ToolTip = 'Post journal entries to the general ledger.';
+                }
+
+                action("Posted Journal Voucher")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Posted Journal Voucher';
+                    Image = Journals;
+                    RunObject = Page "Posted Journal Voucher List";
+                    ToolTip = 'View posted journal entries in the general ledger.';
                 }
             }
 
@@ -846,6 +831,13 @@ page 50009 Parts
                     RunObject = Page "Advance Paymt Appr.";
 
                 }
+                action("BalFullPaymtApproval")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Balance/Full Payment Approval';
+                    RunObject = Page "Full  Payment Appr.";
+
+                }
                 action("BalFullPaymtApproved")
                 {
                     ApplicationArea = CostAccounting;
@@ -933,21 +925,21 @@ page 50009 Parts
                 action("BalFullPaymtApprovalCapex")
                 {
                     ApplicationArea = CostAccounting;
-                    Caption = 'Balance/Full Payment';
+                    Caption = 'Full Payment Approvals';
                     RunObject = Page "Full  Payment Appr.-Capex";
 
                 }
                 action("BalFullPaymtApprovalGMCapex")
                 {
                     ApplicationArea = CostAccounting;
-                    Caption = 'Balance/Full Payment';
+                    Caption = 'Balance/Full Payment -GM';
                     RunObject = Page "Bal/Full Payment Capex-GM";
 
                 }
                 action("BalFullPaymtApprovalMDCapex")
                 {
                     ApplicationArea = CostAccounting;
-                    Caption = 'Balance/Full Payment';
+                    Caption = 'Balance/Full Payment -MD';
                     RunObject = Page "Bal/Full Payment Capex-MD";
 
                 }
@@ -989,14 +981,14 @@ page 50009 Parts
                 action("BalancePaymentCapex")
                 {
                     ApplicationArea = CostAccounting;
-                    Caption = 'Awaiting Balance Payment';
+                    Caption = 'Balance Payment';
                     RunObject = Page "Balance Payment-Capex";
 
                 }
                 action("ClosedCapex")
                 {
                     ApplicationArea = CostAccounting;
-                    Caption = 'Awaiting Balance Payment';
+                    Caption = 'Closed Capex';
                     RunObject = Page "Closed Capex";
 
                 }

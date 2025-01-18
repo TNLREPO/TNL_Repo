@@ -113,15 +113,7 @@ report 50284 "TNL Sales Waybill2"
             column(MarketingApprovedBy_SalesHeader; "Marketing Approved By")
             {
             }
-            column(FDSignature; UserSetup.Signature)
-            {
-            }
-            column(OLSignature; UserSetup1.Signature)
-            {
-            }
-            column(MKTSignature; UserSetup2.Signature)
-            {
-            }
+           
             column(MKTDesignation; MKTDesignation)
             {
             }
@@ -391,7 +383,7 @@ report 50284 "TNL Sales Waybill2"
                 IF DepRec.GET("Shortcut Dimension 1 Code") THEN;
 
 
-                IF UserSetup.GET("Finance Send to") THEN BEGIN
+              /*   IF UserSetup.GET("Finance Send to") THEN BEGIN
                     UserSetup.CALCFIELDS(Signature);
                     FADDesignation := UserSetup.Designation;
                 END;
@@ -404,7 +396,7 @@ report 50284 "TNL Sales Waybill2"
                 IF UserSetup2.GET("Marketing Send To") THEN BEGIN
                     UserSetup2.CALCFIELDS(Signature);
                     MKTDesignation := UserSetup2.Designation;
-                END;
+                END; */
             end;
 
             trigger OnPreDataItem()

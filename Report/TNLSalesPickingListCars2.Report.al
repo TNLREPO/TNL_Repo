@@ -43,15 +43,7 @@ report 50283 "TNL Sales Picking List Cars2"
             column(SalespersonName_SalesHeader; SalesHeader."Salesperson Name")
             {
             }
-            column(FDSignature; UserSetup.Signature)
-            {
-            }
-            column(OLSignature; UserSetup1.Signature)
-            {
-            }
-            column(MKTSignature; UserSetup2.Signature)
-            {
-            }
+            
             column(MKTDesignation; MKTDesignation)
             {
             }
@@ -364,7 +356,7 @@ report 50283 "TNL Sales Picking List Cars2"
                 COMPRESSARRAY(CustomerAddr);
                 PrintBottom := FALSE;
 
-                IF UserSetup.GET("Finance Send to") THEN BEGIN
+                /* IF UserSetup.GET("Finance Send to") THEN BEGIN
                     UserSetup.CALCFIELDS(Signature);
                     FADDesignation := UserSetup.Designation;
                 END;
@@ -377,7 +369,7 @@ report 50283 "TNL Sales Picking List Cars2"
                 IF UserSetup2.GET("Marketing Send To") THEN BEGIN
                     UserSetup2.CALCFIELDS(Signature);
                     MKTDesignation := UserSetup2.Designation;
-                END;
+                END; */
             end;
         }
     }

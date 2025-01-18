@@ -386,13 +386,13 @@ codeunit 50000 MySubscribers
 
     end;
 
-    /* [EventSubscriber(ObjectType::Codeunit, Codeunit::ReportManagement, 'OnAfterSubstituteReport', '', true, true)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::ReportManagement, 'OnAfterSubstituteReport', '', true, true)]
     local procedure ChangeFinancialReport(ReportId: Integer; var NewReportId: Integer)
 
     begin
         if ReportId = Report::"Account Schedule" then
             NewReportId := Report::"Account Schedule2";
-    end; */
+    end;
 
 
 

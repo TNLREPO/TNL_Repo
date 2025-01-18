@@ -3044,6 +3044,7 @@ table 70008 "Procurement Header"
                         if NoSeriesMgt.AreRelated("No. Series", xRec."No. Series") then
                             "No. Series" := xRec."No. Series";
                         "No." := NoSeriesMgt.GetNextNo("No. Series");
+                        
                         //NoSeriesMgt.InitSeries(PurchSetup."Opex Nos.", xRec."No. Series", 0D, "No.", "No. Series");
                     END;
                 END;

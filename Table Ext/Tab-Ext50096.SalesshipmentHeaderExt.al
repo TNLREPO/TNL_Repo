@@ -141,15 +141,15 @@ tableextension 50096 "Sales shipment Header Ext" extends "Sales Shipment Header"
         {
             DataClassification = ToBeClassified;
         }
-        field(60132; "HOD Logistics Signature"; BLOB)
+        field(60132; "HOD Logistics Signature"; MediaSet)
         {
             DataClassification = ToBeClassified;
         }
-        field(60133; "HOD Finance Signature"; BLOB)
+        field(60133; "HOD Finance Signature"; MediaSet)
         {
             DataClassification = ToBeClassified;
         }
-        field(60134; "HOD Marketing Signature"; BLOB)
+        field(60134; "HOD Marketing Signature"; MediaSet)
         {
             DataClassification = ToBeClassified;
         }

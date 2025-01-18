@@ -359,7 +359,7 @@ page 70108 "e-Receipt Card"
             cashRecLine.SETRANGE(cashRecLine.Type, Rec."Document Type");
             cashRecLine.SETRANGE(cashRecLine."Cash/Cheque", Rec."Cash/Cheque");
             cashRecLine.SETRANGE(cashRecLine."No.", Rec."No.");
-            IF cashRecLine.FIND('-') THEN BEGIN
+            IF cashRecLine.FindFirst() THEN BEGIN
                 IF CONFIRM('This Action will delete all balance Line for This Transaction/ Continue deletion ?', FALSE) THEN
                     cashRecLine.DELETEALL
                 ELSE

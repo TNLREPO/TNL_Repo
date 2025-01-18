@@ -1351,6 +1351,13 @@ page 60005 "Accountant RC"
                     RunObject = Page "Advance Paymt Appr.";
 
                 }
+                 action("BalFullPaymtApproval")
+                {
+                    ApplicationArea = CostAccounting;
+                    Caption = 'Balance/Full Payment Approval';
+                    RunObject = Page "Full  Payment Appr.";
+
+                }
                 action("BalFullPaymtApproved")
                 {
                     ApplicationArea = CostAccounting;
@@ -1438,21 +1445,21 @@ page 60005 "Accountant RC"
                 action("BalFullPaymtApprovalCapex")
                 {
                     ApplicationArea = CostAccounting;
-                    Caption = 'Balance/Full Payment';
+                    Caption = 'Full Payment Approvals';
                     RunObject = Page "Full  Payment Appr.-Capex";
 
                 }
                 action("BalFullPaymtApprovalGMCapex")
                 {
                     ApplicationArea = CostAccounting;
-                    Caption = 'Balance/Full Payment';
+                    Caption = 'Balance/Full Payment -GM';
                     RunObject = Page "Bal/Full Payment Capex-GM";
 
                 }
                 action("BalFullPaymtApprovalMDCapex")
                 {
                     ApplicationArea = CostAccounting;
-                    Caption = 'Balance/Full Payment';
+                    Caption = 'Balance/Full Payment -MD';
                     RunObject = Page "Bal/Full Payment Capex-MD";
 
                 }

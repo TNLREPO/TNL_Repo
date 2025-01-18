@@ -390,6 +390,15 @@ page 70102 "Internal Audit Role Center"
                 {
                     RunObject = Page 70034;
                 }
+
+                action("Posted Journal Voucher")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Posted Journal Voucher';
+                    Image = Journals;
+                    RunObject = Page "Posted Journal Voucher List";
+                    ToolTip = 'View posted journal entries in the general ledger.';
+                }
             }
             group("Posted Documents")
             {
@@ -717,6 +726,12 @@ page 70102 "Internal Audit Role Center"
                     Caption = 'Posted Journal Vouchers';
                     RunObject = Page 70024;
                 }
+                action(ILEMod)
+                {
+                    Caption = 'ILEModify';
+                    RunObject = xmlport "Modify Item Ledger Entry";
+                }
+
             }
             group("View Payslip")
             {

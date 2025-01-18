@@ -2209,15 +2209,6 @@ B2eAnEMnF6AYD8lgQSudpfcFL3zSKGi3Sfg52sQyCmDRnxFPwyPqDGq1wtBn3YHl0rsh4gpTB+aXbH8w
         <Field Name="MarketingApprovedBy_SalesHeader">
           <DataField>MarketingApprovedBy_SalesHeader</DataField>
         </Field>
-        <Field Name="FDSignature">
-          <DataField>FDSignature</DataField>
-        </Field>
-        <Field Name="OLSignature">
-          <DataField>OLSignature</DataField>
-        </Field>
-        <Field Name="MKTSignature">
-          <DataField>MKTSignature</DataField>
-        </Field>
         <Field Name="MKTDesignation">
           <DataField>MKTDesignation</DataField>
         </Field>

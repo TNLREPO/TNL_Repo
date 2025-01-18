@@ -891,6 +891,8 @@ table 50103 "Payment/Receipt."
         ToNameID: Code[30];
         Text029: Label 'Vendors Name:';
         Text031: Label 'Vendors Amount:';
+        PymtRcpt: Record "Payment/Receipt.";
+
 
     procedure InitRecord()
     begin
@@ -947,83 +949,77 @@ table 50103 "Payment/Receipt."
         "Document Date" := WORKDATE;
     end;
 
-    procedure AssistEdit("OldP/R": Record "Payment/Receipt."): Boolean
+    procedure AssistEdit(OldPymtRcpt: Record "Payment/Receipt."): Boolean
     begin
-        "OldP/R" := Rec;
+        PymtRcpt := Rec;
         GenSetup.GET;
-        CASE "OldP/R"."Document Type" OF
-            "OldP/R"."Document Type"::Receipt:
+
+        CASE OldPymtRcpt."Document Type" OF
+            OldPymtRcpt."Document Type"::Receipt:
                 BEGIN
-                    IF Rec."Cash/Cheque" = "OldP/R"."Cash/Cheque"::Cash THEN BEGIN
-                        //IF NoSeriesMgt.SelectSeries(GenSetup."Cash Receipt No.", "OldP/R"."No. Series", "OldP/R"."No. Series") THEN BEGIN
-                        GenSetup.GET;
-                        //NoSeriesMgt.SetSeries("OldP/R"."No.");
-                        "OldP/R"."No." := NoSeriesMgt.GetNextNo(GenSetup."Cash Receipt No.");
-                        Rec := "OldP/R";
-                        EXIT(TRUE);
-                        //END;
+                    IF Rec."Cash/Cheque" = OldPymtRcpt."Cash/Cheque"::Cash THEN BEGIN
+                        if NoSeriesMgt.LookupRelatedNoSeries(GenSetup."Cash Receipt No.", OldPymtRcpt."No. Series", PymtRcpt."No. Series") then begin
+                            GenSetup.GET;
+                            PymtRcpt."No." := NoSeriesMgt.GetNextNo(PymtRcpt."No. Series");
+                            Rec := PymtRcpt;
+                            EXIT(TRUE);
+                        END;
                     END
                     ELSE BEGIN
-                        //IF NoSeriesMgt.SelectSeries(GenSetup."Cheque Receipt No.", "OldP/R"."No. Series", "OldP/R"."No. Series") THEN BEGIN
-                        GenSetup.GET;
-                        //NoSeriesMgt.SetSeries("OldP/R"."No.");
-                        "OldP/R"."No." := NoSeriesMgt.GetNextNo(GenSetup."Cheque Receipt No.");
-                        Rec := "OldP/R";
-                        EXIT(TRUE);
-                        //END;
+                        if NoSeriesMgt.LookupRelatedNoSeries(GenSetup."Cheque Receipt No.", OldPymtRcpt."No. Series", PymtRcpt."No. Series") THEN BEGIN
+                            GenSetup.GET;
+                            PymtRcpt."No." := NoSeriesMgt.GetNextNo(PymtRcpt."No. Series");
+                            Rec := PymtRcpt;
+                            EXIT(TRUE);
+                        END;
                     END;
                 END;
 
-            "OldP/R"."Document Type"::Requisition:
+            OldPymtRcpt."Document Type"::Requisition:
                 BEGIN
-                    IF "OldP/R"."Cash/Cheque" = "OldP/R"."Cash/Cheque"::Cash THEN BEGIN
-                        //IF NoSeriesMgt.SelectSeries(GenSetup."Cash Requisition No.", "OldP/R"."No. Series", "OldP/R"."No. Series") THEN BEGIN
-                        GenSetup.GET;
-                        //NoSeriesMgt.SetSeries("OldP/R"."No.");
-                        "OldP/R"."No." := NoSeriesMgt.GetNextNo(GenSetup."Cash Requisition No.");
-                        Rec := "OldP/R";
-                        EXIT(TRUE);
-                        //END;
+                    IF OldPymtRcpt."Cash/Cheque" = OldPymtRcpt."Cash/Cheque"::Cash THEN BEGIN
+                        if NoSeriesMgt.LookupRelatedNoSeries(GenSetup."Cash Requisition No.", OldPymtRcpt."No. Series", PymtRcpt."No. Series") THEN BEGIN
+                            GenSetup.GET;
+                            PymtRcpt."No." := NoSeriesMgt.GetNextNo(PymtRcpt."No. Series");
+                            Rec := PymtRcpt;
+                            EXIT(TRUE);
+                        END;
                     END
                     ELSE BEGIN
-                        //IF NoSeriesMgt.SelectSeries(GenSetup."Cheque Requisition No.", "OldP/R"."No. Series", "OldP/R"."No. Series") THEN BEGIN
-                        GenSetup.GET;
-                        "OldP/R"."No." := NoSeriesMgt.GetNextNo(GenSetup."Cheque Requisition No.");
-                        //NoSeriesMgt.SetSeries("OldP/R"."No.");
-                        Rec := "OldP/R";
-                        EXIT(TRUE);
-                        //END;
+                        if NoSeriesMgt.LookupRelatedNoSeries(GenSetup."Cheque Requisition No.", OldPymtRcpt."No. Series", PymtRcpt."No. Series") THEN BEGIN
+                            GenSetup.GET;
+                            PymtRcpt."No." := NoSeriesMgt.GetNextNo(PymtRcpt."No. Series");
+                            Rec := PymtRcpt;
+                            EXIT(TRUE);
+                        END;
                     END;
                 END;
-            "OldP/R"."Document Type"::Journal:
+            OldPymtRcpt."Document Type"::Journal:
                 BEGIN
-                    //IF NoSeriesMgt.SelectSeries(GenSetup."Journal Voucher No.", "OldP/R"."No. Series", "OldP/R"."No. Series") THEN BEGIN
-                    GenSetup.GET;
-                    "OldP/R"."No." := NoSeriesMgt.GetNextNo(GenSetup."Journal Voucher No.");
-                    //NoSeriesMgt.SetSeries("OldP/R"."No.");
-                    Rec := "OldP/R";
-                    EXIT(TRUE);
-                    //END;
+                    if NoSeriesMgt.LookupRelatedNoSeries(GenSetup."Journal Voucher No.", OldPymtRcpt."No. Series", PymtRcpt."No. Series") THEN BEGIN
+                        GenSetup.GET;
+                        PymtRcpt."No." := NoSeriesMgt.GetNextNo(PymtRcpt."No. Series");
+                        Rec := PymtRcpt;
+                        EXIT(TRUE);
+                    END;
                 END;
-            "OldP/R"."Document Type"::"e-Pay":
+            OldPymtRcpt."Document Type"::"e-Pay":
                 BEGIN
-                    //IF NoSeriesMgt.SelectSeries(GenSetup."E-Payment Voucher No.", "OldP/R"."No. Series", "OldP/R"."No. Series") THEN BEGIN
-                    GenSetup.GET;
-                    "OldP/R"."No." := NoSeriesMgt.GetNextNo(GenSetup."E-Payment Voucher No.");
-                    //NoSeriesMgt.SetSeries("OldP/R"."No.");
-                    Rec := "OldP/R";
-                    EXIT(TRUE);
-                    //END;
+                    if NoSeriesMgt.LookupRelatedNoSeries(GenSetup."E-Payment Voucher No.", OldPymtRcpt."No. Series", PymtRcpt."No. Series") THEN BEGIN
+                        GenSetup.GET;
+                        PymtRcpt."No." := NoSeriesMgt.GetNextNo(PymtRcpt."No. Series");
+                        Rec := PymtRcpt;
+                        EXIT(TRUE);
+                    END;
                 END;
-            "OldP/R"."Document Type"::"e-Receipt":
+            OldPymtRcpt."Document Type"::"e-Receipt":
                 BEGIN
-                    //IF NoSeriesMgt.SelectSeries(GenSetup."E-Receipt Voucher No.", "OldP/R"."No. Series", "OldP/R"."No. Series") THEN BEGIN
                     GenSetup.GET;
-                    "OldP/R"."No." := NoSeriesMgt.GetNextNo(GenSetup."E-Receipt Voucher No.");
-                    //NoSeriesMgt.SetSeries("OldP/R"."No.");
-                    Rec := "OldP/R";
-                    EXIT(TRUE);
-                    //END;
+                    if NoSeriesMgt.LookupRelatedNoSeries(GenSetup."E-Receipt Voucher No.", OldPymtRcpt."No. Series", PymtRcpt."No. Series") THEN BEGIN
+                        PymtRcpt."No." := NoSeriesMgt.GetNextNo(PymtRcpt."No. Series");
+                        Rec := PymtRcpt;
+                        EXIT(TRUE);
+                    END;
                 END
         END;
     end;

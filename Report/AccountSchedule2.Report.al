@@ -4,7 +4,7 @@ report 50018 "Account Schedule2"
     RDLCLayout = 'Layout/AccountSchedule2.rdl';
     AdditionalSearchTerms = 'financial reporting,income statement,balance sheet';
     ApplicationArea = Basic, Suite;
-    Caption = 'Financial Report2';
+    Caption = 'Financial Report';
     PreviewMode = PrintLayout;
     UsageCategory = ReportsAndAnalysis;
     AllowScheduling = false;

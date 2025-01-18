@@ -22,27 +22,7 @@ page 60006 "Managing Director Role Center"
             {
                 ApplicationArea = All;
             }
-            /*  part("User Tasks Activities"; "User Tasks Activities")
-             {
-                 ApplicationArea = Suite;
-             } */
-
-            /*  part("Emails"; "Email Activities")
-             {
-                 ApplicationArea = Basic, Suite;
-             } */
-            /* part(ApprovalsActivities; "Approvals Activities")
-            {
-                ApplicationArea = Suite;
-            } */
-            /* part("Intercompany Activities"; "Intercompany Activities")
-            {
-                ApplicationArea = Intercompany;
-            }
-            part(Control46; "Team Member Activities No Msgs")
-            {
-                ApplicationArea = Suite;
-            } */
+            
             part(Control55; "Help And Chart Wrapper")
             {
                 ApplicationArea = Basic, Suite;
