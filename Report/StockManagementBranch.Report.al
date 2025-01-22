@@ -1,7 +1,7 @@
 report 50179 "Stock Management Branch"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = 'Layout/StockManagementBranch.rdlc';
+    RDLCLayout = 'Layout/StockManagementBranch.rdl';
 
     dataset
     {

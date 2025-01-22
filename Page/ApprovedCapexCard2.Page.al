@@ -93,6 +93,7 @@ page 70150 "Approved Capex Card2"
                 {
                     group(Control3)
                     {
+                        ShowCaption = false;
                         field("Head of Department"; Rec."Head of Department")
                         {
                             Caption = 'Head of Department';
@@ -111,6 +112,7 @@ page 70150 "Approved Capex Card2"
                     }
                     group(Control25)
                     {
+                        ShowCaption = false;
                         field("Head of Audit"; Rec."Head of Audit")
                         {
                             Caption = 'Head of Audit';
@@ -130,6 +132,7 @@ page 70150 "Approved Capex Card2"
                     }
                     group(Control4)
                     {
+                        ShowCaption = false;
                         field("General Manager"; Rec."General Manager")
                         {
                             Caption = 'General Manager';
@@ -151,6 +154,7 @@ page 70150 "Approved Capex Card2"
                     }
                     group(Control5)
                     {
+                        ShowCaption = false;
                         field("Managing Director"; Rec."Managing Director")
                         {
                             Caption = 'Managing Director';
@@ -180,6 +184,7 @@ page 70150 "Approved Capex Card2"
                 {
                     group(Control7)
                     {
+                        ShowCaption = false;
                         field("Adv. Paymt. HOD"; Rec."Adv. Paymt. HOD")
                         {
                             Caption = 'Head of Department';
@@ -198,6 +203,7 @@ page 70150 "Approved Capex Card2"
                     }
                     group(Control8)
                     {
+                        ShowCaption = false;
                         field("Adv. Paymt. Audit"; Rec."Adv. Paymt. Audit")
                         {
                             Caption = 'Head of Audit';
@@ -223,6 +229,7 @@ page 70150 "Approved Capex Card2"
                 {
                     group(Control10)
                     {
+                        ShowCaption = false;
                         field("Service Delivery1"; Rec."Service Delivery1")
                         {
                             Caption = 'Requester';
@@ -243,6 +250,7 @@ page 70150 "Approved Capex Card2"
                     }
                     group(Control11)
                     {
+                        ShowCaption = false;
                         field("Service Delivery2"; Rec."Service Delivery2")
                         {
                             Caption = 'Auditor';
@@ -269,6 +277,7 @@ page 70150 "Approved Capex Card2"
                 {
                     group(Control13)
                     {
+                        ShowCaption = false;
                         field("Bal. Paymt. HOD"; Rec."Bal. Paymt. HOD")
                         {
                             Caption = 'Head of Department';
@@ -288,6 +297,7 @@ page 70150 "Approved Capex Card2"
                     }
                     group(Control20)
                     {
+                        ShowCaption = false;
                         field("Bal. Paymt. Audit"; Rec."Bal. Paymt. Audit")
                         {
                             Caption = 'Head of Audit';
@@ -308,6 +318,7 @@ page 70150 "Approved Capex Card2"
                     group(Control21)
                     {
                         Visible = BalGM;
+                        ShowCaption = false;
                         field("Bal. Paymt. GM"; Rec."Bal. Paymt. GM")
                         {
                             Caption = 'General Manager';
@@ -328,6 +339,7 @@ page 70150 "Approved Capex Card2"
                     group(Control14)
                     {
                         Visible = BalMD;
+                        ShowCaption = false;
                         field("Bal. Paymt. MD"; Rec."Bal. Paymt. MD")
                         {
                             Caption = 'Managing Director';

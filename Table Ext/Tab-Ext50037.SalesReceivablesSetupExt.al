@@ -57,11 +57,15 @@ tableextension 50037 "Sales & Receivables Setup Ext" extends "Sales & Receivable
         {
             TableRelation = "No. Series";
         }
-        field(50016; "Appointment BP Nos."; Code[20])
+        field(50016; "SP Fixed Exch. Rate CNY"; Decimal)
         {
             DataClassification = ToBeClassified;
         }
         field(50017; "Repair Order Nos."; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50018; "Appointment BP Nos."; Code[20])
         {
             DataClassification = ToBeClassified;
         }

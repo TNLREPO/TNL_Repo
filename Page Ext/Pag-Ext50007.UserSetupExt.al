@@ -35,6 +35,10 @@ pageextension 50007 "User Setup Ext" extends "User Setup"
                 ApplicationArea = All;
 
             }
+            field(Department; Rec.Department)
+            {
+                ApplicationArea = All;
+            }
             field("Sales Quote No Series"; Rec."Sales Quote No Series")
             {
                 ApplicationArea = All;
@@ -352,8 +356,10 @@ pageextension 50007 "User Setup Ext" extends "User Setup"
             {
                 ApplicationArea = All;
             }
-
-
+            field("GM/MD"; Rec."GM/MD")
+            {
+                ApplicationArea = All;
+            }
         }
     }
 }

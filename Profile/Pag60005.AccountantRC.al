@@ -336,6 +336,14 @@ page 60005 "Accountant RC"
                     RunObject = Report "Inventory Valuation";
                     ToolTip = 'View inventory valuation.';
                 }
+                action("BankAccountGrp")
+                {
+                    ApplicationArea = BasicEU;
+                    Caption = 'Bank Balance/Posting Group';
+                    RunObject = Report "Bank Account Bal/ Posting Grp";
+                    Image = "Report";
+                    ToolTip = 'View bank account balances.';
+                }
 
             }
 
@@ -1351,7 +1359,7 @@ page 60005 "Accountant RC"
                     RunObject = Page "Advance Paymt Appr.";
 
                 }
-                 action("BalFullPaymtApproval")
+                action("BalFullPaymtApproval")
                 {
                     ApplicationArea = CostAccounting;
                     Caption = 'Balance/Full Payment Approval';

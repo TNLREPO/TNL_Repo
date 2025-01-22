@@ -39,23 +39,23 @@ page 70191 "LPP Subform"
                 field(Amount; Rec.Amount)
                 {
                 }
-                /*   field("Incoming Document Entry No.";Rec."Incoming Document Entry No.")
-                  {
+               /*  field("Incoming Document Entry No."; Rec."Incoming Document Entry No.")
+                {
 
-                      trigger OnAssistEdit()
-                      begin
-                          IF Rec."Incoming Document Entry No." > 0 THEN
-                              HYPERLINK(Rec.GetIncomingDocumentURL);
-                      end;
+                    trigger OnAssistEdit()
+                    begin
+                        IF Rec."Incoming Document Entry No." > 0 THEN
+                            HYPERLINK(Rec.GetIncomingDocumentURL);
+                    end;
 
-                      trigger OnLookup(var Text: Text): Boolean
-                      begin
-                          IncomingDocument.SETRANGE("Entry No.", Rec."Incoming Document Entry No.");
-                          IF PAGE.RUNMODAL(0, IncomingDocument) = ACTION::LookupOK THEN
-                              Rec."Incoming Document Entry No." := IncomingDocument."Entry No.";
-                      end;
-                  } */
-
+                    trigger OnLookup(var Text: Text): Boolean
+                    begin
+                        IncomingDocument.SETRANGE("Entry No.", Rec."Incoming Document Entry No.");
+                        IF PAGE.RUNMODAL(0, IncomingDocument) = ACTION::LookupOK THEN
+                            Rec."Incoming Document Entry No." := IncomingDocument."Entry No.";
+                    end;
+                }
+ */
                 field("Document Link"; Rec."Document Link")
                 {
                     ApplicationArea = All;

@@ -2,52 +2,46 @@ pageextension 50014 "Posted Sales Invoice Ext" extends "Posted Sales Invoice"
 {
     actions
     {
-        addlast(navigation)
+        addbefore("Update Document")
         {
-            group(Category_Document)
+            action("Invoice-Vehicle")
             {
-                Caption = 'Document';
-                action("Invoice-Vehicle")
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Print an invoice for transaction.';
-                    Image = PrintChecklistReport;
-                    PromotedCategory = Category11;
-                    Promoted = true;
+                ApplicationArea = All;
+                ToolTip = 'Print an invoice for transaction.';
+                Image = PrintChecklistReport;
+                PromotedCategory = Process;
+                Promoted = true;
 
-                    trigger OnAction()
-                    begin
-                        SalesInvHeader.SETRANGE(SalesInvHeader."No.", Rec."No.");
-                        IF Rec.FindFirst() THEN
-                            REPORT.RUNMODAL(50606, TRUE, TRUE, SalesInvHeader);
-                    end;
-                }
-
-                action("Invoice-Part")
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Print an invoice for transaction.';
-                    Image = PrintChecklistReport;
-                    PromotedCategory = Category11;
-                    Promoted = true;
-
-                    trigger OnAction()
-                    begin
-                        SalesInvHeader.SETRANGE(SalesInvHeader."No.", Rec."No.");
-                        IF Rec.FindFirst() THEN
-                            REPORT.RUNMODAL(50040, TRUE, TRUE, SalesInvHeader);
-                    end;
-                }
-
-
+                trigger OnAction()
+                begin
+                    SalesInvHeader.SETRANGE(SalesInvHeader."No.", Rec."No.");
+                    IF Rec.FindFirst() THEN
+                        REPORT.RUNMODAL(50285, TRUE, TRUE, SalesInvHeader);
+                end;
             }
+
+            action("Invoice-Part")
+            {
+                ApplicationArea = All;
+                ToolTip = 'Print an invoice for transaction.';
+                Image = PrintChecklistReport;
+                PromotedCategory = Process;
+                Promoted = true;
+
+                trigger OnAction()
+                begin
+                    SalesInvHeader.SETRANGE(SalesInvHeader."No.", Rec."No.");
+                    IF Rec.FindFirst() THEN
+                        REPORT.RUNMODAL(50040, TRUE, TRUE, SalesInvHeader);
+                end;
+            }
+
         }
 
         addafter(SendCustom)
         {
             action(SendCustomDocs)
             {
-                
                 ApplicationArea = All;
                 Caption = 'Email Documents';
                 ToolTip = 'Send documents to customer by email.';

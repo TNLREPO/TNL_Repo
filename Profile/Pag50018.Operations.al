@@ -91,6 +91,58 @@ page 50018 Operations
         area(embedding)
         {
             ToolTip = 'Manage sales processes, view KPIs, and access your favorite items and customers.';
+
+            action("VRI In Progress")
+            {
+                Caption = 'VRI In Progress';
+                RunObject = Page 50397;
+                ApplicationArea = Basic, Suite;
+            }
+            action("Transfer Order")
+            {
+                Caption = 'Transfer Order';
+                Image = Document;
+                RunObject = Page 5742;
+                ApplicationArea = Basic, Suite;
+            }
+            action("Model List")
+            {
+                Caption = 'Model List';
+                RunObject = Page 50037;
+                ApplicationArea = Basic, Suite;
+            }
+            action("Purchase Order")
+            {
+                Caption = 'Purchase Order';
+                Image = Document;
+                RunObject = Page 9307;
+                ApplicationArea = Basic, Suite;
+            }
+            action("Item &Tracing")
+            {
+                Caption = 'Item &Tracing';
+                Image = ItemTracing;
+                RunObject = Page 6520;
+                ApplicationArea = Basic, Suite;
+            }
+            action("Colour Code")
+            {
+                Caption = 'Colour Code';
+                RunObject = Page 70170;
+                ApplicationArea = Basic, Suite;
+            }
+            action("Estimate List")
+            {
+                Caption = 'Estimate List';
+                RunObject = Page 70081;
+                ApplicationArea = Basic, Suite;
+            }
+            action("Completed Job Instruction List")
+            {
+                Caption = 'Completed Job Instruction List';
+                RunObject = Page 70076;
+                ApplicationArea = Basic, Suite;
+            }
             action(SalesOrders)
             {
                 ApplicationArea = Basic, Suite;
@@ -340,8 +392,54 @@ page 50018 Operations
                     ToolTip = 'Manage the different places or warehouses where you receive, process, or ship inventory to increase customer service and keep inventory costs low.';
                 }
 
+                action("Colour List")
+                {
+                    Caption = 'Colour List';
+                    RunObject = Page 50131;
+                    ApplicationArea = Basic, Suite;
+                }
+                action(Vendors)
+                {
+                    Caption = 'Vendors';
+                    Image = Vendor;
+                    RunObject = Page 27;
+                    ApplicationArea = Basic, Suite;
+                }
+                action("Warranty Coupon")
+                {
+                    Caption = 'Warranty Coupon';
+                    RunObject = Page 70018;
+                    ApplicationArea = Basic, Suite;
+                }
+                action("Periodic Maintenance")
+                {
+                    Caption = 'Periodic Maintenance';
+                    RunObject = Page 50282;
+                    ApplicationArea = Basic, Suite;
+                }
+                action("Stock/Inventory")
+                {
+                    Caption = 'Stock/Inventory';
+                    RunObject = Page 50283;
+                    ApplicationArea = Basic, Suite;
+                }
             }
-
+            group(Stores)
+            {
+                Caption = 'Stores';
+                action("Store Requisition")
+                {
+                    Caption = 'Store Requisition';
+                    RunObject = Page 50207;
+                    ApplicationArea = Basic, Suite;
+                }
+                action("PostedStoreRequisition")
+                {
+                    Caption = 'Posted Store Requisition';
+                    RunObject = Page 50208;
+                    ApplicationArea = Basic, Suite;
+                }
+            }
 
             group(Paymentprocess)
             {
@@ -414,8 +512,6 @@ page 50018 Operations
                     ToolTip = 'View posted journal entries in the general ledger.';
                 }
             }
-
-
             group(OpexMgt)
             {
                 Caption = 'Opex Management';
@@ -426,7 +522,6 @@ page 50018 Operations
                     RunObject = Page "Opex List";
 
                 }
-
                 action("HODApproval")
                 {
                     ApplicationArea = CostAccounting;
@@ -512,7 +607,7 @@ page 50018 Operations
                     RunObject = Page "Advance Paymt Appr.";
 
                 }
-                 action("BalFullPaymtApproval")
+                action("BalFullPaymtApproval")
                 {
                     ApplicationArea = CostAccounting;
                     Caption = 'Balance/Full Payment Approval';
@@ -743,7 +838,6 @@ page 50018 Operations
 
             }
 
-
             group("Posted Documents")
             {
                 Caption = 'Posted Documents';
@@ -862,6 +956,132 @@ page 50018 Operations
                     ToolTip = 'Opens the list of issued finance charge memos.';
                 }
             }
+
+            group("Branch Pool Car Repair")
+            {
+                Caption = 'Branch Pool Car Repair';
+                action("TNL Work Order (Mgr)")
+                {
+                    Caption = 'TNL Work Order (Mgr)';
+                    RunObject = Page 50620;
+                    ApplicationArea = Basic, Suite;
+                }
+                action("Approvals Request (Adim)")
+                {
+                    Caption = 'Approvals Request (Adim)';
+                    RunObject = Page 50126;
+                    ApplicationArea = Basic, Suite;
+                }
+                action("Send Estimate Requests (Mgr)")
+                {
+                    Caption = 'Send Estimate Requests (Mgr)';
+                    RunObject = Page 50148;
+                    ApplicationArea = Basic, Suite;
+                }
+                action("Awaitng Estimate Confirmations (Admin)")
+                {
+                    Caption = 'Awaitng Estimate Confirmations (Admin)';
+                    RunObject = Page 50127;
+                    ApplicationArea = Basic, Suite;
+                }
+                action("Approved Estimate (Mgr)")
+                {
+                    Caption = 'Approved Estimate (Mgr)';
+                    RunObject = Page 50135;
+                    ApplicationArea = Basic, Suite;
+                }
+                action("Awaiting Invoices (Admin)")
+                {
+                    Caption = 'Awaiting Invoices (Admin)';
+                    RunObject = Page 50142;
+                    ApplicationArea = Basic, Suite;
+                }
+                action("Awaitig Payment Approvals (Admin)")
+                {
+                    Caption = 'Awaitig Payment Approvals (Admin)';
+                    RunObject = Page 50145;
+                    ApplicationArea = Basic, Suite;
+                }
+                action("Awaiting Checks (Mgr)")
+                {
+                    Caption = 'Awaiting Checks (Mgr)';
+                    RunObject = Page 50173;
+                    ApplicationArea = Basic, Suite;
+                }
+                action("ClosedTransactionsPoolCar")
+                {
+                    Caption = 'Closed Transactions';
+                    RunObject = Page 50212;
+                    ApplicationArea = Basic, Suite;
+                }
+            }
+            group("Motor Show Repairs")
+            {
+                Caption = 'Motor Show Repairs';
+                action("Motor Show Repair List")
+                {
+                    Caption = 'Motor Show Repair List';
+                    RunObject = Page 50621;
+                    ApplicationArea = Basic, Suite;
+                }
+                action("Request Approvals (Event Mgr)")
+                {
+                    Caption = 'Request Approvals (Event Mgr)';
+                    RunObject = Page 50213;
+                    ApplicationArea = Basic, Suite;
+                }
+                action(" Pending Estimate Appr (PDI)")
+                {
+                    Caption = ' Pending Estimate Appr (PDI)';
+                    RunObject = Page 50144;
+                    ApplicationArea = Basic, Suite;
+                }
+                action("Approved Estimates (Event Mgr)")
+                {
+                    Caption = 'Approved Estimates (Event Mgr)';
+                    RunObject = Page 50216;
+                    ApplicationArea = Basic, Suite;
+                }
+                action("Pending Payment (PDI)")
+                {
+                    Caption = 'Pending Payment (PDI)';
+                    RunObject = Page 50244;
+                    ApplicationArea = Basic, Suite;
+                }
+                action("Closed Transactions")
+                {
+                    Caption = 'Closed Transactions';
+                    RunObject = Page 50248;
+                    ApplicationArea = Basic, Suite;
+                }
+            }
+            group("View Payslip")
+            {
+                Caption = 'View Payslip';
+                action("My Payslips")
+                {
+                    Caption = 'My Payslips';
+                    RunObject = Page 50147;
+                    ApplicationArea = Basic, Suite;
+                }
+            }
+            group("Vehicle Delivery")
+            {
+                Caption = 'Vehicle Delivery';
+                action("Vehicle Delivery Monitor")
+                {
+                    Caption = 'Vehicle Delivery Monitor';
+                    RunObject = Page 50378;
+                    ApplicationArea = Basic, Suite;
+                }
+                action("Vehicle Delivered")
+                {
+                    Caption = 'Vehicle Delivered';
+                    RunObject = Page 50380;
+                    ApplicationArea = Basic, Suite;
+                }
+            }
+
         }
         area(creation)
         {

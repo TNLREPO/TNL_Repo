@@ -128,7 +128,7 @@ table 70002 "Pool Car Register"
                         "Current Pending Person" := "2nd Approval";
 
                         ToName := UserSetup."E-Mail";
-                        CCName := 'lawal@toyotanigeria.com; kolawole@toyotanigeria.com';
+                        CCName := 'lawal@toyotanigeria.com;kolawole@toyotanigeria.com;';
                         subject := STRSUBSTNO(text001, "Request No.");
                         Addressee := UserSetup.Initials;
 
@@ -136,31 +136,9 @@ table 70002 "Pool Car Register"
                         SenderName := UserSetup2.Initials;
                         SenderAddress := UserSetup2."E-Mail";
 
-                        /* "Mail Body" := 'Dear ' + Addressee + ',' + CRLF + CRLF + 'Kindly approve this pool car request.' + CRLF + CRLF + CRLF +
-                       'Regards,' + CRLF + CRLF + SenderName; */
-
                         Subject := STRSUBSTNO(text001, "Request No.");
                         CreateEmailBody("Request No.", Text012, Addressee);
                         SendEmail(ToName, Subject, EmailBody, SenderAddress, CCName);
-
-                        /*     WITH TempEmailItem DO BEGIN
-                                "Send to" := ToName;
-                                "Send CC" := SenderAddress + ';' + CCName;
-                                "Send BCC" := '';
-                                Subject := STRSUBSTNO(text001, "Request No.");
-
-                                BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                BodyStream.WRITETEXT(Text010 + Addressee + ',');
-                                BodyStream.WRITETEXT(CRLF + CRLF);
-                                BodyStream.WRITETEXT(STRSUBSTNO(text001, "Request No.") + CRLF + CRLF +
-                                CRLF + CRLF +
-                                Text011 + CRLF);
-                                BodyStream.WRITETEXT(SenderName);
-                                BodyStream.WRITETEXT(CRLF + CRLF);
-                                BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                Body := BodyBlob.Blob;
-                                Send(FALSE);
-                            END; */
 
                     END;
                 END;
@@ -184,25 +162,6 @@ table 70002 "Pool Car Register"
                             CreateEmailBody("Request No.", Text013, Addressee);
                             SendEmail(ToName, Subject, EmailBody, SenderAddress, '');
 
-                            /*  WITH TempEmailItem DO BEGIN
-                                 "Send to" := ToName;
-                                 "Send CC" := SenderAddress;
-                                 "Send BCC" := '';
-                                 Subject := STRSUBSTNO(text003, "Request No.");
-
-                                 BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                 BodyStream.WRITETEXT(Text010 + Addressee + ',');
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT(STRSUBSTNO(text003, "Request No.") + CRLF + CRLF +
-                                 CRLF + CRLF +
-                                 Text011 + CRLF);
-                                 BodyStream.WRITETEXT(SenderName);
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                 Body := BodyBlob.Blob;
-                                 Send(FALSE);
-                             END; */
-
                         END;
 
                     "1st Approval Status"::"On hold":
@@ -216,35 +175,9 @@ table 70002 "Pool Car Register"
                             SenderName := UserSetup.Initials;
                             SenderAddress := UserSetup."E-Mail";
 
-                            /* "Mail Body" := 'Dear ' + Addressee + ',' + CRLF + CRLF + 'Please note that your pool car request is on-hold.' + CRLF + CRLF + CRLF +
-                            'Regards,' + CRLF + CRLF + SenderName; */
-
                             Subject := STRSUBSTNO(text004, "Request No.");
                             CreateEmailBody("Request No.", Text014, Addressee);
                             SendEmail(ToName, Subject, EmailBody, SenderAddress, CCName);
-
-                            /*  WITH TempEmailItem DO BEGIN
-                                 "Send to" := ToName;
-                                 "Send CC" := SenderAddress;
-                                 "Send BCC" := '';
-                                 Subject := STRSUBSTNO(text004, "Request No.");
-
-                                 CRLF := '';
-                                 CRLF[1] := 13;
-                                 CRLF[2] := 10;
-
-                                 BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                 BodyStream.WRITETEXT(Text010 + Addressee + ',');
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT(STRSUBSTNO(text004, "Request No.") + CRLF + CRLF +
-                                 CRLF + CRLF +
-                                 Text011 + CRLF);
-                                 BodyStream.WRITETEXT(SenderName);
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                 Body := BodyBlob.Blob;
-                                 Send(FALSE);
-                             END; */
 
                         END;
                 END;
@@ -270,9 +203,7 @@ table 70002 "Pool Car Register"
                 TESTFIELD("1st Approval Status", 2);
 
                 UserSetup4.GET(USERID);
-                // IF UserSetup4."User ID" <>"2nd Approval" THEN
-                //ERROR('You  do not  have the right to approve this transaction');
-
+                
                 IF "2nd Approval" = "Final Approval" THEN
                     ERROR(text009);
 
@@ -282,39 +213,19 @@ table 70002 "Pool Car Register"
                         "2nd Approval Time" := CURRENTDATETIME;
                         "Current Pending Person" := "Final Approval";
                         ToName := UserSetup."E-Mail";
-                        CCName := 'lawal@toyotanigeria.com; kolawole@toyotanigeria.com';
+                        CCName := 'lawal@toyotanigeria.com;kolawole@toyotanigeria.com;';
                         subject := STRSUBSTNO(text007, "Request No.");
                         Addressee := UserSetup2.Initials;
 
                         UserSetup2.GET(USERID);
                         SenderName := UserSetup2.Initials;
                         SenderAddress := UserSetup2."E-Mail";
-
-                        /* "Mail Body" := 'Dear ' + Addressee + ',' + CRLF + CRLF + 'Kindly allocate a vehicle for this request.' + CRLF + CRLF + CRLF +
-                        'Regards,' + CRLF + CRLF + SenderName; */
+                       
 
                         Subject := STRSUBSTNO(text007, "Request No.");
                         CreateEmailBody("Request No.", Text015, Addressee);
                         SendEmail(ToName, Subject, EmailBody, SenderAddress, CCName);
-
-                        /* WITH TempEmailItem DO BEGIN
-                            "Send to" := ToName;
-                            "Send CC" := SenderAddress + ';' + CCName;
-                            "Send BCC" := '';
-                            Subject := STRSUBSTNO(text007, "Request No.");
-
-                            BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                            BodyStream.WRITETEXT(Text010 + Addressee + ',');
-                            BodyStream.WRITETEXT(CRLF + CRLF);
-                            BodyStream.WRITETEXT(STRSUBSTNO(text007, "Request No.") + CRLF + CRLF +
-                            CRLF + CRLF +
-                            Text011 + CRLF);
-                            BodyStream.WRITETEXT(SenderName);
-                            BodyStream.WRITETEXT(CRLF + CRLF);
-                            BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                            Body := BodyBlob.Blob;
-                            Send(FALSE);
-                        END; */
+                     
 
                     END;
                 END;
@@ -325,7 +236,7 @@ table 70002 "Pool Car Register"
                             "2nd Approval Time" := CURRENTDATETIME;
                             UserSetup2.GET(Requester);
                             ToName := UserSetup2."E-Mail";
-                            CCName := 'lawal@toyotanigeria.com; kolawole@toyotanigeria.com';
+                            CCName := 'lawal@toyotanigeria.com;kolawole@toyotanigeria.com;';
                             subject := STRSUBSTNO(text003, "Request No.");
                             Addressee := UserSetup2.Initials;
 
@@ -339,25 +250,7 @@ table 70002 "Pool Car Register"
                             Subject := STRSUBSTNO(text003, "Request No.");
                             CreateEmailBody("Request No.", Text013, Addressee);
                             SendEmail(ToName, Subject, EmailBody, SenderAddress, CCName);
-
-                            /* WITH TempEmailItem DO BEGIN
-                                "Send to" := ToName;
-                                "Send CC" := SenderAddress + ';' + CCName;
-                                "Send BCC" := '';
-                                Subject := STRSUBSTNO(text003, "Request No.");
-
-                                BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                BodyStream.WRITETEXT(Text010 + Addressee + ',');
-                                BodyStream.WRITETEXT(CRLF + CRLF);
-                                BodyStream.WRITETEXT(STRSUBSTNO(text003, "Request No.") + CRLF + CRLF +
-                                CRLF + CRLF +
-                                Text011 + CRLF);
-                                BodyStream.WRITETEXT(SenderName);
-                                BodyStream.WRITETEXT(CRLF + CRLF);
-                                BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                Body := BodyBlob.Blob;
-                                Send(FALSE);
-                            END; */
+                           
 
                         END;
 
@@ -366,7 +259,7 @@ table 70002 "Pool Car Register"
                             "2nd Approval Time" := CURRENTDATETIME;
                             UserSetup2.GET(Requester);
                             ToName := UserSetup2."E-Mail";
-                            CCName := 'lawal@toyotanigeria.com; kolawole@toyotanigeria.com';
+                            CCName := 'lawal@toyotanigeria.com;kolawole@toyotanigeria.com;';
                             subject := STRSUBSTNO(text004, "Request No.");
                             Addressee := UserSetup2.Initials;
 
@@ -374,31 +267,10 @@ table 70002 "Pool Car Register"
                             SenderName := UserSetup.Initials;
                             SenderAddress := UserSetup."E-Mail";
 
-                            /* "Mail Body" := 'Dear ' + Addressee + ',' + CRLF + CRLF + 'Please note that your pool car request is on-hold.' + CRLF + CRLF + CRLF +
-                            'Regards,' + CRLF + CRLF + SenderName; */
-
                             Subject := STRSUBSTNO(text004, "Request No.");
                             CreateEmailBody("Request No.", Text014, Addressee);
                             SendEmail(ToName, Subject, EmailBody, SenderAddress, CCName);
 
-                            /*  WITH TempEmailItem DO BEGIN
-                                 "Send to" := ToName;
-                                 "Send CC" := SenderAddress + ';' + CCName;
-                                 "Send BCC" := '';
-                                 Subject := STRSUBSTNO(text004, "Request No.");
-
-                                 BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                 BodyStream.WRITETEXT(Text010 + Addressee + ',');
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT(STRSUBSTNO(text004, "Request No.") + CRLF + CRLF +
-                                 CRLF + CRLF +
-                                 Text011 + CRLF);
-                                 BodyStream.WRITETEXT(SenderName);
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                 Body := BodyBlob.Blob;
-                                 Send(FALSE);
-                             END; */
 
                         END;
                 END;

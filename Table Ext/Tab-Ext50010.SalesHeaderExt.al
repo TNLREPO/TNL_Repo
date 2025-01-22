@@ -2,6 +2,22 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
 {
     fields
     {
+
+        modify("Sell-to Customer No.")
+        {
+            trigger OnAfterValidate()
+            var
+
+                Customer: Record Customer;
+
+            begin
+                if Customer.get("Sell-to Customer No.") then
+                    "Customer Line discount" := Customer."Customer Line Discount";
+
+            end;
+        }
+
+
         field(50001; Quantity; Decimal)
         {
             FieldClass = FlowField;
@@ -908,10 +924,6 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
     }
 
     var
-
-        //Color: Record "50067";
-        //PurchInvLine: Record "123";
-        //approvalmessage: Codeunit "397";
         mailsent: Boolean;
         ToName: Text[100];
         CCName: Text[200];

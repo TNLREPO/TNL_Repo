@@ -1,4 +1,4 @@
-report 50013 "Montly Payslip2"
+report 50113 "Montly Payslip2"
 {
     ApplicationArea = All;
     Caption = 'Montly Payslip2';

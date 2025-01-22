@@ -1,7 +1,7 @@
 report 50122 "Generate DOS List 4 New Stock"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = 'Layout/GenerateDOSList4NewStock.rdlc';
+    RDLCLayout = 'Layout/GenerateDOSList4NewStock.rdl';
 
     dataset
     {

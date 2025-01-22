@@ -153,6 +153,46 @@ page 50023 "Service"
                 RunObject = Page "Transfer Orders";
                 ToolTip = 'Move inventory items between company locations. With transfer orders, you ship the outbound transfer from one location and receive the inbound transfer at the other location. This allows you to manage the involved warehouse activities and provides more certainty that inventory quantities are updated correctly.';
             }
+            action(PostedServiceInvoice)
+            {
+                ApplicationArea = Location;
+                Caption = 'Posted Service Invoices';
+                RunObject = Page "Posted Service Invoices";
+                //ToolTip = 'Move inventory items between company locations. With transfer orders, you ship the outbound transfer from one location and receive the inbound transfer at the other location. This allows you to manage the involved warehouse activities and provides more certainty that inventory quantities are updated correctly.';
+            }
+            action(PostedSaleShipments)
+            {
+                ApplicationArea = Location;
+                Caption = 'Posted Sales Shipments';
+                RunObject = Page "Posted Sales Shipments";
+                //ToolTip = 'Move inventory items between company locations. With transfer orders, you ship the outbound transfer from one location and receive the inbound transfer at the other location. This allows you to manage the involved warehouse activities and provides more certainty that inventory quantities are updated correctly.';
+            }
+            action(PostedSalesInvoice)
+            {
+                ApplicationArea = Location;
+                Caption = 'Posted Sales Invoices';
+                RunObject = Page "Posted Sales Invoices";
+                //ToolTip = 'Move inventory items between company locations. With transfer orders, you ship the outbound transfer from one location and receive the inbound transfer at the other location. This allows you to manage the involved warehouse activities and provides more certainty that inventory quantities are updated correctly.';
+            }
+             action(PostedSalesCredit)
+            {
+                ApplicationArea = Location;
+                Caption = 'Posted Sales Cr. Memo';
+                RunObject = Page "Posted Sales Credit Memos";
+                //ToolTip = 'Move inventory items between company locations. With transfer orders, you ship the outbound transfer from one location and receive the inbound transfer at the other location. This allows you to manage the involved warehouse activities and provides more certainty that inventory quantities are updated correctly.';
+            }
+            action(PostedTransferRcpt)
+            {
+                ApplicationArea = Location;
+                Caption = 'Posted Tranfer Receipt';
+                RunObject = Page "Posted Transfer Receipts";
+                //ToolTip = 'Move inventory items between company locations. With transfer orders, you ship the outbound transfer from one location and receive the inbound transfer at the other location. This allows you to manage the involved warehouse activities and provides more certainty that inventory quantities are updated correctly.';
+            }
+
+
+
+
+
         }
         area(sections)
         {
@@ -380,7 +420,7 @@ page 50023 "Service"
                     RunObject = Page "Journal Voucher List";
                     ToolTip = 'Post journal entries to the general ledger.';
                 }
-                              
+
                 action("Posted Journal Voucher")
                 {
                     ApplicationArea = Basic, Suite;
@@ -488,7 +528,7 @@ page 50023 "Service"
                     RunObject = Page "Advance Paymt Appr.";
 
                 }
-                 action("BalFullPaymtApproval")
+                action("BalFullPaymtApproval")
                 {
                     ApplicationArea = CostAccounting;
                     Caption = 'Balance/Full Payment Approval';
@@ -638,14 +678,14 @@ page 50023 "Service"
                 action("BalancePaymentCapex")
                 {
                     ApplicationArea = CostAccounting;
-                    Caption = 'Awaiting Balance Payment';
+                    Caption = 'Balance Payment';
                     RunObject = Page "Balance Payment-Capex";
 
                 }
                 action("ClosedCapex")
                 {
                     ApplicationArea = CostAccounting;
-                    Caption = 'Awaiting Balance Payment';
+                    Caption = 'Closed';
                     RunObject = Page "Closed Capex";
 
                 }

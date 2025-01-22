@@ -19,8 +19,22 @@ pageextension 50000 "Sales Order Subform Ext" extends "Sales Order Subform"
                 ApplicationArea = All;
                 Editable = false;
             }
-
         }
+
+        addafter("Line Amount")
+        {
+            field("Discount Inc.Vat"; Rec."Discount Inc.Vat")
+            {
+                ApplicationArea = All;
+            }
+            field("Line Dis.Amt Inc Vat"; Rec."Line Dis.Amt Inc Vat")
+            {
+                ApplicationArea = All;
+            }
+        }
+
+
+
     }
 
     var

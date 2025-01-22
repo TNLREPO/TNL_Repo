@@ -138,10 +138,9 @@ table 50106 "IOU Retirement Lines"
         {
             Editable = true;
         }
-        field(13; "FA Posting Type"; Option)
+        field(13; "FA Posting Type"; Enum "Gen. Journal Line FA Posting Type")
         {
-            OptionCaption = ' ,Acquisition Cost,Depreciation,Write-Down,Appreciation,Custom 1,Custom 2,Disposal,Maintenance';
-            OptionMembers = " ","Acquisition Cost",Depreciation,"Write-Down",Appreciation,"Custom 1","Custom 2",Disposal,Maintenance;
+         
         }
         field(14; "Maintenance Code"; Code[10])
         {

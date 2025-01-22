@@ -292,6 +292,7 @@ page 70126 "Opex Card"
                     }
                     group(Control023)
                     {
+                        ShowCaption = false;
                         field("Bal. Paymt. Audit"; Rec."Bal. Paymt. Audit")
                         {
                             Caption = 'Head of Audit';
@@ -314,6 +315,7 @@ page 70126 "Opex Card"
                 {
                     group(Control015)
                     {
+                        ShowCaption = false;
                         Visible = BalGM;
                         field("Bal. Paymt. GM"; Rec."Bal. Paymt. GM")
                         {
@@ -335,6 +337,7 @@ page 70126 "Opex Card"
                     group(Control016)
                     {
                         Visible = BalMD;
+                         ShowCaption = false;
                         field("Bal. Paymt. MD"; Rec."Bal. Paymt. MD")
                         {
                             Caption = 'Managing Director';

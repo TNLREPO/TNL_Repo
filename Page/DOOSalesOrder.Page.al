@@ -2212,6 +2212,53 @@ page 70522 "DOO Sales Order"
                         DocPrint.PrintSalesOrder(Rec, Usage::"Pick Instruction");
                     end;
                 }
+
+                action("Picking List - Vehicle")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Picking List - Vehicle';
+                    Ellipsis = true;
+                    Image = Print;
+
+
+                    trigger OnAction()
+                    begin
+
+                        SalesHeader.SETRANGE(SalesHeader."No.", Rec."No.");
+                        IF Rec.FindFirst() THEN
+                            REPORT.RUNMODAL(50117, TRUE, TRUE, SalesHeader);
+                    end;
+                }
+                action("Picking List - Pre-Owned Vehicle")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Picking List - Pre-Owned Vehicle';
+                    Ellipsis = true;
+                    Image = Print;
+
+                    trigger OnAction()
+                    begin
+                        SalesHeader.SETRANGE(SalesHeader."No.", Rec."No.");
+                        IF Rec.FindFirst() THEN
+                            REPORT.RUNMODAL(50438, TRUE, TRUE, SalesHeader);
+                    end;
+                }
+                action("Manual Invoice")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Manual Invoice';
+                    Image = Print;
+
+
+
+                    trigger OnAction()
+                    begin
+                        ERROR('Contact the Administrator');
+                        SalesHeader.SETRANGE(SalesHeader."No.", Rec."No.");
+                        IF Rec.FindFirst() THEN
+                            REPORT.RUNMODAL(50439, TRUE, TRUE, SalesHeader);
+                    end;
+                }
             }
             group("&Order Confirmation")
             {
@@ -2680,6 +2727,7 @@ page 70522 "DOO Sales Order"
         VATDateEnabled: Boolean;
         BasicEUEnabled: Boolean;
         UserSetup: Record "User Setup";
+        SalesHeader: Record "Sales Header";
 
     protected var
         ShipToOptions: Enum "Sales Ship-to Options";

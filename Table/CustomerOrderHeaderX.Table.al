@@ -1765,181 +1765,92 @@ table 70034 "Customer Order HeaderX"
             OptionCaption = 'Greater than 10,N-10,N-9,N-8,N-7,N-6,N-5,N-4,N-3,N-2,N-1,Parts Ordered,Parts Arrived,Today,Waiting for Service,Next Job,Being Serviced,Waiting for Inspection,Waiting for Washing,Waiting for Invoicing,Awaiting Delivery,Waiting for Settlement,Waiting for Decision,Waiting for Approval,Waiting for Parts,Waiting for Sublet,Awaiting DAD,Awaiting Estimate,Job Stoppage,Delivered';
             OptionMembers = "Greater than 10","N-10","N-9","N-8","N-7","N-6","N-5","N-4","N-3","N-2","N-1","Parts Ordered","Parts Arrived",Today,"Waiting for Service","Next Job","Being Serviced","Waiting for Inspection","Waiting for Washing","Waiting for Invoicing","Awaiting Delivery","Waiting for Settlement","Waiting for Decision","Waiting for Approval","Waiting for Parts","Waiting for Sublet","Awaiting DAD","Awaiting Estimate","Job Stoppage",Delivered;
 
-            /*         trigger OnValidate()
-                    begin
+            trigger OnValidate()
+            begin
+                ServiceMgtSetup.Get();
+                //Isolo Mail
+                IF "Service Location" = '120ISO' THEN BEGIN
+                    CASE Stage OF
+                        Stage::"Parts Ordered":
+                            IF NOT CONFIRM('Are you sure you want to request for parts', FALSE) THEN
+                                Stage := Stage::"N-1"
+                            ELSE BEGIN
 
-                        //Isolo Mail
-                        IF "Service Location" = '120ISO' THEN BEGIN
-                            CASE Stage OF
-                                Stage::"Parts Ordered":
-                                    IF NOT CONFIRM('Are you sure you want to request for Parts', FALSE) THEN
-                                        Stage := Stage::"N-1"
-                                    ELSE BEGIN
-                                        TESTFIELD("Confirmation Date");
-                                        TESTFIELD("Confirmation Time");
-                                        "Parts Ordered Date" := TODAY;
-                                        "Parts Ordered Time" := TIME;
-                                        "Parts Ordered Staff Name" := USERID;
-                                        ToAddresses := 'ayodeji@toyotanigeria.com';
-                                        Addressee := 'Sir';
-                                        CcAddresses := 'isuekebho@toyotanigeria.com;uzonwanne@toyotanigeria.com';
-                                        BccAddresses := '';
-                                        Subject := STRSUBSTNO(Text005, "No.");
-                                        UserSetup3.GET(USERID);
-                                        SendersName := UserSetup3.Initials;
+                                TESTFIELD("Confirmation Date");
+                                TESTFIELD("Confirmation Time");
+                                "Parts Ordered Date" := TODAY;
+                                "Parts Ordered Time" := TIME;
+                                "Parts Ordered Staff Name" := USERID;
+                                ToAddresses := ServiceMgtSetup."Parts Order Isolo";
+                                CcAddresses := ServiceMgtSetup."Parts Order Isolo CC";
+                                BccAddresses := '';
+                                Subject := STRSUBSTNO(Text005, "No.");
+                                CreateEmailBody("No.", Text007);
+                                SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderEmail);
 
-                                        WITH TempEmailItem DO BEGIN
-                                            "Send to" := ToAddresses;
-                                            "Send CC" := 'csc-reception@toyotanigeria.com;isuekebho@toyotanigeria.com;uzonwanne@toyotanigeria.com;afolabi@toyotanigeria.com;isolopartswarehouse@toyotanigeria.com';
-                                            "Send BCC" := BccAddresses;
-                                            Subject := STRSUBSTNO(Text005, "No.");
+                            end;
 
-                                            CRLF := '';
-                                            CRLF[1] := 13;
-                                            CRLF[2] := 10;
+                        Stage::"Parts Arrived":
+                            IF NOT CONFIRM('Are you sure of availability for Parts', FALSE) THEN
+                                Stage := Stage::"Parts Ordered"
+                            ELSE BEGIN
 
-                                            BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                            BodyStream.WRITETEXT(Text006 + ' ' + Addressee + ',');
-                                            BodyStream.WRITETEXT(CRLF + CRLF);
-                                            BodyStream.WRITETEXT(STRSUBSTNO(Text007, "No.") + CRLF + CRLF +
-                                            Text008 + CRLF + CRLF +
-                                            SendersName);
-                                            BodyStream.WRITETEXT(CRLF + CRLF);
-                                            BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                            Body := BodyBlob.Blob;
-                                            Send(FALSE);
-                                        END;
-                                    END;
+                                "Parts Arrived Date" := TODAY;
+                                "Parts Arrived Time" := TIME;
+                                "Parts Arrived Staff Name" := USERID;
+                                ToAddresses := ServiceMgtSetup."Parts Arrival Isolo";
+                                CcAddresses := ServiceMgtSetup."Parts Arrival Isolo CC";
+                                BccAddresses := '';
+                                Subject := STRSUBSTNO(Text010, "No.");
+                                CreateEmailBody("No.", Text011);
+                                SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderEmail);
 
-                                Stage::"Parts Arrived":
-                                    IF NOT CONFIRM('Are you sure of availability for Parts', FALSE) THEN
-                                        Stage := Stage::"Parts Ordered"
-                                    ELSE BEGIN
-                                        "Parts Arrived Date" := TODAY;
-                                        "Parts Arrived Time" := TIME;
-                                        "Parts Arrived Staff Name" := USERID;
-                                        ToAddresses := 'uzonwanne@toyotanigeria.com;isaac@toyotanigeria.com;csc-reception@toyotanigeria.com;csc-appointment@toyotanigeria.com';
-                                        Addressee := UserSetup5.Initials;
-                                        CcAddresses := 'afolabi@toyotanigeria.com;isuekebho@toyotanigeria.com;ayodeji@toyotanigeria.com';
-                                        BccAddresses := '';
-                                        Subject := STRSUBSTNO(Text010, "No.");
-                                        UserSetup4.GET(USERID);
-                                        SendersName := UserSetup4.Initials;
-                                        WITH TempEmailItem DO BEGIN
-                                            "Send to" := ToAddresses;
-                                            "Send CC" := CcAddresses;
-                                            "Send BCC" := BccAddresses;
-                                            Subject := STRSUBSTNO(Text010, "No.");
-
-                                            CRLF := '';
-                                            CRLF[1] := 13;
-                                            CRLF[2] := 10;
-
-                                            BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                            BodyStream.WRITETEXT(Text006 + ' ' + Addressee + ',');
-                                            BodyStream.WRITETEXT(CRLF + CRLF);
-                                            BodyStream.WRITETEXT(STRSUBSTNO(Text011, "No.") + CRLF + CRLF +
-                                            Text008 + CRLF + CRLF +
-                                            SendersName);
-                                            BodyStream.WRITETEXT(CRLF + CRLF);
-                                            BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                            Body := BodyBlob.Blob;
-                                            Send(FALSE);
-                                        END;
-                                    END;
                             END;
+                    END;
+
+                    //Lekki Mail
+                    IF "Service Location" = '113LEK' THEN BEGIN
+                        CASE Stage OF
+                            Stage::"Parts Ordered":
+                                IF NOT CONFIRM('Are you sure you want to request for parts', FALSE) THEN
+                                    Stage := Stage::"N-1"
+                                ELSE BEGIN
+
+                                    TESTFIELD("Confirmation Date");
+                                    TESTFIELD("Confirmation Time");
+                                    "Parts Ordered Date" := TODAY;
+                                    "Parts Ordered Time" := TIME;
+                                    "Parts Ordered Staff Name" := USERID;
+
+                                    ToAddresses := ServiceMgtSetup."Parts Order Lekki";
+                                    CcAddresses := ServiceMgtSetup."Parts Order Lekki CC";
+                                    BccAddresses := '';
+                                    Subject := STRSUBSTNO(Text005, "No.");
+                                    CreateEmailBody("No.", Text007);
+                                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderEmail);
+
+                                END;
+
+                            Stage::"Parts Arrived":
+                                IF NOT CONFIRM('Are you sure of availability for Parts', FALSE) THEN
+                                    Stage := Stage::"Parts Ordered"
+                                ELSE BEGIN
+
+                                    "Parts Arrived Date" := TODAY;
+                                    "Parts Arrived Time" := TIME;
+                                    "Parts Arrived Staff Name" := USERID;
+                                    ToAddresses := ServiceMgtSetup."Parts Arrival Lekki";
+                                    CcAddresses := ServiceMgtSetup."Parts Arrival Lekki CC";
+                                    BccAddresses := '';
+                                    Subject := STRSUBSTNO(Text010, "No.");
+                                    CreateEmailBody("No.", Text011);
+                                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderEmail);
+
+                                END;
                         END;
-
-                        //Lekki Mail
-                        IF "Service Location" = '113LEK' THEN BEGIN
-                            CASE Stage OF
-                                Stage::"Parts Ordered":
-                                    IF NOT CONFIRM('Are you sure you want to request for Parts', FALSE) THEN
-                                        Stage := Stage::"N-1"
-                                    ELSE BEGIN
-                                        TESTFIELD("Confirmation Date");
-                                        TESTFIELD("Confirmation Time");
-                                        "Parts Ordered Date" := TODAY;
-                                        "Parts Ordered Time" := TIME;
-                                        "Parts Ordered Staff Name" := USERID;
-
-                                        IF UserSetup5.GET(USERID) THEN
-                                            SenderAddress := UserSetup5."E-Mail";
-                                        ToAddresses := 'remigus@toyotanigeria.com'; //isolopartswarehouse@toyotanigeria.com;';
-                                        Addressee := 'Sir';
-                                        CcAddresses := 'irabor@toyotanigeria.com;mudashiru@toyotanigeria.com;badejoko@toyotanigeria.com';
-                                        BccAddresses := '';
-                                        Subject := STRSUBSTNO(Text005, "No.");
-                                        UserSetup3.GET(USERID);
-                                        SendersName := UserSetup3.Initials;
-
-                                        WITH TempEmailItem DO BEGIN
-                                            "Send to" := ToAddresses;
-                                            "Send CC" := CcAddresses + ';' + SenderAddress;
-                                            "Send BCC" := BccAddresses;
-                                            Subject := STRSUBSTNO(Text005, "No.");
-
-                                            CRLF := '';
-                                            CRLF[1] := 13;
-                                            CRLF[2] := 10;
-
-                                            BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                            BodyStream.WRITETEXT(Text006 + ' ' + Addressee + ',');
-                                            BodyStream.WRITETEXT(CRLF + CRLF);
-                                            BodyStream.WRITETEXT(STRSUBSTNO(Text007, "No.") + CRLF + CRLF +
-                                            Text008 + CRLF + CRLF +
-                                            SendersName);
-                                            BodyStream.WRITETEXT(CRLF + CRLF);
-                                            BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                            Body := BodyBlob.Blob;
-                                            Send(FALSE);
-                                        END;
-                                    END;
-
-
-                                Stage::"Parts Arrived":
-                                    IF NOT CONFIRM('Are you sure of availability for Parts', FALSE) THEN
-                                        Stage := Stage::"Parts Ordered"
-                                    ELSE BEGIN
-                                        "Parts Arrived Date" := TODAY;
-                                        "Parts Arrived Time" := TIME;
-                                        "Parts Arrived Staff Name" := USERID;
-
-                                        IF UserSetup5.GET(USERID) THEN
-                                            SenderAddress := UserSetup5."E-Mail";
-                                        ToAddresses := 'servicedojo@toyotanigeria.com';//uzonwanne@toyotanigeria.com;
-                                        Addressee := 'Dear Sir,';
-                                        CcAddresses := 'irabor@toyotanigeria.com;remigus@toyotanigeria.com;badejoko@toyotanigeria.com;mudashiru@toyotanigeria.com';
-                                        BccAddresses := '';
-                                        Subject := STRSUBSTNO(Text010, "No.");
-                                        UserSetup4.GET(USERID);
-                                        SendersName := UserSetup4.Initials;
-
-                                        WITH TempEmailItem DO BEGIN
-                                            "Send to" := ToAddresses;
-                                            "Send CC" := CcAddresses + ';' + SenderAddress;
-                                            "Send BCC" := BccAddresses;
-                                            Subject := STRSUBSTNO(Text010, "No.");
-
-                                            CRLF := '';
-                                            CRLF[1] := 13;
-                                            CRLF[2] := 10;
-
-                                            BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                            BodyStream.WRITETEXT(Addressee + ',');
-                                            BodyStream.WRITETEXT(CRLF + CRLF);
-                                            BodyStream.WRITETEXT(STRSUBSTNO(Text011, "No.") + CRLF + CRLF +
-                                            Text008 + CRLF + CRLF +
-                                            SendersName);
-                                            BodyStream.WRITETEXT(CRLF + CRLF);
-                                            BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                            Body := BodyBlob.Blob;
-                                            Send(FALSE);
-                                        END;
-                                    END;
-                            END;
-                        END;
-                    end; */
+                    END;
+                end;
+            end;
         }
         field(313; Right; Boolean)
         {
@@ -1986,9 +1897,9 @@ table 70034 "Customer Order HeaderX"
         }
         field(324; "Total Line Discount"; Decimal)
         {
-            /* CalcFormula = Sum("Customer Order LineX"."Line Discount Amount" WHERE("Document No." = FIELD("No.")));
+            CalcFormula = Sum("Customer Order LineX"."Line Discount Amount" WHERE("Document No." = FIELD("No.")));
             Editable = false;
-            FieldClass = FlowField; */
+            FieldClass = FlowField;
         }
         field(325; "Current Action"; Text[50])
         {
@@ -2217,22 +2128,23 @@ table 70034 "Customer Order HeaderX"
         //SMTPMail: Codeunit "400";
         UserSetup: Record "User Setup";
         UserSetup3: Record "User Setup";
-        Text005: Label 'Customer Order No:   ''%1''  requires your attention for Item Transfer';
+        Text005: Label 'Customer Order No: %1  requires your attention for Item Transfer.';
         Text006: Label 'Dear';
         Text008: Label 'Regards,';
         Text009: Label 'Mail sent successfully.';
-        Text007: Label 'Customer Order No. ''%1'' transfer order has been created. Kindly proceed to ship the requested items.';
-        Text010: Label 'Customer Order No:   ''%1''  items are now available';
-        Text011: Label 'Customer Order No. ''%1'' items are now available, kindly carry on with the order';
+        Text007: Label 'Customer Order No. %1 transfer order has been created. Kindly proceed to ship the requested items.';
+        Text010: Label 'Customer Order No: %1  items are now available.';
+        Text011: Label 'Customer Order No. %1 items are now available, kindly carry on with the order.';
         UserSetup4: Record "User Setup";
         UserSetup5: Record "User Setup";
         Email1: Label 'keji@toyotanigeria.com';
         BodyTxt: Text;
-        //BodyBlob: Record TempBlob;
         BodyStream: OutStream;
         SenderInitial: Text;
         SenderEmail: Text[50];
         TempEmailItem: Record "Email Item" temporary;
+        EmailBody: Text[1024];
+        Salutation: Label 'Dear team,';
 
     procedure InitRecord()
     var
@@ -2368,10 +2280,10 @@ table 70034 "Customer Order HeaderX"
     begin
         IF NOT Internal THEN
             GenerateService;
-        IF Internal THEN
-            "GenerateService-I";
-        IF Warranty THEN
-            "GenerateService-W";
+        IF Internal THEN;
+        //"GenerateService-I";
+        IF Warranty THEN;
+        //"GenerateService-W";
     end;
 
     procedure GenerateService()
@@ -2458,260 +2370,6 @@ table 70034 "Customer Order HeaderX"
             UNTIL CustOrderLine.NEXT = 0;
     end;
 
-    procedure "GenerateService-I"()
-    var
-        ServiceRec: Record 5900;
-        ServiceLine: Record 5902;
-        ServItemLine: Record 5901;
-    begin
-        /*ServiceMgtSetup.GET;
-        
-        TESTFIELD("Vehicle Registration No.");
-        TESTFIELD("Customer No.");
-        ServiceHeader.INIT;
-        ServiceHeader."Document Type":= ServiceHeader."Document Type"::Order;
-        ServiceMgtSetup.TESTFIELD(ServiceMgtSetup."Default Internal Customer");
-        IF Internal THEN BEGIN
-            ServiceHeader.VALIDATE(ServiceHeader."No.","Customer Order Form No." + '-' + 'I');
-            ServiceHeader.VALIDATE(ServiceHeader."Customer No.","Customer No.");
-        END;
-        ServiceHeader.VALIDATE(ServiceHeader."Posting Date","Expected Delivery Date");
-        //ServiceHeader."User ID" := USERID;
-        ServiceHeader.Description := "Job Type Description";
-        ServiceHeader."Vehicle Registration No." := "Vehicle Registration No.";
-        ServiceHeader.Model := "Model No";
-        ServiceHeader."Model Year" := "Model Year";
-        ServiceHeader.Chassis := "Frame No./VIN";
-        ServiceHeader."Engine No." := "Engine No.";
-        ServiceHeader."Odometer Reading Reception" := "Odometer At Reception";
-        ServiceHeader.Make := "Model Name";
-        ServiceHeader.Model := "Model No";
-        ServiceHeader."Service Advisor" := "Service Advisor";
-        ServiceHeader."Service Advisor's Name" := "Service Advisor's Name";
-        ServiceHeader.Description := "Job Type Description";
-        ServiceHeader."Job Details" := "Job Details";
-        ServiceHeader."Order Date" := TODAY;
-        ServiceHeader."Order Time" := TIME;
-        //ServiceHeader."Customer's Requests" := Appointment;
-        ServiceHeader."Additional Job Details" := "Additional Job Details";
-        ServiceHeader."Reception Time" := "Reception Time";
-        ServiceHeader."Delivery Date" := "Expected Delivery Date";
-        ServiceHeader."Delivery Time" := "Expected Delivery Time";
-        ServiceHeader."Job Posting Group" := 'MOTOR';
-        ServiceHeader.Internal := Internal;
-        ServiceHeader.Warranty := Warranty;
-        ServiceHeader.PM := Maintenance2;
-        ServiceHeader.GR := "General Repair";
-        ServiceHeader."D/Estimate" := "Diag/Est";
-        ServiceHeader."B&P" := "B & P";
-        ServiceHeader.INSERT(TRUE);
-        COMMIT;
-        ServiceHeader.VALIDATE(ServiceHeader."Bill-to Customer No.",ServiceMgtSetup."Default Internal Customer");
-        ServiceHeader.VALIDATE(ServiceHeader."Shortcut Dimension 1 Code","Shortcut Dimension 1 Code");
-        ServiceHeader.VALIDATE(ServiceHeader."Shortcut Dimension 2 Code","Shortcut Dimension 2 Code");
-        
-        ServiceItemLine.INIT;
-        ServiceItemLine.VALIDATE(ServiceItemLine."Document Type",ServiceItemLine."Document Type"::Order);
-        IF Internal THEN
-          ServiceItemLine.VALIDATE(ServiceItemLine."Document No.","Customer Order Form No." + '-' + 'I');
-        ServiceItemLine.VALIDATE(ServiceItemLine."Fault Code","Job Type");
-        ServiceItemLine."Line No." := 10000;
-        ServiceItemLine."Job Type" := CustOrderLine."Job Type";
-        ServiceItemLine.VALIDATE(ServiceItemLine."Service Item No.","Vehicle Registration No.");
-        ServiceItemLine.INSERT(TRUE);
-        
-        CustOrderLine.SETRANGE("Customer Order Form No.","Customer Order Form No.");
-        //CustOrderLine.SETRANGE("Line Type",CustOrderLine."Line Type"::Item);
-        CustOrderLine.SETRANGE(CustOrderLine."Customer Class",CustOrderLine."Customer Class"::Internal);
-        CustOrderLine.SETRANGE(CustOrderLine."On Part Order",FALSE);
-        CustOrderLine.SETFILTER(CustOrderLine."No.",'<>%1','');
-          IF CustOrderLine.FINDSET THEN REPEAT
-            ServiceLine.INIT;
-            ServiceLine.VALIDATE(ServiceLine."Document Type",ServiceItemLine."Document Type");       //SEGUNIO
-            ServiceLine.VALIDATE(ServiceLine."Document No.",ServiceItemLine."Document No.");         //SEGUNIO
-            ServiceLine."Service Item No." := ServiceItemLine."Service Item No.";                    //SEGUNIO
-            ServiceLine."Customer Class" := CustOrderLine."Customer Class";
-            ServiceLine."Service Item Line No." := ServiceItemLine."Line No.";                       //SEGUNIO
-            ServiceLine."Document Type" := ServiceLine."Document Type"::Order;
-            ServiceLine.VALIDATE(ServiceLine."Document No.",ServiceHeader."No.");
-            ServiceLine."Customer No." := ServiceHeader."Customer No.";
-            ServiceLine.VALIDATE(ServiceLine."External Doc. No.","Customer Order Form No.");
-            ServiceLine."Line No." := CustOrderLine."Line No.";
-            IF CustOrderLine.Type = CustOrderLine.Type::Item THEN
-              ServiceLine.Type := ServiceLine.Type::Item
-            ELSE
-              ServiceLine.Type := ServiceLine.Type::Cost;
-            ServiceLine."Model Description" := CustOrderLine."Model Description";
-            ServiceLine.VALIDATE(ServiceLine."No.",CustOrderLine."No.");
-            ServiceLine.VALIDATE(ServiceLine."Variant Code",CustOrderLine.Variant);
-            ServiceLine."Shortcut Dimension 1 Code" := "Shortcut Dimension 1 Code";
-            ServiceLine."Shortcut Dimension 2 Code" := "Shortcut Dimension 2 Code";
-            ServiceLine.VALIDATE(ServiceLine."Location Code",CustOrderLine."Location Code");
-            ServiceLine.Description := CustOrderLine.Description;
-            ServiceLine."Model Description" := CustOrderLine."Model Description";
-            ServiceLine.VALIDATE(ServiceLine.Quantity,CustOrderLine.Quantity);
-            ServiceLine."Fault Code" := CustOrderLine."Operation Code";
-            ServiceLine.VALIDATE(ServiceLine."External Doc. No.","Customer Order Form No.");
-            ServiceLine."PR Raised" := CustOrderLine."PR Raised";
-            ServiceLine.INSERT;
-          UNTIL CustOrderLine.NEXT = 0;
-        
-        "Service Order No." := ServiceHeader."No.";
-        VALIDATE("For Part Order",TRUE);
-        
-        CustOrderLine.SETRANGE("Customer Order Form No.","Customer Order Form No.");
-        CustOrderLine.SETRANGE(CustOrderLine."Customer Class",CustOrderLine."Customer Class"::Internal);
-        //CustOrderLine.SETRANGE("Line Type",CustOrderLine."Line Type"::Item);
-        CustOrderLine.SETRANGE(CustOrderLine."On Part Order",FALSE);
-          IF CustOrderLine.FINDSET THEN REPEAT
-             CustOrderLine."On Part Order" := TRUE;
-             CustOrderLine.MODIFY;
-          UNTIL CustOrderLine.NEXT = 0;
-        
-        
-        //UPDATE JOB DETAILS ON SERVICE LINE
-        ServiceLine.SETRANGE(ServiceLine."Document Type",ServiceLine."Document Type"::Order);
-        ServiceLine.SETRANGE(ServiceLine."Document No.","Customer Order Form No." + '-' + 'I');
-        IF ServiceLine.FINDSET THEN BEGIN
-          JobTask.SETRANGE(JobTask."Job No.","Customer Order Form No." + '-' + 'I');
-          IF JobTask.FINDFIRST THEN
-          REPEAT
-            ServiceLine."Job No." := "Customer Order Form No." + '-' + 'I';
-            ServiceLine."Job Task No." := JobTask."Job Task No.";
-            ServiceLine."Job Line Type" := ServiceLine."Job Line Type"::"Both Schedule and Contract";
-            ServiceLine.MODIFY;
-          UNTIL ServiceLine.NEXT = 0;
-        END;
-         */
-
-    end;
-
-    procedure "GenerateService-W"()
-    var
-        ServiceRec: Record "Service Header";
-        ServiceLine: Record "Service Line";
-        ServItemLine: Record "Service Item Line";
-    begin
-        /*ServiceMgtSetup.GET;
-        
-        TESTFIELD("Vehicle Registration No.");
-        TESTFIELD("Customer No.");
-        ServiceHeader.INIT;
-        ServiceHeader."Document Type":= ServiceHeader."Document Type"::Order;
-        IF Warranty THEN BEGIN
-          ServiceHeader.VALIDATE(ServiceHeader."No.","Customer Order Form No." + '-' + 'W');
-          ServiceHeader.VALIDATE(ServiceHeader."Customer No.","Customer No.");
-        END;
-        ServiceHeader.VALIDATE(ServiceHeader."Posting Date","Expected Delivery Date");
-        //ServiceHeader."User ID" := USERID;
-        ServiceHeader.Description := "Job Type Description";
-        ServiceHeader."Vehicle Registration No." := "Vehicle Registration No.";
-        ServiceHeader.Model := "Model No";
-        ServiceHeader."Model Year" := "Model Year";
-        ServiceHeader.Chassis := "Frame No./VIN";
-        ServiceHeader."Engine No." := "Engine No.";
-        ServiceHeader."Odometer Reading Reception" := "Odometer At Reception";
-        ServiceHeader.Make := "Model Name";
-        ServiceHeader.Model := "Model No";
-        ServiceHeader."Service Advisor" := "Service Advisor";
-        ServiceHeader."Service Advisor's Name" := "Service Advisor's Name";
-        ServiceHeader.Description := "Job Type Description";
-        ServiceHeader."Job Details" := "Job Details";
-        ServiceHeader."Order Date" := TODAY;
-        ServiceHeader."Order Time" := TIME;
-        //ServiceHeader."Customer's Requests" := Appointment;
-        ServiceHeader."Additional Job Details" := "Additional Job Details";
-        ServiceHeader."Reception Time" := "Reception Time";
-        ServiceHeader."Delivery Date" := "Expected Delivery Date";
-        ServiceHeader."Delivery Time" := "Expected Delivery Time";
-        ServiceHeader."Job Posting Group" := 'MOTOR';
-        ServiceHeader.Internal := Internal;
-        ServiceHeader.Warranty := Warranty;
-        ServiceHeader.PM := Maintenance2;
-        ServiceHeader.GR := "General Repair";
-        ServiceHeader."D/Estimate" := "Diag/Est";
-        ServiceHeader."B&P" := "B & P";
-        ServiceHeader.INSERT(TRUE);
-        COMMIT;
-        ServiceHeader.VALIDATE(ServiceHeader."Bill-to Customer No.",ServiceMgtSetup."Default Warranty Customer");
-        ServiceHeader.VALIDATE(ServiceHeader."Shortcut Dimension 1 Code","Shortcut Dimension 1 Code");
-        ServiceHeader.VALIDATE(ServiceHeader."Shortcut Dimension 2 Code","Shortcut Dimension 2 Code");
-        
-        ServiceItemLine.INIT;
-        ServiceItemLine.VALIDATE(ServiceItemLine."Document Type",ServiceItemLine."Document Type"::Order);
-        IF Warranty THEN
-          ServiceItemLine.VALIDATE(ServiceItemLine."Document No.","Customer Order Form No." + '-' + 'W');
-        ServiceItemLine.VALIDATE(ServiceItemLine."Fault Code","Job Type");
-        ServiceItemLine."Line No." := 10000;
-        ServiceItemLine."Job Type" := CustOrderLine."Job Type";
-        ServiceItemLine.VALIDATE(ServiceItemLine."Service Item No.","Vehicle Registration No.");
-        ServiceItemLine.INSERT(TRUE);
-        
-        CustOrderLine.SETRANGE("Customer Order Form No.","Customer Order Form No.");
-        //CustOrderLine.SETRANGE("Line Type",CustOrderLine."Line Type"::Item);
-        CustOrderLine.SETRANGE(CustOrderLine."Customer Class",CustOrderLine."Customer Class"::Warranty);
-        CustOrderLine.SETRANGE(CustOrderLine."On Part Order",FALSE);
-        CustOrderLine.SETFILTER(CustOrderLine."No.",'<>%1','');
-          IF CustOrderLine.FINDSET THEN REPEAT
-            ServiceLine.INIT;
-            ServiceLine.VALIDATE(ServiceLine."Document Type",ServiceItemLine."Document Type");       //SEGUNIO
-            ServiceLine.VALIDATE(ServiceLine."Document No.",ServiceItemLine."Document No.");         //SEGUNIO
-            ServiceLine."Service Item No." := ServiceItemLine."Service Item No.";                    //SEGUNIO
-            ServiceLine."Customer Class" := CustOrderLine."Customer Class";
-            ServiceLine."Service Item Line No." := ServiceItemLine."Line No.";                       //SEGUNIO
-            ServiceLine."Document Type" := ServiceLine."Document Type"::Order;
-            ServiceLine.VALIDATE(ServiceLine."Document No.",ServiceHeader."No.");
-            ServiceLine."Customer No." := ServiceHeader."Customer No.";
-            ServiceLine.VALIDATE(ServiceLine."External Doc. No.","Customer Order Form No.");
-            ServiceLine."Line No." := CustOrderLine."Line No.";
-            IF CustOrderLine.Type = CustOrderLine.Type::Item THEN
-              ServiceLine.Type := ServiceLine.Type::Item
-            ELSE
-              ServiceLine.Type := ServiceLine.Type::Cost;
-            ServiceLine."Model Description" := CustOrderLine."Model Description";
-            ServiceLine.VALIDATE(ServiceLine."No.",CustOrderLine."No.");
-            ServiceLine.VALIDATE(ServiceLine."Variant Code",CustOrderLine.Variant);
-            ServiceLine."Shortcut Dimension 1 Code" := "Shortcut Dimension 1 Code";
-            ServiceLine."Shortcut Dimension 2 Code" := "Shortcut Dimension 2 Code";
-            ServiceLine.VALIDATE(ServiceLine."Location Code",CustOrderLine."Location Code");
-            ServiceLine.Description := CustOrderLine.Description;
-            ServiceLine."Model Description" := CustOrderLine."Model Description";
-            ServiceLine.VALIDATE(ServiceLine.Quantity,CustOrderLine.Quantity);
-            ServiceLine."Fault Code" := CustOrderLine."Operation Code";
-            ServiceLine.VALIDATE(ServiceLine."External Doc. No.","Customer Order Form No." + '-' + 'W');
-            ServiceLine."PR Raised" := CustOrderLine."PR Raised";
-            ServiceLine.INSERT;
-          UNTIL CustOrderLine.NEXT = 0;
-        
-        "Service Order No." := ServiceHeader."No.";
-        VALIDATE("For Part Order",TRUE);
-        
-        CustOrderLine.SETRANGE("Customer Order Form No.","Customer Order Form No.");
-        CustOrderLine.SETRANGE(CustOrderLine."Customer Class",CustOrderLine."Customer Class"::Warranty);
-        //CustOrderLine.SETRANGE("Line Type",CustOrderLine."Line Type"::Item);
-        CustOrderLine.SETRANGE(CustOrderLine."On Part Order",FALSE);
-          IF CustOrderLine.FINDSET THEN REPEAT
-             CustOrderLine."On Part Order" := TRUE;
-             CustOrderLine.MODIFY;
-          UNTIL CustOrderLine.NEXT = 0;
-        
-        
-        //UPDATE JOB DETAILS ON SERVICE LINE
-        ServiceLine.SETRANGE(ServiceLine."Document Type",ServiceLine."Document Type"::Order);
-        ServiceLine.SETRANGE(ServiceLine."Document No.","Customer Order Form No." + '-' + 'W');
-        IF ServiceLine.FINDSET THEN BEGIN
-          JobTask.SETRANGE(JobTask."Job No.","Customer Order Form No." + '-' + 'W');
-          IF JobTask.FINDFIRST THEN
-          REPEAT
-            ServiceLine."Job No." := "Customer Order Form No." + '-' + 'W';
-            ServiceLine."Job Task No." := JobTask."Job Task No.";
-            ServiceLine."Job Line Type" := ServiceLine."Job Line Type"::"Both Schedule and Contract";
-            ServiceLine.MODIFY;
-          UNTIL ServiceLine.NEXT = 0;
-        END;
-         */
-
-    end;
 
     procedure CreateTransferOrder()
     begin
@@ -3157,6 +2815,36 @@ table 70034 "Customer Order HeaderX"
 
         "OpexX Created" := TRUE;
         MODIFY;
+    end;
+
+    procedure CreateEmailBody(DocNo: Code[20]; BodyMsg: Text);
+
+    begin
+
+        UserSetup.Get(UserId);
+
+        EmailBody := Salutation;
+        EmailBody += '<br><br>';
+        EmailBody += STRSUBSTNO(BodyMsg, DocNo);
+        EmailBody += '<br><br>';
+        EmailBody += 'Regards,';
+        EmailBody += '<br>';
+        EmailBody += UserSetup.Initials;
+
+    end;
+
+    procedure SendEmail(ReceiverEmail: Text; Subject: Text; Body: Text; CCRecipients: Text; BCCRecipients: Text)
+    var
+        Email: Codeunit Email;
+        EmailMessage: Codeunit "Email Message";
+
+    begin
+
+        EmailMessage.Create(ReceiverEmail, Subject, EmailBody, true);
+        EmailMessage.AddRecipient(enum::"Email Recipient Type"::Cc, CCRecipients);
+        EmailMessage.AddRecipient(Enum::"Email Recipient Type"::Bcc, BCCRecipients);
+        Email.OpenInEditorModally(EmailMessage, Enum::"Email Scenario"::Default)
+
     end;
 
 }

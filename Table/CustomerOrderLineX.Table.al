@@ -533,6 +533,18 @@ table 70036 "Customer Order LineX"
             CalcFormula = Lookup("Customer Order HeaderX"."Service Advisor's Name" WHERE("No." = FIELD("Document No.")));
             FieldClass = FlowField;
         }
+        field(50030; "Shipment Status"; Option)
+        {
+            OptionCaption = ' ,Pending,Shipped,Cancelled';
+            OptionMembers = " ",Pending,Shipped,Cancelled;
+
+        }
+        field(50031; Reason; Option)
+        {
+            OptionCaption = ' ,Not Needed,Repaired,Done';
+            OptionMembers = " ","Not Needed",Repaired,Done;
+        }
+
     }
 
     keys

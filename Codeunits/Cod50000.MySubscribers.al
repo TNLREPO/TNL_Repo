@@ -394,7 +394,13 @@ codeunit 50000 MySubscribers
             NewReportId := Report::"Account Schedule2";
     end;
 
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::ReportManagement, 'OnAfterSubstituteReport', '', true, true)]
+    local procedure ChangeCustmerItemSalesReport(ReportId: Integer; var NewReportId: Integer)
 
+    begin
+        if ReportId = Report::"Customer/Item Sales" then
+            NewReportId := Report::"Customer/Item Sales2";
+    end;
 
 }
 

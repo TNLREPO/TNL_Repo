@@ -159,5 +159,39 @@ tableextension 50079 "Service Mgt. Setup Ext" extends "Service Mgt. Setup"
         {
             TableRelation = "No. Series".Code;
         }
+
+        field(60000; "Parts Order Isolo"; Text[150])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(60001; "Parts Order Isolo CC"; Text[150])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(60002; "Parts Arrival Isolo"; Text[150])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(60003; "Parts Arrival Isolo CC"; Text[150])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(60004; "Parts Order Lekki"; Text[150])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(60005; "Parts Order Lekki CC"; Text[150])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(60006; "Parts Arrival Lekki"; Text[150])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(60007; "Parts Arrival Lekki CC"; Text[150])
+        {
+            DataClassification = ToBeClassified;
+        }
+
     }
 }

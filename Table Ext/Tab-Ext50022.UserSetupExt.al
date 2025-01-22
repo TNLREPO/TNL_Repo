@@ -352,5 +352,9 @@ tableextension 50022 "User Setup Ext" extends "User Setup"
         {
             DataClassification = ToBeClassified;
         }
+        field(60000; "GM/MD"; boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 }

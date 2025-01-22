@@ -401,12 +401,15 @@ table 70015 "Procument Cue"
         }
         field(43; "Air Online Order MD"; Integer)
         {
+            /*  CalcFormula = Count("Air Online Header" WHERE(Send = CONST(true),
+                                                            HoDPartApproval = CONST(true),
+                                                            ComplianceCheck = CONST(true),
+                                                            HoDAuditApproval = CONST(true),
+                                                            GMapproval = CONST(false),
+                                                            MDapproval = CONST(true))); */
+
             CalcFormula = Count("Air Online Header" WHERE(Send = CONST(true),
-                                                           HoDPartApproval = CONST(true),
-                                                           ComplianceCheck = CONST(true),
-                                                           HoDAuditApproval = CONST(true),
-                                                           GMapproval = CONST(false),
-                                                           MDapproval = CONST(true)));
+            "Head of Department" = CONST(Approved), "Compliance check" = CONST(Satisfactory), "Head of Audit" = CONST(Approved), "Managing Director" = FILTER(' ' | 'On-hold')));
             FieldClass = FlowField;
         }
 

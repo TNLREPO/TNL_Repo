@@ -2,6 +2,35 @@ tableextension 50008 "Item Ext" extends Item
 {
     fields
     {
+
+        modify("Price/Profit Calculation")
+        {
+            trigger OnAfterValidate()
+            begin
+
+                IF ("Inventory Posting Group" = 'N_PARTS') OR ("Inventory Posting Group" = 'ACCESORIES') THEN BEGIN
+                    TESTFIELD("Item Price Group");
+                    IF PriceGrp.GET("Item Price Group") THEN
+                        "TNL Profit %" := PriceGrp."Profit % On Cost B4 Discount";
+                end;
+
+                IF "Profit %" < 100 THEN BEGIN
+                    GLSetup.Get();
+                    IF ("Inventory Posting Group" = 'N_PARTS') OR ("Inventory Posting Group" = 'ACCESORIES') THEN BEGIN
+                        "Unit Price" :=
+                                 ROUND("Fixed Cost" * (1 + ("TNL Profit %" / 100)) * (1 + CalcVAT),
+                                 GLSetup."Unit-Amount Rounding Precision");
+                    end;
+
+                end;
+            end;
+
+        }
+
+
+
+
+
         field(50001; "Stock Date"; Date)
         {
             FieldClass = FlowField;
@@ -970,7 +999,9 @@ tableextension 50008 "Item Ext" extends Item
         {
             DataClassification = ToBeClassified;
         }
+
     }
+
 
     fieldgroups
     {
@@ -1003,6 +1034,7 @@ tableextension 50008 "Item Ext" extends Item
         FixedPrice2: Record 50128;
         ItemCat2: Record 50157;
         ExchRate: Decimal;
+        GLSetup: Record "General Ledger Setup";
 
     trigger OnInsert()
     var

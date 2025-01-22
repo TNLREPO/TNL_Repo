@@ -1,10 +1,24 @@
 pageextension 50018 "Purchase Order Ext" extends "Purchase Order"
 {
+
+    layout
+    {
+
+        addafter(Status)
+        {
+            field("Total Quantity"; Rec."Total Quantity")
+            {
+                ApplicationArea = All;
+                Editable = false;
+            }
+        }
+
+    }
+
     actions
     {
         addafter(MoveNegativeLines)
         {
-
             action(ImportBOL)
             {
                 ApplicationArea = All;

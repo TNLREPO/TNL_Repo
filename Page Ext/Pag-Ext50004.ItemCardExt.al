@@ -3,6 +3,46 @@ pageextension 50004 "Item Card Ext" extends "Item Card"
 
     layout
     {
+        modify("Unit Cost")
+        {
+            Caption = 'Landing Cost (AVG)';
+            Editable = false;
+        }
+        modify("Last Direct Cost")
+        {
+            Caption = 'FOB (Current)';
+            Editable = false;
+        }
+
+        addafter("Unit Cost")
+        {
+            field("FOB (FIXED)"; Rec."FOB (FIXED)")
+            {
+                Caption = 'FOB (Fixed)';
+                ApplicationArea = All;
+                Editable = false;
+            }
+        }
+        addafter("Unit Cost")
+        {
+            field("Fixed Cost"; Rec."Fixed Cost")
+            {
+                Caption = 'Landing Cost (Fixed)';
+                ApplicationArea = All;
+                Editable = false;
+            }
+        }
+
+        addbefore("Profit %")
+        {
+            field("TNL Profit %"; Rec."TNL Profit %")
+            {
+                ApplicationArea = All;
+            }
+        }
+
+
+
         addafter(Warehouse)
         {
             group(OtherInformation)
@@ -92,15 +132,12 @@ pageextension 50004 "Item Card Ext" extends "Item Card"
                     ShowMandatory = true;
                 }
 
-                field("TNL Profit %"; Rec."TNL Profit %")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-
+                
 
             }
 
-
         }
+
+
     }
 }

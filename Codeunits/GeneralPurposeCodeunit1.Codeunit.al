@@ -1013,7 +1013,7 @@ codeunit 50004 "General Purpose Codeunit-1"
                 END;
         END;
 
-        MESSAGE('Retirement Successfully posted');
+        MESSAGE('Retirement Successfully posted!');
 
         GLEntry.SETCURRENTKEY("Document No.", "Posting Date");
         GLEntry.SETRANGE("Document No.", Rec."No.");
