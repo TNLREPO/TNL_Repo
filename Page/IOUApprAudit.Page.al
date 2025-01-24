@@ -37,6 +37,14 @@ page 70238 "IOU Appr. Audit"
                 field("Staff Name"; Rec."Staff Name")
                 {
                 }
+                field("Account No.";Rec."Account No.")
+                {
+
+                }
+                field("Account Name";Rec."Account Name")
+                {
+                    
+                }
             }
         }
     }

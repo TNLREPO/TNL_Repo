@@ -25,10 +25,6 @@ page 70032 "IOU Approved List"
                 field(Amount; Rec.Amount)
                 {
                 }
-                field("Account Name"; Rec."Account Name")
-                {
-                    Caption = 'Staff  Name';
-                }
                 field("Payment Date"; Rec."Payment Date")
                 {
                 }
@@ -40,6 +36,14 @@ page 70032 "IOU Approved List"
                 }
                 field("Expected Retirement Date"; Rec."Expected Retirement Date")
                 {
+                }
+                field("Account No."; Rec."Account No.")
+                {
+
+                }
+                field("Account Name"; Rec."Account Name")
+                {
+
                 }
             }
         }

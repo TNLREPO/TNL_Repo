@@ -91,7 +91,6 @@ page 50009 Parts
             {
                 Caption = 'General Reports';
 
-
             }
 
         }
@@ -262,6 +261,49 @@ page 50009 Parts
                 Image = Invoice;
                 RunObject = Page "Service Invoices";
             }
+
+            action(Takata)
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Takata Calls';
+                Image = "Report";
+                RunObject = page "Pending Takata Customer List";
+                ToolTip = 'View pending Takata customer calls.';
+            }
+            action(ProsCustomers)
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Prospective Customers';
+                Image = "Report";
+                RunObject = page "Prospective Customer";
+                ToolTip = 'View prospective Customers.';
+            }
+            action(KIVCustomers)
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'KIV Customer';
+                Image = "Report";
+                RunObject = page "KIV Customer";
+                ToolTip = 'View KIV Customer.';
+            }
+            action(NotReach)
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Not Reachable Customers';
+                Image = "Report";
+                RunObject = page "Not Reachable Customer";
+                ToolTip = 'View not reachable customers.';
+            }
+            action(TCSCCustomers)
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'TCSC Customer';
+                Image = "Report";
+                RunObject = page "Customer List";
+                RunPageView = WHERE("Location Code" = FILTER('120ISO'));
+                ToolTip = 'View TCSC customers.';
+            }
+
 
         }
         area(sections)
@@ -1434,6 +1476,88 @@ page 50009 Parts
                     RunObject = Report "Inventory - Sales Back Orders";
                     ToolTip = 'View a list with the order lines whose shipment date has been exceeded. The following information is shown for the individual orders for each item: number, customer name, customer''s telephone number, shipment date, order quantity and quantity on back order. The report also shows whether there are other items for the customer on back order.';
                 }
+
+                action(TSP1001)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'TSP1001 Sales Invoice';
+                    Image = "Report";
+                    RunObject = Report "TNL Sale_nvoice TSP1001";
+                }
+
+                action(TSP1004)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'TSP1004 Sales Summary';
+                    Image = "Report";
+                    RunObject = Report "Sales summary TSP1004";
+                }
+                action(TSP1005)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'TSP1005 Debtors Outstanding';
+                    Image = "Report";
+                    RunObject = Report "Debtors Outstanding TSP1005";
+                }
+                action(TSP1007)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'TSP1007 Stock Statement';
+                    Image = "Report";
+                    RunObject = Report "Stock Statement TSP1007";
+                }
+                action(TSP2001)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'TSP2001 Stock Statement';
+                    Image = "Report";
+                    RunObject = Report "Stock Statement TSP2001";
+                }
+                action(TSP2002)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'TSP2002 Stock Transaction';
+                    Image = "Report";
+                    RunObject = Report "Stock Transactn statmt.TSP2002";
+                }
+                action(TSP2003)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'TSP2003 Stock Transaction';
+                    Image = "Report";
+                    RunObject = Report "Stock Transact. statmt TSP2003";
+                }
+                action(TSP2004)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'TSP2004 Stock/Bin';
+                    Image = "Report";
+                    RunObject = Report "Stock List p Bin Locat Tsp2004";
+                }
+                action(TSP2005)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'TSP2005 Branch Dispatch';
+                    Image = "Report";
+                    RunObject = Report "Branch Trans Dispatch TSP2005";
+                }
+                action(TSP2006)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'TSP2005 Branch Receipt';
+                    Image = "Report";
+                    RunObject = Report "Branch Transfer recpt TSP2006";
+                }
+                action(TSP2007)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'TSP2007 Stock/Non-Bin';
+                    Image = "Report";
+                    RunObject = Report "Branch Transfer recpt TSP2006";
+                }
+
+
+
 
             }
             group(History)

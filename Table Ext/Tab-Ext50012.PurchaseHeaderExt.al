@@ -131,14 +131,7 @@ tableextension 50012 "Purchase Header Ext" extends "Purchase Header"
         {
             AutoFormatExpression = "Currency Code";
             AutoFormatType = 1;
-
-            /*
-            CalcFormula = Sum("Purchase Line".Field30997716 WHERE (Document Type=FIELD(Document Type),
-                                                                   Document No.=FIELD(No.),
-                                                                   Type=CONST(Item)));
-            Editable = false;
-            FieldClass = FlowField;
-            */
+            
         }
         field(50201; "Order Type"; Option)
         {
@@ -154,12 +147,12 @@ tableextension 50012 "Purchase Header Ext" extends "Purchase Header"
         }
         field(50203; "Total Quantity"; Decimal)
         {
-            /*
-             CalcFormula = Sum("Purchase Line".Quantity WHERE (Document Type=FIELD(Document Type),
-                                                               Document No.=FIELD(No.),
-                                                               Type=CONST(Item)));
-             FieldClass = FlowField;
-             */
+
+            CalcFormula = Sum("Purchase Line".Quantity WHERE("Document Type" = FIELD("Document Type"),
+                                                               "Document No." = FIELD("No."),
+                                                               Type = CONST(Item)));
+            FieldClass = FlowField;
+
         }
         field(50204; "Cubic Capacity"; Decimal)
         {

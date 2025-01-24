@@ -510,7 +510,20 @@ page 80056 "Parts Customer Order"
             }
             action("Stock Issue Voucher ")
             {
-                //RunObject = Report 50631;
+                Image = Voucher;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+
+                trigger OnAction()
+                var
+                    CustOrderLineX: Record "Customer Order LineX";
+                begin
+                    CustOrderLineX.SETRANGE("Document No.", Rec."No.");
+                    IF CustOrderLineX.FINDFIRST THEN
+                        REPORT.RUNMODAL(50631, TRUE, TRUE, CustOrderLineX);
+
+                end;
             }
             action("Service Order")
             {

@@ -320,7 +320,8 @@ tableextension 50004 "Customer Ext." extends Customer
             var
 
             begin
-                IF NOT userrec."System Admin" THEN
+                UserSetup.get(USERID);
+                IF NOT UserSetup."System Admin" THEN
                     ERROR('You do not have permission for this action!');
 
             end;

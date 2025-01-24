@@ -48,6 +48,12 @@ page 70030 "IOU Register List"
                 field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
                 {
                 }
+                 field("Staff No."; Rec."Account No.")
+                {
+                }
+                field("Staff Name"; Rec."Account Name")
+                {
+                }
             }
         }
     }

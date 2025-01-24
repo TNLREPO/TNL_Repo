@@ -29,8 +29,6 @@ tableextension 50008 "Item Ext" extends Item
 
 
 
-
-
         field(50001; "Stock Date"; Date)
         {
             FieldClass = FlowField;
@@ -810,6 +808,14 @@ tableextension 50008 "Item Ext" extends Item
         }
         field(70017; "BNP Grouping"; Code[20])
         {
+        }
+        field(70018; "Lekki Inventory"; Decimal)
+        {
+            FieldClass = FlowField;
+            CalcFormula = Sum("Item Ledger Entry".Quantity WHERE("Item No." = FIELD("No."), "Global Dimension 1 Code" = FIELD("Global Dimension 1 Filter"),
+            "Global Dimension 2 Code" = FIELD("Global Dimension 2 Filter"),
+            "Location Code" = FIELD("Location Filter"), "Location Code" = FILTER('113LEK'), "Drop Shipment" = FIELD("Drop Shipment Filter"),
+            "Variant Code" = FIELD("Variant Filter"), "Lot No." = FIELD("Lot No. Filter"), "Serial No." = FIELD("Serial No. Filter")));
         }
         field(70100; "Item No. Filter"; Code[250])
         {

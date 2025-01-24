@@ -27,11 +27,11 @@ tableextension 50051 "Employee Ext" extends "Employee"
         }
         field(50015; "Posting Group"; Code[20])
         {
-
+            TableRelation = "Payroll-Posting Group Header."."Posting Group Code";
         }
         field(50016; "Employee Group"; Code[20])
         {
-
+            TableRelation = "Payroll-Employee Group Header.".Code;
         }
         field(50020; "SAM Number"; Code[20])
         {
@@ -53,11 +53,11 @@ tableextension 50051 "Employee Ext" extends "Employee"
         }
         field(50025; EDAmount; Decimal)
         {
-            /*  CalcFormula = Sum("Payroll-Payslip Lines.".Amount WHERE (Payroll Period=FIELD(Period Filter),
-                                                                      Employee No=FIELD(No.),
-                                                                      E/D Code=FIELD(ED Filter)));
-             DecimalPlaces = 0:5;
-             FieldClass = FlowField; */
+            CalcFormula = Sum("Payroll-Payslip Lines.".Amount WHERE("Payroll Period" = FIELD("Period Filter"),
+                                                                      "Employee No" = FIELD("No."),
+                                                                      "E/D Code" = FIELD("ED Filter")));
+            DecimalPlaces = 0 : 5;
+            FieldClass = FlowField;
         }
         field(50026; "ED Filter"; Code[20])
         {
@@ -75,19 +75,19 @@ tableextension 50051 "Employee Ext" extends "Employee"
         }
         field(50030; "Emolument EDAmount"; Decimal)
         {
-            /* CalcFormula = Sum("Payroll-Payslip Lines.".Amount WHERE (Payroll Period=FIELD(Period Filter),
-                                                                     Employee No=FIELD(No.),
-                                                                     E/D Code=FIELD(ED Filter),
-                                                                     ED Type=FIELD(ED Type Filter)));
-            DecimalPlaces = 0:5;
+            CalcFormula = Sum("Payroll-Payslip Lines.".Amount WHERE("Payroll Period" = FIELD("Period Filter"),
+                                                                     "Employee No" = FIELD("No."),
+                                                                     "E/D Code" = FIELD("ED Filter"),
+                                                                     "ED Type" = FIELD("ED Type Filter")));
+            DecimalPlaces = 0 : 5;
             Editable = false;
-            FieldClass = FlowField; */
+            FieldClass = FlowField;
         }
         field(50031; "ED Type Filter"; Option)
         {
             FieldClass = FlowFilter;
             OptionMembers = " ","NSITF Employee","NSITF Employer","Gross Salary","Pension Employee","Pension Employer","NSITF Gross",NHF,"Net Pay","Other Emoluments","Gross Emolument","Emolument Net","Deduction Emolument";
-            //TableRelation = "Payroll-E/D Codes."."ED Type" WHERE (ED Type=FILTER(Other Emoluments|Gross Emolument|Emolument Net|Deduction Emolument));
+            TableRelation = "Payroll-E/D Codes."."ED Type" WHERE("ED Type" = FILTER('Other Emoluments|Gross Emolument|Emolument Net|Deduction Emolument'));
         }
         field(50034; "Acct. type"; Option)
         {
@@ -174,7 +174,7 @@ tableextension 50051 "Employee Ext" extends "Employee"
         field(50103; "Leave Category Filter"; Code[50])
         {
             FieldClass = FlowFilter;
-            //TableRelation = "Leave Categories".Code;
+            TableRelation = "Leave Categories".Code;
         }
         field(50104; "Leave Days"; Integer)
         {
@@ -195,9 +195,9 @@ tableextension 50051 "Employee Ext" extends "Employee"
         field(50106; "Training Cost"; Decimal)
         {
             BlankZero = true;
-            /*  CalcFormula = Sum("Course Attendance".Cost WHERE (Employee No=FIELD(No.)));
-             Editable = false;
-             FieldClass = FlowField; */
+            CalcFormula = Sum("Course Attendance".Cost WHERE("Employee No" = FIELD("No.")));
+            Editable = false;
+            FieldClass = FlowField;
         }
         field(50107; "Course Filter"; Code[30])
         {
@@ -205,13 +205,13 @@ tableextension 50051 "Employee Ext" extends "Employee"
         field(50108; "Scholarship Cost"; Decimal)
         {
             BlankZero = true;
-            /*  CalcFormula = Sum("Scholarship Payment".Amount WHERE (Employee No=FIELD(No.)));
-             FieldClass = FlowField; */
+            CalcFormula = Sum("Scholarship Payment".Amount WHERE("Employee No" = FIELD("No.")));
+            FieldClass = FlowField;
         }
         field(50109; "Hospital Filter"; Code[10])
         {
             FieldClass = FlowFilter;
-            //TableRelation = Vendor."No." WHERE (Hospital=CONST(Yes));
+            TableRelation = Vendor."No." WHERE(Hospital = CONST(true));
         }
         field(50110; "Beneficiary Filter"; Option)
         {
@@ -274,11 +274,11 @@ tableextension 50051 "Employee Ext" extends "Employee"
         }
         field(50120; EDQuantity; Decimal)
         {
-            /* CalcFormula = Sum("Payroll-Payslip Lines.".Quantity WHERE(Payroll Period=FIELD(Period Filter),
-                                                                       Employee No=FIELD(No.),
-                                                                       E/D Code=FIELD(ED Filter)));
-            DecimalPlaces = 0:5;
-            FieldClass = FlowField; */
+            CalcFormula = Sum("Payroll-Payslip Lines.".Quantity WHERE("Payroll Period" = FIELD("Period Filter"),
+                                                                       "Employee No" = FIELD("No."),
+                                                                       "E/D Code" = FIELD("ED Filter")));
+            DecimalPlaces = 0 : 5;
+            FieldClass = FlowField;
         }
         field(50121; Grade; Code[15])
         {
@@ -468,7 +468,7 @@ tableextension 50051 "Employee Ext" extends "Employee"
         }
         field(60035; "Code"; Code[20])
         {
-            //TableRelation = "Behavioral Attribute";
+            TableRelation = "Behavioral Attribute";
             trigger OnValidate()
             begin
                 //IF BehAtt.GET(Code) THEN

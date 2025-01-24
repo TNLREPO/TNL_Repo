@@ -36,6 +36,14 @@ page 70239 "IOU Appr. General"
                 field("Staff Name"; Rec."Staff Name")
                 {
                 }
+                field("Account No.";Rec."Account No.")
+                {
+
+                }
+                field("Account Name";Rec."Account Name")
+                {
+                    
+                }
             }
         }
     }

@@ -30,9 +30,6 @@ page 50217 "IOU Request"
                 field("Payment Date"; Rec."Payment Date")
                 {
                 }
-                field("Staff Name"; Rec."Account Name")
-                {
-                }
                 field("Manual Voucher No."; Rec."Manual Voucher No.")
                 {
                 }
@@ -40,6 +37,12 @@ page 50217 "IOU Request"
                 {
                 }
                 field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
+                {
+                }
+                field("Staff No."; Rec."Account No.")
+                {
+                }
+                field("Staff Name"; Rec."Account Name")
                 {
                 }
             }

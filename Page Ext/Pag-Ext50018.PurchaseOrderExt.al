@@ -3,6 +3,14 @@ pageextension 50018 "Purchase Order Ext" extends "Purchase Order"
 
     layout
     {
+        addafter("Vendor Invoice No.")
+        {
+            field("External Document No."; Rec."External Document No.")
+            {
+                ApplicationArea = All;
+            }
+        }
+
 
         addafter(Status)
         {

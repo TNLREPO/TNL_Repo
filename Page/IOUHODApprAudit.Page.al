@@ -36,6 +36,14 @@ page 70538 "IOU HOD Appr. Audit"
                 field("Staff Name"; Rec."Staff Name")
                 {
                 }
+                field("Account No.";Rec."Account No.")
+                {
+
+                }
+                field("Account Name";Rec."Account Name")
+                {
+                    
+                }
             }
         }
     }

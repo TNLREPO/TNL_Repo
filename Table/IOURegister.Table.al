@@ -254,15 +254,15 @@ table 50105 "IOU Register"
             ELSE
             IF (Department = FILTER('04DDEV')) "User Setup"."User ID" WHERE("User ID" = FILTER('HENRY|OLUFEMI'))
             ELSE
-            IF (Department = FILTER('05PARTS')) "User Setup"."User ID" WHERE("User ID" = FILTER('AKINDELE|ISUEKEBHO|RAVINDER|SYLVESTER|IBIDAPO-OBE'))
+            IF (Department = FILTER('05PARTS')) "User Setup"."User ID" WHERE("User ID" = FILTER('AKINDELE|ISUEKEBHO|RAVINDER|SYLVESTER|IBIDAPO-OBE|BAMIDELE|KOLAWOLE|UZONWANNE'))
             ELSE
             IF (Department = FILTER('06SERVICE')) "User Setup"."User ID" WHERE("User ID" = FILTER('BAMIDELE|SYLVESTER'))
             ELSE
             IF (Department = FILTER('07FINACC')) "User Setup"."User ID" WHERE("User ID" = FILTER('ALBERT|BUNMI|PAA'))
             ELSE
-            IF (Department = FILTER('08AUDSYS')) "User Setup"."User ID" WHERE("User ID" = FILTER('ADEWUMI|AGBESUA|BRANO|OLAMIDE'))
+            IF (Department = FILTER('08AUDSYS')) "User Setup"."User ID" WHERE("User ID" = FILTER('ADEWUMI|BRANO|OLAMIDE'))
             ELSE
-            IF (Department = FILTER('09MARKET')) "User Setup"."User ID" WHERE("User ID" = FILTER('AJUYAH|BAYO|BUKUNOLA'));
+            IF (Department = FILTER('09MARKET')) "User Setup"."User ID" WHERE("User ID" = FILTER('BAYO|BUKUNOLA'));
 
 
 

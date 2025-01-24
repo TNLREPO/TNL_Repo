@@ -3,7 +3,7 @@ namespace AL_TNL.AL_TNL;
 using Microsoft.Inventory.Journal;
 using Microsoft.Inventory.Item;
 
-report 50019 "Update Phys. Inventory Jnl"
+report 51019 "Update Phys. Inventory Jnl"
 {
     ApplicationArea = All;
     Caption = 'Update Phys. Inventory Jnl';

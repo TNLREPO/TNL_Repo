@@ -2504,8 +2504,8 @@ table 70008 "Procurement Header"
                 BEGIN
                     IF "No." = '' THEN BEGIN
                         PurchSetup.GET;
-                        PurchSetup.TESTFIELD("Opex Nos.");
-                        "No. Series" := PurchSetup."Opex Nos.";
+                        PurchSetup.TESTFIELD("Capex Nos.");
+                        "No. Series" := PurchSetup."Capex Nos.";
                         if NoSeriesMgt.AreRelated("No. Series", xRec."No. Series") then
                             "No. Series" := xRec."No. Series";
                         "No." := NoSeriesMgt.GetNextNo("No. Series");

@@ -21,9 +21,7 @@ page 50434 "IOU Approval List"
                 field("IOU No."; Rec."IOU No.")
                 {
                 }
-                field("Account Name"; Rec."Account Name")
-                {
-                }
+                
                 field(Description; Rec.Description)
                 {
                 }
@@ -32,6 +30,14 @@ page 50434 "IOU Approval List"
                 }
                 field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
                 {
+                }
+                field("Account No.";Rec."Account No.")
+                {
+
+                }
+                field("Account Name";Rec."Account Name")
+                {
+                    
                 }
             }
         }

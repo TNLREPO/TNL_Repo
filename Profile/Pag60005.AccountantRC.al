@@ -344,8 +344,29 @@ page 60005 "Accountant RC"
                     Image = "Report";
                     ToolTip = 'View bank account balances.';
                 }
+            }
+
+            group(PayrollReports)
+            {
+                action("AmountED")
+                {
+                    ApplicationArea = BasicEU;
+                    Caption = 'Amount for One ED';
+                    RunObject = Report "Amounts for one E/D";
+                    Image = "Report";
+                    //ToolTip = 'View bank account balances.';
+                }
+                action("CreatePayrollJnl")
+                {
+                    ApplicationArea = BasicEU;
+                    Caption = 'Create Payroll Journal';
+                    RunObject = Report "Create Payroll Journal";
+                    Image = "Report";
+                    //ToolTip = 'View bank account balances.';
+                }
 
             }
+
 
             group("Cost Accounting")
             {
@@ -1356,7 +1377,7 @@ page 60005 "Accountant RC"
                 {
                     ApplicationArea = CostAccounting;
                     Caption = 'Advance Payment Approved';
-                    RunObject = Page "Advance Paymt Appr.";
+                    RunObject = Page "Advance Payment";
 
                 }
                 action("BalFullPaymtApproval")

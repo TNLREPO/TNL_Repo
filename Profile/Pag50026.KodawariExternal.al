@@ -577,17 +577,56 @@ page 50026 "Kodawari External"
             group("Warranty Coupon")
             {
 
-                Caption = 'Warranty Coupon';
-                Image = FiledPosted;
-                ToolTip = 'View the warranty register.';
-                action(Warranty)
+                action(WarrantyCoupon)
                 {
                     ApplicationArea = Basic, Suite;
                     Caption = 'Warranty Coupon';
-                    Image = PostedOrder;
-                    RunObject = Page "Warranty Coupon2";
-                    ToolTip = 'Open the warranty coupon list.';
+                    Image = ListPage;
+                    RunObject = page "Warranty Coupon4";
+                    ToolTip = 'View warranty coupons.';
                 }
+                action(Takata)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Takata Calls';
+                    Image = "Report";
+                    RunObject = page "Pending Takata Customer List";
+                    ToolTip = 'View pending Takata customer calls.';
+                }
+                action(ProsCustomers)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Prospective Customers';
+                    Image = "Report";
+                    RunObject = page "Prospective Customer";
+                    ToolTip = 'View prospective Customers.';
+                }
+                action(KIVCustomers)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'KIV Customer';
+                    Image = "Report";
+                    RunObject = page "KIV Customer";
+                    ToolTip = 'View KIV Customer.';
+                }
+                action(NotReach)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Not Reachable Customers';
+                    Image = "Report";
+                    RunObject = page "Not Reachable Customer";
+                    ToolTip = 'View not reachable customers.';
+                }
+                action(TCSCCustomers)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'TCSC Customer';
+                    Image = "Report";
+                    RunObject = page "Customer List";
+                    RunPageView = WHERE("Location Code" = FILTER('120ISO'));
+                    ToolTip = 'View TCSC customers.';
+                }
+
 
             }
 
@@ -628,16 +667,50 @@ page 50026 "Kodawari External"
                     RunObject = Page "Posted Sales Shipments";
                     ToolTip = 'Open the list of posted sales shipments.';
                 }
-                action("Sales Quote Archive")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Sales Quote Archives';
-                    RunObject = page "Sales Quote Archives";
-                }
-
-
-
-
+                 action(PostedServiceInvoice)
+            {
+                ApplicationArea = Location;
+                Caption = 'Posted Service Invoices';
+                RunObject = Page "Posted Service Invoices";
+                //ToolTip = 'Move inventory items between company locations. With transfer orders, you ship the outbound transfer from one location and receive the inbound transfer at the other location. This allows you to manage the involved warehouse activities and provides more certainty that inventory quantities are updated correctly.';
+            }
+            action(PostedSaleShipments)
+            {
+                ApplicationArea = Location;
+                Caption = 'Posted Sales Shipments';
+                RunObject = Page "Posted Sales Shipments";
+                //ToolTip = 'Move inventory items between company locations. With transfer orders, you ship the outbound transfer from one location and receive the inbound transfer at the other location. This allows you to manage the involved warehouse activities and provides more certainty that inventory quantities are updated correctly.';
+            }
+            
+             action(PostedSalesCredit)
+            {
+                ApplicationArea = Location;
+                Caption = 'Posted Sales Cr. Memo';
+                RunObject = Page "Posted Sales Credit Memos";
+                //ToolTip = 'Move inventory items between company locations. With transfer orders, you ship the outbound transfer from one location and receive the inbound transfer at the other location. This allows you to manage the involved warehouse activities and provides more certainty that inventory quantities are updated correctly.';
+            }
+            action(PostedSalesInvoice)
+            {
+                ApplicationArea = Location;
+                Caption = 'Posted Sales Invoices';
+                RunObject = Page "Posted Sales Invoices";
+                //ToolTip = 'Move inventory items between company locations. With transfer orders, you ship the outbound transfer from one location and receive the inbound transfer at the other location. This allows you to manage the involved warehouse activities and provides more certainty that inventory quantities are updated correctly.';
+            }
+            action(PostedTransferRcpt)
+            {
+                ApplicationArea = Location;
+                Caption = 'Posted Tranfer Receipt Lines';
+                RunObject = Page "Posted Transfer Receipt Lines";
+                //ToolTip = 'Move inventory items between company locations. With transfer orders, you ship the outbound transfer from one location and receive the inbound transfer at the other location. This allows you to manage the involved warehouse activities and provides more certainty that inventory quantities are updated correctly.';
+            }
+            action(PostedTransferShipment)
+            {
+                ApplicationArea = Location;
+                Caption = 'Posted Tranfer Shipment Lines';
+                RunObject = Page "Posted Transfer Shipment Lines";
+                //ToolTip = 'Move inventory items between company locations. With transfer orders, you ship the outbound transfer from one location and receive the inbound transfer at the other location. This allows you to manage the involved warehouse activities and provides more certainty that inventory quantities are updated correctly.';
+            }
+               
 
             }
         }
