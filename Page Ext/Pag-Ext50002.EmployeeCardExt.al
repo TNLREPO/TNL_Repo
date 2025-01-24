@@ -145,6 +145,10 @@ pageextension 50002 "Employee Card Ext" extends "Employee Card"
             {
                 ApplicationArea = All;
             }
+            field(Blocked; Rec.Blocked)
+            {
+                ApplicationArea = All;
+            }
         }
 
 

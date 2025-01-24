@@ -402,5 +402,15 @@ codeunit 50000 MySubscribers
             NewReportId := Report::"Customer/Item Sales2";
     end;
 
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::ReportManagement, 'OnAfterSubstituteReport', '', true, true)]
+    local procedure ChangeCustmerDetailTrialBal(ReportId: Integer; var NewReportId: Integer)
+
+    begin
+        if ReportId = Report::"Customer - Detail Trial Bal." then
+            NewReportId := Report::"Customer - Detail Trial Bal.2";
+    end;
+
+   
+
 }
 

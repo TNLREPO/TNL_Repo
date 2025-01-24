@@ -109,7 +109,7 @@ page 50603 "Leave Request Card"
                 field("Send for Approval"; Rec."Send for Approval")
                 {
                     Caption = 'Send';
-                    Editable = "Send for ApprovalEditable";
+                    //Editable = "Send for ApprovalEditable";
 
                     trigger OnValidate()
                     begin
@@ -127,7 +127,7 @@ page 50603 "Leave Request Card"
                 field("1st Approval"; Rec."1st Approval")
                 {
                     Caption = 'To';
-                    Editable = "1st Approval toEditable";
+                    //Editable = "1st Approval toEditable";
 
                     trigger OnLookup(var Text: Text): Boolean
                     begin
@@ -327,7 +327,7 @@ page 50603 "Leave Request Card"
                 field("1st Approval Status"; Rec."1st Approval Status")
                 {
                     Caption = 'Action';
-                    Editable = "1st Apprv. StatusEditable";
+                    //Editable = "1st Apprv. StatusEditable";
 
                     trigger OnValidate()
                     begin

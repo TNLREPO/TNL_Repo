@@ -364,6 +364,30 @@ page 60005 "Accountant RC"
                     Image = "Report";
                     //ToolTip = 'View bank account balances.';
                 }
+                action("BankReport")
+                {
+                    ApplicationArea = BasicEU;
+                    Caption = 'Bank Report';
+                    RunObject = Report "Bank Report";
+                    Image = "Report";
+                    //ToolTip = 'View bank account balances.';
+                }
+                action("BankReportEmolument")
+                {
+                    ApplicationArea = BasicEU;
+                    Caption = 'Bank/Emolument Report';
+                    RunObject = Report "Bank Report + Emolument";
+                    Image = "Report";
+                    //ToolTip = 'View bank account balances.';
+                }
+                action("BankTotal")
+                {
+                    ApplicationArea = BasicEU;
+                    Caption = 'Bank Total Net';
+                    RunObject = Report "Bank Total Net Report";
+                    Image = "Report";
+                    //ToolTip = 'View bank account balances.';
+                }
 
             }
 

@@ -35,12 +35,12 @@ table 70003 "Pool Car Allocation"
 
             trigger OnLookup()
             begin
-                /*  IF PAGE.RUNMODAL(50602,PoolCarAvail) = ACTION::LookupOK THEN BEGIN
-                   "Registration No." := PoolCarAvail."Registration No.";
-                   "Model Name" := PoolCarAvail."Model Name";
-                   "Driver Name" := PoolCarAvail."Driver Name";
-                   MODIFY;
-                 END; */
+                IF PAGE.RUNMODAL(50602, PoolCarAvail) = ACTION::LookupOK THEN BEGIN
+                    "Registration No." := PoolCarAvail."Registration No.";
+                    "Model Name" := PoolCarAvail."Model Name";
+                    "Driver Name" := PoolCarAvail."Driver Name";
+                    MODIFY;
+                END;
             end;
         }
         field(4; "Model Name"; Text[70])
@@ -111,10 +111,10 @@ table 70003 "Pool Car Allocation"
 
             trigger OnLookup()
             begin
-                /* IF PAGE.RUNMODAL(50602,PoolCarAvail) = ACTION::LookupOK THEN BEGIN
-                  "Driver Name" := PoolCarAvail."Driver Name";
-                  MODIFY;
-                END; */
+                IF PAGE.RUNMODAL(50602, PoolCarAvail) = ACTION::LookupOK THEN BEGIN
+                    "Driver Name" := PoolCarAvail."Driver Name";
+                    MODIFY;
+                END;
             end;
         }
         field(15; Comments; Text[250])

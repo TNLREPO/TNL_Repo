@@ -85,7 +85,15 @@ page 50021 "Dealer Development"
     {
         area(embedding)
         {
-            ToolTip = 'Manage sales processes, view KPIs, and access your favorite items and customers.';
+            ToolTip = 'Manage payslip, sales processes, view KPIs, and access your favorite items and customers.';
+
+            action(MyPaySlips)
+            {
+                ApplicationArea = CostAccounting;
+                Caption = 'My Payslips';
+                RunObject = Page "My payslip";
+                ToolTip = '';
+            }
             action(SalesOrders)
             {
                 ApplicationArea = Basic, Suite;
@@ -458,7 +466,7 @@ page 50021 "Dealer Development"
                     RunObject = Page "Advance Paymt Appr.";
 
                 }
-                 action("BalFullPaymtApproval")
+                action("BalFullPaymtApproval")
                 {
                     ApplicationArea = CostAccounting;
                     Caption = 'Balance/Full Payment Approval';

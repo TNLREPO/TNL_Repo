@@ -20,7 +20,7 @@ tableextension 50051 "Employee Ext" extends "Employee"
         }
         field(50013; Bank; Code[20])
         {
-
+            TableRelation = IF ("Mode of payment" = CONST(Bank)) "Payroll-Banks.".Code;
         }
         field(50014; "Bank Account"; Text[30])
         {
@@ -49,7 +49,8 @@ tableextension 50051 "Employee Ext" extends "Employee"
         }
         field(50024; "Period Filter"; Code[10])
         {
-
+            FieldClass = FlowFilter;
+            TableRelation = "Payroll-Periods.";
         }
         field(50025; EDAmount; Decimal)
         {
@@ -61,7 +62,8 @@ tableextension 50051 "Employee Ext" extends "Employee"
         }
         field(50026; "ED Filter"; Code[20])
         {
-
+            FieldClass = FlowFilter;
+            TableRelation = "Payroll-E/D Codes.";
         }
         field(50027; Designation; Code[10])
         {

@@ -7,7 +7,7 @@ using Microsoft.Purchases.History;
 using Microsoft.Inventory.Setup;
 using Microsoft.Sales.Setup;
 
-report 50020 "Item Price Update"
+report 51020 "Item Price Update"
 {
     ApplicationArea = All;
     Caption = 'Item Price Update';

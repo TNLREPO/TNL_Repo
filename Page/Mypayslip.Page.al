@@ -1,6 +1,6 @@
 page 50147 "My payslip"
 {
-    CardPageID = "Payslip Card";
+    //CardPageID = "Payslip Card";
     Editable = false;
     PageType = List;
     SourceTable = "Payroll-Payslip Header.";
@@ -94,7 +94,7 @@ page 50147 "My payslip"
         {
             action("print payslip")
             {
-                Caption = 'print  payslip';
+                Caption = 'Print Payslip';
                 Image = Print;
                 Promoted = true;
                 PromotedCategory = New;
@@ -106,7 +106,9 @@ page 50147 "My payslip"
                     PayrollPayslipHeader.SETRANGE("Payroll Period", Rec."Payroll Period");
                     PayrollPayslipHeader.SETRANGE("Employee No", UserSetup."Employee No.");
                     IF PayrollPayslipHeader.FINDFIRST THEN
-                        REPORT.RUNMODAL(50046, TRUE, TRUE, PayrollPayslipHeader);
+                        //REPORT.RUNMODAL(50046, false, TRUE, PayrollPayslipHeader);
+                        REPORT.RUNMODAL(50045, false, TRUE, PayrollPayslipHeader);
+
                 end;
             }
         }

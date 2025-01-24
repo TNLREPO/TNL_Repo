@@ -2,15 +2,16 @@ report 50046 "Special Emolument Payslip"
 {
     DefaultLayout = RDLC;
     RDLCLayout = 'Layout/SpecialEmolumentPayslip.rdl';
+    ApplicationArea = All;
 
     dataset
     {
         dataitem(Employee; Employee)
         {
-            //The property 'DataItemTableView' shouldn't have an empty value.
-            //DataItemTableView = '';
+
             PrintOnlyIfDetail = true;
             RequestFilterHeading = 'Payslip Filters';
+
             column(Employee_No_; "No.")
             {
             }
@@ -25,11 +26,11 @@ report 50046 "Special Emolument Payslip"
             }
             dataitem("Payroll-Payslip Header."; "Payroll-Payslip Header.")
             {
-                DataItemLink = "Employee No" = FIELD("No."),
-                               "Payroll Period" = FIELD("Period Filter");
+                DataItemLink = "Employee No" = FIELD("No."), "Payroll Period" = FIELD("Period Filter");
                 DataItemTableView = SORTING("Payroll Period", "Employee No");
                 RequestFilterFields = "Payroll Period", "Employee No";
-                RequestFilterHeading = 'Parameters for payslips';
+                RequestFilterHeading = 'Parameters for Payslips';
+
                 column(Payroll_Payslip_Header__Payroll_Period; "Payroll Period")
                 {
                 }

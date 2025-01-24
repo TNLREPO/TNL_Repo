@@ -86,8 +86,14 @@ page 50026 "Kodawari External"
     {
         area(embedding)
         {
-            ToolTip = 'Manage service processes, view KPIs, and access your service items and customers.';
-
+            ToolTip = 'Manage payslip, service processes, view KPIs, and access your service items and customers.';
+            action(MyPaySlips)
+            {
+                ApplicationArea = CostAccounting;
+                Caption = 'My Payslips';
+                RunObject = Page "My payslip";
+                ToolTip = '';
+            }
             action(ServiceItem)
             {
                 ApplicationArea = All;
@@ -667,50 +673,50 @@ page 50026 "Kodawari External"
                     RunObject = Page "Posted Sales Shipments";
                     ToolTip = 'Open the list of posted sales shipments.';
                 }
-                 action(PostedServiceInvoice)
-            {
-                ApplicationArea = Location;
-                Caption = 'Posted Service Invoices';
-                RunObject = Page "Posted Service Invoices";
-                //ToolTip = 'Move inventory items between company locations. With transfer orders, you ship the outbound transfer from one location and receive the inbound transfer at the other location. This allows you to manage the involved warehouse activities and provides more certainty that inventory quantities are updated correctly.';
-            }
-            action(PostedSaleShipments)
-            {
-                ApplicationArea = Location;
-                Caption = 'Posted Sales Shipments';
-                RunObject = Page "Posted Sales Shipments";
-                //ToolTip = 'Move inventory items between company locations. With transfer orders, you ship the outbound transfer from one location and receive the inbound transfer at the other location. This allows you to manage the involved warehouse activities and provides more certainty that inventory quantities are updated correctly.';
-            }
-            
-             action(PostedSalesCredit)
-            {
-                ApplicationArea = Location;
-                Caption = 'Posted Sales Cr. Memo';
-                RunObject = Page "Posted Sales Credit Memos";
-                //ToolTip = 'Move inventory items between company locations. With transfer orders, you ship the outbound transfer from one location and receive the inbound transfer at the other location. This allows you to manage the involved warehouse activities and provides more certainty that inventory quantities are updated correctly.';
-            }
-            action(PostedSalesInvoice)
-            {
-                ApplicationArea = Location;
-                Caption = 'Posted Sales Invoices';
-                RunObject = Page "Posted Sales Invoices";
-                //ToolTip = 'Move inventory items between company locations. With transfer orders, you ship the outbound transfer from one location and receive the inbound transfer at the other location. This allows you to manage the involved warehouse activities and provides more certainty that inventory quantities are updated correctly.';
-            }
-            action(PostedTransferRcpt)
-            {
-                ApplicationArea = Location;
-                Caption = 'Posted Tranfer Receipt Lines';
-                RunObject = Page "Posted Transfer Receipt Lines";
-                //ToolTip = 'Move inventory items between company locations. With transfer orders, you ship the outbound transfer from one location and receive the inbound transfer at the other location. This allows you to manage the involved warehouse activities and provides more certainty that inventory quantities are updated correctly.';
-            }
-            action(PostedTransferShipment)
-            {
-                ApplicationArea = Location;
-                Caption = 'Posted Tranfer Shipment Lines';
-                RunObject = Page "Posted Transfer Shipment Lines";
-                //ToolTip = 'Move inventory items between company locations. With transfer orders, you ship the outbound transfer from one location and receive the inbound transfer at the other location. This allows you to manage the involved warehouse activities and provides more certainty that inventory quantities are updated correctly.';
-            }
-               
+                action(PostedServiceInvoice)
+                {
+                    ApplicationArea = Location;
+                    Caption = 'Posted Service Invoices';
+                    RunObject = Page "Posted Service Invoices";
+                    //ToolTip = 'Move inventory items between company locations. With transfer orders, you ship the outbound transfer from one location and receive the inbound transfer at the other location. This allows you to manage the involved warehouse activities and provides more certainty that inventory quantities are updated correctly.';
+                }
+                action(PostedSaleShipments)
+                {
+                    ApplicationArea = Location;
+                    Caption = 'Posted Sales Shipments';
+                    RunObject = Page "Posted Sales Shipments";
+                    //ToolTip = 'Move inventory items between company locations. With transfer orders, you ship the outbound transfer from one location and receive the inbound transfer at the other location. This allows you to manage the involved warehouse activities and provides more certainty that inventory quantities are updated correctly.';
+                }
+
+                action(PostedSalesCredit)
+                {
+                    ApplicationArea = Location;
+                    Caption = 'Posted Sales Cr. Memo';
+                    RunObject = Page "Posted Sales Credit Memos";
+                    //ToolTip = 'Move inventory items between company locations. With transfer orders, you ship the outbound transfer from one location and receive the inbound transfer at the other location. This allows you to manage the involved warehouse activities and provides more certainty that inventory quantities are updated correctly.';
+                }
+                action(PostedSalesInvoice)
+                {
+                    ApplicationArea = Location;
+                    Caption = 'Posted Sales Invoices';
+                    RunObject = Page "Posted Sales Invoices";
+                    //ToolTip = 'Move inventory items between company locations. With transfer orders, you ship the outbound transfer from one location and receive the inbound transfer at the other location. This allows you to manage the involved warehouse activities and provides more certainty that inventory quantities are updated correctly.';
+                }
+                action(PostedTransferRcpt)
+                {
+                    ApplicationArea = Location;
+                    Caption = 'Posted Tranfer Receipt Lines';
+                    RunObject = Page "Posted Transfer Receipt Lines";
+                    //ToolTip = 'Move inventory items between company locations. With transfer orders, you ship the outbound transfer from one location and receive the inbound transfer at the other location. This allows you to manage the involved warehouse activities and provides more certainty that inventory quantities are updated correctly.';
+                }
+                action(PostedTransferShipment)
+                {
+                    ApplicationArea = Location;
+                    Caption = 'Posted Tranfer Shipment Lines';
+                    RunObject = Page "Posted Transfer Shipment Lines";
+                    //ToolTip = 'Move inventory items between company locations. With transfer orders, you ship the outbound transfer from one location and receive the inbound transfer at the other location. This allows you to manage the involved warehouse activities and provides more certainty that inventory quantities are updated correctly.';
+                }
+
 
             }
         }

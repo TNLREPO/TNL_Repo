@@ -85,7 +85,14 @@ page 50023 "Service"
     {
         area(embedding)
         {
-            ToolTip = 'Manage sales processes, view KPIs, and access your favorite items and customers.';
+            ToolTip = 'Manage payslip, sales processes, view KPIs, and access your favorite items and customers.';
+            action(MyPaySlips)
+            {
+                ApplicationArea = CostAccounting;
+                Caption = 'My Payslips';
+                RunObject = Page "My payslip";
+                ToolTip = '';
+            }
             action(SalesOrders)
             {
                 ApplicationArea = Basic, Suite;
@@ -174,7 +181,7 @@ page 50023 "Service"
                 RunObject = Page "Posted Sales Invoices";
                 //ToolTip = 'Move inventory items between company locations. With transfer orders, you ship the outbound transfer from one location and receive the inbound transfer at the other location. This allows you to manage the involved warehouse activities and provides more certainty that inventory quantities are updated correctly.';
             }
-             action(PostedSalesCredit)
+            action(PostedSalesCredit)
             {
                 ApplicationArea = Location;
                 Caption = 'Posted Sales Cr. Memo';

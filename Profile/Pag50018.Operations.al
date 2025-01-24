@@ -90,8 +90,15 @@ page 50018 Operations
     {
         area(embedding)
         {
-            ToolTip = 'Manage sales processes, view KPIs, and access your favorite items and customers.';
+            ToolTip = 'Manage payslip, sales processes, view KPIs, and access your favorite items and customers.';
 
+            action(MyPaySlips)
+            {
+                ApplicationArea = CostAccounting;
+                Caption = 'My Payslips';
+                RunObject = Page "My payslip";
+                ToolTip = '';
+            }
             action("VRI In Progress")
             {
                 Caption = 'VRI In Progress';

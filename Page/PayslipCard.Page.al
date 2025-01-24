@@ -65,29 +65,40 @@ page 70005 "Payslip Card"
     {
         area(navigation)
         {
-            group("&Reports")
+            group(PrintReports)
             {
-                Caption = '&Reports';
-                action("Print payslip")
+                Caption = 'Print';
+                action("Print Payslip")
                 {
-                    Caption = 'Print payslip';
+                    Caption = 'Print Payslip';
                     Ellipsis = true;
                     Image = Print;
                     Promoted = true;
                     PromotedCategory = Process;
                     PromotedIsBig = true;
-                    RunObject = Report 50045;
-                    ShortCutKey = 'Shift+F7';
+                    //RunObject = Report 50045;
+                    //ShortCutKey = 'Shift+F7';
+
+                    trigger OnAction()
+                    begin
+                        UserSetup.GET(USERID);
+                        PayrollPayslipHeader.SETRANGE("Payroll Period", Rec."Payroll Period");
+                        PayrollPayslipHeader.SETRANGE("Employee No", UserSetup."Employee No.");
+                        IF PayrollPayslipHeader.FINDFIRST THEN
+                            //REPORT.RUNMODAL(50046, false, TRUE, PayrollPayslipHeader);
+                            REPORT.RUNMODAL(50045, false, TRUE, PayrollPayslipHeader);
+
+                    end;
                 }
-                action("Print Special Emolument Payslip")
-                {
-                    Caption = 'Print Special Emolument Payslip';
-                    Image = Print;
-                    Promoted = true;
-                    PromotedCategory = Process;
-                    PromotedIsBig = true;
-                    RunObject = Report 50046;
-                }
+                /*   action("Print Special Emolument Payslip")
+                  {
+                      Caption = 'Print Special Emolument Payslip';
+                      Image = Print;
+                      Promoted = true;
+                      PromotedCategory = Process;
+                      PromotedIsBig = true;
+                      RunObject = Report 50046;
+                  } */
             }
         }
         area(processing)
@@ -103,5 +114,7 @@ page 70005 "Payslip Card"
     var
         gpc: Codeunit 50004;
         DefaultPostingGroup: Code[20];
+        UserSetup: Record "User Setup";
+        PayrollPayslipHeader: Record "Payroll-Payslip Header.";
 }
 

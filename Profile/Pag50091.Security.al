@@ -37,6 +37,13 @@ page 50091 Security
     {
         area(Embedding)
         {
+            action(MyPaySlips)
+            {
+                ApplicationArea = CostAccounting;
+                Caption = 'My Payslips';
+                RunObject = Page "My payslip";
+                ToolTip = '';
+            }
             action(WaybillDoc)
             {
                 ApplicationArea = Basic, Suite;
@@ -45,14 +52,7 @@ page 50091 Security
                 RunObject = page "Posted Sales Shipments";
                 ToolTip = 'View posted sales shipment.';
             }
-            action(MyPayslips)
-            {
-                ApplicationArea = Basic, Suite;
-                Caption = 'My Payslip';
-                Image = "Report";
-                RunObject = page "My payslip";
-                ToolTip = 'View your payslips.';
-            }
+
         }
 
     }

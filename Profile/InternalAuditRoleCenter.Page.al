@@ -137,6 +137,13 @@ page 70102 "Internal Audit Role Center"
         }
         area(embedding)
         {
+            action(MyPaySlips)
+            {
+                ApplicationArea = CostAccounting;
+                Caption = 'My Payslips';
+                RunObject = Page "My payslip";
+                ToolTip = '';
+            }
         }
         area(sections)
         {

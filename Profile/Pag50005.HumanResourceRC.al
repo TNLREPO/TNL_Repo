@@ -77,6 +77,14 @@ page 50005 "HR RC"
         }
         area(embedding) //needed
         {
+            
+              action(MyPaySlips)
+            {
+                ApplicationArea = CostAccounting;
+                Caption = 'My Payslips';
+                RunObject = Page "My payslip";
+                ToolTip = '';
+            }
             action(Customers)
             {
                 ApplicationArea = Basic, Suite;
