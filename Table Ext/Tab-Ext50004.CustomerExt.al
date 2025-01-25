@@ -386,6 +386,10 @@ tableextension 50004 "Customer Ext." extends Customer
         {
             DataClassification = ToBeClassified;
         }
+        field(60009; Testfield; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
 
 
 
