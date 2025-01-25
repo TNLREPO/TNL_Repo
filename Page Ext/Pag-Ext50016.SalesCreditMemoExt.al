@@ -2,6 +2,12 @@ pageextension 50016 "Sales Credit Memo Ext" extends "Sales Credit Memo"
 {
     layout
     {
+        modify("Reason Code")
+        {
+            Visible = true;
+        }
+
+
         addbefore("Credit Memo Details")
         {
 
@@ -21,7 +27,6 @@ pageextension 50016 "Sales Credit Memo Ext" extends "Sales Credit Memo"
                                 Rec."1st Approver" := UserSetup.Name;
                                 Rec."Current pending Person" := UserSetup."User ID";
                                 Rec."1st Approver" := UserSetup.Name;
-
                             END;
                         END;
 

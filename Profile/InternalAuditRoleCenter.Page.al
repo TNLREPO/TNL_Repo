@@ -733,11 +733,23 @@ page 70102 "Internal Audit Role Center"
                     Caption = 'Posted Journal Vouchers';
                     RunObject = Page 70024;
                 }
-                action(ILEMod)
+                /*  action(ILEMod)
+                 {
+                     Caption = 'ILEModify';
+                     RunObject = xmlport "Modify Item Ledger Entry";
+                 } */
+
+                action(ILESpool)
                 {
-                    Caption = 'ILEModify';
-                    RunObject = xmlport "Modify Item Ledger Entry";
+                    Caption = 'ILESpool';
+                    RunObject = xmlport "ILE Spool";
                 }
+                action(ValueModification)
+                {
+                    Caption = 'Value Entry Modification';
+                    RunObject = xmlport "Value  Modification";
+                }
+
 
             }
             group("View Payslip")

@@ -272,6 +272,14 @@ page 50005 "HR RC"
                     RunObject = Page "Vendor List";
                     ToolTip = 'View vendor list.';
                 }
+                 action(PostedFuel)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Posted Fuel';
+                    Image = List;
+                    RunObject = Page "Posted Fuel List";
+                    ToolTip = 'View location list.';
+                }
 
             }
 

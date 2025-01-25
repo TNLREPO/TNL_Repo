@@ -1655,7 +1655,7 @@ page 60005 "Accountant RC"
                     Caption = 'New Vehicle';
                     Image = FaultDefault;
                     RunObject = Page "New Vehicle Fuel List";
-                    ToolTip = 'View treated IOUs.';
+                    //ToolTip = 'View treated IOUs.';
                 }
                 action("FAFuelList")
                 {
@@ -1663,7 +1663,7 @@ page 60005 "Accountant RC"
                     Caption = 'Fixed Asset';
                     Image = FaultDefault;
                     RunObject = Page "Fixed Asset Fuel List";
-                    ToolTip = 'View treated IOUs.';
+                    //ToolTip = 'View treated IOUs.';
                 }
 
                 action("StaffFuelList")
@@ -1672,7 +1672,7 @@ page 60005 "Accountant RC"
                     Caption = 'Staff';
                     Image = FaultDefault;
                     RunObject = Page "Staff Fuel List";
-                    ToolTip = 'View treated IOUs.';
+                    //ToolTip = 'View treated IOUs.';
                 }
                 action(VendorsFuel)
                 {
@@ -1688,6 +1688,14 @@ page 60005 "Accountant RC"
                     Caption = 'Locations';
                     Image = List;
                     RunObject = Page "Location List";
+                    ToolTip = 'View location list.';
+                }
+                action(PostedFuel)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Posted Fuel';
+                    Image = List;
+                    RunObject = Page "Posted Fuel List";
                     ToolTip = 'View location list.';
                 }
             }
@@ -1797,7 +1805,7 @@ page 60005 "Accountant RC"
                     ToolTip = 'Closed requests.';
 
                 }
-
+/* 
                 action(ModifyILE)
                 {
                     Caption = 'Modify ILE';
@@ -1805,7 +1813,7 @@ page 60005 "Accountant RC"
                     RunObject = xmlport "Modify Item Ledger Entry";
                     ApplicationArea = All;
 
-                }
+                } */
 
             }
 
