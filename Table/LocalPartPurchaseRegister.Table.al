@@ -115,7 +115,7 @@ table 70018 "Local Part Purchase Register"
                         "Sent By" := UserSetup2."User ID";
                         SendersName := UserSetup2.Initials;
                         SenderAddress := UserSetup2."E-Mail";
-                        CcAddresses := 'oshunniyi@toyotanigeria.com';
+                        CcAddresses := '';
                         TimeDate1 := CURRENTDATETIME;
 
                         PurchSetup.GET;
@@ -164,6 +164,96 @@ table 70018 "Local Part Purchase Register"
             OptionCaption = ' ,Approved,On-hold,Rejected';
             OptionMembers = " ",Approved,"On-hold",Rejected;
 
+            trigger OnValidate()
+            begin
+                UserSetup4.GET(USERID);
+                IF UserSetup4."User ID" <> "Send To" THEN
+                    ERROR(Text031);
+                TESTFIELD(Send, TRUE);
+
+                IF "Head of Department" = "Head of Department"::Approved THEN
+                    IF NOT CONFIRM('Are you sure you want to approve?', FALSE) THEN
+                        "Head of Department" := LPPRec."Head of Department"::" "
+                    ELSE BEGIN
+                        CALCFIELDS("Total Purchase Value");
+                        VendAmt := "Total Purchase Value";
+                        VendName := "Supplier's Name";
+                        VendAddr := "Supplier's Address";
+                        Purpose := "Justification for purchase";
+                        ToAddresses := 'aderonke@toyotanigeria.com' + ';' + 'brano@toyotanigeria.com' + ';' + 'grace@toyotanigeria.com';
+                        UserSetup4.GET(USERID);
+                        SendersName := UserSetup4.Initials;
+                        SenderAddress := UserSetup4."E-Mail";
+                        "Name HOD" := UserSetup4.Name;
+                        TimeDate2 := CURRENTDATETIME;
+                        Addressee := 'team';
+
+                        Subject := STRSUBSTNO(Text006, "LPP No.");
+                        CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text022, Addressee);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
+
+                        ComplianceCheck := TRUE;
+                    END;
+
+                IF "Head of Department" = "Head of Department"::"On-hold" THEN
+                    IF NOT CONFIRM('Are you sure you want to place ON hold?', FALSE) THEN
+                        "Head of Department" := LPPRec."Head of Department"::" "
+                    ELSE BEGIN
+                        CALCFIELDS("Total Purchase Value");
+                        VendAmt := "Total Purchase Value";
+                        VendName := "Supplier's Name";
+                        VendAddr := "Supplier's Address";
+                        Purpose := "Justification for purchase";
+                        UserSetup.GET("Sent By");
+                        ToAddresses := UserSetup."E-Mail";
+                        Addressee := UserSetup.Initials;
+                        CcAddresses := '';
+                        BccAddresses := '';
+
+                        UserSetup4.GET(USERID);
+                        SendersName := UserSetup4.Initials;
+                        "Name HOD" := UserSetup4.Name;
+                        SenderAddress := UserSetup4."E-Mail";
+                        TimeDate2 := CURRENTDATETIME;
+
+                        Subject := STRSUBSTNO(Text011, "LPP No.");
+                        CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text011, Addressee);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
+
+                    END;
+
+                IF "Head of Department" = "Head of Department"::Rejected THEN
+                    IF NOT CONFIRM('Are you sure you want to Reject', FALSE) THEN
+                        "Head of Department" := LPPRec."Head of Department"::" "
+                    ELSE BEGIN
+                        CALCFIELDS("Total Purchase Value");
+                        VendAmt := "Total Purchase Value";
+                        VendName := "Supplier's Name";
+                        VendAddr := "Supplier's Address";
+                        Purpose := "Justification for purchase";
+
+                        UserSetup.GET("Sent By");
+                        ToAddresses := UserSetup."E-Mail";
+                        Addressee := UserSetup.Initials;
+                        CcAddresses := '';
+                        BccAddresses := '';
+
+                        UserSetup4.GET(USERID);
+                        SendersName := UserSetup4.Initials;
+                        "Name HOD" := UserSetup4.Name;
+                        SenderAddress := UserSetup4."E-Mail";
+                        TimeDate2 := CURRENTDATETIME;
+                        Subject := STRSUBSTNO(Text006, "LPP No.");
+
+                        Subject := STRSUBSTNO(Text017, "LPP No.");
+                        CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text017, Addressee);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
+
+                        Rejected1 := TRUE;
+                    END;
+
+            end;
+
         }
         field(32; "Name HOD"; Text[50])
         {
@@ -209,7 +299,7 @@ table 70018 "Local Part Purchase Register"
 
                         IF (VendAmt <= 100000) THEN BEGIN
                             ToAddresses := 'ravinder@toyotanigeria.com';
-                            CcAddresses := 'oshunniyi@toyotanigeria.com';
+                            CcAddresses := '';
                             Addressee := 'RS,';
                             HODVisible := TRUE;
                             "Procurement Approval" := TRUE;
@@ -231,7 +321,7 @@ table 70018 "Local Part Purchase Register"
 
                         Subject := STRSUBSTNO(Text001, "LPP No.");
                         CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text003, Addressee);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                     end;
 
@@ -281,7 +371,7 @@ table 70018 "Local Part Purchase Register"
 
                             Subject := STRSUBSTNO(Text025, "LPP No.");
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text024, Addressee);
-                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                             /* WITH TempEmailItem DO BEGIN
                                   "Send to" := ToAddresses;
@@ -338,7 +428,7 @@ table 70018 "Local Part Purchase Register"
 
                             Subject := STRSUBSTNO(Text006, "LPP No.");
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text011, Addressee);
-                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                             /* WITH TempEmailItem DO BEGIN
                                 "Send to" := ToAddresses;
@@ -388,7 +478,7 @@ table 70018 "Local Part Purchase Register"
 
                             Subject := STRSUBSTNO(Text006, "LPP No.");
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text017, Addressee);
-                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                             /*  WITH TempEmailItem DO BEGIN
                                  "Send to" := ToAddresses;
@@ -444,7 +534,7 @@ table 70018 "Local Part Purchase Register"
 
                             Subject := STRSUBSTNO(Text025, "LPP No.");
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text024, Addressee);
-                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                             /*  WITH TempEmailItem DO BEGIN
                                  "Send to" := ToAddresses;
@@ -497,7 +587,7 @@ table 70018 "Local Part Purchase Register"
 
                             Subject := STRSUBSTNO(Text006, "LPP No.");
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text011, Addressee);
-                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                             /* WITH TempEmailItem DO BEGIN
                                 "Send to" := ToAddresses;
@@ -547,7 +637,7 @@ table 70018 "Local Part Purchase Register"
 
                             Subject := STRSUBSTNO(Text006, "LPP No.");
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text017, Addressee);
-                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                             /* WITH TempEmailItem DO BEGIN
                                 "Send to" := ToAddresses;
@@ -616,7 +706,7 @@ table 70018 "Local Part Purchase Register"
 
                             Subject := STRSUBSTNO(Text025, "LPP No.");
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text024, Addressee);
-                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                             /* WITH TempEmailItem DO BEGIN
                                 "Send to" := ToAddresses;
@@ -669,7 +759,7 @@ table 70018 "Local Part Purchase Register"
 
                             Subject := STRSUBSTNO(Text006, "LPP No.");
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text011, Addressee);
-                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                             /* WITH TempEmailItem DO BEGIN
                                "Send to" := ToAddresses;
@@ -719,7 +809,7 @@ table 70018 "Local Part Purchase Register"
 
                             Subject := STRSUBSTNO(Text006, "LPP No.");
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text017, Addressee);
-                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                             /* WITH TempEmailItem DO BEGIN
                                "Send to" := ToAddresses;
@@ -761,7 +851,7 @@ table 70018 "Local Part Purchase Register"
 
                             UserSetup2.GET("Send To");
                             ToAddresses := UserSetup2."E-Mail";
-                            CcAddresses := 'albert@toyotanigeria.com;adewumi@toyotanigeria.com;agbesua@toyotanigeria.com';
+                            CcAddresses := 'albert@toyotanigeria.com;adewumi@toyotanigeria.com';
                             BccAddresses := '';
 
                             UserSetup4.GET(USERID);
@@ -773,7 +863,7 @@ table 70018 "Local Part Purchase Register"
 
                             Subject := STRSUBSTNO(Text025, "LPP No.");
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text024, Addressee);
-                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                             /*  WITH TempEmailItem DO BEGIN
                                  "Send to" := ToAddresses;
@@ -826,7 +916,7 @@ table 70018 "Local Part Purchase Register"
 
                             Subject := STRSUBSTNO(Text006, "LPP No.");
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text011, Addressee);
-                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                             /* WITH TempEmailItem DO BEGIN
                                "Send to" := ToAddresses;
@@ -876,7 +966,7 @@ table 70018 "Local Part Purchase Register"
 
                             Subject := STRSUBSTNO(Text006, "LPP No.");
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text017, Addressee);
-                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                             /* WITH TempEmailItem DO BEGIN
                                 "Send to" := ToAddresses;
@@ -923,7 +1013,7 @@ table 70018 "Local Part Purchase Register"
                     TESTFIELD("Head of Audit", "Head of Audit"::Approved);
 
                     IF "HOD's Part Procurement Appr." = "HOD's Part Procurement Appr."::Approved THEN
-                        IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
+                        IF NOT CONFIRM('Are you sure you want to approve?', FALSE) THEN
                             "HOD's Part Procurement Appr." := LPPRec."HOD's Part Procurement Appr."::" "
                         ELSE BEGIN
                             CALCFIELDS("Total Purchase Value");
@@ -946,31 +1036,7 @@ table 70018 "Local Part Purchase Register"
 
                             Subject := STRSUBSTNO(Text019, "LPP No.");
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text012, Addressee);
-                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
-
-                            /* WITH TempEmailItem DO BEGIN
-                                "Send to" := ToAddresses;
-                                "Send CC" := SenderAddress;
-                                "Send BCC" := '';
-                                Subject := STRSUBSTNO(Text019, "LPP No.");
-
-                                BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                BodyStream.WRITETEXT(Text002 + ' ' + Addressee + ',');
-                                BodyStream.WRITETEXT(CRLF + CRLF);
-                                BodyStream.WRITETEXT(STRSUBSTNO(Text012, "LPP No.") + CRLF + CRLF +
-                                STRSUBSTNO(Text028) + CRLF + CRLF +
-                                Text014 + FORMAT(VendName) + CRLF + CRLF +
-                                Text015 + FORMAT(VendAddr) + CRLF +
-                                Text020 + FORMAT(Purpose) + CRLF + CRLF +
-                                Text016 + FORMAT(VendAmt) + CRLF + CRLF +
-                                CRLF + CRLF +
-                                Text004 + CRLF);
-                                BodyStream.WRITETEXT(SendersName);
-                                BodyStream.WRITETEXT(CRLF + CRLF);
-                                BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                Body := BodyBlob.Blob;
-                                Send(FALSE);
-                            END; */
+                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                             Float := TRUE;
                         END;
@@ -999,29 +1065,8 @@ table 70018 "Local Part Purchase Register"
 
                             Subject := STRSUBSTNO(Text006, "LPP No.");
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text011, Addressee);
-                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                            /* WITH TempEmailItem DO BEGIN
-                                "Send to" := ToAddresses;
-                                "Send CC" := SenderAddress;
-                                "Send BCC" := '';
-                                Subject := STRSUBSTNO(Text006, "LPP No.");
-
-                                // BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                BodyStream.WRITETEXT(Text002 + ' ' + Addressee + ',');
-                                BodyStream.WRITETEXT(CRLF + CRLF);
-                                BodyStream.WRITETEXT(STRSUBSTNO(Text011, "LPP No.") + CRLF + CRLF +
-                                Text014 + FORMAT(VendName) + CRLF +
-                                Text015 + FORMAT(VendAddr) + CRLF +
-                                Text020 + FORMAT(Purpose) + CRLF +
-                                Text016 + FORMAT(VendAmt) + CRLF +
-                                Text004 + CRLF);
-                                BodyStream.WRITETEXT(SendersName);
-                                BodyStream.WRITETEXT(CRLF + CRLF);
-                                BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                // Body := BodyBlob.Blob;
-                                // Send(FALSE);
-                            END; */
                         END;
 
                     IF "HOD's Part Procurement Appr." = "HOD's Part Procurement Appr."::Rejected THEN
@@ -1048,7 +1093,7 @@ table 70018 "Local Part Purchase Register"
 
                             Subject := STRSUBSTNO(Text006, "LPP No.");
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text017, Addressee);
-                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                             /* WITH TempEmailItem DO BEGIN
                                 "Send to" := ToAddresses;
@@ -1106,7 +1151,7 @@ table 70018 "Local Part Purchase Register"
 
                             Subject := STRSUBSTNO(Text019, "LPP No.");
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text012, Addressee);
-                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                             /* WITH TempEmailItem DO BEGIN
                                 "Send to" := ToAddresses;
@@ -1159,7 +1204,7 @@ table 70018 "Local Part Purchase Register"
 
                             Subject := STRSUBSTNO(Text006, "LPP No.");
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text011, Addressee);
-                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                             /*  WITH TempEmailItem DO BEGIN
                                  "Send to" := ToAddresses;
@@ -1209,7 +1254,7 @@ table 70018 "Local Part Purchase Register"
 
                             Subject := STRSUBSTNO(Text006, "LPP No.");
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text017, Addressee);
-                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                             /* WITH TempEmailItem DO BEGIN
                                 "Send to" := ToAddresses;
@@ -1281,7 +1326,7 @@ table 70018 "Local Part Purchase Register"
 
                             Subject := STRSUBSTNO(Text001, "LPP No.");
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text021, Addressee);
-                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                             /* WITH TempEmailItem DO BEGIN
                                 "Send to" := ToAddresses;
@@ -1334,7 +1379,7 @@ table 70018 "Local Part Purchase Register"
 
                             Subject := STRSUBSTNO(Text006, "LPP No.");
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text011, Addressee);
-                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                             /*     WITH TempEmailItem DO BEGIN
                                     "Send to" := ToAddresses;
@@ -1404,7 +1449,7 @@ table 70018 "Local Part Purchase Register"
 
                             Subject := STRSUBSTNO(Text001, "LPP No.");
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text021, Addressee);
-                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                             /* WITH TempEmailItem DO BEGIN
                                "Send to" := ToAddresses;
@@ -1457,7 +1502,7 @@ table 70018 "Local Part Purchase Register"
 
                             Subject := STRSUBSTNO(Text006, "LPP No.");
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text011, Addressee);
-                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
 
                             /*  WITH TempEmailItem DO BEGIN
@@ -1688,7 +1733,7 @@ table 70018 "Local Part Purchase Register"
         Text003: Label 'The document no. %1 for local part purchase requires your Procurement approval.';
         Text004: Label 'Regards,';
         Text005: Label 'Mail sent successfully.';
-        Text006: Label 'This document No. %1 requires a compliance check :';
+        Text006: Label 'Compliance Check: Document No. %1';
         Text007: Label 'You cannot approvee this Transaction.Kindly contact your system Administrator';
         Text008: Label 'Mail sent successfully.';
         Text009: Label 'You are not an auditor. Please contact your system administrator.';
