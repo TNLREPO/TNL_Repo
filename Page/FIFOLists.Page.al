@@ -1,6 +1,6 @@
 page 50381 "FIFO Lists"
 {
-    Editable = true;
+    Editable = false;
     PageType = List;
     SourceTable = "Item Ledger Entry";
     SourceTableView = SORTING("Purchase Date")

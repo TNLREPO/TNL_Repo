@@ -331,10 +331,18 @@ page 60005 "Accountant RC"
                 action("InventoryValuation")
                 {
                     ApplicationArea = BasicEU;
-                    Caption = 'Inventory Valuation';
+                    Caption = 'Inventory Valuation New';
                     Image = "Report";
-                    RunObject = Report "Inventory Valuation";
+                    RunObject = Report "Stock Value";
                     ToolTip = 'View inventory valuation.';
+                }
+                action(SalesContr)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Sales Contribution/Warranty/Fleet';
+                    Image = "Report";
+                    RunObject = Report "TNL Sales Cont. Warrty & Fleet";
+                    ToolTip = 'View or print sales contribution, warranty and fleet.';
                 }
                 action("BankAccountGrp")
                 {
@@ -1805,15 +1813,15 @@ page 60005 "Accountant RC"
                     ToolTip = 'Closed requests.';
 
                 }
-/* 
-                action(ModifyILE)
-                {
-                    Caption = 'Modify ILE';
-                    Image = Workflow;
-                    RunObject = xmlport "Modify Item Ledger Entry";
-                    ApplicationArea = All;
+                /* 
+                                action(ModifyILE)
+                                {
+                                    Caption = 'Modify ILE';
+                                    Image = Workflow;
+                                    RunObject = xmlport "Modify Item Ledger Entry";
+                                    ApplicationArea = All;
 
-                } */
+                                } */
 
             }
 

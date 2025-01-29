@@ -219,8 +219,7 @@ table 70002 "Pool Car Register"
 
                         UserSetup2.GET(USERID);
                         SenderName := UserSetup2.Initials;
-                        SenderAddress := UserSetup2."E-Mail";
-                       
+                        SenderAddress := UserSetup2."E-Mail";                       
 
                         Subject := STRSUBSTNO(text007, "Request No.");
                         CreateEmailBody("Request No.", Text015, Addressee);

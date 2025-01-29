@@ -1640,25 +1640,11 @@ table 70008 "Procurement Header"
                 TESTFIELD("Head of Audit", "Head of Audit"::Approved);
 
                 UserSetup4.GET(USERID);
+
                 IF UserSetup4."User ID" <> 'BUNMI' THEN
-                    //IF UserSetup4."User ID" <> 'PAA' THEN
                     ERROR(Text039);
 
                 IF "General Manager" = "General Manager"::Approved THEN BEGIN
-
-                    /*  CapexOpexLine.SETRANGE("Document Type", "Document Type");
-                     CapexOpexLine.SETRANGE("Document No.", "No.");
-                     CapexOpexLine.SETRANGE(Preferred, TRUE);
-                     IF CapexOpexLine.FINDFIRST THEN BEGIN
-                         CapexOpexLine.CALCFIELDS(Amount);
-                         VendAmt := CapexOpexLine.Amount;
-                         Advance := CapexOpexLine."Advance Payment";
-                         Balance := CapexOpexLine.Balance;
-                         VendName := CapexOpexLine."Vendor Name";
-                         VendAddr := CapexOpexLine.Address;
-                         PurJus := CapexOpexLine.Description;
-                     END; */
-
 
                     PurchSetup.GET;
                     UserSetup.GET(InitiatorN);

@@ -84,7 +84,7 @@ tableextension 50083 "Service Invoice Header Ext" extends "Service Invoice Heade
             CalcFormula = Sum("Service Invoice Line"."Line Amount" WHERE("Document No." = FIELD("No."),
                                                                           Type = FILTER(Item),
                                                                           "Location Code" = FILTER('131PWISOLO'),
-                                                                          "Job Type" = filter("B&P")));
+                                                                          "Job Type" = filter(BP)));
             Caption = 'Total B&P Materials';
             Editable = false;
             FieldClass = FlowField;
@@ -116,7 +116,7 @@ tableextension 50083 "Service Invoice Header Ext" extends "Service Invoice Heade
         {
             CalcFormula = Sum("Service Invoice Line".Amount WHERE("Document No." = FIELD("No."),
                                                                    Type = FILTER(Cost),
-                                                                   "Job Type" = filter("B&P")));
+                                                                   "Job Type" = filter(BP)));
             Caption = 'Total B&P Labour';
             FieldClass = FlowField;
         }
@@ -128,13 +128,13 @@ tableextension 50083 "Service Invoice Header Ext" extends "Service Invoice Heade
         }
         field(50278; "Delivery Date"; Date)
         {
-            /* CalcFormula = Lookup("Customer Order HeaderX"."Date Delivered" WHERE ("No."=FIELD("Customer Order No.")));
-            FieldClass = FlowField; */
+            CalcFormula = Lookup("Customer Order HeaderX"."Date Delivered" WHERE("No." = FIELD("Customer Order No.")));
+            FieldClass = FlowField;
         }
         field(50279; "Model Name"; Text[40])
         {
-            /* CalcFormula = Lookup("Customer Order HeaderX"."Model Name" WHERE ("No."=FIELD("Customer Order No.")));
-            FieldClass = FlowField; */
+            CalcFormula = Lookup("Customer Order HeaderX"."Model Name" WHERE("No." = FIELD("Customer Order No.")));
+            FieldClass = FlowField;
         }
         field(50280; "Vehicle Classification"; Option)
         {
@@ -145,8 +145,8 @@ tableextension 50083 "Service Invoice Header Ext" extends "Service Invoice Heade
         }
         field(50281; Brand; Code[20])
         {
-            /* CalcFormula = Lookup("Customer Order HeaderX".Brand WHERE ("No."=FIELD("Customer Order No.")));
-            FieldClass = FlowField; */
+            CalcFormula = Lookup("Customer Order HeaderX".Brand WHERE("No." = FIELD("Customer Order No.")));
+            FieldClass = FlowField;
         }
         field(50282; "Customer Type"; Option)
         {
@@ -158,8 +158,8 @@ tableextension 50083 "Service Invoice Header Ext" extends "Service Invoice Heade
         field(50283; "Job Type"; Option)
         {
 
-            OptionCaption = ' ,PM,GR,Others,Warranty,Internal,D/Estimate,B&P,B&P Estimate,Painting';
-            OptionMembers = " ",PM,GR,Others,Warranty,Internal,"D/Estimate","B&P","B&P Estimate",Painting;
+            OptionCaption = ' ,PM,GR,Others,Warranty,Internal,D/Estimate,BP,BP Estimate,Painting';
+            OptionMembers = " ",PM,GR,Others,Warranty,Internal,"D/Estimate",BP,"BP Estimate",Painting;
         }
         field(50284; "Total Labour Amount"; Decimal)
         {
@@ -167,12 +167,30 @@ tableextension 50083 "Service Invoice Header Ext" extends "Service Invoice Heade
                                                                    Type = CONST(Cost)));
             FieldClass = FlowField;
         }
-        field(50285; "Total Items Amount"; Decimal)
+        field(50285; "Total B&P Items"; Decimal)
         {
-            CalcFormula = Sum("Service Invoice Line".Amount WHERE("Document No." = FIELD("No."),
-                                                                   Type = CONST(Item)));
+            CalcFormula = Sum("Service Invoice Line".Amount WHERE("Document No." = FIELD("No."), Type = FILTER(Item), "Job Type" = const(BP)));
             FieldClass = FlowField;
         }
+
+        field(50286; "Total Others"; Decimal)
+        {
+            FieldClass = FlowField;
+            CalcFormula = Sum("Service Invoice Line".Amount WHERE("Document No." = FIELD("No."), "Job Type" = CONST(Others)));
+        }
+        field(50287; "Total Warranty"; Decimal)
+        {
+            FieldClass = FlowField;
+            CalcFormula = Sum("Service Invoice Line".Amount WHERE("Document No." = FIELD("No."), "Job Type" = CONST(Warranty)));
+        }
+        field(50288; "Total Empty"; Decimal)
+        {
+            FieldClass = FlowField;
+            CalcFormula = Sum("Service Invoice Line".Amount WHERE("Document No." = FIELD("No."), "Job Type" = CONST(" ")));
+        }
+
+
+
     }
     keys
     {

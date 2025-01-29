@@ -1361,6 +1361,23 @@ codeunit 50004 "General Purpose Codeunit-1"
     end;
 
 
+    procedure LookupItemLedgerList(SalesLine: Record "Sales Line")
+
+    var
+        SalesInfoMgtPanel: Codeunit "Sales Info-Pane Management";
+        ItemLedgEntry: Record "Item Ledger Entry";
+
+    Begin
+        SalesLine.TESTFIELD(Type, SalesLine.Type::Item);
+        SalesLine.TESTFIELD("No.");
+        SalesInfoMgtPanel.GetItem(SalesLine);
+        ItemLedgEntry.SETRANGE("Item No.", SalesLine."No.");
+        PAGE.RUNMODAL(PAGE::"FIFO Lists", ItemLedgEntry)
+
+    End;
+
+
+
     procedure AccessGranted(FieldNo: Code[10]): Boolean
     var
         HasPermission: Boolean;

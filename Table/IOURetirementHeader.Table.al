@@ -82,8 +82,7 @@ table 50107 "IOU Retirement Header"
                     "Original IOU Amount" := IOURec.Amount;
                     Description := IOURec.Description;
                     "Staff No." := IOURec."Account No.";
-                    Cust.get(IOURec."Account No.");
-                    "Staff Name" := Cust.Name;
+                    "Staff Name" := IOURec."Account Name";
                     "Global Dimension 1 Code" := IOURec."Global Dimension 1 Code";
                     "Global Dimension 2 Code" := IOURec."Global Dimension 2 Code";
                 END ELSE BEGIN
@@ -1145,7 +1144,6 @@ table 50107 "IOU Retirement Header"
         BccAddresses: Text;
         SenderAddress: Text;
         ToAddresses: Text;
-        "Staff Name": Text;
         Purpose: Text;
         Amount: Decimal;
         "IOU Amount": Decimal;

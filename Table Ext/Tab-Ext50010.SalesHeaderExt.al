@@ -101,10 +101,11 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
             trigger OnValidate()
             begin
 
-                IF UserSetup.GET("Send to") THEN
-                    UserSetup.TESTFIELD(UserSetup."Credit Memo Approval", TRUE);
-                IF Approved THEN
-                    "Approved Time" := CURRENTDATETIME;
+                UserSetup.get(USERID);
+                if not UserSetup."Credit Memo Approval" then
+                    Error('You cannot approve this document!');
+
+                "Approved Time" := CURRENTDATETIME;
                 "Approved By" := USERID;
             end;
         }

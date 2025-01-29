@@ -4,6 +4,19 @@ using Microsoft.Inventory.Transfer;
 
 pageextension 50033 "Posted Transfer Shipment Ext" extends "Posted Transfer Shipment"
 {
+    layout
+    {
+        addafter("Posting Date")
+        {
+            field("COF No."; Rec."COF No.")
+            {
+                ApplicationArea = All;
+            }
+        }
+    }
+
+
+
     actions
     {
         addafter("&Print")
@@ -20,8 +33,8 @@ pageextension 50033 "Posted Transfer Shipment Ext" extends "Posted Transfer Ship
                 trigger OnAction()
                 begin
                     TransferShipHeader.SETRANGE("No.", Rec."No.");
-                    IF Rec.FindFirst() THEN
-                        REPORT.RUNMODAL(50032, TRUE, TRUE, TransferShipHeader);
+                    IF TransferShipHeader.FindFirst() THEN
+                        REPORT.RUNMODAL(50019, TRUE, TRUE, TransferShipHeader);
                 end;
             }
         }

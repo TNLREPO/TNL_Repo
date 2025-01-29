@@ -364,7 +364,7 @@ page 50603 "Leave Request Card"
                 field("2nd Approval"; Rec."2nd Approval")
                 {
                     Caption = 'To';
-                    Editable = "2nd Approval toEditable";
+                    //Editable = "2nd Approval toEditable";
 
                     trigger OnLookup(var Text: Text): Boolean
                     begin
@@ -442,7 +442,7 @@ page 50603 "Leave Request Card"
                 field("2nd Approval Status"; Rec."2nd Approval Status")
                 {
                     Caption = 'Action';
-                    Editable = "2nd Apprv. StatusEditable";
+                    //Editable = "2nd Apprv. StatusEditable";
 
                     trigger OnValidate()
                     begin
@@ -471,7 +471,7 @@ page 50603 "Leave Request Card"
             }
             group("Level 2")
             {
-                Visible = Level_2;
+                //Visible = Level_2;
                 field("3rd Approval"; Rec."3rd Approval")
                 {
                     Caption = 'To';
@@ -541,7 +541,7 @@ page 50603 "Leave Request Card"
                 field("3rd Approval Status"; Rec."3rd Approval Status")
                 {
                     Caption = 'Action';
-                    Editable = "3rd Apprv. StatusEditable";
+                    //Editable = "3rd Apprv. StatusEditable";
 
                     trigger OnValidate()
                     begin
@@ -560,7 +560,7 @@ page 50603 "Leave Request Card"
                     Editable = false;
                 }
             }
-            group(Control1)
+            group(Final)
             {
                 Editable = "4th Approval toEditable";
                 Visible = Level_3;

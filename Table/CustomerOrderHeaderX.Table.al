@@ -1772,7 +1772,7 @@ table 70034 "Customer Order HeaderX"
                 IF "Service Location" = '120ISO' THEN BEGIN
                     CASE Stage OF
                         Stage::"Parts Ordered":
-                            IF NOT CONFIRM('Are you sure you want to request for parts', FALSE) THEN
+                            IF NOT CONFIRM('Are you sure you want to request for parts?', FALSE) THEN
                                 Stage := Stage::"N-1"
                             ELSE BEGIN
 
@@ -1791,7 +1791,7 @@ table 70034 "Customer Order HeaderX"
                             end;
 
                         Stage::"Parts Arrived":
-                            IF NOT CONFIRM('Are you sure of availability for Parts', FALSE) THEN
+                            IF NOT CONFIRM('Are you sure of availability for parts?', FALSE) THEN
                                 Stage := Stage::"Parts Ordered"
                             ELSE BEGIN
 
@@ -2311,7 +2311,6 @@ table 70034 "Customer Order HeaderX"
         ServiceHeader.MODIFY;
 
 
-
         ServiceItemLine.INIT;
         ServiceItemLine.VALIDATE("Document Type", ServiceItemLine."Document Type"::Order);
         ServiceItemLine.VALIDATE("Document No.", "No.");
@@ -2376,14 +2375,13 @@ table 70034 "Customer Order HeaderX"
         CustOrderLine.SETRANGE("Document No.", "No.");
         CustOrderLine.SETRANGE(Type, CustOrderLine.Type::Item);
         CustOrderLine.SETFILTER("Sent to Parts", '%1', FALSE);
+        CustOrderLine.SETFILTER("Quantity Requested", '<>%1', 0);
+        CustOrderLine.SETFILTER("Location Code", '<>%1', '');
+
         IF CustOrderLine.FINDFIRST THEN BEGIN
             TransferHeader.INIT;
             TransferHeader.INSERT(TRUE);
 
-            CustOrderLine.SETRANGE("Document No.", "No.");
-            CustOrderLine.SETRANGE(Type, CustOrderLine.Type::Item);
-            CustOrderLine.SETFILTER("Sent to Parts", '%1', FALSE);
-            IF CustOrderLine.FINDFIRST THEN;
 
             TransferHeader."COF No" := "No.";
             TransferHeader.VALIDATE("Transfer-from Code", '120ISO');
@@ -2395,6 +2393,8 @@ table 70034 "Customer Order HeaderX"
             CustOrderLine.SETRANGE("Document No.", "No.");
             CustOrderLine.SETRANGE(Type, CustOrderLine.Type::Item);
             CustOrderLine.SETFILTER("Sent to Parts", '%1', FALSE);
+            CustOrderLine.SETFILTER("Quantity Requested", '<>%1', 0);
+            CustOrderLine.SETFILTER("Location Code", '<>%1', '');
             IF CustOrderLine.FINDFIRST THEN BEGIN
                 REPEAT
                     TransferLine.INIT;

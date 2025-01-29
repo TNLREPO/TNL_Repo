@@ -96,33 +96,7 @@ table 70036 "Customer Order LineX"
             trigger OnValidate()
             begin
 
-                "Cost Amount" := "Quantity Received" * "Unit Cost";
-                VALIDATE(Amount, "Unit Price" * "Quantity Received");
-
-                IF "Discount %" = 0 THEN
-                    "Line Discount Amount" := 0
-                ELSE
-                    "Line Discount Amount" := ("Discount %" / 100) * Amount;
-
-                "Line Amount" := Amount - "Line Discount Amount";
-                "VAT Amount" := "Line Amount" * 0.075;
-
-                IF "VAT Category" = "VAT Category"::VAT THEN
-                    "VAT Amount" := "Line Amount" * 0.075
-                ELSE
-                    "VAT Amount" := 0.0;
-
-                "Amount Inc. VAT" := "Line Amount" + "VAT Amount";
-
-                //"Quantity Outstanding" := "Quantity Requested" - "Quantity Received";
-
-
-                IF "VAT Category" = "VAT Category"::VAT THEN BEGIN
-                    IF VATPostingSetup.GET("VAT Category"::VAT, "VAT Category"::VAT) THEN
-                        "VAT Amount" := "Line Amount" * VATPostingSetup."VAT %";
-                END ELSE BEGIN
-                    "VAT Amount" := "Line Amount" * VATPostingSetup."VAT %";
-                END;
+                "Quantity Outstanding" := "Quantity Requested" - "Quantity Received";
 
 
             end;

@@ -8,6 +8,7 @@ page 70194 "HOD Part Approval"
                             ComplianceCheck = CONST(false),
                             Rejected = CONST(false));
 
+
     layout
     {
         area(content)

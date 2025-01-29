@@ -364,6 +364,31 @@ page 50023 "Service"
                     ToolTip = 'View all job instructions.';
                 }
 
+
+            }
+
+            group(Delivery)
+            {
+                Caption = 'Delivery';
+
+                action(DeliveryPage)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Delivery';
+                    Image = Job;
+                    RunObject = Page "Delivery List";
+                    ToolTip = 'View all jobs for delivery.';
+                }
+                action(CompletedJobs)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Completed Jobs';
+                    Image = Job;
+                    RunObject = Page "Completed Job Instruction List";
+                    ToolTip = 'View all completed jobs.';
+                }
+
+
             }
 
             group(Paymentprocess)

@@ -77,7 +77,7 @@ page 70116 "Capex Card"
             part("Vendor Details"; 70117)
             {
                 Caption = 'Vendor Details';
-                Editable = EditSend;
+                //Editable = EditSend;
                 SubPageLink = "Document Type" = FIELD("Document Type"),
                               "Document No." = FIELD("No.");
             }

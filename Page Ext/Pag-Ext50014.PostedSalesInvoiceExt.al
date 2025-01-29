@@ -1,5 +1,6 @@
 pageextension 50014 "Posted Sales Invoice Ext" extends "Posted Sales Invoice"
 {
+
     actions
     {
         addbefore("Update Document")
@@ -33,6 +34,22 @@ pageextension 50014 "Posted Sales Invoice Ext" extends "Posted Sales Invoice"
                     SalesInvHeader.SETRANGE(SalesInvHeader."No.", Rec."No.");
                     IF Rec.FindFirst() THEN
                         REPORT.RUNMODAL(50040, TRUE, TRUE, SalesInvHeader);
+                end;
+            }
+
+            action("TCSC Invoice-Part")
+            {
+                ApplicationArea = All;
+                ToolTip = 'Print an invoice for transaction.';
+                Image = PrintChecklistReport;
+                PromotedCategory = Process;
+                Promoted = true;
+
+                trigger OnAction()
+                begin
+                    SalesInvHeader.SETRANGE(SalesInvHeader."No.", Rec."No.");
+                    IF Rec.FindFirst() THEN
+                        REPORT.RUNMODAL(50052, TRUE, TRUE, SalesInvHeader);
                 end;
             }
 

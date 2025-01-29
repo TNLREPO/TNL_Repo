@@ -687,6 +687,13 @@ page 50026 "Kodawari External"
                     RunObject = Page "Posted Sales Shipments";
                     //ToolTip = 'Move inventory items between company locations. With transfer orders, you ship the outbound transfer from one location and receive the inbound transfer at the other location. This allows you to manage the involved warehouse activities and provides more certainty that inventory quantities are updated correctly.';
                 }
+                 action(PostedSaleShipmentLines)
+                {
+                    ApplicationArea = Location;
+                    Caption = 'Posted Sales Shipment Lines';
+                    RunObject = Page "Posted Sales Shipment Lines";
+                    //ToolTip = 'Move inventory items between company locations. With transfer orders, you ship the outbound transfer from one location and receive the inbound transfer at the other location. This allows you to manage the involved warehouse activities and provides more certainty that inventory quantities are updated correctly.';
+                }
 
                 action(PostedSalesCredit)
                 {

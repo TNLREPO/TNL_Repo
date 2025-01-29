@@ -13,4 +13,11 @@ tableextension 50069 "Transfer Shipment Line Ext" extends "Transfer Shipment Lin
             FieldClass = FlowField;
         }
     }
+    keys
+    {
+        key(NewKey; "Transfer-to Code", "Transfer-from Code")
+        {
+
+        }
+    }
 }

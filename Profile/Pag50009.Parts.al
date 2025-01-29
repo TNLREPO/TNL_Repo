@@ -98,7 +98,7 @@ page 50009 Parts
         area(embedding)
         {
             ToolTip = 'Manage payslip, sales processes, view KPIs, and access your favorite items and customers.';
-              action(MyPaySlips)
+            action(MyPaySlips)
             {
                 ApplicationArea = CostAccounting;
                 Caption = 'My Payslips';
@@ -1442,14 +1442,32 @@ page 50009 Parts
                     RunObject = Report "TNL Sales Cont. Warrty & Fleet";
                     ToolTip = 'View or print sales contribution, warranty and fleet.';
                 }
+                action("InventoryValuation")
+                {
+                    ApplicationArea = BasicEU;
+                    Caption = 'Inventory Valuation New';
+                    Image = "Report";
+                    RunObject = Report "Stock Value";
+                    ToolTip = 'View inventory valuation.';
+                }
+
                 action(ServiceRate)
                 {
                     ApplicationArea = Basic, Suite;
-                    Caption = 'Service Rate';
+                    Caption = 'Service Rate Detail/Summary';
                     Image = "Report";
                     RunObject = Report "Service Rate Detail/Summary";
                     ToolTip = 'View or print service rate.';
                 }
+                action(ServiceRateWithDepth)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Service Rate/Width/Depth';
+                    Image = "Report";
+                    RunObject = Report "Service Rate Width By Depth";
+                    ToolTip = 'View or print service rate by width by depth.';
+                }
+
                 action(CustItemSales)
                 {
                     ApplicationArea = Basic, Suite;
@@ -1482,6 +1500,13 @@ page 50009 Parts
                     Image = "Report";
                     RunObject = Report "Inventory - Sales Back Orders";
                     ToolTip = 'View a list with the order lines whose shipment date has been exceeded. The following information is shown for the individual orders for each item: number, customer name, customer''s telephone number, shipment date, order quantity and quantity on back order. The report also shows whether there are other items for the customer on back order.';
+                }
+                action(StockTransfer)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Stock Transfer';
+                    Image = "Report";
+                    RunObject = Report "Stock Transfer";
                 }
 
                 action(TSP1001)

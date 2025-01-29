@@ -82,7 +82,7 @@ page 70150 "Approved Capex Card2"
             part("Vendor Details"; 70117)
             {
                 Caption = 'Vendor Details';
-                Editable = EditVendorDetails;
+                //Editable = EditVendorDetails;
                 SubPageLink = "Document Type" = FIELD("Document Type"),
                               "Document No." = FIELD("No.");
             }

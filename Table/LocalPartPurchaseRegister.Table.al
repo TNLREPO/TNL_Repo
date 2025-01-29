@@ -95,6 +95,52 @@ table 70018 "Local Part Purchase Register"
         }
         field(25; Send; Boolean)
         {
+            trigger OnValidate()
+            Begin
+
+                TESTFIELD("Send To");
+                TESTFIELD("Order Type");
+
+                IF Send = TRUE THEN
+                    IF NOT CONFIRM('Are you sure you want to send for Approval', FALSE) THEN
+                        Send := FALSE
+                    ELSE BEGIN
+                        CALCFIELDS("Total Purchase Value");
+                        VendAmt := "Total Purchase Value";
+                        VendName := "Supplier's Name";
+                        VendAddr := "Supplier's Address";
+                        Purpose := "Justification for purchase";
+
+                        UserSetup2.GET(USERID);
+                        "Sent By" := UserSetup2."User ID";
+                        SendersName := UserSetup2.Initials;
+                        SenderAddress := UserSetup2."E-Mail";
+                        CcAddresses := 'oshunniyi@toyotanigeria.com';
+                        TimeDate1 := CURRENTDATETIME;
+
+                        PurchSetup.GET;
+                        IF "Order Type" = "Order Type"::"Dojo Store Order" THEN BEGIN
+                            ToAddresses := 'ravinder@toyotanigeria.com';
+                            Initials := 'RS/AO'
+                        END ELSE
+                            IF "Order Type" = "Order Type"::"Isolo Store" THEN BEGIN
+                                ToAddresses := 'isuekebho@toyotanigeria.com';
+                                Initials := 'SE/GI'
+                            END ELSE BEGIN
+                                UserSetup4.GET("Send To");
+                                Initials := UserSetup4.Initials;
+                                ToAddresses := UserSetup4."E-Mail";
+                                BccAddresses := '';
+                            END;
+
+                        Subject := STRSUBSTNO(Text026, "LPP No.");
+                        CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text027, Addressee);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
+                    END;
+
+                HoDPartApproval := TRUE;
+            END;
+
 
         }
         field(26; "Sent By"; Code[30])
@@ -151,8 +197,8 @@ table 70018 "Local Part Purchase Register"
                     ELSE BEGIN
                         CALCFIELDS("Total Purchase Value");
                         VendAmt := "Total Purchase Value";
-                        "Supplier Name" := "Supplier's Name";
-                        "Supplier Address" := "Supplier's Address";
+                        VendName := "Supplier's Name";
+                        VendAddr := "Supplier's Address";
                         Purpose := "Justification for purchase";
 
                         UserSetup4.GET(USERID);
@@ -187,30 +233,6 @@ table 70018 "Local Part Purchase Register"
                         CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text003, Addressee);
                         SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
 
-                        /*  WITH TempEmailItem DO BEGIN
-                         "Send to" := ToAddresses;
-                         "Send CC" := SenderAddress;
-                         "Send BCC" := '';
-                         Subject := STRSUBSTNO(Text001, "LPP No.");
-
-                         BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                         BodyStream.WRITETEXT(Text002 + ' ' + Addressee);
-                         BodyStream.WRITETEXT(CRLF + CRLF);
-                         BodyStream.WRITETEXT(STRSUBSTNO(Text003, "LPP No.") + CRLF + CRLF +
-                         
-                         Text014 + FORMAT("Supplier Name") + CRLF + CRLF +
-                         Text015 + FORMAT("Supplier Address") + CRLF +
-                         Text020 + FORMAT(Purpose) + CRLF + CRLF +
-                         Text016 + FORMAT(VendAmt) + CRLF + CRLF +
-                         CRLF + CRLF +
-                         Text004 + CRLF);
-                         BodyStream.WRITETEXT(SendersName);
-                         BodyStream.WRITETEXT(CRLF + CRLF);
-                         BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                         Body := BodyBlob.Blob;
-                         Send(FALSE);
-                        End; */
-
                     end;
 
             end;
@@ -240,8 +262,8 @@ table 70018 "Local Part Purchase Register"
                             UserSetup.GET("Sent By");
                             CALCFIELDS("Total Purchase Value");
                             VendAmt := "Total Purchase Value";
-                            "Supplier Name" := "Supplier's Name";
-                            "Supplier Address" := "Supplier's Address";
+                            VendName := "Supplier's Name";
+                            VendAddr := "Supplier's Address";
                             Purpose := "Justification for purchase";
                             Addressee := UserSetup.Initials;
 
@@ -276,8 +298,8 @@ table 70018 "Local Part Purchase Register"
                                   BodyStream.WRITETEXT(CRLF + CRLF);
                                   BodyStream.WRITETEXT(STRSUBSTNO(Text024, "LPP No.") + CRLF + CRLF +
                                   STRSUBSTNO(Text029) + CRLF + CRLF +
-                                  Text014 + FORMAT("Supplier Name") + CRLF + CRLF +
-                                  Text015 + FORMAT("Supplier Address") + CRLF +
+                                  Text014 + FORMAT(VendName) + CRLF + CRLF +
+                                  Text015 + FORMAT(VendAddr) + CRLF +
                                   Text020 + FORMAT(Purpose) + CRLF + CRLF +
                                   Text016 + FORMAT(VendAmt) + CRLF + CRLF +
                                   CRLF + CRLF +
@@ -298,8 +320,8 @@ table 70018 "Local Part Purchase Register"
                         ELSE BEGIN
                             CALCFIELDS("Total Purchase Value");
                             VendAmt := "Total Purchase Value";
-                            "Supplier Name" := "Supplier's Name";
-                            "Supplier Address" := "Supplier's Address";
+                            VendName := "Supplier's Name";
+                            VendAddr := "Supplier's Address";
                             Purpose := "Justification for purchase";
 
                             UserSetup.GET("Sent By");
@@ -328,8 +350,8 @@ table 70018 "Local Part Purchase Register"
                                 BodyStream.WRITETEXT(Text002 + ' ' + Addressee + ',');
                                 BodyStream.WRITETEXT(CRLF + CRLF);
                                 BodyStream.WRITETEXT(STRSUBSTNO(Text011, "LPP No.") + CRLF + CRLF +
-                                Text014 + FORMAT("Supplier Name") + CRLF +
-                                Text015 + FORMAT("Supplier Address") + CRLF +
+                                Text014 + FORMAT(VendName) + CRLF +
+                                Text015 + FORMAT(VendAddr) + CRLF +
                                 Text020 + FORMAT(Purpose) + CRLF +
                                 Text016 + FORMAT(VendAmt) + CRLF +
                                 Text004 + CRLF);
@@ -348,8 +370,8 @@ table 70018 "Local Part Purchase Register"
                         ELSE BEGIN
                             CALCFIELDS("Total Purchase Value");
                             VendAmt := "Total Purchase Value";
-                            "Supplier Name" := "Supplier's Name";
-                            "Supplier Address" := "Supplier's Address";
+                            VendName := "Supplier's Name";
+                            VendAddr := "Supplier's Address";
                             Purpose := "Justification for purchase";
 
                             UserSetup.GET("Sent By");
@@ -378,8 +400,8 @@ table 70018 "Local Part Purchase Register"
                                  BodyStream.WRITETEXT(Text002 + ' ' + Addressee + ',');
                                  BodyStream.WRITETEXT(CRLF + CRLF);
                                  BodyStream.WRITETEXT(STRSUBSTNO(Text017, "LPP No.") + CRLF + CRLF +
-                                 Text014 + FORMAT("Supplier Name") + CRLF +
-                                 Text015 + FORMAT("Supplier Address") + CRLF +
+                                 Text014 + FORMAT(VendName) + CRLF +
+                                 Text015 + FORMAT(VendAddr) + CRLF +
                                  Text020 + FORMAT(Purpose) + CRLF +
                                  Text016 + FORMAT(VendAmt) + CRLF +
                                  Text004 + CRLF);
@@ -404,8 +426,8 @@ table 70018 "Local Part Purchase Register"
                             CALCFIELDS("Total Purchase Value");
                             VendAmt := "Total Purchase Value";
                             Addressee := UserSetup.Initials;
-                            "Supplier Name" := "Supplier's Name";
-                            "Supplier Address" := "Supplier's Address";
+                            VendName := "Supplier's Name";
+                            VendAddr := "Supplier's Address";
                             Purpose := "Justification for purchase";
 
                             UserSetup2.GET("Send To");
@@ -435,8 +457,8 @@ table 70018 "Local Part Purchase Register"
                                  BodyStream.WRITETEXT(CRLF + CRLF);
                                  BodyStream.WRITETEXT(STRSUBSTNO(Text024, "LPP No.") + CRLF + CRLF +
                                  STRSUBSTNO(Text029) + CRLF + CRLF +
-                                 Text014 + FORMAT("Supplier Name") + CRLF + CRLF +
-                                 Text015 + FORMAT("Supplier Address") + CRLF +
+                                 Text014 + FORMAT(VendName) + CRLF + CRLF +
+                                 Text015 + FORMAT(VendAddr) + CRLF +
                                  Text020 + FORMAT(Purpose) + CRLF + CRLF +
                                  Text016 + FORMAT(VendAmt) + CRLF + CRLF +
                                  CRLF + CRLF +
@@ -457,8 +479,8 @@ table 70018 "Local Part Purchase Register"
                         ELSE BEGIN
                             CALCFIELDS("Total Purchase Value");
                             VendAmt := "Total Purchase Value";
-                            "Supplier Name" := "Supplier's Name";
-                            "Supplier Address" := "Supplier's Address";
+                            VendName := "Supplier's Name";
+                            VendAddr := "Supplier's Address";
                             Purpose := "Justification for purchase";
 
                             UserSetup.GET("Sent By");
@@ -487,8 +509,8 @@ table 70018 "Local Part Purchase Register"
                                 BodyStream.WRITETEXT(Text002 + ' ' + Addressee + ',');
                                 BodyStream.WRITETEXT(CRLF + CRLF);
                                 BodyStream.WRITETEXT(STRSUBSTNO(Text011, "LPP No.") + CRLF + CRLF +
-                                Text014 + FORMAT("Supplier Name") + CRLF +
-                                Text015 + FORMAT("Supplier Address") + CRLF +
+                                Text014 + FORMAT(VendName) + CRLF +
+                                Text015 + FORMAT(VendAddr) + CRLF +
                                 Text020 + FORMAT(Purpose) + CRLF +
                                 Text016 + FORMAT(VendAmt) + CRLF +
                                 Text004 + CRLF);
@@ -507,8 +529,8 @@ table 70018 "Local Part Purchase Register"
                         ELSE BEGIN
                             CALCFIELDS("Total Purchase Value");
                             VendAmt := "Total Purchase Value";
-                            "Supplier Name" := "Supplier's Name";
-                            "Supplier Address" := "Supplier's Address";
+                            VendName := "Supplier's Name";
+                            VendAddr := "Supplier's Address";
                             Purpose := "Justification for purchase";
 
                             UserSetup.GET("Sent By");
@@ -537,8 +559,8 @@ table 70018 "Local Part Purchase Register"
                                 BodyStream.WRITETEXT(Text002 + ' ' + Addressee + ',');
                                 BodyStream.WRITETEXT(CRLF + CRLF);
                                 BodyStream.WRITETEXT(STRSUBSTNO(Text017, "LPP No.") + CRLF + CRLF +
-                                Text014 + FORMAT("Supplier Name") + CRLF +
-                                Text015 + FORMAT("Supplier Address") + CRLF +
+                                Text014 + FORMAT(VendName) + CRLF +
+                                Text015 + FORMAT(VendAddr) + CRLF +
                                 Text020 + FORMAT(Purpose) + CRLF +
                                 Text016 + FORMAT(VendAmt) + CRLF +
                                 Text004 + CRLF);
@@ -576,8 +598,8 @@ table 70018 "Local Part Purchase Register"
                             UserSetup.GET("Sent By");
                             CALCFIELDS("Total Purchase Value");
                             VendAmt := "Total Purchase Value";
-                            "Supplier Name" := "Supplier's Name";
-                            "Supplier Address" := "Supplier's Address";
+                            VendName := "Supplier's Name";
+                            VendAddr := "Supplier's Address";
                             Purpose := "Justification for purchase";
 
                             UserSetup2.GET("Send To");
@@ -607,8 +629,8 @@ table 70018 "Local Part Purchase Register"
                                 BodyStream.WRITETEXT(CRLF + CRLF);
                                 BodyStream.WRITETEXT(STRSUBSTNO(Text024, "LPP No.") + CRLF + CRLF +
                                 STRSUBSTNO(Text029) + CRLF + CRLF +
-                                Text014 + FORMAT("Supplier Name") + CRLF + CRLF +
-                                Text015 + FORMAT("Supplier Address") + CRLF +
+                                Text014 + FORMAT(VendName) + CRLF + CRLF +
+                                Text015 + FORMAT(VendAddr) + CRLF +
                                 Text020 + FORMAT(Purpose) + CRLF + CRLF +
                                 Text016 + FORMAT(VendAmt) + CRLF + CRLF +
                                 CRLF + CRLF +
@@ -629,8 +651,8 @@ table 70018 "Local Part Purchase Register"
                         ELSE BEGIN
                             CALCFIELDS("Total Purchase Value");
                             VendAmt := "Total Purchase Value";
-                            "Supplier Name" := "Supplier's Name";
-                            "Supplier Address" := "Supplier's Address";
+                            VendName := "Supplier's Name";
+                            VendAddr := "Supplier's Address";
                             Purpose := "Justification for purchase";
 
                             UserSetup.GET("Sent By");
@@ -659,8 +681,8 @@ table 70018 "Local Part Purchase Register"
                                BodyStream.WRITETEXT(Text002 + ' ' + Addressee + ',');
                                BodyStream.WRITETEXT(CRLF + CRLF);
                                BodyStream.WRITETEXT(STRSUBSTNO(Text011, "LPP No.") + CRLF + CRLF +
-                               Text014 + FORMAT("Supplier Name") + CRLF +
-                               Text015 + FORMAT("Supplier Address") + CRLF +
+                               Text014 + FORMAT(VendName) + CRLF +
+                               Text015 + FORMAT(VendAddr) + CRLF +
                                Text020 + FORMAT(Purpose) + CRLF +
                                Text016 + FORMAT(VendAmt) + CRLF +
                                Text004 + CRLF);
@@ -679,8 +701,8 @@ table 70018 "Local Part Purchase Register"
                         ELSE BEGIN
                             CALCFIELDS("Total Purchase Value");
                             VendAmt := "Total Purchase Value";
-                            "Supplier Name" := "Supplier's Name";
-                            "Supplier Address" := "Supplier's Address";
+                            VendName := "Supplier's Name";
+                            VendAddr := "Supplier's Address";
                             Purpose := "Justification for purchase";
 
                             UserSetup.GET("Sent By");
@@ -709,8 +731,8 @@ table 70018 "Local Part Purchase Register"
                                BodyStream.WRITETEXT(Text002 + ' ' + Addressee + ',');
                                BodyStream.WRITETEXT(CRLF + CRLF);
                                BodyStream.WRITETEXT(STRSUBSTNO(Text017, "LPP No.") + CRLF + CRLF +
-                               Text014 + FORMAT("Supplier Name") + CRLF +
-                               Text015 + FORMAT("Supplier Address") + CRLF +
+                               Text014 + FORMAT(VendName) + CRLF +
+                               Text015 + FORMAT(VendAddr) + CRLF +
                                Text020 + FORMAT(Purpose) + CRLF +
                                Text016 + FORMAT(VendAmt) + CRLF +
                                Text004 + CRLF);
@@ -733,8 +755,8 @@ table 70018 "Local Part Purchase Register"
                             UserSetup.GET("Sent By");
                             CALCFIELDS("Total Purchase Value");
                             VendAmt := "Total Purchase Value";
-                            "Supplier Name" := "Supplier's Name";
-                            "Supplier Address" := "Supplier's Address";
+                            VendName := "Supplier's Name";
+                            VendAddr := "Supplier's Address";
                             Purpose := "Justification for purchase";
 
                             UserSetup2.GET("Send To");
@@ -764,8 +786,8 @@ table 70018 "Local Part Purchase Register"
                                  BodyStream.WRITETEXT(CRLF + CRLF);
                                  BodyStream.WRITETEXT(STRSUBSTNO(Text024, "LPP No.") + CRLF + CRLF +
                                  STRSUBSTNO(Text029) + CRLF + CRLF +
-                                 Text014 + FORMAT("Supplier Name") + CRLF + CRLF +
-                                 Text015 + FORMAT("Supplier Address") + CRLF +
+                                 Text014 + FORMAT(VendName) + CRLF + CRLF +
+                                 Text015 + FORMAT(VendAddr) + CRLF +
                                  Text020 + FORMAT(Purpose) + CRLF + CRLF +
                                  Text016 + FORMAT(VendAmt) + CRLF + CRLF +
                                  CRLF + CRLF +
@@ -786,8 +808,8 @@ table 70018 "Local Part Purchase Register"
                         ELSE BEGIN
                             CALCFIELDS("Total Purchase Value");
                             VendAmt := "Total Purchase Value";
-                            "Supplier Name" := "Supplier's Name";
-                            "Supplier Address" := "Supplier's Address";
+                            VendName := "Supplier's Name";
+                            VendAddr := "Supplier's Address";
                             Purpose := "Justification for purchase";
 
                             UserSetup.GET("Sent By");
@@ -816,8 +838,8 @@ table 70018 "Local Part Purchase Register"
                                BodyStream.WRITETEXT(Text002 + ' ' + Addressee + ',');
                                BodyStream.WRITETEXT(CRLF + CRLF);
                                BodyStream.WRITETEXT(STRSUBSTNO(Text011, "LPP No.") + CRLF + CRLF +
-                               Text014 + FORMAT("Supplier Name") + CRLF +
-                               Text015 + FORMAT("Supplier Address") + CRLF +
+                               Text014 + FORMAT(VendName) + CRLF +
+                               Text015 + FORMAT(VendAddr) + CRLF +
                                Text020 + FORMAT(Purpose) + CRLF +
                                Text016 + FORMAT(VendAmt) + CRLF +
                                Text004 + CRLF);
@@ -836,8 +858,8 @@ table 70018 "Local Part Purchase Register"
                         ELSE BEGIN
                             CALCFIELDS("Total Purchase Value");
                             VendAmt := "Total Purchase Value";
-                            "Supplier Name" := "Supplier's Name";
-                            "Supplier Address" := "Supplier's Address";
+                            VendName := "Supplier's Name";
+                            VendAddr := "Supplier's Address";
                             Purpose := "Justification for purchase";
 
                             UserSetup.GET("Sent By");
@@ -866,8 +888,8 @@ table 70018 "Local Part Purchase Register"
                                 BodyStream.WRITETEXT(Text002 + ' ' + Addressee + ',');
                                 BodyStream.WRITETEXT(CRLF + CRLF);
                                 BodyStream.WRITETEXT(STRSUBSTNO(Text017, "LPP No.") + CRLF + CRLF +
-                                Text014 + FORMAT("Supplier Name") + CRLF +
-                                Text015 + FORMAT("Supplier Address") + CRLF +
+                                Text014 + FORMAT(VendName) + CRLF +
+                                Text015 + FORMAT(VendAddr) + CRLF +
                                 Text020 + FORMAT(Purpose) + CRLF +
                                 Text016 + FORMAT(VendAmt) + CRLF +
                                 Text004 + CRLF);
@@ -906,8 +928,8 @@ table 70018 "Local Part Purchase Register"
                         ELSE BEGIN
                             CALCFIELDS("Total Purchase Value");
                             VendAmt := "Total Purchase Value";
-                            "Supplier Name" := "Supplier's Name";
-                            "Supplier Address" := "Supplier's Address";
+                            VendName := "Supplier's Name";
+                            VendAddr := "Supplier's Address";
                             Purpose := "Justification for purchase";
 
                             UserSetup.GET("Sent By");
@@ -937,8 +959,8 @@ table 70018 "Local Part Purchase Register"
                                 BodyStream.WRITETEXT(CRLF + CRLF);
                                 BodyStream.WRITETEXT(STRSUBSTNO(Text012, "LPP No.") + CRLF + CRLF +
                                 STRSUBSTNO(Text028) + CRLF + CRLF +
-                                Text014 + FORMAT("Supplier Name") + CRLF + CRLF +
-                                Text015 + FORMAT("Supplier Address") + CRLF +
+                                Text014 + FORMAT(VendName) + CRLF + CRLF +
+                                Text015 + FORMAT(VendAddr) + CRLF +
                                 Text020 + FORMAT(Purpose) + CRLF + CRLF +
                                 Text016 + FORMAT(VendAmt) + CRLF + CRLF +
                                 CRLF + CRLF +
@@ -959,8 +981,8 @@ table 70018 "Local Part Purchase Register"
                         ELSE BEGIN
                             CALCFIELDS("Total Purchase Value");
                             VendAmt := "Total Purchase Value";
-                            "Supplier Name" := "Supplier's Name";
-                            "Supplier Address" := "Supplier's Address";
+                            VendName := "Supplier's Name";
+                            VendAddr := "Supplier's Address";
                             Purpose := "Justification for purchase";
 
                             UserSetup.GET("Sent By");
@@ -989,8 +1011,8 @@ table 70018 "Local Part Purchase Register"
                                 BodyStream.WRITETEXT(Text002 + ' ' + Addressee + ',');
                                 BodyStream.WRITETEXT(CRLF + CRLF);
                                 BodyStream.WRITETEXT(STRSUBSTNO(Text011, "LPP No.") + CRLF + CRLF +
-                                Text014 + FORMAT("Supplier Name") + CRLF +
-                                Text015 + FORMAT("Supplier Address") + CRLF +
+                                Text014 + FORMAT(VendName) + CRLF +
+                                Text015 + FORMAT(VendAddr) + CRLF +
                                 Text020 + FORMAT(Purpose) + CRLF +
                                 Text016 + FORMAT(VendAmt) + CRLF +
                                 Text004 + CRLF);
@@ -1008,8 +1030,8 @@ table 70018 "Local Part Purchase Register"
                         ELSE BEGIN
                             CALCFIELDS("Total Purchase Value");
                             VendAmt := "Total Purchase Value";
-                            "Supplier Name" := "Supplier's Name";
-                            "Supplier Address" := "Supplier's Address";
+                            VendName := "Supplier's Name";
+                            VendAddr := "Supplier's Address";
                             Purpose := "Justification for purchase";
 
                             UserSetup.GET("Sent By");
@@ -1038,8 +1060,8 @@ table 70018 "Local Part Purchase Register"
                                 BodyStream.WRITETEXT(Text002 + ' ' + Addressee + ',');
                                 BodyStream.WRITETEXT(CRLF + CRLF);
                                 BodyStream.WRITETEXT(STRSUBSTNO(Text017, "LPP No.") + CRLF + CRLF +
-                                Text014 + FORMAT("Supplier Name") + CRLF +
-                                Text015 + FORMAT("Supplier Address") + CRLF +
+                                Text014 + FORMAT(VendName) + CRLF +
+                                Text015 + FORMAT(VendAddr) + CRLF +
                                 Text020 + FORMAT(Purpose) + CRLF +
                                 Text016 + FORMAT(VendAmt) + CRLF +
                                 Text004 + CRLF);
@@ -1066,8 +1088,8 @@ table 70018 "Local Part Purchase Register"
                         ELSE BEGIN
                             CALCFIELDS("Total Purchase Value");
                             VendAmt := "Total Purchase Value";
-                            "Supplier Name" := "Supplier's Name";
-                            "Supplier Address" := "Supplier's Address";
+                            VendName := "Supplier's Name";
+                            VendAddr := "Supplier's Address";
                             Purpose := "Justification for purchase";
 
                             UserSetup.GET("Sent By");
@@ -1097,8 +1119,8 @@ table 70018 "Local Part Purchase Register"
                                 BodyStream.WRITETEXT(CRLF + CRLF);
                                 BodyStream.WRITETEXT(STRSUBSTNO(Text012, "LPP No.") + CRLF + CRLF +
                                 STRSUBSTNO(Text028) + CRLF + CRLF +
-                                Text014 + FORMAT("Supplier Name") + CRLF + CRLF +
-                                Text015 + FORMAT("Supplier Address") + CRLF +
+                                Text014 + FORMAT(VendName) + CRLF + CRLF +
+                                Text015 + FORMAT(VendAddr) + CRLF +
                                 Text020 + FORMAT(Purpose) + CRLF + CRLF +
                                 Text016 + FORMAT(VendAmt) + CRLF + CRLF +
                                 CRLF + CRLF +
@@ -1119,8 +1141,8 @@ table 70018 "Local Part Purchase Register"
                         ELSE BEGIN
                             CALCFIELDS("Total Purchase Value");
                             VendAmt := "Total Purchase Value";
-                            "Supplier Name" := "Supplier's Name";
-                            "Supplier Address" := "Supplier's Address";
+                            VendName := "Supplier's Name";
+                            VendAddr := "Supplier's Address";
                             Purpose := "Justification for purchase";
 
                             UserSetup.GET("Sent By");
@@ -1149,8 +1171,8 @@ table 70018 "Local Part Purchase Register"
                                  BodyStream.WRITETEXT(Text002 + ' ' + Addressee + ',');
                                  BodyStream.WRITETEXT(CRLF + CRLF);
                                  BodyStream.WRITETEXT(STRSUBSTNO(Text011, "LPP No.") + CRLF + CRLF +
-                                 Text014 + FORMAT("Supplier Name") + CRLF +
-                                 Text015 + FORMAT("Supplier Address") + CRLF +
+                                 Text014 + FORMAT(VendName) + CRLF +
+                                 Text015 + FORMAT(VendAddr) + CRLF +
                                  Text020 + FORMAT(Purpose) + CRLF +
                                  Text016 + FORMAT(VendAmt) + CRLF +
                                  Text004 + CRLF);
@@ -1169,8 +1191,8 @@ table 70018 "Local Part Purchase Register"
                         ELSE BEGIN
                             CALCFIELDS("Total Purchase Value");
                             VendAmt := "Total Purchase Value";
-                            "Supplier Name" := "Supplier's Name";
-                            "Supplier Address" := "Supplier's Address";
+                            VendName := "Supplier's Name";
+                            VendAddr := "Supplier's Address";
                             Purpose := "Justification for purchase";
 
                             UserSetup.GET("Sent By");
@@ -1199,8 +1221,8 @@ table 70018 "Local Part Purchase Register"
                                 BodyStream.WRITETEXT(Text002 + ' ' + Addressee + ',');
                                 BodyStream.WRITETEXT(CRLF + CRLF);
                                 BodyStream.WRITETEXT(STRSUBSTNO(Text017, "LPP No.") + CRLF + CRLF +
-                                Text014 + FORMAT("Supplier Name") + CRLF +
-                                Text015 + FORMAT("Supplier Address") + CRLF +
+                                Text014 + FORMAT(VendName) + CRLF +
+                                Text015 + FORMAT(VendAddr) + CRLF +
                                 Text020 + FORMAT(Purpose) + CRLF +
                                 Text016 + FORMAT(VendAmt) + CRLF +
                                 Text004 + CRLF);
@@ -1242,8 +1264,8 @@ table 70018 "Local Part Purchase Register"
                         ELSE BEGIN
                             CALCFIELDS("Total Purchase Value");
                             VendAmt := "Total Purchase Value";
-                            "Supplier Name" := "Supplier's Name";
-                            "Supplier Address" := "Supplier's Address";
+                            VendName := "Supplier's Name";
+                            VendAddr := "Supplier's Address";
                             Purpose := "Justification for purchase";
                             ToAddresses := 'adewumi@toyotanigeria.com';
                             CcAddresses := 'agbesua@toyotanigeria.com';
@@ -1272,8 +1294,8 @@ table 70018 "Local Part Purchase Register"
                                 BodyStream.WRITETEXT(CRLF + CRLF);
                                 BodyStream.WRITETEXT(STRSUBSTNO(Text021, "LPP No.") + CRLF + CRLF +
                                 STRSUBSTNO(Text030) + CRLF + CRLF +
-                                Text014 + FORMAT("Supplier Name") + CRLF + CRLF +
-                                Text015 + FORMAT("Supplier Address") + CRLF +
+                                Text014 + FORMAT(VendName) + CRLF + CRLF +
+                                Text015 + FORMAT(VendAddr) + CRLF +
                                 Text020 + FORMAT(Purpose) + CRLF + CRLF +
                                 Text016 + FORMAT(VendAmt) + CRLF + CRLF +
                                 CRLF + CRLF +
@@ -1295,8 +1317,8 @@ table 70018 "Local Part Purchase Register"
                         ELSE BEGIN
                             CALCFIELDS("Total Purchase Value");
                             VendAmt := "Total Purchase Value";
-                            "Supplier Name" := "Supplier's Name";
-                            "Supplier Address" := "Supplier's Address";
+                            VendName := "Supplier's Name";
+                            VendAddr := "Supplier's Address";
                             Purpose := "Justification for purchase";
                             UserSetup.GET("Sent By");
                             ToAddresses := UserSetup."E-Mail";
@@ -1325,8 +1347,8 @@ table 70018 "Local Part Purchase Register"
                                     BodyStream.WRITETEXT(CRLF + CRLF);
                                     BodyStream.WRITETEXT(STRSUBSTNO(Text011, "LPP No.") + CRLF + CRLF +
                                     STRSUBSTNO(Text030) + CRLF + CRLF +
-                                    Text014 + FORMAT("Supplier Name") + CRLF + CRLF +
-                                    Text015 + FORMAT("Supplier Address") + CRLF +
+                                    Text014 + FORMAT(VendName) + CRLF + CRLF +
+                                    Text015 + FORMAT(VendAddr) + CRLF +
                                     Text020 + FORMAT(Purpose) + CRLF + CRLF +
                                     Text016 + FORMAT(VendAmt) + CRLF + CRLF +
                                     CRLF + CRLF +
@@ -1350,8 +1372,8 @@ table 70018 "Local Part Purchase Register"
                         ELSE BEGIN
                             CALCFIELDS("Total Purchase Value");
                             VendAmt := "Total Purchase Value";
-                            "Supplier Name" := "Supplier's Name";
-                            "Supplier Address" := "Supplier's Address";
+                            VendName := "Supplier's Name";
+                            VendAddr := "Supplier's Address";
                             Purpose := "Justification for purchase";
 
                             IF "Total Purchase Value" <= 100000 THEN BEGIN
@@ -1395,8 +1417,8 @@ table 70018 "Local Part Purchase Register"
                                BodyStream.WRITETEXT(CRLF + CRLF);
                                BodyStream.WRITETEXT(STRSUBSTNO(Text021, "LPP No.") + CRLF + CRLF +
                                STRSUBSTNO(Text030) + CRLF + CRLF +
-                               Text014 + FORMAT("Supplier Name") + CRLF + CRLF +
-                               Text015 + FORMAT("Supplier Address") + CRLF +
+                               Text014 + FORMAT(VendName) + CRLF + CRLF +
+                               Text015 + FORMAT(VendAddr) + CRLF +
                                Text020 + FORMAT(Purpose) + CRLF + CRLF +
                                Text016 + FORMAT(VendAmt) + CRLF + CRLF +
                                CRLF + CRLF +
@@ -1417,8 +1439,8 @@ table 70018 "Local Part Purchase Register"
                         ELSE BEGIN
                             CALCFIELDS("Total Purchase Value");
                             VendAmt := "Total Purchase Value";
-                            "Supplier Name" := "Supplier's Name";
-                            "Supplier Address" := "Supplier's Address";
+                            VendName := "Supplier's Name";
+                            VendAddr := "Supplier's Address";
                             Purpose := "Justification for purchase";
 
                             UserSetup.GET("Sent By");
@@ -1449,8 +1471,8 @@ table 70018 "Local Part Purchase Register"
                                  BodyStream.WRITETEXT(CRLF + CRLF);
                                  BodyStream.WRITETEXT(STRSUBSTNO(Text011, "LPP No.") + CRLF + CRLF +
                                  STRSUBSTNO(Text030) + CRLF + CRLF +
-                                 Text014 + FORMAT("Supplier Name") + CRLF + CRLF +
-                                 Text015 + FORMAT("Supplier Address") + CRLF +
+                                 Text014 + FORMAT(VendName) + CRLF + CRLF +
+                                 Text015 + FORMAT(VendAddr) + CRLF +
                                  Text020 + FORMAT(Purpose) + CRLF + CRLF +
                                  Text016 + FORMAT(VendAmt) + CRLF + CRLF +
                                  CRLF + CRLF +
@@ -1657,8 +1679,8 @@ table 70018 "Local Part Purchase Register"
         Addressee: Text[50];
         SenderAddress: Text[200];
         EditSend: Boolean;
-        "Supplier Name": Text;
-        "Supplier Address": Text;
+        //VendName: Text;
+        //VendAddr: Text;
         Purpose: Text;
         Amount: Decimal;
         Text001: Label '%1  requires your approval  for local parts procurement.';
@@ -1686,7 +1708,7 @@ table 70018 "Local Part Purchase Register"
         Text023: Label 'Local part purchase request for  SPV requires your approval';
         LPPLine: Record "LPP Line";
         Text024: Label 'The Local  part  purchase  with Document No. %1 has been approved. ';
-        Text025: Label '%1  requires your approval to  Procure and  Fianance &Account  to process payment:';
+        Text025: Label '%1  requires your approval to Procure and Fianance &Account to process payment:';
         Text026: Label '%1  requires your approval';
         Text027: Label 'The document No. %1 for local part purchase  requires approval to process local parts procurement.';
         Text028: Label ' Kindly Proceed to make payment from the departmental float .';

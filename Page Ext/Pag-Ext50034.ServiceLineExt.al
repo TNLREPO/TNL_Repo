@@ -14,4 +14,32 @@ pageextension 50034 "Service Line Ext" extends "Service Lines"
             }
         }
     }
+
+    actions
+    {
+        addafter(Reserve)
+        {
+            action(PrintBP)
+            {
+                ApplicationArea = All;
+                Caption = 'Print BP Materials';
+                ToolTip = 'Print body and paint materials.';
+                Image = PrintChecklistReport;
+                PromotedCategory = Process;
+                Promoted = true;
+
+                trigger OnAction()
+                begin
+                    ServiceLine.SetRange("Document No.", Rec."Document No.");
+                    if ServiceLine.FindFirst() then
+                        Report.RunModal(50632, true, true, ServiceLine);
+                end;
+
+            }
+        }
+    }
+
+    var
+        ServiceLine: Record "Service Line";
+
 }
