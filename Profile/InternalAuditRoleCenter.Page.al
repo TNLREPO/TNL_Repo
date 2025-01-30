@@ -411,6 +411,42 @@ page 70102 "Internal Audit Role Center"
             {
                 Caption = 'Posted Documents';
                 Image = FiledPosted;
+                
+                action("Posted Cash Receipts")
+                {
+                    Caption = 'Posted Cash Receipts';
+                    RunObject = Page 70020;
+                }
+                action("Posted Cheque Receipts")
+                {
+                    Caption = 'Posted Cheque Receipts';
+                    RunObject = Page "Posted Cheque Receipt List";
+                }
+                action("Posted e-Receipt")
+                {
+                    Caption = 'Posted e-Receipt';
+                    RunObject = Page 70109;
+                }
+                action("Posted Cash Payment")
+                {
+                    Caption = 'Posted Cash Payment';
+                    RunObject = Page 70022;
+                }
+                action("Posted Cheque Payment")
+                {
+                    Caption = 'Posted Cheque Payment';
+                    RunObject = Page "Posted Cheque Payment List";
+                }
+                action("Posted e-Payment")
+                {
+                    Caption = 'Posted e-Payment';
+                    RunObject = Page 70099;
+                }
+                action("Posted Journal Vouchers")
+                {
+                    Caption = 'Posted Journal Vouchers';
+                    RunObject = Page 70024;
+                }
                 action("Posted Sales Invoice")
                 {
                     Caption = 'Posted Sales Invoice';
@@ -694,60 +730,21 @@ page 70102 "Internal Audit Role Center"
                     RunObject = Page 70203;
                 }
             }
-            group("PostedDocuments")
+            group(Administration)
             {
-                Caption = 'Posted Documents';
+                Caption = 'Administration';
                 Image = FiledPosted;
-                action("Posted Cash Receipts")
-                {
-                    Caption = 'Posted Cash Receipts';
-                    RunObject = Page 70020;
-                }
-                action("Posted Cheque Receipts")
-                {
-                    Caption = 'Posted Cheque Receipts';
-                    RunObject = Page "Posted Cheque Receipt List";
-                }
-                action("Posted e-Receipt")
-                {
-                    Caption = 'Posted e-Receipt';
-                    RunObject = Page 70109;
-                }
-                action("Posted Cash Payment")
-                {
-                    Caption = 'Posted Cash Payment';
-                    RunObject = Page 70022;
-                }
-                action("Posted Cheque Payment")
-                {
-                    Caption = 'Posted Cheque Payment';
-                    RunObject = Page "Posted Cheque Payment List";
-                }
-                action("Posted e-Payment")
-                {
-                    Caption = 'Posted e-Payment';
-                    RunObject = Page 70099;
-                }
-                action("Posted Journal Vouchers")
-                {
-                    Caption = 'Posted Journal Vouchers';
-                    RunObject = Page 70024;
-                }
-                /*  action(ILEMod)
-                 {
-                     Caption = 'ILEModify';
-                     RunObject = xmlport "Modify Item Ledger Entry";
-                 } */
-
+                
+               
                 action(ILESpool)
                 {
-                    Caption = 'ILESpool';
-                    RunObject = xmlport "ILE Spool";
+                    Caption = 'Change Model';
+                    RunObject = xmlport "Change Model";
                 }
-                action(ValueModification)
+                action(SkipOpexQuote)
                 {
-                    Caption = 'Value Entry Modification';
-                    RunObject = xmlport "Value  Modification";
+                    Caption = 'Skip Opex Quotes';
+                    RunObject = report "Skip Opex/Capex Quotes";
                 }
 
 

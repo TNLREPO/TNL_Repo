@@ -1,8 +1,9 @@
-xmlport 50151 "ILE Spool"
+xmlport 50151 "Change Model"
 {
     Direction = Import;
     Format = VariableText;
     UseRequestPage = false;
+    Permissions = tabledata "Item Ledger Entry" = rimd, tabledata "Value Entry" = rimd;
 
     schema
     {
@@ -27,33 +28,24 @@ xmlport 50151 "ILE Spool"
 
                 trigger OnAfterInsertRecord()
                 begin
-                    //ItemLedgerEntry.SETRANGE("Document Type",ItemLedgerEntry."Document Type"::"Purchase Receipt");
-                    //ItemLedgerEntry.SETRANGE("Serial No.",SerialNo);
-                    //IF ItemLedgerEntry.FINDLAST THEN BEGIN
-                    //    ItemLedgerEntry.Pick := TRUE;
-                    //    ItemLedgerEntry.MODIFY;
-                    //END;
-
                     ItemLedgerEntry.SETRANGE("Serial No.", SerialNo);
                     IF ItemLedgerEntry.FINDFIRST THEN BEGIN
                         REPEAT
                             ItemLedgerEntry."Item No." := ItemNo;
                             ItemLedgerEntry.Description := Description;
-                            ItemLedgerEntry.MODIFY;
+                            ItemLedgerEntry.Modify();
+
+                            ValueEntry.SetRange("Item Ledger Entry No.", ItemLedgerEntry."Entry No.");
+                            if ValueEntry.FindFirst() then begin
+                                ValueEntry."Item No." := ItemNo;
+                                ValueEntry.Description := Description;
+                                ValueEntry.Modify();
+                            end;
+
                         UNTIL ItemLedgerEntry.NEXT = 0;
-
-                        //   PurchRecptLine.SETRANGE(PurchRecptLine."Posting Group",'N_CARS');
-                        //
-                        //  PurchRecptLine.SETRANGE(PurchRecptLine."Chassis No.",SerialNo);
-                        //  IF PurchRecptLine.FINDFIRST THEN BEGIN
-                        //  PurchRecptLine.Pick:= TRUE;
-                        //   PurchRecptLine.MODIFY;
-                        //   END;
-
-
                     END;
 
-                    MESSAGE('Done!')
+                    MESSAGE(Text001)
                 end;
             }
         }
@@ -73,13 +65,14 @@ xmlport 50151 "ILE Spool"
 
     trigger OnPostXmlPort()
     begin
-        MESSAGE(Text001, Counter);
+
     end;
 
     var
         ItemLedgerEntry: Record 32;
+        ValueEntry: Record "Value Entry";
         PurchRecptLine: Record 121;
         Counter: Integer;
-        Text001: Label '%1 records were successfully inserted or modified.';
+        Text001: Label 'Records were successfully modified.';
 }
 

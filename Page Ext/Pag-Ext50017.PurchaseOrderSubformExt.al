@@ -7,18 +7,19 @@ pageextension 50017 "Purchase Order Subform Ext" extends "Purchase Order Subform
             Editable = false;
         }
 
-        addafter("Unit Cost (LCY)")
-        {
 
+        addafter("Location Code")
+        {
+            field("Chassis No."; Rec."Chassis No.")
+            {
+                ApplicationArea = All;
+                Visible = true;
+            }
             field("Year of Production"; Rec."Year of Production")
             {
                 ApplicationArea = All;
                 Visible = true;
             }
-        }
-
-        addafter("Location Code")
-        {
             field("Color Group"; Rec."Color Group")
             {
                 ApplicationArea = All;
@@ -37,7 +38,6 @@ pageextension 50017 "Purchase Order Subform Ext" extends "Purchase Order Subform
                 Visible = true;
                 Editable = false;
             }
-
 
         }
 

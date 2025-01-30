@@ -14,6 +14,32 @@ pageextension 50021 "Sales Quote Ext" extends "Sales Quote"
     {
         addafter(Print)
         {
+            action(PrintTNLSalesQuote)
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'TNL Sales Quote';
+                Ellipsis = true;
+                Image = Print;
+                Promoted = true;
+                PromotedCategory = Category9;
+                ToolTip = 'Prepare to print the document. A report request window for the document opens where you can specify what to include on the print-out.';
+                trigger OnAction()
+                var
+                    SalesHeader: Record "Sales Header";
+                    TNLSalesQuote: Report "TNL Sales Quotation";
+
+                begin
+                    SalesHeader.SetRange("No.", Rec."No.");
+                    if SalesHeader.FindFirst() then begin
+                        TNLSalesQuote.SetTableView(SalesHeader);
+                        TNLSalesQuote.UseRequestPage();
+                        TNLSalesQuote.RunModal();
+                    end
+
+                end;
+            }
+
+
             action(PrintTCSC)
             {
                 ApplicationArea = Basic, Suite;
