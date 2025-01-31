@@ -228,7 +228,6 @@ page 50023 "Service"
                     Caption = 'Warranty Data Uploaded';
                     RunObject = Page "Warranty Data Uploaded";
                 }
-
             }
 
             group(MaintReminderApp)
@@ -300,7 +299,6 @@ page 50023 "Service"
                     RunObject = Page "Kodawari Estimate List";
                     ToolTip = 'Review estimates.';
                 }
-
             }
 
             group(ReceptionArea)
@@ -363,7 +361,6 @@ page 50023 "Service"
                     RunObject = Page "Labour and Operations List";
                     ToolTip = 'View all job instructions.';
                 }
-
 
             }
 

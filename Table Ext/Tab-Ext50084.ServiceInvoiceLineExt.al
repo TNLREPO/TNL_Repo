@@ -22,13 +22,13 @@ tableextension 50084 "Service Invoice Line Ext" extends "Service Invoice Line"
         }
         field(50304; "Model No."; Code[20])
         {
-            /* CalcFormula = Lookup("Customer Order HeaderX"."Model No." WHERE ("No."=FIELD("Customer Order No.")));
-            FieldClass = FlowField; */
+            CalcFormula = Lookup("Customer Order HeaderX"."Model No." WHERE("No." = FIELD("Customer Order No.")));
+            FieldClass = FlowField;
         }
         field(50305; "Model Name"; Code[40])
         {
-            /* CalcFormula = Lookup("Customer Order HeaderX"."Model Name" WHERE ("No."=FIELD("Customer Order No.")));
-            FieldClass = FlowField; */
+            CalcFormula = Lookup("Customer Order HeaderX"."Model Name" WHERE("No." = FIELD("Customer Order No.")));
+            FieldClass = FlowField;
         }
         field(50306; "Job Type"; Option)
         {
@@ -48,8 +48,8 @@ tableextension 50084 "Service Invoice Line Ext" extends "Service Invoice Line"
         }
         field(50402; VIN; Code[50])
         {
-            /* CalcFormula = Lookup("Customer Order HeaderX"."Frame No./VIN" WHERE ("No."=FIELD("Customer Order No.")));
-            FieldClass = FlowField; */
+            CalcFormula = Lookup("Customer Order HeaderX"."Frame No./VIN" WHERE("No." = FIELD("Customer Order No.")));
+            FieldClass = FlowField;
         }
     }
 

@@ -1,9 +1,7 @@
 pageextension 50003 "Transfer Order Ext" extends "Transfer Order"
 {
-
     layout
     {
-
         addafter("Foreign Trade")
         {
             group(OtherInformation)
@@ -43,7 +41,6 @@ pageextension 50003 "Transfer Order Ext" extends "Transfer Order"
                 {
                     ApplicationArea = All;
                 }
-
             }
 
             group(Authorization)
@@ -79,9 +76,7 @@ pageextension 50003 "Transfer Order Ext" extends "Transfer Order"
                 {
                     ApplicationArea = All;
                 }
-
             }
-
         }
 
         addafter("Posting Date")
@@ -94,6 +89,35 @@ pageextension 50003 "Transfer Order Ext" extends "Transfer Order"
         modify("Assigned User ID")
         {
             Editable = true;
+        }
+    }
+
+    actions
+    {
+        addafter("&Print")
+        {
+            action(PrintTCSCPickingList)
+            {
+                Caption = 'TCSC Picking List';
+                ApplicationArea = All;
+                ToolTip = 'Print picking list for this transaction.';
+                Image = Print;
+                PromotedCategory = Category8;
+                Promoted = true;
+                trigger OnAction()
+                var
+                    PickingList: Report "TCSC Picking List";
+                    TransferOrder: Record "Transfer Header";
+                begin
+                    Clear(PickingList);
+                    TransferOrder.SetRange("No.", Rec."No.");
+                    if TransferOrder.FindFirst() then begin
+                        PickingList.SetTableView(TransferOrder);
+                        PickingList.UseRequestPage();
+                        PickingList.RunModal();
+                    end
+                end;
+            }
         }
     }
 }

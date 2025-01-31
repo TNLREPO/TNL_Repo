@@ -31,7 +31,7 @@ pageextension 50016 "Sales Credit Memo Ext" extends "Sales Credit Memo"
                         END;
 
                         IF (Rec."Shortcut Dimension 1 Code" = '05PARTS') AND (Rec."Reason Code" = 'NDEFECTIVE') THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1|%2|%3', 'AKINDELE', 'RAVINDER', 'GOC');
+                            UserSetup.SETFILTER("User ID", '%1|%2','RAVINDER', 'GOC');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."1st Approval to" := UserSetup."User ID";
                                 Rec."1st Approver" := UserSetup.Name;
@@ -39,7 +39,7 @@ pageextension 50016 "Sales Credit Memo Ext" extends "Sales Credit Memo"
                             END;
                         END;
                         IF (Rec."Shortcut Dimension 1 Code" = '05PARTS') AND (Rec."Reason Code" = 'DEFECTIVE') THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1|%2|%3', 'AKINDELE', 'RAVINDER', 'GOC');
+                            UserSetup.SETFILTER("User ID", '%1|%2', 'RAVINDER', 'GOC');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."1st Approval to" := UserSetup."User ID";
                                 Rec."1st Approver" := UserSetup.Name;
@@ -47,7 +47,7 @@ pageextension 50016 "Sales Credit Memo Ext" extends "Sales Credit Memo"
                             END;
                         END;
                         IF (Rec."Shortcut Dimension 1 Code" = '05PARTS') AND (Rec."Reason Code" = 'ERROR') THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1|%2|%3|%4|%5', 'AKINDELE', 'RAVINDER', 'AKEEM', 'GOC', 'Nishant');
+                            UserSetup.SETFILTER("User ID", '%1|%2|%3|%4', 'RAVINDER', 'AKEEM', 'GOC', 'Nishant');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."1st Approval to" := UserSetup."User ID";
                                 Rec."1st Approver" := UserSetup.Name;
