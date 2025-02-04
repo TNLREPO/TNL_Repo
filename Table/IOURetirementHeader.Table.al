@@ -142,7 +142,7 @@ table 50107 "IOU Retirement Header"
 
                     Subject := STRSUBSTNO(text001, "No.");
                     CreateEmailBody("No.", Addressee, text001, "Staff Name", Purpose, "IOU Amount", Balance);
-                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
 
                 END;
@@ -233,7 +233,7 @@ table 50107 "IOU Retirement Header"
 
                         Subject := STRSUBSTNO(text003, "No.");
                         CreateEmailBody("No.", Addressee, text003, "Staff Name", Purpose, "IOU Amount", Balance);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                         /*        WITH TempEmailItem DO BEGIN
                                    "Send to" := ToAddresses;
@@ -290,7 +290,7 @@ table 50107 "IOU Retirement Header"
 
                         Subject := STRSUBSTNO(text004, "No.");
                         CreateEmailBody("No.", Addressee, text004, "Staff Name", Purpose, "IOU Amount", Balance);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                         Reject := TRUE;
                     END;
@@ -321,7 +321,7 @@ table 50107 "IOU Retirement Header"
 
                         Subject := STRSUBSTNO(text005, "No.");
                         CreateEmailBody("No.", Addressee, text005, "Staff Name", Purpose, "IOU Amount", Balance);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                         /*   WITH TempEmailItem DO BEGIN
                               "Send to" := ToAddresses;
@@ -415,7 +415,7 @@ table 50107 "IOU Retirement Header"
 
                         Subject := STRSUBSTNO(text003, "No.");
                         CreateEmailBody("No.", Addressee, text003, "Staff Name", Purpose, "IOU Amount", Balance);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                         /*        WITH TempEmailItem DO BEGIN
                                    "Send to" := ToAddresses;
@@ -471,7 +471,7 @@ table 50107 "IOU Retirement Header"
 
                         Subject := STRSUBSTNO(text004, "No.");
                         CreateEmailBody("No.", Addressee, text004, "Staff Name", Purpose, "IOU Amount", Balance);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                         /*  WITH TempEmailItem DO BEGIN
                              "Send to" := ToAddresses;
@@ -525,7 +525,7 @@ table 50107 "IOU Retirement Header"
 
                         Subject := STRSUBSTNO(text005, "No.");
                         CreateEmailBody("No.", Addressee, text005, "Staff Name", Purpose, "IOU Amount", Balance);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                         /*      WITH TempEmailItem DO BEGIN
                                  "Send to" := ToAddresses;
@@ -561,7 +561,7 @@ table 50107 "IOU Retirement Header"
         }
         field(28; "3rd Approval to"; Code[25])
         {
-            TableRelation = "User Setup"."User ID";
+            TableRelation = "User Setup"."User ID" WHERE("User ID" = FILTER('BUNMI|PAA|ALBERT|ONIMISI'));
 
             trigger OnValidate()
             begin
@@ -610,7 +610,7 @@ table 50107 "IOU Retirement Header"
 
                     Subject := STRSUBSTNO(text001, "No.");
                     CreateEmailBody("No.", Addressee, text001, "Staff Name", Purpose, "IOU Amount", Balance);
-                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                     /* Body := Text011 + ' ' + Addressee + ',' +
                     CRLF + CRLF + STRSUBSTNO(text001, "IOU No.") + CRLF +
@@ -653,7 +653,7 @@ table 50107 "IOU Retirement Header"
 
                     Subject := STRSUBSTNO(text004, "No.");
                     CreateEmailBody("No.", Addressee, text004, "Staff Name", Purpose, "IOU Amount", Balance);
-                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                     /*  Body := Text011 + ' ' + Addressee + ',' +
                      CRLF + CRLF + STRSUBSTNO(text004, "IOU No.") + CRLF +
@@ -697,7 +697,7 @@ table 50107 "IOU Retirement Header"
 
                     Subject := STRSUBSTNO(text005, "No.");
                     CreateEmailBody("No.", Addressee, text005, "Staff Name", Purpose, "IOU Amount", Balance);
-                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                     /* Body := Text011 + ' ' + Addressee + ',' +
                     CRLF + CRLF + STRSUBSTNO(text005, "IOU No.") + CRLF +
@@ -776,7 +776,7 @@ table 50107 "IOU Retirement Header"
 
                         Subject := STRSUBSTNO(text003, "No.");
                         CreateEmailBody("No.", Addressee, text003, "Staff Name", Purpose, "IOU Amount", Balance);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                         /*  WITH TempEmailItem DO BEGIN
                              "Send to" := ToAddresses;
@@ -827,7 +827,7 @@ table 50107 "IOU Retirement Header"
 
                         Subject := STRSUBSTNO(text004, "No.");
                         CreateEmailBody("No.", Addressee, text004, "Staff Name", Purpose, "IOU Amount", Balance);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                         /*  WITH TempEmailItem DO BEGIN
                              "Send to" := ToAddresses;
@@ -880,7 +880,7 @@ table 50107 "IOU Retirement Header"
 
                         Subject := STRSUBSTNO(text005, "No.");
                         CreateEmailBody("No.", Addressee, text005, "Staff Name", Purpose, "IOU Amount", Balance);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                         /*      WITH TempEmailItem DO BEGIN
                                  "Send to" := ToAddresses;
@@ -947,7 +947,7 @@ table 50107 "IOU Retirement Header"
 
                     Subject := STRSUBSTNO(text001, "No.");
                     CreateEmailBody("No.", Addressee, text001, "Staff Name", Purpose, "IOU Amount", Balance);
-                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                 END;
             end;
@@ -972,7 +972,7 @@ table 50107 "IOU Retirement Header"
 
                     Subject := STRSUBSTNO(text001, "No.");
                     CreateEmailBody("No.", Addressee, text001, "Staff Name", Purpose, "IOU Amount", Balance);
-                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                     /*    IF CURRENTCLIENTTYPE = CLIENTTYPE::Windows THEN
                            //Mail.NewMessage(ToAddresses, CcAddresses, BccAddresses, Subject, Body, '', TRUE);
@@ -1291,7 +1291,7 @@ table 50107 "IOU Retirement Header"
                         GenJnlLine."VAT Prod. Posting Group" := '';
                         IF GenJnlLine."Account Type" <> GenJnlLine."Account Type"::"Fixed Asset" THEN BEGIN
                             GenJnlLine."Depreciation Book Code" := '';
-                            //GenJnlLine."FA Posting Type" := 0;
+                            GenJnlLine."FA Posting Type" := GenJnlLine."FA Posting Type"::" ";
                             GenJnlLine."Maintenance Code" := '';
                         END ELSE BEGIN
                             GenJnlLine.VALIDATE("FA Posting Type", RetLines."FA Posting Type");
@@ -1324,7 +1324,7 @@ table 50107 "IOU Retirement Header"
                     GenJnlLine.VALIDATE(GenJnlLine."Applies-to Doc. No.", Rec."Applies-to Doc. No.");
                     IF GenJnlLine."Account Type" <> GenJnlLine."Account Type"::"Fixed Asset" THEN BEGIN
                         GenJnlLine."Depreciation Book Code" := '';
-                        //GenJnlLine."FA Posting Type" := 0;
+                        GenJnlLine."FA Posting Type" := GenJnlLine."FA Posting Type"::" ";
                         GenJnlLine."Maintenance Code" := '';
                     END ELSE BEGIN
                         GenJnlLine.VALIDATE("FA Posting Type", RetLines."FA Posting Type");
@@ -1404,7 +1404,7 @@ table 50107 "IOU Retirement Header"
                         GenJnlLine."VAT Prod. Posting Group" := '';
                         IF GenJnlLine."Account Type" <> GenJnlLine."Account Type"::"Fixed Asset" THEN BEGIN
                             GenJnlLine."Depreciation Book Code" := '';
-                            //GenJnlLine."FA Posting Type" := 0;
+                            GenJnlLine."FA Posting Type" := GenJnlLine."FA Posting Type"::" ";
                             GenJnlLine."Maintenance Code" := '';
                         END ELSE BEGIN
                             GenJnlLine.VALIDATE("FA Posting Type", RetLines."FA Posting Type");
@@ -1437,7 +1437,7 @@ table 50107 "IOU Retirement Header"
                     GenJnlLine.VALIDATE(GenJnlLine."Applies-to Doc. No.", Rec."Applies-to Doc. No.");
                     IF GenJnlLine."Account Type" <> GenJnlLine."Account Type"::"Fixed Asset" THEN BEGIN
                         GenJnlLine."Depreciation Book Code" := '';
-                        //GenJnlLine."FA Posting Type" := 0;
+                        GenJnlLine."FA Posting Type" := GenJnlLine."FA Posting Type"::" ";
                         GenJnlLine."Maintenance Code" := '';
                     END ELSE BEGIN
                         GenJnlLine.VALIDATE("FA Posting Type", RetLines."FA Posting Type");

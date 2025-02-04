@@ -157,7 +157,7 @@ table 70009 "Leave Request3"
 
                             subject := STRSUBSTNO(text001, "Request No.");
                             CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                            SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+                            SendEmail(ToAddresses, subject, EmailBody, '', '');
 
                         END;
                     END;
@@ -179,7 +179,7 @@ table 70009 "Leave Request3"
 
                             subject := STRSUBSTNO(text001, "Request No.");
                             CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                            SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+                            SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
                         END;
                     END;
@@ -199,7 +199,7 @@ table 70009 "Leave Request3"
 
                         subject := STRSUBSTNO(text001, "Request No.");
                         CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                        SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+                        SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
                     END;
 
@@ -219,7 +219,7 @@ table 70009 "Leave Request3"
                         subject := STRSUBSTNO(text001, "Request No.");
 
                         CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                        SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+                        SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
                     END;
 
@@ -238,7 +238,7 @@ table 70009 "Leave Request3"
                             subject := STRSUBSTNO(text001, "Request No.");
 
                             CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                            SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+                            SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
                         END;
                     END;
@@ -259,7 +259,7 @@ table 70009 "Leave Request3"
                             subject := STRSUBSTNO(text001, "Request No.");
 
                             CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                            SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+                            SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
                         END;
                     END;
@@ -279,7 +279,7 @@ table 70009 "Leave Request3"
                             subject := STRSUBSTNO(text001, "Request No.");
 
                             CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                            SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+                            SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
                         END;
                     END;
@@ -368,7 +368,7 @@ table 70009 "Leave Request3"
                             SenderAddress := UserSetup2."E-Mail";
 
                             CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                            SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+                            SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
                             "MD Leave Approval" := TRUE;
                         END;
@@ -391,7 +391,7 @@ table 70009 "Leave Request3"
                                 Addressee := UserSetup.Initials;
 
                                 CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                                SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+                                SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
                                 "HOD HR/ADMIN" := TRUE;
                             END;
@@ -415,7 +415,7 @@ table 70009 "Leave Request3"
                                 SenderAddress := UserSetup2."E-Mail";
 
                                 CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                                SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+                                SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
                             END;
                         END;
@@ -437,7 +437,7 @@ table 70009 "Leave Request3"
                                 SenderAddress := UserSetup2."E-Mail";
 
                                 CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                                SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+                                SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
                             END;
                         END;
@@ -459,7 +459,7 @@ table 70009 "Leave Request3"
                                 SenderAddress := UserSetup2."E-Mail";
 
                                 CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                                SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+                                SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
                             END;
                             "HOD HR/ADMIN" := TRUE;
@@ -481,7 +481,7 @@ table 70009 "Leave Request3"
                             SenderAddress := UserSetup."E-Mail";
 
                             CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                            SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+                            SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
 
                             "MD Leave Approval" := FALSE;
@@ -501,7 +501,7 @@ table 70009 "Leave Request3"
                             SenderAddress := UserSetup."E-Mail";
 
                             CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                            SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+                            SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
                             "MD Leave Approval" := FALSE;
                         END;
@@ -519,7 +519,7 @@ table 70009 "Leave Request3"
                             SenderAddress := UserSetup2."E-Mail";
 
                             CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                            SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+                            SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
                             "MD Leave Approval" := TRUE;
                         END;
@@ -538,7 +538,7 @@ table 70009 "Leave Request3"
                             SenderAddress := UserSetup2."E-Mail";
 
                             CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                            SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+                            SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
                         END;
                     END;
@@ -587,7 +587,7 @@ table 70009 "Leave Request3"
 
                         Subject := STRSUBSTNO(text001, "Request No.");
                         CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                        SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+                        SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
                         /*  WITH TempEmailItem DO BEGIN
                              "Send to" := ToAddresses;
@@ -632,31 +632,8 @@ table 70009 "Leave Request3"
 
                         subject := STRSUBSTNO(text008);
                         CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                        SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
-
-                        /*     WITH TempEmailItem DO BEGIN
-                                "Send to" := ToAddresses;
-                                "Send CC" := SenderAddress + ';' + 'lawal@toyotanigeria.com;' + 'ibidapo-obe@toyotanigeria.com';
-                                "Send BCC" := '';
-                                Subject := STRSUBSTNO(text008);
-
-                                BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                                BodyStream.WRITETEXT(CRLF + CRLF);
-                                BodyStream.WRITETEXT(STRSUBSTNO(text008) + CRLF + CRLF + CRLF +
-                                Text015 + STRSUBSTNO("Request No.") + CRLF + CRLF +
-                                Text016 + STRSUBSTNO(EmpRec.GetFullName("Employee No.")) + CRLF + CRLF +
-                                Text017 + STRSUBSTNO("Leave Category") + CRLF + CRLF +
-                                text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                                text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                                STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                                Text018 + CRLF +
-                                SenderName);
-                                BodyStream.WRITETEXT(CRLF + CRLF);
-                                BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                Body := BodyBlob.Blob;
-                                Send(FALSE);
-                            END; */
+                        SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
+                      
 
                         Approved2 := TRUE;
                     END;
@@ -679,7 +656,7 @@ table 70009 "Leave Request3"
 
                             Subject := STRSUBSTNO(text008);
                             CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                            SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+                            SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
 
                             /*   WITH TempEmailItem DO BEGIN
@@ -728,7 +705,7 @@ table 70009 "Leave Request3"
 
                             Subject := STRSUBSTNO(text004, "Request No.");
                             CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                            SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+                            SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
                             /*   WITH TempEmailItem DO BEGIN
                                   "Send to" := ToAddresses;
@@ -779,7 +756,7 @@ table 70009 "Leave Request3"
 
                         Subject := STRSUBSTNO(text008);
                         CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                        SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+                        SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
 
                         /*  WITH TempEmailItem DO BEGIN
@@ -827,7 +804,7 @@ table 70009 "Leave Request3"
 
                             Subject := STRSUBSTNO(text008);
                             CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                            SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+                            SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
                             /* WITH TempEmailItem DO BEGIN
                                 "Send to" := ToAddresses;
@@ -876,7 +853,7 @@ table 70009 "Leave Request3"
 
                             Subject := STRSUBSTNO(text001, "Request No.");
                             CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                            SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+                            SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
                             /*      WITH TempEmailItem DO BEGIN
                                      "Send to" := ToAddresses;
@@ -928,7 +905,7 @@ table 70009 "Leave Request3"
 
                             Subject := STRSUBSTNO(text001, "Request No.");
                             CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                            SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+                            SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
                             /* WITH TempEmailItem DO BEGIN
                                 "Send to" := ToAddresses;
@@ -982,7 +959,7 @@ table 70009 "Leave Request3"
 
                             Subject := STRSUBSTNO(text001, "Request No.");
                             CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                            SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+                            SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
                             /*  WITH TempEmailItem DO BEGIN
                                  "Send to" := ToAddresses;
@@ -1030,7 +1007,7 @@ table 70009 "Leave Request3"
 
                             Subject := STRSUBSTNO(text001, "Request No.");
                             CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                            SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+                            SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
                             /*   WITH TempEmailItem DO BEGIN
                                   "Send to" := ToAddresses;
@@ -1149,7 +1126,7 @@ table 70009 "Leave Request3"
 
                         Subject := STRSUBSTNO(text008);
                         CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                        SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+                        SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
                         /*  WITH TempEmailItem DO BEGIN
                              "Send to" := ToAddresses;
@@ -1201,7 +1178,7 @@ table 70009 "Leave Request3"
 
                         Subject := STRSUBSTNO(text008);
                         CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                        SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+                        SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
                         /*  WITH TempEmailItem DO BEGIN
                              "Send to" := ToAddresses;
@@ -1251,7 +1228,7 @@ table 70009 "Leave Request3"
 
                         Subject := STRSUBSTNO(text008);
                         CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                        SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+                        SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
                         /*  WITH TempEmailItem DO BEGIN
                              "Send to" := ToAddresses;
@@ -1301,7 +1278,7 @@ table 70009 "Leave Request3"
 
                         Subject := STRSUBSTNO(text008);
                         CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                        SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+                        SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
                         /*  WITH TempEmailItem DO BEGIN
                              "Send to" := ToAddresses;
@@ -1352,7 +1329,7 @@ table 70009 "Leave Request3"
 
                         Subject := STRSUBSTNO(text008);
                         CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                        SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+                        SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
                         /*    WITH TempEmailItem DO BEGIN
                                "Send to" := ToAddresses;
@@ -1405,7 +1382,7 @@ table 70009 "Leave Request3"
 
                             Subject := STRSUBSTNO(text003, "Request No.");
                             CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                            SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+                            SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
 
                             /*  WITH TempEmailItem DO BEGIN
@@ -1451,7 +1428,7 @@ table 70009 "Leave Request3"
 
                             Subject := STRSUBSTNO(text004, "Request No.");
                             CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                            SendEmail(ToAddresses, subject, EmailBody, SenderAddress, BccAddresses);
+                            SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
                             /*  WITH TempEmailItem DO BEGIN
                                  "Send to" := ToAddresses;

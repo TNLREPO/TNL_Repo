@@ -1001,9 +1001,6 @@ report 50040 "TNL Sales Invoice-Part"
                     END;
 
 
-                //AmountInWords := figure("Amount Including VAT",'NAIRA','KOBO');
-                //AmountInWords := AmountInWords +' ONLY.';
-
                 Curr := 'Naira Only.';
                 CurrUnit := 'Kobo';
                 CALCFIELDS("Amount Including VAT");

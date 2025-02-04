@@ -1480,7 +1480,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=sum(Fields!Amount_SalesInvLine.Value, "DataSet_Result")+Sum(Fields!VATAmtLineVATAmt.Value)</Value>
+                    <Value>=Round(sum(Fields!Amount_SalesInvLine.Value, "DataSet_Result")+Sum(Fields!VATAmtLineVATAmt.Value))</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>

@@ -228,7 +228,7 @@ table 50105 "IOU Register"
 
                     Subject := STRSUBSTNO(Text001, "IOU No.");
                     CreateEmailBody("IOU No.", Addressee, Text001, "Staff Name", Description, Amount);
-                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                 END;
             end;
@@ -312,7 +312,7 @@ table 50105 "IOU Register"
 
                         Subject := STRSUBSTNO(text001, "IOU No.");
                         CreateEmailBody("IOU No.", Addressee, Text001, "Account Name", Description, Amount);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                     END;
 
@@ -341,7 +341,7 @@ table 50105 "IOU Register"
 
                         Subject := STRSUBSTNO(Text004, "IOU No.");
                         CreateEmailBody("IOU No.", Addressee, Text004, "Account Name", Description, Amount);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                         Reject := TRUE;
                     END;
@@ -369,7 +369,7 @@ table 50105 "IOU Register"
                         SenderAddress := UserSetup2."E-Mail";
 
                         CreateEmailBody("IOU No.", Addressee, Text005, "Account Name", Description, Amount);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                     END;
 
@@ -431,7 +431,7 @@ table 50105 "IOU Register"
                         SenderAddress := UserSetup2."E-Mail";
 
                         CreateEmailBody("IOU No.", Addressee, Text001, "Account Name", Description, Amount);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                     END;
 
@@ -456,7 +456,7 @@ table 50105 "IOU Register"
                         SenderAddress := UserSetup2."E-Mail";
 
                         CreateEmailBody("IOU No.", Addressee, Text004, "Account Name", Description, Amount);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                         Reject := TRUE;
                     END;
@@ -480,7 +480,7 @@ table 50105 "IOU Register"
                         UserSetup2.GET(USERID);
 
                         CreateEmailBody("IOU No.", Addressee, Text005, "Account Name", Description, Amount);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                     END;
             end;
@@ -566,7 +566,7 @@ table 50105 "IOU Register"
 
                         Subject := STRSUBSTNO(Text003, "IOU No.");
                         CreateEmailBody("IOU No.", Addressee, Text003, "Account Name", Description, Amount);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                     END;
 
@@ -592,7 +592,7 @@ table 50105 "IOU Register"
 
                         Subject := STRSUBSTNO(text004, "IOU No.");
                         CreateEmailBody("IOU No.", Addressee, Text004, "Account Name", Description, Amount);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
                         Reject := TRUE;
                     END;
 
@@ -620,7 +620,7 @@ table 50105 "IOU Register"
 
                         Subject := STRSUBSTNO(text005, "IOU No.");
                         CreateEmailBody("IOU No.", Addressee, Text005, "Account Name", Description, Amount);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                     END;
             end;

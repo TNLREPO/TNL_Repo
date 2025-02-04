@@ -698,16 +698,16 @@ tableextension 50008 "Item Ext" extends Item
         }
         field(70002; "Item Price Group"; Code[10])
         {
-            /* Description = 'ok';
-            TableRelation = IF (Inventory Posting Group=CONST(N_PARTS)) "Item Price Group"."Item Price Grp Code";
+            Description = 'ok';
+            TableRelation = IF ("Inventory Posting Group" = filter('N_PARTS')) "Item Price Group"."Item Price Grp Code";
 
             trigger OnValidate()
             begin
                 IF PriceGrp.GET("Item Price Group") THEN
-                  VALIDATE("Profit %",PriceGrp."MarkUp Profit % B4 Discount");
+                    VALIDATE("Profit %", PriceGrp."MarkUp Profit % B4 Discount");
 
                 "TNL Profit %" := PriceGrp."Profit % On Cost B4 Discount";
-            end; */
+            end;
         }
         field(70003; "Naira Sales Factor"; Decimal)
         {

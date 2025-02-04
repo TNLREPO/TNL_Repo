@@ -333,7 +333,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="UnitPrice_SalesInvLine">
+                        <Textbox Name="Textbox6">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -350,7 +350,7 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>UnitPrice_SalesInvLine</rd:DefaultName>
+                          <rd:DefaultName>Textbox6</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -361,14 +361,6 @@
                             <BottomBorder>
                               <Style>None</Style>
                             </BottomBorder>
-                            <LeftBorder>
-                              <Color>Black</Color>
-                              <Width>1pt</Width>
-                            </LeftBorder>
-                            <RightBorder>
-                              <Color>Black</Color>
-                              <Width>1pt</Width>
-                            </RightBorder>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -379,7 +371,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="LineAmt_SalesInvLine">
+                        <Textbox Name="Textbox7">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -389,21 +381,14 @@
                                   <Value>=Fields!Amount_SalesInvLine.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
-                                    <Format>#,0;(#,0)</Format>
-                                  </Style>
-                                </TextRun>
-                                <TextRun>
-                                  <Value>.00</Value>
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                    <Format>#,0;(#,0)</Format>
+                                    <Format>#,0.00;(#,0.00)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>LineAmt_SalesInvLine</rd:DefaultName>
+                          <rd:DefaultName>Textbox7</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -414,14 +399,6 @@
                             <BottomBorder>
                               <Style>None</Style>
                             </BottomBorder>
-                            <LeftBorder>
-                              <Color>Black</Color>
-                              <Width>1pt</Width>
-                            </LeftBorder>
-                            <RightBorder>
-                              <Color>Black</Color>
-                              <Width>1pt</Width>
-                            </RightBorder>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -1231,48 +1208,6 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox46">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=sum(Fields!Amount_SalesInvLine.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                      <Format>#,0;(#,0)</Format>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>.00</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                      <Format>#,0;(#,0)</Format>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox43</rd:DefaultName>
-            <Top>10.18684cm</Top>
-            <Left>14.77003cm</Left>
-            <Height>0.6cm</Height>
-            <Width>2.5cm</Width>
-            <ZIndex>24</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
           <Textbox Name="Textbox44">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
@@ -1296,49 +1231,7 @@
             <Left>5.46327in</Left>
             <Height>0.6cm</Height>
             <Width>0.71695cm</Width>
-            <ZIndex>25</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox47">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=Sum(Fields!VATAmtLineVATAmt.Value)</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                      <Format>#,0;(#,0)</Format>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>.00</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                      <Format>#,0;(#,0)</Format>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox43</rd:DefaultName>
-            <Top>11.37484cm</Top>
-            <Left>15.15732cm</Left>
-            <Height>0.6cm</Height>
-            <Width>2.11271cm</Width>
-            <ZIndex>26</ZIndex>
+            <ZIndex>24</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1371,63 +1264,11 @@
             <Left>5.09989in</Left>
             <Height>0.6cm</Height>
             <Width>1.63993cm</Width>
-            <ZIndex>27</ZIndex>
+            <ZIndex>25</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox48">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=sum(Fields!Amount_SalesInvLine.Value, "DataSet_Result")+Sum(Fields!VATAmtLineVATAmt.Value)</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                      <Format>#,0;(#,0)</Format>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>.00</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                      <Format>#,0;(#,0)</Format>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox43</rd:DefaultName>
-            <Top>12.40672cm</Top>
-            <Left>14.83458cm</Left>
-            <Height>0.85867cm</Height>
-            <Width>2.5cm</Width>
-            <ZIndex>28</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <TopBorder>
-                <Color>Black</Color>
-                <Style>Solid</Style>
-                <Width>1pt</Width>
-              </TopBorder>
-              <BottomBorder>
-                <Color>Black</Color>
-                <Style>Solid</Style>
-                <Width>1pt</Width>
-              </BottomBorder>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -1439,7 +1280,7 @@
             <Left>12.75183cm</Left>
             <Height>6.18843cm</Height>
             <Width>0cm</Width>
-            <ZIndex>29</ZIndex>
+            <ZIndex>26</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -1451,7 +1292,7 @@
             <Left>0.86245cm</Left>
             <Height>6.29455cm</Height>
             <Width>0cm</Width>
-            <ZIndex>30</ZIndex>
+            <ZIndex>27</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -1463,7 +1304,7 @@
             <Left>0.86245cm</Left>
             <Height>0cm</Height>
             <Width>16.66107cm</Width>
-            <ZIndex>31</ZIndex>
+            <ZIndex>28</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -1491,7 +1332,7 @@
             <Left>0.86245cm</Left>
             <Height>0.6cm</Height>
             <Width>11.58206cm</Width>
-            <ZIndex>32</ZIndex>
+            <ZIndex>29</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1507,7 +1348,7 @@
             <Left>17.51224cm</Left>
             <Height>6.25899cm</Height>
             <Width>0cm</Width>
-            <ZIndex>33</ZIndex>
+            <ZIndex>30</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -1534,7 +1375,7 @@
             <Left>10.34125cm</Left>
             <Height>0.6cm</Height>
             <Width>6.72121cm</Width>
-            <ZIndex>34</ZIndex>
+            <ZIndex>31</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1563,7 +1404,7 @@
             <Left>10.34125cm</Left>
             <Height>0.46771cm</Height>
             <Width>6.72123cm</Width>
-            <ZIndex>35</ZIndex>
+            <ZIndex>32</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1595,7 +1436,7 @@
             <Left>10.34125cm</Left>
             <Height>0.46771cm</Height>
             <Width>6.72125cm</Width>
-            <ZIndex>36</ZIndex>
+            <ZIndex>33</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1627,7 +1468,7 @@
             <Left>10.34125cm</Left>
             <Height>0.46771cm</Height>
             <Width>6.72125cm</Width>
-            <ZIndex>37</ZIndex>
+            <ZIndex>34</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1659,7 +1500,7 @@
             <Left>0.26891cm</Left>
             <Height>0.46771cm</Height>
             <Width>4.61385cm</Width>
-            <ZIndex>38</ZIndex>
+            <ZIndex>35</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1691,7 +1532,7 @@
             <Left>0.26891cm</Left>
             <Height>0.46771cm</Height>
             <Width>4.61385cm</Width>
-            <ZIndex>39</ZIndex>
+            <ZIndex>36</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1723,7 +1564,7 @@
             <Left>0.26891cm</Left>
             <Height>0.46771cm</Height>
             <Width>4.61385cm</Width>
-            <ZIndex>40</ZIndex>
+            <ZIndex>37</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1755,7 +1596,7 @@
             <Left>0.26891cm</Left>
             <Height>0.46771cm</Height>
             <Width>4.61385cm</Width>
-            <ZIndex>41</ZIndex>
+            <ZIndex>38</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1787,7 +1628,7 @@
             <Left>0.26891cm</Left>
             <Height>0.46771cm</Height>
             <Width>4.61385cm</Width>
-            <ZIndex>42</ZIndex>
+            <ZIndex>39</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1819,7 +1660,7 @@
             <Left>0.26891cm</Left>
             <Height>0.46771cm</Height>
             <Width>4.61385cm</Width>
-            <ZIndex>43</ZIndex>
+            <ZIndex>40</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1851,7 +1692,7 @@
             <Left>10.34125cm</Left>
             <Height>0.51146cm</Height>
             <Width>6.72125cm</Width>
-            <ZIndex>44</ZIndex>
+            <ZIndex>41</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1887,7 +1728,7 @@
             <Left>13.09366cm</Left>
             <Height>0.52944cm</Height>
             <Width>2.99429cm</Width>
-            <ZIndex>45</ZIndex>
+            <ZIndex>42</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1924,7 +1765,7 @@
             <Left>0.9017cm</Left>
             <Height>0.6cm</Height>
             <Width>16.62182cm</Width>
-            <ZIndex>46</ZIndex>
+            <ZIndex>43</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1955,7 +1796,7 @@
             <Left>14.5625cm</Left>
             <Height>0.55515cm</Height>
             <Width>2.5cm</Width>
-            <ZIndex>47</ZIndex>
+            <ZIndex>44</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1989,7 +1830,7 @@
             <Left>5.03429in</Left>
             <Height>0.6cm</Height>
             <Width>0.98376cm</Width>
-            <ZIndex>48</ZIndex>
+            <ZIndex>45</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -2021,11 +1862,123 @@
             <Left>0.26891cm</Left>
             <Height>0.46771cm</Height>
             <Width>4.61385cm</Width>
+            <ZIndex>46</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox28">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=sum(Fields!Amount_SalesInvLine.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <Format>#,0.00;(#,0.00)</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox28</rd:DefaultName>
+            <Top>10.18684cm</Top>
+            <Left>14.90641cm</Left>
+            <Height>0.6cm</Height>
+            <Width>2.5cm</Width>
+            <ZIndex>47</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox29">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Sum(Fields!VATAmtLineVATAmt.Value)</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <Format>#,0.00;(#,0.00)</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox28</rd:DefaultName>
+            <Top>11.41745cm</Top>
+            <Left>14.90641cm</Left>
+            <Height>0.6cm</Height>
+            <Width>2.5cm</Width>
+            <ZIndex>48</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox46">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Round(Sum(Fields!Amount_SalesInvLine.Value, "DataSet_Result")+Sum(Fields!VATAmtLineVATAmt.Value))</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <Format>#,0.00;(#,0.00)</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox28</rd:DefaultName>
+            <Top>12.40672cm</Top>
+            <Left>14.94168cm</Left>
+            <Height>0.6cm</Height>
+            <Width>2.5cm</Width>
             <ZIndex>49</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
+              <TopBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </TopBorder>
+              <BottomBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </BottomBorder>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>

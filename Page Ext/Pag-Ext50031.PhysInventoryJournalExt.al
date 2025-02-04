@@ -12,9 +12,13 @@ pageextension 50031 "Phys. Inventory Journal Ext" extends "Phys. Inventory Journ
             {
                 ApplicationArea = All;
             }
+            field("Item shelf"; Rec."Item shelf")
+            {
+                ApplicationArea = All;
+            }
         }
 
-        
+
     }
-    
+
 }

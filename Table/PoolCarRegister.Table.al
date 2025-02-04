@@ -128,7 +128,7 @@ table 70002 "Pool Car Register"
                         "Current Pending Person" := "2nd Approval";
 
                         ToName := UserSetup."E-Mail";
-                        CCName := 'lawal@toyotanigeria.com;kolawole@toyotanigeria.com;';
+                        //CCName := 'lawal@toyotanigeria.com;kolawole@toyotanigeria.com';
                         subject := STRSUBSTNO(text001, "Request No.");
                         Addressee := UserSetup.Initials;
 
@@ -138,7 +138,7 @@ table 70002 "Pool Car Register"
 
                         Subject := STRSUBSTNO(text001, "Request No.");
                         CreateEmailBody("Request No.", Text012, Addressee);
-                        SendEmail(ToName, Subject, EmailBody, SenderAddress, CCName);
+                        SendEmail(ToName, Subject, EmailBody, '', '');
 
                     END;
                 END;
@@ -160,7 +160,7 @@ table 70002 "Pool Car Register"
 
                             Subject := STRSUBSTNO(text003, "Request No.");
                             CreateEmailBody("Request No.", Text013, Addressee);
-                            SendEmail(ToName, Subject, EmailBody, SenderAddress, '');
+                            SendEmail(ToName, Subject, EmailBody, '', '');
 
                         END;
 
@@ -177,7 +177,7 @@ table 70002 "Pool Car Register"
 
                             Subject := STRSUBSTNO(text004, "Request No.");
                             CreateEmailBody("Request No.", Text014, Addressee);
-                            SendEmail(ToName, Subject, EmailBody, SenderAddress, CCName);
+                            SendEmail(ToName, Subject, EmailBody, '', CCName);
 
                         END;
                 END;
@@ -203,7 +203,7 @@ table 70002 "Pool Car Register"
                 TESTFIELD("1st Approval Status", 2);
 
                 UserSetup4.GET(USERID);
-                
+
                 IF "2nd Approval" = "Final Approval" THEN
                     ERROR(text009);
 
@@ -213,18 +213,18 @@ table 70002 "Pool Car Register"
                         "2nd Approval Time" := CURRENTDATETIME;
                         "Current Pending Person" := "Final Approval";
                         ToName := UserSetup."E-Mail";
-                        CCName := 'lawal@toyotanigeria.com;kolawole@toyotanigeria.com;';
+                        CCName := 'lawal@toyotanigeria.com;kolawole@toyotanigeria.com';
                         subject := STRSUBSTNO(text007, "Request No.");
                         Addressee := UserSetup2.Initials;
 
                         UserSetup2.GET(USERID);
                         SenderName := UserSetup2.Initials;
-                        SenderAddress := UserSetup2."E-Mail";                       
+                        SenderAddress := UserSetup2."E-Mail";
 
                         Subject := STRSUBSTNO(text007, "Request No.");
                         CreateEmailBody("Request No.", Text015, Addressee);
-                        SendEmail(ToName, Subject, EmailBody, SenderAddress, CCName);
-                     
+                        SendEmail(ToName, Subject, EmailBody, '', '');
+
 
                     END;
                 END;
@@ -235,7 +235,7 @@ table 70002 "Pool Car Register"
                             "2nd Approval Time" := CURRENTDATETIME;
                             UserSetup2.GET(Requester);
                             ToName := UserSetup2."E-Mail";
-                            CCName := 'lawal@toyotanigeria.com;kolawole@toyotanigeria.com;';
+                            CCName := 'lawal@toyotanigeria.com;kolawole@toyotanigeria.com';
                             subject := STRSUBSTNO(text003, "Request No.");
                             Addressee := UserSetup2.Initials;
 
@@ -248,8 +248,8 @@ table 70002 "Pool Car Register"
 
                             Subject := STRSUBSTNO(text003, "Request No.");
                             CreateEmailBody("Request No.", Text013, Addressee);
-                            SendEmail(ToName, Subject, EmailBody, SenderAddress, CCName);
-                           
+                            SendEmail(ToName, Subject, EmailBody, '', '');
+
 
                         END;
 
@@ -258,7 +258,7 @@ table 70002 "Pool Car Register"
                             "2nd Approval Time" := CURRENTDATETIME;
                             UserSetup2.GET(Requester);
                             ToName := UserSetup2."E-Mail";
-                            CCName := 'lawal@toyotanigeria.com;kolawole@toyotanigeria.com;';
+                            CCName := 'lawal@toyotanigeria.com;kolawole@toyotanigeria.com';
                             subject := STRSUBSTNO(text004, "Request No.");
                             Addressee := UserSetup2.Initials;
 
@@ -268,7 +268,7 @@ table 70002 "Pool Car Register"
 
                             Subject := STRSUBSTNO(text004, "Request No.");
                             CreateEmailBody("Request No.", Text014, Addressee);
-                            SendEmail(ToName, Subject, EmailBody, SenderAddress, CCName);
+                            SendEmail(ToName, Subject, EmailBody, '', '');
 
 
                         END;

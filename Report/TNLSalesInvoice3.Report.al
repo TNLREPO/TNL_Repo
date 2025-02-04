@@ -1018,7 +1018,7 @@ report 50285 "TNL Sales Invoice3"
                 Curr := 'Naira';
                 CurrUnit := 'Kobo';
                 CALCFIELDS("Amount Including VAT");
-                AmountInWords := Library.ToWords("Amount Including VAT", Curr, CurrUnit, 100, '');
+                AmountInWords := Library.ToWords(Round("Amount Including VAT", 1), Curr, CurrUnit, 100, '');
 
 
                 /* IF UserSetup.GET("Finance Send to") THEN BEGIN

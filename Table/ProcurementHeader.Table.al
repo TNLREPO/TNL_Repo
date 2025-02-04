@@ -340,7 +340,7 @@ table 70008 "Procurement Header"
                     TimeDate5 := CURRENTDATETIME;
 
                     Subject := STRSUBSTNO(Text047, "Document Type", "No.");
-                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                     /*  WITH TempEmailItem DO BEGIN
                          "Send to" := ToAddresses;
@@ -387,7 +387,7 @@ table 70008 "Procurement Header"
 
                     Subject := STRSUBSTNO(Text017, "Document Type", "No.");
                     CreateEmailBody("Document Type", "No.", Text033, Addressee);
-                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                     /*   WITH TempEmailItem DO BEGIN
                           "Send to" := ToAddresses;
@@ -430,7 +430,7 @@ table 70008 "Procurement Header"
 
                     Subject := STRSUBSTNO(Text018, "Document Type", "No.");
                     CreateEmailBody("Document Type", "No.", Text034, Addressee);
-                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                     /*  WITH TempEmailItem DO BEGIN
                          "Send to" := ToAddresses;
@@ -504,7 +504,7 @@ table 70008 "Procurement Header"
 
                     Subject := STRSUBSTNO(Text013, "Document Type", "No.");
                     CreateEmailBody("Document Type", "No.", Text038, 'PAA');
-                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                     /*          WITH TempEmailItem DO BEGIN
                                  "Send to" := ToAddresses;
@@ -554,7 +554,7 @@ table 70008 "Procurement Header"
 
                     Subject := STRSUBSTNO(Text017, "Document Type", "No.");
                     CreateEmailBody("Document Type", "No.", Text033, Addressee);
-                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                     /*                WITH TempEmailItem DO BEGIN
                                        "Send to" := ToAddresses;
@@ -609,7 +609,7 @@ table 70008 "Procurement Header"
 
                     Subject := STRSUBSTNO(Text018, "Document Type", "No.");
                     CreateEmailBody("Document Type", "No.", Text034, Addressee);
-                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                     /* WITH TempEmailItem DO BEGIN
                         "Send to" := ToAddresses;
@@ -725,7 +725,7 @@ table 70008 "Procurement Header"
 
                     Subject := STRSUBSTNO(Text020, "Document Type", "No.");
                     CreateEmailBody("Document Type", "No.", Text049, 'Team');
-                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                     /* WITH TempEmailItem DO BEGIN
                         "Send to" := ToAddresses;
@@ -804,7 +804,7 @@ table 70008 "Procurement Header"
 
                     Subject := STRSUBSTNO(Text047, "Document Type", "No.");
                     CreateEmailBody("Document Type", "No.", Text056, Addressee);
-                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                     /*    WITH TempEmailItem DO BEGIN
                            "Send to" := ToAddresses;
@@ -867,7 +867,7 @@ table 70008 "Procurement Header"
 
                     Subject := STRSUBSTNO(Text052, "Document Type", "No.");
                     CreateEmailBody("Document Type", "No.", Text053, Addressee);
-                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                     /*  WITH TempEmailItem DO BEGIN
                          "Send to" := ToAddresses;
@@ -961,7 +961,7 @@ table 70008 "Procurement Header"
 
                     Subject := STRSUBSTNO(Text047, "Document Type", "No.");
                     CreateEmailBody("Document Type", "No.", Text063, Addressee);
-                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                     /*   WITH TempEmailItem DO BEGIN
                           "Send to" := ToAddresses;
@@ -1021,7 +1021,7 @@ table 70008 "Procurement Header"
 
                     Subject := STRSUBSTNO(Text017, "Document Type", "No.");
                     CreateEmailBody("Document Type", "No.", Text033, Addressee);
-                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                     /*  WITH TempEmailItem DO BEGIN
                          "Send to" := ToAddresses;
@@ -1078,7 +1078,7 @@ table 70008 "Procurement Header"
 
                     Subject := STRSUBSTNO(Text018, "Document Type", "No.");
                     CreateEmailBody("Document Type", "No.", Text034, Addressee);
-                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                     /* WITH TempEmailItem DO BEGIN
                         "Send to" := ToAddresses;
@@ -1204,7 +1204,7 @@ table 70008 "Procurement Header"
 
                     Subject := STRSUBSTNO(Text047, "Document Type", "No.");
                     CreateEmailBody("Document Type", "No.", Text060, Addressee);
-                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                     /*   WITH TempEmailItem DO BEGIN //To GM or MD
                           "Send to" := ToAddresses;
@@ -1264,7 +1264,7 @@ table 70008 "Procurement Header"
 
                     Subject := STRSUBSTNO(Text017, "Document Type", "No.");
                     CreateEmailBody("Document Type", "No.", Text033, Addressee);
-                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                     /*    WITH TempEmailItem DO BEGIN
                            "Send to" := ToAddresses;
@@ -1321,7 +1321,7 @@ table 70008 "Procurement Header"
 
                     Subject := STRSUBSTNO(Text018, "Document Type", "No.");
                     CreateEmailBody("Document Type", "No.", Text034, Addressee);
-                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                     /*  WITH TempEmailItem DO BEGIN
                          "Send to" := ToAddresses;
@@ -1405,7 +1405,7 @@ table 70008 "Procurement Header"
 
                     Subject := STRSUBSTNO(Text007, "Document Type", "No.");
                     CreateEmailBody("Document Type", "No.", Text026, Addressee);
-                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
 
                 END;
@@ -1432,7 +1432,7 @@ table 70008 "Procurement Header"
 
                     Subject := STRSUBSTNO(Text017, "Document Type", "No.");
                     CreateEmailBody("Document Type", "No.", Text033, Addressee);
-                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
 
 
@@ -1454,7 +1454,7 @@ table 70008 "Procurement Header"
 
                     Subject := STRSUBSTNO(Text018, "Document Type", "No.");
                     CreateEmailBody("Document Type", "No.", Text034, Addressee);
-                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                     Reject := TRUE;
                 END;
@@ -1532,7 +1532,7 @@ table 70008 "Procurement Header"
 
                     //To GM or MD
                     CreateEmailBody("Document Type", "No.", Text026, Addressee);
-                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
 
                 END;
@@ -1559,7 +1559,7 @@ table 70008 "Procurement Header"
 
                     Subject := STRSUBSTNO(Text017, "Document Type", "No.");
                     CreateEmailBody("Document Type", "No.", Text033, Addressee);
-                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                     /*  WITH TempEmailItem DO BEGIN
                          "Send to" := ToAddresses;
@@ -1616,7 +1616,7 @@ table 70008 "Procurement Header"
 
                     Subject := STRSUBSTNO(Text018, "Document Type", "No.");
                     CreateEmailBody("Document Type", "No.", Text034, Addressee);
-                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
 
                     Reject := TRUE;
@@ -1664,7 +1664,7 @@ table 70008 "Procurement Header"
 
                     Subject := STRSUBSTNO(Text010, "Document Type", "No.");
                     CreateEmailBody("Document Type", "No.", Text035, Addressee);
-                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                     "Move to LPO" := TRUE;
 
@@ -1702,7 +1702,7 @@ table 70008 "Procurement Header"
 
                     Subject := STRSUBSTNO(Text017, "Document Type", "No.");
                     CreateEmailBody("Document Type", "No.", Text033, Addressee);
-                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                 END;
 
@@ -1727,7 +1727,7 @@ table 70008 "Procurement Header"
 
                     Subject := STRSUBSTNO(Text018, "Document Type", "No.");
                     CreateEmailBody("Document Type", "No.", Text034, Addressee);
-                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                     /*  WITH TempEmailItem DO BEGIN
                          "Send to" := ToAddresses;
@@ -2020,7 +2020,7 @@ table 70008 "Procurement Header"
 
                     Subject := STRSUBSTNO(Text047, "Document Type", "No.");
                     CreateEmailBody("Document Type", "No.", Text048, 'PAA');
-                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                     "Balance Paymt." := TRUE;
                 END;
@@ -2046,31 +2046,7 @@ table 70008 "Procurement Header"
 
                     Subject := STRSUBSTNO(Text017, "Document Type", "No.");
                     CreateEmailBody("Document Type", "No.", Text033, Addressee);
-                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
-
-                    /*      WITH TempEmailItem DO BEGIN
-                             "Send to" := ToAddresses;
-                             "Send CC" := CcAddresses + ';' + SenderAddress;
-                             "Send BCC" := BccAddresses;
-                             Subject := STRSUBSTNO(Text017, "Document Type", "No.");
-
-                             BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                             BodyStream.WRITETEXT(Text025 + Addressee + ',');
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT(STRSUBSTNO(Text033, "Document Type", "No.") + CRLF + CRLF +
-                               Text029 + FORMAT(VendName) + CRLF +
-                               Text030 + FORMAT(VendAddr) + CRLF +
-                               Text031 + FORMAT(VendAmt) + CRLF +
-                               Text057 + FORMAT(Advance) + CRLF +
-                               Text058 + FORMAT(Balance) + CRLF +
-                               Text055 + FORMAT(PurJus) + CRLF + CRLF +
-                               Text027 + CRLF + CRLF);
-                             BodyStream.WRITETEXT(SendersName);
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                             Body := BodyBlob.Blob;
-                             Send(FALSE);
-                         END; */
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                 END;
 
@@ -2105,7 +2081,7 @@ table 70008 "Procurement Header"
 
                     Subject := STRSUBSTNO(Text018, "Document Type", "No.");
                     CreateEmailBody("Document Type", "No.", Text034, Addressee);
-                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                    SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                     Reject := TRUE;
                 END;

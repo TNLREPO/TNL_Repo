@@ -11,15 +11,7 @@ page 50005 "HR RC"
             {
                 ApplicationArea = Basic, Suite;
             }
-            /*  part(Control99; "Finance Performance")
-             {
-                 ApplicationArea = Basic, Suite;
-                 Visible = false;
-             } */
-            /* part(Control1902304208; "Accountant Activities")
-            {
-                ApplicationArea = Basic, Suite;
-            } */
+
             part("Intercompany Activities"; "Intercompany Activities")
             {
                 ApplicationArea = Intercompany;
@@ -77,8 +69,8 @@ page 50005 "HR RC"
         }
         area(embedding) //needed
         {
-            
-              action(MyPaySlips)
+
+            action(MyPaySlips)
             {
                 ApplicationArea = CostAccounting;
                 Caption = 'My Payslips';
@@ -117,7 +109,37 @@ page 50005 "HR RC"
                 RunObject = Page "Purchase Order List";
                 ToolTip = 'Create purchase orders to mirror sales documents that vendors send to you. This enables you to record the cost of purchases and to track accounts payable. Posting purchase orders dynamically updates inventory levels so that you can minimize inventory costs and provide better customer service. Purchase orders allow partial receipts, unlike with purchase invoices, and enable drop shipment directly from your vendor to your customer. Purchase orders can be created automatically from PDF or image files from your vendors by using the Incoming Documents feature.';
             }
+            action(PurchCrMemo)
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Purchase Credit Memo';
+                RunObject = Page "Purchase Credit Memos";
+            }
+            action(PostedPurch)
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Posted Purchase Invoices';
+                RunObject = Page "Posted Purchase Invoices";
+            }
+            action(PostedPurchRcpts)
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Posted Purchase Receipts';
+                RunObject = Page "Posted Purchase Receipts";
+            }
 
+            action(PostedPurchCrMemo)
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Posted Purchase Credit Memos';
+                RunObject = Page "Posted Purchase Credit Memos";
+            }
+            action(PostedRetrunRcpt)
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Posted Return Receipts';
+                RunObject = Page "Posted Return Receipts";
+            }
             action("Incoming Documents")
             {
                 ApplicationArea = Basic, Suite;
@@ -128,23 +150,22 @@ page 50005 "HR RC"
             }
 
 
-
         }
         area(sections) //modules
         {
+
+
+
             group(Action172)
             {
-                Caption = 'Human Resources';
-                Image = Journals;
-                ToolTip = 'Collect and make payments, prepare statements, and reconcile bank accounts.';
-                action("Employee")
+                Caption = 'Employees';
+                action("Employees")
                 {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Employee';
-                    Image = Journal;
-                    RunObject = Page "Employee List";
-                    ToolTip = 'View employee list.';
+                    ApplicationArea = BasicHR;
+                    Caption = 'Employees';
+                    RunObject = page "Employee List";
                 }
+
                 action("BlockedEmployee")
                 {
                     ApplicationArea = Basic, Suite;
@@ -153,13 +174,12 @@ page 50005 "HR RC"
                     RunObject = Page "Blocked Employee List";
                     ToolTip = 'View blocked employee list.';
                 }
-                action("AbsenceReg")
+                action("Absence Registration")
                 {
-                    ApplicationArea = Basic, Suite;
+                    ApplicationArea = BasicHR;
                     Caption = 'Absence Registration';
-                    Image = Journal;
-                    RunObject = Page "Absence Registration";
-                    ToolTip = 'View absence registration list.';
+                    RunObject = page "Absence Registration";
+
                 }
                 action("Planned Leave")
                 {
@@ -218,6 +238,170 @@ page 50005 "HR RC"
                     ToolTip = 'Plan your annual leave.';
                 }
 
+
+                group("Group1")
+                {
+                    Caption = 'Reports';
+                    action("Employee - Absences by Causes")
+                    {
+                        ApplicationArea = BasicHR;
+                        Caption = 'Employee Absences by Causes';
+                        RunObject = report "Employee - Absences by Causes";
+                    }
+                    action("Employee - Addresses")
+                    {
+                        ApplicationArea = BasicHR;
+                        Caption = 'Employee Addresses';
+                        RunObject = report "Employee - Addresses";
+                    }
+                    action("Employee - Alt. Addresses")
+                    {
+                        ApplicationArea = BasicHR;
+                        Caption = 'Employee Alt. Addresses';
+                        RunObject = report "Employee - Alt. Addresses";
+                    }
+                    action("Employee - Birthdays")
+                    {
+                        ApplicationArea = BasicHR;
+                        Caption = 'Employee Birthdays';
+                        RunObject = report "Employee - Birthdays";
+                    }
+                    action("Employee - Confidential Info.")
+                    {
+                        ApplicationArea = BasicHR;
+                        Caption = 'Employee Confidential Info.';
+                        RunObject = report "Employee - Confidential Info.";
+                    }
+                    action("Employee - Contracts")
+                    {
+                        ApplicationArea = BasicHR;
+                        Caption = 'Employee Contracts';
+                        RunObject = report "Employee - Contracts";
+                    }
+                    action("Employee - Labels")
+                    {
+                        ApplicationArea = BasicHR;
+                        Caption = 'Employee Labels';
+                        RunObject = report "Employee - Labels";
+                    }
+                    action("Employee - List")
+                    {
+                        ApplicationArea = BasicHR;
+                        Caption = 'Employee List';
+                        RunObject = report "Employee - List";
+                    }
+                    action("Employee - Misc. Article Info.")
+                    {
+                        ApplicationArea = BasicHR;
+                        Caption = 'Employee Misc. Article Info.';
+                        RunObject = report "Employee - Misc. Article Info.";
+                    }
+                    action("Employee - Qualifications")
+                    {
+                        ApplicationArea = BasicHR;
+                        Caption = 'Employee Qualifications';
+                        RunObject = report "Employee - Qualifications";
+                    }
+                    action("Employee - Relatives")
+                    {
+                        ApplicationArea = BasicHR;
+                        Caption = 'Employee Relatives';
+                        RunObject = report "Employee - Relatives";
+                    }
+                    action("Employee - Staff Absences")
+                    {
+                        ApplicationArea = BasicHR;
+                        Caption = 'Staff Absences';
+                        RunObject = report "Employee - Staff Absences";
+                    }
+                    action("Employee - Unions")
+                    {
+                        ApplicationArea = BasicHR;
+                        Caption = 'Employee Unions';
+                        RunObject = report "Employee - Unions";
+                    }
+                }
+
+            }
+
+            group(Group2)
+            {
+                Caption = 'Setup';
+                action("Human Resources Setup")
+                {
+                    ApplicationArea = BasicHR;
+                    Caption = 'Human Resources Setup';
+                    RunObject = page "Human Resources Setup";
+                }
+                action("Human Resources Units of Measu")
+                {
+                    ApplicationArea = BasicHR;
+                    Caption = 'Human Resources Units of Measure';
+                    RunObject = page "Human Res. Units of Measure";
+                }
+                action("Causes of Inactivity")
+                {
+                    ApplicationArea = BasicHR;
+                    Caption = 'Causes of Inactivity';
+                    RunObject = page "Causes of Inactivity";
+                }
+                action("Grounds for Termination")
+                {
+                    ApplicationArea = BasicHR;
+                    Caption = 'Grounds for Termination';
+                    RunObject = page "Grounds for Termination";
+                }
+                action("Unions")
+                {
+                    ApplicationArea = BasicHR;
+                    Caption = 'Unions';
+                    RunObject = page "Unions";
+                }
+                action("Employment Contracts")
+                {
+                    ApplicationArea = BasicHR;
+                    Caption = 'Employment Contracts';
+                    RunObject = page "Employment Contracts";
+                }
+                action("Relatives")
+                {
+                    ApplicationArea = BasicHR;
+                    Caption = 'Relatives';
+                    RunObject = page "Relatives";
+                }
+                action("Misc. Articles")
+                {
+                    ApplicationArea = BasicHR;
+                    Caption = 'Employee Misc. Articles';
+                    RunObject = page "Misc. Articles";
+                }
+                action("Confidential")
+                {
+                    ApplicationArea = BasicHR;
+                    Caption = 'Confidential';
+                    RunObject = page "Confidential";
+                }
+                action("Qualifications")
+                {
+                    ApplicationArea = BasicHR;
+                    Caption = 'Qualifications';
+                    RunObject = page "Qualifications";
+                }
+                action("Employee Statistics Groups")
+                {
+                    ApplicationArea = BasicHR;
+                    Caption = 'Employee Statistics Groups';
+                    RunObject = page "Employee Statistics Groups";
+                }
+                action(HolidaysPage)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Holidays';
+                    Image = CalculateCalendar;
+                    RunObject = Page Holidays;
+                    ToolTip = 'Plan annual holidays.';
+                }
+
             }
 
             group(FuelMgt)
@@ -272,7 +456,7 @@ page 50005 "HR RC"
                     RunObject = Page "Vendor List";
                     ToolTip = 'View vendor list.';
                 }
-                 action(PostedFuel)
+                action(PostedFuel)
                 {
                     ApplicationArea = Basic, Suite;
                     Caption = 'Posted Fuel';
@@ -345,7 +529,7 @@ page 50005 "HR RC"
                     RunObject = Page "Journal Voucher List";
                     ToolTip = 'Post journal entries to the general ledger.';
                 }
-                              
+
                 action("Posted Journal Voucher")
                 {
                     ApplicationArea = Basic, Suite;
@@ -453,7 +637,7 @@ page 50005 "HR RC"
                     RunObject = Page "Advance Paymt Appr.";
 
                 }
-                 action("BalFullPaymtApproval")
+                action("BalFullPaymtApproval")
                 {
                     ApplicationArea = CostAccounting;
                     Caption = 'Balance/Full Payment Approval';

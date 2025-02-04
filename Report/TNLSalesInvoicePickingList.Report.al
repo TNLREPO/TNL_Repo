@@ -122,7 +122,7 @@ report 50286 "TNL Sales Invoice/Picking List"
             column(MarketingApprovedBy_SalesInvoiceHeader; SalesInvHeader."Marketing Approved By")
             {
             }
-            
+
             column(MKTDesignation; MKTDesignation)
             {
             }
@@ -1048,7 +1048,7 @@ report 50286 "TNL Sales Invoice/Picking List"
                 Curr := 'Naira';
                 CurrUnit := 'Kobo';
                 CALCFIELDS("Amount Including VAT");
-                AmountInWords := Library.ToWords("Amount Including VAT", Curr, CurrUnit, 100, '');
+                AmountInWords := Library.ToWords(Round("Amount Including VAT", 1), Curr, CurrUnit, 100, '');
 
 
                 /* IF UserSetup.GET("Finance Send to") THEN BEGIN

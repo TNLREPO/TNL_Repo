@@ -37,6 +37,7 @@ pageextension 50000 "Sales Order Subform Ext" extends "Sales Order Subform"
             field("Quantity Demanded"; Rec."Quantity Demanded")
             {
                 ApplicationArea = All;
+                Visible = true;
             }
         }
 

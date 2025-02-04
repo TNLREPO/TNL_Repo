@@ -1000,8 +1000,6 @@ report 50052 "TCSC Sales Invoice-Part"
                     END;
 
 
-                //AmountInWords := figure("Amount Including VAT",'NAIRA','KOBO');
-                //AmountInWords := AmountInWords +' ONLY.';
 
                 Curr := 'Naira Only.';
                 CurrUnit := 'Kobo';

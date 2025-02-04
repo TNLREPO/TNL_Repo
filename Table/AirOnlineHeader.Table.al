@@ -121,7 +121,7 @@ table 70022 "Air Online Header"
 
                         Subject := STRSUBSTNO(Text001, "No.");
                         CreateEmailBody("No.", Text003, Addressee);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                         /*  WITH TempEmailItem DO BEGIN
                              "Send to" := ToAddresses;
@@ -201,7 +201,7 @@ table 70022 "Air Online Header"
 
                         Subject := STRSUBSTNO(Text001, "No.");
                         CreateEmailBody("No.", Text003, Addressee);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
 
                         /* WITH TempEmailItem DO BEGIN
@@ -255,7 +255,7 @@ table 70022 "Air Online Header"
 
                         Subject := STRSUBSTNO(Text014, "No.");
                         CreateEmailBody("No.", Text009, Addressee);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
 
                         /*    WITH TempEmailItem DO BEGIN
@@ -307,7 +307,7 @@ table 70022 "Air Online Header"
 
                         Subject := STRSUBSTNO(Text015, "No.");
                         CreateEmailBody("No.", Text011, Addressee);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                         /* WITH TempEmailItem DO BEGIN
                             "Send to" := ToAddresses;
@@ -385,7 +385,7 @@ table 70022 "Air Online Header"
 
                         Subject := STRSUBSTNO(Text001, "No.");
                         CreateEmailBody("No.", Text003, Addressee);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                         /*  WITH TempEmailItem DO BEGIN
                              "Send to" := ToAddresses;
@@ -437,7 +437,7 @@ table 70022 "Air Online Header"
 
                         Subject := STRSUBSTNO(Text014, "No.");
                         CreateEmailBody("No.", Text009, Addressee);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                         /* WITH TempEmailItem DO BEGIN
                             "Send to" := ToAddresses;
@@ -489,7 +489,7 @@ table 70022 "Air Online Header"
 
                         Subject := STRSUBSTNO(Text011, "No.");
                         CreateEmailBody("No.", Text015, Addressee);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                         /* WITH TempEmailItem DO BEGIN
                             "Send to" := ToAddresses;
@@ -558,7 +558,7 @@ table 70022 "Air Online Header"
 
                         Subject := STRSUBSTNO(Text016, "No.");
                         CreateEmailBody("No.", Text010, Addressee);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                         /* WITH TempEmailItem DO BEGIN
                             "Send to" := ToAddresses;
@@ -612,7 +612,7 @@ table 70022 "Air Online Header"
 
                         Subject := STRSUBSTNO(Text014, "No.");
                         CreateEmailBody("No.", Text009, Addressee);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                         /*  WITH TempEmailItem DO BEGIN
                              "Send to" := ToAddresses;
@@ -663,7 +663,7 @@ table 70022 "Air Online Header"
 
                         Subject := STRSUBSTNO(Text015, "No.");
                         CreateEmailBody("No.", Text011, Addressee);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                         /*  WITH TempEmailItem DO BEGIN
                              "Send to" := ToAddresses;
@@ -731,7 +731,7 @@ table 70022 "Air Online Header"
 
                         Subject := STRSUBSTNO(Text016, "No.");
                         CreateEmailBody("No.", Text010, Addressee);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                         /* WITH TempEmailItem DO BEGIN
                             "Send to" := ToAddresses;
@@ -783,7 +783,7 @@ table 70022 "Air Online Header"
 
                         Subject := STRSUBSTNO(Text014, "No.");
                         CreateEmailBody("No.", Text009, Addressee);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                         /* WITH TempEmailItem DO BEGIN
                             "Send to" := ToAddresses;
@@ -835,7 +835,7 @@ table 70022 "Air Online Header"
 
                         Subject := STRSUBSTNO(Text015, "No.");
                         CreateEmailBody("No.", Text011, Addressee);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                         /*  WITH TempEmailItem DO BEGIN
                              "Send to" := ToAddresses;
@@ -909,7 +909,7 @@ table 70022 "Air Online Header"
 
                         Subject := STRSUBSTNO(Text012, "No.");
                         CreateEmailBody("No.", Text013, Addressee);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                         /*   WITH TempEmailItem DO BEGIN
                               "Send to" := ToAddresses;
@@ -962,7 +962,7 @@ table 70022 "Air Online Header"
 
                         Subject := STRSUBSTNO(Text014, "No.");
                         CreateEmailBody("No.", Text009, Addressee);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, SenderAddress);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                         /*     WITH TempEmailItem DO BEGIN
                                 "Send to" := ToAddresses;
