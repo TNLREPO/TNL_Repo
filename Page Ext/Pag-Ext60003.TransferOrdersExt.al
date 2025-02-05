@@ -8,7 +8,7 @@ pageextension 60003 "Transfer Orders Ext" extends "Transfer Orders"
     {
         addafter("Assigned User ID")
         {
-            field("COF No"; Rec."COF No")
+            field("COF No."; Rec."COF No.")
             {
                 ApplicationArea = All;
             }

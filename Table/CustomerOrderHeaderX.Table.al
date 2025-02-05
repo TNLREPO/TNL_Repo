@@ -2383,7 +2383,7 @@ table 70034 "Customer Order HeaderX"
             TransferHeader.INSERT(TRUE);
 
 
-            TransferHeader."COF No" := "No.";
+            TransferHeader."COF No." := "No.";
             TransferHeader.VALIDATE("Transfer-from Code", '120ISO');
             TransferHeader.VALIDATE("Transfer-to Code", CustOrderLine."Location Code");
             TransferHeader.VALIDATE("In-Transit Code", 'TRANSIT');
@@ -2428,7 +2428,7 @@ table 70034 "Customer Order HeaderX"
             CustOrderLine.SETFILTER("Sent to Parts", '%1', FALSE);
             IF CustOrderLine.FINDFIRST THEN;
 
-            TransferHeader."COF No" := "No.";
+            TransferHeader."COF No." := "No.";
             TransferHeader.VALIDATE("Transfer-from Code", '114SER');
             TransferHeader.VALIDATE("Transfer-to Code", CustOrderLine."Location Code");
             TransferHeader.VALIDATE("Direct Transfer", TRUE);

@@ -373,7 +373,7 @@ page 80056 "Parts Customer Order"
 
                 trigger OnAction()
                 begin
-                    TransferHeader.SETRANGE("COF No", Rec."No.");
+                    TransferHeader.SETRANGE("COF No.", Rec."No.");
                     IF TransferHeader.FINDFIRST THEN
                         PAGE.RUN(5742, TransferHeader)
                     ELSE

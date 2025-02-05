@@ -105,11 +105,11 @@ page 50597 "Pool Car Allocation Card"
             {
                 Image = Print;
                 Promoted = true;
-                PromotedCategory = "Report";
+                PromotedCategory = Process;
 
                 trigger OnAction()
                 begin
-                    POOLAREC.SETRANGE(POOLAREC."Allocation No.", Rec."Allocation No.");
+                    POOLAREC.SETRANGE("Allocation No.", Rec."Allocation No.");
                     IF POOLAREC.FINDFIRST THEN
                         REPORT.RUNMODAL(50434, TRUE, TRUE, POOLAREC);
                 end;

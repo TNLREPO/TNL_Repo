@@ -9,7 +9,7 @@ pageextension 50003 "Transfer Order Ext" extends "Transfer Order"
 
                 Caption = 'Other Information';
 
-                field("COF No"; Rec."COF No")
+                field("COF No."; Rec."COF No.")
                 {
                     ApplicationArea = All;
                 }

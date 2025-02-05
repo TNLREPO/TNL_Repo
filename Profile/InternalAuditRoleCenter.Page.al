@@ -734,9 +734,8 @@ page 70102 "Internal Audit Role Center"
             {
                 Caption = 'Administration';
                 Image = FiledPosted;
-                
-               
-                action(ILESpool)
+                               
+                action(ChangeModel)
                 {
                     Caption = 'Change Model';
                     RunObject = xmlport "Change Model";
@@ -746,6 +745,42 @@ page 70102 "Internal Audit Role Center"
                     Caption = 'Skip Opex Quotes';
                     RunObject = report "Skip Opex/Capex Quotes";
                 }
+                action(UnpostJournal)
+                {
+                    Caption = 'Unpost Journal';
+                    RunObject = report "Unpost Journal";
+                }
+                action(IOUSendTo)
+                {
+                    Caption = 'IOU Send To';
+                    RunObject = report "IOU Send To";
+                }
+                action(LeaveSendTo)
+                {
+                    Caption = 'Leave Send To';
+                    RunObject = report "Leave Send To";
+                }
+                action(CapexSendTo)
+                {
+                    Caption = 'Opex/Capex Send To';
+                    RunObject = report "Opex/Capex Send To";
+                }
+                action(SkipLeave)
+                {
+                    Caption = 'Skip Leave Controls';
+                    RunObject = report "Skip Leave Controls";
+                }
+                action(UncheckPostedCOF)
+                {
+                    Caption = 'Uncheck Posted COF';
+                    RunObject = report "Uncheck Posted COF";
+                }
+                action(UnDeliverCOF)
+                {
+                    Caption = 'Undeliver COF';
+                    RunObject = report "Undeliver Customer Order";
+                }
+
 
 
             }

@@ -14,7 +14,7 @@ report 50041 "TCSC Picking List"
             column(No_TransferHdr; "No.")
             {
             }
-            column(COF_Number; "COF No")
+            column(COF_Number; "COF No.")
             {
             }
             column(Reception_Date; "Reception Date")
@@ -76,7 +76,7 @@ report 50041 "TCSC Picking List"
                     column(PostingDate_TransHdr; FORMAT(TransHeaderData."Posting Date", 0, 4))
                     {
                     }
-                    column(COF_No; TransHeaderData."COF No")
+                    column(COF_No; TransHeaderData."COF No.")
                     {
                     }
                     column(TransferToAddr7; TransferToAddr[7])

@@ -19,7 +19,7 @@ pageextension 50033 "Posted Transfer Shipment Ext" extends "Posted Transfer Ship
 
     actions
     {
-        addafter("&Print")
+        addbefore("&Print")
         {
             action(PrintVehicle)
             {

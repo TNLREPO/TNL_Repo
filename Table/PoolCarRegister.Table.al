@@ -370,7 +370,9 @@ table 70002 "Pool Car Register"
     trigger OnDelete()
     begin
         TESTFIELD("Request No.");
-        ERROR('Kindly contact your System Administrator');
+        UserSetup.get(USERID);
+        if not UserSetup."System Admin" then
+            ERROR('You cannot delete this record. Please contact your system administrator!');
     end;
 
     trigger OnInsert()

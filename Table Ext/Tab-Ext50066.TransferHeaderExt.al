@@ -74,7 +74,7 @@ tableextension 50066 "Transfer Header Ext" extends "Transfer Header"
         }
         field(50011; "Vehicle No."; Code[20])
         {
-            CalcFormula = Lookup("Customer Order HeaderX"."Vehicle Registration No." WHERE("No." = FIELD("COF No")));
+            CalcFormula = Lookup("Customer Order HeaderX"."Vehicle Registration No." WHERE("No." = FIELD("COF No.")));
             FieldClass = FlowField;
         }
         field(50012; "Branch Manager's Name"; Text[50])
@@ -153,25 +153,25 @@ tableextension 50066 "Transfer Header Ext" extends "Transfer Header"
                 END;
             end;
         }
-        field(50016; "COF No"; Code[20])
-        {
-        }
+        /*  field(50016; "COF No"; Code[20])
+         {
+         } */
         field(50017; "COF No."; Code[20])
         {
         }
         field(50018; "Reception Date"; Date)
         {
-            CalcFormula = Lookup("Customer Order HeaderX".Date WHERE("No." = FIELD("COF No")));
+            CalcFormula = Lookup("Customer Order HeaderX".Date WHERE("No." = FIELD("COF No.")));
             FieldClass = FlowField;
         }
         field(50019; "Model Name"; Text[40])
         {
-            CalcFormula = Lookup("Customer Order HeaderX"."Model Name" WHERE("No." = FIELD("COF No")));
+            CalcFormula = Lookup("Customer Order HeaderX"."Model Name" WHERE("No." = FIELD("COF No.")));
             FieldClass = FlowField;
         }
         field(50020; "Service Advisor Name"; Text[30])
         {
-            CalcFormula = Lookup("Customer Order HeaderX"."Service Advisor's Name" WHERE("No." = FIELD("COF No")));
+            CalcFormula = Lookup("Customer Order HeaderX"."Service Advisor's Name" WHERE("No." = FIELD("COF No.")));
             FieldClass = FlowField;
         }
     }

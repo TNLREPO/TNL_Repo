@@ -25,6 +25,10 @@ pageextension 50010 "Item Ledger Entries Ext" extends "Item Ledger Entries"
                 ApplicationArea = All;
 
             }
+            field("Customer Name"; Rec."Customer Name")
+            {
+                ApplicationArea = All;
+            }
         }
     }
 }

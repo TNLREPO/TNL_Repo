@@ -360,7 +360,7 @@ page 50603 "Leave Request Card"
             }
             group("Level 1")
             {
-                Visible = Level_1;
+                //Visible = Level_1;
                 field("2nd Approval"; Rec."2nd Approval")
                 {
                     Caption = 'To';
@@ -431,7 +431,7 @@ page 50603 "Leave Request Card"
                 }
                 field("Send to MD for Approval"; Rec."Send to MD for Approval")
                 {
-                    Visible = To_Visible;
+                    //Visible = To_Visible;
 
                     trigger OnValidate()
                     begin
