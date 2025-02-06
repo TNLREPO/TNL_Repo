@@ -29,6 +29,10 @@ pageextension 50010 "Item Ledger Entries Ext" extends "Item Ledger Entries"
             {
                 ApplicationArea = All;
             }
+            field("Inventory Posting Group"; Rec."Inventory Posting Group")
+            {
+                ApplicationArea = All;
+            }
         }
     }
 }

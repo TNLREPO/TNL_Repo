@@ -1217,69 +1217,61 @@ page 50018 Operations
             group(Reports)
             {
                 Caption = 'Reports';
-                group(Customer)
-                {
-                    Caption = 'Customer';
-                    Image = Customer;
-                    action("Customer - &Order Summary")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Customer - &Order Summary';
-                        Image = "Report";
-                        RunObject = Report "Customer - Order Summary";
-                        ToolTip = 'View the quantity not yet shipped for each customer in three periods of 30 days each, starting from a selected date. There are also columns with orders to be shipped before and after the three periods and a column with the total order detail for each customer. The report can be used to analyze a company''s expected sales volume.';
-                    }
-                    action("Customer - &Top 10 List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Customer - &Top 10 List';
-                        Image = "Report";
-                        RunObject = Report "Customer - Top 10 List";
-                        ToolTip = 'View which customers purchase the most or owe the most in a selected period. Only customers that have either purchases during the period or a balance at the end of the period will be included.';
-                    }
-                    action("Customer/&Item Sales")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Customer/&Item Sales';
-                        Image = "Report";
-                        RunObject = Report "Customer/Item Sales";
-                        ToolTip = 'View a list of item sales for each customer during a selected time period. The report contains information on quantity, sales amount, profit, and possible discounts. It can be used, for example, to analyze a company''s customer groups.';
-                    }
-                }
-                group(Action31)
-                {
-                    Caption = 'Sales';
-                    Image = Sales;
 
-                    action("TNL Sales Contribution")
-                    {
-                        ApplicationArea = Suite;
-                        Caption = 'TNL Sales Contribution';
-                        Image = "Report";
-                        RunObject = Report "TNL Sales Contribution";
-                        ToolTip = 'View amounts for sales, profit, invoice discount, as well as profit percentage, for each salesperson for a selected period. The report also shows the adjusted profit and adjusted profit percentage, which reflect any changes to the original costs of the items in the sales.';
-                    }
-                    action("Salesperson - Sales &Statistics")
-                    {
-                        ApplicationArea = Suite;
-                        Caption = 'Salesperson - Sales &Statistics';
-                        Image = "Report";
-                        RunObject = Report "Salesperson - Sales Statistics";
-                        ToolTip = 'View amounts for sales, profit, invoice discount, and payment discount, as well as profit percentage, for each salesperson for a selected period. The report also shows the adjusted profit and adjusted profit percentage, which reflect any changes to the original costs of the items in the sales.';
-                    }
-#if not CLEAN21 
-                    action("Price &List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Price &List';
-                        Image = "Report";
-                        RunPageView = where("Object Type" = const(Report), "Object ID" = const(715)); // "Price List";
-                        RunObject = Page "Role Center Page Dispatcher";
-                        ToolTip = 'View a list of your items and their prices, for example, to send to customers. You can create the list for specific customers, campaigns, currencies, or other criteria.';
-                        ObsoleteState = Pending;
-                        ObsoleteReason = 'Replaced by the new implementation (V16) of price calculation.';
-                        ObsoleteTag = '19.0';
-                    }
+                action("Customer - &Order Summary")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Customer - &Order Summary';
+                    Image = "Report";
+                    RunObject = Report "Customer - Order Summary";
+                    ToolTip = 'View the quantity not yet shipped for each customer in three periods of 30 days each, starting from a selected date. There are also columns with orders to be shipped before and after the three periods and a column with the total order detail for each customer. The report can be used to analyze a company''s expected sales volume.';
+                }
+                action("Customer - &Top 10 List")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Customer - &Top 10 List';
+                    Image = "Report";
+                    RunObject = Report "Customer - Top 10 List";
+                    ToolTip = 'View which customers purchase the most or owe the most in a selected period. Only customers that have either purchases during the period or a balance at the end of the period will be included.';
+                }
+                action("Customer/&Item Sales")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Customer/&Item Sales';
+                    Image = "Report";
+                    RunObject = Report "Customer/Item Sales";
+                    ToolTip = 'View a list of item sales for each customer during a selected time period. The report contains information on quantity, sales amount, profit, and possible discounts. It can be used, for example, to analyze a company''s customer groups.';
+                }
+
+                action("TNL Sales Contribution")
+                {
+                    ApplicationArea = Suite;
+                    Caption = 'TNL Sales Contribution';
+                    Image = "Report";
+                    RunObject = Report "TNL Sales Contribution";
+                    ToolTip = 'View amounts for sales, profit, invoice discount, as well as profit percentage, for each salesperson for a selected period. The report also shows the adjusted profit and adjusted profit percentage, which reflect any changes to the original costs of the items in the sales.';
+                }
+                action("Salesperson - Sales &Statistics")
+                {
+                    ApplicationArea = Suite;
+                    Caption = 'Salesperson - Sales &Statistics';
+                    Image = "Report";
+                    RunObject = Report "Salesperson - Sales Statistics";
+                    ToolTip = 'View amounts for sales, profit, invoice discount, and payment discount, as well as profit percentage, for each salesperson for a selected period. The report also shows the adjusted profit and adjusted profit percentage, which reflect any changes to the original costs of the items in the sales.';
+                }
+#if not CLEAN21
+                action("Price &List")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Price &List';
+                    Image = "Report";
+                    RunPageView = where("Object Type" = const(Report), "Object ID" = const(715)); // "Price List";
+                    RunObject = Page "Role Center Page Dispatcher";
+                    ToolTip = 'View a list of your items and their prices, for example, to send to customers. You can create the list for specific customers, campaigns, currencies, or other criteria.';
+                    ObsoleteState = Pending;
+                    ObsoleteReason = 'Replaced by the new implementation (V16) of price calculation.';
+                    ObsoleteTag = '19.0';
+                }
 #else
                     action("Price &List")
                     {
@@ -1290,15 +1282,24 @@ page 50018 Operations
                         ToolTip = 'View a list of your items and their prices, for example, to send to customers. You can create the list for specific customers, campaigns, currencies, or other criteria.';
                     }
 #endif
-                    action("Inventory - Sales &Back Orders")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Inventory - Sales &Back Orders';
-                        Image = "Report";
-                        RunObject = Report "Inventory - Sales Back Orders";
-                        ToolTip = 'View a list with the order lines whose shipment date has been exceeded. The following information is shown for the individual orders for each item: number, customer name, customer''s telephone number, shipment date, order quantity and quantity on back order. The report also shows whether there are other items for the customer on back order.';
-                    }
+                action("Inventory - Sales &Back Orders")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Inventory - Sales &Back Orders';
+                    Image = "Report";
+                    RunObject = Report "Inventory - Sales Back Orders";
+                    ToolTip = 'View a list with the order lines whose shipment date has been exceeded. The following information is shown for the individual orders for each item: number, customer name, customer''s telephone number, shipment date, order quantity and quantity on back order. The report also shows whether there are other items for the customer on back order.';
                 }
+
+                action(CarsInventory)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Cars Inventory';
+                    Image = "Report";
+                    RunObject = Report "Cars-Inventory";
+                }
+
+
             }
             group(History)
             {
