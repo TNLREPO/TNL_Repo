@@ -589,29 +589,6 @@ table 70009 "Leave Request3"
                         CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
                         SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
-                        /*  WITH TempEmailItem DO BEGIN
-                             "Send to" := ToAddresses;
-                             "Send CC" := SenderAddress + ';' + 'lawal@toyotanigeria.com;' + 'ibidapo-obe@toyotanigeria.com';
-                             "Send BCC" := '';
-                             Subject := STRSUBSTNO(text001, "Request No.");
-
-                             BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                             BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT(STRSUBSTNO(text008) + CRLF + CRLF +
-                             Text015 + STRSUBSTNO("Request No.") + CRLF + CRLF +
-                             Text016 + STRSUBSTNO(EmpRec.GetFullName("Employee No.")) + CRLF + CRLF +
-                             Text017 + STRSUBSTNO("Leave Category") + CRLF + CRLF +
-                             text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                             text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                             STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                             Text018 + CRLF +
-                             SenderName);
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                             Body := BodyBlob.Blob;
-                             Send(FALSE);
-                         END; */
 
                         Approved2 := TRUE;
                     END;
@@ -633,7 +610,7 @@ table 70009 "Leave Request3"
                         subject := STRSUBSTNO(text008);
                         CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
                         SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
-                      
+
 
                         Approved2 := TRUE;
                     END;
@@ -658,35 +635,6 @@ table 70009 "Leave Request3"
                             CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
                             SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
-
-                            /*   WITH TempEmailItem DO BEGIN
-                                  "Send to" := ToAddresses;
-                                  "Send CC" := SenderAddress + ';' + 'lawal@toyotanigeria.com;' + 'ibidapo-obe@toyotanigeria.com';
-                                  "Send BCC" := '';
-                                  Subject := STRSUBSTNO(text008);
-
-                                  CRLF := '';
-                                  CRLF[1] := 13;
-                                  CRLF[2] := 10;
-
-                                  BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                  BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                                  BodyStream.WRITETEXT(CRLF + CRLF);
-                                  BodyStream.WRITETEXT(text003 + CRLF + CRLF + CRLF +
-                                  Text015 + STRSUBSTNO("Request No.") + CRLF + CRLF +
-                                  Text016 + STRSUBSTNO(EmpRec.GetFullName("Employee No.")) + CRLF + CRLF +
-                                  Text017 + STRSUBSTNO("Leave Category") + CRLF + CRLF +
-                                  text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                                  text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                                  STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                                  Text018 + CRLF +
-                                  SenderName);
-                                  BodyStream.WRITETEXT(CRLF + CRLF);
-                                  BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                  Body := BodyBlob.Blob;
-                                  Send(FALSE);
-                              END; */
-
                         END;
 
                     "2nd Approval Status"::"On hold":
@@ -706,32 +654,6 @@ table 70009 "Leave Request3"
                             Subject := STRSUBSTNO(text004, "Request No.");
                             CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
                             SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
-
-                            /*   WITH TempEmailItem DO BEGIN
-                                  "Send to" := ToAddresses;
-                                  "Send CC" := SenderAddress + ';' + 'lawal@toyotanigeria.com;' + 'ibidapo-obe@toyotanigeria.com';
-                                  "Send BCC" := '';
-                                  Subject := STRSUBSTNO(text004, "Request No.");
-                                  CRLF := '';
-                                  CRLF[1] := 13;
-                                  CRLF[2] := 10;
-
-                                  BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                  BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                                  BodyStream.WRITETEXT(CRLF + CRLF);
-                                  BodyStream.WRITETEXT(Text020 + CRLF + CRLF + CRLF +
-                                  Text015 + STRSUBSTNO("Request No.") + CRLF + CRLF +
-                                  Text016 + STRSUBSTNO(EmpRec.GetFullName("Employee No.")) + CRLF + CRLF +
-                                  Text017 + STRSUBSTNO("Leave Category") + CRLF + CRLF +
-                                  text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                                  text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                                  STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                                  Text018 + CRLF +
-                                  SenderName);
-                                  BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                  Body := BodyBlob.Blob;
-                                  Send(FALSE);
-                              END; */
 
                         END;
                 END;
@@ -758,31 +680,6 @@ table 70009 "Leave Request3"
                         CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
                         SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
-
-                        /*  WITH TempEmailItem DO BEGIN
-                             "Send to" := ToAddresses;
-                             "Send CC" := SenderAddress + ';' + 'lawal@toyotanigeria.com';
-                             "Send BCC" := '';
-                             Subject := STRSUBSTNO(text008);
-
-                             BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                             BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT(STRSUBSTNO(text008) + CRLF + CRLF + CRLF +
-                             Text015 + STRSUBSTNO("Request No.") + CRLF + CRLF +
-                             Text016 + STRSUBSTNO(EmpRec.GetFullName("Employee No.")) + CRLF + CRLF +
-                             Text017 + STRSUBSTNO("Leave Category") + CRLF + CRLF +
-                             text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                             text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                             STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                             Text018 + CRLF +
-                             SenderName);
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                             Body := BodyBlob.Blob;
-                             Send(FALSE);
-                         END; */
-
                         Approved2 := TRUE;
                     END;
 
@@ -805,30 +702,6 @@ table 70009 "Leave Request3"
                             Subject := STRSUBSTNO(text008);
                             CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
                             SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
-
-                            /* WITH TempEmailItem DO BEGIN
-                                "Send to" := ToAddresses;
-                                "Send CC" := SenderAddress + ';' + 'lawal@toyotanigeria.com';
-                                "Send BCC" := '';
-                                Subject := STRSUBSTNO(text008);
-
-                                BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                                BodyStream.WRITETEXT(CRLF + CRLF);
-                                BodyStream.WRITETEXT(STRSUBSTNO(text008) + CRLF + CRLF + CRLF +
-                                Text015 + STRSUBSTNO("Request No.") + CRLF +
-                                Text016 + STRSUBSTNO(EmpRec.GetFullName("Employee No.")) + CRLF +
-                                Text017 + STRSUBSTNO("Leave Category") + CRLF + CRLF +
-                                text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                                text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                                STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                                Text018 + CRLF +
-                                SenderName);
-                                BodyStream.WRITETEXT(CRLF + CRLF);
-                                BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                Body := BodyBlob.Blob;
-                                Send(FALSE);
-                            END; */
 
                             "MD Leave Approval" := TRUE;
                         END;
@@ -855,34 +728,6 @@ table 70009 "Leave Request3"
                             CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
                             SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
-                            /*      WITH TempEmailItem DO BEGIN
-                                     "Send to" := ToAddresses;
-                                     "Send CC" := SenderAddress + ';' + 'lawal@toyotanigeria.com';
-                                     "Send BCC" := '';
-                                     Subject := STRSUBSTNO(text001, "Request No.");
-
-                                     CRLF := '';
-                                     CRLF[1] := 13;
-                                     CRLF[2] := 10;
-
-                                     BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                     BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                                     BodyStream.WRITETEXT(CRLF + CRLF);
-                                     BodyStream.WRITETEXT(Text014 + CRLF + CRLF + CRLF +
-                                     Text015 + STRSUBSTNO("Request No.") + CRLF +
-                                     Text016 + STRSUBSTNO(EmpRec.GetFullName("Employee No.")) + CRLF +
-                                     Text017 + STRSUBSTNO("Leave Category") + CRLF + CRLF +
-                                     text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                                     text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                                     STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                                     Text018 + CRLF +
-                                     SenderName);
-                                     BodyStream.WRITETEXT(CRLF + CRLF);
-                                     BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                     Body := BodyBlob.Blob;
-                                     Send(FALSE);
-                                 END;
-                                  */
                             "MD Leave Approval" := TRUE;
                         END;
                     END;
@@ -906,34 +751,6 @@ table 70009 "Leave Request3"
                             Subject := STRSUBSTNO(text001, "Request No.");
                             CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
                             SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
-
-                            /* WITH TempEmailItem DO BEGIN
-                                "Send to" := ToAddresses;
-                                "Send CC" := SenderAddress + ';' + 'lawal@toyotanigeria.com';
-                                "Send BCC" := '';
-                                Subject := STRSUBSTNO(text001, "Request No.");
-
-                                CRLF := '';
-                                CRLF[1] := 13;
-                                CRLF[2] := 10;
-
-                                BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                                BodyStream.WRITETEXT(CRLF + CRLF);
-                                BodyStream.WRITETEXT(Text014 + CRLF + CRLF + CRLF +
-                                Text015 + STRSUBSTNO("Request No.") + CRLF +
-                                Text016 + STRSUBSTNO(EmpRec.GetFullName("Employee No.")) + CRLF +
-                                Text017 + STRSUBSTNO("Leave Category") + CRLF + CRLF +
-                                text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                                text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                                STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                                Text018 + CRLF +
-                                SenderName);
-                                BodyStream.WRITETEXT(CRLF + CRLF);
-                                BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                Body := BodyBlob.Blob;
-                                Send(FALSE);
-                            END; */
 
                             "MD Leave Approval" := TRUE;
                         END;
@@ -961,30 +778,6 @@ table 70009 "Leave Request3"
                             CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
                             SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
-                            /*  WITH TempEmailItem DO BEGIN
-                                 "Send to" := ToAddresses;
-                                 "Send CC" := SenderAddress + ';' + 'lawal@toyotanigeria.com';
-                                 "Send BCC" := '';
-                                 Subject := STRSUBSTNO(text001, "Request No.");
-
-                                 BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                 BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT(Text014 + CRLF + CRLF + CRLF +
-                                 Text015 + STRSUBSTNO("Request No.") + CRLF +
-                                 Text016 + STRSUBSTNO(EmpRec.GetFullName("Employee No.")) + CRLF +
-                                 Text017 + STRSUBSTNO("Leave Category") + CRLF + CRLF +
-                                 text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                                 text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                                 STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                                 Text018 + CRLF +
-                                 SenderName);
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                 Body := BodyBlob.Blob;
-                                 Send(FALSE);
-                             END; */
-
                         END;
                     END;
 
@@ -1009,33 +802,6 @@ table 70009 "Leave Request3"
                             CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
                             SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
-                            /*   WITH TempEmailItem DO BEGIN
-                                  "Send to" := ToAddresses;
-                                  "Send CC" := SenderAddress + ';' + 'lawal@toyotanigeria.com';
-                                  "Send BCC" := '';
-                                  Subject := STRSUBSTNO(text001, "Request No.");
-
-                                  CRLF := '';
-                                  CRLF[1] := 13;
-                                  CRLF[2] := 10;
-
-                                  BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                  BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                                  BodyStream.WRITETEXT(CRLF + CRLF);
-                                  BodyStream.WRITETEXT(Text014 + CRLF + CRLF + CRLF +
-                                  Text015 + STRSUBSTNO("Request No.") + CRLF +
-                                  Text016 + STRSUBSTNO(EmpRec.GetFullName("Employee No.")) + CRLF +
-                                  Text017 + STRSUBSTNO("Leave Category") + CRLF + CRLF +
-                                  text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                                  text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                                  STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                                  Text018 + CRLF +
-                                  SenderName);
-                                  BodyStream.WRITETEXT(CRLF + CRLF);
-                                  BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                  Body := BodyBlob.Blob;
-                                  Send(FALSE);
-                              END; */
 
                         END;
                     END;
@@ -1094,7 +860,7 @@ table 70009 "Leave Request3"
         }
         field(59; "3rd Approval Status"; Option)
         {
-            Caption = '<3rd Approval Satues>';
+
             OptionCaption = ' ,On hold,Approved,Rejected';
             OptionMembers = " ","On hold",Approved,Rejected;
 
@@ -1128,33 +894,6 @@ table 70009 "Leave Request3"
                         CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
                         SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
-                        /*  WITH TempEmailItem DO BEGIN
-                             "Send to" := ToAddresses;
-                             "Send CC" := SenderAddress + ';' + 'lawal@toyotanigeria.com;' + 'ibidapo-obe@toyotanigeria.com';
-                             "Send BCC" := '';
-                             Subject := STRSUBSTNO(text008);
-
-                             CRLF := '';
-                             CRLF[1] := 13;
-                             CRLF[2] := 10;
-
-                             BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                             BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT(STRSUBSTNO(text008) + CRLF + CRLF + CRLF +
-                             Text015 + STRSUBSTNO("Request No.") + CRLF +
-                             Text016 + STRSUBSTNO(EmpRec.GetFullName("Employee No.")) + CRLF +
-                             Text017 + STRSUBSTNO("Leave Category") + CRLF + CRLF +
-                             text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                             text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                             STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                             Text018 + CRLF +
-                             SenderName);
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                             Body := BodyBlob.Blob;
-                             Send(FALSE);
-                         END; */
 
                         Approved2 := TRUE;
                     END;
@@ -1180,33 +919,6 @@ table 70009 "Leave Request3"
                         CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
                         SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
-                        /*  WITH TempEmailItem DO BEGIN
-                             "Send to" := ToAddresses;
-                             "Send CC" := SenderAddress + ';' + 'lawal@toyotanigeria.com;' + 'ibidapo-obe@toyotanigeria.com';
-                             "Send BCC" := '';
-                             Subject := STRSUBSTNO(text008);
-
-                             CRLF := '';
-                             CRLF[1] := 13;
-                             CRLF[2] := 10;
-
-                             BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                             BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT(STRSUBSTNO(text008) + CRLF + CRLF + CRLF +
-                             Text015 + STRSUBSTNO("Request No.") + CRLF +
-                             Text016 + STRSUBSTNO(EmpRec.GetFullName("Employee No.")) + CRLF +
-                             Text017 + STRSUBSTNO("Leave Category") + CRLF + CRLF +
-                             text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                             text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                             STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                             Text018 + CRLF +
-                             SenderName);
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                             Body := BodyBlob.Blob;
-                             Send(FALSE);
-                         END; */
 
                         Approved2 := TRUE;
                     END;
@@ -1230,33 +942,6 @@ table 70009 "Leave Request3"
                         CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
                         SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
-                        /*  WITH TempEmailItem DO BEGIN
-                             "Send to" := ToAddresses;
-                             "Send CC" := SenderAddress + ';' + 'lawal@toyotanigeria.com;' + 'ibidapo-obe@toyotanigeria.com';
-                             "Send BCC" := '';
-                             Subject := STRSUBSTNO(text008);
-
-                             CRLF := '';
-                             CRLF[1] := 13;
-                             CRLF[2] := 10;
-
-                             BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                             BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT(STRSUBSTNO(text008) + CRLF + CRLF + CRLF +
-                             Text015 + STRSUBSTNO("Request No.") + CRLF +
-                             Text016 + STRSUBSTNO(EmpRec.GetFullName("Employee No.")) + CRLF +
-                             Text017 + STRSUBSTNO("Leave Category") + CRLF + CRLF +
-                             text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                             text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                             STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                             Text018 + CRLF +
-                             SenderName);
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                             Body := BodyBlob.Blob;
-                             Send(FALSE);
-                         END; */
 
                         Approved2 := TRUE;
                     END;
@@ -1280,33 +965,6 @@ table 70009 "Leave Request3"
                         CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
                         SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
-                        /*  WITH TempEmailItem DO BEGIN
-                             "Send to" := ToAddresses;
-                             "Send CC" := SenderAddress + ';' + 'lawal@toyotanigeria.com;' + 'ibidapo-obe@toyotanigeria.com';
-                             "Send BCC" := '';
-                             Subject := STRSUBSTNO(text008);
-
-                             CRLF := '';
-                             CRLF[1] := 13;
-                             CRLF[2] := 10;
-
-                             BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                             BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT(STRSUBSTNO(text008) + CRLF + CRLF + CRLF +
-                             Text015 + STRSUBSTNO("Request No.") + CRLF +
-                             Text016 + STRSUBSTNO(EmpRec.GetFullName("Employee No.")) + CRLF +
-                             Text017 + STRSUBSTNO("Leave Category") + CRLF + CRLF +
-                             text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                             text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                             STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                             Text018 + CRLF +
-                             SenderName);
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                             Body := BodyBlob.Blob;
-                             Send(FALSE);
-                         END; */
 
                         Approved2 := TRUE;
                     END;
@@ -1331,33 +989,6 @@ table 70009 "Leave Request3"
                         CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
                         SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
-                        /*    WITH TempEmailItem DO BEGIN
-                               "Send to" := ToAddresses;
-                               "Send CC" := SenderAddress + ';' + 'lawal@toyotanigeria.com;' + 'ibidapo-obe@toyotanigeria.com';
-                               "Send BCC" := '';
-                               Subject := STRSUBSTNO(text008);
-
-                               CRLF := '';
-                               CRLF[1] := 13;
-                               CRLF[2] := 10;
-
-                               BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                               BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                               BodyStream.WRITETEXT(CRLF + CRLF);
-                               BodyStream.WRITETEXT(STRSUBSTNO(text006) + CRLF + CRLF + CRLF +
-                               Text015 + STRSUBSTNO("Request No.") + CRLF +
-                               Text016 + STRSUBSTNO(EmpRec.GetFullName("Employee No.")) + CRLF +
-                               Text017 + STRSUBSTNO("Leave Category") + CRLF + CRLF +
-                               text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                               text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                               STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                               Text018 + CRLF +
-                               SenderName);
-                               BodyStream.WRITETEXT(CRLF + CRLF);
-                               BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                               Body := BodyBlob.Blob;
-                               Send(FALSE);
-                           END; */
 
                         "MD Leave Approval" := TRUE;
 
@@ -1385,32 +1016,6 @@ table 70009 "Leave Request3"
                             SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
 
-                            /*  WITH TempEmailItem DO BEGIN
-                                 "Send to" := ToAddresses;
-                                 "Send CC" := SenderAddress;
-                                 "Send BCC" := '';
-                                 Subject := STRSUBSTNO(text003, "Request No.");
-                                 CRLF := '';
-                                 CRLF[1] := 13;
-                                 CRLF[2] := 10;
-
-                                 BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                 BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT(Text019 + CRLF + CRLF + CRLF +
-                                 Text015 + STRSUBSTNO("Request No.") + CRLF + CRLF +
-                                 Text016 + STRSUBSTNO(EmpRec.GetFullName("Employee No.")) + CRLF + CRLF +
-                                 Text017 + STRSUBSTNO("Leave Category") + CRLF + CRLF +
-                                 text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                                 text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                                 STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                                 Text018 + CRLF +
-                                 SenderName);
-                                 BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                 Body := BodyBlob.Blob;
-                                 Send(FALSE);
-                             END; */
-
                         END;
                     "3rd Approval Status"::"On hold":
                         IF NOT CONFIRM('Are you sure you want to place on hold?', FALSE) THEN
@@ -1429,32 +1034,6 @@ table 70009 "Leave Request3"
                             Subject := STRSUBSTNO(text004, "Request No.");
                             CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
                             SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
-
-                            /*  WITH TempEmailItem DO BEGIN
-                                 "Send to" := ToAddresses;
-                                 "Send CC" := SenderAddress;
-                                 "Send BCC" := '';
-                                 Subject := STRSUBSTNO(text004, "Request No.");
-                                 CRLF := '';
-                                 CRLF[1] := 13;
-                                 CRLF[2] := 10;
-
-                                 BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                 BodyStream.WRITETEXT(Text013 + ' ' + Addressee + ',');
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT(Text020 + CRLF + CRLF + CRLF +
-                                 Text015 + STRSUBSTNO("Request No.") + CRLF + CRLF +
-                                 Text016 + STRSUBSTNO(EmpRec.GetFullName("Employee No.")) + CRLF + CRLF +
-                                 Text017 + STRSUBSTNO("Leave Category") + CRLF + CRLF +
-                                 text011 + FORMAT("Actual Start Date") + CRLF + CRLF +
-                                 text012 + FORMAT("Actual End Date") + CRLF + CRLF +
-                                 STRSUBSTNO(text010, "Actual Duration") + CRLF + CRLF +
-                                 Text018 + CRLF +
-                                 SenderName);
-                                 BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                 Body := BodyBlob.Blob;
-                                 Send(FALSE);
-                             END; */
 
                         END;
                 END;

@@ -1587,6 +1587,13 @@ page 50009 Parts
                     Image = "Report";
                     RunObject = Report "Branch Transfer recpt TSP2006";
                 }
+                action(SalesStatistics)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Sales Statistics/Price/Group';
+                    Image = "Report";
+                    RunObject = Report "Sales Statistics By Price Grp";
+                }
 
 
 

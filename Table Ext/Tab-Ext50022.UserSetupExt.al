@@ -356,5 +356,15 @@ tableextension 50022 "User Setup Ext" extends "User Setup"
         {
             DataClassification = ToBeClassified;
         }
+
     }
+
+    trigger OnAfterModify()
+    var
+        UserSetup: Record "User Setup";
+    begin
+        UserSetup.get(USERID);
+        if not UserSetup."System Admin" then
+            Error('You cannot modify this record!');
+    end;
 }

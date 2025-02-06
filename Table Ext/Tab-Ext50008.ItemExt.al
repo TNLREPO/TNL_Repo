@@ -3,6 +3,7 @@ tableextension 50008 "Item Ext" extends Item
     fields
     {
 
+
         modify("Price/Profit Calculation")
         {
             trigger OnAfterValidate()
@@ -1006,7 +1007,17 @@ tableextension 50008 "Item Ext" extends Item
             DataClassification = ToBeClassified;
         }
 
+
     }
+
+    keys
+    {
+        key(NewKey; "Item Price Group")
+        {
+
+        }
+    }
+
 
 
     fieldgroups

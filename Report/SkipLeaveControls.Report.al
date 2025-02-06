@@ -44,10 +44,12 @@ report 60002 "Skip Leave Controls"
             {
                 field(VarSkip1; VarSkip1)
                 {
+                    ApplicationArea = All;
                     Caption = 'Skip';
                 }
                 field(VarSkip2; VarSkip2)
                 {
+                    ApplicationArea = All;
                     Caption = 'Skip2';
                 }
             }

@@ -109,25 +109,26 @@ page 50603 "Leave Request Card"
                 field("Send for Approval"; Rec."Send for Approval")
                 {
                     Caption = 'Send';
-                    //Editable = "Send for ApprovalEditable";
+                    Editable = "Send for ApprovalEditable";
 
                     trigger OnValidate()
                     begin
                         Rec.TESTFIELD("Request Type");
                     end;
                 }
-            }
-            group(Approvals)
-            {
                 field("Sent Time"; Rec."Sent Time")
                 {
                     Caption = 'Time';
                     Editable = false;
                 }
+            }
+            group(Approvals)
+            {
+
                 field("1st Approval"; Rec."1st Approval")
                 {
                     Caption = 'To';
-                    //Editable = "1st Approval toEditable";
+                    Editable = "1st Approval toEditable";
 
                     trigger OnLookup(var Text: Text): Boolean
                     begin
@@ -187,7 +188,7 @@ page 50603 "Leave Request Card"
                             END;
                         END;
                         IF (Rec."Request Type" = Rec."Request Type"::Manager) AND (Rec."Global Dimension 1 code" = '05PARTS') THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1|%2', 'RAVINDER', 'AKINDELE');
+                            UserSetup.SETFILTER("User ID", '%1|%2', 'RAVINDER');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."1st Approval" := UserSetup."User ID";
                                 Rec."1st Approver" := UserSetup.Name;
@@ -242,7 +243,7 @@ page 50603 "Leave Request Card"
                             END;
                         END;
                         IF (Rec."Request Type" = Rec."Request Type"::"Junior staff - Deputy Manager") AND (Rec."Global Dimension 1 code" = '05PARTS') THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1|%2', 'RAVINDER', 'AKINDELE');
+                            UserSetup.SETFILTER("User ID", '%1|%2', 'RAVINDER');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."1st Approval" := UserSetup."User ID";
                                 Rec."1st Approver" := UserSetup.Name;
@@ -327,7 +328,7 @@ page 50603 "Leave Request Card"
                 field("1st Approval Status"; Rec."1st Approval Status")
                 {
                     Caption = 'Action';
-                    //Editable = "1st Apprv. StatusEditable";
+                    Editable = "1st Apprv. StatusEditable";
 
                     trigger OnValidate()
                     begin
@@ -360,16 +361,16 @@ page 50603 "Leave Request Card"
             }
             group("Level 1")
             {
-                //Visible = Level_1;
+                Visible = Level_1;
                 field("2nd Approval"; Rec."2nd Approval")
                 {
                     Caption = 'To';
-                    //Editable = "2nd Approval toEditable";
+                    Editable = "2nd Approval toEditable";
 
                     trigger OnLookup(var Text: Text): Boolean
                     begin
                         IF Rec."Request Type" = Rec."Request Type"::HOD THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1', 'OLAKUNLE');
+                            UserSetup.SETFILTER("User ID", '%1', 'KUNLE_ADE-OJO');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."2nd Approval" := UserSetup."User ID";
                                 Rec."2nd Approver" := UserSetup.Name;
@@ -378,7 +379,7 @@ page 50603 "Leave Request Card"
                         END;
 
                         IF (Rec."Request Type" = Rec."Request Type"::"MD OFFICE") AND (Rec."Global Dimension 1 code" = '01EXADMIN') THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1', 'OLAKUNLE');
+                            UserSetup.SETFILTER("User ID", '%1', 'KUNLE_ADE-OJO');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."2nd Approval" := UserSetup."User ID";
                                 Rec."2nd Approver" := UserSetup.Name;
@@ -415,7 +416,7 @@ page 50603 "Leave Request Card"
 
                         IF (Rec."Request Type" = Rec."Request Type"::FG) //AND //(Rec."Global Dimension 1 code" = '05PARTS')/
                         THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1|%2|%3|4%', 'RAVINDER', 'INGALE', 'SYLVESTER', 'AKINDELE');
+                            UserSetup.SETFILTER("User ID", '%1|%2|%3|4%', 'RAVINDER', 'SYLVESTER');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."2nd Approval" := UserSetup."User ID";
                                 Rec."2nd Approver" := UserSetup.Name;
@@ -431,7 +432,7 @@ page 50603 "Leave Request Card"
                 }
                 field("Send to MD for Approval"; Rec."Send to MD for Approval")
                 {
-                    //Visible = To_Visible;
+                    Visible = To_Visible;
 
                     trigger OnValidate()
                     begin
@@ -442,7 +443,7 @@ page 50603 "Leave Request Card"
                 field("2nd Approval Status"; Rec."2nd Approval Status")
                 {
                     Caption = 'Action';
-                    //Editable = "2nd Apprv. StatusEditable";
+                    Editable = "2nd Apprv. StatusEditable";
 
                     trigger OnValidate()
                     begin
@@ -471,7 +472,7 @@ page 50603 "Leave Request Card"
             }
             group("Level 2")
             {
-                //Visible = Level_2;
+                Visible = Level_2;
                 field("3rd Approval"; Rec."3rd Approval")
                 {
                     Caption = 'To';
@@ -481,7 +482,7 @@ page 50603 "Leave Request Card"
                     trigger OnLookup(var Text: Text): Boolean
                     begin
                         IF Rec."Request Type" = Rec."Request Type"::Manager THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1', 'OLAKUNLE');
+                            UserSetup.SETFILTER("User ID", '%1', 'KUNLE_ADE-OJO');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."3rd Approval" := UserSetup."User ID";
                                 Rec."3rd Approver" := UserSetup.Name;
@@ -490,7 +491,7 @@ page 50603 "Leave Request Card"
                         END;
 
                         IF Rec."Request Type" = Rec."Request Type"::HOD1 THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1', 'OLAKUNLE');
+                            UserSetup.SETFILTER("User ID", '%1', 'KUNLE_ADE-OJO');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."3rd Approval" := UserSetup."User ID";
                                 Rec."3rd Approver" := UserSetup.Name;
@@ -499,7 +500,7 @@ page 50603 "Leave Request Card"
                         END;
 
                         IF (Rec."Request Type" = Rec."Request Type"::"Junior staff - Deputy Manager") AND (Rec."Send to MD for Approval" = TRUE) THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1', 'OLAKUNLE');
+                            UserSetup.SETFILTER("User ID", '%1', 'KUNLE_ADE-OJO');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."3rd Approval" := UserSetup."User ID";
                                 Rec."3rd Approver" := UserSetup.Name;
@@ -541,7 +542,7 @@ page 50603 "Leave Request Card"
                 field("3rd Approval Status"; Rec."3rd Approval Status")
                 {
                     Caption = 'Action';
-                    //Editable = "3rd Apprv. StatusEditable";
+                    Editable = "3rd Apprv. StatusEditable";
 
                     trigger OnValidate()
                     begin
@@ -571,7 +572,7 @@ page 50603 "Leave Request Card"
                     trigger OnLookup(var Text: Text): Boolean
                     begin
                         IF Rec."Request Type" = Rec."Request Type"::FG THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1', 'OLAKUNLE');
+                            UserSetup.SETFILTER("User ID", '%1', 'KUNLE_ADE-OJO');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."4th Approval" := UserSetup."User ID";
                                 Rec."4th  Approver" := UserSetup.Name;
@@ -693,81 +694,79 @@ page 50603 "Leave Request Card"
 
         IsPageEditable := true;
 
+        IF (Rec."Send for Approval" = TRUE) THEN
+            Level_1 := TRUE
 
-        /*         IF (Rec."Send for Approval" = TRUE) THEN
-                    Level_1 := TRUE
+        ELSE
+            Level_1 := FALSE;
 
-                ELSE
-                    Level_1 := FALSE;
+        IF Rec."1st Approval Status" <> Rec."1st Approval Status"::" " THEN
+            Level_2 := TRUE
 
-                IF Rec."1st Approval Status" <> Rec."1st Approval Status"::" " THEN
-                    Level_2 := TRUE
+        ELSE
+            Level_2 := FALSE;
 
-                ELSE
-                    Level_2 := FALSE;
+        IF Rec."Request Type" = Rec."Request Type"::FG THEN
+            Level_3 := TRUE;
 
-                IF Rec."Request Type" = Rec."Request Type"::FG THEN
-                    Level_3 := TRUE;
+        //IF  ( "2nd Approval Status" <> "2nd Approval Status":: " " ) THEN
+        // Level_3 := TRUE;
+        //IF ("Request Type"= "Request Type":: Manager) OR ("Send for Approval" = TRUE) THEN
+        //  Level_2 := TRUE;
 
-                //IF  ( "2nd Approval Status" <> "2nd Approval Status":: " " ) THEN
-                // Level_3 := TRUE;
-                //IF (Rec."Request Type"= Rec."Request Type":: Manager) OR ("Send for Approval" = TRUE) THEN
-                //  Level_2 := TRUE;
+        IF Rec."Send for Approval" = TRUE THEN
+            "1st Approval toEditable" := FALSE
+        ELSE
+            "1st Approval toEditable" := TRUE;
+        IF Rec."1st Approval Status" = Rec."1st Approval Status"::Approved THEN BEGIN
+            "2nd Approval toEditable" := FALSE;
+            "Send for ApprovalEditable" := FALSE
+        END ELSE BEGIN
+            "2nd Approval toEditable" := TRUE;
+            "Send for ApprovalEditable" := TRUE
+        END;
+        IF Rec."2nd Approval Status" = Rec."2nd Approval Status"::Approved THEN BEGIN
+            "3rd Approval toEditable" := FALSE;
+            "1st Apprv. StatusEditable" := FALSE
+        END ELSE BEGIN
+            "3rd Approval toEditable" := TRUE;
+            "1st Apprv. StatusEditable" := TRUE
+        END;
+        IF Rec."3rd Approval Status" = Rec."3rd Approval Status"::Approved THEN BEGIN
+            "4th Approval toEditable" := TRUE;
+            "1st Apprv. StatusEditable" := FALSE
+        END ELSE BEGIN
+            "4th Approval toEditable" := FALSE;
+            "1st Apprv. StatusEditable" := TRUE
+        END;
 
-                IF Rec."Send for Approval" = TRUE THEN
-                    "1st Approval toEditable" := FALSE
-                ELSE
-                    "1st Approval toEditable" := TRUE;
-                IF Rec."1st Approval Status" = Rec."1st Approval Status"::Approved THEN BEGIN
-                    "2nd Approval toEditable" := FALSE;
-                    "Send for ApprovalEditable" := FALSE
-                END ELSE BEGIN
-                    "2nd Approval toEditable" := TRUE;
-                    "Send for ApprovalEditable" := TRUE
-                END;
-                IF Rec."2nd Approval Status" = Rec."2nd Approval Status"::Approved THEN BEGIN
-                    "3rd Approval toEditable" := FALSE;
-                    "1st Apprv. StatusEditable" := FALSE
-                END ELSE BEGIN
-                    "3rd Approval toEditable" := TRUE;
-                    "1st Apprv. StatusEditable" := TRUE
-                END;
-                IF Rec."3rd Approval Status" = Rec."3rd Approval Status"::Approved THEN BEGIN
-                    "4th Approval toEditable" := TRUE;
-                    "1st Apprv. StatusEditable" := FALSE
-                END ELSE BEGIN
-                    "4th Approval toEditable" := FALSE;
-                    "1st Apprv. StatusEditable" := TRUE
-                END;
+        IF Rec."4th  Approval Status" = Rec."4th  Approval Status"::Approved THEN BEGIN
+            "2nd Apprv. StatusEditable" := FALSE;
+            "4th Approval toEditable" := FALSE
+        END ELSE BEGIN
+            "2nd Apprv. StatusEditable" := TRUE;
+            "4th Approval toEditable" := TRUE
+        END;
 
-                IF Rec."4th  Approval Status" = Rec."4th  Approval Status"::Approved THEN BEGIN
-                    "2nd Apprv. StatusEditable" := FALSE;
-                    "4th Approval toEditable" := FALSE
-                END ELSE BEGIN
-                    "2nd Apprv. StatusEditable" := TRUE;
-                    "4th Approval toEditable" := TRUE
-                END;
+        //IF "4th  Approval Status" ="4th  Approval Status"::Approved THEN
+        //  "2nd Apprv. StatusEditable" := FALSE
+        //ELSE
+        //  "2nd Apprv. StatusEditable" := TRUE;
 
-                //IF "4th  Approval Status" ="4th  Approval Status"::Approved THEN
-                //  "2nd Apprv. StatusEditable" := FALSE
-                //ELSE
-                //  "2nd Apprv. StatusEditable" := TRUE;
-
-                IF Rec."4th  Approval Status" = Rec."4th  Approval Status"::Approved THEN
-                    "3rd Apprv. StatusEditable" := FALSE
-                ELSE
-                    "3rd Apprv. StatusEditable" := TRUE;
-                IF (Rec."3rd Approval Status" = Rec."3rd Approval Status"::Approved) AND
-                   ((Rec."Request Type" = Rec."Request Type"::Branch) OR (Rec."Send to MD for Approval")) THEN
-                    "4th Apprv. StatusEditable" := TRUE
-                ELSE
-                    "4th Apprv. StatusEditable" := TRUE;
-                FastTabControl;
-                IF Rec."Request Type" = Rec."Request Type"::HOD THEN
-                    To_Visible := FALSE
-                ELSE
-                    To_Visible := TRUE;
-         */
+        IF Rec."4th  Approval Status" = Rec."4th  Approval Status"::Approved THEN
+            "3rd Apprv. StatusEditable" := FALSE
+        ELSE
+            "3rd Apprv. StatusEditable" := TRUE;
+        IF (Rec."3rd Approval Status" = Rec."3rd Approval Status"::Approved) AND
+           ((Rec."Request Type" = Rec."Request Type"::Branch) OR (Rec."Send to MD for Approval")) THEN
+            "4th Apprv. StatusEditable" := TRUE
+        ELSE
+            "4th Apprv. StatusEditable" := TRUE;
+        FastTabControl;
+        IF Rec."Request Type" = Rec."Request Type"::HOD THEN
+            To_Visible := FALSE
+        ELSE
+            To_Visible := TRUE;
 
     end;
 
