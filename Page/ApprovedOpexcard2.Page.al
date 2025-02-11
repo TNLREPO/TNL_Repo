@@ -79,6 +79,7 @@ page 70144 "Approved Opex card2"
                 {
                     group(Control02)
                     {
+                        ShowCaption = false;
                         field("Head of Department"; Rec."Head of Department")
                         {
                             Caption = 'Head of Department';
@@ -97,6 +98,7 @@ page 70144 "Approved Opex card2"
                     }
                     group(Control03)
                     {
+                        ShowCaption = false;
                         field("Head of Audit"; Rec."Head of Audit")
                         {
                             Caption = 'Head of Audit';
@@ -117,6 +119,7 @@ page 70144 "Approved Opex card2"
                     group(Conrol04)
                     {
                         Visible = GMAppr;
+                        ShowCaption = false;
                         field("General Manager"; Rec."General Manager")
                         {
                             Caption = 'General Manager';
@@ -136,6 +139,7 @@ page 70144 "Approved Opex card2"
                     group(Control014)
                     {
                         Visible = MDAppr;
+                        ShowCaption = false;
                         field("Managing Director"; Rec."Managing Director")
                         {
                             Caption = 'Managing Director';

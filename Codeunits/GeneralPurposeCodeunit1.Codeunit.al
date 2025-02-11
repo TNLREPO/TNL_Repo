@@ -1672,7 +1672,7 @@ codeunit 50004 "General Purpose Codeunit-1"
                 ValueEntry.SETRANGE("Item No.", ItemLedgEntry."Item No.");
                 IF ValueEntry.FINDFIRST THEN BEGIN
                     ValueEntry.CALCSUMS("Cost Posted to G/L");
-                    IF NewSalesPrice < ValueEntry."Cost Posted to G/L" THEN
+                    IF NewSalesPrice < Abs(ValueEntry."Cost Posted to G/L") THEN
                         ERROR('Selling Price is lower than the Cost Amount!');
                 END;
             UNTIL ItemLedgEntry.NEXT = 0;
@@ -1700,8 +1700,8 @@ codeunit 50004 "General Purpose Codeunit-1"
                         UnitPrice := SalesLine."Unit Price";
                     UNTIL SalesLine.NEXT = 0;
                 END;
-                IF UnitPrice < ItemLedgEntry."Cost Amount (Actual)" THEN BEGIN
-                    MESSAGE('%1,%2,%3', ItemLedgEntry."Item No.", ItemLedgEntry."Serial No.", ItemLedgEntry."Cost Amount (Actual)");
+                IF UnitPrice < Abs(ItemLedgEntry."Cost Amount (Actual)") THEN BEGIN
+                    MESSAGE('%1,%2,%3', ItemLedgEntry."Item No.", ItemLedgEntry."Serial No.", Abs(ItemLedgEntry."Cost Amount (Actual)"));
                     ERROR('Selling Price is lower than the Cost Amount!')
                 END
             UNTIL ReservEntry.NEXT = 0;
@@ -1738,7 +1738,7 @@ codeunit 50004 "General Purpose Codeunit-1"
                         UnitPrice := SalesLine."Unit Price";
                     UNTIL SalesLine.NEXT = 0;
                 END;
-                Margin := ((UnitPrice - ItemLedgEntry."Cost Amount (Actual)") / UnitPrice) * 100;
+                Margin := ((UnitPrice - Abs(ItemLedgEntry."Cost Amount (Actual)")) / UnitPrice) * 100;
                 IF Margin < 5 THEN BEGIN
                     MESSAGE('%1,%2,%3', ItemLedgEntry."Item No.", ItemLedgEntry."Serial No.", ItemLedgEntry."Cost Amount (Actual)");
                     ERROR('The margin is too low for the vehicle!')
@@ -1756,7 +1756,6 @@ codeunit 50004 "General Purpose Codeunit-1"
         NewDate: Date;
         NewVariantCode: Code[10];
         NewLocationCode: Code[10];
-
 
     begin
 
@@ -1782,7 +1781,6 @@ codeunit 50004 "General Purpose Codeunit-1"
         END;
     END;
 
-
     procedure ShowItemAvailFromFaultSetup(VAR FaultSetupLine: Record "Fault Setup Line"; AvailabilityType: Enum Microsoft.Inventory.Availability."Item Availability Type")
 
     var
@@ -1804,9 +1802,6 @@ codeunit 50004 "General Purpose Codeunit-1"
                     FaultSetupLine.VALIDATE(FaultSetupLine.Location, NewLocationCode);
         END;
     End;
-
-
-
 
 
 

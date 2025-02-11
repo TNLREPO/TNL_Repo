@@ -477,19 +477,6 @@ table 70008 "Procurement Header"
 
                 IF "Adv. Paymt. Audit" = "Adv. Paymt. Audit"::Approved THEN BEGIN
 
-                    /* CapexOpexLine.SETRANGE("Document Type", "Document Type");
-                    CapexOpexLine.SETRANGE("Document No.", "No.");
-                    CapexOpexLine.SETRANGE(Preferred, TRUE);
-                    IF CapexOpexLine.FINDFIRST THEN BEGIN
-                        CapexOpexLine.CALCFIELDS(Amount);
-                        VendAmt := CapexOpexLine.Amount;
-                        Advance := CapexOpexLine."Advance Payment";
-                        Balance := CapexOpexLine.Balance;
-                        VendName := CapexOpexLine."Vendor Name";
-                        VendAddr := CapexOpexLine.Address;
-                        PurJus := CapexOpexLine.Description;
-                    END; */
-
                     UserSetup.GET("Send To");
                     PurchSetup.GET;
                     ToAddresses := PurchSetup."Account Dept. Approvers";
@@ -505,31 +492,6 @@ table 70008 "Procurement Header"
                     Subject := STRSUBSTNO(Text013, "Document Type", "No.");
                     CreateEmailBody("Document Type", "No.", Text038, 'PAA');
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
-
-                    /*          WITH TempEmailItem DO BEGIN
-                                 "Send to" := ToAddresses;
-                                 "Send CC" := CcAddresses + ';' + SenderAddress;
-                                 "Send BCC" := BccAddresses;
-                                 Subject := STRSUBSTNO(Text013, "Document Type", "No.");
-
-                                 BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                 BodyStream.WRITETEXT(Text025 + 'PAA' + ',');
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT(STRSUBSTNO(Text038, "Document Type", "No.") + CRLF + CRLF +
-                                   Text029 + FORMAT(VendName) + CRLF +
-                                   Text030 + FORMAT(VendAddr) + CRLF +
-                                   Text031 + FORMAT(VendAmt) + CRLF +
-                                   Text057 + FORMAT(Advance) + CRLF +
-                                   Text058 + FORMAT(Balance) + CRLF +
-                                   Text055 + FORMAT(PurJus) + CRLF + CRLF +
-                                   Text027 + CRLF + CRLF);
-                                 BodyStream.WRITETEXT(SendersName);
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                 Body := BodyBlob.Blob;
-                                 Send(FALSE);
-                             END; 
-                             */
 
                     "Move to LPO" := TRUE;
                 END;
@@ -1637,7 +1599,7 @@ table 70008 "Procurement Header"
                     ERROR(Text028);
 
 
-                TESTFIELD("Head of Audit", "Head of Audit"::Approved);
+                // TESTFIELD("Head of Audit", "Head of Audit"::Approved); restore
 
                 UserSetup4.GET(USERID);
 
@@ -2015,7 +1977,7 @@ table 70008 "Procurement Header"
 
                     UserSetup.GET("Send To");
                     ToAddresses := 'paa@toyotanigeria.com';
-                    CcAddresses := 'albert@toyotanigeria.com;adewumi@toyotanigeria.com;' + UserSetup2."E-Mail" + ';' + SenderAddress;
+                    CcAddresses := 'albert@toyotanigeria.com' + ';' + 'adewumi@toyotanigeria.com';
                     BccAddresses := '';
 
                     Subject := STRSUBSTNO(Text047, "Document Type", "No.");
@@ -2051,18 +2013,6 @@ table 70008 "Procurement Header"
                 END;
 
                 IF "Bal. Paymt. GM" = "Bal. Paymt. GM"::Rejected THEN BEGIN
-
-                    /*   CapexOpexLine.SETRANGE("Document Type", "Document Type");
-                      CapexOpexLine.SETRANGE("Document No.", "No.");
-                      CapexOpexLine.SETRANGE(Preferred, TRUE);
-                      IF CapexOpexLine.FINDFIRST THEN BEGIN
-                          CapexOpexLine.CALCFIELDS(Amount);
-                          VendAmt := CapexOpexLine.Amount;
-                          VendName := CapexOpexLine."Vendor Name";
-                          VendAddr := CapexOpexLine.Address;
-                          PurJus := CapexOpexLine.Description;
-                      END; */
-
 
                     UserSetup.GET("User ID");
                     Addressee := UserSetup.Initials;
