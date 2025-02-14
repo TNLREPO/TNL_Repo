@@ -1,9 +1,9 @@
 page 50001 "Test Email Attachment"
 {
     PageType = List;
-    SourceTable = "Test Email Attachment";
+    SourceTable = Test;
     ApplicationArea = All;
-
+    UsageCategory = Lists;
     layout
     {
         area(content)
@@ -13,14 +13,9 @@ page 50001 "Test Email Attachment"
                 field("No."; Rec."No.")
                 {
                 }
-                field(Name; Rec.Name)
+                field("Take Action"; Rec."Take Action")
                 {
-                }
-                field(Send; Rec.Send)
-                {
-                }
-                field("Customer No."; Rec."Customer No.")
-                {
+
                 }
             }
         }

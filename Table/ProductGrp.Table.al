@@ -1,7 +1,7 @@
 table 50302 "Product Grp"
 {
-    /* DrillDownPageID = 50538;
-    LookupPageID = 50538; */
+    DrillDownPageID = 50538;
+    LookupPageID = 50538;
 
     fields
     {

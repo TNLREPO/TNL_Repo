@@ -800,7 +800,7 @@ table 70009 "Leave Request3"
 
                             Subject := STRSUBSTNO(text001, "Request No.");
                             CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                            SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
+                            SendEmail(ToAddresses, subject, EmailBody, '', '');
 
 
                         END;

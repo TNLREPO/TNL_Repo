@@ -267,7 +267,7 @@ table 70018 "Local Part Purchase Register"
             OptionMembers = " ",Approved,"On-hold",Rejected;
             trigger OnValidate()
             begin
-                IF Send = FALSE THEN
+                 IF Send = FALSE THEN
                     ERROR('The request has not been send for audit approval!');
 
                 TESTFIELD("Head of Department", "Head of Department"::Approved);
@@ -303,7 +303,7 @@ table 70018 "Local Part Purchase Register"
                             Addressee := 'RS,';
                             HODVisible := TRUE;
                             "Procurement Approval" := TRUE;
-                        END;
+                        END; 
 
                         IF (VendAmt >= 500000) THEN BEGIN
                             ToAddresses := 'dynamics@toyotanigeria.com';
@@ -312,12 +312,12 @@ table 70018 "Local Part Purchase Register"
                             "MD Approval" := TRUE;
                         END;
 
-                        IF (VendAmt > 100000) AND (VendAmt < 500000) THEN BEGIN
+                     IF (VendAmt > 100000) AND (VendAmt < 500000) THEN BEGIN
                             ToAddresses := 'bunmi@toyotanigeria.com';
                             Addressee := 'OAO,';
                             GMVisible := TRUE;
                             "GM Approval" := TRUE;
-                        END;
+                        END; 
 
                         Subject := STRSUBSTNO(Text001, "LPP No.");
                         CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text003, Addressee);
@@ -1430,12 +1430,14 @@ table 70018 "Local Part Purchase Register"
                                 IF ("Total Purchase Value" > 100001) AND ("Total Purchase Value" < 500000) THEN BEGIN
                                     ToAddresses := 'bunmi@toyotanigeria.com';
                                     CcAddresses := 'paa@toyotanigeria.com';
+                                    Addressee := 'GM';
                                     GMVisible := TRUE;
                                     "GM Approval" := TRUE;
                                 END ELSE
                                     IF "Total Purchase Value" >= 500000 THEN BEGIN
-                                        ToAddresses := 'kunle_ade-ojo@toyotanigeria.com';
+                                        ToAddresses := 'dynamics@toyotanigeria.com';
                                         CcAddresses := 'bunmi@toyotanigeria.com';
+                                        Addressee := 'MD';
                                         MDVisible := TRUE;
                                         "MD Approval" := TRUE;
                                     END;
@@ -1450,30 +1452,7 @@ table 70018 "Local Part Purchase Register"
                             Subject := STRSUBSTNO(Text001, "LPP No.");
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text021, Addressee);
                             SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
-
-                            /* WITH TempEmailItem DO BEGIN
-                               "Send to" := ToAddresses;
-                               "Send CC" := SenderAddress + ';' + CcAddresses;
-                               "Send BCC" := '';
-                               Subject := STRSUBSTNO(Text001, "LPP No.");
-
-                              // BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                               BodyStream.WRITETEXT(Text002 + 'Sir,');
-                               BodyStream.WRITETEXT(CRLF + CRLF);
-                               BodyStream.WRITETEXT(STRSUBSTNO(Text021, "LPP No.") + CRLF + CRLF +
-                               STRSUBSTNO(Text030) + CRLF + CRLF +
-                               Text014 + FORMAT(VendName) + CRLF + CRLF +
-                               Text015 + FORMAT(VendAddr) + CRLF +
-                               Text020 + FORMAT(Purpose) + CRLF + CRLF +
-                               Text016 + FORMAT(VendAmt) + CRLF + CRLF +
-                               CRLF + CRLF +
-                               Text004 + CRLF);
-                               BodyStream.WRITETEXT(SendersName);
-                               BodyStream.WRITETEXT(CRLF + CRLF);
-                               BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                               // Body := BodyBlob.Blob;
-                               // Send(FALSE);
-                           END; */
+                           
 
                             HoDAuditApproval := TRUE;
                         END;

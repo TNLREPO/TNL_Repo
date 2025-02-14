@@ -1139,8 +1139,6 @@ table 50103 "Payment/Receipt."
             GlJour."Document Type" := GlJour."Document Type"::" ";
         GlJour.VALIDATE(GlJour."Document No.", reqrec."No.");
         GlJour.Description := COPYSTR(reqrec."Transaction Description", 1, 50);
-        GlJour.VALIDATE(GlJour."Shortcut Dimension 1 Code", reqrec."Global Dimension 1 Code");
-        GlJour.VALIDATE(GlJour."Shortcut Dimension 2 Code", reqrec."Global Dimension 2 Code");
         GlJour.VALIDATE(GlJour."Currency Code", reqrec."Currency Code");
         GlJour.VALIDATE(GlJour."Currency Factor", reqrec."Currency Factor");
         GlJour."Procurement No." := "Procurement No."; //codeware
@@ -1151,6 +1149,8 @@ table 50103 "Payment/Receipt."
         GlJour."Loan Type" := reqrec."Loan Type";
         GlJour."Applies-to Doc. Type" := reqrec."Applies-to Doc. Type";
         GlJour.VALIDATE(GlJour."Applies-to Doc. No.", reqrec."Applies-to Doc. No.");
+        GlJour.VALIDATE(GlJour."Shortcut Dimension 1 Code", reqrec."Global Dimension 1 Code");
+        GlJour.VALIDATE(GlJour."Shortcut Dimension 2 Code", reqrec."Global Dimension 2 Code");
         //GlJour."Form M No.":= reqrec."Form M No.";
         IF GlJour."Account Type" <> GlJour."Account Type"::"Fixed Asset" THEN BEGIN
             GlJour."Depreciation Book Code" := '';

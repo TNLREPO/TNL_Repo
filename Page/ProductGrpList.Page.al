@@ -3,7 +3,7 @@ page 50538 "Product Grp List"
     PageType = List;
     SourceTable = "Product Grp";
     ApplicationArea = All;
-
+    UsageCategory = Lists;
     layout
     {
         area(content)

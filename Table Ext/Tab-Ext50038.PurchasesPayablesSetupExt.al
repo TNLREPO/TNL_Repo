@@ -43,6 +43,7 @@ tableextension 50038 "Purchases & Payables Setup Ext" extends "Purchases & Payab
         }
         field(50011; "CC Audit Dept. Approvers"; Text[100])
         {
+            
         }
         field(50012; "Account Dept. Approvers"; Text[100])
         {

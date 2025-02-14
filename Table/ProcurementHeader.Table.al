@@ -342,29 +342,6 @@ table 70008 "Procurement Header"
                     Subject := STRSUBSTNO(Text047, "Document Type", "No.");
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                    /*  WITH TempEmailItem DO BEGIN
-                         "Send to" := ToAddresses;
-                         "Send CC" := CcAddresses + ';' + SenderAddress;
-                         "Send BCC" := BccAddresses;
-                         Subject := STRSUBSTNO(Text047, "Document Type", "No.");
-
-                         BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                         BodyStream.WRITETEXT(Text025 + 'STA' + ',');
-                         BodyStream.WRITETEXT(CRLF + CRLF);
-                         BodyStream.WRITETEXT(STRSUBSTNO(Text037, "Document Type", "No.") + CRLF + CRLF +
-                         Text029 + FORMAT(VendName) + CRLF +
-                         Text030 + FORMAT(VendAddr) + CRLF +
-                         Text031 + FORMAT(VendAmt) + CRLF +
-                         Text057 + FORMAT(Advance) + CRLF +
-                         Text058 + FORMAT(Balance) + CRLF +
-                         Text055 + FORMAT(PurJus) + CRLF + CRLF +
-                         Text027 + CRLF + CRLF);
-                         BodyStream.WRITETEXT(SendersName);
-                         BodyStream.WRITETEXT(CRLF + CRLF);
-                         BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                         Body := BodyBlob.Blob;
-                         Send(FALSE);
-                     END; */
                 END;
 
                 IF "Adv. Paymt. HOD" = "Adv. Paymt. HOD"::"On-hold" THEN BEGIN
@@ -389,29 +366,7 @@ table 70008 "Procurement Header"
                     CreateEmailBody("Document Type", "No.", Text033, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                    /*   WITH TempEmailItem DO BEGIN
-                          "Send to" := ToAddresses;
-                          "Send CC" := SenderAddress;
-                          "Send BCC" := BccAddresses;
-                          Subject := STRSUBSTNO(Text017, "Document Type", "No.");
 
-                          BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                          BodyStream.WRITETEXT(Text025 + UserSetup.Initials + ',');
-                          BodyStream.WRITETEXT(CRLF + CRLF);
-                          BodyStream.WRITETEXT(STRSUBSTNO(Text033, "Document Type", "No.") + CRLF + CRLF +
-                            Text029 + FORMAT(VendName) + CRLF +
-                            Text030 + FORMAT(VendAddr) + CRLF +
-                            Text031 + FORMAT(VendAmt) + CRLF +
-                            Text057 + FORMAT(Advance) + CRLF +
-                            Text058 + FORMAT(Balance) + CRLF +
-                            Text055 + FORMAT(PurJus) + CRLF + CRLF +
-                            Text027 + CRLF + CRLF);
-                          BodyStream.WRITETEXT(SendersName);
-                          BodyStream.WRITETEXT(CRLF + CRLF);
-                          BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                          Body := BodyBlob.Blob;
-                          Send(FALSE);
-                      END; */
                 END;
 
                 IF "Adv. Paymt. HOD" = "Adv. Paymt. HOD"::Rejected THEN BEGIN
@@ -432,29 +387,7 @@ table 70008 "Procurement Header"
                     CreateEmailBody("Document Type", "No.", Text034, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                    /*  WITH TempEmailItem DO BEGIN
-                         "Send to" := ToAddresses;
-                         "Send CC" := SenderAddress;
-                         "Send BCC" := BccAddresses;
-                         Subject := STRSUBSTNO(Text018, "Document Type", "No.");
 
-                         BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                         BodyStream.WRITETEXT(Text025 + UserSetup.Initials + ',');
-                         BodyStream.WRITETEXT(CRLF + CRLF);
-                         BodyStream.WRITETEXT(STRSUBSTNO(Text034, "Document Type", "No.") + CRLF + CRLF +
-                           Text029 + FORMAT(VendName) + CRLF +
-                           Text030 + FORMAT(VendAddr) + CRLF +
-                           Text031 + FORMAT(VendAmt) + CRLF +
-                           Text057 + FORMAT(Advance) + CRLF +
-                           Text058 + FORMAT(Balance) + CRLF +
-                           Text055 + FORMAT(PurJus) + CRLF + CRLF +
-                           Text027 + CRLF + CRLF);
-                         BodyStream.WRITETEXT(SendersName);
-                         BodyStream.WRITETEXT(CRLF + CRLF);
-                         BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                         Body := BodyBlob.Blob;
-                         Send(FALSE);
-                     END; */
                 END;
             end;
         }
@@ -518,44 +451,9 @@ table 70008 "Procurement Header"
                     CreateEmailBody("Document Type", "No.", Text033, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                    /*                WITH TempEmailItem DO BEGIN
-                                       "Send to" := ToAddresses;
-                                       "Send CC" := SenderAddress;
-                                       "Send BCC" := BccAddresses;
-                                       Subject := STRSUBSTNO(Text017, "Document Type", "No.");
-
-                                       BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                       BodyStream.WRITETEXT(Text025 + Addressee + ',');
-                                       BodyStream.WRITETEXT(CRLF + CRLF);
-                                       BodyStream.WRITETEXT(STRSUBSTNO(Text033, "Document Type", "No.") + CRLF + CRLF +
-                                         Text029 + FORMAT(VendName) + CRLF +
-                                         Text030 + FORMAT(VendAddr) + CRLF +
-                                         Text031 + FORMAT(VendAmt) + CRLF +
-                                         Text057 + FORMAT(Advance) + CRLF +
-                                         Text058 + FORMAT(Balance) + CRLF +
-                                         Text055 + FORMAT(PurJus) + CRLF + CRLF +
-                                         Text027 + CRLF + CRLF);
-                                       BodyStream.WRITETEXT(SendersName);
-                                       BodyStream.WRITETEXT(CRLF + CRLF);
-                                       BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                       Body := BodyBlob.Blob;
-                                       Send(FALSE);
-                                   END;
-                                    */
                 END;
 
                 IF "Adv. Paymt. Audit" = "Adv. Paymt. Audit"::Rejected THEN BEGIN
-
-                    /* CapexOpexLine.SETRANGE("Document Type", "Document Type");
-                    CapexOpexLine.SETRANGE("Document No.", "No.");
-                    CapexOpexLine.SETRANGE(Preferred, TRUE);
-                    IF CapexOpexLine.FINDFIRST THEN BEGIN
-                        CapexOpexLine.CALCFIELDS(Amount);
-                         VendAmt := CapexOpexLine.Amount;
-                         VendName := CapexOpexLine."Vendor Name";
-                         VendAddr := CapexOpexLine.Address;
-                         PurJus := CapexOpexLine.Description;
-                    END; */
 
                     UserSetup.GET(InitiatorN);
                     ToAddresses := UserSetup."E-Mail";
@@ -573,30 +471,6 @@ table 70008 "Procurement Header"
                     CreateEmailBody("Document Type", "No.", Text034, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                    /* WITH TempEmailItem DO BEGIN
-                        "Send to" := ToAddresses;
-                        "Send CC" := SenderAddress;
-                        "Send BCC" := BccAddresses;
-                        Subject := STRSUBSTNO(Text018, "Document Type", "No.");
-
-                        BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                        BodyStream.WRITETEXT(Text025 + Addressee + ',');
-                        BodyStream.WRITETEXT(CRLF + CRLF);
-                        BodyStream.WRITETEXT(STRSUBSTNO(Text034, "Document Type", "No.") + CRLF + CRLF +
-                          Text029 + FORMAT(VendName) + CRLF +
-                          Text030 + FORMAT(VendAddr) + CRLF +
-                          Text031 + FORMAT(VendAmt) + CRLF +
-                          Text057 + FORMAT(Advance) + CRLF +
-                          Text058 + FORMAT(Balance) + CRLF +
-                          Text055 + FORMAT(PurJus) + CRLF + CRLF +
-                          Text027 + CRLF + CRLF);
-                        BodyStream.WRITETEXT(SendersName);
-                        BodyStream.WRITETEXT(CRLF + CRLF);
-                        BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                        Body := BodyBlob.Blob;
-                        Send(FALSE);
-                    END;
-                     */
                 END;
 
                 IF "Adv. Paymt. Audit" = "Adv. Paymt. Audit"::Approved THEN BEGIN
@@ -660,16 +534,6 @@ table 70008 "Procurement Header"
 
                 IF "Service Delivery1" <> "Service Delivery1"::" " THEN BEGIN
 
-                    /* CapexOpexLine.SETRANGE("Document Type", "Document Type");
-                    CapexOpexLine.SETRANGE("Document No.", "No.");
-                    CapexOpexLine.SETRANGE(Preferred, TRUE);
-                    IF CapexOpexLine.FINDFIRST THEN BEGIN
-                        CapexOpexLine.CALCFIELDS(Amount);
-                        VendAmt := CapexOpexLine.Amount;
-                        VendName := CapexOpexLine."Vendor Name";
-                        VendAddr := CapexOpexLine.Address;
-                        PurJus := CapexOpexLine.Description;
-                    END; */
 
                     CreateEmailBody("Document Type", "No.", Text049, 'Team');
 
@@ -689,27 +553,7 @@ table 70008 "Procurement Header"
                     CreateEmailBody("Document Type", "No.", Text049, 'Team');
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                    /* WITH TempEmailItem DO BEGIN
-                        "Send to" := ToAddresses;
-                        "Send CC" := SenderAddress;
-                        "Send BCC" := BccAddresses;
-                        Subject := STRSUBSTNO(Text020, "Document Type", "No.");
 
-                        BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                        BodyStream.WRITETEXT(Text025 + 'OLO' + ',');
-                        BodyStream.WRITETEXT(CRLF + CRLF);
-                        BodyStream.WRITETEXT(STRSUBSTNO(Text049, "Document Type", "No.") + CRLF + CRLF +
-                          Text029 + FORMAT(VendName) + CRLF +
-                          Text030 + FORMAT(VendAddr) + CRLF +
-                          Text031 + FORMAT(VendAmt) + CRLF +
-                          Text055 + FORMAT(PurJus) + CRLF + CRLF +
-                          Text027 + CRLF + CRLF);
-                        BodyStream.WRITETEXT(SendersName);
-                        BodyStream.WRITETEXT(CRLF + CRLF);
-                        BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                        Body := BodyBlob.Blob;
-                        Send(FALSE);
-                    END; */
 
                 END;
             end;
@@ -1110,21 +954,6 @@ table 70008 "Procurement Header"
                     IF UserSetup5.GET(USERID) THEN
                         SenderEmail := UserSetup5."E-Mail";
 
-                    /*  CapexOpexLine.SETRANGE("Document Type", "Document Type");
-                     CapexOpexLine.SETRANGE("Document No.", "No.");
-                     CapexOpexLine.SETRANGE(Preferred, TRUE);
-                     IF CapexOpexLine.FINDFIRST THEN BEGIN
-                         CapexOpexLine.CALCFIELDS(Amount);
-                         VendAmt := CapexOpexLine.Amount;
-                         Advance := CapexOpexLine."Advance Payment";
-                         Balance := CapexOpexLine.Balance;
-                         VendName := CapexOpexLine."Vendor Name";
-                         VendAddr := CapexOpexLine.Address;
-                         PurJus := CapexOpexLine.Description;
-                     END; */
-
-
-
                     IF "Document Type" = "Document Type"::Opex THEN BEGIN
                         PurchSetup.GET;
 
@@ -1168,46 +997,9 @@ table 70008 "Procurement Header"
                     CreateEmailBody("Document Type", "No.", Text060, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                    /*   WITH TempEmailItem DO BEGIN //To GM or MD
-                          "Send to" := ToAddresses;
-                          "Send CC" := SenderEmail;
-                          "Send BCC" := BccAddresses;
-                          Subject := STRSUBSTNO(Text047, "Document Type", "No.");
-
-                          BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                          BodyStream.WRITETEXT(Text025 + Addressee + ',');
-                          BodyStream.WRITETEXT(CRLF + CRLF);
-                          BodyStream.WRITETEXT(STRSUBSTNO(Text060, "Document Type", "No.") + CRLF + CRLF +
-                            Text029 + FORMAT(VendName) + CRLF +
-                            Text030 + FORMAT(VendAddr) + CRLF +
-                            Text031 + FORMAT(VendAmt) + CRLF +
-                            Text057 + FORMAT(Advance) + CRLF +
-                            Text058 + FORMAT(Balance) + CRLF +
-                            Text055 + FORMAT(PurJus) + CRLF + CRLF +
-                            Text027 + CRLF + CRLF);
-                          BodyStream.WRITETEXT(SendersName);
-                          BodyStream.WRITETEXT(CRLF + CRLF);
-                          BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                          Body := BodyBlob.Blob;
-                          Send(FALSE);
-                      END; */
-
                 END;
 
                 IF "Bal. Paymt. Audit" = "Bal. Paymt. Audit"::"On-hold" THEN BEGIN
-
-                    /* CapexOpexLine.SETRANGE("Document Type", "Document Type");
-                    CapexOpexLine.SETRANGE("Document No.", "No.");
-                    CapexOpexLine.SETRANGE(Preferred, TRUE);
-                    IF CapexOpexLine.FINDFIRST THEN BEGIN
-                        CapexOpexLine.CALCFIELDS(Amount);
-                        VendAmt := CapexOpexLine.Amount;
-                        Advance := CapexOpexLine."Advance Payment";
-                        Balance := CapexOpexLine.Balance;
-                        VendName := CapexOpexLine."Vendor Name";
-                        VendAddr := CapexOpexLine.Address;
-                        PurJus := CapexOpexLine.Description;
-                    END; */
 
                     UserSetup.GET("User ID");
                     ToAddresses := UserSetup."E-Mail";
@@ -1228,45 +1020,9 @@ table 70008 "Procurement Header"
                     CreateEmailBody("Document Type", "No.", Text033, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                    /*    WITH TempEmailItem DO BEGIN
-                           "Send to" := ToAddresses;
-                           "Send CC" := SenderAddress;
-                           "Send BCC" := BccAddresses;
-                           Subject := STRSUBSTNO(Text017, "Document Type", "No.");
-
-                           BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                           BodyStream.WRITETEXT(Text025 + Addressee + ',');
-                           BodyStream.WRITETEXT(CRLF + CRLF);
-                           BodyStream.WRITETEXT(STRSUBSTNO(Text033, "Document Type", "No.") + CRLF + CRLF +
-                             Text029 + FORMAT(VendName) + CRLF +
-                             Text030 + FORMAT(VendAddr) + CRLF +
-                             Text031 + FORMAT(VendAmt) + CRLF +
-                             Text057 + FORMAT(Advance) + CRLF +
-                             Text058 + FORMAT(Balance) + CRLF +
-                             Text055 + FORMAT(PurJus) + CRLF + CRLF +
-                             Text027 + CRLF + CRLF);
-                           BodyStream.WRITETEXT(SendersName);
-                           BodyStream.WRITETEXT(CRLF + CRLF);
-                           BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                           Body := BodyBlob.Blob;
-                           Send(FALSE);
-                       END; */
-
                 END;
 
                 IF "Bal. Paymt. Audit" = "Bal. Paymt. Audit"::Rejected THEN BEGIN
-
-                    /*  CapexOpexLine.SETRANGE("Document Type", "Document Type");
-                     CapexOpexLine.SETRANGE("Document No.", "No.");
-                     CapexOpexLine.SETRANGE(Preferred, TRUE);
-                     IF CapexOpexLine.FINDFIRST THEN BEGIN
-                         CapexOpexLine.CALCFIELDS(Amount);
-                         VendAmt := CapexOpexLine.Amount;
-                         VendName := CapexOpexLine."Vendor Name";
-                         VendAddr := CapexOpexLine.Address;
-                         PurJus := CapexOpexLine.Description;
-                     END; */
-
 
                     UserSetup.GET("User ID");
                     ToAddresses := UserSetup."E-Mail";
@@ -1284,30 +1040,6 @@ table 70008 "Procurement Header"
                     Subject := STRSUBSTNO(Text018, "Document Type", "No.");
                     CreateEmailBody("Document Type", "No.", Text034, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
-
-                    /*  WITH TempEmailItem DO BEGIN
-                         "Send to" := ToAddresses;
-                         "Send CC" := SenderAddress;
-                         "Send BCC" := BccAddresses;
-                         Subject := STRSUBSTNO(Text018, "Document Type", "No.");
-
-                         BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                         BodyStream.WRITETEXT(Text025 + Addressee + ',');
-                         BodyStream.WRITETEXT(CRLF + CRLF);
-                         BodyStream.WRITETEXT(STRSUBSTNO(Text034, "Document Type", "No.") + CRLF + CRLF +
-                           Text029 + FORMAT(VendName) + CRLF +
-                           Text030 + FORMAT(VendAddr) + CRLF +
-                           Text031 + FORMAT(VendAmt) + CRLF +
-                           Text057 + FORMAT(Advance) + CRLF +
-                           Text058 + FORMAT(Balance) + CRLF +
-                           Text055 + FORMAT(PurJus) + CRLF + CRLF +
-                           Text027 + CRLF + CRLF);
-                         BodyStream.WRITETEXT(SendersName);
-                         BodyStream.WRITETEXT(CRLF + CRLF);
-                         BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                         Body := BodyBlob.Blob;
-                         Send(FALSE);
-                     END; */
 
                     Reject := TRUE;
                 END;
@@ -1335,19 +1067,6 @@ table 70008 "Procurement Header"
                     ERROR(Text040);
 
                 IF "Head of Department" = "Head of Department"::Approved THEN BEGIN
-
-                    /* CapexOpexLine.SETRANGE("Document Type", "Document Type");
-                    CapexOpexLine.SETRANGE("Document No.", "No.");
-                    CapexOpexLine.SETRANGE(Preferred, TRUE);
-                    IF CapexOpexLine.FINDFIRST THEN BEGIN
-                        CapexOpexLine.CALCFIELDS(Amount);
-                        VendAmt := CapexOpexLine.Amount;
-                        Advance := CapexOpexLine."Advance Payment";
-                        Balance := CapexOpexLine.Balance;
-                        VendName := CapexOpexLine."Vendor Name";
-                        VendAddr := CapexOpexLine.Address;
-                        PurJus := CapexOpexLine.Description;
-                    END; */
 
                     IF UserSetup2.GET(USERID) THEN
                         SenderEmail := UserSetup2."E-Mail";
@@ -1523,45 +1242,10 @@ table 70008 "Procurement Header"
                     CreateEmailBody("Document Type", "No.", Text033, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                    /*  WITH TempEmailItem DO BEGIN
-                         "Send to" := ToAddresses;
-                         "Send CC" := SenderAddress;
-                         "Send BCC" := BccAddresses;
-                         Subject := STRSUBSTNO(Text017, "Document Type", "No.");
-
-                         BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                         BodyStream.WRITETEXT(Text025 + Addressee);
-                         BodyStream.WRITETEXT(CRLF + CRLF);
-                         BodyStream.WRITETEXT(STRSUBSTNO(Text033, "Document Type", "No.") + CRLF + CRLF +
-                           Text029 + FORMAT(VendName) + CRLF +
-                           Text030 + FORMAT(VendAddr) + CRLF +
-                           Text031 + FORMAT(VendAmt) + CRLF +
-                           Text057 + FORMAT(Advance) + CRLF +
-                           Text058 + FORMAT(Balance) + CRLF +
-                           Text055 + FORMAT(PurJus) + CRLF + CRLF +
-                           Text027 + CRLF + CRLF);
-                         BodyStream.WRITETEXT(SendersName);
-                         BodyStream.WRITETEXT(CRLF + CRLF);
-                         BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                         Body := BodyBlob.Blob;
-                         Send(FALSE);
-                     END; */
 
                 END;
 
                 IF "Head of Audit" = "Head of Audit"::Rejected THEN BEGIN
-
-                    /* CapexOpexLine.SETRANGE("Document Type", "Document Type");
-                    CapexOpexLine.SETRANGE("Document No.", "No.");
-                    CapexOpexLine.SETRANGE(Preferred, TRUE);
-                    IF CapexOpexLine.FINDFIRST THEN BEGIN
-                        CapexOpexLine.CALCFIELDS(Amount);
-                        VendAmt := CapexOpexLine.Amount;
-                        VendName := CapexOpexLine."Vendor Name";
-                        VendAddr := CapexOpexLine.Address;
-                        PurJus := CapexOpexLine.Description;
-                    END; */
-
 
                     UserSetup.GET(InitiatorN);
                     ToAddresses := UserSetup."E-Mail";
@@ -1690,31 +1374,7 @@ table 70008 "Procurement Header"
                     Subject := STRSUBSTNO(Text018, "Document Type", "No.");
                     CreateEmailBody("Document Type", "No.", Text034, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
-
-                    /*  WITH TempEmailItem DO BEGIN
-                         "Send to" := ToAddresses;
-                         "Send CC" := CcAddresses + ';' + SenderAddress;
-                         "Send BCC" := BccAddresses;
-                         Subject := STRSUBSTNO(Text018, "Document Type", "No.");
-
-                         BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                         BodyStream.WRITETEXT(Text025 + UserSetup.Initials + ',');
-                         BodyStream.WRITETEXT(CRLF + CRLF);
-                         BodyStream.WRITETEXT(STRSUBSTNO(Text034, "Document Type", "No.") + CRLF + CRLF +
-                           Text029 + FORMAT(VendName) + CRLF +
-                           Text030 + FORMAT(VendAddr) + CRLF +
-                           Text031 + FORMAT(VendAmt) + CRLF +
-                           Text057 + FORMAT(Advance) + CRLF +
-                           Text058 + FORMAT(Balance) + CRLF +
-                           Text055 + FORMAT(PurJus) + CRLF + CRLF +
-                           Text027 + CRLF + CRLF);
-                         BodyStream.WRITETEXT(SendersName);
-                         BodyStream.WRITETEXT(CRLF + CRLF);
-                         BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                         Body := BodyBlob.Blob;
-                         Send(FALSE);
-                     END; */
-
+               
                     Reject := TRUE;
                 END;
             end;

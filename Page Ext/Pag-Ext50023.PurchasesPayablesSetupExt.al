@@ -12,6 +12,9 @@ pageextension 50023 "Purchases & Payables Setup Ext" extends "Purchases & Payabl
             {
                 ApplicationArea = All;
             }
+
+            
+            
         }
     }
 }
