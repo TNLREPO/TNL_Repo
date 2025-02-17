@@ -1158,13 +1158,9 @@ table 70008 "Procurement Header"
 
                 UserSetup4.GET(USERID);
                 IF (UserSetup4."User ID" <> 'ADEWUMI') THEN
-                    IF (UserSetup4."User ID" <> 'AGBESUA') THEN
-                        // IF (UserSetup4."User ID" <> 'OLAMIDE') THEN
-                        // IF (UserSetup4."User ID" <> 'BRANO') THEN
-                        ERROR(Text039);
+                    ERROR(Text039);
 
                 IF "Head of Audit" = "Head of Audit"::Approved THEN BEGIN
-
 
                     IF "Document Type" = "Document Type"::Opex THEN BEGIN
                         PurchSetup.GET;
@@ -1199,6 +1195,7 @@ table 70008 "Procurement Header"
                             Addressee := '0A0,'
                         END;
                     END;
+                    
                     UserSetup.GET(InitiatorN);
                     CcAddresses := UserSetup."E-Mail";
                     BccAddresses := '';
@@ -1374,7 +1371,7 @@ table 70008 "Procurement Header"
                     Subject := STRSUBSTNO(Text018, "Document Type", "No.");
                     CreateEmailBody("Document Type", "No.", Text034, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
-               
+
                     Reject := TRUE;
                 END;
             end;

@@ -48,6 +48,7 @@ page 70535 "Allocation Card"
 
         IF Rec."Total Allocated Quantity" <> 0 THEN
             Rec.VALIDATE("Total Allocated Quantity");
+            
     end;
 }
 

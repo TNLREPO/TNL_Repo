@@ -353,7 +353,7 @@ table 70009 "Leave Request3"
                 //HOD
                 IF ("Request Type" = "Request Type"::HOD) THEN
                     IF "1st Approval Status" = "1st Approval Status"::Approved THEN
-                        IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
+                        IF NOT CONFIRM('Are you sure you want to approve?', FALSE) THEN
                             "1st Approval Status" := LeaveRequest."1st Approval Status"::" "
                         ELSE BEGIN
                             UserSetup.GET("2nd Approval");
@@ -1393,8 +1393,6 @@ table 70009 "Leave Request3"
                 IF EmpRec.GET("Employee No.") THEN EmpGrpCode := EmpRec."Employee Group";
 
                 CheckTotalDuration(1);
-
-
 
             end;
         }

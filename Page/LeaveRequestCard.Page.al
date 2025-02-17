@@ -83,7 +83,7 @@ page 50603 "Leave Request Card"
                     trigger OnValidate()
                     begin
                         IF NOT (Rec."Leave Category" = 'MATERNITY') AND (Rec."Actual Duration" > 15) THEN
-                            ERROR('You cant request more than 15 days Annual Leave at once');
+                            ERROR('You cannot request more than 15 days Annual Leave at once!');
                     end;
                 }
                 field("Leave Category"; Rec."Leave Category")

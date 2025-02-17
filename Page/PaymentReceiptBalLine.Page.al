@@ -29,6 +29,10 @@ page 70012 "Payment/Receipt Bal. Line"
                 field("Branch Code"; Rec."Branch Code")
                 {
                 }
+                field("Dimension Set ID"; Rec."Dimension Set ID")
+                {
+
+                }
                 field("FA Posting Type"; Rec."FA Posting Type")
                 {
                     Visible = false;

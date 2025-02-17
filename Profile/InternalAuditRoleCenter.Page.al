@@ -411,7 +411,7 @@ page 70102 "Internal Audit Role Center"
             {
                 Caption = 'Posted Documents';
                 Image = FiledPosted;
-                
+
                 action("Posted Cash Receipts")
                 {
                     Caption = 'Posted Cash Receipts';
@@ -734,7 +734,7 @@ page 70102 "Internal Audit Role Center"
             {
                 Caption = 'Administration';
                 Image = FiledPosted;
-                               
+
                 action(ChangeModel)
                 {
                     Caption = 'Change Model';
@@ -779,6 +779,11 @@ page 70102 "Internal Audit Role Center"
                 {
                     Caption = 'Undeliver COF';
                     RunObject = report "Undeliver Customer Order";
+                }
+                action(ZeroPhysJnl)
+                {
+                    Caption = 'Zero Phys. Inventory Jnl.';
+                    RunObject = report "Phys. Valuation Zeroing";
                 }
 
 

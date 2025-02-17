@@ -336,6 +336,19 @@ table 50104 "Payment/Receipt Bal. Line."
                 END;
             end;
         }
+
+        field(480; "Dimension Set ID"; Integer)
+        {
+            Editable = false;
+            TableRelation = "Dimension Set Entry";
+
+            trigger OnValidate()
+            var
+                myInt: Integer;
+            begin
+                DimMgt.UpdateGlobalDimFromDimSetID("Dimension Set ID", "Department Code", "Branch Code");
+            end;
+        }
     }
 
     keys
@@ -369,6 +382,7 @@ table 50104 "Payment/Receipt Bal. Line."
         TEXT002: Label 'cannot be specified without %1';
         CustLedgEntry: Record 21;
         VendLedgEntry: Record 25;
+        DimMgt: Codeunit DimensionManagement;
 
 
     procedure NewLine()
@@ -413,6 +427,17 @@ table 50104 "Payment/Receipt Bal. Line."
         curbal := ("Cumm Balance" - xRec.Amount + Amount);
         IF ABS(curbal) > ABS(headerrec.Amount) THEN
             ERROR('Cummulative Balance will be greater Than the Amount above');
+    end;
+
+    procedure ValidateShortcutDimCode(FieldNumber: Integer; VAR ShortcutDimCode: Code[20])
+    var
+        OldDimSetID: Integer;
+    begin
+        OldDimSetID := "Dimension Set ID";
+        DimMgt.ValidateShortcutDimValues(FieldNumber, ShortcutDimCode, "Dimension Set ID");
+        IF "No." <> '' THEN
+            MODIFY;
+
     end;
 }
 

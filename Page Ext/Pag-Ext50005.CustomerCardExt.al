@@ -30,6 +30,11 @@ pageextension 50005 "Customer Card Ext" extends "Customer Card"
                 {
                     ApplicationArea = All;
                 }
+                field("Dealer Emails"; Rec."Dealer Emails")
+                {
+                    ApplicationArea = All;
+                    MultiLine = true;
+                }
             }
 
         }

@@ -1562,14 +1562,14 @@ page 60005 "Accountant RC"
                 action("BalancePaymentCapex")
                 {
                     ApplicationArea = CostAccounting;
-                    Caption = 'Awaiting Balance Payment';
+                    Caption = 'Balance Payment';
                     RunObject = Page "Balance Payment-Capex";
 
                 }
                 action("ClosedCapex")
                 {
                     ApplicationArea = CostAccounting;
-                    Caption = 'Awaiting Balance Payment';
+                    Caption = 'Closed Capex';
                     RunObject = Page "Closed Capex";
 
                 }

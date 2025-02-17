@@ -284,6 +284,8 @@ tableextension 50092 "Sales Invoice Header Ext." extends "Sales Invoice Header"
         RecipientAll: Text;
         EmailBody: Text[1024];
         SalesInvoiceHeader: Record "Sales Invoice Header";
+        SalesSetup: Record "Sales & Receivables Setup";
+        CCEmails: List of [Text];
 
 
     procedure SendToCustomer(var Rec: Record "Sales Invoice Header")
@@ -292,11 +294,14 @@ tableextension 50092 "Sales Invoice Header Ext." extends "Sales Invoice Header"
         Customer.get(Rec."Bill-to Customer No.");
         RecipientAll := Customer."E-Mail";
 
+        SalesSetup.Get();
+        CCEmails := SalesSetup."CC Emails".Split(';');
+
         SalesInvoiceHeader.Get(Rec."No.");
 
         Subject := StrSubstNo(TextApproval, SalesInvoiceHeader."No.");
         CreateEmailBody();
-        SendEmailAttachments(SalesInvoiceHeader, RecipientAll);
+        SendEmailAttachments(SalesInvoiceHeader, RecipientAll, CCEmails);
     end;
 
 
@@ -306,19 +311,20 @@ tableextension 50092 "Sales Invoice Header Ext." extends "Sales Invoice Header"
         EmailBody += '<br><br>';
         EmailBody += FORMAT(STRSUBSTNO(TextApproval, "Vehicle Order No."));
         EmailBody += '<br><br>';
-        EmailBody += 'Regards';
+        EmailBody += 'Regards,';
         EmailBody += '<br><br>';
         EmailBody += SenderName;
     end;
 
-    procedure SendEmailAttachments(var Rec: Record "Sales Invoice Header"; pSendto: Text[250])
+    procedure SendEmailAttachments(var Rec: Record "Sales Invoice Header"; ToRecipients: Text[250]; CCRecipients: list of [Text])
     var
         EmailAccount: Record "Email Account";
         EmailMessage: Codeunit "Email Message";
         BodyMessage: Text;
         AddBodyMessage: Text;
         Email: Codeunit Email;
-        Recipients: List of [Text];
+        //Recipients: List of [Text];
+
         DocAttachment: Record "Document Attachment";
 
         PickingList: Report "TNL Sales Picking List Cars3";
@@ -335,7 +341,6 @@ tableextension 50092 "Sales Invoice Header Ext." extends "Sales Invoice Header"
         PickingListName: Text[250];
         WayBillName: Text[250];
         SalesInvoiceName: Text[250];
-
 
     begin
         SalesInvHeader.Reset();
@@ -356,7 +361,7 @@ tableextension 50092 "Sales Invoice Header Ext." extends "Sales Invoice Header"
         EmailAccount.SetFilter(Connector, 'SMTP');
         IF EmailAccount.FindLast() then;
 
-        EmailMessage.Create(pSendto, Subject, EmailBody, true);
+        EmailMessage.Create(ToRecipients, Subject, EmailBody, true);
 
         TempBlob.CreateOutStream(OutS);
 
@@ -387,6 +392,8 @@ tableextension 50092 "Sales Invoice Header Ext." extends "Sales Invoice Header"
         SalesInvoice.SaveAs('', ReportFormat::Pdf, OutS);
         TempBlob.CreateInStream(InS);
         EmailMessage.AddAttachment(SalesInvoiceName, 'PDF', InS);
+
+        EmailMessage.SetRecipients(Enum::"Email Recipient Type"::Cc, CCRecipients);
 
         Email.OpenInEditorModally(EmailMessage, Enum::"Email Scenario"::Default);
 

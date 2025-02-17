@@ -175,12 +175,21 @@ table 50103 "Payment/Receipt."
         {
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = filter(1));
             CaptionClass = '1,2,1';
+            trigger OnValidate()
+            begin
+                ValidateShortcutDimCode(1, "Global Dimension 1 Code");
+            end;
 
         }
         field(11; "Global Dimension 2 Code"; Code[20])
         {
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = filter(2));
             CaptionClass = '1,2,2';
+
+            trigger OnValidate()
+            begin
+                ValidateShortcutDimCode(2, "Global Dimension 2 Code");
+            end;
 
         }
         field(12; Amount; Decimal)
@@ -363,10 +372,18 @@ table 50103 "Payment/Receipt."
         field(32; "Balance Department Code"; Code[20])
         {
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = filter(1));
+            trigger OnValidate()
+            begin
+                ValidateShortcutDimCode(1, "Balance Department Code");
+            end;
         }
         field(33; "Balance Branch Code"; Code[20])
         {
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = filter(2));
+            trigger OnValidate()
+            begin
+                ValidateShortcutDimCode(2, "Balance Branch Code");
+            end;
         }
         field(34; "Bank Name"; Text[50])
         {
@@ -624,11 +641,11 @@ table 50103 "Payment/Receipt."
         field(75; "Mail Body"; Text[250])
         {
         }
-        field(76; "User ID"; Code[20])
+        field(76; "User ID"; Code[30])
         {
             TableRelation = User;
         }
-        field(77; "Current pending Person"; Code[20])
+        field(77; "Current pending Person"; Code[30])
         {
             TableRelation = user;
         }
@@ -674,11 +691,11 @@ table 50103 "Payment/Receipt."
             Editable = false;
             FieldClass = FlowField;
         }
-        field(86; "Created By"; Code[20])
+        field(86; "Created By"; Code[30])
         {
             Editable = false;
         }
-        field(87; "Modified By"; Code[20])
+        field(87; "Modified By"; Code[30])
         {
             Editable = false;
         }
@@ -746,6 +763,23 @@ table 50103 "Payment/Receipt."
         }
         field(99; Reject; Boolean)
         {
+        }
+        field(480; "Dimension Set ID"; Integer)
+        {
+            Editable = false;
+            TableRelation = "Dimension Set Entry";
+
+            trigger OnLookup()
+            begin
+                Rec.ShowDocDim();
+            end;
+
+            trigger OnValidate()
+            var
+                myInt: Integer;
+            begin
+                DimMgt.UpdateGlobalDimFromDimSetID("Dimension Set ID", "Global Dimension 1 Code", "Global Dimension 2 Code");
+            end;
         }
         field(50000; "Payment Successful"; Boolean)
         {
@@ -897,6 +931,8 @@ table 50103 "Payment/Receipt."
         Text029: Label 'Vendors Name:';
         Text031: Label 'Vendors Amount:';
         PymtRcpt: Record "Payment/Receipt.";
+
+        DimMgt: Codeunit DimensionManagement;
 
 
     procedure InitRecord()
@@ -1151,6 +1187,7 @@ table 50103 "Payment/Receipt."
         GlJour.VALIDATE(GlJour."Applies-to Doc. No.", reqrec."Applies-to Doc. No.");
         GlJour.VALIDATE(GlJour."Shortcut Dimension 1 Code", reqrec."Global Dimension 1 Code");
         GlJour.VALIDATE(GlJour."Shortcut Dimension 2 Code", reqrec."Global Dimension 2 Code");
+        //GlJour.Validate("Dimension Set ID", "Dimension Set ID");
         //GlJour."Form M No.":= reqrec."Form M No.";
         IF GlJour."Account Type" <> GlJour."Account Type"::"Fixed Asset" THEN BEGIN
             GlJour."Depreciation Book Code" := '';
@@ -1207,6 +1244,7 @@ table 50103 "Payment/Receipt."
             IF NOT GlJour.INSERT THEN GlJour.MODIFY;
             GlJour.VALIDATE(GlJour."Shortcut Dimension 1 Code", reqrec."Global Dimension 1 Code");
             GlJour.VALIDATE(GlJour."Shortcut Dimension 2 Code", reqrec."Global Dimension 2 Code");
+            //GlJour.Validate("Dimension Set ID", "Dimension Set ID");
             GlJour.MODIFY(TRUE);
         END;
         // Generate the Second Leg for straight Transaction
@@ -1216,6 +1254,8 @@ table 50103 "Payment/Receipt."
             "GlJou 2"."Account Type" := reqrec."Balance Account Type";
             "GlJou 2".VALIDATE("GlJou 2"."Account No.", reqrec."Balance Account No.");
             "GlJou 2".Description := COPYSTR(reqrec."Transaction Description", 1, 50);
+            "GlJou 2".Validate("Dimension Set ID","Dimension Set ID");
+
             IF "GlJou 2"."Account Type" = "GlJou 2"."Account Type"::" " THEN BEGIN
                 "GlJou 2"."Gen. Prod. Posting Group" := '';
                 "GlJou 2"."Gen. Bus. Posting Group" := '';
@@ -1223,8 +1263,10 @@ table 50103 "Payment/Receipt."
                 "GlJou 2"."VAT Prod. Posting Group" := '';
                 "GlJou 2"."Gen. Posting Type" := "GlJou 2"."Gen. Posting Type"::" ";
             END;
-            "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 1 Code", reqrec."Balance Department Code");
-            "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 2 Code", reqrec."Balance Branch Code");
+           
+           "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 1 Code", reqrec."Balance Department Code");
+           "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 2 Code", reqrec."Balance Branch Code");
+
             "GlJou 2"."Bal. Account Type" := "GlJou 2"."Bal. Account Type"::" ";
             "GlJou 2".VALIDATE("GlJou 2".Amount, -reqrec."Amount (LCY)");
 
@@ -1502,6 +1544,7 @@ table 50103 "Payment/Receipt."
         GlJour."Loan Type" := reqrec."Loan Type";
         GlJour."Applies-to Doc. Type" := reqrec."Applies-to Doc. Type";
         GlJour.VALIDATE(GlJour."Applies-to Doc. No.", reqrec."Applies-to Doc. No.");
+
         //GlJour."Form M No.":= reqrec."Form M No.";
         IF GlJour."Account Type" <> GlJour."Account Type"::"Fixed Asset" THEN BEGIN
             GlJour."Depreciation Book Code" := '';
@@ -1680,6 +1723,42 @@ table 50103 "Payment/Receipt."
         IF GenJournalLine.FINDFIRST THEN
             GenJournalLine.DELETEALL;
     end;
+
+
+    procedure ValidateShortcutDimCode(FieldNumber: Integer; VAR ShortcutDimCode: Code[20])
+    var
+        OldDimSetID: Integer;
+    begin
+        OldDimSetID := "Dimension Set ID";
+        DimMgt.ValidateShortcutDimValues(FieldNumber, ShortcutDimCode, "Dimension Set ID");
+        IF "No." <> '' THEN
+            MODIFY;
+
+        IF OldDimSetID <> "Dimension Set ID" THEN
+            MODIFY;
+
+    end;
+
+    procedure ShowDocDim()
+    var
+        OldDimSetID: Integer;
+        IsHandled: Boolean;
+    begin
+        IsHandled := false;
+        if IsHandled then
+            exit;
+
+        OldDimSetID := "Dimension Set ID";
+        "Dimension Set ID" :=
+          DimMgt.EditDimensionSet(
+            Rec, "Dimension Set ID", StrSubstNo('%1 %2', '', "No."),
+            "Global Dimension 1 Code", "Global Dimension 2 Code");
+
+        if OldDimSetID <> "Dimension Set ID" then
+            Modify;
+    end;
+
+    
 
 }
 

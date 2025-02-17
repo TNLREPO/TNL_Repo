@@ -28,6 +28,10 @@ page 70082 "General Repair/Estimate Card"
                 field("Delivery Type"; Rec."Delivery Type")
                 {
                 }
+                field("COF Origin"; Rec."COF Origin")
+                {
+
+                }
             }
             group("Customer Details")
             {

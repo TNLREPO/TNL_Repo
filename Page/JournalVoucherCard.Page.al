@@ -98,6 +98,7 @@ page 70017 "Journal Voucher Card"
                 field("FA Posting Type"; Rec."FA Posting Type")
                 {
                 }
+
             }
             group("Balancing Account")
             {
@@ -131,6 +132,7 @@ page 70017 "Journal Voucher Card"
                         CurrPage.UPDATE;
                     end;
                 }
+
             }
             group("Other Details")
             {

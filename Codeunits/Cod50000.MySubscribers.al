@@ -195,7 +195,7 @@ codeunit 50000 MySubscribers
     end;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::ReportManagement, 'OnAfterSubstituteReport', '', true, true)]
-    local procedure ChangeFinancialReport(ReportId: Integer; var NewReportId: Integer)
+    procedure ChangeFinancialReport(ReportId: Integer; var NewReportId: Integer)
 
     begin
         if ReportId = Report::"Account Schedule" then
@@ -203,7 +203,7 @@ codeunit 50000 MySubscribers
     end;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::ReportManagement, 'OnAfterSubstituteReport', '', true, true)]
-    local procedure ChangeCustmerItemSalesReport(ReportId: Integer; var NewReportId: Integer)
+    procedure ChangeCustmerItemSalesReport(ReportId: Integer; var NewReportId: Integer)
 
     begin
         if ReportId = Report::"Customer/Item Sales" then
@@ -211,12 +211,29 @@ codeunit 50000 MySubscribers
     end;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::ReportManagement, 'OnAfterSubstituteReport', '', true, true)]
-    local procedure ChangeCustmerDetailTrialBal(ReportId: Integer; var NewReportId: Integer)
+    procedure ChangeCustmerDetailTrialBal(ReportId: Integer; var NewReportId: Integer)
 
     begin
         if ReportId = Report::"Customer - Detail Trial Bal." then
             NewReportId := Report::"Customer - Detail Trial Bal.2";
     end;
+
+    [EventSubscriber(ObjectType::Codeunit, codeunit::"TransferOrder-Post Shipment", 'OnAfterInsertTransShptHeader', '', false, false)]
+    procedure AddOnAfterInsertTransShptHeader(var TransferHeader: Record "Transfer Header"; var TransferShipmentHeader: Record "Transfer Shipment Header")
+
+    Begin
+        TransferShipmentHeader."COF No." := TransferHeader."COF No.";
+        TransferShipmentHeader.Modify();
+    End;
+
+
+    [EventSubscriber(ObjectType::Codeunit, codeunit::"TransferOrder-Post Receipt", 'OnAfterInsertTransRcptHeader', '', false, false)]
+    procedure AddOnAfterInsertTransRcptHeader(var TransRcptHeader: Record "Transfer Receipt Header"; var TransHeader: Record "Transfer Header")
+
+    Begin
+        TransRcptHeader."COF No." := TransHeader."COF No.";
+        TransRcptHeader.Modify();
+    End;
 
 }
 

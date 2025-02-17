@@ -1267,7 +1267,6 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
 
     Begin
 
-
         Rec.TESTFIELD("Shortcut Dimension 1 Code");
 
         UserSetup.get(UserId);
@@ -1354,7 +1353,8 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
             SalesLine.SETRANGE(Type, SalesLine.Type::Item);
             IF SalesLine.FINDFIRST THEN BEGIN
                 REPEAT
-                    IF (Rec."Shortcut Dimension 1 Code" = '09MARKET') AND (SalesLine."Line Discount Amount" <> 0) THEN
+                    //IF (Rec."Shortcut Dimension 1 Code" = '09MARKET') AND (SalesLine."Line Discount Amount" <> 0) THEN
+                    if (SalesLine."Gen. Prod. Posting Group" = 'CAR') AND (SalesLine."Line Discount Amount" <> 0) THEN
                         IF Rec.Approved = FALSE THEN
                             ERROR('This transaction needs to be approved before posting!')
                 UNTIL SalesLine.NEXT = 0;

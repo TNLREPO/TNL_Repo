@@ -11,15 +11,25 @@ table 50165 Test
             OptionCaption = ' ,Approved,On-hold,Rejected';
             OptionMembers = " ",Approved,"On-hold",Rejected;
             trigger OnValidate()
+
+            var
+                CCText: Text;
+                Separator: Text;
+
             begin
                 ToAddresses := 'joshua@toyotanigeria.com';
-                CcAddresses := 'albert@toyotanigeria.com' + ';' + 'onimisi@toyotanigeria.com';
                 BccAddresses := '';
                 PurchSetUp.Get();
 
+
+                CcAddresses.Add('albert@toyotanigeria.com');
+                CcAddresses.Add('onimisi@toyotanigeria.com');
+
+                //CcAddresses := PurchSetUp."CC Account Dept. Approvers".Split(';');
+
                 Subject := 'Test';
-                //CreateEmailBody('', '', , 'PAA');
-                SendEmail(ToAddresses, Subject, '', PurchSetUp."CC Account Dept. Approvers", '');
+
+                SendEmail(ToAddresses, Subject, '', CcAddresses, '');
 
             end;
 
@@ -39,9 +49,11 @@ table 50165 Test
     var
         PurchSetUp: Record "Purchases & Payables Setup";
         ToAddresses: Text;
-        CcAddresses: Text;
+        CcAddresses: List of [Text];
+        CCAddress: Text;
         BccAddresses: Text;
         Subject: Text[70];
+
 
     procedure CreateEmailBody(DocType: Option; DocNo: Code[20]; BodyMsg: Text; RecipientInitials: Text);
 
@@ -53,7 +65,7 @@ table 50165 Test
 
     end;
 
-    procedure SendEmail(ToRecipients: Text; Subject: Text; Body: Text; CCRecipients: Text; BCCRecipients: Text)
+    procedure SendEmail(ToRecipients: Text; Subject: Text; Body: Text; CCRecipients: list of [Text]; BCCRecipients: Text)
     var
 
         Email: Codeunit Email;
@@ -62,10 +74,29 @@ table 50165 Test
     begin
 
         EmailMessage.Create(ToRecipients, Subject, '', true);
-        EmailMessage.AddRecipient(Enum::"Email Recipient Type"::Cc, CCRecipients);
+        
+        EmailMessage.SetRecipients(Enum::"Email Recipient Type"::Cc, CCRecipients);
+        
         EmailMessage.AddRecipient(Enum::"Email Recipient Type"::Bcc, BCCRecipients);
         Email.OpenInEditorModally(EmailMessage, Enum::"Email Scenario"::Default)
 
     end;
+
+    local procedure SplitStringusingCommas()
+    var
+        SourceText: Text;
+        Delimiter: Text;
+        Substrings: List of [Text];
+        Substring: Text;
+    begin
+        SourceText := 'apple,banana,cherry';
+        Delimiter := ',';
+
+        Substrings := SourceText.Split(Delimiter);
+
+        foreach Substring in Substrings do
+            Message(Substring);
+    end;
+
 }
 
