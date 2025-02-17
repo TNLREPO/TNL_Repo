@@ -578,7 +578,8 @@ table 70009 "Leave Request3"
                         "2nd Approval Time" := CURRENTDATETIME;
                         UserSetup.GET(Requester);
                         ToAddresses := UserSetup."E-Mail";
-                        CCName := 'lawal@toyotanigeria.com;' + 'ibidapo-obe@toyotanigeria.com';
+                        CCName := 'lawal@toyotanigeria.com';
+                        BccAddresses := 'ibidapo-obe@toyotanigeria.com';
                         subject := STRSUBSTNO(text008);
                         Addressee := UserSetup.Initials;
                         UserSetup2.GET(USERID);
@@ -587,7 +588,7 @@ table 70009 "Leave Request3"
 
                         Subject := STRSUBSTNO(text001, "Request No.");
                         CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                        SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
+                        SendEmail(ToAddresses, subject, EmailBody, CCName, BccAddresses);
 
 
                         Approved2 := TRUE;
@@ -600,7 +601,8 @@ table 70009 "Leave Request3"
                         "2nd Approval Time" := CURRENTDATETIME;
                         UserSetup.GET(Requester);
                         ToAddresses := UserSetup."E-Mail";
-                        CCName := 'lawal@toyotanigeria.com;' + 'ibidapo-obe@toyotanigeria.com';
+                        CCName := 'lawal@toyotanigeria.com';
+                        BccAddresses := 'ibidapo-obe@toyotanigeria.com';
                         subject := STRSUBSTNO(text008);
                         Addressee := UserSetup.Initials;
                         UserSetup2.GET(USERID);
@@ -609,7 +611,7 @@ table 70009 "Leave Request3"
 
                         subject := STRSUBSTNO(text008);
                         CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                        SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
+                        SendEmail(ToAddresses, subject, EmailBody, CCName, BccAddresses);
 
 
                         Approved2 := TRUE;

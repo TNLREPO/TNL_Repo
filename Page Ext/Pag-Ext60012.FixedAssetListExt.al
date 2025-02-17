@@ -11,10 +11,12 @@ pageextension 60012 "Fixed Asset List Ext" extends "Fixed Asset List"
             field("Registration No."; Rec."Registration No.")
             {
                 ApplicationArea = All;
+                Visible = true;
             }
             field("New Registration No."; Rec."New Registration No.")
             {
                 ApplicationArea = All;
+                Visible = true;
             }
         }
     }

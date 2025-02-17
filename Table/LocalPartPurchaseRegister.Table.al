@@ -180,7 +180,10 @@ table 70018 "Local Part Purchase Register"
                         VendName := "Supplier's Name";
                         VendAddr := "Supplier's Address";
                         Purpose := "Justification for purchase";
-                        ToAddresses := 'aderonke@toyotanigeria.com' + ';' + 'brano@toyotanigeria.com' + ';' + 'grace@toyotanigeria.com';
+                        ToAddresses := 'aderonke@toyotanigeria.com';
+                        CcAddresses := 'brano@toyotanigeria.com';
+                        BccAddresses := 'grace@toyotanigeria.com';
+
                         UserSetup4.GET(USERID);
                         SendersName := UserSetup4.Initials;
                         SenderAddress := UserSetup4."E-Mail";
@@ -190,13 +193,13 @@ table 70018 "Local Part Purchase Register"
 
                         Subject := STRSUBSTNO(Text006, "LPP No.");
                         CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text022, Addressee);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, BccAddresses);
 
                         ComplianceCheck := TRUE;
                     END;
 
                 IF "Head of Department" = "Head of Department"::"On-hold" THEN
-                    IF NOT CONFIRM('Are you sure you want to place ON hold?', FALSE) THEN
+                    IF NOT CONFIRM('Are you sure you want to place on hold?', FALSE) THEN
                         "Head of Department" := LPPRec."Head of Department"::" "
                     ELSE BEGIN
                         CALCFIELDS("Total Purchase Value");
@@ -267,7 +270,7 @@ table 70018 "Local Part Purchase Register"
             OptionMembers = " ",Approved,"On-hold",Rejected;
             trigger OnValidate()
             begin
-                 IF Send = FALSE THEN
+                IF Send = FALSE THEN
                     ERROR('The request has not been send for audit approval!');
 
                 TESTFIELD("Head of Department", "Head of Department"::Approved);
@@ -303,7 +306,7 @@ table 70018 "Local Part Purchase Register"
                             Addressee := 'RS,';
                             HODVisible := TRUE;
                             "Procurement Approval" := TRUE;
-                        END; 
+                        END;
 
                         IF (VendAmt >= 500000) THEN BEGIN
                             ToAddresses := 'dynamics@toyotanigeria.com';
@@ -312,12 +315,12 @@ table 70018 "Local Part Purchase Register"
                             "MD Approval" := TRUE;
                         END;
 
-                     IF (VendAmt > 100000) AND (VendAmt < 500000) THEN BEGIN
+                        IF (VendAmt > 100000) AND (VendAmt < 500000) THEN BEGIN
                             ToAddresses := 'bunmi@toyotanigeria.com';
                             Addressee := 'OAO,';
                             GMVisible := TRUE;
                             "GM Approval" := TRUE;
-                        END; 
+                        END;
 
                         Subject := STRSUBSTNO(Text001, "LPP No.");
                         CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text003, Addressee);
@@ -373,34 +376,6 @@ table 70018 "Local Part Purchase Register"
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text024, Addressee);
                             SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                            /* WITH TempEmailItem DO BEGIN
-                                  "Send to" := ToAddresses;
-                                  "Send CC" := SenderAddress + ';' + CcAddresses;
-                                  "Send BCC" := '';
-                                  Subject := STRSUBSTNO(Text025, "LPP No.");
-
-                                  CRLF := '';
-                                  CRLF[1] := 13;
-                                  CRLF[2] := 10;
-
-                                  // BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                  BodyStream.WRITETEXT(Text002 + ' ' + Addressee + ',');
-                                  BodyStream.WRITETEXT(CRLF + CRLF);
-                                  BodyStream.WRITETEXT(STRSUBSTNO(Text024, "LPP No.") + CRLF + CRLF +
-                                  STRSUBSTNO(Text029) + CRLF + CRLF +
-                                  Text014 + FORMAT(VendName) + CRLF + CRLF +
-                                  Text015 + FORMAT(VendAddr) + CRLF +
-                                  Text020 + FORMAT(Purpose) + CRLF + CRLF +
-                                  Text016 + FORMAT(VendAmt) + CRLF + CRLF +
-                                  CRLF + CRLF +
-                                  Text004 + CRLF);
-                                  BodyStream.WRITETEXT(SendersName);
-                                  BodyStream.WRITETEXT(CRLF + CRLF);
-                                  BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                  // Body := BodyBlob.Blob;
-                                  // Send(FALSE);
-                              END; */
-
                             "Genarate LPO" := TRUE;
                         END;
 
@@ -429,28 +404,6 @@ table 70018 "Local Part Purchase Register"
                             Subject := STRSUBSTNO(Text006, "LPP No.");
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text011, Addressee);
                             SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
-
-                            /* WITH TempEmailItem DO BEGIN
-                                "Send to" := ToAddresses;
-                                "Send CC" := SenderAddress;
-                                "Send BCC" := '';
-                                Subject := STRSUBSTNO(Text006, "LPP No.");
-
-                                // BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                BodyStream.WRITETEXT(Text002 + ' ' + Addressee + ',');
-                                BodyStream.WRITETEXT(CRLF + CRLF);
-                                BodyStream.WRITETEXT(STRSUBSTNO(Text011, "LPP No.") + CRLF + CRLF +
-                                Text014 + FORMAT(VendName) + CRLF +
-                                Text015 + FORMAT(VendAddr) + CRLF +
-                                Text020 + FORMAT(Purpose) + CRLF +
-                                Text016 + FORMAT(VendAmt) + CRLF +
-                                Text004 + CRLF);
-                                BodyStream.WRITETEXT(SendersName);
-                                BodyStream.WRITETEXT(CRLF + CRLF);
-                                BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                // Body := BodyBlob.Blob;
-                                // Send(FALSE);
-                            END; */
 
                         END;
 
@@ -480,28 +433,6 @@ table 70018 "Local Part Purchase Register"
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text017, Addressee);
                             SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                            /*  WITH TempEmailItem DO BEGIN
-                                 "Send to" := ToAddresses;
-                                 "Send CC" := SenderAddress;
-                                 "Send BCC" := '';
-                                 Subject := STRSUBSTNO(Text006, "LPP No.");
-
-                                 // BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                 BodyStream.WRITETEXT(Text002 + ' ' + Addressee + ',');
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT(STRSUBSTNO(Text017, "LPP No.") + CRLF + CRLF +
-                                 Text014 + FORMAT(VendName) + CRLF +
-                                 Text015 + FORMAT(VendAddr) + CRLF +
-                                 Text020 + FORMAT(Purpose) + CRLF +
-                                 Text016 + FORMAT(VendAmt) + CRLF +
-                                 Text004 + CRLF);
-                                 BodyStream.WRITETEXT(SendersName);
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                 // Body := BodyBlob.Blob;
-                                 // Send(FALSE);
-                             END; */
-
                             Rejected1 := TRUE;
                         END;
                 END;
@@ -509,7 +440,7 @@ table 70018 "Local Part Purchase Register"
 
                 IF "Order Type" = "Order Type"::"Isolo Store" THEN BEGIN
                     IF "Managing Director" = "Managing Director"::Approved THEN
-                        IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
+                        IF NOT CONFIRM('Are you sure you want to approve?', FALSE) THEN
                             "Managing Director" := LPPRec."Managing Director"::" "
                         ELSE BEGIN
                             UserSetup.GET("Sent By");
@@ -522,8 +453,8 @@ table 70018 "Local Part Purchase Register"
 
                             UserSetup2.GET("Send To");
                             ToAddresses := UserSetup2."E-Mail";
-                            CcAddresses := 'albert@toyotanigeria.com;adewumi@toyotanigeria.com;agbesua@toyotanigeria.com';
-                            BccAddresses := '';
+                            CcAddresses := 'albert@toyotanigeria.com';
+                            BccAddresses := 'adewumi@toyotanigeria.com';
                             Subject := STRSUBSTNO(Text025, "LPP No.");
 
                             UserSetup4.GET(USERID);
@@ -534,37 +465,13 @@ table 70018 "Local Part Purchase Register"
 
                             Subject := STRSUBSTNO(Text025, "LPP No.");
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text024, Addressee);
-                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
-
-                            /*  WITH TempEmailItem DO BEGIN
-                                 "Send to" := ToAddresses;
-                                 "Send CC" := SenderAddress + ';' + CcAddresses;
-                                 "Send BCC" := '';
-                                 Subject := STRSUBSTNO(Text025, "LPP No.");
-
-                                 // BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                 BodyStream.WRITETEXT(Text002 + ' ' + Addressee);
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT(STRSUBSTNO(Text024, "LPP No.") + CRLF + CRLF +
-                                 STRSUBSTNO(Text029) + CRLF + CRLF +
-                                 Text014 + FORMAT(VendName) + CRLF + CRLF +
-                                 Text015 + FORMAT(VendAddr) + CRLF +
-                                 Text020 + FORMAT(Purpose) + CRLF + CRLF +
-                                 Text016 + FORMAT(VendAmt) + CRLF + CRLF +
-                                 CRLF + CRLF +
-                                 Text004 + CRLF);
-                                 BodyStream.WRITETEXT(SendersName);
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                 // Body := BodyBlob.Blob;
-                                 // Send(FALSE);
-                             END; */
+                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, BccAddresses);
 
                             "Genarate LPO" := TRUE;
                         END;
 
                     IF "Managing Director" = "Managing Director"::"On-hold" THEN
-                        IF NOT CONFIRM('Are you sure you want to place ON HOLD', FALSE) THEN
+                        IF NOT CONFIRM('Are you sure you want to place on hold?', FALSE) THEN
                             "Managing Director" := LPPRec."Managing Director"::" "
                         ELSE BEGIN
                             CALCFIELDS("Total Purchase Value");
@@ -589,32 +496,10 @@ table 70018 "Local Part Purchase Register"
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text011, Addressee);
                             SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                            /* WITH TempEmailItem DO BEGIN
-                                "Send to" := ToAddresses;
-                                "Send CC" := SenderAddress;
-                                "Send BCC" := '';
-                                Subject := STRSUBSTNO(Text006, "LPP No.");
-
-                                // BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                BodyStream.WRITETEXT(Text002 + ' ' + Addressee + ',');
-                                BodyStream.WRITETEXT(CRLF + CRLF);
-                                BodyStream.WRITETEXT(STRSUBSTNO(Text011, "LPP No.") + CRLF + CRLF +
-                                Text014 + FORMAT(VendName) + CRLF +
-                                Text015 + FORMAT(VendAddr) + CRLF +
-                                Text020 + FORMAT(Purpose) + CRLF +
-                                Text016 + FORMAT(VendAmt) + CRLF +
-                                Text004 + CRLF);
-                                BodyStream.WRITETEXT(SendersName);
-                                BodyStream.WRITETEXT(CRLF + CRLF);
-                                BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                // Body := BodyBlob.Blob;
-                                // Send(FALSE);
-                            END; */
-
                         END;
 
                     IF "Managing Director" = "Managing Director"::Rejected THEN
-                        IF NOT CONFIRM('Are you sure you want to Reject', FALSE) THEN
+                        IF NOT CONFIRM('Are you sure you want to Reject?', FALSE) THEN
                             "Managing Director" := LPPRec."Managing Director"::" "
                         ELSE BEGIN
                             CALCFIELDS("Total Purchase Value");
@@ -639,28 +524,6 @@ table 70018 "Local Part Purchase Register"
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text017, Addressee);
                             SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                            /* WITH TempEmailItem DO BEGIN
-                                "Send to" := ToAddresses;
-                                "Send CC" := SenderAddress;
-                                "Send BCC" := '';
-                                Subject := STRSUBSTNO(Text006, "LPP No.");
-
-                                // BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                BodyStream.WRITETEXT(Text002 + ' ' + Addressee + ',');
-                                BodyStream.WRITETEXT(CRLF + CRLF);
-                                BodyStream.WRITETEXT(STRSUBSTNO(Text017, "LPP No.") + CRLF + CRLF +
-                                Text014 + FORMAT(VendName) + CRLF +
-                                Text015 + FORMAT(VendAddr) + CRLF +
-                                Text020 + FORMAT(Purpose) + CRLF +
-                                Text016 + FORMAT(VendAmt) + CRLF +
-                                Text004 + CRLF);
-                                BodyStream.WRITETEXT(SendersName);
-                                BodyStream.WRITETEXT(CRLF + CRLF);
-                                BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                // Body := BodyBlob.Blob;
-                                // Send(FALSE);
-                            END; */
-
                             Rejected1 := TRUE;
                         END;
                 END;
@@ -682,7 +545,7 @@ table 70018 "Local Part Purchase Register"
                 IF "Order Type" <> "Order Type"::"Isolo Store" THEN BEGIN
                     TESTFIELD("Head of Audit", "Head of Audit"::Approved);
                     IF "General Manager" = "General Manager"::Approved THEN
-                        IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
+                        IF NOT CONFIRM('Are you sure you want to approve?', FALSE) THEN
                             "General Manager" := LPPRec."General Manager"::" "
                         ELSE BEGIN
                             UserSetup.GET("Sent By");
@@ -694,8 +557,8 @@ table 70018 "Local Part Purchase Register"
 
                             UserSetup2.GET("Send To");
                             ToAddresses := UserSetup2."E-Mail";
-                            CcAddresses := 'albert@toyotanigeria.com;adewumi@toyotanigeria.com;agbesua@toyotanigeria.com';
-                            BccAddresses := '';
+                            CcAddresses := 'albert@toyotanigeria.com';
+                            BccAddresses := 'adewumi@toyotanigeria.com';
 
                             UserSetup4.GET(USERID);
                             SendersName := UserSetup4.Initials;
@@ -706,31 +569,7 @@ table 70018 "Local Part Purchase Register"
 
                             Subject := STRSUBSTNO(Text025, "LPP No.");
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text024, Addressee);
-                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
-
-                            /* WITH TempEmailItem DO BEGIN
-                                "Send to" := ToAddresses;
-                                "Send CC" := SenderAddress + ';' + CcAddresses;
-                                "Send BCC" := '';
-                                Subject := STRSUBSTNO(Text025, "LPP No.");
-
-                                // BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                BodyStream.WRITETEXT(Text002 + ' ' + Addressee);
-                                BodyStream.WRITETEXT(CRLF + CRLF);
-                                BodyStream.WRITETEXT(STRSUBSTNO(Text024, "LPP No.") + CRLF + CRLF +
-                                STRSUBSTNO(Text029) + CRLF + CRLF +
-                                Text014 + FORMAT(VendName) + CRLF + CRLF +
-                                Text015 + FORMAT(VendAddr) + CRLF +
-                                Text020 + FORMAT(Purpose) + CRLF + CRLF +
-                                Text016 + FORMAT(VendAmt) + CRLF + CRLF +
-                                CRLF + CRLF +
-                                Text004 + CRLF);
-                                BodyStream.WRITETEXT(SendersName);
-                                BodyStream.WRITETEXT(CRLF + CRLF);
-                                BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                // Body := BodyBlob.Blob;
-                                // Send(FALSE);
-                            END; */
+                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, BccAddresses);
 
                             "Genarate LPO" := TRUE;
                         END;
@@ -761,28 +600,6 @@ table 70018 "Local Part Purchase Register"
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text011, Addressee);
                             SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                            /* WITH TempEmailItem DO BEGIN
-                               "Send to" := ToAddresses;
-                               "Send CC" := SenderAddress;
-                               "Send BCC" := '';
-                               Subject := STRSUBSTNO(Text006, "LPP No.");
-
-                               // BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                               BodyStream.WRITETEXT(Text002 + ' ' + Addressee + ',');
-                               BodyStream.WRITETEXT(CRLF + CRLF);
-                               BodyStream.WRITETEXT(STRSUBSTNO(Text011, "LPP No.") + CRLF + CRLF +
-                               Text014 + FORMAT(VendName) + CRLF +
-                               Text015 + FORMAT(VendAddr) + CRLF +
-                               Text020 + FORMAT(Purpose) + CRLF +
-                               Text016 + FORMAT(VendAmt) + CRLF +
-                               Text004 + CRLF);
-                               BodyStream.WRITETEXT(SendersName);
-                               BodyStream.WRITETEXT(CRLF + CRLF);
-                               BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                               // Body := BodyBlob.Blob;
-                               // Send(FALSE);
-                           END; */
-
                         END;
 
                     IF "General Manager" = "General Manager"::Rejected THEN
@@ -811,28 +628,6 @@ table 70018 "Local Part Purchase Register"
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text017, Addressee);
                             SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                            /* WITH TempEmailItem DO BEGIN
-                               "Send to" := ToAddresses;
-                               "Send CC" := SenderAddress;
-                               "Send BCC" := '';
-                               Subject := STRSUBSTNO(Text006, "LPP No.");
-
-                               // BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                               BodyStream.WRITETEXT(Text002 + ' ' + Addressee + ',');
-                               BodyStream.WRITETEXT(CRLF + CRLF);
-                               BodyStream.WRITETEXT(STRSUBSTNO(Text017, "LPP No.") + CRLF + CRLF +
-                               Text014 + FORMAT(VendName) + CRLF +
-                               Text015 + FORMAT(VendAddr) + CRLF +
-                               Text020 + FORMAT(Purpose) + CRLF +
-                               Text016 + FORMAT(VendAmt) + CRLF +
-                               Text004 + CRLF);
-                               BodyStream.WRITETEXT(SendersName);
-                               BodyStream.WRITETEXT(CRLF + CRLF);
-                               BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                               // Body := BodyBlob.Blob;
-                               // Send(FALSE);
-                           END; */
-
                             Rejected1 := TRUE;
                         END;
                 END;
@@ -851,8 +646,8 @@ table 70018 "Local Part Purchase Register"
 
                             UserSetup2.GET("Send To");
                             ToAddresses := UserSetup2."E-Mail";
-                            CcAddresses := 'albert@toyotanigeria.com;adewumi@toyotanigeria.com';
-                            BccAddresses := '';
+                            CcAddresses := 'albert@toyotanigeria.com';
+                            BccAddresses := 'adewumi@toyotanigeria.com';
 
                             UserSetup4.GET(USERID);
                             SendersName := UserSetup4.Initials;
@@ -863,37 +658,13 @@ table 70018 "Local Part Purchase Register"
 
                             Subject := STRSUBSTNO(Text025, "LPP No.");
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text024, Addressee);
-                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
-
-                            /*  WITH TempEmailItem DO BEGIN
-                                 "Send to" := ToAddresses;
-                                 "Send CC" := SenderAddress + ';' + CcAddresses;
-                                 "Send BCC" := '';
-                                 Subject := STRSUBSTNO(Text025, "LPP No.");
-
-                                 // BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                 BodyStream.WRITETEXT(Text002 + ' ' + Addressee);
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT(STRSUBSTNO(Text024, "LPP No.") + CRLF + CRLF +
-                                 STRSUBSTNO(Text029) + CRLF + CRLF +
-                                 Text014 + FORMAT(VendName) + CRLF + CRLF +
-                                 Text015 + FORMAT(VendAddr) + CRLF +
-                                 Text020 + FORMAT(Purpose) + CRLF + CRLF +
-                                 Text016 + FORMAT(VendAmt) + CRLF + CRLF +
-                                 CRLF + CRLF +
-                                 Text004 + CRLF);
-                                 BodyStream.WRITETEXT(SendersName);
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                 // Body := BodyBlob.Blob;
-                                 // Send(FALSE);
-                             END; */
+                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, BccAddresses);
 
                             "Genarate LPO" := TRUE;
                         END;
 
                     IF "General Manager" = "General Manager"::"On-hold" THEN
-                        IF NOT CONFIRM('Are you sure you want to place ON HOLD', FALSE) THEN
+                        IF NOT CONFIRM('Are you sure you want to place on hold?', FALSE) THEN
                             "General Manager" := LPPRec."General Manager"::" "
                         ELSE BEGIN
                             CALCFIELDS("Total Purchase Value");
@@ -918,32 +689,10 @@ table 70018 "Local Part Purchase Register"
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text011, Addressee);
                             SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                            /* WITH TempEmailItem DO BEGIN
-                               "Send to" := ToAddresses;
-                               "Send CC" := SenderAddress;
-                               "Send BCC" := '';
-                               Subject := STRSUBSTNO(Text006, "LPP No.");
-
-                               // BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                               BodyStream.WRITETEXT(Text002 + ' ' + Addressee + ',');
-                               BodyStream.WRITETEXT(CRLF + CRLF);
-                               BodyStream.WRITETEXT(STRSUBSTNO(Text011, "LPP No.") + CRLF + CRLF +
-                               Text014 + FORMAT(VendName) + CRLF +
-                               Text015 + FORMAT(VendAddr) + CRLF +
-                               Text020 + FORMAT(Purpose) + CRLF +
-                               Text016 + FORMAT(VendAmt) + CRLF +
-                               Text004 + CRLF);
-                               BodyStream.WRITETEXT(SendersName);
-                               BodyStream.WRITETEXT(CRLF + CRLF);
-                               BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                               // Body := BodyBlob.Blob;
-                               // Send(FALSE);
-                           END; */
-
                         END;
 
                     IF "General Manager" = "General Manager"::Rejected THEN
-                        IF NOT CONFIRM('Are you sure you want to Reject', FALSE) THEN
+                        IF NOT CONFIRM('Are you sure you want to Reject?', FALSE) THEN
                             "General Manager" := LPPRec."General Manager"::" "
                         ELSE BEGIN
                             CALCFIELDS("Total Purchase Value");
@@ -967,28 +716,6 @@ table 70018 "Local Part Purchase Register"
                             Subject := STRSUBSTNO(Text006, "LPP No.");
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text017, Addressee);
                             SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
-
-                            /* WITH TempEmailItem DO BEGIN
-                                "Send to" := ToAddresses;
-                                "Send CC" := SenderAddress;
-                                "Send BCC" := '';
-                                Subject := STRSUBSTNO(Text006, "LPP No.");
-
-                                // BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                BodyStream.WRITETEXT(Text002 + ' ' + Addressee + ',');
-                                BodyStream.WRITETEXT(CRLF + CRLF);
-                                BodyStream.WRITETEXT(STRSUBSTNO(Text017, "LPP No.") + CRLF + CRLF +
-                                Text014 + FORMAT(VendName) + CRLF +
-                                Text015 + FORMAT(VendAddr) + CRLF +
-                                Text020 + FORMAT(Purpose) + CRLF +
-                                Text016 + FORMAT(VendAmt) + CRLF +
-                                Text004 + CRLF);
-                                BodyStream.WRITETEXT(SendersName);
-                                BodyStream.WRITETEXT(CRLF + CRLF);
-                                BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                // Body := BodyBlob.Blob;
-                                // Send(FALSE);
-                            END; */
 
                             Rejected1 := TRUE;
                         END;
@@ -1042,7 +769,7 @@ table 70018 "Local Part Purchase Register"
                         END;
 
                     IF "HOD's Part Procurement Appr." = "HOD's Part Procurement Appr."::"On-hold" THEN
-                        IF NOT CONFIRM('Are you sure you want to place ON HOLD', FALSE) THEN
+                        IF NOT CONFIRM('Are you sure you want to place on hold?', FALSE) THEN
                             "HOD's Part Procurement Appr." := LPPRec."HOD's Part Procurement Appr."::" "
                         ELSE BEGIN
                             CALCFIELDS("Total Purchase Value");
@@ -1070,7 +797,7 @@ table 70018 "Local Part Purchase Register"
                         END;
 
                     IF "HOD's Part Procurement Appr." = "HOD's Part Procurement Appr."::Rejected THEN
-                        IF NOT CONFIRM('Are you sure you want to Reject', FALSE) THEN
+                        IF NOT CONFIRM('Are you sure you want to reject?', FALSE) THEN
                             "HOD's Part Procurement Appr." := LPPRec."HOD's Part Procurement Appr."::" "
                         ELSE BEGIN
                             CALCFIELDS("Total Purchase Value");
@@ -1095,28 +822,6 @@ table 70018 "Local Part Purchase Register"
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text017, Addressee);
                             SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                            /* WITH TempEmailItem DO BEGIN
-                                "Send to" := ToAddresses;
-                                "Send CC" := SenderAddress;
-                                "Send BCC" := '';
-                                Subject := STRSUBSTNO(Text006, "LPP No.");
-
-                                // BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                BodyStream.WRITETEXT(Text002 + ' ' + Addressee + ',');
-                                BodyStream.WRITETEXT(CRLF + CRLF);
-                                BodyStream.WRITETEXT(STRSUBSTNO(Text017, "LPP No.") + CRLF + CRLF +
-                                Text014 + FORMAT(VendName) + CRLF +
-                                Text015 + FORMAT(VendAddr) + CRLF +
-                                Text020 + FORMAT(Purpose) + CRLF +
-                                Text016 + FORMAT(VendAmt) + CRLF +
-                                Text004 + CRLF);
-                                BodyStream.WRITETEXT(SendersName);
-                                BodyStream.WRITETEXT(CRLF + CRLF);
-                                BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                // Body := BodyBlob.Blob;
-                                // Send(FALSE);
-                            END; */
-
                             Rejected1 := TRUE;
                         END;
                 END;
@@ -1124,7 +829,6 @@ table 70018 "Local Part Purchase Register"
 
                 IF "Order Type" = "Order Type"::"Isolo Store" THEN BEGIN
                     TESTFIELD("Send To", 'ISUEKEBHO');
-                    //TESTFIELD("Send To",'UZONWANNE');
                     TESTFIELD("Compliance check", "Compliance check"::Satisfactory);
 
                     IF "HOD's Part Procurement Appr." = "HOD's Part Procurement Appr."::Approved THEN
@@ -1153,35 +857,11 @@ table 70018 "Local Part Purchase Register"
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text012, Addressee);
                             SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                            /* WITH TempEmailItem DO BEGIN
-                                "Send to" := ToAddresses;
-                                "Send CC" := SenderAddress;
-                                "Send BCC" := '';
-                                Subject := STRSUBSTNO(Text019, "LPP No.");
-
-                                // BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                BodyStream.WRITETEXT(Text002 + ' ' + Addressee);
-                                BodyStream.WRITETEXT(CRLF + CRLF);
-                                BodyStream.WRITETEXT(STRSUBSTNO(Text012, "LPP No.") + CRLF + CRLF +
-                                STRSUBSTNO(Text028) + CRLF + CRLF +
-                                Text014 + FORMAT(VendName) + CRLF + CRLF +
-                                Text015 + FORMAT(VendAddr) + CRLF +
-                                Text020 + FORMAT(Purpose) + CRLF + CRLF +
-                                Text016 + FORMAT(VendAmt) + CRLF + CRLF +
-                                CRLF + CRLF +
-                                Text004 + CRLF);
-                                BodyStream.WRITETEXT(SendersName);
-                                BodyStream.WRITETEXT(CRLF + CRLF);
-                                BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                // Body := BodyBlob.Blob;
-                                // Send(FALSE);
-                            END; */
-
                             Float := TRUE;
                         END;
 
                     IF "HOD's Part Procurement Appr." = "HOD's Part Procurement Appr."::"On-hold" THEN
-                        IF NOT CONFIRM('Are you sure you want to place ON HOLD', FALSE) THEN
+                        IF NOT CONFIRM('Are you sure you want to place on hold?', FALSE) THEN
                             "HOD's Part Procurement Appr." := LPPRec."HOD's Part Procurement Appr."::" "
                         ELSE BEGIN
                             CALCFIELDS("Total Purchase Value");
@@ -1206,32 +886,10 @@ table 70018 "Local Part Purchase Register"
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text011, Addressee);
                             SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                            /*  WITH TempEmailItem DO BEGIN
-                                 "Send to" := ToAddresses;
-                                 "Send CC" := SenderAddress;
-                                 "Send BCC" := '';
-                                 Subject := STRSUBSTNO(Text006, "LPP No.");
-
-                                 // BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                 BodyStream.WRITETEXT(Text002 + ' ' + Addressee + ',');
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT(STRSUBSTNO(Text011, "LPP No.") + CRLF + CRLF +
-                                 Text014 + FORMAT(VendName) + CRLF +
-                                 Text015 + FORMAT(VendAddr) + CRLF +
-                                 Text020 + FORMAT(Purpose) + CRLF +
-                                 Text016 + FORMAT(VendAmt) + CRLF +
-                                 Text004 + CRLF);
-                                 BodyStream.WRITETEXT(SendersName);
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                 // Body := BodyBlob.Blob;
-                                 // Send(FALSE);
-                             END; */
-
                         END;
 
                     IF "HOD's Part Procurement Appr." = "HOD's Part Procurement Appr."::Rejected THEN
-                        IF NOT CONFIRM('Are you sure you want to Reject', FALSE) THEN
+                        IF NOT CONFIRM('Are you sure you want to reject?', FALSE) THEN
                             "HOD's Part Procurement Appr." := LPPRec."HOD's Part Procurement Appr."::" "
                         ELSE BEGIN
                             CALCFIELDS("Total Purchase Value");
@@ -1256,27 +914,6 @@ table 70018 "Local Part Purchase Register"
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text017, Addressee);
                             SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                            /* WITH TempEmailItem DO BEGIN
-                                "Send to" := ToAddresses;
-                                "Send CC" := SenderAddress;
-                                "Send BCC" := '';
-                                Subject := STRSUBSTNO(Text006, "LPP No.");
-
-                                // BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                BodyStream.WRITETEXT(Text002 + ' ' + Addressee + ',');
-                                BodyStream.WRITETEXT(CRLF + CRLF);
-                                BodyStream.WRITETEXT(STRSUBSTNO(Text017, "LPP No.") + CRLF + CRLF +
-                                Text014 + FORMAT(VendName) + CRLF +
-                                Text015 + FORMAT(VendAddr) + CRLF +
-                                Text020 + FORMAT(Purpose) + CRLF +
-                                Text016 + FORMAT(VendAmt) + CRLF +
-                                Text004 + CRLF);
-                                BodyStream.WRITETEXT(SendersName);
-                                BodyStream.WRITETEXT(CRLF + CRLF);
-                                BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                // Body := BodyBlob.Blob;
-                                // Send(FALSE);
-                            END; */
                             Rejected1 := TRUE;
                         END;
                 END;
@@ -1328,36 +965,12 @@ table 70018 "Local Part Purchase Register"
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text021, Addressee);
                             SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                            /* WITH TempEmailItem DO BEGIN
-                                "Send to" := ToAddresses;
-                                "Send CC" := SenderAddress + ';' + CcAddresses;
-                                "Send BCC" := '';
-                                Subject := STRSUBSTNO(Text001, "LPP No.");
-
-                                // BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                BodyStream.WRITETEXT(Text002 + 'STA,');
-                                BodyStream.WRITETEXT(CRLF + CRLF);
-                                BodyStream.WRITETEXT(STRSUBSTNO(Text021, "LPP No.") + CRLF + CRLF +
-                                STRSUBSTNO(Text030) + CRLF + CRLF +
-                                Text014 + FORMAT(VendName) + CRLF + CRLF +
-                                Text015 + FORMAT(VendAddr) + CRLF +
-                                Text020 + FORMAT(Purpose) + CRLF + CRLF +
-                                Text016 + FORMAT(VendAmt) + CRLF + CRLF +
-                                CRLF + CRLF +
-                                Text004 + CRLF);
-                                BodyStream.WRITETEXT(SendersName);
-                                BodyStream.WRITETEXT(CRLF + CRLF);
-                                BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                // Body := BodyBlob.Blob;
-                                // Send(FALSE);
-                            END; */
-
                             Float := TRUE;
                             HoDAuditApproval := TRUE;
                         END;
 
                     IF "Compliance check" = "Compliance check"::"Not Satisfactory" THEN
-                        IF NOT CONFIRM('Are you sure you want to select NOT SATISFACTORY', FALSE) THEN
+                        IF NOT CONFIRM('Are you sure you want to select not satisfactory?', FALSE) THEN
                             "Compliance check" := LPPRec."Compliance check"::" "
                         ELSE BEGIN
                             CALCFIELDS("Total Purchase Value");
@@ -1381,30 +994,6 @@ table 70018 "Local Part Purchase Register"
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text011, Addressee);
                             SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                            /*     WITH TempEmailItem DO BEGIN
-                                    "Send to" := ToAddresses;
-                                    "Send CC" := SenderAddress;
-                                    "Send BCC" := '';
-                                    Subject := STRSUBSTNO(Text006, "LPP No.");
-
-                                    // BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                    BodyStream.WRITETEXT(Text002 + Addressee + ',');
-                                    BodyStream.WRITETEXT(CRLF + CRLF);
-                                    BodyStream.WRITETEXT(STRSUBSTNO(Text011, "LPP No.") + CRLF + CRLF +
-                                    STRSUBSTNO(Text030) + CRLF + CRLF +
-                                    Text014 + FORMAT(VendName) + CRLF + CRLF +
-                                    Text015 + FORMAT(VendAddr) + CRLF +
-                                    Text020 + FORMAT(Purpose) + CRLF + CRLF +
-                                    Text016 + FORMAT(VendAmt) + CRLF + CRLF +
-                                    CRLF + CRLF +
-                                    Text004 + CRLF);
-                                    BodyStream.WRITETEXT(SendersName);
-                                    BodyStream.WRITETEXT(CRLF + CRLF);
-                                    BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                    // Body := BodyBlob.Blob;
-                                    // Send(FALSE);
-                                END; */
-
                             Rejected1 := TRUE;
                         END;
                 END;
@@ -1412,7 +1001,7 @@ table 70018 "Local Part Purchase Register"
                 IF "Order Type" = "Order Type"::"Isolo Store" THEN BEGIN
 
                     IF "Compliance check" = "Compliance check"::Satisfactory THEN
-                        IF NOT CONFIRM('Are you sure you this is SATISFACTORY', FALSE) THEN
+                        IF NOT CONFIRM('Are you sure you this is satisfactory?', FALSE) THEN
                             "Compliance check" := LPPRec."Compliance check"::" "
                         ELSE BEGIN
                             CALCFIELDS("Total Purchase Value");
@@ -1452,13 +1041,13 @@ table 70018 "Local Part Purchase Register"
                             Subject := STRSUBSTNO(Text001, "LPP No.");
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text021, Addressee);
                             SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
-                           
+
 
                             HoDAuditApproval := TRUE;
                         END;
 
                     IF "Compliance check" = "Compliance check"::"Not Satisfactory" THEN
-                        IF NOT CONFIRM('Are you sure you want to select NOT SATISFACTORY', FALSE) THEN
+                        IF NOT CONFIRM('Are you sure you want to select not satisfactory?', FALSE) THEN
                             "Compliance check" := LPPRec."Compliance check"::" "
                         ELSE BEGIN
                             CALCFIELDS("Total Purchase Value");
@@ -1482,31 +1071,6 @@ table 70018 "Local Part Purchase Register"
                             Subject := STRSUBSTNO(Text006, "LPP No.");
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text011, Addressee);
                             SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
-
-
-                            /*  WITH TempEmailItem DO BEGIN
-                                 "Send to" := ToAddresses;
-                                 "Send CC" := SenderAddress;
-                                 "Send BCC" := '';
-                                 Subject := STRSUBSTNO(Text006, "LPP No.");
-
-                                 // BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                 BodyStream.WRITETEXT(Text002 + Addressee + ',');
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT(STRSUBSTNO(Text011, "LPP No.") + CRLF + CRLF +
-                                 STRSUBSTNO(Text030) + CRLF + CRLF +
-                                 Text014 + FORMAT(VendName) + CRLF + CRLF +
-                                 Text015 + FORMAT(VendAddr) + CRLF +
-                                 Text020 + FORMAT(Purpose) + CRLF + CRLF +
-                                 Text016 + FORMAT(VendAmt) + CRLF + CRLF +
-                                 CRLF + CRLF +
-                                 Text004 + CRLF);
-                                 BodyStream.WRITETEXT(SendersName);
-                                 BodyStream.WRITETEXT(CRLF + CRLF);
-                                 BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                 // Body := BodyBlob.Blob;
-                                 // Send(FALSE);
-                             END; */
 
                             Rejected1 := TRUE;
                         END;

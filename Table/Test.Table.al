@@ -21,10 +21,8 @@ table 50165 Test
                 BccAddresses := '';
                 PurchSetUp.Get();
 
-
-                CcAddresses.Add('albert@toyotanigeria.com');
-                CcAddresses.Add('onimisi@toyotanigeria.com');
-
+                CcAddresses.Add('joshua@toyotanigeria.com');
+                CcAddresses.Add('brano@toyotanigeria.com');
                 //CcAddresses := PurchSetUp."CC Account Dept. Approvers".Split(';');
 
                 Subject := 'Test';
@@ -74,9 +72,9 @@ table 50165 Test
     begin
 
         EmailMessage.Create(ToRecipients, Subject, '', true);
-        
+
         EmailMessage.SetRecipients(Enum::"Email Recipient Type"::Cc, CCRecipients);
-        
+
         EmailMessage.AddRecipient(Enum::"Email Recipient Type"::Bcc, BCCRecipients);
         Email.OpenInEditorModally(EmailMessage, Enum::"Email Scenario"::Default)
 

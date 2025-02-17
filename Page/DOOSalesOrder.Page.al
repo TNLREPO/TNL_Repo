@@ -1992,6 +1992,11 @@ page 70522 "DOO Sales Order"
 
                     trigger OnAction()
                     begin
+
+                        Rec.Testfield("Logistics Apprv Status", Rec."Logistics Apprv Status"::Approved);
+                        Rec.Testfield("Finance Apprv Status", Rec."Finance Apprv Status"::Approved);
+                        Rec.Testfield("Marketing Apprv Status", Rec."Marketing Apprv Status"::Approved);
+
                         PostSalesOrder(CODEUNIT::"Sales-Post (Yes/No)", Enum::"Navigate After Posting"::"Posted Document");
                     end;
                 }
@@ -2006,6 +2011,11 @@ page 70522 "DOO Sales Order"
 
                     trigger OnAction()
                     begin
+
+                        Rec.Testfield("Logistics Apprv Status", Rec."Logistics Apprv Status"::Approved);
+                        Rec.Testfield("Finance Apprv Status", Rec."Finance Apprv Status"::Approved);
+                        Rec.Testfield("Marketing Apprv Status", Rec."Marketing Apprv Status"::Approved);
+
                         PostSalesOrder(CODEUNIT::"Sales-Post (Yes/No)", Enum::"Navigate After Posting"::"New Document");
                     end;
                 }
@@ -2019,6 +2029,11 @@ page 70522 "DOO Sales Order"
 
                     trigger OnAction()
                     begin
+
+                        Rec.Testfield("Logistics Apprv Status", Rec."Logistics Apprv Status"::Approved);
+                        Rec.Testfield("Finance Apprv Status", Rec."Finance Apprv Status"::Approved);
+                        Rec.Testfield("Marketing Apprv Status", Rec."Marketing Apprv Status"::Approved);
+
                         PostSalesOrder(CODEUNIT::"Sales-Post and Send", Enum::"Navigate After Posting"::"Do Nothing");
                     end;
                 }
@@ -2224,7 +2239,7 @@ page 70522 "DOO Sales Order"
                     trigger OnAction()
                     begin
 
-                        SalesHeader.SETRANGE(SalesHeader."No.", Rec."No.");
+                        SalesHeader.SETRANGE("No.", Rec."No.");
                         IF Rec.FindFirst() THEN
                             REPORT.RUNMODAL(50117, TRUE, TRUE, SalesHeader);
                     end;
@@ -2238,7 +2253,7 @@ page 70522 "DOO Sales Order"
 
                     trigger OnAction()
                     begin
-                        SalesHeader.SETRANGE(SalesHeader."No.", Rec."No.");
+                        SalesHeader.SETRANGE("No.", Rec."No.");
                         IF Rec.FindFirst() THEN
                             REPORT.RUNMODAL(50438, TRUE, TRUE, SalesHeader);
                     end;
@@ -2248,13 +2263,10 @@ page 70522 "DOO Sales Order"
                     ApplicationArea = All;
                     Caption = 'Manual Invoice';
                     Image = Print;
-
-
-
                     trigger OnAction()
                     begin
                         ERROR('Contact the Administrator');
-                        SalesHeader.SETRANGE(SalesHeader."No.", Rec."No.");
+                        SalesHeader.SETRANGE("No.", Rec."No.");
                         IF Rec.FindFirst() THEN
                             REPORT.RUNMODAL(50439, TRUE, TRUE, SalesHeader);
                     end;

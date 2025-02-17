@@ -2,6 +2,7 @@ page 80038 "Maintenance Reminder Card"
 {
     PageType = Card;
     SourceTable = "Service AppointmentsX";
+    ApplicationArea = All;
 
     layout
     {

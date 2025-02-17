@@ -4,6 +4,7 @@ page 80039 "Maintenance Reminder Today"
     PageType = List;
     SourceTable = "Service AppointmentsX";
     SourceTableView = WHERE(Maintenance = CONST(true));
+    ApplicationArea = All;
 
     layout
     {
