@@ -94,6 +94,14 @@ page 50026 "Kodawari External"
                 RunObject = Page "My payslip";
                 ToolTip = '';
             }
+            action(MaintenanceReminder)
+            {
+                ApplicationArea = All;
+                Caption = 'Maintenance Reminder Today';
+                Image = Item;
+                RunObject = Page "Maintenance Reminder Today";
+                ToolTip = 'View or edit detailed information for maintenance reminders.';
+            }
             action(ServiceItem)
             {
                 ApplicationArea = All;

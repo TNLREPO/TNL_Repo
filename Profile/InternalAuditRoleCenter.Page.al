@@ -740,6 +740,12 @@ page 70102 "Internal Audit Role Center"
                     Caption = 'Change Model';
                     RunObject = xmlport "Change Model";
                 }
+                action(ChangeColour)
+                {
+                    Caption = 'Change Colour';
+                    RunObject = xmlport "Modify Item Ledger Entry";
+                }
+
                 action(SkipOpexQuote)
                 {
                     Caption = 'Skip Opex Quotes';

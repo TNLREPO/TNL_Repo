@@ -69,11 +69,11 @@ tableextension 50037 "Sales & Receivables Setup Ext" extends "Sales & Receivable
         {
             DataClassification = ToBeClassified;
         }
-        field(50019; "CC Emails"; Text[250])
+        field(50019; "CC Emails"; Text[500])
         {
             DataClassification = ToBeClassified;
         }
-        
-        
+
+
     }
 }

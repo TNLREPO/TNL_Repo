@@ -23,10 +23,10 @@ xmlport 50000 "Modify Item Ledger Entry"
                 {
 
                 }
-                textelement(EngineNo)
-                {
+                /*  textelement(EngineNo)
+                 {
 
-                }
+                 } */
                 textelement(ExtColorCode)
                 {
 
@@ -35,9 +35,6 @@ xmlport 50000 "Modify Item Ledger Entry"
                 {
 
                 }
-                
-                
-               
                 
                 textelement(KeyNo)
                 {
@@ -56,7 +53,7 @@ xmlport 50000 "Modify Item Ledger Entry"
 
                     if ItemLedgEntry.get(EntryNo) then begin
                         //ItemLedgEntry."Serial No." := SerialNo;
-                        ItemLedgEntry."Engine No." := EngineNo;
+                        //ItemLedgEntry."Engine No." := EngineNo;
                         ItemLedgEntry."Exterior Colour Code" := ExtColorCode;
                         ItemLedgEntry."Exterior Colour Name" := ExtColorName;
                         //ItemLedgEntry."Key No." := KeyNo;

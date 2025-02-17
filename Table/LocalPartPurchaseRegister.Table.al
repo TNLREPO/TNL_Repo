@@ -736,7 +736,7 @@ table 70018 "Local Part Purchase Register"
                         END;
 
                     IF "General Manager" = "General Manager"::"On-hold" THEN
-                        IF NOT CONFIRM('Are you sure you want to place ON HOLD', FALSE) THEN
+                        IF NOT CONFIRM('Are you sure you want to place on hold?', FALSE) THEN
                             "General Manager" := LPPRec."General Manager"::" "
                         ELSE BEGIN
                             CALCFIELDS("Total Purchase Value");
@@ -839,7 +839,7 @@ table 70018 "Local Part Purchase Register"
 
                 IF "Order Type" = "Order Type"::"Isolo Store" THEN BEGIN
                     IF "General Manager" = "General Manager"::Approved THEN
-                        IF NOT CONFIRM('Are you sure you want to APPROVE', FALSE) THEN
+                        IF NOT CONFIRM('Are you sure you want to approve?', FALSE) THEN
                             "General Manager" := LPPRec."General Manager"::" "
                         ELSE BEGIN
                             UserSetup.GET("Sent By");

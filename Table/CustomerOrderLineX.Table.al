@@ -152,26 +152,11 @@ table 70036 "Customer Order LineX"
         }
         field(14; "Location Code"; Code[20])
         {
-            TableRelation = IF (Type = FILTER(Cost)) Location.Code WHERE(Code = FILTER('120ISO|113LEK'))
-            ELSE IF (Type = FILTER(Item)) Location.Code WHERE(Code = FILTER('150ISOLO|131PWISOLO|118LKS'));
-
+            TableRelation = Location.Code;
             trigger OnValidate()
             begin
                 VALIDATE("No.");
 
-                //IF Type = Type::Cost THEN
-                //  TESTFIELD("Location Code",'120ISO');
-
-                //IF Type = Type::Item THEN
-                //ItemRec.GET("No.");
-                // // IF ItemRec."Item Category Code" = 'PART'  THEN
-                //   TESTFIELD("Location Code",'150ISOLO') OR ("Location Code",'131PWISOLO');
-
-
-                //IF Type = Type::Item THEN
-                //ItemRec.GET("No.");
-                // // IF ItemRec."Item Category Code" = 'BODY'  THEN
-                //    //TESTFIELD("Location Code",'131PWISOLO');
             end;
         }
         field(15; "Variant Code"; Code[20])
