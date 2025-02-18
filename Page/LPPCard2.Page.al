@@ -80,10 +80,12 @@ page 70205 "LPP Card2"
                         }
                         field("Name HOD"; Rec."Name HOD")
                         {
+                            Caption = 'Name';
                             Editable = false;
                         }
                         field(TimeDate2; Rec.TimeDate2)
                         {
+                            Caption = 'Time';
                             Editable = false;
                         }
                     }
@@ -101,6 +103,7 @@ page 70205 "LPP Card2"
                         field(TimeDate3; Rec.TimeDate3)
                         {
                             Editable = false;
+                            Caption = 'Time';
                         }
                     }
                     group(Control04)
@@ -113,12 +116,11 @@ page 70205 "LPP Card2"
                         }
                         field("Name Head of Audit"; Rec."Name Head of Audit")
                         {
+                            Caption = 'Name';
                         }
                         field(TimeDate4; Rec.TimeDate4)
                         {
-                        }
-                        group(Control05)
-                        {
+                            Caption = 'Time';
                         }
                     }
                 }
@@ -135,9 +137,11 @@ page 70205 "LPP Card2"
                     }
                     field("HOD's Part  Appr. Name"; Rec."HOD's Part  Appr. Name")
                     {
+                        Caption = 'Name';
                     }
                     field(TimeDate5; Rec.TimeDate5)
                     {
+                        Caption = 'Time';
                     }
                 }
             }
@@ -152,9 +156,11 @@ page 70205 "LPP Card2"
                     }
                     field("Name GM"; Rec."Name GM")
                     {
+                        Caption = 'Name';
                     }
                     field(TimeDate6; Rec.TimeDate6)
                     {
+                        Caption = 'Time';
                     }
                 }
             }
@@ -164,18 +170,18 @@ page 70205 "LPP Card2"
                 group(Control08)
                 {
                     Editable = MDEdit;
+                    ShowCaption = false;
                     field("Managing Director"; rec."Managing Director")
                     {
                     }
                     field("Name MD"; Rec."Name MD")
                     {
+                        Caption = 'Name';
                     }
                     field(TimeDate7; Rec.TimeDate7)
                     {
+                        Caption = 'Time';
                     }
-                }
-                group(Control09)
-                {
                 }
             }
         }

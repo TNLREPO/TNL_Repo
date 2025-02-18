@@ -11,7 +11,7 @@ page 70199 "MD Procurement Approval"
                             Rejected = CONST(false),
                             "Compliance check" = CONST(Satisfactory),
                             "Head of Audit" = CONST(Approved),
-                            "Total Purchase Value" = FILTER('>499,999.99'));
+                            "Total Purchase Value" = FILTER(> 499999));
 
     layout
     {
@@ -21,6 +21,10 @@ page 70199 "MD Procurement Approval"
             {
                 field("LPP No."; Rec."LPP No.")
                 {
+                }
+                field(Date; Rec.Date)
+                {
+
                 }
                 field("Requester Name"; Rec."Requester Name")
                 {

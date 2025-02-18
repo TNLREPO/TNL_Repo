@@ -145,10 +145,10 @@ table 70015 "Procument Cue"
         }
         field(16; "Capex Approval- MD"; Integer)
         {
-            CalcFormula = Count("Procurement Header" WHERE("Capex Type" = FILTER('Fixed Asset'),
+            CalcFormula = Count("Procurement Header" WHERE("Document Type" = const(Capex),
                                                             "Head of Audit" = CONST(Approved),
                                                             "General Manager" = CONST(" "),
-                                                            "Managing Director" = FILTER(" " | "On-hold"),
+                                                            "Managing Director" = FILTER(<> Approved),
                                                             Reject = CONST(false),
                                                             "Document Type" = CONST(Capex),
                                                             "Proposed Purchase Amount" = FILTER(> 100000)));
@@ -277,7 +277,7 @@ table 70015 "Procument Cue"
                                                                       Rejected = CONST(false),
                                                                       "Compliance check" = CONST(Satisfactory),
                                                                       "Head of Audit" = CONST(Approved),
-                                                                      "Total Purchase Value" = FILTER(> 499999.99)));
+                                                                      "Total Purchase Value" = FILTER(> 499999)));
             FieldClass = FlowField;
         }
         field(29; "Local Part Purch. Isolo"; Integer)
@@ -288,7 +288,7 @@ table 70015 "Procument Cue"
                                                                       "Genarate LPO" = CONST(false),
                                                                       Rejected = CONST(false),
                                                                       "Compliance check" = CONST(Satisfactory),
-                                                                      "Total Purchase Value" = FILTER(> 499999.99),
+                                                                      "Total Purchase Value" = FILTER(> 499999),
                                                                       "Order Type" = FILTER("Isolo Store")));
             FieldClass = FlowField;
         }

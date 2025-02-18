@@ -9,7 +9,7 @@ page 70157 "Managing Dir. Appr.-Capex"
                             "General Manager" = CONST(" "),
                             "Managing Director" = FILTER(<> Approved),
                             Reject = CONST(false),
-                            "Proposed Purchase Amount" = FILTER('>100,000'));
+                            "Proposed Purchase Amount" = FILTER(> 100000));
 
     layout
     {

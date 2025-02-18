@@ -180,6 +180,7 @@ table 70018 "Local Part Purchase Register"
                         VendName := "Supplier's Name";
                         VendAddr := "Supplier's Address";
                         Purpose := "Justification for purchase";
+
                         ToAddresses := 'aderonke@toyotanigeria.com';
                         CcAddresses := 'brano@toyotanigeria.com';
                         BccAddresses := 'grace@toyotanigeria.com';
@@ -207,9 +208,11 @@ table 70018 "Local Part Purchase Register"
                         VendName := "Supplier's Name";
                         VendAddr := "Supplier's Address";
                         Purpose := "Justification for purchase";
+
                         UserSetup.GET("Sent By");
                         ToAddresses := UserSetup."E-Mail";
                         Addressee := UserSetup.Initials;
+
                         CcAddresses := '';
                         BccAddresses := '';
 
@@ -352,16 +355,18 @@ table 70018 "Local Part Purchase Register"
                         IF NOT CONFIRM('Are you sure you want to approve?', FALSE) THEN
                             "Managing Director" := LPPRec."Managing Director"::" "
                         ELSE BEGIN
-                            UserSetup.GET("Sent By");
+                            UserSetup.GET("Requester Code");
+                            Addressee := UserSetup.Initials;
+                            ToAddresses := UserSetup."E-Mail";
+
                             CALCFIELDS("Total Purchase Value");
                             VendAmt := "Total Purchase Value";
                             VendName := "Supplier's Name";
                             VendAddr := "Supplier's Address";
                             Purpose := "Justification for purchase";
-                            Addressee := UserSetup.Initials;
+
 
                             UserSetup2.GET("Send To");
-                            ToAddresses := UserSetup."E-Mail";
                             CcAddresses := UserSetup2."E-Mail";
                             BccAddresses := '';
                             Subject := STRSUBSTNO(Text025, "LPP No.");
@@ -446,13 +451,15 @@ table 70018 "Local Part Purchase Register"
                             UserSetup.GET("Sent By");
                             CALCFIELDS("Total Purchase Value");
                             VendAmt := "Total Purchase Value";
-                            Addressee := UserSetup.Initials;
+
                             VendName := "Supplier's Name";
                             VendAddr := "Supplier's Address";
                             Purpose := "Justification for purchase";
 
                             UserSetup2.GET("Send To");
+                            Addressee := UserSetup2.Initials;
                             ToAddresses := UserSetup2."E-Mail";
+
                             CcAddresses := 'albert@toyotanigeria.com';
                             BccAddresses := 'adewumi@toyotanigeria.com';
                             Subject := STRSUBSTNO(Text025, "LPP No.");
@@ -483,6 +490,7 @@ table 70018 "Local Part Purchase Register"
                             UserSetup.GET("Sent By");
                             ToAddresses := UserSetup."E-Mail";
                             Addressee := UserSetup.Initials;
+
                             CcAddresses := '';
                             BccAddresses := '';
 
@@ -511,6 +519,7 @@ table 70018 "Local Part Purchase Register"
                             UserSetup.GET("Sent By");
                             ToAddresses := UserSetup."E-Mail";
                             Addressee := UserSetup.Initials;
+
                             CcAddresses := '';
                             BccAddresses := '';
 
@@ -1317,6 +1326,8 @@ table 70018 "Local Part Purchase Register"
     procedure CreateEmailBody(Name: Text; Addr: Text; Value: Decimal; Descr: Text; BodyMsg: Text; RecipientInitials: Text);
 
     begin
+
+        UserSetup.Get(USERID);
 
         EmailBody := Format(StrSubstNo(Text002, Addressee));
         EmailBody += '<br><br>';

@@ -10,7 +10,7 @@ page 70217 "MD Proc Apprv Isolo"
                             "Genarate LPO" = CONST(false),
                             Rejected = CONST(false),
                             "Compliance check" = CONST(Satisfactory),
-                            "Total Purchase Value" = FILTER('>499,999.99'),
+                            "Total Purchase Value" = FILTER(> 499999),
                             "Order Type" = FILTER('Isolo Store'));
 
     layout
@@ -21,6 +21,10 @@ page 70217 "MD Proc Apprv Isolo"
             {
                 field("LPP No."; Rec."LPP No.")
                 {
+                }
+                field(Date; Rec.Date)
+                {
+
                 }
                 field("Requester Name"; Rec."Requester Name")
                 {
