@@ -48,7 +48,7 @@ table 50165 Test
         PurchSetUp: Record "Purchases & Payables Setup";
         ToAddresses: Text;
         CcAddresses: List of [Text];
-        CCAddress: Text;
+        //CCAddress: Text;
         BccAddresses: Text;
         Subject: Text[70];
 
