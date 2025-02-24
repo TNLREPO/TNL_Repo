@@ -8,12 +8,12 @@ codeunit 50005 "Call API"
         HttpClient: HttpClient;
         HttpContent: HttpContent;
         HttpResponseMessage: HttpResponseMessage;
-        ContentHeaders: HttpHeaders;
+        HttpRequestMessage: HttpRequestMessage;
+        HttpHeaders: HttpHeaders;
         JsonObject: JsonObject;
         JsonArray: JsonArray;
         JsonResponse: JsonObject;
         PaymentPush: Record "Payment Push";
-        //PaymentReceipt: Record "Payment/Receipt.";
         DeviceId: Text;
         Amt: Text;
         ToSend: Text;
@@ -34,25 +34,15 @@ codeunit 50005 "Call API"
         JsonObject.Add('amount', Amt);
         JsonObject.Add('customername', Rec."Account Description");
 
-        // Serialize JSON to text
-        //ToSend := JsonObject.ToString();
-
-        //ToSend := JsonArray.Add(JsonObject); // error?
-
-        // Set up HTTP request
+        JsonObject.WriteTo(ToSend);
         HttpContent.WriteFrom(ToSend);
 
-        //HttpContent.GetHeaders().Add('Content-Type', 'application/json');
-
-
-        //HttpContent.GetHeaders(ContentHeaders);
-        //ContentHeaders.Clear();
-        //ContentHeaders.Add('Content-Type', 'application/json');
-
-        //HttpClient.DefaultRequestHeaders.Add('Content-Type', 'application/json');
-        //HttpClient.Send('POST', PaymentPush."Webservice Url", HttpContent, HttpResponseMessage);
-        HttpClient.Post(PaymentPush."Webservice Url", HttpContent, HttpResponseMessage);
-
+        HttpHeaders.Clear();
+        HttpRequestMessage.Method := 'POST';
+        HttpRequestMessage.SetRequestUri(PaymentPush."Webservice Url");
+        HttpRequestMessage.Content := HttpContent;
+        HttpRequestMessage.GetHeaders(HttpHeaders);
+        HttpClient.Send(HttpRequestMessage, HttpResponseMessage);
         // Check response status
         if HttpResponseMessage.IsSuccessStatusCode() then begin
             Rec."Payment Successful" := true;
@@ -63,8 +53,7 @@ codeunit 50005 "Call API"
         end else begin
             Error('Not successful!');
         end;
-
-        // Close "Please Wait" message
+       
         Window.Close();
     end;
 
