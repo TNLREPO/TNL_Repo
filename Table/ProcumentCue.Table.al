@@ -156,10 +156,9 @@ table 70015 "Procument Cue"
         }
         field(17; "Capex Adv. Apprv."; Integer)
         {
-            CalcFormula = Count("Procurement Header" WHERE("Adv. Pymt. Required" = CONST(true),
-                                                            "Adv. Paymt. Audit" = FILTER(<> Approved),
-                                                            "Document Type" = CONST(Capex),
-                                                            Reject = CONST(false)));
+            CalcFormula = Count("Procurement Header" WHERE("Adv. Pymt. Required" = CONST(true), "Adv. Paymt. Audit" = FILTER(<> Approved),
+            "Document Type" = CONST(Capex), Reject = CONST(false), "Adv. Paymt. HOD" = FILTER(Approved)));
+
             FieldClass = FlowField;
         }
         field(18; "Capex Compliance Check"; Integer)
@@ -331,6 +330,8 @@ table 70015 "Procument Cue"
                                                             "Document Type" = CONST(Capex),
                                                             "Adv. Paymt. HOD" = FILTER("On-hold" | " "),
                                                             Reject = FILTER(false)));
+
+
             Description = 'Capex HOD Adv. Apprv.';
             FieldClass = FlowField;
 

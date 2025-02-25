@@ -9,6 +9,7 @@ report 50022 ModifyILE
     Caption = 'ModifyILE';
     UsageCategory = Lists;
     Permissions = tabledata "Item Ledger Entry" = rimd;
+    ProcessingOnly = true;
     dataset
     {
         dataitem(ItemLedgerEntry; "Item Ledger Entry")

@@ -707,16 +707,16 @@ table 50075 "Leave Plan Lines Rev 2"
 
     procedure ExplodeRec()
     begin
-        /*  IF EmpRec.GET("Employee No.") THEN
-             IF CONFIRM('Are you sure you want to Register \\' +
-                            '%1 day(s) %2 Leave for %3 \\' +
-                            'Between %4 and %5', TRUE, "Actual Duration",
-                            CatName, EmpRec.FullName, "Actual Start Date", "Actual End Date")
-                        THEN BEGIN
-                 GenPCode.ExplodeActualLeave(Rec);
-                 LeavPRec2.GET("Serial No", "Employee No.", "Entry Type");
-                 LeavPRec2.Registered := TRUE;
-             END; */
+        IF EmpRec.GET("Employee No.") THEN
+            IF CONFIRM('Are you sure you want to Register \\' +
+                           '%1 day(s) %2 Leave for %3 \\' +
+                           'Between %4 and %5', TRUE, "Actual Duration",
+                           CatName, EmpRec.FullName, "Actual Start Date", "Actual End Date")
+                       THEN BEGIN
+                GenPCode.ExplodeActualLeave(Rec);
+                LeavPRec2.GET("Serial No", "Employee No.", "Entry Type");
+                LeavPRec2.Registered := TRUE;
+            END;
     end;
 
 

@@ -60,6 +60,8 @@ table 70049 "Vehicle Online Order"
                     "Approval Status Changed" := TRUE;
                     MODIFY;
 
+                    CallAPI.OnlineOrderingStatus("Order No.", 'Payment', "FAD Name");
+
                 END;
             end;
         }
@@ -274,6 +276,7 @@ table 70049 "Vehicle Online Order"
         RecipientAll: Text;
         EmailBody: Text[1024];
         ReceiverEmail: Text;
+        CallAPI: Codeunit "Call API";
 
 
     procedure CreateSales()

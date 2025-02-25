@@ -37,6 +37,10 @@ page 50054 TrackerLineAPI
                 {
                     ToolTip = 'Specifies the value of the Quantity Demanded field.', Comment = '%';
                 }
+                field("Quantity Supplied"; Rec."Quantity Supplied")
+                {
+
+                }
             }
         }
     }

@@ -13,6 +13,10 @@ table 70041 "Payment Push"
         field(3; "Webservice Url"; Text[250])
         {
         }
+        field(4; "Online Status Url"; Text[250])
+        {
+
+        }
     }
 
     keys

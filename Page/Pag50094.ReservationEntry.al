@@ -24,6 +24,14 @@ page 50094 "Reservation Entry"
                 {
                     ToolTip = 'Specifies the number of the item that has been reserved in this entry.';
                 }
+                field("Source ID"; Rec."Source ID")
+                {
+
+                }
+                field("Serial No."; Rec."Serial No.")
+                {
+
+                }
             }
         }
     }

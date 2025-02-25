@@ -235,5 +235,16 @@ codeunit 50000 MySubscribers
         TransRcptHeader.Modify();
     End;
 
+    [EventSubscriber(ObjectType::Table, Database::"Sales Header", 'OnAfterOnInsert', '', false, false)]
+    procedure OnAfterInsertSalesHeader(var SalesHeader: Record "Sales Header")
+    var
+        UserSetup: Record "User Setup";
+    begin
+
+        IF UserSetup.GET(USERID) THEN
+            SalesHeader."Shortcut Dimension 1 Code" := UserSetup.Department;
+        
+    end;
+
 }
 

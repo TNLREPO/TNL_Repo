@@ -6,8 +6,9 @@ page 70159 "Advance Paymt Appr.-Capex"
     SourceTable = "Procurement Header";
     SourceTableView = WHERE("Document Type" = CONST(Capex),
                             "Adv. Pymt. Required" = CONST(true),
-                            "Adv. Paymt. Audit" = FILTER('<>Approved'),
+                            "Adv. Paymt. Audit" = FILTER(<> Approved),
                             Reject = CONST(false));
+
 
     layout
     {

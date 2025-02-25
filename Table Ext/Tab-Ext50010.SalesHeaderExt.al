@@ -17,7 +17,6 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
             end;
         }
 
-
         field(50001; Quantity; Decimal)
         {
             FieldClass = FlowField;
@@ -502,6 +501,8 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                             "Mail Body" := STRSUBSTNO(WaitingforApprovalText, "No.");
                             CreateEmailBody("No.", ReceiverInitials, "Mail Body");
                             SendEmail(ReceiverEmail, Subject, EmailBody, CcAddresses, SenderEmail); //marketing gets email
+
+                            CallAPI.OnlineOrderingStatus(Rec."Vehicle Order No.", 'Finance', Rec."Finance Approved By");
                         END;
 
                     "Finance Apprv Status"::Rejected:
@@ -577,6 +578,9 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                             CreateEmailBody("No.", ReceiverInitials, "Mail Body");
                             SendEmail(ReceiverEmail, Subject, EmailBody, CcAddresses, SenderEmail);
 
+                            CallAPI.OnlineOrderingStatus(Rec."Vehicle Order No.", 'Marketing', Rec."Marketing Approved By");
+
+
                             IF VehicleOrderOnline.GET("Vehicle Order No.") THEN BEGIN
                                 VehicleOrderOnline.SETRANGE("Order No.", "Vehicle Order No.");
                                 VehicleOrderOnline."Approval Status Changed" := TRUE;
@@ -648,6 +652,9 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                             "Mail Body" := STRSUBSTNO(WaitingforApprovalText, "No.");
                             CreateEmailBody("No.", ReceiverInitials, "Mail Body");
                             SendEmail(ReceiverEmail, Subject, EmailBody, CcAddresses, SenderEmail); //finance gets email
+
+                            CallAPI.OnlineOrderingStatus(Rec."Vehicle Order No.", 'Logistics', Rec."Logistics Approved By");
+
                         END;
 
                     "Logistics Apprv Status"::Rejected:
@@ -678,6 +685,8 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                 UserRec.GET("Logistics Send to");
                 "Logistics Approved By" := UserRec.Name;
                 "Logistics Approved Time" := CURRENTDATETIME;
+
+
             end;
         }
         field(60117; "Logistics Sent Time"; DateTime)
@@ -950,6 +959,7 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
         ReceiverInitials: Text[10];
         VehicleOrderOnline: Record "Vehicle Online Order";
         DesignatedApprovers: Record "Designated Approvers";
+        CallAPI: Codeunit "Call API";
 
 
 

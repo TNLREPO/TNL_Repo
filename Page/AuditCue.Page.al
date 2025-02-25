@@ -62,7 +62,7 @@ page 70179 "Audit Cue"
                 }
                 field("Capex Adv. Apprv."; Rec."Capex Adv. Apprv.")
                 {
-                    Caption = 'Head of Audit Adv. Capex Apprv.>';
+                    Caption = 'Head of Audit Adv. Capex Apprv.';
                     DrillDownPageID = "Advance Paymt Appr.-Capex";
                 }
                 field("Capex Compliance Check"; Rec."Capex Compliance Check")
