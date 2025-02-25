@@ -791,6 +791,16 @@ page 70102 "Internal Audit Role Center"
                     Caption = 'Zero Phys. Inventory Jnl.';
                     RunObject = report "Phys. Valuation Zeroing";
                 }
+                action(PriceTest)
+                {
+                    Caption = 'Price Test';
+                    RunObject = report "Price Test";
+                }
+                action(UpdateVariant)
+                {
+                    Caption = 'Update Variant';
+                    RunObject = report "Update Item Variant- SEA";
+                }
 
 
 

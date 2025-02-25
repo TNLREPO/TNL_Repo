@@ -154,9 +154,24 @@ table 70036 "Customer Order LineX"
         {
             TableRelation = Location.Code;
             trigger OnValidate()
+
             begin
                 VALIDATE("No.");
 
+            end;
+
+            trigger OnLookup()
+            var
+                UserSetup: Record "User Setup";
+                Location: Record Location;
+            begin
+                UserSetup.Get(USERID);
+                if UserSetup."Location Code" <> '' then
+                    Location.FilterGroup(2);
+                Location.SetRange(Code, UserSetup."Location Code");
+                if Page.RunModal(Page::"Location List", Location) = Action::LookupOK then
+                    "Location Code" := Location.Code;
+                Location.FilterGroup(0);
             end;
         }
         field(15; "Variant Code"; Code[20])
