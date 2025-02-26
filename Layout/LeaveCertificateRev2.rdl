@@ -8,7 +8,7 @@
         <ConnectString />
       </ConnectionProperties>
       <rd:SecurityType>None</rd:SecurityType>
-      <rd:DataSourceID>c8d0cd3c-cd0d-4789-a996-07f31acd61e9</rd:DataSourceID>
+      <rd:DataSourceID>c2ce06f7-a72e-41c7-93a7-b9dad6affa0a</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <ReportSections>
@@ -184,7 +184,8 @@
                         </TablixCell>
                         <TablixCell>
                           <CellContents>
-                            <Textbox Name="CurrReport_PAGENO">
+                            <Textbox Name="Textbox2">
+                              <CanGrow>true</CanGrow>
                               <KeepTogether>true</KeepTogether>
                               <Paragraphs>
                                 <Paragraph>
@@ -199,6 +200,7 @@
                                   <Style />
                                 </Paragraph>
                               </Paragraphs>
+                              <rd:DefaultName>Textbox2</rd:DefaultName>
                               <Style>
                                 <VerticalAlign>Middle</VerticalAlign>
                                 <PaddingLeft>0.075cm</PaddingLeft>
@@ -207,6 +209,7 @@
                                 <PaddingBottom>2pt</PaddingBottom>
                               </Style>
                             </Textbox>
+                            <rd:Selected>true</rd:Selected>
                           </CellContents>
                         </TablixCell>
                       </TablixCells>
@@ -477,7 +480,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Fields!Leave_Plan_Lines_Rev_2__Serial_No_.Value</Value>
+                                      <Value>=Fields!SerialNo.Value</Value>
                                       <Style>
                                         <FontSize>9pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
@@ -1423,7 +1426,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Fields!Leave_Plan_Lines_Rev_2__Actual_Start_Date_.Value</Value>
+                                      <Value>=Fields!ActualStartDate.Value</Value>
                                       <Style>
                                         <FontSize>9pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
@@ -1734,7 +1737,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Fields!Please_note_that_failure_to_return_to_duty_on_the_above_date_without_accepted_excuse_will_be_treated_as_unauthorised_absence_Caption.Value</Value>
+                                      <Value>=Fields!PleaseNote.Value</Value>
                                       <Style>
                                         <FontSize>9pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
@@ -2128,7 +2131,7 @@ End Function
   <Language>=User!Language</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
-  <rd:ReportID>5b8f2691-153b-462e-a53b-3e827d5c273e</rd:ReportID>
+  <rd:ReportID>351e9cb4-7423-413e-95d8-777fa647b37b</rd:ReportID>
   <DataSets>
     <DataSet Name="DataSet_Result">
       <Fields>
@@ -2186,8 +2189,8 @@ End Function
         <Field Name="ResumeDate">
           <DataField>ResumeDate</DataField>
         </Field>
-        <Field Name="Leave_Plan_Lines_Rev_2__Actual_Start_Date_">
-          <DataField>Leave_Plan_Lines_Rev_2__Actual_Start_Date_</DataField>
+        <Field Name="ActualStartDate">
+          <DataField>ActualStartDate</DataField>
         </Field>
         <Field Name="V1__">
           <DataField>V1__</DataField>
@@ -2237,8 +2240,8 @@ End Function
         <Field Name="USERID">
           <DataField>USERID</DataField>
         </Field>
-        <Field Name="Leave_Plan_Lines_Rev_2__Serial_No_">
-          <DataField>Leave_Plan_Lines_Rev_2__Serial_No_</DataField>
+        <Field Name="SerialNo">
+          <DataField>SerialNo</DataField>
         </Field>
         <Field Name="DesignationCaption">
           <DataField>DesignationCaption</DataField>
@@ -2279,11 +2282,11 @@ End Function
         <Field Name="Amount_taken_as_leave_allowanceCaption">
           <DataField>Amount_taken_as_leave_allowanceCaption</DataField>
         </Field>
-        <Field Name="DataItem77">
-          <DataField>DataItem77</DataField>
+        <Field Name="PleaseNote">
+          <DataField>PleaseNote</DataField>
         </Field>
-        <Field Name="The_Finance___Accounts_Department_to_pay_the_sum_stated_on_item_13_above_on_the_next_salary_pay_day_Caption">
-          <DataField>The_Finance___Accounts_Department_to_pay_the_sum_stated_on_item_13_above_on_the_next_salary_pay_day_Caption</DataField>
+        <Field Name="FinanceNote">
+          <DataField>FinanceNote</DataField>
         </Field>
         <Field Name="Yours_faithfully_Caption">
           <DataField>Yours_faithfully_Caption</DataField>
@@ -2309,8 +2312,8 @@ End Function
         <Field Name="Leave_NoCaption">
           <DataField>Leave_NoCaption</DataField>
         </Field>
-        <Field Name="Leave_Plan_Lines_Rev_2_Entry_Type">
-          <DataField>Leave_Plan_Lines_Rev_2_Entry_Type</DataField>
+        <Field Name="EntryType">
+          <DataField>EntryType</DataField>
         </Field>
       </Fields>
       <Query>

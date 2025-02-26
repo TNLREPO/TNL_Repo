@@ -557,18 +557,18 @@ table 70018 "Local Part Purchase Register"
                         IF NOT CONFIRM('Are you sure you want to approve?', FALSE) THEN
                             "General Manager" := LPPRec."General Manager"::" "
                         ELSE BEGIN
+
                             UserSetup.GET("Sent By");
                             CALCFIELDS("Total Purchase Value");
                             VendAmt := "Total Purchase Value";
                             VendName := "Supplier's Name";
                             VendAddr := "Supplier's Address";
                             Purpose := "Justification for purchase";
-
                             UserSetup2.GET("Send To");
-                            ToAddresses := UserSetup2."E-Mail";
-                            CcAddresses := 'albert@toyotanigeria.com';
-                            BccAddresses := 'adewumi@toyotanigeria.com';
-
+                            ToAddresses := UserSetup."E-Mail";
+                            CcAddresses := 'ravinder@toyotanigeria.com';
+                            BccAddresses := '';
+                            Subject := STRSUBSTNO(Text029, "LPP No.");
                             UserSetup4.GET(USERID);
                             SendersName := UserSetup4.Initials;
                             SenderAddress := UserSetup4."E-Mail";
@@ -576,9 +576,10 @@ table 70018 "Local Part Purchase Register"
                             TimeDate6 := CURRENTDATETIME;
                             Addressee := UserSetup.Initials;
 
+
                             Subject := STRSUBSTNO(Text025, "LPP No.");
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text024, Addressee);
-                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, BccAddresses);
+                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                             "Genarate LPO" := TRUE;
                         END;
@@ -655,8 +656,7 @@ table 70018 "Local Part Purchase Register"
 
                             UserSetup2.GET("Send To");
                             ToAddresses := UserSetup2."E-Mail";
-                            CcAddresses := 'albert@toyotanigeria.com';
-                            BccAddresses := 'adewumi@toyotanigeria.com';
+                            CcAddresses := 'isuekebho@toyotanigeria.com';
 
                             UserSetup4.GET(USERID);
                             SendersName := UserSetup4.Initials;
@@ -701,7 +701,7 @@ table 70018 "Local Part Purchase Register"
                         END;
 
                     IF "General Manager" = "General Manager"::Rejected THEN
-                        IF NOT CONFIRM('Are you sure you want to Reject?', FALSE) THEN
+                        IF NOT CONFIRM('Are you sure you want to reject?', FALSE) THEN
                             "General Manager" := LPPRec."General Manager"::" "
                         ELSE BEGIN
                             CALCFIELDS("Total Purchase Value");

@@ -541,7 +541,7 @@ table 70008 "Procurement Header"
                     SenderAddress := UserSetup4."E-Mail";
                     TimeDate7 := CURRENTDATETIME;
 
-                    ToAddresses := 'brano@toyotanigeria.com' + ';' + 'olamide@toyotanigeria.com' + ';' + 'grace@toyotanigeria.com';
+                    ToAddresses := 'brano@toyotanigeria.com' + ';' + 'olamide@toyotanigeria.com' + ';' + 'grace@toyotanigeria.com' + 'aderonke@toyotanigeria.com';
                     // CcAddresses := +  ';' +PurchSetup."Audit Dept. Approvers";
                     BccAddresses := '';
 

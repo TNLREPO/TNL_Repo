@@ -106,7 +106,7 @@ page 70056 "Actual Leave Card"
                 begin
                     LPlanRec.SETRANGE(LPlanRec."Serial No", Rec."Serial No");
                     LPlanRec.SETRANGE(LPlanRec."Employee No.", Rec."Employee No.");
-                    //REPORT.RUN(REPORT::"Leave Certificate-Rev2", TRUE, FALSE, LPlanRec);
+                    REPORT.RUN(REPORT::"Leave Certificate-Rev2", TRUE, FALSE, LPlanRec);
                 end;
             }
             separator(Group)

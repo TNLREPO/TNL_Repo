@@ -7,8 +7,7 @@ report 50120 "Update Item Variant- SEA"
     {
         dataitem(ItemData; Item)
         {
-            DataItemTableView = SORTING("Inventory Posting Group", "Item Price Group")
-                                WHERE("Inventory Posting Group" = filter('N_PARTS'));
+            DataItemTableView = SORTING("Inventory Posting Group", "Item Price Group");
             RequestFilterFields = "Inventory Posting Group";
             column(FORMAT_TODAY_0_4_; FORMAT(TODAY, 0, 4))
             {

@@ -16,6 +16,7 @@ pageextension 60007 "Item List Ext" extends "Item List"
             {
                 ApplicationArea = All;
             }
+           
         }
     }
 }
