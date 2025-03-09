@@ -210,14 +210,14 @@ codeunit 50000 MySubscribers
             NewReportId := Report::"Customer/Item Sales2";
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::ReportManagement, 'OnAfterSubstituteReport', '', true, true)]
+    /* [EventSubscriber(ObjectType::Codeunit, Codeunit::ReportManagement, 'OnAfterSubstituteReport', '', true, true)]
     procedure ChangeCustmerDetailTrialBal(ReportId: Integer; var NewReportId: Integer)
 
     begin
         if ReportId = Report::"Customer - Detail Trial Bal." then
             NewReportId := Report::"Customer - Detail Trial Bal.2";
     end;
-
+ */
     [EventSubscriber(ObjectType::Codeunit, codeunit::"TransferOrder-Post Shipment", 'OnAfterInsertTransShptHeader', '', false, false)]
     procedure AddOnAfterInsertTransShptHeader(var TransferHeader: Record "Transfer Header"; var TransferShipmentHeader: Record "Transfer Shipment Header")
 
@@ -243,7 +243,15 @@ codeunit 50000 MySubscribers
 
         IF UserSetup.GET(USERID) THEN
             SalesHeader."Shortcut Dimension 1 Code" := UserSetup.Department;
-        
+
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, codeunit::"Shipment Header - Edit", 'OnBeforeSalesShptHeaderModify', '', false, false)]
+    procedure AddOnBeforeSalesShptHeaderModify(var SalesShptHeader: Record "Sales Shipment Header"; FromSalesShptHeader: Record "Sales Shipment Header")
+
+    begin
+        SalesShptHeader."Acknowledged Doc Link" := FromSalesShptHeader."Acknowledged Doc Link";
+        SalesShptHeader."Audit Summary" := FromSalesShptHeader."Audit Summary";
     end;
 
 }

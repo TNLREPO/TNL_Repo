@@ -13,13 +13,9 @@ page 50023 "Service"
             }
             part(Control1901851508; "VRI Activities")
             {
-                //AccessByPermission = TableData "Sales Shipment Header" = R;
                 ApplicationArea = All;
             }
-            /* part("Intercompany Activities"; "Intercompany Activities")
-            {
-                ApplicationArea = Intercompany;
-            } */
+
             part("User Tasks Activities"; "User Tasks Activities")
             {
                 ApplicationArea = Suite;

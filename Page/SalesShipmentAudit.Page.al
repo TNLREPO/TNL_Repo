@@ -193,15 +193,16 @@ page 70529 "Sales Shipment Audit"
             }
             group("Doc Link")
             {
-                Editable = false;
                 field("Acknowledged Doc Link"; Rec."Acknowledged Doc Link")
                 {
+                    Editable = true;
                 }
             }
             group("Auditors Record")
             {
                 field("Audit Summary"; Rec."Audit Summary")
                 {
+                    Editable = true;
                 }
                 field("Audit Confirmation by"; Rec."Audit Confirmation by")
                 {
@@ -217,6 +218,28 @@ page 70529 "Sales Shipment Audit"
 
     actions
     {
+        area(Processing)
+        {
+            action(UpdateDocument)
+            {
+                ApplicationArea = Suite;
+                Caption = 'Update Document';
+                Image = Edit;
+                Promoted = true;
+                ToolTip = 'Add new information that is relevant to the document, such as information from the shipping agent. You can only edit a few fields because the document has already been posted.';
+
+                trigger OnAction()
+                var
+                    PostedSalesShipmentUpdate: Page "Posted Sales Shipment - Update";
+                begin
+                    PostedSalesShipmentUpdate.LookupMode := true;
+                    PostedSalesShipmentUpdate.SetRec(Rec);
+                    PostedSalesShipmentUpdate.RunModal();
+                end;
+            }
+
+
+        }
     }
 }
 

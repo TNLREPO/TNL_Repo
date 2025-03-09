@@ -177,15 +177,15 @@ codeunit 50004 "General Purpose Codeunit-1"
 
         DateRec2.RESET;
         HolidayRec.RESET;
-        HolidayRec.SETRANGE(HolidayRec.Day, Dy);
-        HolidayRec.SETRANGE(HolidayRec.Month, Mth);
+        HolidayRec.SETRANGE(Day, Dy);
+        HolidayRec.SETRANGE(Month, Mth);
 
         IF HolidayRec.COUNT <> 0 THEN
             EXIT(TRUE)
         ELSE BEGIN
-            DateRec2.SETRANGE(DateRec2."Period Type", 0);
-            DateRec2.SETRANGE(DateRec2."Period Start", CheckDate);
-            IF DateRec2.FIND('-') THEN BEGIN
+            DateRec2.SETRANGE("Period Type", DateRec2."Period Type"::Date);
+            DateRec2.SETRANGE("Period Start", CheckDate);
+            IF DateRec2.FindLast() THEN BEGIN
                 WkDay := DateRec2."Period Name";
                 HolidayRec.RESET;
                 HolidayRec.SETRANGE(HolidayRec."Day Of Week", WkDay);
@@ -1802,6 +1802,76 @@ codeunit 50004 "General Purpose Codeunit-1"
                     FaultSetupLine.VALIDATE(FaultSetupLine.Location, NewLocationCode);
         END;
     End;
+
+
+
+    procedure CalculateLeaveEndDateExcludingWeekendsAndHolidays(LeaveStartDate: Date; NumberOfLeaveDays: Integer): Date
+    var
+        RemainingDays: Integer;
+        CurrentDate: Date;
+        HolidayRecord: Record Holidays;
+    begin
+        RemainingDays := 0;
+        RemainingDays := NumberOfLeaveDays;
+        CurrentDate := LeaveStartDate - 1; // day before
+
+        while RemainingDays > 0 do begin
+            CurrentDate := CurrentDate + 1; // Move to the current day
+
+            // Check if it's a weekend (Saturday = 6, Sunday = 7) or a public holiday
+            HolidayRecord.Reset();
+            HolidayRecord.SetRange(Date, CurrentDate);
+            if not ((Date2DWY(CurrentDate, 1) in [6, 7]) or HolidayRecord.FindFirst()) then
+                RemainingDays -= 1; // Count the working day
+        end;
+
+        exit(CurrentDate);
+    end;
+
+     procedure CalculateLeaveStartDateExcludingWeekendsAndHolidays(LeaveEndDate: Date; NumberOfLeaveDays: Integer): Date
+    var
+        RemainingDays: Integer;
+        CurrentDate: Date;
+        HolidayRecord: Record Holidays;
+    begin
+        RemainingDays := 0;
+        RemainingDays := NumberOfLeaveDays;
+        CurrentDate := LeaveEndDate + 1; // day before
+
+        while RemainingDays > 0 do begin
+            CurrentDate := CurrentDate - 1; // Move to the current day
+
+            // Check if it's a weekend (Saturday = 6, Sunday = 7) or a public holiday
+            HolidayRecord.Reset();
+            HolidayRecord.SetRange(Date, CurrentDate);
+            if not ((Date2DWY(CurrentDate, 1) in [6, 7]) or HolidayRecord.FindFirst()) then
+                RemainingDays -= 1; // Count the working day
+        end;
+
+        exit(CurrentDate);
+    end;
+
+    procedure CalculateTotalLeaveDaysExcludingWeekends(LeaveStartDate: Date; LeaveEndDate: Date): Integer
+    var
+        TotalDays: Integer;
+        CurrentDate: Date;
+        HolidayRecord: Record Holidays;
+    begin
+        TotalDays := 0;
+        CurrentDate := LeaveStartDate;
+
+        while CurrentDate <= LeaveEndDate do begin
+
+            HolidayRecord.Reset();
+            HolidayRecord.SetRange(Date, CurrentDate);
+            if not ((Date2DWY(CurrentDate, 1) in [6, 7]) or HolidayRecord.FindFirst()) then
+                TotalDays += 1;
+            CurrentDate := CurrentDate + 1;
+        end;
+
+        exit(TotalDays);
+    end;
+
 
 
 }

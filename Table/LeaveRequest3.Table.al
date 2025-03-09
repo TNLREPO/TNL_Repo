@@ -109,15 +109,16 @@ table 70009 "Leave Request3"
                     END;
 
                     IF ("Actual End Date" < "Actual Start Date") AND ("Actual End Date" <> 0D) THEN
-                        ERROR(FIELDCAPTION("Actual Start Date") + 'Must be on or after ' + FIELDCAPTION("Actual End Date"));
+                        ERROR(FIELDCAPTION("Actual Start Date") + 'must be on or after ' + FIELDCAPTION("Actual End Date"));
 
                     IF "Actual End Date" <> 0D THEN
-                        "Actual Duration" := GenPCode.GetNoOfDays("Actual Start Date", "Actual End Date")
+                        "Actual Duration" := GenPCode.CalculateTotalLeaveDaysExcludingWeekends("Actual Start Date", "Actual End Date")
                     ELSE
                         IF "Actual Duration" <> 0 THEN
-                            "Actual End Date" := GenPCode.GetEndDate("Actual Start Date", "Actual Duration");
+                            "Actual End Date" := GenPCode.CalculateLeaveEndDateExcludingWeekendsAndHolidays("Actual Start Date", "Actual Duration");
 
                     CheckTotalDuration(9);
+
 
                     IF SKIP2 = FALSE THEN BEGIN
                         IF ("Leave Category" = 'CASUAL') AND ("Actual Duration" > 3) THEN
@@ -1078,13 +1079,13 @@ table 70009 "Leave Request3"
                 END;
 
                 IF ("Actual End Date" < "Actual Start Date") AND ("Actual End Date" <> 0D) THEN
-                    ERROR(FIELDCAPTION("Actual Start Date") + 'Must be on or after ' + FIELDCAPTION("Actual End Date"));
+                    ERROR(FIELDCAPTION("Actual Start Date") + 'must be on or after ' + FIELDCAPTION("Actual End Date"));
 
                 IF "Actual End Date" <> 0D THEN
-                    "Actual Duration" := GenPCode.GetNoOfDays("Actual Start Date", "Actual End Date")
+                    "Actual Duration" := GenPCode.CalculateTotalLeaveDaysExcludingWeekends("Actual Start Date", "Actual End Date")
                 ELSE
                     IF "Actual Duration" <> 0 THEN
-                        "Actual End Date" := GenPCode.GetEndDate("Actual Start Date", "Actual Duration");
+                        "Actual End Date" := GenPCode.CalculateLeaveEndDateExcludingWeekendsAndHolidays("Actual Start Date", "Actual Duration");
 
                 CheckTotalDuration(9);
 
@@ -1104,10 +1105,10 @@ table 70009 "Leave Request3"
                     ERROR(FIELDCAPTION("Actual End Date") + 'Must be on or before ' + FIELDCAPTION("Actual Start Date"));
 
                 IF "Actual Start Date" <> 0D THEN
-                    "Actual Duration" := GenPCode.GetNoOfDays("Actual Start Date", "Actual End Date")
+                    "Actual Duration" := GenPCode.CalculateTotalLeaveDaysExcludingWeekends("Actual Start Date", "Actual End Date")
                 ELSE
                     IF "Actual Duration" <> 0 THEN
-                        "Actual Start Date" := GenPCode.GetStartDate("Actual End Date", "Actual Duration");
+                        "Actual Start Date" := GenPCode.CalculateLeaveEndDateExcludingWeekendsAndHolidays("Actual End Date", "Actual Duration");
 
                 CheckTotalDuration(9);
             end;
@@ -1131,13 +1132,14 @@ table 70009 "Leave Request3"
                 IF ("Actual Start Date" = 0D) AND ("Actual End Date" = 0D) THEN EXIT;
 
                 IF "Actual Start Date" <> 0D THEN
-                    "Actual End Date" := GenPCode.GetEndDate("Actual Start Date", "Actual Duration")
+                    "Actual End Date" := GenPCode.CalculateLeaveEndDateExcludingWeekendsAndHolidays("Actual Start Date", "Actual Duration")
                 ELSE
                     "Actual Start Date" := GenPCode.GetStartDate("Actual End Date", "Actual Duration");
 
                 IF EmpRec.GET("Employee No.") THEN EmpGrpCode := EmpRec."Employee Group";
 
-                // CheckTotalDuration(9);
+                CheckTotalDuration(9);
+               
 
             end;
         }

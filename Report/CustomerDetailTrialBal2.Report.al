@@ -2,8 +2,9 @@ report 50186 "Customer - Detail Trial Bal.2"
 {
     DefaultLayout = RDLC;
     RDLCLayout = 'Layout/CustomerDetailTrialBal2.rdl';
-    Caption = 'Customer - Detail Trial Bal.';
-    ApplicationArea = Basic, Suite, Service;
+    Caption = 'Customer - Detail Trial Bal.2';
+    ApplicationArea = All;
+    UsageCategory = Lists;
 
     dataset
     {

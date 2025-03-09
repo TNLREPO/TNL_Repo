@@ -14,13 +14,9 @@ page 50026 "Kodawari External"
             }
             part(Control1901851508; "Service Adviser Activities")
             {
-                //AccessByPermission = TableData "Sales Shipment Header" = R;
                 ApplicationArea = All;
             }
-            /* part("Intercompany Activities"; "Intercompany Activities")
-            {
-                ApplicationArea = Intercompany;
-            } */
+
             part("User Tasks Activities"; "User Tasks Activities")
             {
                 ApplicationArea = Suite;
