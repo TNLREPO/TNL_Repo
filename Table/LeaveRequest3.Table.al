@@ -588,7 +588,7 @@ table 70009 "Leave Request3"
                         SenderAddress := UserSetup2."E-Mail";
 
                         Subject := STRSUBSTNO(text001, "Request No.");
-                        CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
+                        CreateEmailBody2(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
                         SendEmail(ToAddresses, subject, EmailBody, CCName, BccAddresses);
 
 
@@ -611,7 +611,7 @@ table 70009 "Leave Request3"
                         SenderAddress := UserSetup2."E-Mail";
 
                         subject := STRSUBSTNO(text008);
-                        CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
+                        CreateEmailBody2(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
                         SendEmail(ToAddresses, subject, EmailBody, CCName, BccAddresses);
 
 
@@ -680,7 +680,7 @@ table 70009 "Leave Request3"
                         SenderAddress := UserSetup2."E-Mail";
 
                         Subject := STRSUBSTNO(text008);
-                        CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
+                        CreateEmailBody2(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
                         SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
                         Approved2 := TRUE;
@@ -703,7 +703,7 @@ table 70009 "Leave Request3"
                             SenderAddress := UserSetup2."E-Mail";
 
                             Subject := STRSUBSTNO(text008);
-                            CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
+                            CreateEmailBody2(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
                             SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
                             "MD Leave Approval" := TRUE;
@@ -894,7 +894,7 @@ table 70009 "Leave Request3"
                         SenderAddress := UserSetup2."E-Mail";
 
                         Subject := STRSUBSTNO(text008);
-                        CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
+                        CreateEmailBody2(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
                         SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
 
@@ -919,7 +919,7 @@ table 70009 "Leave Request3"
                         SenderAddress := UserSetup2."E-Mail";
 
                         Subject := STRSUBSTNO(text008);
-                        CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
+                        CreateEmailBody2(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
                         SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
 
@@ -942,7 +942,7 @@ table 70009 "Leave Request3"
                         SenderAddress := UserSetup2."E-Mail";
 
                         Subject := STRSUBSTNO(text008);
-                        CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
+                        CreateEmailBody2(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
                         SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
 
@@ -965,7 +965,7 @@ table 70009 "Leave Request3"
                         SenderAddress := UserSetup2."E-Mail";
 
                         Subject := STRSUBSTNO(text008);
-                        CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
+                        CreateEmailBody2(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
                         SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
 
@@ -989,7 +989,7 @@ table 70009 "Leave Request3"
                         SenderAddress := UserSetup2."E-Mail";
 
                         Subject := STRSUBSTNO(text008);
-                        CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
+                        CreateEmailBody2(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
                         SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
 
 
@@ -1139,7 +1139,7 @@ table 70009 "Leave Request3"
                 IF EmpRec.GET("Employee No.") THEN EmpGrpCode := EmpRec."Employee Group";
 
                 CheckTotalDuration(9);
-               
+
 
             end;
         }
@@ -1736,8 +1736,8 @@ table 70009 "Leave Request3"
         text002: Label 'Leave request %1 has been approved';
         text003: Label 'Leave request %1 has been rejected';
         text004: Label 'Leave request %1 is on hold';
-        text006: Label 'This document needs your approval.';
-        text008: Label 'This document has been approved, generate  Leave Certificate';
+        text006: Label 'This document needs your approval';
+        text008: Label 'This document has been approved, generate Leave Certificate';
         text009: Label 'The same person cannot approve this request.';
         GenPCode: Codeunit 50004;
         ActualLeaves: Integer;
@@ -1905,6 +1905,34 @@ table 70009 "Leave Request3"
         EmailBody := STRSUBSTNO(Text013, Addressee);
         EmailBody += '<br><br>';
         EmailBody += Text014;
+        EmailBody += '<br><br>';
+        EmailBody += Text015 + STRSUBSTNO(RequestNo);
+        EmailBody += '<br><br>';
+        EmailBody += Text016 + STRSUBSTNO(EmpRec.GetFullName(EmpNo));
+        EmailBody += '<br><br>';
+        EmailBody += Text017 + STRSUBSTNO(LeaveCat);
+        EmailBody += '<br><br>';
+        EmailBody += text011 + FORMAT(StartDate);
+        EmailBody += '<br><br>';
+        EmailBody += text012 + FORMAT(EndDate);
+        EmailBody += '<br><br>';
+        EmailBody += STRSUBSTNO(text010, ActualDuration);
+        EmailBody += '<br><br>';
+        EmailBody += Text018;
+        EmailBody += '<br><br>';
+        EmailBody += SenderName;
+
+    end;
+
+    local procedure CreateEmailBody2(RecipientInitials: Text[70]; RequestNo: Code[30]; EmpNo: Code[30]; LeaveCat: Code[30]; StartDate: Date; EndDate: Date; ActualDuration: Integer)
+
+    begin
+
+        UserSetup.Get(UserId);
+
+        EmailBody := STRSUBSTNO(Text013, Addressee);
+        EmailBody += '<br><br>';
+        EmailBody += text008;
         EmailBody += '<br><br>';
         EmailBody += Text015 + STRSUBSTNO(RequestNo);
         EmailBody += '<br><br>';

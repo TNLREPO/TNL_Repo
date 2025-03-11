@@ -1,7 +1,7 @@
 page 50128 "Parts By Model Lines"
 {
     DelayedInsert = true;
-    PageType = List;
+    PageType = ListPart;
     SourceTable = "Parts By Model";
     SourceTableView = SORTING("Model Code", "Part No.");
     ApplicationArea = All;

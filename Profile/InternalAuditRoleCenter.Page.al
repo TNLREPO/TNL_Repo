@@ -144,6 +144,63 @@ page 70102 "Internal Audit Role Center"
                 RunObject = Page "My payslip";
                 ToolTip = '';
             }
+            action("Chart of Accounts")
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Chart of Accounts';
+                RunObject = Page "Chart of Accounts";
+                ToolTip = 'Open the chart of accounts.';
+            }
+            action("Bank Accounts")
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Bank Accounts';
+                Image = BankAccount;
+                RunObject = Page "Bank Account List";
+                ToolTip = 'View or set up detailed information about your bank account, such as which currency to use, the format of bank files that you import and export as electronic payments, and the numbering of checks.';
+            }
+            action(VendorsBalance)
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Balance';
+                Image = Balance;
+                RunObject = Page "Vendor List";
+                RunPageView = WHERE("Balance (LCY)" = FILTER(<> 0));
+                ToolTip = 'View a summary of the bank account balance in different periods.';
+            }
+            action("Purchase Orders")
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Purchase Orders';
+                RunObject = Page "Purchase Order List";
+                ToolTip = 'Create purchase orders to mirror sales documents that vendors send to you. This enables you to record the cost of purchases and to track accounts payable. Posting purchase orders dynamically updates inventory levels so that you can minimize inventory costs and provide better customer service. Purchase orders allow partial receipts, unlike with purchase invoices, and enable drop shipment directly from your vendor to your customer. Purchase orders can be created automatically from PDF or image files from your vendors by using the Incoming Documents feature.';
+            }
+            action(CustomersBalance)
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Balance';
+                Image = Balance;
+                RunObject = Page "Customer List";
+                RunPageView = WHERE("Balance (LCY)" = FILTER(<> 0));
+                ToolTip = 'View a summary of the bank account balance in different periods.';
+            }
+            action("Incoming Documents")
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Incoming Documents';
+                Image = Documents;
+                RunObject = Page "Incoming Documents";
+                ToolTip = 'Handle incoming documents, such as vendor invoices in PDF or as image files, that you can manually or automatically convert to document records, such as purchase invoices. The external files that represent incoming documents can be attached at any process stage, including to posted documents and to the resulting vendor, customer, and general ledger entries.';
+            }
+            action("Purchase Invoices")
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Purchase Invoices';
+                Image = Invoice;
+                RunObject = Page "Purchase Invoices";
+                ToolTip = 'Create purchase invoices to mirror sales documents that vendors send to you. This enables you to record the cost of purchases and to track accounts payable. Posting purchase invoices dynamically updates inventory levels so that you can minimize inventory costs and provide better customer service. Purchase invoices can be created automatically from PDF or image files from your vendors by using the Incoming Documents feature.';
+            }
+
         }
         area(sections)
         {
@@ -555,7 +612,6 @@ page 70102 "Internal Audit Role Center"
                 action("Employee Leave Analysis")
                 {
                     Caption = 'Employee Leave Analysis';
-
                     RunObject = Page 70058;
                 }
 
@@ -801,7 +857,6 @@ page 70102 "Internal Audit Role Center"
                     Caption = 'Update Variant';
                     RunObject = report "Update Item Variant- SEA";
                 }
-
 
 
             }

@@ -151,7 +151,9 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
             OptionMembers = " ","on Hold",Approved,Rejected;
 
             trigger OnValidate()
+
             begin
+
                 IF "Shortcut Dimension 1 Code" = '09MARKET' THEN BEGIN
                     TESTFIELD("Send for Approval", TRUE);
                     TESTFIELD("1st Approval to", USERID);
@@ -159,49 +161,133 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
 
                     CASE "1st Apprv. Status" OF
                         "1st Apprv. Status"::Approved:
-                            BEGIN
+                            IF NOT CONFIRM('Are you sure you want to APPROVE this?', FALSE) THEN
+                                "1st Apprv. Status" := SalesHeader."1st Apprv. Status"::" "
+                            ELSE BEGIN
                                 IF UserSetup2.GET(USERID) THEN
                                     SenderEmail := UserSetup2."E-Mail";
-
                                 TESTFIELD("2nd Approval to");
+                                "1st Approval Time" := CURRENTDATETIME;
                                 UserSetup.GET("2nd Approval to");
                                 "Current pending Person" := "2nd Approval to";
-                                ReceiverEmail := UserSetup."E-Mail";
+                                ToName := UserSetup."E-Mail";
+                                Subject := STRSUBSTNO(Text073, "No.");
+                                "Mail Body" := STRSUBSTNO(Text073, "No.");
+                                SenderInitial := UserSetup2.Initials;
+                                Initials := UserSetup.Initials;
 
-                                Subject := STRSUBSTNO(WaitingforApprovalText, "No.");
-                                "Mail Body" := STRSUBSTNO(WaitingforApprovalText, "No.");
+                                CreateEmailBody("No.", Initials, "Mail Body");
+                                SendEmail(ToName, Subject, EmailBody, CCName, SenderEmail);
 
 
+                                /*   WITH TempEmailItem DO BEGIN
+                                      "Send to" := ToName + ';' + 'akinmutimi@toyotanigeria.com;segun@toyotanigeria.com;samir@toyotanigeria.com;grace@toyotanigeria.com;chima@toyotanigeria.com;bayo@toyotanigeria.com';
+                                      "Send CC" := SenderEmail + ';' + 'james@toyotanigeria.com;aderonke@toyotanigeria.com;komolofe@toyotanigeria.com;olamide@toyotanigeria.com;gbenga@toyotanigeria.com;johnson@toyotanigeria.com';
+                                      "Send BCC" := '';
+                                      Subject := STRSUBSTNO(Text073, "No.");
 
-                                "1st Approval Time" := CURRENTDATETIME;
+                                      CRLF := '';
+                                      CRLF[1] := 13;
+                                      CRLF[2] := 10;
+
+                                      BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                                      BodyStream.WRITETEXT(Text071 + Initials + ',');
+                                      BodyStream.WRITETEXT(CRLF + CRLF);
+                                      BodyStream.WRITETEXT(STRSUBSTNO(Text073, "No.") + CRLF + CRLF +
+                                      CRLF + CRLF +
+                                      Text077 + CRLF);
+                                      BodyStream.WRITETEXT(SenderInitial);
+                                      BodyStream.WRITETEXT(CRLF + CRLF);
+                                      BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                                      Body := BodyBlob.Blob;
+                                      Send(FALSE);
+                                  END; 
+                                  */
 
                             END;
+
                         "1st Apprv. Status"::Rejected:
-                            BEGIN
+                            IF NOT CONFIRM('Are you sure you want to reject this?', FALSE) THEN
+                                "1st Apprv. Status" := SalesHeader."1st Apprv. Status"::" "
+                            ELSE BEGIN
                                 IF UserSetup2.GET(USERID) THEN
                                     SenderEmail := UserSetup2."E-Mail";
                                 "1st Approval Time" := CURRENTDATETIME;
                                 UserSetup.GET(Sender);
                                 ToName := UserSetup."E-Mail";
-                                Subject := STRSUBSTNO(RejectedText, "No.");
-                                "Mail Body" := STRSUBSTNO(RejectedText, "No.");
-                                // mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
-                                //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                                //.Send;
-                                MESSAGE('Mail Sent Successfully!');
+                                Subject := STRSUBSTNO(Text075, "No.");
+                                "Mail Body" := STRSUBSTNO(Text075, "No.");
+                                SenderInitial := UserSetup2.Initials;
+                                Initials := UserSetup.Initials;
+
+                                CreateEmailBody("No.", Initials, "Mail Body");
+                                SendEmail(ToName, Subject, EmailBody, CCName, SenderEmail);
+
+                                /*    WITH TempEmailItem DO BEGIN
+                                       "Send to" := ToName;
+                                       "Send CC" := SenderEmail;
+                                       "Send BCC" := '';
+                                       Subject := STRSUBSTNO(Text075, "No.");
+
+                                       CRLF := '';
+                                       CRLF[1] := 13;
+                                       CRLF[2] := 10;
+
+                                       BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                                       BodyStream.WRITETEXT(Text071 + Initials + ',');
+                                       BodyStream.WRITETEXT(CRLF + CRLF);
+                                       BodyStream.WRITETEXT(STRSUBSTNO(Text075, "No.") + CRLF + CRLF +
+                                       CRLF + CRLF +
+                                       Text077 + CRLF);
+                                       BodyStream.WRITETEXT(SenderInitial);
+                                       BodyStream.WRITETEXT(CRLF + CRLF);
+                                       BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                                       Body := BodyBlob.Blob;
+                                       Send(FALSE);
+                                   END;
+                                    */
                             END;
+
                         "1st Apprv. Status"::"on Hold":
-                            BEGIN
+                            IF NOT CONFIRM('Are you sure you want place this order on hold?', FALSE) THEN
+                                "1st Apprv. Status" := SalesHeader."1st Apprv. Status"::" "
+                            ELSE BEGIN
                                 IF UserSetup2.GET(USERID) THEN
                                     SenderEmail := UserSetup2."E-Mail";
                                 "1st Approval Time" := CURRENTDATETIME;
                                 UserSetup.GET(Sender);
                                 ToName := UserSetup."E-Mail";
-                                Subject := STRSUBSTNO(OnholdText, "No.");
-                                "Mail Body" := STRSUBSTNO(OnholdText, "No.");
-                                //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                                //.Send;
-                                MESSAGE('Mail Sent Successfully!');
+                                Subject := STRSUBSTNO(Text076, "No.");
+                                "Mail Body" := STRSUBSTNO(Text076, "No.");
+                                SenderInitial := UserSetup2.Initials;
+                                Initials := UserSetup.Initials;
+
+                                CreateEmailBody("No.", Initials, "Mail Body");
+                                SendEmail(ToName, Subject, EmailBody, CCName, SenderEmail);
+
+                                /*   WITH TempEmailItem DO BEGIN
+                                      "Send to" := ToName;
+                                      "Send CC" := SenderEmail;
+                                      "Send BCC" := '';
+                                      Subject := STRSUBSTNO(Text076, "No.");
+
+                                      CRLF := '';
+                                      CRLF[1] := 13;
+                                      CRLF[2] := 10;
+
+                                      BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                                      BodyStream.WRITETEXT(Text071 + Initials + ',');
+                                      BodyStream.WRITETEXT(CRLF + CRLF);
+                                      BodyStream.WRITETEXT(STRSUBSTNO(Text076, "No.") + CRLF + CRLF +
+                                      CRLF + CRLF +
+                                      Text077 + CRLF);
+                                      BodyStream.WRITETEXT(SenderInitial);
+                                      BodyStream.WRITETEXT(CRLF + CRLF);
+                                      BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                                      Body := BodyBlob.Blob;
+                                      Send(FALSE);
+                                  END;
+                                   */
                             END;
                     END;
                 END;
@@ -212,7 +298,9 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                     "1st Approval Time" := 0DT;
                     CASE "1st Apprv. Status" OF
                         "1st Apprv. Status"::Approved:
-                            BEGIN
+                            IF NOT CONFIRM('Are you sure you want to approve this?', FALSE) THEN
+                                "1st Apprv. Status" := SalesHeader."1st Apprv. Status"::" "
+                            ELSE BEGIN
                                 TESTFIELD("2nd Approval to");
                                 IF UserSetup2.GET(USERID) THEN
                                     SenderEmail := UserSetup2."E-Mail";
@@ -220,50 +308,138 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                                 UserSetup.GET("2nd Approval to");
                                 "Current pending Person" := "2nd Approval to";
                                 ToName := UserSetup."E-Mail";
-                                CCName := 'ravinder@toyotanigeria.com;' + 'godwin@toyotanigeria.com;' + 'Ingale@toyotanigeria.com';
-                                Subject := STRSUBSTNO(WaitingforApprovalText, "No.");
-                                "Mail Body" := STRSUBSTNO(WaitingforApprovalText, "No.");
-                                //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                                //.Send;
-                                MESSAGE('Mail Sent Successfully!');
+                                CCName := 'ravinder@toyotanigeria.com';
+                                Subject := STRSUBSTNO(Text073, "No.");
+                                "Mail Body" := STRSUBSTNO(Text073, "No.");
+                                SenderInitial := UserSetup2.Initials;
+                                Initials := UserSetup.Initials;
+
+                                CreateEmailBody("No.", Initials, "Mail Body");
+                                SendEmail(ToName, Subject, EmailBody, CCName, SenderEmail);
+
+                                /*    WITH TempEmailItem DO BEGIN
+                                       "Send to" := ToName;
+                                       "Send CC" := SenderEmail + ';' + CCName;
+                                       "Send BCC" := '';
+                                       Subject := STRSUBSTNO(Text073, "No.");
+
+                                       CRLF := '';
+                                       CRLF[1] := 13;
+                                       CRLF[2] := 10;
+
+                                       BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                                       BodyStream.WRITETEXT(Text071 + Initials + ',');
+                                       BodyStream.WRITETEXT(CRLF + CRLF);
+                                       BodyStream.WRITETEXT(STRSUBSTNO(Text073, "No.") + CRLF + CRLF +
+                                       CRLF + CRLF +
+                                       Text077 + CRLF);
+                                       BodyStream.WRITETEXT(SenderInitial);
+                                       BodyStream.WRITETEXT(CRLF + CRLF);
+                                       BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                                       Body := BodyBlob.Blob;
+                                       Send(FALSE);
+                                   END;
+                                    */
                             END;
+
                         "1st Apprv. Status"::Rejected:
-                            BEGIN
+                            IF NOT CONFIRM('Are you sure you want to reject this?', FALSE) THEN
+                                "1st Apprv. Status" := SalesHeader."1st Apprv. Status"::" "
+                            ELSE BEGIN
                                 "1st Approval Time" := CURRENTDATETIME;
                                 IF UserSetup2.GET(USERID) THEN
                                     SenderEmail := UserSetup2."E-Mail";
                                 UserSetup.GET(Sender);
                                 ToName := UserSetup."E-Mail";
                                 CCName := 'ravinder@toyotanigeria.com';
-                                Subject := STRSUBSTNO(RejectedText, "No.");
-                                //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
-                                //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                                //.Send;
-                                MESSAGE('Mail Sent Successfully!');
+                                Subject := STRSUBSTNO(Text075, "No.");
+                                SenderInitial := UserSetup2.Initials;
+                                Initials := UserSetup.Initials;
+
+                                CreateEmailBody("No.", Initials, "Mail Body");
+                                SendEmail(ToName, Subject, EmailBody, CCName, SenderEmail);
+
+                                /* WITH TempEmailItem DO BEGIN
+                                    "Send to" := ToName;
+                                    "Send CC" := SenderEmail + ';' + CCName;
+                                    "Send BCC" := '';
+                                    Subject := STRSUBSTNO(Text075, "No.");
+
+                                    CRLF := '';
+                                    CRLF[1] := 13;
+                                    CRLF[2] := 10;
+
+                                    BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                                    BodyStream.WRITETEXT(Text071 + Initials + ',');
+                                    BodyStream.WRITETEXT(CRLF + CRLF);
+                                    BodyStream.WRITETEXT(STRSUBSTNO(Text075, "No.") + CRLF + CRLF +
+                                    CRLF + CRLF +
+                                    Text077 + CRLF);
+                                    BodyStream.WRITETEXT(SenderInitial);
+                                    BodyStream.WRITETEXT(CRLF + CRLF);
+                                    BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                                    Body := BodyBlob.Blob;
+                                    Send(FALSE);
+                                END; 
+                                */
+
                             END;
+
                         "1st Apprv. Status"::"on Hold":
-                            BEGIN
+                            IF NOT CONFIRM('Are you sure you want place this order on hold?', FALSE) THEN
+                                "1st Apprv. Status" := SalesHeader."1st Apprv. Status"::" "
+                            ELSE BEGIN
                                 IF UserSetup2.GET(USERID) THEN
                                     SenderEmail := UserSetup2."E-Mail";
                                 "1st Approval Time" := CURRENTDATETIME;
                                 UserSetup.GET(Sender);
                                 ToName := UserSetup."E-Mail";
-                                Subject := STRSUBSTNO(OnholdText, "No.");
-                                "Mail Body" := STRSUBSTNO(OnholdText, "No.");
-                                //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
-                                //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                                //.Send;
-                                MESSAGE('Mail Sent Successfully!');
+                                Subject := STRSUBSTNO(Text076, "No.");
+                                "Mail Body" := STRSUBSTNO(Text076, "No.");
+                                SenderInitial := UserSetup2.Initials;
+                                Initials := UserSetup.Initials;
+
+                                CreateEmailBody("No.", Initials, "Mail Body");
+                                SendEmail(ToName, Subject, EmailBody, CCName, SenderEmail);
+
+                                /*  WITH TempEmailItem DO BEGIN
+                                     "Send to" := ToName;
+                                     "Send CC" := SenderEmail;
+                                     "Send BCC" := '';
+                                     Subject := STRSUBSTNO(Text076, "No.");
+
+                                     CRLF := '';
+                                     CRLF[1] := 13;
+                                     CRLF[2] := 10;
+
+                                     BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                                     BodyStream.WRITETEXT(Text071 + Initials + ',');
+                                     BodyStream.WRITETEXT(CRLF + CRLF);
+                                     BodyStream.WRITETEXT(STRSUBSTNO(Text076, "No.") + CRLF + CRLF +
+                                     CRLF + CRLF +
+                                     Text077 + CRLF);
+                                     BodyStream.WRITETEXT(SenderInitial);
+                                     BodyStream.WRITETEXT(CRLF + CRLF);
+                                     BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                                     Body := BodyBlob.Blob;
+                                     Send(FALSE);
+                                 END; 
+                                 */
+
                             END;
                     END;
                 END;
+
+
                 IF ("Shortcut Dimension 1 Code" = '05PARTS') AND ("Reason Code" = 'NDEFECTIVE') THEN BEGIN
                     TESTFIELD("Send for Approval", TRUE);
                     TESTFIELD("1st Approval to", USERID);
                     "1st Approval Time" := 0DT;
                     CASE "1st Apprv. Status" OF
                         "1st Apprv. Status"::Approved:
-                            BEGIN
+                            IF NOT CONFIRM('Are you sure you want to approve this?', FALSE) THEN
+                                "1st Apprv. Status" := SalesHeader."1st Apprv. Status"::" "
+                            ELSE BEGIN
                                 TESTFIELD("2nd Approval to");
                                 IF UserSetup2.GET(USERID) THEN
                                     SenderEmail := UserSetup2."E-Mail";
@@ -271,53 +447,141 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                                 UserSetup.GET("2nd Approval to");
                                 "Current pending Person" := "2nd Approval to";
                                 ToName := UserSetup."E-Mail";
-                                CCName := 'agbesua@toyotanigeria.com;' + 'brano@toyotanigeria.com;' + 'ravinder@toyotanigeria.com';
-                                Subject := STRSUBSTNO(WaitingforApprovalText, "No.");
-                                "Mail Body" := STRSUBSTNO(WaitingforApprovalText, "No.");
-                                //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
-                                //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                                //.Send;
-                                MESSAGE('Mail Sent Successfully!');
+                                CCName := 'brano@toyotanigeria.com;' + 'ravinder@toyotanigeria.com;' + 'grace@toyotanigeria.com';
+                                Subject := STRSUBSTNO(Text073, "No.");
+                                "Mail Body" := STRSUBSTNO(Text073, "No.");
+                                SenderInitial := UserSetup2.Initials;
+                                Initials := UserSetup.Initials;
+
+                                CreateEmailBody("No.", Initials, "Mail Body");
+                                SendEmail(ToName, Subject, EmailBody, CCName, SenderEmail);
+
+                                /* WITH TempEmailItem DO BEGIN
+                                    "Send to" := ToName;
+                                    "Send CC" := SenderEmail + ';' + CCName;
+                                    "Send BCC" := '';
+                                    Subject := STRSUBSTNO(Text073, "No.");
+
+                                    CRLF := '';
+                                    CRLF[1] := 13;
+                                    CRLF[2] := 10;
+
+                                    BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                                    BodyStream.WRITETEXT(Text071 + Initials + ',');
+                                    BodyStream.WRITETEXT(CRLF + CRLF);
+                                    BodyStream.WRITETEXT(STRSUBSTNO(Text073, "No.") + CRLF + CRLF +
+                                    CRLF + CRLF +
+                                    Text077 + CRLF);
+                                    BodyStream.WRITETEXT(SenderInitial);
+                                    BodyStream.WRITETEXT(CRLF + CRLF);
+                                    BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                                    Body := BodyBlob.Blob;
+                                    Send(FALSE);
+                                END; 
+                                */
 
                             END;
+
                         "1st Apprv. Status"::Rejected:
-                            BEGIN
+                            IF NOT CONFIRM('Are you sure you want to reject this?', FALSE) THEN
+                                "1st Apprv. Status" := SalesHeader."1st Apprv. Status"::" "
+                            ELSE BEGIN
                                 IF UserSetup2.GET(USERID) THEN
                                     SenderEmail := UserSetup2."E-Mail";
                                 "1st Approval Time" := CURRENTDATETIME;
                                 UserSetup.GET(Sender);
                                 ToName := UserSetup."E-Mail";
                                 CCName := 'ravinder@toyotanigeria.com';
-                                Subject := STRSUBSTNO(RejectedText, "No.");
-                                "Mail Body" := STRSUBSTNO(RejectedText, "No.");
-                                //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
-                                //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                                //.Send;
-                                MESSAGE('Mail Sent Successfully!');
+                                Subject := STRSUBSTNO(Text075, "No.");
+                                "Mail Body" := STRSUBSTNO(Text075, "No.");
+                                SenderInitial := UserSetup2.Initials;
+                                Initials := UserSetup.Initials;
+
+                                CreateEmailBody("No.", Initials, "Mail Body");
+                                SendEmail(ToName, Subject, EmailBody, CCName, SenderEmail);
+
+                                /* 
+                                  WITH TempEmailItem DO BEGIN
+                                      "Send to" := ToName;
+                                      "Send CC" := SenderEmail + ';' + CCName;
+                                      "Send BCC" := '';
+                                      Subject := STRSUBSTNO(Text075, "No.");
+
+                                      CRLF := '';
+                                      CRLF[1] := 13;
+                                      CRLF[2] := 10;
+
+                                      BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                                      BodyStream.WRITETEXT(Text071 + Initials + ',');
+                                      BodyStream.WRITETEXT(CRLF + CRLF);
+                                      BodyStream.WRITETEXT(STRSUBSTNO(Text075, "No.") + CRLF + CRLF +
+                                      CRLF + CRLF +
+                                      Text077 + CRLF);
+                                      BodyStream.WRITETEXT(SenderInitial);
+                                      BodyStream.WRITETEXT(CRLF + CRLF);
+                                      BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                                      Body := BodyBlob.Blob;
+                                      Send(FALSE);
+                                  END;
+                                   */
                             END;
+
+
                         "1st Apprv. Status"::"on Hold":
-                            BEGIN
+                            IF NOT CONFIRM('Are you sure you want place this order ON_HOLD?', FALSE) THEN
+                                "1st Apprv. Status" := SalesHeader."1st Apprv. Status"::" "
+                            ELSE BEGIN
                                 "1st Approval Time" := CURRENTDATETIME;
                                 IF UserSetup2.GET(USERID) THEN
                                     SenderEmail := UserSetup2."E-Mail";
                                 UserSetup.GET(Sender);
                                 ToName := UserSetup."E-Mail";
-                                Subject := STRSUBSTNO(OnholdText, "No.");
-                                "Mail Body" := STRSUBSTNO(OnholdText, "No.");
-                                //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
-                                //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                                //.Send;
-                                MESSAGE('Mail Sent Successfully!');
+                                Subject := STRSUBSTNO(Text076, "No.");
+                                "Mail Body" := STRSUBSTNO(Text076, "No.");
+                                SenderInitial := UserSetup2.Initials;
+                                Initials := UserSetup.Initials;
+
+                                CreateEmailBody("No.", Initials, "Mail Body");
+                                SendEmail(ToName, Subject, EmailBody, CCName, SenderEmail);
+
+                                /*      WITH TempEmailItem DO BEGIN
+                                         "Send to" := ToName;
+                                         "Send CC" := SenderEmail;
+                                         "Send BCC" := '';
+                                         Subject := STRSUBSTNO(Text076, "No.");
+
+                                         CRLF := '';
+                                         CRLF[1] := 13;
+                                         CRLF[2] := 10;
+
+                                         BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                                         BodyStream.WRITETEXT(Text071 + Initials + ',');
+                                         BodyStream.WRITETEXT(CRLF + CRLF);
+                                         BodyStream.WRITETEXT(STRSUBSTNO(Text076, "No.") + CRLF + CRLF +
+                                         CRLF + CRLF +
+                                         Text077 + CRLF);
+                                         BodyStream.WRITETEXT(SenderInitial);
+                                         BodyStream.WRITETEXT(CRLF + CRLF);
+                                         BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                                         Body := BodyBlob.Blob;
+                                         Send(FALSE);
+                                     END; 
+                                     */
+
                             END;
                     END;
                 END;
+
+
                 IF ("Shortcut Dimension 1 Code" = '05PARTS') AND ("Reason Code" = 'ERROR') THEN BEGIN
                     TESTFIELD("Send for Approval", TRUE);
                     TESTFIELD("1st Approval to", USERID);
                     "1st Approval Time" := 0DT;
                     CASE "1st Apprv. Status" OF
                         "1st Apprv. Status"::Approved:
-                            BEGIN
+                            IF NOT CONFIRM('Are you sure you want to APPROVE this?', FALSE) THEN
+                                "1st Apprv. Status" := SalesHeader."1st Apprv. Status"::" "
+                            ELSE BEGIN
                                 TESTFIELD("2nd Approval to");
                                 "1st Approval Time" := CURRENTDATETIME;
                                 IF UserSetup2.GET(USERID) THEN
@@ -325,45 +589,132 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                                 UserSetup.GET("2nd Approval to");
                                 // "Current pending Person" := "2nd Approval to";
                                 ToName := UserSetup."E-Mail";
-                                CCName := 'agbesua@toyotanigeria.com;' + 'brano@toyotanigeria.com;' + 'ravinder@toyotanigeria.com';
-                                Subject := STRSUBSTNO(WaitingforApprovalText, "No.");
-                                "Mail Body" := STRSUBSTNO(WaitingforApprovalText, "No.");
-                                //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
-                                //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                                //.Send;
+                                CCName := 'brano@toyotanigeria.com;' + 'ravinder@toyotanigeria.com;' + 'grace@toyotanigeria.com';
+                                Subject := STRSUBSTNO(Text073, "No.");
+                                "Mail Body" := STRSUBSTNO(Text073, "No.");
+                                SenderInitial := UserSetup2.Initials;
+                                Initials := UserSetup.Initials;
+
+                                CreateEmailBody("No.", Initials, "Mail Body");
+                                SendEmail(ToName, Subject, EmailBody, CCName, SenderEmail);
+
+                                /*    WITH TempEmailItem DO BEGIN
+                                       "Send to" := ToName;
+                                       "Send CC" := SenderEmail + ';' + CCName;
+                                       "Send BCC" := '';
+                                       Subject := STRSUBSTNO(Text074, "No.");
+
+                                       CRLF := '';
+                                       CRLF[1] := 13;
+                                       CRLF[2] := 10;
+
+                                       BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                                       BodyStream.WRITETEXT(Text071 + '' + Initials + ',');
+                                       BodyStream.WRITETEXT(CRLF + CRLF);
+                                       BodyStream.WRITETEXT(STRSUBSTNO(Text074, "No.") + CRLF + CRLF +
+                                       CRLF + CRLF +
+                                       Text077 + CRLF);
+                                       BodyStream.WRITETEXT(SenderInitial);
+                                       BodyStream.WRITETEXT(CRLF + CRLF);
+                                       BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                                       Body := BodyBlob.Blob;
+                                       Send(FALSE);
+                                   END; 
+                               */
                             END;
+
+
                         "1st Apprv. Status"::Rejected:
-                            BEGIN
+                            IF NOT CONFIRM('Are you sure you want to REJECT this?', FALSE) THEN
+                                "1st Apprv. Status" := SalesHeader."1st Apprv. Status"::" "
+                            ELSE BEGIN
                                 "1st Approval Time" := CURRENTDATETIME;
                                 IF UserSetup2.GET(USERID) THEN
                                     SenderEmail := UserSetup2."E-Mail";
                                 UserSetup.GET(Sender);
                                 ToName := UserSetup."E-Mail";
                                 CCName := 'ravinder@toyotanigeria.com';
-                                Subject := STRSUBSTNO(RejectedText, "No.");
-                                "Mail Body" := STRSUBSTNO(RejectedText, "No.");
-                                //mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
-                                //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                                //.Send;
-                                MESSAGE('Mail Sent Successfully!');
+                                Subject := STRSUBSTNO(Text075, "No.");
+                                "Mail Body" := STRSUBSTNO(Text075, "No.");
+                                SenderInitial := UserSetup2.Initials;
+                                Initials := UserSetup.Initials;
+
+                                CreateEmailBody("No.", Initials, "Mail Body");
+                                SendEmail(ToName, Subject, EmailBody, CCName, SenderEmail);
+
+                                /*   WITH TempEmailItem DO BEGIN
+                                      "Send to" := ToName;
+                                      "Send CC" := SenderEmail + ';' + CCName;
+                                      "Send BCC" := '';
+                                      Subject := STRSUBSTNO(Text075, "No.");
+
+                                      CRLF := '';
+                                      CRLF[1] := 13;
+                                      CRLF[2] := 10;
+
+                                      BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                                      BodyStream.WRITETEXT(Text071 + Initials + ',');
+                                      BodyStream.WRITETEXT(CRLF + CRLF);
+                                      BodyStream.WRITETEXT(STRSUBSTNO(Text075, "No.") + CRLF + CRLF +
+                                      CRLF + CRLF +
+                                      Text077 + CRLF);
+                                      BodyStream.WRITETEXT(SenderInitial);
+                                      BodyStream.WRITETEXT(CRLF + CRLF);
+                                      BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                                      Body := BodyBlob.Blob;
+                                      Send(FALSE);
+                                  END; 
+                                  */
+
                             END;
+
+
                         "1st Apprv. Status"::"on Hold":
-                            BEGIN
+                            IF NOT CONFIRM('Are you sure you want place this order ON_HOLD?', FALSE) THEN
+                                "1st Apprv. Status" := SalesHeader."1st Apprv. Status"::" "
+                            ELSE BEGIN
                                 "1st Approval Time" := CURRENTDATETIME;
                                 IF UserSetup2.GET(USERID) THEN
                                     SenderEmail := UserSetup2."E-Mail";
                                 UserSetup.GET(Sender);
                                 ToName := UserSetup."E-Mail";
-                                Subject := STRSUBSTNO(OnholdText, "No.");
-                                "Mail Body" := STRSUBSTNO(OnholdText, "No.");
-                                //                   mailsent := approvalmessage.NewMessage(ToName,CCName,'',Subject,"Mail Body",attachement,TRUE);
-                                //.CreateMessage(USERID, SenderEmail, ToName, Subject, "Mail Body", FALSE);
-                                //.Send;
-                                MESSAGE('Mail Sent Successfully!');
+                                Subject := STRSUBSTNO(Text076, "No.");
+                                "Mail Body" := STRSUBSTNO(Text076, "No.");
+                                SenderInitial := UserSetup2.Initials;
+                                Initials := UserSetup.Initials;
+
+                                CreateEmailBody("No.", Initials, "Mail Body");
+                                SendEmail(ToName, Subject, EmailBody, CCName, SenderEmail);
+
+                                /*   WITH TempEmailItem DO BEGIN
+                                      "Send to" := ToName;
+                                      "Send CC" := SenderEmail;
+                                      "Send BCC" := '';
+                                      Subject := STRSUBSTNO(Text076, "No.");
+
+                                      CRLF := '';
+                                      CRLF[1] := 13;
+                                      CRLF[2] := 10;
+
+                                      BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                                      BodyStream.WRITETEXT(Text071 + Initials + ',');
+                                      BodyStream.WRITETEXT(CRLF + CRLF);
+                                      BodyStream.WRITETEXT(STRSUBSTNO(Text076, "No.") + CRLF + CRLF +
+                                      CRLF + CRLF +
+                                      Text077 + CRLF);
+                                      BodyStream.WRITETEXT(SenderInitial);
+                                      BodyStream.WRITETEXT(CRLF + CRLF);
+                                      BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                                      Body := BodyBlob.Blob;
+                                      Send(FALSE);
+                                  END; */
+
                             END;
                     END;
                 END;
+
             end;
+
         }
         field(50176; "1st Approval Time"; DateTime)
         {
@@ -392,6 +743,552 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
         {
             OptionCaption = ' ,on Hold,Approved,Rejected';
             OptionMembers = " ","on Hold",Approved,Rejected;
+            trigger OnValidate()
+            begin
+
+
+                IF "Shortcut Dimension 1 Code" = '09MARKET' THEN BEGIN
+                    TESTFIELD("Send for Approval", TRUE);
+                    TESTFIELD("1st Apprv. Status", 2);
+                    TESTFIELD("2nd Approval to", USERID);
+                    "2nd Approval Time" := 0DT;
+                    CASE "2nd Apprv. Status" OF
+                        "2nd Apprv. Status"::Approved:
+                            IF NOT CONFIRM('Are you sure you want to APPROVE this?', FALSE) THEN
+                                "2nd Apprv. Status" := SalesHeader."2nd Apprv. Status"::" "
+                            ELSE BEGIN
+                                "2nd Approval Time" := CURRENTDATETIME;
+                                IF UserSetup2.GET(USERID) THEN
+                                    SenderEmail := UserSetup2."E-Mail";
+                                UserSetup.GET(Sender);
+                                ToName := UserSetup."E-Mail";
+                                CCName := 'oshunniyi@toyotanigeria.com';
+                                Subject := STRSUBSTNO(Text074, "No.");
+                                "Mail Body" := STRSUBSTNO(Text074, "No.");
+                                SenderInitial := UserSetup2.Initials;
+                                Initials := UserSetup.Initials;
+
+                                CreateEmailBody("No.", Initials, "Mail Body");
+                                SendEmail(ToName, Subject, EmailBody, CCName, SenderEmail);
+
+                                /* WITH TempEmailItem DO BEGIN
+                                    "Send to" := ToName;
+                                    "Send CC" := SenderEmail + ';' + CCName;
+                                    "Send BCC" := '';
+                                    Subject := STRSUBSTNO(Text074, "No.");
+
+                                    CRLF := '';
+                                    CRLF[1] := 13;
+                                    CRLF[2] := 10;
+
+                                    BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                                    BodyStream.WRITETEXT(Text071 + Initials + ',');
+                                    BodyStream.WRITETEXT(CRLF + CRLF);
+                                    BodyStream.WRITETEXT(STRSUBSTNO(Text074, "No.") + CRLF + CRLF +
+                                    CRLF + CRLF +
+                                    Text077 + CRLF);
+                                    BodyStream.WRITETEXT(SenderInitial);
+                                    BodyStream.WRITETEXT(CRLF + CRLF);
+                                    BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                                    Body := BodyBlob.Blob;
+                                    Send(FALSE);
+                                END;
+                                 */
+                            END;
+                        "2nd Apprv. Status"::Rejected:
+                            IF NOT CONFIRM('Are you sure you want to REJECT this?', FALSE) THEN
+                                "2nd Apprv. Status" := SalesHeader."2nd Apprv. Status"::" "
+                            ELSE BEGIN
+                                "2nd Approval Time" := CURRENTDATETIME;
+                                IF UserSetup2.GET(USERID) THEN
+                                    SenderEmail := UserSetup2."E-Mail";
+                                UserSetup.GET(Sender);
+                                ToName := UserSetup."E-Mail";
+                                Subject := STRSUBSTNO(Text075, "No.");
+                                SenderInitial := UserSetup2.Initials;
+                                Initials := UserSetup.Initials;
+
+                                CreateEmailBody("No.", Initials, "Mail Body");
+                                SendEmail(ToName, Subject, EmailBody, CCName, SenderEmail);
+
+                                /* WITH TempEmailItem DO BEGIN
+                                    "Send to" := ToName;
+                                    "Send CC" := SenderEmail;
+                                    "Send BCC" := '';
+                                    Subject := STRSUBSTNO(Text075, "No.");
+
+                                    CRLF := '';
+                                    CRLF[1] := 13;
+                                    CRLF[2] := 10;
+
+                                    BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                                    BodyStream.WRITETEXT(Text071 + Initials + ',');
+                                    BodyStream.WRITETEXT(CRLF + CRLF);
+                                    BodyStream.WRITETEXT(STRSUBSTNO(Text075, "No.") + CRLF + CRLF +
+                                    CRLF + CRLF +
+                                    Text077 + CRLF);
+                                    BodyStream.WRITETEXT(SenderInitial);
+                                    BodyStream.WRITETEXT(CRLF + CRLF);
+                                    BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                                    Body := BodyBlob.Blob;
+                                    Send(FALSE);
+                                END;
+                                 */
+                            END;
+                        "2nd Apprv. Status"::"on Hold":
+                            IF NOT CONFIRM('Are you sure you want place this order ON_HOLD?', FALSE) THEN
+                                "2nd Apprv. Status" := SalesHeader."2nd Apprv. Status"::" "
+                            ELSE BEGIN
+                                "2nd Approval Time" := CURRENTDATETIME;
+                                IF UserSetup2.GET(USERID) THEN
+                                    SenderEmail := UserSetup2."E-Mail";
+                                UserSetup.GET(Sender);
+                                ToName := UserSetup."E-Mail";
+                                Subject := STRSUBSTNO(Text076, "No.");
+                                SenderInitial := UserSetup2.Initials;
+                                Initials := UserSetup.Initials;
+
+                                CreateEmailBody("No.", Initials, "Mail Body");
+                                SendEmail(ToName, Subject, EmailBody, CCName, SenderEmail);
+
+                                /* WITH TempEmailItem DO BEGIN
+                                    "Send to" := ToName;
+                                    "Send CC" := SenderEmail;
+                                    "Send BCC" := '';
+                                    Subject := STRSUBSTNO(Text076, "No.");
+
+                                    CRLF := '';
+                                    CRLF[1] := 13;
+                                    CRLF[2] := 10;
+
+                                    BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                                    BodyStream.WRITETEXT(Text071 + Initials + ',');
+                                    BodyStream.WRITETEXT(CRLF + CRLF);
+                                    BodyStream.WRITETEXT(STRSUBSTNO(Text076, "No.") + CRLF + CRLF +
+                                    CRLF + CRLF +
+                                    Text077 + CRLF);
+                                    BodyStream.WRITETEXT(SenderInitial);
+                                    BodyStream.WRITETEXT(CRLF + CRLF);
+                                    BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                                    Body := BodyBlob.Blob;
+                                    Send(FALSE);
+                                END;
+                                 */
+                            END;
+                    END;
+                END;
+
+
+                IF ("Shortcut Dimension 1 Code" = '05PARTS') AND ("Reason Code" = 'DEFECTIVE') THEN BEGIN
+                    TESTFIELD("Send for Approval", TRUE);
+                    TESTFIELD("1st Apprv. Status", 2);
+                    TESTFIELD("2nd Approval to", USERID);
+                    "2nd Approval Time" := 0DT;
+                    CASE "2nd Apprv. Status" OF
+                        "2nd Apprv. Status"::Approved:
+                            IF NOT CONFIRM('Are you sure you want to APPROVE this?', FALSE) THEN
+                                "2nd Apprv. Status" := SalesHeader."2nd Apprv. Status"::" "
+                            ELSE BEGIN
+                                "2nd Approval Time" := CURRENTDATETIME;
+                                IF UserSetup2.GET(USERID) THEN
+                                    SenderEmail := UserSetup2."E-Mail";
+                                UserSetup.GET(Sender);
+                                ToName := UserSetup."E-Mail";
+                                CCName := 'brano@toyotanigeria.com;' + 'oshunniyi@toyotanigeria.com;' + 'ravinder@toyotanigeria.com;' + 'grace@toyotanigeria.com';
+                                Subject := STRSUBSTNO(Text073, "No.");
+                                SenderInitial := UserSetup2.Initials;
+                                Initials := UserSetup.Initials;
+
+                                CreateEmailBody("No.", Initials, "Mail Body");
+                                SendEmail(ToName, Subject, EmailBody, CCName, SenderEmail);
+
+                                /* WITH TempEmailItem DO BEGIN
+                                    "Send to" := ToName;
+                                    "Send CC" := SenderEmail + ';' + CCName;
+                                    "Send BCC" := '';
+                                    Subject := STRSUBSTNO(Text073, "No.");
+
+                                    CRLF := '';
+                                    CRLF[1] := 13;
+                                    CRLF[2] := 10;
+
+                                    BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                                    BodyStream.WRITETEXT(Text071 + Initials + ',');
+                                    BodyStream.WRITETEXT(CRLF + CRLF);
+                                    BodyStream.WRITETEXT(STRSUBSTNO(Text073, "No.") + CRLF + CRLF +
+                                    CRLF + CRLF +
+                                    Text077 + CRLF);
+                                    BodyStream.WRITETEXT(SenderInitial);
+                                    BodyStream.WRITETEXT(CRLF + CRLF);
+                                    BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                                    Body := BodyBlob.Blob;
+                                    Send(FALSE);
+                                END;
+                                 */
+                            END;
+                        "2nd Apprv. Status"::Rejected:
+                            IF NOT CONFIRM('Are you sure you want to reject this?', FALSE) THEN
+                                "2nd Apprv. Status" := SalesHeader."2nd Apprv. Status"::" "
+                            ELSE BEGIN
+                                "2nd Approval Time" := CURRENTDATETIME;
+                                IF UserSetup2.GET(USERID) THEN
+                                    SenderEmail := UserSetup2."E-Mail";
+                                UserSetup.GET(Sender);
+                                ToName := UserSetup."E-Mail";
+                                CCName := 'ravinder@toyotanigeria.com';
+                                Subject := STRSUBSTNO(Text075, "No.");
+                                "Mail Body" := STRSUBSTNO(Text075, "No.");
+                                SenderInitial := UserSetup2.Initials;
+                                Initials := UserSetup.Initials;
+
+                                CreateEmailBody("No.", Initials, "Mail Body");
+                                SendEmail(ToName, Subject, EmailBody, CCName, SenderEmail);
+
+                                /* WITH TempEmailItem DO BEGIN
+                                    "Send to" := ToName;
+                                    "Send CC" := SenderEmail + ';' + CCName;
+                                    "Send BCC" := '';
+                                    Subject := STRSUBSTNO(Text075, "No.");
+
+                                    CRLF := '';
+                                    CRLF[1] := 13;
+                                    CRLF[2] := 10;
+
+                                    BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                                    BodyStream.WRITETEXT(Text071 + Initials + ',');
+                                    BodyStream.WRITETEXT(CRLF + CRLF);
+                                    BodyStream.WRITETEXT(STRSUBSTNO(Text075, "No.") + CRLF + CRLF +
+                                    CRLF + CRLF +
+                                    Text077 + CRLF);
+                                    BodyStream.WRITETEXT(SenderInitial);
+                                    BodyStream.WRITETEXT(CRLF + CRLF);
+                                    BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                                    Body := BodyBlob.Blob;
+                                    Send(FALSE);
+                                END;
+                                 */
+
+                            END;
+                        "2nd Apprv. Status"::"on Hold":
+                            IF NOT CONFIRM('Are you sure you want place this order on hold?', FALSE) THEN
+                                "2nd Apprv. Status" := SalesHeader."2nd Apprv. Status"::" "
+                            ELSE BEGIN
+                                "2nd Approval Time" := CURRENTDATETIME;
+                                IF UserSetup2.GET(USERID) THEN
+                                    SenderEmail := UserSetup2."E-Mail";
+                                UserSetup.GET(Sender);
+                                ToName := UserSetup."E-Mail";
+                                CCName := 'ravinder@toyotanigeria.com';
+                                Subject := STRSUBSTNO(Text076, "No.");
+                                "Mail Body" := STRSUBSTNO(Text076, "No.");
+                                SenderInitial := UserSetup2.Initials;
+                                Initials := UserSetup.Initials;
+
+                                CreateEmailBody("No.", Initials, "Mail Body");
+                                SendEmail(ToName, Subject, EmailBody, CCName, SenderEmail);
+
+                                /* WITH TempEmailItem DO BEGIN
+                                    "Send to" := ToName;
+                                    "Send CC" := SenderEmail;
+                                    "Send BCC" := '';
+                                    Subject := STRSUBSTNO(Text076, "No.");
+
+                                    CRLF := '';
+                                    CRLF[1] := 13;
+                                    CRLF[2] := 10;
+
+                                    BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                                    BodyStream.WRITETEXT(Text071 + Initials + ',');
+                                    BodyStream.WRITETEXT(CRLF + CRLF);
+                                    BodyStream.WRITETEXT(STRSUBSTNO(Text076, "No.") + CRLF + CRLF +
+                                    CRLF + CRLF +
+                                    Text077 + CRLF);
+                                    BodyStream.WRITETEXT(SenderInitial);
+                                    BodyStream.WRITETEXT(CRLF + CRLF);
+                                    BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                                    Body := BodyBlob.Blob;
+                                    Send(FALSE);
+                                END;
+                                 */
+                            END;
+                    END;
+                END;
+
+                IF ("Shortcut Dimension 1 Code" = '05PARTS') AND ("Reason Code" = 'NDEFECTIVE') THEN BEGIN
+                    TESTFIELD("Send for Approval", TRUE);
+                    TESTFIELD("1st Apprv. Status", 2);
+                    TESTFIELD("2nd Approval to", USERID);
+                    "2nd Approval Time" := 0DT;
+                    CASE "2nd Apprv. Status" OF
+                        "2nd Apprv. Status"::Approved:
+                            IF NOT CONFIRM('Are you sure you want to APPROVE this?', FALSE) THEN
+                                "2nd Apprv. Status" := SalesHeader."2nd Apprv. Status"::" "
+                            ELSE BEGIN
+                                // TESTFIELD("3rd Approval to");
+                                "2nd Approval Time" := CURRENTDATETIME;
+                                IF UserSetup2.GET(USERID) THEN
+                                    SenderEmail := UserSetup2."E-Mail";
+                                UserSetup.GET(Sender);
+                                ToName := UserSetup."E-Mail";
+                                CCName := 'ravinder@toyotanigeria.com';
+                                Subject := STRSUBSTNO(Text073, "No.");
+                                "Mail Body" := STRSUBSTNO(Text073, "No.");
+                                SenderInitial := UserSetup2.Initials;
+                                Initials := UserSetup.Initials;
+
+                                CreateEmailBody("No.", Initials, "Mail Body");
+                                SendEmail(ToName, Subject, EmailBody, CCName, SenderEmail);
+
+                                /* WITH TempEmailItem DO BEGIN
+                                    "Send to" := ToName;
+                                    "Send CC" := SenderEmail + ';' + CCName;
+                                    "Send BCC" := '';
+                                    Subject := STRSUBSTNO(Text073, "No.");
+
+                                    CRLF := '';
+                                    CRLF[1] := 13;
+                                    CRLF[2] := 10;
+
+                                    BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                                    BodyStream.WRITETEXT(Text071 + Initials + ',');
+                                    BodyStream.WRITETEXT(CRLF + CRLF);
+                                    BodyStream.WRITETEXT(STRSUBSTNO(Text074, "No.") + CRLF + CRLF +
+                                    CRLF + CRLF +
+                                    Text077 + CRLF);
+                                    BodyStream.WRITETEXT(SenderInitial);
+                                    BodyStream.WRITETEXT(CRLF + CRLF);
+                                    BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                                    Body := BodyBlob.Blob;
+                                    Send(FALSE);
+                                END;
+                                 */
+                            END;
+
+                        "2nd Apprv. Status"::Rejected:
+                            IF NOT CONFIRM('Are you sure you want to reject this?', FALSE) THEN
+                                "2nd Apprv. Status" := SalesHeader."2nd Apprv. Status"::" "
+                            ELSE BEGIN
+                                "2nd Approval Time" := CURRENTDATETIME;
+                                IF UserSetup2.GET(USERID) THEN
+                                    SenderEmail := UserSetup2."E-Mail";
+                                UserSetup.GET(Sender);
+                                ToName := UserSetup."E-Mail";
+                                CCName := 'ravinder@toyotanigeria.com';
+                                Subject := STRSUBSTNO(Text075, "No.");
+                                "Mail Body" := STRSUBSTNO(Text075, "No.");
+                                SenderInitial := UserSetup2.Initials;
+                                Initials := UserSetup.Initials;
+
+                                CreateEmailBody("No.", Initials, "Mail Body");
+                                SendEmail(ToName, Subject, EmailBody, CCName, SenderEmail);
+
+                                /* WITH TempEmailItem DO BEGIN
+                                    "Send to" := ToName;
+                                    "Send CC" := SenderEmail + ';' + CCName;
+                                    "Send BCC" := '';
+                                    Subject := STRSUBSTNO(Text075, "No.");
+
+                                    CRLF := '';
+                                    CRLF[1] := 13;
+                                    CRLF[2] := 10;
+
+                                    BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                                    BodyStream.WRITETEXT(Text071 + Initials + ',');
+                                    BodyStream.WRITETEXT(CRLF + CRLF);
+                                    BodyStream.WRITETEXT(STRSUBSTNO(Text075, "No.") + CRLF + CRLF +
+                                    CRLF + CRLF +
+                                    Text077 + CRLF);
+                                    BodyStream.WRITETEXT(SenderInitial);
+                                    BodyStream.WRITETEXT(CRLF + CRLF);
+                                    BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                                    Body := BodyBlob.Blob;
+                                    Send(FALSE);
+                                END;
+                                 */
+                            END;
+                        "2nd Apprv. Status"::"on Hold":
+                            IF NOT CONFIRM('Are you sure you want place this order on hold?', FALSE) THEN
+                                "2nd Apprv. Status" := SalesHeader."2nd Apprv. Status"::" "
+                            ELSE BEGIN
+                                "2nd Approval Time" := CURRENTDATETIME;
+                                IF UserSetup2.GET(USERID) THEN
+                                    SenderEmail := UserSetup2."E-Mail";
+                                UserSetup.GET(Sender);
+                                ToName := UserSetup."E-Mail";
+                                CCName := 'ravinder@toyotanigeria.com';
+                                Subject := STRSUBSTNO(Text076, "No.");
+                                "Mail Body" := STRSUBSTNO(Text076, "No.");
+                                SenderInitial := UserSetup2.Initials;
+                                Initials := UserSetup.Initials;
+
+                                CreateEmailBody("No.", Initials, "Mail Body");
+                                SendEmail(ToName, Subject, EmailBody, CCName, SenderEmail);
+
+                                /* WITH TempEmailItem DO BEGIN
+                                    "Send to" := ToName;
+                                    "Send CC" := SenderEmail;
+                                    "Send BCC" := '';
+                                    Subject := STRSUBSTNO(Text076, "No.");
+
+                                    CRLF := '';
+                                    CRLF[1] := 13;
+                                    CRLF[2] := 10;
+
+                                    BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                                    BodyStream.WRITETEXT(Text071 + Initials + ',');
+                                    BodyStream.WRITETEXT(CRLF + CRLF);
+                                    BodyStream.WRITETEXT(STRSUBSTNO(Text076, "No.") + CRLF + CRLF +
+                                    CRLF + CRLF +
+                                    Text077 + CRLF);
+                                    BodyStream.WRITETEXT(SenderInitial);
+                                    BodyStream.WRITETEXT(CRLF + CRLF);
+                                    BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                                    Body := BodyBlob.Blob;
+                                    Send(FALSE);
+                                END;
+                                 */
+                            END;
+                    END;
+                END;
+                IF ("Shortcut Dimension 1 Code" = '05PARTS') AND ("Reason Code" = 'ERROR') THEN BEGIN
+                    TESTFIELD("Send for Approval", TRUE);
+                    TESTFIELD("1st Apprv. Status", 2);
+                    TESTFIELD("2nd Approval to", USERID);
+                    "2nd Approval Time" := 0DT;
+                    CASE "2nd Apprv. Status" OF
+                        "2nd Apprv. Status"::Approved:
+                            IF NOT CONFIRM('Are you sure you want to approve this?', FALSE) THEN
+                                "2nd Apprv. Status" := SalesHeader."2nd Apprv. Status"::" "
+                            ELSE BEGIN
+                                // TESTFIELD("3rd Approval to");
+                                "2nd Approval Time" := CURRENTDATETIME;
+                                IF UserSetup2.GET(USERID) THEN
+                                    SenderEmail := UserSetup2."E-Mail";
+                                UserSetup.GET(Sender);
+                                ToName := UserSetup."E-Mail";
+                                CCName := 'ravinder@toyotanigeria.com';
+                                Subject := STRSUBSTNO(Text074, "No.");
+                                "Mail Body" := STRSUBSTNO(Text074, "No.");
+                                SenderInitial := UserSetup2.Initials;
+                                Initials := UserSetup.Initials;
+
+                                CreateEmailBody("No.", Initials, "Mail Body");
+                                SendEmail(ToName, Subject, EmailBody, CCName, SenderEmail);
+
+                                /* WITH TempEmailItem DO BEGIN
+                                    "Send to" := ToName;
+                                    "Send CC" := SenderEmail + ';' + CCName;
+                                    "Send BCC" := '';
+                                    Subject := STRSUBSTNO(Text074, "No.");
+
+                                    CRLF := '';
+                                    CRLF[1] := 13;
+                                    CRLF[2] := 10;
+
+                                    BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                                    BodyStream.WRITETEXT(Text071 + Initials + ',');
+                                    BodyStream.WRITETEXT(CRLF + CRLF);
+                                    BodyStream.WRITETEXT(STRSUBSTNO(Text074, "No.") + CRLF + CRLF +
+                                    CRLF + CRLF +
+                                    Text077 + CRLF);
+                                    BodyStream.WRITETEXT(SenderInitial);
+                                    BodyStream.WRITETEXT(CRLF + CRLF);
+                                    BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                                    Body := BodyBlob.Blob;
+                                    Send(FALSE);
+                                END;
+                                 */
+                            END;
+
+                        "2nd Apprv. Status"::Rejected:
+                            IF NOT CONFIRM('Are you sure you want to rject this?', FALSE) THEN
+                                "2nd Apprv. Status" := SalesHeader."2nd Apprv. Status"::" "
+                            ELSE BEGIN
+                                "2nd Approval Time" := CURRENTDATETIME;
+                                IF UserSetup2.GET(USERID) THEN
+                                    SenderEmail := UserSetup2."E-Mail";
+                                UserSetup.GET(Sender);
+                                ToName := UserSetup."E-Mail";
+                                CCName := 'ravinder@toyotanigeria.com';
+                                Subject := STRSUBSTNO(Text075, "No.");
+                                "Mail Body" := STRSUBSTNO(Text075, "No.");
+                                SenderInitial := UserSetup2.Initials;
+                                Initials := UserSetup.Initials;
+
+                                CreateEmailBody("No.", Initials, "Mail Body");
+                                SendEmail(ToName, Subject, EmailBody, CCName, SenderEmail);
+
+                                /* WITH TempEmailItem DO BEGIN
+                                    "Send to" := ToName;
+                                    "Send CC" := SenderEmail + ';' + CCName;
+                                    "Send BCC" := '';
+                                    Subject := STRSUBSTNO(Text075, "No.");
+
+                                    CRLF := '';
+                                    CRLF[1] := 13;
+                                    CRLF[2] := 10;
+
+                                    BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                                    BodyStream.WRITETEXT(Text071 + Initials + ',');
+                                    BodyStream.WRITETEXT(CRLF + CRLF);
+                                    BodyStream.WRITETEXT(STRSUBSTNO(Text075, "No.") + CRLF + CRLF +
+                                    CRLF + CRLF +
+                                    Text077 + CRLF);
+                                    BodyStream.WRITETEXT(SenderInitial);
+                                    BodyStream.WRITETEXT(CRLF + CRLF);
+                                    BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                                    Body := BodyBlob.Blob;
+                                    Send(FALSE);
+                                END;
+                                 */
+                            END;
+
+                        "2nd Apprv. Status"::"on Hold":
+                            IF NOT CONFIRM('Are you sure you want place this order on hold?', FALSE) THEN
+                                "2nd Apprv. Status" := SalesHeader."2nd Apprv. Status"::" "
+                            ELSE BEGIN
+                                "2nd Approval Time" := CURRENTDATETIME;
+                                IF UserSetup2.GET(USERID) THEN
+                                    SenderEmail := UserSetup2."E-Mail";
+                                UserSetup.GET(Sender);
+                                ToName := UserSetup."E-Mail";
+                                CCName := 'ravinder@toyotanigeria.com';
+                                Subject := STRSUBSTNO(Text076, "No.");
+                                "Mail Body" := STRSUBSTNO(Text076, "No.");
+                                SenderInitial := UserSetup2.Initials;
+                                Initials := UserSetup.Initials;
+
+                                CreateEmailBody("No.", Initials, "Mail Body");
+                                SendEmail(ToName, Subject, EmailBody, CCName, SenderEmail);
+
+                                /*    WITH TempEmailItem DO BEGIN
+                                       "Send to" := ToName;
+                                       "Send CC" := SenderEmail;
+                                       "Send BCC" := '';
+                                       Subject := STRSUBSTNO(Text076, "No.");
+
+                                       CRLF := '';
+                                       CRLF[1] := 13;
+                                       CRLF[2] := 10;
+
+                                       BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                                       BodyStream.WRITETEXT(Text071 + Initials + ',');
+                                       BodyStream.WRITETEXT(CRLF + CRLF);
+                                       BodyStream.WRITETEXT(STRSUBSTNO(Text076, "No.") + CRLF + CRLF +
+                                       CRLF + CRLF +
+                                       Text077 + CRLF);
+                                       BodyStream.WRITETEXT(SenderInitial);
+                                       BodyStream.WRITETEXT(CRLF + CRLF);
+                                       BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                                       Body := BodyBlob.Blob;
+                                       Send(FALSE);
+                                   END;
+                                    */
+                            END;
+                    END;
+                END;
+
+            end;
 
         }
         field(50181; "2nd Approval Time"; DateTime)
@@ -412,6 +1309,155 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
         {
             OptionCaption = ' ,on Hold,Approved,Rejected';
             OptionMembers = " ","on Hold",Approved,Rejected;
+
+            trigger OnValidate()
+
+            begin
+
+                IF "Shortcut Dimension 1 Code" = '05PARTS' THEN BEGIN
+                    TESTFIELD("Send for Approval", TRUE);
+                    "Final Approval Time" := 0DT;
+                    //"Final Approver's Name" := UserSetup.Name;
+
+                    CASE "Final Apprv. Status" OF
+                        "Final Apprv. Status"::Approved:
+                            IF NOT CONFIRM('Are you sure you want to APPROVE this?', FALSE) THEN
+                                "Final Apprv. Status" := SalesHeader."Final Apprv. Status"::" "
+                            ELSE BEGIN
+                                TESTFIELD("1st Approval to");
+                                "Final Approval Time" := CURRENTDATETIME;
+                                IF UserSetup2.GET(USERID) THEN
+                                    SenderEmail := UserSetup2."E-Mail";
+                                UserSetup.GET(Sender);
+                                //"Current pending Person" := "Final Approval to";
+                                ToName := UserSetup."E-Mail";
+                                CCName := 'ravinder@toyotanigeria.com';
+                                Subject := STRSUBSTNO(Text074, "No.");
+                                "Mail Body" := STRSUBSTNO(Text074, "No.");
+                                SenderInitial := UserSetup2.Initials;
+                                Initials := UserSetup.Initials;
+
+                                CreateEmailBody("No.", Initials, "Mail Body");
+                                SendEmail(ToName, Subject, EmailBody, CCName, SenderEmail);
+
+                                /* WITH TempEmailItem DO BEGIN
+                                    "Send to" := ToName;
+                                    "Send CC" := SenderEmail + ';' + CCName;
+                                    "Send BCC" := '';
+                                    Subject := STRSUBSTNO(Text074, "No.");
+
+                                    CRLF := '';
+                                    CRLF[1] := 13;
+                                    CRLF[2] := 10;
+
+                                    BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                                    BodyStream.WRITETEXT(Text071 + Initials + ',');
+                                    BodyStream.WRITETEXT(CRLF + CRLF);
+                                    BodyStream.WRITETEXT(STRSUBSTNO(Text074, "No.") + CRLF + CRLF +
+                                    CRLF + CRLF +
+                                    Text077 + CRLF);
+                                    BodyStream.WRITETEXT(SenderInitial);
+                                    BodyStream.WRITETEXT(CRLF + CRLF);
+                                    BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                                    Body := BodyBlob.Blob;
+                                    Send(FALSE);
+                                END;
+                                 */
+                            END;
+
+
+                        "Final Apprv. Status"::Rejected:
+                            IF NOT CONFIRM('Are you sure you want to reject this?', FALSE) THEN
+                                "Final Apprv. Status" := SalesHeader."Final Apprv. Status"::" "
+                            ELSE BEGIN
+                                "Final Approval Time" := CURRENTDATETIME;
+                                IF UserSetup2.GET(USERID) THEN
+                                    SenderEmail := UserSetup2."E-Mail";
+                                UserSetup.GET(Sender);
+                                ToName := UserSetup."E-Mail";
+                                CCName := 'ravinder@toyotanigeria.com';
+                                Subject := STRSUBSTNO(Text075, "No.");
+                                "Mail Body" := STRSUBSTNO(Text075, "No.");
+                                SenderInitial := UserSetup2.Initials;
+                                Initials := UserSetup.Initials;
+
+                                CreateEmailBody("No.", Initials, "Mail Body");
+                                SendEmail(ToName, Subject, EmailBody, CCName, SenderEmail);
+
+                                /* WITH TempEmailItem DO BEGIN
+                                    "Send to" := ToName;
+                                    "Send CC" := SenderEmail;
+                                    "Send BCC" := '';
+                                    Subject := STRSUBSTNO(Text075, "No.");
+
+                                    CRLF := '';
+                                    CRLF[1] := 13;
+                                    CRLF[2] := 10;
+
+                                    BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                                    BodyStream.WRITETEXT(Text071 + Initials + ',');
+                                    BodyStream.WRITETEXT(CRLF + CRLF);
+                                    BodyStream.WRITETEXT(STRSUBSTNO(Text075, "No.") + CRLF + CRLF +
+                                    CRLF + CRLF +
+                                    Text077 + CRLF);
+                                    BodyStream.WRITETEXT(SenderInitial);
+                                    BodyStream.WRITETEXT(CRLF + CRLF);
+                                    BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                                    Body := BodyBlob.Blob;
+                                    Send(FALSE);
+                                END;
+                                 */
+                            END;
+
+
+                        "Final Apprv. Status"::"on Hold":
+                            IF NOT CONFIRM('Are you sure you want place this order on hold?', FALSE) THEN
+                                "Final Apprv. Status" := SalesHeader."Final Apprv. Status"::" "
+                            ELSE BEGIN
+                                "Final Approval Time" := CURRENTDATETIME;
+                                IF UserSetup2.GET(USERID) THEN
+                                    SenderEmail := UserSetup2."E-Mail";
+                                UserSetup.GET(Sender);
+                                ToName := UserSetup."E-Mail";
+                                CCName := 'ravinder@toyotanigeria.com';
+                                Subject := STRSUBSTNO(Text076, "No.");
+                                "Mail Body" := STRSUBSTNO(Text076, "No.");
+                                SenderInitial := UserSetup2.Initials;
+                                Initials := UserSetup.Initials;
+
+                                CreateEmailBody("No.", Initials, "Mail Body");
+                                SendEmail(ToName, Subject, EmailBody, CCName, SenderEmail);
+
+                                /*  WITH TempEmailItem DO BEGIN
+                                     "Send to" := ToName;
+                                     "Send CC" := SenderEmail;
+                                     "Send BCC" := '';
+                                     Subject := STRSUBSTNO(Text076, "No.");
+
+                                     CRLF := '';
+                                     CRLF[1] := 13;
+                                     CRLF[2] := 10;
+
+                                     BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
+                                     BodyStream.WRITETEXT(Text071 + Initials + ',');
+                                     BodyStream.WRITETEXT(CRLF + CRLF);
+                                     BodyStream.WRITETEXT(STRSUBSTNO(Text076, "No.") + CRLF + CRLF +
+                                     CRLF + CRLF +
+                                     Text077 + CRLF);
+                                     BodyStream.WRITETEXT(SenderInitial);
+                                     BodyStream.WRITETEXT(CRLF + CRLF);
+                                     BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
+                                     Body := BodyBlob.Blob;
+                                     Send(FALSE);
+                                 END; 
+                                 */
+
+                            END;
+                    END;
+                END;
+
+
+            end;
 
         }
         field(50191; "Final Approval Time"; DateTime)
@@ -960,7 +2006,12 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
         VehicleOrderOnline: Record "Vehicle Online Order";
         DesignatedApprovers: Record "Designated Approvers";
         CallAPI: Codeunit "Call API";
-
+        SenderInitial: Text[30];
+        Initials: Text[10];
+        Text073: Label 'Document %1 is waiting for delivery confirmation';
+        Text074: Label 'Document %1 has been approved';
+        Text075: Label 'Document %1 has been rejected';
+        Text076: Label 'Document %1 is on hold';
 
 
     procedure CreateEmailBody(DocNo: Code[20]; RecipientInitials: Text; BodyMsg: Text);
@@ -1457,8 +2508,6 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
 
         end;
     end;
-
-
 
 
     procedure PostSalesCreditMemoControl()

@@ -1,4 +1,4 @@
-page 50037 "Service Item List New"
+page 51096 "Service Item List New"
 {
     ApplicationArea = All;
     Caption = 'Service Item List New';

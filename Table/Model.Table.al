@@ -1,8 +1,8 @@
 table 50014 Model
 {
     DataCaptionFields = "Model No.", "Model Name";
-    /* DrillDownPageID = 50037;
-    LookupPageID = 50037 */;
+    DrillDownPageID = "Model List";
+    LookupPageID = "Model List";
 
     fields
     {
@@ -32,9 +32,9 @@ table 50014 Model
             trigger OnValidate()
             begin
                 //datefilter := GETFILTER("Date Filter");
-               /*  PartsBymodel.SETRANGE(PartsBymodel."Model Code", "Model No.");
+                PartsBymodel.SETRANGE(PartsBymodel."Model Code", "Model No.");
                 IF PartsBymodel.FIND('-') THEN
-                    PartsBymodel.SETFILTER(PartsBymodel."Base Date", '%1', "Date Filter"); */
+                    PartsBymodel.SETFILTER(PartsBymodel."Base Date", '%1', "Date Filter");
             end;
         }
         field(6; "Part Category Filter"; Option)
@@ -45,68 +45,68 @@ table 50014 Model
         }
         field(7; "Line Items"; Integer)
         {
-            CalcFormula = Count ("Parts By Model" WHERE ("Model Code"=FIELD("Model No.")));
+            CalcFormula = Count("Parts By Model" WHERE("Model Code" = FIELD("Model No.")));
             Editable = false;
             FieldClass = FlowField;
         }
-        field(8;"Line Items with Stock Q'ty";Integer)
+        field(8; "Line Items with Stock Q'ty"; Integer)
         {
-           /*  CalcFormula = Count("Parts By Model" WHERE ("Model Code"=FIELD("Model No."),
-                                                        "Q'ty On Hand"=FILTER(>0)));
+            CalcFormula = Count("Parts By Model" WHERE("Model Code" = FIELD("Model No."),
+                                                         "Q'ty On Hand" = FILTER(> 0)));
             Editable = false;
-            FieldClass = FlowField; */
+            FieldClass = FlowField;
         }
-        field(9;"Other Specification";Boolean)
+        field(9; "Other Specification"; Boolean)
         {
 
             trigger OnValidate()
             begin
-                /* ItemRec.SETRANGE(ItemRec."Model No.","Model No.");
+                ItemRec.SETRANGE(ItemRec."Model No.", "Model No.");
                 IF ItemRec.FIND('-') THEN
-                 REPEAT
-                   IF "Other Specification" THEN
-                      ItemRec."Non Specification" := TRUE
-                      ELSE
-                      ItemRec."Non Specification" := FALSE;
-                   ItemRec.MODIFY;
-                 UNTIL ItemRec.NEXT = 0; */
+                    REPEAT
+                        IF "Other Specification" THEN
+                            ItemRec."Non Specification" := TRUE
+                        ELSE
+                            ItemRec."Non Specification" := FALSE;
+                        ItemRec.MODIFY;
+                    UNTIL ItemRec.NEXT = 0;
             end;
         }
-        field(10;"Inventory Line Item";Integer)
+        field(10; "Inventory Line Item"; Integer)
         {
-            /* CalcFormula = Count(Item WHERE (Model No.=FIELD(Model No.),
-                                            Inventory Posting Group=CONST('N_PARTS')));
-            FieldClass = FlowField; */
+            CalcFormula = Count(Item WHERE("Model No." = FIELD("Model No."),
+                                            "Inventory Posting Group" = filter('N_PARTS')));
+            FieldClass = FlowField;
         }
-        field(11;"Operation code";Code[20])
+        field(11; "Operation code"; Code[20])
         {
         }
-        field(12;Type;Option)
+        field(12; Type; Option)
         {
             OptionCaption = ' ,Item,Resource,Cost,Temp';
             OptionMembers = " ",Item,Resource,Cost,Temp;
         }
-        field(13;"No.";Code[20])
+        field(13; "No."; Code[20])
         {
         }
-        field(14;Description;Text[50])
+        field(14; Description; Text[50])
         {
         }
-        field(15;Quantity;Integer)
+        field(15; Quantity; Integer)
         {
         }
-        field(16;"Model Description";Text[50])
+        field(16; "Model Description"; Text[50])
         {
         }
     }
 
     keys
     {
-        key(Key1;"Model No.","Model Name")
+        key(Key1; "Model No.", "Model Name")
         {
             Clustered = true;
         }
-        key(Key2;"Model Name")
+        key(Key2; "Model Name")
         {
         }
     }
@@ -117,22 +117,22 @@ table 50014 Model
 
     var
         ItemRec: Record Item;
-        //PartsBymodel: Record "50023";
+        PartsBymodel: Record "Parts By Model";
         datefilter: Text[30];
         Qsales: Decimal;
-    
+
     procedure unitinoperation(): Decimal
     begin
         Qsales := 0;
-        ItemRec.SETCURRENTKEY("Model No.","Inventory Posting Group");
-        ItemRec.SETRANGE(ItemRec."Model No.","Model No.");
-        ItemRec.SETRANGE(ItemRec."Inventory Posting Group",'N_CARS');
+        ItemRec.SETCURRENTKEY("Model No.", "Inventory Posting Group");
+        ItemRec.SETRANGE(ItemRec."Model No.", "Model No.");
+        ItemRec.SETRANGE(ItemRec."Inventory Posting Group", 'N_CARS');
         IF ItemRec.FIND('-') THEN
-           REPEAT
-           ItemRec.CALCFIELDS(ItemRec."Sales (Qty.)");
-           Qsales := Qsales + ItemRec."Sales (Qty.)";
-           UNTIL ItemRec.NEXT = 0;
-           "Units in Operation" := Qsales;
+            REPEAT
+                ItemRec.CALCFIELDS(ItemRec."Sales (Qty.)");
+                Qsales := Qsales + ItemRec."Sales (Qty.)";
+            UNTIL ItemRec.NEXT = 0;
+        "Units in Operation" := Qsales;
         EXIT(Qsales);
     end;
 }

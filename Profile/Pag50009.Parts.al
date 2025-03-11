@@ -628,15 +628,23 @@ page 50009 Parts
                     ApplicationArea = Basic, Suite;
                     Caption = 'Dynamic Ordering System';
                     RunObject = Page "Purchase Requisition.";
-                    ToolTip = 'Manage the different stock in locations.';
+                    //ToolTip = 'Manage the different stock in locations.';
                 }
                 action(JPMList)
                 {
                     ApplicationArea = Basic, Suite;
                     Caption = 'JPM';
                     RunObject = Page JPM;
-                    ToolTip = 'Manage the different stock in locations.';
+                    //ToolTip = 'Manage the different stock in locations.';
                 }
+                   action(JapanOrderUpdate)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Japan Order Update';
+                    RunObject = Page "Japan Order Update";
+                    //ToolTip = 'Manage the different stock in locations.';
+                }
+
 
             }
 
@@ -1450,7 +1458,6 @@ page 50009 Parts
                     RunObject = Report "Stock Value";
                     ToolTip = 'View inventory valuation.';
                 }
-
                 action(ServiceRate)
                 {
                     ApplicationArea = Basic, Suite;
@@ -1508,6 +1515,14 @@ page 50009 Parts
                     Image = "Report";
                     RunObject = Report "Stock Transfer";
                 }
+                  action(StockAnalysis)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'TNL Stock Analysis';
+                    Image = "Report";
+                    RunObject = Report "TNL Stock Analysis Report";
+                }
+
 
                 action(TSP1001)
                 {
