@@ -950,7 +950,7 @@ table 70018 "Local Part Purchase Register"
                     IF NOT UserSetup4."Audit Service Approval" THEN
                         ERROR(Text033);
                     IF "Compliance check" = "Compliance check"::Satisfactory THEN
-                        IF NOT CONFIRM('Are you sure you this is SATISFACTORY', FALSE) THEN
+                        IF NOT CONFIRM('Are you sure you this is satisfactory?', FALSE) THEN
                             "Compliance check" := LPPRec."Compliance check"::" "
                         ELSE BEGIN
                             CALCFIELDS("Total Purchase Value");
@@ -959,7 +959,7 @@ table 70018 "Local Part Purchase Register"
                             VendAddr := "Supplier's Address";
                             Purpose := "Justification for purchase";
                             ToAddresses := 'adewumi@toyotanigeria.com';
-                            CcAddresses := 'agbesua@toyotanigeria.com';
+                            //CcAddresses := 
                             BccAddresses := '';
 
                             Subject := STRSUBSTNO(Text001, "LPP No.");

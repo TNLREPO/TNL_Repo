@@ -16,7 +16,16 @@ pageextension 60007 "Item List Ext" extends "Item List"
             {
                 ApplicationArea = All;
             }
-           
+            field("Last Purchase Date"; Rec."Last Purchase Date")
+            {
+                ApplicationArea = All;
+                Visible = false;
+            }
+            field("Last Date Sold"; Rec."Last Date Sold")
+            {
+                ApplicationArea = All;
+                Visible = false;
+            }
         }
     }
 }
