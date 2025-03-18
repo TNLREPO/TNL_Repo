@@ -181,10 +181,12 @@ report 50022 Transfer2
                     field(NoOfCopies; NoOfCopies)
                     {
                         Caption = 'No. of Copies';
+                        ApplicationArea = All;
                     }
                     field(ShowInternalInfo; ShowInternalInfo)
                     {
                         Caption = 'Show Internal Information';
+                        ApplicationArea = All;
                     }
                 }
             }
