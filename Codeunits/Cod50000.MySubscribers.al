@@ -254,5 +254,23 @@ codeunit 50000 MySubscribers
         SalesShptHeader."Audit Summary" := FromSalesShptHeader."Audit Summary";
     end;
 
+
+    [EventSubscriber(ObjectType::Page, Page::"Service Order", 'OnBeforeActionEvent', 'Post', false, false)]
+
+    procedure ValidateServPost(var Rec: Record "Service Header")
+
+    begin
+        Rec.CheckControls();
+    end;
+
+     [EventSubscriber(ObjectType::Page, Page::"Service Order", 'OnBeforeActionEvent', 'Preview', false, false)]
+
+    procedure ValidateServPreview(var Rec: Record "Service Header")
+
+    begin
+        Rec.CheckControls();
+    end;
+
+
 }
 

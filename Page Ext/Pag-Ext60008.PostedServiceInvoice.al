@@ -21,7 +21,7 @@ pageextension 60008 "Posted Service Invoice" extends "Posted Service Invoice"
                 begin
                     ServiceInvHeader.SETRANGE("No.", Rec."No.");
                     IF ServiceInvHeader.FindFirst() THEN
-                        REPORT.RUNMODAL(50281, TRUE, TRUE, ServiceInvHeader);
+                        REPORT.RUNMODAL(50616, TRUE, TRUE, ServiceInvHeader);
                 end;
             }
         }

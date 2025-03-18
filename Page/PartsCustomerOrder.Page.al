@@ -480,7 +480,7 @@ page 80056 "Parts Customer Order"
                 RunObject = Page 70061;
                 RunPageLink = "TCOF No." = FIELD("No.");
             }
-            action("Create TransferOrder")
+            action("Create Transfer Order")
             {
                 Image = TransferOrder;
                 Promoted = true;

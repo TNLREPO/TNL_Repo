@@ -1,6 +1,7 @@
 table 50109 "Fault Setup Header"
 {
-    //LookupPageID = 50236;
+    LookupPageID = "Fault Material Setup Lookup";
+    DrillDownPageId = "Fault Material Setup List";
 
     fields
     {

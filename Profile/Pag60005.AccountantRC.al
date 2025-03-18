@@ -352,6 +352,14 @@ page 60005 "Accountant RC"
                     Image = "Report";
                     ToolTip = 'View bank account balances.';
                 }
+                action("WarrantyTransfer")
+                {
+                    ApplicationArea = BasicEU;
+                    Caption = 'Warranty Transfer';
+                    RunObject = Report "Warranty Transfer";
+                    Image = "Report";
+
+                }
             }
 
             group(PayrollReports)

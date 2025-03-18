@@ -2184,7 +2184,7 @@ table 70034 "Customer Order HeaderX"
         ServiceIndex: Record 70040;
         COFormRec: Record 50119;
     begin
-        /* TESTFIELD("P.S.F.U. (Plan) Date");
+        TESTFIELD("P.S.F.U. (Plan) Date");
         TESTFIELD("P.S.F.U. (Plan) Time");
 
         ServiceIndex2.SETCURRENTKEY("COF No.");
@@ -2202,12 +2202,12 @@ table 70034 "Customer Order HeaderX"
         ServiceIndex."Additional Job Details" := "Additional Job Details";
         ServiceIndex."Vehicle Release Date" := "Actual Delivery Date";
         ServiceIndex.INSERT(TRUE);
-        MESSAGE('The vehicle has been scheduled for post service follow-up!'); */
+        MESSAGE('The vehicle has been scheduled for post service follow-up!');
     end;
 
     procedure GenMaterials()
     begin
-        /* IF FaultRec.GET("Operation Code", "Model No.") THEN BEGIN
+        IF FaultRec.GET("Operation Code", "Model No.") THEN BEGIN
             "Operation Code Description" := FaultRec.Description;
             Faultsetup.SETRANGE(Faultsetup."Operation code", "Operation Code");
             IF Faultsetup.FIND('-') THEN
@@ -2225,7 +2225,7 @@ table 70034 "Customer Order HeaderX"
                     CustOrderLine.VALIDATE(CustOrderLine."Quantity Received", Faultsetup.Quantity);
                     CustOrderLine.INSERT;
                 UNTIL Faultsetup.NEXT = 0;
-        END */
+        END
         ;
     end;
 
@@ -2238,18 +2238,21 @@ table 70034 "Customer Order HeaderX"
         CustOrder: Record "Customer Order Table.";
         NoSeriesMgt: Codeunit "No. Series";
     begin
-        /* WITH CustOrderRec DO BEGIN
-            COPY(Rec);
-            CustOrderRec := Rec;
+        CustOrderRec.COPY(Rec);
+        CustOrderRec := Rec;
+        SalesSetup.GET;
+
+        /* IF NoSeriesMgt.SelectSeries(GetNoSeriesCode, OldCustOrderForm."No. Series", CustOrderRec."No. Series") THEN BEGIN
             SalesSetup.GET;
-            IF NoSeriesMgt.SelectSeries(GetNoSeriesCode, OldCustOrderForm."No. Series", "No. Series") THEN BEGIN
-                SalesSetup.GET;
-                TestNoSeries;
-                NoSeriesMgt.SetSeries("No.");
-                Rec := CustOrderRec;
-                EXIT(TRUE);
-            END;
-        END; */
+            CustOrderRec.TestNoSeries;
+            NoSeriesMgt.SetSeries(CustOrderRec."No.");
+            Rec := CustOrderRec; */
+
+        "No. Series" := SalesSetup."Customer Order No.";
+        NoSeriesMgt.GetNextNo("No. Series");
+
+        EXIT(TRUE);
+
     end;
 
     procedure TestNoSeries(): Boolean

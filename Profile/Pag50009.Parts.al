@@ -301,15 +301,7 @@ page 50009 Parts
                 RunObject = page "Not Reachable Customer";
                 ToolTip = 'View not reachable customers.';
             }
-            action(TCSCCustomers)
-            {
-                ApplicationArea = Basic, Suite;
-                Caption = 'TCSC Customer';
-                Image = "Report";
-                RunObject = page "Customer List";
-                RunPageView = WHERE("Location Code" = FILTER('120ISO'));
-                ToolTip = 'View TCSC customers.';
-            }
+            
 
 
         }
@@ -536,6 +528,24 @@ page 50009 Parts
                     RunObject = Page "Item List";
                     ToolTip = 'View or edit detailed information for the products that you trade in. The item card can be of type Inventory or Service to specify if the item is a physical unit or a labor time unit. Here you also define if items in inventory or on incoming orders are automatically reserved for outbound documents and whether order tracking links are created between demand and supply to reflect planning actions.';
                 }
+                action(TCSCItems)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'TCSC Items';
+                    Image = Item;
+                    RunObject = Page "Item List TCSC";
+                    ToolTip = 'View or edit detailed information for the products that you trade in. The item card can be of type Inventory or Service to specify if the item is a physical unit or a labor time unit. Here you also define if items in inventory or on incoming orders are automatically reserved for outbound documents and whether order tracking links are created between demand and supply to reflect planning actions.';
+                }
+                action(TCSCCustomers)
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'TCSC Customers';
+                Image = "Report";
+                RunObject = page "Customer List";
+                RunPageView = WHERE("Location Code" = FILTER('120ISO'));
+                ToolTip = 'View TCSC customers.';
+            }
+
 
                 action(SearchTrack)
                 {
@@ -1522,8 +1532,6 @@ page 50009 Parts
                     Image = "Report";
                     RunObject = Report "TNL Stock Analysis Report";
                 }
-
-
                 action(TSP1001)
                 {
                     ApplicationArea = Basic, Suite;

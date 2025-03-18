@@ -1,6 +1,8 @@
 table 70031 "Fault Setup HeaderX"
 {
-    //LookupPageID = 50236;
+    LookupPageID = "Fault Material Setup Lookup";
+    DrillDownPageId = "Fault Material Setup List";
+
     fields
     {
         field(1; "Operation Code"; Code[20])
@@ -119,18 +121,18 @@ table 70031 "Fault Setup HeaderX"
 
     procedure AssistEdit(Oldfault: Record "Fault Setup Header"): Boolean
     begin
-       /*  WITH Faultrec DO BEGIN
-            Faultrec := Rec;
-            SerSetup.GET;
-            SerSetup.TESTFIELD("Fault Code No.s");
-            IF NoSeriesMgt.SelectSeries(SerSetup."Fault Code No.s", Oldfault."No. Series", "No. Series") THEN BEGIN
-                SerSetup.GET;
-                SerSetup.TESTFIELD("Fault Code No.s");
-                NoSeriesMgt.SetSeries("Operation Code");
-                Rec := Faultrec;
-                EXIT(TRUE);
-            END;
-        END; */
+        /*  WITH Faultrec DO BEGIN
+             Faultrec := Rec;
+             SerSetup.GET;
+             SerSetup.TESTFIELD("Fault Code No.s");
+             IF NoSeriesMgt.SelectSeries(SerSetup."Fault Code No.s", Oldfault."No. Series", "No. Series") THEN BEGIN
+                 SerSetup.GET;
+                 SerSetup.TESTFIELD("Fault Code No.s");
+                 NoSeriesMgt.SetSeries("Operation Code");
+                 Rec := Faultrec;
+                 EXIT(TRUE);
+             END;
+         END; */
     end;
 }
 

@@ -306,322 +306,334 @@ tableextension 50075 "Service Header" extends "Service Header"
 
         FArec: Record "Fixed Asset";
 
-      /*   procedure PostToMaintLedgEntry()
-    var
-        ItemJnlTemplate: Record "82";
-        ItemJnlBatch: Record "233";
-        ItemJnlLine: Record "83";
-        ItemJnlLine2: Record "83";
-        JnlSelected: Boolean;
-        ServLine: Record "5902";
-        ServLine2: Record "5902";
-        LineNo: Integer;
-        GenPostSetup: Record "252";
-        ItemLedgEntry: Record "32";
-        ItemLedgEntry2: Record "32";
-        MaintenanceLedgEntry: Record "5625";
-        ServiceHeader: Record "5900";
-        Confirmation: Boolean;
-        RecCount: Decimal;
-        SerLineCount: Decimal;
-        SerLineCount2: Decimal;
-        postMaint: Codeunit "5600";
-        ServLineRec: Record "5902";
-    begin
-        ItemJnlLine.RESET;
+    /*   procedure PostToMaintLedgEntry()
+  var
+      ItemJnlTemplate: Record "82";
+      ItemJnlBatch: Record "233";
+      ItemJnlLine: Record "83";
+      ItemJnlLine2: Record "83";
+      JnlSelected: Boolean;
+      ServLine: Record "5902";
+      ServLine2: Record "5902";
+      LineNo: Integer;
+      GenPostSetup: Record "252";
+      ItemLedgEntry: Record "32";
+      ItemLedgEntry2: Record "32";
+      MaintenanceLedgEntry: Record "5625";
+      ServiceHeader: Record "5900";
+      Confirmation: Boolean;
+      RecCount: Decimal;
+      SerLineCount: Decimal;
+      SerLineCount2: Decimal;
+      postMaint: Codeunit "5600";
+      ServLineRec: Record "5902";
+  begin
+      ItemJnlLine.RESET;
 
-        IF NOT CONFIRM('Are you sure you want to post?') THEN
-          EXIT
-          ELSE BEGIN
-              Confirmation := TRUE;
-        //To delete existing item jnl lines
-        ItemJnlLine2.SETRANGE(ItemJnlLine2."Journal Template Name",'ITEM');
-        ItemJnlLine2.SETRANGE(ItemJnlLine2."Journal Batch Name",'MAINT');
-        IF ItemJnlLine2.FINDSET THEN
+      IF NOT CONFIRM('Are you sure you want to post?') THEN
+        EXIT
+        ELSE BEGIN
+            Confirmation := TRUE;
+      //To delete existing item jnl lines
+      ItemJnlLine2.SETRANGE(ItemJnlLine2."Journal Template Name",'ITEM');
+      ItemJnlLine2.SETRANGE(ItemJnlLine2."Journal Batch Name",'MAINT');
+      IF ItemJnlLine2.FINDSET THEN
+        ItemJnlLine2.DELETEALL;
+
+      LineNo := 10000;
+      ServLine.SETCURRENTKEY("Document Type","Document No.","Line No.");
+      ServLine.SETRANGE(ServLine."Document Type","Document Type");
+      ServLine.SETRANGE(ServLine."Document No.","No.");
+      ServLine.SETRANGE(ServLine.Type,ServLine.Type::Item);
+      ServLine.SETFILTER(ServLine."Qty. to Ship",'>%1',0);
+      ServLine.SETRANGE(ServLine.Posted,FALSE);
+      IF ServLine.FINDSET THEN
+        REPEAT
+          ItemJnlLine."Journal Template Name" := 'ITEM';
+          ItemJnlLine."Journal Batch Name" := 'MAINT';
+          ItemJnlLine."Line No." := ServLine."Line No.";
+          ItemJnlLine."Entry Type" := ItemJnlLine."Entry Type"::"Negative Adjmt.";
+          ItemJnlLine.VALIDATE(ItemJnlLine."Item No.",ServLine."No.");
+          ItemJnlLine.VALIDATE("Unit of Measure Code",ServLine."Unit of Measure Code");
+          ItemJnlLine.VALIDATE("Posting Date","Posting Date");
+          ItemJnlLine."Document No." := ServLine."Document No.";
+          ItemJnlLine."Requisition No." := ServLine."Document No.";
+          ItemJnlLine.Description := ServLine.Description;
+          ItemJnlLine."External Document No." := ServLine."Document No.";
+          ItemJnlLine."Fixed Assets No." := "FA No.";
+          ItemJnlLine.VALIDATE(ItemJnlLine."Location Code",ServLine."Location Code");
+          ItemJnlLine.VALIDATE(ItemJnlLine."Variant Code",ServLine."Variant Code");
+          ItemJnlLine."Unit of Measure Code" := ServLine."Unit of Measure";
+          ItemJnlLine.VALIDATE(ItemJnlLine.Quantity,ServLine."Qty. to Ship");
+          ItemJnlLine.VALIDATE(ItemJnlLine."Unit Cost",ServLine."Unit Cost");
+          ItemJnlLine."Gen. Bus. Posting Group" := 'MAINTCE';
+          ItemJnlLine."Gen. Prod. Posting Group" := ServLine."Gen. Prod. Posting Group";
+          ItemJnlLine."Maintenance Code" := "Maintenance Code";
+          ItemJnlLine."Shortcut Dimension 1 Code" := ServLine."Shortcut Dimension 1 Code";
+          ItemJnlLine."Shortcut Dimension 2 Code" := ServLine."Shortcut Dimension 2 Code";
+          ItemJnlLine."From Service" := TRUE;
+          ItemJnlLine."From Service Line No." := ServLine."Line No.";
+          ItemJnlLine.INSERT(TRUE);
+          LineNo := LineNo + 10000;
+        UNTIL ServLine.NEXT = 0;
+        CODEUNIT.RUN(CODEUNIT::"Item Jnl.-Post",ItemJnlLine);
+        Confirmation := TRUE;
+        ServLine.MODIFY;
+      END;
+
+
+      IF Confirmation = FALSE THEN
+        EXIT
+        ELSE BEGIN
+          //To delete item jnl lines after posting
+          ItemJnlLine2.SETRANGE(ItemJnlLine2."Journal Template Name",'ITEM');
+          ItemJnlLine2.SETRANGE(ItemJnlLine2."Journal Batch Name",'MAINT');
+          IF ItemJnlLine2.FINDFIRST THEN
           ItemJnlLine2.DELETEALL;
 
-        LineNo := 10000;
-        ServLine.SETCURRENTKEY("Document Type","Document No.","Line No.");
-        ServLine.SETRANGE(ServLine."Document Type","Document Type");
-        ServLine.SETRANGE(ServLine."Document No.","No.");
-        ServLine.SETRANGE(ServLine.Type,ServLine.Type::Item);
-        ServLine.SETFILTER(ServLine."Qty. to Ship",'>%1',0);
-        ServLine.SETRANGE(ServLine.Posted,FALSE);
-        IF ServLine.FINDSET THEN
-          REPEAT
-            ItemJnlLine."Journal Template Name" := 'ITEM';
-            ItemJnlLine."Journal Batch Name" := 'MAINT';
-            ItemJnlLine."Line No." := ServLine."Line No.";
-            ItemJnlLine."Entry Type" := ItemJnlLine."Entry Type"::"Negative Adjmt.";
-            ItemJnlLine.VALIDATE(ItemJnlLine."Item No.",ServLine."No.");
-            ItemJnlLine.VALIDATE("Unit of Measure Code",ServLine."Unit of Measure Code");
-            ItemJnlLine.VALIDATE("Posting Date","Posting Date");
-            ItemJnlLine."Document No." := ServLine."Document No.";
-            ItemJnlLine."Requisition No." := ServLine."Document No.";
-            ItemJnlLine.Description := ServLine.Description;
-            ItemJnlLine."External Document No." := ServLine."Document No.";
-            ItemJnlLine."Fixed Assets No." := "FA No.";
-            ItemJnlLine.VALIDATE(ItemJnlLine."Location Code",ServLine."Location Code");
-            ItemJnlLine.VALIDATE(ItemJnlLine."Variant Code",ServLine."Variant Code");
-            ItemJnlLine."Unit of Measure Code" := ServLine."Unit of Measure";
-            ItemJnlLine.VALIDATE(ItemJnlLine.Quantity,ServLine."Qty. to Ship");
-            ItemJnlLine.VALIDATE(ItemJnlLine."Unit Cost",ServLine."Unit Cost");
-            ItemJnlLine."Gen. Bus. Posting Group" := 'MAINTCE';
-            ItemJnlLine."Gen. Prod. Posting Group" := ServLine."Gen. Prod. Posting Group";
-            ItemJnlLine."Maintenance Code" := "Maintenance Code";
-            ItemJnlLine."Shortcut Dimension 1 Code" := ServLine."Shortcut Dimension 1 Code";
-            ItemJnlLine."Shortcut Dimension 2 Code" := ServLine."Shortcut Dimension 2 Code";
-            ItemJnlLine."From Service" := TRUE;
-            ItemJnlLine."From Service Line No." := ServLine."Line No.";
-            ItemJnlLine.INSERT(TRUE);
-            LineNo := LineNo + 10000;
-          UNTIL ServLine.NEXT = 0;
-          CODEUNIT.RUN(CODEUNIT::"Item Jnl.-Post",ItemJnlLine);
-          Confirmation := TRUE;
-          ServLine.MODIFY;
-        END;
+          //To create Maintenance Ledger Entry
+          ItemLedgEntry.SETCURRENTKEY("Document No.","Document Type","Document Line No.");
+          ItemLedgEntry.SETRANGE("Document No.","No.");
+          ItemLedgEntry.SETRANGE("Posting Date","Posting Date");
+          ItemLedgEntry.SETRANGE("From Service",TRUE);
+            IF ItemLedgEntry.FINDSET THEN REPEAT
+              ServLineRec.SETRANGE(ServLineRec."Document No.",ItemLedgEntry."Document No.");
+              ServLineRec.SETRANGE(ServLineRec."Line No.",ItemLedgEntry."From Service Line No.");
+              ServLineRec.FINDFIRST;
+              IF NOT ServLineRec.Posted THEN BEGIN
+                ItemLedgEntry.CALCFIELDS(ItemLedgEntry."Cost Amount (Actual)");
+                MaintenanceLedgEntry.SETRANGE("Entry No.");
+                IF MaintenanceLedgEntry.FINDLAST THEN
+                  LineNo := MaintenanceLedgEntry."Entry No.";
 
-
-        IF Confirmation = FALSE THEN
-          EXIT
-          ELSE BEGIN
-            //To delete item jnl lines after posting
-            ItemJnlLine2.SETRANGE(ItemJnlLine2."Journal Template Name",'ITEM');
-            ItemJnlLine2.SETRANGE(ItemJnlLine2."Journal Batch Name",'MAINT');
-            IF ItemJnlLine2.FINDFIRST THEN
-            ItemJnlLine2.DELETEALL;
-
-            //To create Maintenance Ledger Entry
-            ItemLedgEntry.SETCURRENTKEY("Document No.","Document Type","Document Line No.");
-            ItemLedgEntry.SETRANGE("Document No.","No.");
-            ItemLedgEntry.SETRANGE("Posting Date","Posting Date");
-            ItemLedgEntry.SETRANGE("From Service",TRUE);
-              IF ItemLedgEntry.FINDSET THEN REPEAT
-                ServLineRec.SETRANGE(ServLineRec."Document No.",ItemLedgEntry."Document No.");
-                ServLineRec.SETRANGE(ServLineRec."Line No.",ItemLedgEntry."From Service Line No.");
-                ServLineRec.FINDFIRST;
-                IF NOT ServLineRec.Posted THEN BEGIN
-                  ItemLedgEntry.CALCFIELDS(ItemLedgEntry."Cost Amount (Actual)");
-                  MaintenanceLedgEntry.SETRANGE("Entry No.");
-                  IF MaintenanceLedgEntry.FINDLAST THEN
-                    LineNo := MaintenanceLedgEntry."Entry No.";
-
-                  MaintenanceLedgEntry."Entry No." := LineNo + 1;
-                  MaintenanceLedgEntry."Document No." := ItemLedgEntry."Document No.";
-                  MaintenanceLedgEntry."User ID" := USERID;
-                  MaintenanceLedgEntry."Depreciation Book Code" := 'DEF_DEPR';
-                  MaintenanceLedgEntry."FA No." := "FA No.";
-                  MaintenanceLedgEntry."FA Posting Date" := ItemLedgEntry."Posting Date";
-                  MaintenanceLedgEntry."FA Class Code" := 'MOTOR_VEH';
-                  MaintenanceLedgEntry."Maintenance Code" := "Maintenance Code";
-                  MaintenanceLedgEntry."Posting Date" := ItemLedgEntry."Posting Date";
-                  MaintenanceLedgEntry."Document Date" := ItemLedgEntry."Posting Date";
-                  MaintenanceLedgEntry."Document No." := ItemLedgEntry."Document No.";
-                  MaintenanceLedgEntry.Description := ItemLedgEntry.Description;
-                  MaintenanceLedgEntry.Quantity := ABS(ItemLedgEntry.Quantity);
-                  MaintenanceLedgEntry.VALIDATE("Global Dimension 1 Code",ItemLedgEntry."Global Dimension 1 Code");
-                  MaintenanceLedgEntry.VALIDATE("Global Dimension 2 Code",ItemLedgEntry."Global Dimension 2 Code");
-                  MaintenanceLedgEntry."Journal Batch Name" := 'MAINT.';
-                  MaintenanceLedgEntry."Debit Amount" := ABS(ItemLedgEntry."Cost Amount (Actual)");
-                  MaintenanceLedgEntry.Amount := ABS(ItemLedgEntry."Cost Amount (Actual)");
-                  MaintenanceLedgEntry."Bal. Account No." := GenPostSetup."Inventory Adjmt. Account";
-                  MaintenanceLedgEntry."Gen. Posting Type" := 0;
-                  MaintenanceLedgEntry."Gen. Bus. Posting Group" := '';
-                  MaintenanceLedgEntry."Gen. Prod. Posting Group" := '';
-                  MaintenanceLedgEntry."VAT Bus. Posting Group" := '';
-                  //MaintenanceLedgEntry.INSERT;
-                 postMaint.InsertFromService(MaintenanceLedgEntry);
-                END;
-              UNTIL ItemLedgEntry.NEXT = 0;
-            END;
-
-            ItemLedgEntry.SETCURRENTKEY("Document No.","Document Type");
-            ItemLedgEntry.SETRANGE(ItemLedgEntry."Document No.","No.");
-            RecCount := ItemLedgEntry.COUNT;
-            IF ItemLedgEntry.FINDSET THEN BEGIN
-              REPEAT
-                ItemLedgEntry."From Service" := TRUE;
-                ServLine.Posted := TRUE;
-                ServLine.MODIFYALL(Posted,TRUE);
-              UNTIL ItemLedgEntry.NEXT = 0;
-            END
-            ELSE BEGIN
-              REPEAT
-                ItemLedgEntry."From Service" := FALSE;
-                ServLine.Posted := FALSE;
-                ServLine.MODIFYALL(Posted,FALSE);
-              UNTIL ItemLedgEntry.NEXT = 0;
-            END;
-
-
-            ItemLedgEntry.SETCURRENTKEY("Document No.","Document Type");
-            ItemLedgEntry.SETRANGE(ItemLedgEntry."Document No.","No.");
-            RecCount := ItemLedgEntry.COUNT;
-
-            //By Segunio (The System should only close the Order if all items are posted or are ready for posting)
-            ServLine2.SETCURRENTKEY("Document Type","Document No.",Type,"No.");
-            ServLine2.SETRANGE(ServLine2."Document Type","Document Type");
-            ServLine2.SETRANGE(ServLine2."Document No.","No.");
-            ServLine.SETRANGE(ServLine.Type,ServLine.Type::Item);
-            ServLine2.SETFILTER(ServLine2."No.",'<>%1','');
-            ServLine2.SETFILTER(ServLine2."Line No.",'<>%1',0);
-            SerLineCount2 := ServLine2.COUNT;
-
-            //By Segunio (The System should only close the Order if all items are posted or are ready for posting)
-            ServLine.SETCURRENTKEY("Document Type","Document No.",Type,"No.","Qty. to Ship",Posted);
-            ServLine.SETRANGE(ServLine."Document Type","Document Type");
-            ServLine.SETRANGE(ServLine.Type,ServLine.Type::Item);
-            ServLine.SETRANGE(ServLine."Document No.","No.");
-            ServLine.SETFILTER(ServLine."No.",'<>%1','');
-            ServLine.SETFILTER(ServLine."Qty. to Ship",'>%1',0);
-            ServLine.SETRANGE(ServLine.Posted,TRUE);
-            SerLineCount := ServLine.COUNT;
-            IF ServLine.FINDSET THEN BEGIN
-              IF (SerLineCount = SerLineCount2) AND (SerLineCount = RecCount)THEN BEGIN
-                Posted := TRUE;
-                MODIFY(TRUE);
-              END
-              ELSE BEGIN
-                Posted := FALSE;
-                MODIFY(TRUE);
+                MaintenanceLedgEntry."Entry No." := LineNo + 1;
+                MaintenanceLedgEntry."Document No." := ItemLedgEntry."Document No.";
+                MaintenanceLedgEntry."User ID" := USERID;
+                MaintenanceLedgEntry."Depreciation Book Code" := 'DEF_DEPR';
+                MaintenanceLedgEntry."FA No." := "FA No.";
+                MaintenanceLedgEntry."FA Posting Date" := ItemLedgEntry."Posting Date";
+                MaintenanceLedgEntry."FA Class Code" := 'MOTOR_VEH';
+                MaintenanceLedgEntry."Maintenance Code" := "Maintenance Code";
+                MaintenanceLedgEntry."Posting Date" := ItemLedgEntry."Posting Date";
+                MaintenanceLedgEntry."Document Date" := ItemLedgEntry."Posting Date";
+                MaintenanceLedgEntry."Document No." := ItemLedgEntry."Document No.";
+                MaintenanceLedgEntry.Description := ItemLedgEntry.Description;
+                MaintenanceLedgEntry.Quantity := ABS(ItemLedgEntry.Quantity);
+                MaintenanceLedgEntry.VALIDATE("Global Dimension 1 Code",ItemLedgEntry."Global Dimension 1 Code");
+                MaintenanceLedgEntry.VALIDATE("Global Dimension 2 Code",ItemLedgEntry."Global Dimension 2 Code");
+                MaintenanceLedgEntry."Journal Batch Name" := 'MAINT.';
+                MaintenanceLedgEntry."Debit Amount" := ABS(ItemLedgEntry."Cost Amount (Actual)");
+                MaintenanceLedgEntry.Amount := ABS(ItemLedgEntry."Cost Amount (Actual)");
+                MaintenanceLedgEntry."Bal. Account No." := GenPostSetup."Inventory Adjmt. Account";
+                MaintenanceLedgEntry."Gen. Posting Type" := 0;
+                MaintenanceLedgEntry."Gen. Bus. Posting Group" := '';
+                MaintenanceLedgEntry."Gen. Prod. Posting Group" := '';
+                MaintenanceLedgEntry."VAT Bus. Posting Group" := '';
+                //MaintenanceLedgEntry.INSERT;
+               postMaint.InsertFromService(MaintenanceLedgEntry);
               END;
-            END;
-    end;
-
-    [Scope('Internal')]
-    procedure PostToGLAccounts()
-    var
-        ItemJnlTemplate: Record "82";
-        ItemJnlBatch: Record "233";
-        ItemJnlLine: Record "83";
-        ItemJnlLine2: Record "83";
-        JnlSelected: Boolean;
-        ServLine: Record "5902";
-        ServLine2: Record "5902";
-        LineNo: Integer;
-        GenPostSetup: Record "252";
-        ItemLedgEntry: Record "32";
-        ItemLedgEntry2: Record "32";
-        MaintenanceLedgEntry: Record "5625";
-        ServiceHeader: Record "5900";
-        Confirmation: Boolean;
-        RecCount: Decimal;
-        SerLineCount: Decimal;
-        SerLineCount2: Decimal;
-        postMaint: Codeunit "5600";
-        ServLineRec: Record "5902";
-    begin
-        ItemJnlLine.RESET;
-        IF NOT CONFIRM('Are you sure you want to post?') THEN
-          EXIT
-          ELSE BEGIN
-              Confirmation := TRUE;
-        //To delete existing item jnl lines
-        ItemJnlLine2.SETRANGE(ItemJnlLine2."Journal Template Name",'ITEM');
-        ItemJnlLine2.SETRANGE(ItemJnlLine2."Journal Batch Name",'OTHERS');
-        IF ItemJnlLine2.FINDSET THEN
-          ItemJnlLine2.DELETEALL;
-
-        LineNo := 10000;
-        ServLine.SETCURRENTKEY("Document Type","Document No.","Line No.");
-        ServLine.SETRANGE(ServLine."Document Type","Document Type");
-        ServLine.SETRANGE(ServLine."Document No.","No.");
-        ServLine.SETRANGE(ServLine.Type,ServLine.Type::Item);
-        ServLine.SETFILTER(ServLine."Qty. to Ship",'>%1',0);
-        ServLine.SETRANGE(ServLine.Posted,FALSE);
-        IF ServLine.FINDFIRST THEN BEGIN
-          REPEAT
-            ItemJnlLine."Journal Template Name" := 'ITEM';
-            ItemJnlLine."Journal Batch Name" := 'OTHERS';
-            ItemJnlLine."Line No." := ServLine."Line No.";
-            ItemJnlLine."Entry Type" := ItemJnlLine."Entry Type"::"Negative Adjmt.";
-            ItemJnlLine.VALIDATE(ItemJnlLine."Item No.",ServLine."No.");
-            ItemJnlLine.VALIDATE("Unit of Measure Code",ServLine."Unit of Measure Code");
-            ItemJnlLine.VALIDATE("Posting Date","Posting Date");
-            ItemJnlLine."Document No." := ServLine."Document No.";
-            ItemJnlLine."Requisition No." := ServLine."Document No.";
-            ItemJnlLine.Description := ServLine.Description;
-            ItemJnlLine."External Document No." := ServLine."Claim No.";
-            ItemJnlLine.VALIDATE("Location Code",ServLine."Location Code");
-            ItemJnlLine.VALIDATE("Variant Code",ServLine."Variant Code");
-            ItemJnlLine.VALIDATE(Quantity,ServLine."Qty. to Ship");
-            ItemJnlLine.VALIDATE("Unit Cost",ServLine."Unit Cost");
-            ItemJnlLine."Gen. Bus. Posting Group" := 'VRI-TNL';
-            ItemJnlLine."Gen. Prod. Posting Group" := ServLine."Gen. Prod. Posting Group";
-            ItemJnlLine."Maintenance Code" := "Maintenance Code";
-            ItemJnlLine."Shortcut Dimension 1 Code" := ServLine."Shortcut Dimension 1 Code";
-            ItemJnlLine."Shortcut Dimension 2 Code" := ServLine."Shortcut Dimension 2 Code";
-            ItemJnlLine."From Service" := TRUE;
-            ItemJnlLine."From Service Line No." := ServLine."Line No.";
-            ItemJnlLine.INSERT(TRUE);
-            LineNo := LineNo + 10000;
-          UNTIL ServLine.NEXT = 0;
-          CODEUNIT.RUN(CODEUNIT::"Item Jnl.-Post",ItemJnlLine);
-          Confirmation := TRUE;
-          ServLine.MODIFY;
-        END;
-        END;
-
-
-        IF Confirmation = FALSE THEN
-          EXIT
-          ELSE BEGIN
-            //To delete item jnl lines after posting
-            ItemJnlLine2.SETRANGE(ItemJnlLine2."Journal Template Name",'ITEM');
-            ItemJnlLine2.SETRANGE(ItemJnlLine2."Journal Batch Name",'OTHERS');
-            IF ItemJnlLine2.FINDFIRST THEN
-            ItemJnlLine2.DELETEALL;
+            UNTIL ItemLedgEntry.NEXT = 0;
           END;
 
-            ItemLedgEntry.SETCURRENTKEY("Document No.","Document Type");
-            ItemLedgEntry.SETRANGE(ItemLedgEntry."Document No.","No.");
-            RecCount := ItemLedgEntry.COUNT;
-            IF ItemLedgEntry.FINDSET THEN BEGIN
-              REPEAT
-                ItemLedgEntry."From Service" := TRUE;
-                ServLine.Posted := TRUE;
-                ServLine.MODIFYALL(Posted,TRUE);
-              UNTIL ItemLedgEntry.NEXT = 0;
+          ItemLedgEntry.SETCURRENTKEY("Document No.","Document Type");
+          ItemLedgEntry.SETRANGE(ItemLedgEntry."Document No.","No.");
+          RecCount := ItemLedgEntry.COUNT;
+          IF ItemLedgEntry.FINDSET THEN BEGIN
+            REPEAT
+              ItemLedgEntry."From Service" := TRUE;
+              ServLine.Posted := TRUE;
+              ServLine.MODIFYALL(Posted,TRUE);
+            UNTIL ItemLedgEntry.NEXT = 0;
+          END
+          ELSE BEGIN
+            REPEAT
+              ItemLedgEntry."From Service" := FALSE;
+              ServLine.Posted := FALSE;
+              ServLine.MODIFYALL(Posted,FALSE);
+            UNTIL ItemLedgEntry.NEXT = 0;
+          END;
+
+
+          ItemLedgEntry.SETCURRENTKEY("Document No.","Document Type");
+          ItemLedgEntry.SETRANGE(ItemLedgEntry."Document No.","No.");
+          RecCount := ItemLedgEntry.COUNT;
+
+          //By Segunio (The System should only close the Order if all items are posted or are ready for posting)
+          ServLine2.SETCURRENTKEY("Document Type","Document No.",Type,"No.");
+          ServLine2.SETRANGE(ServLine2."Document Type","Document Type");
+          ServLine2.SETRANGE(ServLine2."Document No.","No.");
+          ServLine.SETRANGE(ServLine.Type,ServLine.Type::Item);
+          ServLine2.SETFILTER(ServLine2."No.",'<>%1','');
+          ServLine2.SETFILTER(ServLine2."Line No.",'<>%1',0);
+          SerLineCount2 := ServLine2.COUNT;
+
+          //By Segunio (The System should only close the Order if all items are posted or are ready for posting)
+          ServLine.SETCURRENTKEY("Document Type","Document No.",Type,"No.","Qty. to Ship",Posted);
+          ServLine.SETRANGE(ServLine."Document Type","Document Type");
+          ServLine.SETRANGE(ServLine.Type,ServLine.Type::Item);
+          ServLine.SETRANGE(ServLine."Document No.","No.");
+          ServLine.SETFILTER(ServLine."No.",'<>%1','');
+          ServLine.SETFILTER(ServLine."Qty. to Ship",'>%1',0);
+          ServLine.SETRANGE(ServLine.Posted,TRUE);
+          SerLineCount := ServLine.COUNT;
+          IF ServLine.FINDSET THEN BEGIN
+            IF (SerLineCount = SerLineCount2) AND (SerLineCount = RecCount)THEN BEGIN
+              Posted := TRUE;
+              MODIFY(TRUE);
             END
             ELSE BEGIN
-              REPEAT
-                ItemLedgEntry."From Service" := FALSE;
-                ServLine.Posted := FALSE;
-                ServLine.MODIFYALL(Posted,FALSE);
-              UNTIL ItemLedgEntry.NEXT = 0;
+              Posted := FALSE;
+              MODIFY(TRUE);
             END;
+          END;
+  end;
 
-            ItemLedgEntry.SETCURRENTKEY("Document No.","Document Type");
-            ItemLedgEntry.SETRANGE(ItemLedgEntry."Document No.","No.");
-            RecCount := ItemLedgEntry.COUNT;
+  [Scope('Internal')]
+  procedure PostToGLAccounts()
+  var
+      ItemJnlTemplate: Record "82";
+      ItemJnlBatch: Record "233";
+      ItemJnlLine: Record "83";
+      ItemJnlLine2: Record "83";
+      JnlSelected: Boolean;
+      ServLine: Record "5902";
+      ServLine2: Record "5902";
+      LineNo: Integer;
+      GenPostSetup: Record "252";
+      ItemLedgEntry: Record "32";
+      ItemLedgEntry2: Record "32";
+      MaintenanceLedgEntry: Record "5625";
+      ServiceHeader: Record "5900";
+      Confirmation: Boolean;
+      RecCount: Decimal;
+      SerLineCount: Decimal;
+      SerLineCount2: Decimal;
+      postMaint: Codeunit "5600";
+      ServLineRec: Record "5902";
+  begin
+      ItemJnlLine.RESET;
+      IF NOT CONFIRM('Are you sure you want to post?') THEN
+        EXIT
+        ELSE BEGIN
+            Confirmation := TRUE;
+      //To delete existing item jnl lines
+      ItemJnlLine2.SETRANGE(ItemJnlLine2."Journal Template Name",'ITEM');
+      ItemJnlLine2.SETRANGE(ItemJnlLine2."Journal Batch Name",'OTHERS');
+      IF ItemJnlLine2.FINDSET THEN
+        ItemJnlLine2.DELETEALL;
 
-            //By Segunio (The System should only close the Order if all items are posted or are ready for posting)
-            ServLine2.SETCURRENTKEY("Document Type","Document No.",Type,"No.");
-            ServLine2.SETRANGE(ServLine2."Document Type","Document Type");
-            ServLine2.SETRANGE(ServLine2."Document No.","No.");
-            ServLine.SETRANGE(ServLine.Type,ServLine.Type::Item);
-            ServLine2.SETFILTER(ServLine2."No.",'<>%1','');
-            ServLine2.SETFILTER(ServLine2."Line No.",'<>%1',0);
-            SerLineCount2 := ServLine2.COUNT;
+      LineNo := 10000;
+      ServLine.SETCURRENTKEY("Document Type","Document No.","Line No.");
+      ServLine.SETRANGE(ServLine."Document Type","Document Type");
+      ServLine.SETRANGE(ServLine."Document No.","No.");
+      ServLine.SETRANGE(ServLine.Type,ServLine.Type::Item);
+      ServLine.SETFILTER(ServLine."Qty. to Ship",'>%1',0);
+      ServLine.SETRANGE(ServLine.Posted,FALSE);
+      IF ServLine.FINDFIRST THEN BEGIN
+        REPEAT
+          ItemJnlLine."Journal Template Name" := 'ITEM';
+          ItemJnlLine."Journal Batch Name" := 'OTHERS';
+          ItemJnlLine."Line No." := ServLine."Line No.";
+          ItemJnlLine."Entry Type" := ItemJnlLine."Entry Type"::"Negative Adjmt.";
+          ItemJnlLine.VALIDATE(ItemJnlLine."Item No.",ServLine."No.");
+          ItemJnlLine.VALIDATE("Unit of Measure Code",ServLine."Unit of Measure Code");
+          ItemJnlLine.VALIDATE("Posting Date","Posting Date");
+          ItemJnlLine."Document No." := ServLine."Document No.";
+          ItemJnlLine."Requisition No." := ServLine."Document No.";
+          ItemJnlLine.Description := ServLine.Description;
+          ItemJnlLine."External Document No." := ServLine."Claim No.";
+          ItemJnlLine.VALIDATE("Location Code",ServLine."Location Code");
+          ItemJnlLine.VALIDATE("Variant Code",ServLine."Variant Code");
+          ItemJnlLine.VALIDATE(Quantity,ServLine."Qty. to Ship");
+          ItemJnlLine.VALIDATE("Unit Cost",ServLine."Unit Cost");
+          ItemJnlLine."Gen. Bus. Posting Group" := 'VRI-TNL';
+          ItemJnlLine."Gen. Prod. Posting Group" := ServLine."Gen. Prod. Posting Group";
+          ItemJnlLine."Maintenance Code" := "Maintenance Code";
+          ItemJnlLine."Shortcut Dimension 1 Code" := ServLine."Shortcut Dimension 1 Code";
+          ItemJnlLine."Shortcut Dimension 2 Code" := ServLine."Shortcut Dimension 2 Code";
+          ItemJnlLine."From Service" := TRUE;
+          ItemJnlLine."From Service Line No." := ServLine."Line No.";
+          ItemJnlLine.INSERT(TRUE);
+          LineNo := LineNo + 10000;
+        UNTIL ServLine.NEXT = 0;
+        CODEUNIT.RUN(CODEUNIT::"Item Jnl.-Post",ItemJnlLine);
+        Confirmation := TRUE;
+        ServLine.MODIFY;
+      END;
+      END;
 
-            //By Segunio (The System should only close the Order if all items are posted or are ready for posting)
-            ServLine.SETCURRENTKEY("Document Type","Document No.",Type,"No.","Qty. to Ship",Posted);
-            ServLine.SETRANGE(ServLine."Document Type","Document Type");
-            ServLine.SETRANGE(ServLine.Type,ServLine.Type::Item);
-            ServLine.SETRANGE(ServLine."Document No.","No.");
-            ServLine.SETFILTER(ServLine."No.",'<>%1','');
-            ServLine.SETFILTER(ServLine."Qty. to Ship",'>%1',0);
-            ServLine.SETRANGE(ServLine.Posted,TRUE);
-            SerLineCount := ServLine.COUNT;
-            IF ServLine.FINDSET THEN BEGIN
-              IF (SerLineCount = SerLineCount2) AND (SerLineCount = RecCount)THEN BEGIN
-                Posted := TRUE;
-                MODIFY(TRUE);
-              END
-              ELSE BEGIN
-                Posted := FALSE;
-                MODIFY(TRUE);
-              END;
+
+      IF Confirmation = FALSE THEN
+        EXIT
+        ELSE BEGIN
+          //To delete item jnl lines after posting
+          ItemJnlLine2.SETRANGE(ItemJnlLine2."Journal Template Name",'ITEM');
+          ItemJnlLine2.SETRANGE(ItemJnlLine2."Journal Batch Name",'OTHERS');
+          IF ItemJnlLine2.FINDFIRST THEN
+          ItemJnlLine2.DELETEALL;
+        END;
+
+          ItemLedgEntry.SETCURRENTKEY("Document No.","Document Type");
+          ItemLedgEntry.SETRANGE(ItemLedgEntry."Document No.","No.");
+          RecCount := ItemLedgEntry.COUNT;
+          IF ItemLedgEntry.FINDSET THEN BEGIN
+            REPEAT
+              ItemLedgEntry."From Service" := TRUE;
+              ServLine.Posted := TRUE;
+              ServLine.MODIFYALL(Posted,TRUE);
+            UNTIL ItemLedgEntry.NEXT = 0;
+          END
+          ELSE BEGIN
+            REPEAT
+              ItemLedgEntry."From Service" := FALSE;
+              ServLine.Posted := FALSE;
+              ServLine.MODIFYALL(Posted,FALSE);
+            UNTIL ItemLedgEntry.NEXT = 0;
+          END;
+
+          ItemLedgEntry.SETCURRENTKEY("Document No.","Document Type");
+          ItemLedgEntry.SETRANGE(ItemLedgEntry."Document No.","No.");
+          RecCount := ItemLedgEntry.COUNT;
+
+          //By Segunio (The System should only close the Order if all items are posted or are ready for posting)
+          ServLine2.SETCURRENTKEY("Document Type","Document No.",Type,"No.");
+          ServLine2.SETRANGE(ServLine2."Document Type","Document Type");
+          ServLine2.SETRANGE(ServLine2."Document No.","No.");
+          ServLine.SETRANGE(ServLine.Type,ServLine.Type::Item);
+          ServLine2.SETFILTER(ServLine2."No.",'<>%1','');
+          ServLine2.SETFILTER(ServLine2."Line No.",'<>%1',0);
+          SerLineCount2 := ServLine2.COUNT;
+
+          //By Segunio (The System should only close the Order if all items are posted or are ready for posting)
+          ServLine.SETCURRENTKEY("Document Type","Document No.",Type,"No.","Qty. to Ship",Posted);
+          ServLine.SETRANGE(ServLine."Document Type","Document Type");
+          ServLine.SETRANGE(ServLine.Type,ServLine.Type::Item);
+          ServLine.SETRANGE(ServLine."Document No.","No.");
+          ServLine.SETFILTER(ServLine."No.",'<>%1','');
+          ServLine.SETFILTER(ServLine."Qty. to Ship",'>%1',0);
+          ServLine.SETRANGE(ServLine.Posted,TRUE);
+          SerLineCount := ServLine.COUNT;
+          IF ServLine.FINDSET THEN BEGIN
+            IF (SerLineCount = SerLineCount2) AND (SerLineCount = RecCount)THEN BEGIN
+              Posted := TRUE;
+              MODIFY(TRUE);
+            END
+            ELSE BEGIN
+              Posted := FALSE;
+              MODIFY(TRUE);
             END;
-    end; */
+          END;
+  end; */
+
+
+    procedure CheckControls()
+    var
+
+        COFRec: Record "Customer Order Table.";
+    Begin
+        TESTFIELD("Posting Date", TODAY);
+        TESTFIELD("Salesperson Code");
+        TESTFIELD("Location Code");
+
+    End;
 }
