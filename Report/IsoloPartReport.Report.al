@@ -1,69 +1,69 @@
 report 50072 "Isolo Part  Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './IsoloPartReport.rdlc';
+    RDLCLayout = 'Layout/IsoloPartReport.rdl';
 
     dataset
     {
-        dataitem(DataItem1000000000; Table5993)
+        dataitem(ServInvLineData; "Service Invoice Line")
         {
-            DataItemTableView = WHERE (Customer No.=FILTER(TCSC*));
+            DataItemTableView = WHERE("Customer No." = FILTER('TCSC*'));
             RequestFilterFields = "Posting Date";
-            column(CustomerNo_ServiceInvoiceLine;"Service Invoice Line"."Customer No.")
+            column(CustomerNo_ServiceInvoiceLine; "Customer No.")
             {
             }
-            column(DocumentNo_ServiceInvoiceLine;"Service Invoice Line"."Document No.")
+            column(DocumentNo_ServiceInvoiceLine; "Document No.")
             {
             }
-            column(LineNo_ServiceInvoiceLine;"Service Invoice Line"."Line No.")
+            column(LineNo_ServiceInvoiceLine; "Line No.")
             {
             }
-            column(Description_ServiceInvoiceLine;"Service Invoice Line".Description)
+            column(Description_ServiceInvoiceLine; Description)
             {
             }
-            column(Type_ServiceInvoiceLine;"Service Invoice Line".Type)
+            column(Type_ServiceInvoiceLine; Type)
             {
             }
-            column(No_ServiceInvoiceLine;"Service Invoice Line"."No.")
+            column(No_ServiceInvoiceLine; "No.")
             {
             }
-            column(CustomerOrderNo_ServiceInvoiceLine;"Service Invoice Line"."Customer Order No.")
+            column(CustomerOrderNo_ServiceInvoiceLine; "Customer Order No.")
             {
             }
-            column(GLAccTableCaption2;TABLECAPTION +': ' + GLFilter2)
+            column(GLAccTableCaption2; TABLECAPTION + ': ' + GLFilter2)
             {
             }
-            column(GLFilter2;GLFilter2)
+            column(GLFilter2; GLFilter2)
             {
             }
-            column(Quantity_ServiceInvoiceLine;"Service Invoice Line".Quantity)
+            column(Quantity_ServiceInvoiceLine; Quantity)
             {
             }
-            column(UnitPrice_ServiceInvoiceLine;"Service Invoice Line"."Unit Price")
+            column(UnitPrice_ServiceInvoiceLine; "Unit Price")
             {
             }
-            column(RegistrationNo_ServiceInvoiceLine;"Service Invoice Line"."Registration No.")
+            column(RegistrationNo_ServiceInvoiceLine; "Registration No.")
             {
             }
-            column(UnitCostLCY_ServiceInvoiceLine;"Service Invoice Line"."Unit Cost (LCY)")
+            column(UnitCostLCY_ServiceInvoiceLine; "Unit Cost (LCY)")
             {
             }
-            column(AmountIncludingVAT_ServiceInvoiceLine;"Service Invoice Line"."Amount Including VAT")
+            column(AmountIncludingVAT_ServiceInvoiceLine; "Amount Including VAT")
             {
             }
-            column(CustomerName_ServiceInvoiceLine;"Service Invoice Line"."Customer Name")
+            column(CustomerName_ServiceInvoiceLine; "Customer Name")
             {
             }
-            column(JobType_ServiceInvoiceLine;"Service Invoice Line"."Job Type")
+            column(JobType_ServiceInvoiceLine; "Job Type")
             {
             }
-            column(Show_Detail;Hide)
+            column(Show_Detail; Hide)
             {
             }
 
             trigger OnAfterGetRecord()
             begin
-                 GLFilter2 := "Service Invoice Line".GETFILTERS;
+                GLFilter2 := GETFILTERS;
             end;
         }
     }
@@ -77,8 +77,9 @@ report 50072 "Isolo Part  Report"
             {
                 group(Option)
                 {
-                    field("Show Detail";Hide)
+                    field("Show Detail"; Hide)
                     {
+                        ApplicationArea = All;
                     }
                 }
             }
@@ -95,7 +96,7 @@ report 50072 "Isolo Part  Report"
 
     trigger OnPreReport()
     begin
-           GLFilter := "Service Invoice Line".GETFILTERS;
+        GLFilter := ServInvLineData.GETFILTERS;
     end;
 
     var

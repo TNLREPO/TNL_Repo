@@ -1,13 +1,13 @@
 report 50344 "Purchase & Valuation details"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './PurchaseValuationdetails.rdlc';
+    RDLCLayout = 'Layout/PurchaseValuationdetails.rdl';
 
     dataset
     {
-        dataitem(DataItem7209; Table32)
+        dataitem(DataItem7209; "Item Ledger Entry")
         {
-            DataItemTableView = SORTING (Item No.);
+            DataItemTableView = SORTING("Item No.");
             RequestFilterFields = "Item No.", "Posting Date", "Inventory Posting Group", "Entry Type";
             column(FORMAT_TODAY_0_4_; FORMAT(TODAY, 0, 4))
             {
@@ -15,9 +15,7 @@ report 50344 "Purchase & Valuation details"
             column(COMPANYNAME; COMPANYNAME)
             {
             }
-            column(CurrReport_PAGENO; CurrReport.PAGENO)
-            {
-            }
+
             column(USERID; USERID)
             {
             }
@@ -93,10 +91,10 @@ report 50344 "Purchase & Valuation details"
             column(Item_Ledger_Entry__Item_No__Caption; FIELDCAPTION("Item No."))
             {
             }
-            dataitem(DataItem8894; Table5802)
+            dataitem(DataItem8894; "Value Entry")
             {
-                DataItemLink = Item Ledger Entry No.=FIELD(Entry No.);
-                DataItemTableView = SORTING (Item Ledger Entry No., Entry Type);
+                DataItemLink = "Item Ledger Entry No." = FIELD("Entry No.");
+                DataItemTableView = SORTING("Item Ledger Entry No.", "Entry Type");
                 column(Value_Entry__Posting_Date_; "Posting Date")
                 {
                 }

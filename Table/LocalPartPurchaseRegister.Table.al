@@ -959,6 +959,7 @@ table 70018 "Local Part Purchase Register"
                             VendAddr := "Supplier's Address";
                             Purpose := "Justification for purchase";
                             ToAddresses := 'adewumi@toyotanigeria.com';
+                            Addressee := 'STA';
                             //CcAddresses := 
                             BccAddresses := '';
 

@@ -1,14 +1,14 @@
 report 50233 "Inventory Valuation Group"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './InventoryValuationGroup.rdlc';
+    RDLCLayout = 'Layout/InventoryValuationGroup.rdl';
 
     dataset
     {
-        dataitem(DataItem5759; Table94)
+        dataitem(InvPostingGrpData; "Inventory Posting Group")
         {
-            CalcFields = Inventory Value, Quantity;
-            DataItemTableView = WHERE (Show In Inventory Summary=CONST(Yes));
+            CalcFields = "Inventory Value", Quantity;
+            DataItemTableView = WHERE("Show In Inventory Summary" = CONST(true));
             RequestFilterFields = "Code";
             RequestFilterHeading = 'Filter';
             column(FORMAT_TODAY_0_4_; FORMAT(TODAY, 0, 4))
@@ -17,9 +17,7 @@ report 50233 "Inventory Valuation Group"
             column(COMPANYNAME; COMPANYNAME)
             {
             }
-            column(CurrReport_PAGENO; CurrReport.PAGENO)
-            {
-            }
+
             column(USERID; USERID)
             {
             }
@@ -125,10 +123,10 @@ report 50233 "Inventory Valuation Group"
             column(Inventory_Posting_Group_Code; Code)
             {
             }
-            dataitem(LoopRec; Table2000000026)
+            dataitem(LoopRec; Integer)
             {
-                DataItemTableView = SORTING (Number)
-                                    WHERE (Number = FILTER (1 .. 14));
+                DataItemTableView = SORTING(Number)
+                                    WHERE(Number = FILTER(1 .. 14));
                 MaxIteration = 14;
                 column(PeriodName_LoopRec_Number_; PeriodName[LoopRec.Number])
                 {
@@ -196,7 +194,7 @@ report 50233 "Inventory Valuation Group"
                         14:
                             BEGIN
                                 MinDate := PeriodStart[14];
-                                MaxDate := 31129999D;
+                                MaxDate := 99991231D;
                                 PeriodName[14] := 'From ' + FORMAT(PeriodStart[14]);
                             END;
 
@@ -211,17 +209,17 @@ report 50233 "Inventory Valuation Group"
 
                     LineTotal := 0;
                     FOR i := 1 TO 10 DO BEGIN
-                        "Inventory Posting Group".SETRANGE("Inventory Posting Group"."Location Filter", LocArray[i]);
-                        "Inventory Posting Group".SETFILTER("Inventory Posting Group"."Date Filter", '%1..%2', MinDate, MaxDate);
-                        "Inventory Posting Group".CALCFIELDS("Inventory Posting Group"."Inventory Value");
-                        ValueArray[i] := "Inventory Posting Group"."Inventory Value";
+                        InvPostingGrpData.SETRANGE("Location Filter", LocArray[i]);
+                        InvPostingGrpData.SETFILTER("Date Filter", '%1..%2', MinDate, MaxDate);
+                        InvPostingGrpData.CALCFIELDS("Inventory Value");
+                        ValueArray[i] := InvPostingGrpData."Inventory Value";
                         LineTotal := LineTotal + ValueArray[i];
                     END;
                 end;
 
                 trigger OnPreDataItem()
                 begin
-                    CurrReport.CREATETOTALS(ValueArray, LineTotal);
+                    //CurrReport.CREATETOTALS(ValueArray, LineTotal);
 
                     FOR i := 1 TO 10 DO BEGIN
                         LocNameArray[i] := LocationRec.GetName(LocArray[i]);
@@ -265,8 +263,8 @@ report 50233 "Inventory Valuation Group"
 
             trigger OnPreDataItem()
             begin
-                CurrReport.CREATETOTALS(StoresValue, VesselValue, LineTotal);
-                CurrReport.CREATETOTALS(ValueArray, LineTotal);
+                //CurrReport.CREATETOTALS(StoresValue, VesselValue, LineTotal);
+                //CurrReport.CREATETOTALS(ValueArray, LineTotal);
 
                 FOR i := 1 TO 10 DO BEGIN
                     LocNameArray[i] := LocationRec.GetName(LocArray[i]);
@@ -289,7 +287,7 @@ report 50233 "Inventory Valuation Group"
 
 
                 PeriodStart[14] := CALCDATE('+1D', PeriodEnd[13]);
-                PeriodEnd[14] := 31129999D;
+                PeriodEnd[14] := 99991231D;
             end;
         }
     }
@@ -303,36 +301,43 @@ report 50233 "Inventory Valuation Group"
             {
                 field("Ending Period"; PeriodEnd[13])
                 {
+                    ApplicationArea = All;
                 }
                 field("Location 1"; LocArray[1])
                 {
                     DrillDownPageID = "Location List";
                     TableRelation = Location;
+                    ApplicationArea = All;
                 }
                 field("Location 2"; LocArray[2])
                 {
                     DrillDownPageID = "Location List";
                     TableRelation = Location;
+                    ApplicationArea = All;
                 }
                 field("Location 3"; LocArray[3])
                 {
                     DrillDownPageID = "Location List";
                     TableRelation = Location;
+                    ApplicationArea = All;
                 }
                 field("Location 4"; LocArray[4])
                 {
                     DrillDownPageID = "Location List";
                     TableRelation = Location;
+                    ApplicationArea = All;
                 }
                 field("Location 5"; LocArray[5])
                 {
                     DrillDownPageID = "Location List";
                     TableRelation = Location;
+                    ApplicationArea = All;
                 }
                 field("Location 6"; LocArray[6])
                 {
                     DrillDownPageID = "Location List";
                     TableRelation = Location;
+                    ApplicationArea = All;
                 }
             }
         }
@@ -350,8 +355,8 @@ report 50233 "Inventory Valuation Group"
         LastFieldNo: Integer;
         FooterPrinted: Boolean;
         TotalFor: Label 'Total for ';
-        LocationRec: Record "14";
-        ValueRec: Record "5802";
+        LocationRec: Record 14;
+        ValueRec: Record 5802;
         StoresValue: Decimal;
         VesselValue: Decimal;
         ReportDate: Date;

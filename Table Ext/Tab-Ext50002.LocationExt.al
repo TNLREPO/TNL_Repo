@@ -142,4 +142,18 @@ tableextension 50002 "Location Ext." extends Location
         {
         }
     }
+    var
+
+        Location: Record Location;
+
+    procedure GetName(LocCode: Code[10]): Text[30]
+    begin
+        IF Location.GET(LocCode) THEN
+            EXIT(Location.Name)
+        ELSE
+            EXIT('');
+
+    end;
+
+
 }

@@ -1,21 +1,18 @@
 report 50183 "Item Movement Monitor Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './ItemMovementMonitorReport.rdlc';
+    RDLCLayout = 'Layout/ItemMovementMonitorReport.rdl';
 
     dataset
     {
-        dataitem(DataItem8129; Table27)
+        dataitem(DataItem8129; Item)
         {
-            DataItemTableView = SORTING (Inventory Posting Group, Item Price Group);
+            DataItemTableView = SORTING("Inventory Posting Group", "Item Price Group");
             RequestFilterFields = "No.", "Inventory Posting Group", "Date Filter";
             column(FORMAT_TODAY_0_4_; FORMAT(TODAY, 0, 4))
             {
             }
             column(COMPANYNAME; COMPANYNAME)
-            {
-            }
-            column(CurrReport_PAGENO; CurrReport.PAGENO)
             {
             }
             column(ExportToExcel; ExportToExcel)
@@ -63,16 +60,16 @@ report 50183 "Item Movement Monitor Report"
             column(Item__Unit_Cost_; "Unit Cost")
             {
             }
-            column(Item_Item__Product_Code_; Item."Product Code")
+            column(Item_Item__Product_Code_; "Product Code")
             {
             }
-            column(Item_Item__Product_Group_Code_; Item."Product Group Code")
+            column(Item_Item__Product_Group_Code_; "Item Category Code")
             {
             }
-            column(Item_Item__Model_Name_; Item."Model Name")
+            column(Item_Item__Model_Name_; "Model Name")
             {
             }
-            column(Item_Item__Model_No__; Item."Model No.")
+            column(Item_Item__Model_No__; "Model No.")
             {
             }
             column(TotalFor___FIELDCAPTION__Inventory_Posting_Group__; TotalFor + FIELDCAPTION("Inventory Posting Group"))
@@ -157,8 +154,8 @@ report 50183 "Item Movement Monitor Report"
                         lastpurchdate := ledgerrec."Posting Date";
                 END;
                 ledgerrec.SETRANGE(ledgerrec."Entry Type");
-                IF Item.Inventory > 0 THEN
-                    costval := Item.Inventory * Item."Unit Cost"
+                IF Inventory > 0 THEN
+                    costval := Inventory * "Unit Cost"
                 ELSE
                     IF NOT conzero THEN CurrReport.SKIP;
             end;
@@ -169,7 +166,7 @@ report 50183 "Item Movement Monitor Report"
                 IF movedate = 0D THEN
                     movedate := TODAY;
                 ledgerrec.SETCURRENTKEY("Item No.", "Posting Date", "Entry Type");
-                CurrReport.CREATETOTALS(costval);
+                //CurrReport.CREATETOTALS(costval);
             end;
         }
     }
@@ -183,15 +180,15 @@ report 50183 "Item Movement Monitor Report"
             {
                 field("Movement End Date"; moveper)
                 {
+                    ApplicationArea = All;
                 }
                 field("Movement Last Considered"; movedate)
                 {
-                }
-                field("Export To Excel"; ExportToExcel)
-                {
+                    ApplicationArea = All;
                 }
                 field("Show Zero Inventory"; conzero)
                 {
+                    ApplicationArea = All;
                 }
             }
         }
@@ -209,7 +206,7 @@ report 50183 "Item Movement Monitor Report"
         LastFieldNo: Integer;
         FooterPrinted: Boolean;
         TotalFor: Label 'Total for ';
-        ledgerrec: Record "32";
+        ledgerrec: Record 32;
         Lastdate: Date;
         LastsaleDate: Date;
         lastpurchdate: Date;
@@ -221,11 +218,7 @@ report 50183 "Item Movement Monitor Report"
         EXc: Integer;
         EXr: Integer;
         gFontSize: Integer;
-        XlApp: Automation;
-        XlWorkBook: Automation;
-        XlWorkSheet: Automation;
-        XlWorksheets: Automation;
-        XlRange: Automation;
+
         Bold: Boolean;
         Italic: Boolean;
         Underline: Boolean;

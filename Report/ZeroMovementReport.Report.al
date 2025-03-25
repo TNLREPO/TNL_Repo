@@ -2,21 +2,18 @@ report 50108 "Zero Movement Report"
 {
     // 12372-15110..13041-74040-02
     DefaultLayout = RDLC;
-    RDLCLayout = './ZeroMovementReport.rdlc';
+    RDLCLayout = 'Layout/ZeroMovementReport.rdl';
 
 
     dataset
     {
-        dataitem(DataItem5444; Table2000000026)
+        dataitem(DataItem5444; Integer)
         {
             MaxIteration = 1;
             column(FORMAT_TODAY_0_4_; FORMAT(TODAY, 0, 4))
             {
             }
             column(COMPANYNAME; COMPANYNAME)
-            {
-            }
-            column(CurrReport_PAGENO; CurrReport.PAGENO)
             {
             }
             column(USERID; USERID)
@@ -40,7 +37,7 @@ report 50108 "Zero Movement Report"
             column(Item__Qty__on_Purch__Order_Caption; Item.FIELDCAPTION("Qty. on Purch. Order"))
             {
             }
-            column(Item__Stockvalue__Caption; Item__Stockvalue__CaptionLbl)
+            column(Item__Stockvalue__Caption; Item.FieldCaption("Stockvalue."))
             {
             }
             column(DslsCaption; DslsCaptionLbl)
@@ -58,49 +55,49 @@ report 50108 "Zero Movement Report"
             column(Integer_Number; Number)
             {
             }
-            dataitem(DataItem8129; Table27)
+            dataitem(Item; Item)
             {
-                CalcFields = Qty. on Purch. Order, Inventory, Stockvalue.;
-                DataItemTableView = SORTING (Inventory Posting Group)
-                                    WHERE (Inventory Posting Group=CONST(N_PARTS));
-                RequestFilterFields = "No.","Inventory Posting Group","Variant Filter","Location Filter","Date Filter";
-                column(Filters_______GETFILTERS;'Filters : ' + GETFILTERS)
+                CalcFields = "Qty. on Purch. Order", Inventory, "Stockvalue.";
+                DataItemTableView = SORTING("Inventory Posting Group")
+                                    WHERE("Inventory Posting Group" = filter('N_PARTS'));
+                RequestFilterFields = "No.", "Inventory Posting Group", "Variant Filter", "Location Filter", "Date Filter";
+                column(Filters_______GETFILTERS; 'Filters : ' + GETFILTERS)
                 {
                 }
-                column(Zero_Movement_Since_The_Last_5_Years__from______FORMAT_StartDate______to_____FORMAT_EndDate_______;'Zero Movement Since The Last 5 Years  from (' + FORMAT(StartDate) + ' to ' + FORMAT(EndDate) + ')')
+                column(Zero_Movement_Since_The_Last_5_Years__from______FORMAT_StartDate______to_____FORMAT_EndDate_______; 'Zero Movement Since The Last 5 Years  from (' + FORMAT(StartDate) + ' to ' + FORMAT(EndDate) + ')')
                 {
                 }
-                column(Item__No__;"No.")
+                column(Item__No__; "No.")
                 {
                 }
-                column(Item_Description;Description)
+                column(Item_Description; Description)
                 {
                 }
-                column(Item__Qty__on_Purch__Order_;"Qty. on Purch. Order")
+                column(Item__Qty__on_Purch__Order_; "Qty. on Purch. Order")
                 {
                 }
-                column(Item__Stockvalue__;"Stockvalue.")
+                column(Item__Stockvalue__; "Stockvalue.")
                 {
                 }
-                column(Dsls;Dsls)
+                column(Dsls; Dsls)
                 {
                 }
-                column(Item_Inventory;Inventory)
+                column(Item_Inventory; Inventory)
                 {
                 }
-                column(Item__Last_Sales_Date_;"Last Sales Date")
+                column(Item__Last_Sales_Date_; "Last Sales Date")
                 {
                 }
-                column(Item__Last_Purchase_Date_;"Last Purchase Date")
+                column(Item__Last_Purchase_Date_; "Last Purchase Date")
                 {
                 }
-                column(Item__Qty__on_Purch__Order__Control1000000060;"Qty. on Purch. Order")
+                column(Item__Qty__on_Purch__Order__Control1000000060; "Qty. on Purch. Order")
                 {
                 }
-                column(Item__Stockvalue___Control1000000061;"Stockvalue.")
+                column(Item__Stockvalue___Control1000000061; "Stockvalue.")
                 {
                 }
-                column(Item_Inventory_Control1000000067;Inventory)
+                column(Item_Inventory_Control1000000067; Inventory)
                 {
                 }
 
@@ -117,48 +114,48 @@ report 50108 "Zero Movement Report"
                     EndDate := WORKDATE;
                     StartDate := CALCDATE('-5Y', WORKDATE);
 
-                    CurrReport.CREATETOTALS("Qty. on Purch. Order",Inventory,"Stockvalue.");
+                    //CurrReport.CREATETOTALS("Qty. on Purch. Order", Inventory, "Stockvalue.");
                 end;
             }
-            dataitem(Item2;Table27)
+            dataitem(Item2; Item)
             {
-                CalcFields = Qty. on Purch. Order,Inventory,Stockvalue.;
-                DataItemTableView = SORTING(Inventory Posting Group)
-                                    WHERE(Inventory Posting Group=CONST(N_PARTS));
-                column(Zero_Movement_In_The_Last_4_Years__from______FORMAT_StartDate______to_____FORMAT_EndDate_______;'Zero Movement In The Last 4 Years  from (' + FORMAT(StartDate) + ' to ' + FORMAT(EndDate) + ')')
+                CalcFields = "Qty. on Purch. Order", Inventory, "Stockvalue.";
+                DataItemTableView = SORTING("Inventory Posting Group")
+                                    WHERE("Inventory Posting Group" = filter('N_PARTS'));
+                column(Zero_Movement_In_The_Last_4_Years__from______FORMAT_StartDate______to_____FORMAT_EndDate_______; 'Zero Movement In The Last 4 Years  from (' + FORMAT(StartDate) + ' to ' + FORMAT(EndDate) + ')')
                 {
                 }
-                column(Item2__No__;"No.")
+                column(Item2__No__; "No.")
                 {
                 }
-                column(Item2_Description;Description)
+                column(Item2_Description; Description)
                 {
                 }
-                column(Item2__Qty__on_Purch__Order_;"Qty. on Purch. Order")
+                column(Item2__Qty__on_Purch__Order_; "Qty. on Purch. Order")
                 {
                 }
-                column(Item2__Stockvalue__;"Stockvalue.")
+                column(Item2__Stockvalue__; "Stockvalue.")
                 {
                 }
-                column(Dsls_Control1000000029;Dsls)
+                column(Dsls_Control1000000029; Dsls)
                 {
                 }
-                column(Item2_Inventory;Inventory)
+                column(Item2_Inventory; Inventory)
                 {
                 }
-                column(Item2__Last_Sales_Date_;"Last Sales Date")
+                column(Item2__Last_Sales_Date_; "Last Sales Date")
                 {
                 }
-                column(Item2__Last_Purchase_Date_;"Last Purchase Date")
+                column(Item2__Last_Purchase_Date_; "Last Purchase Date")
                 {
                 }
-                column(Item2__Qty__on_Purch__Order__Control1000000071;"Qty. on Purch. Order")
+                column(Item2__Qty__on_Purch__Order__Control1000000071; "Qty. on Purch. Order")
                 {
                 }
-                column(Item2__Stockvalue___Control1000000072;"Stockvalue.")
+                column(Item2__Stockvalue___Control1000000072; "Stockvalue.")
                 {
                 }
-                column(Item2_Inventory_Control1000000073;Inventory)
+                column(Item2_Inventory_Control1000000073; Inventory)
                 {
                 }
 
@@ -177,45 +174,45 @@ report 50108 "Zero Movement Report"
                     StartDate := CALCDATE('-4Y', WORKDATE);
                 end;
             }
-            dataitem(Item3;Table27)
+            dataitem(Item3; Item)
             {
-                CalcFields = Qty. on Purch. Order,Inventory,Stockvalue.;
-                DataItemTableView = SORTING(Inventory Posting Group)
-                                    WHERE(Inventory Posting Group=CONST(N_PARTS));
-                column(Zero_Movement_In_The_Last_3_Years__from______FORMAT_StartDate______to_____FORMAT_EndDate_______;'Zero Movement In The Last 3 Years  from (' + FORMAT(StartDate) + ' to ' + FORMAT(EndDate) + ')')
+                CalcFields = "Qty. on Purch. Order", Inventory, "Stockvalue.";
+                DataItemTableView = SORTING("Inventory Posting Group")
+                                    WHERE("Inventory Posting Group" = filter('N_PARTS'));
+                column(Zero_Movement_In_The_Last_3_Years__from______FORMAT_StartDate______to_____FORMAT_EndDate_______; 'Zero Movement In The Last 3 Years  from (' + FORMAT(StartDate) + ' to ' + FORMAT(EndDate) + ')')
                 {
                 }
-                column(Item3__No__;"No.")
+                column(Item3__No__; "No.")
                 {
                 }
-                column(Item3_Description;Description)
+                column(Item3_Description; Description)
                 {
                 }
-                column(Item3__Qty__on_Purch__Order_;"Qty. on Purch. Order")
+                column(Item3__Qty__on_Purch__Order_; "Qty. on Purch. Order")
                 {
                 }
-                column(Item3__Stockvalue__;"Stockvalue.")
+                column(Item3__Stockvalue__; "Stockvalue.")
                 {
                 }
-                column(Dsls_Control1000000037;Dsls)
+                column(Dsls_Control1000000037; Dsls)
                 {
                 }
-                column(Item3_Inventory;Inventory)
+                column(Item3_Inventory; Inventory)
                 {
                 }
-                column(Item3__Last_Sales_Date_;"Last Sales Date")
+                column(Item3__Last_Sales_Date_; "Last Sales Date")
                 {
                 }
-                column(Item3__Last_Purchase_Date_;"Last Purchase Date")
+                column(Item3__Last_Purchase_Date_; "Last Purchase Date")
                 {
                 }
-                column(Item3__Qty__on_Purch__Order__Control1000000075;"Qty. on Purch. Order")
+                column(Item3__Qty__on_Purch__Order__Control1000000075; "Qty. on Purch. Order")
                 {
                 }
-                column(Item3__Stockvalue___Control1000000076;"Stockvalue.")
+                column(Item3__Stockvalue___Control1000000076; "Stockvalue.")
                 {
                 }
-                column(Item3_Inventory_Control1000000077;Inventory)
+                column(Item3_Inventory_Control1000000077; Inventory)
                 {
                 }
 
@@ -234,45 +231,45 @@ report 50108 "Zero Movement Report"
                     StartDate := CALCDATE('-3Y', WORKDATE);
                 end;
             }
-            dataitem(Item4;Table27)
+            dataitem(Item4; Item)
             {
-                CalcFields = Qty. on Purch. Order,Inventory,Stockvalue.;
-                DataItemTableView = SORTING(Inventory Posting Group)
-                                    WHERE(Inventory Posting Group=CONST(N_PARTS));
-                column(Zero_Movement_In_The_Last_2_Years__from______FORMAT_StartDate______to_____FORMAT_EndDate_______;'Zero Movement In The Last 2 Years  from (' + FORMAT(StartDate) + ' to ' + FORMAT(EndDate) + ')')
+                CalcFields = "Qty. on Purch. Order", Inventory, "Stockvalue.";
+                DataItemTableView = SORTING("Inventory Posting Group")
+                                    WHERE("Inventory Posting Group" = filter('N_PARTS'));
+                column(Zero_Movement_In_The_Last_2_Years__from______FORMAT_StartDate______to_____FORMAT_EndDate_______; 'Zero Movement In The Last 2 Years  from (' + FORMAT(StartDate) + ' to ' + FORMAT(EndDate) + ')')
                 {
                 }
-                column(Item4__No__;"No.")
+                column(Item4__No__; "No.")
                 {
                 }
-                column(Item4_Description;Description)
+                column(Item4_Description; Description)
                 {
                 }
-                column(Item4__Qty__on_Purch__Order_;"Qty. on Purch. Order")
+                column(Item4__Qty__on_Purch__Order_; "Qty. on Purch. Order")
                 {
                 }
-                column(Item4__Stockvalue__;"Stockvalue.")
+                column(Item4__Stockvalue__; "Stockvalue.")
                 {
                 }
-                column(Dsls_Control1000000045;Dsls)
+                column(Dsls_Control1000000045; Dsls)
                 {
                 }
-                column(Item4_Inventory;Inventory)
+                column(Item4_Inventory; Inventory)
                 {
                 }
-                column(Item4__Last_Sales_Date_;"Last Sales Date")
+                column(Item4__Last_Sales_Date_; "Last Sales Date")
                 {
                 }
-                column(Item4__Last_Purchase_Date_;"Last Purchase Date")
+                column(Item4__Last_Purchase_Date_; "Last Purchase Date")
                 {
                 }
-                column(Item4__Qty__on_Purch__Order__Control1000000079;"Qty. on Purch. Order")
+                column(Item4__Qty__on_Purch__Order__Control1000000079; "Qty. on Purch. Order")
                 {
                 }
-                column(Item4__Stockvalue___Control1000000080;"Stockvalue.")
+                column(Item4__Stockvalue___Control1000000080; "Stockvalue.")
                 {
                 }
-                column(Item4_Inventory_Control1000000081;Inventory)
+                column(Item4_Inventory_Control1000000081; Inventory)
                 {
                 }
 
@@ -291,45 +288,45 @@ report 50108 "Zero Movement Report"
                     StartDate := CALCDATE('-2Y', WORKDATE);
                 end;
             }
-            dataitem(Item5;Table27)
+            dataitem(Item5; Item)
             {
-                CalcFields = Qty. on Purch. Order,Inventory,Stockvalue.;
-                DataItemTableView = SORTING(Inventory Posting Group)
-                                    WHERE(Inventory Posting Group=CONST(N_PARTS));
-                column(Zero_Movement_Since_The_Last_1_Year__from______FORMAT_StartDate______to_____FORMAT_EndDate_______;'Zero Movement Since The Last 1 Year  from (' + FORMAT(StartDate) + ' to ' + FORMAT(EndDate) + ')')
+                CalcFields = "Qty. on Purch. Order", Inventory, "Stockvalue.";
+                DataItemTableView = SORTING("Inventory Posting Group")
+                                    WHERE("Inventory Posting Group" = filter('N_PARTS'));
+                column(Zero_Movement_Since_The_Last_1_Year__from______FORMAT_StartDate______to_____FORMAT_EndDate_______; 'Zero Movement Since The Last 1 Year  from (' + FORMAT(StartDate) + ' to ' + FORMAT(EndDate) + ')')
                 {
                 }
-                column(Item5__No__;"No.")
+                column(Item5__No__; "No.")
                 {
                 }
-                column(Item5_Description;Description)
+                column(Item5_Description; Description)
                 {
                 }
-                column(Item5__Qty__on_Purch__Order_;"Qty. on Purch. Order")
+                column(Item5__Qty__on_Purch__Order_; "Qty. on Purch. Order")
                 {
                 }
-                column(Item5__Stockvalue__;"Stockvalue.")
+                column(Item5__Stockvalue__; "Stockvalue.")
                 {
                 }
-                column(Dsls_Control1000000053;Dsls)
+                column(Dsls_Control1000000053; Dsls)
                 {
                 }
-                column(Item5_Inventory;Inventory)
+                column(Item5_Inventory; Inventory)
                 {
                 }
-                column(Item5__Last_Sales_Date_;"Last Sales Date")
+                column(Item5__Last_Sales_Date_; "Last Sales Date")
                 {
                 }
-                column(Item5__Last_Purchase_Date_;"Last Purchase Date")
+                column(Item5__Last_Purchase_Date_; "Last Purchase Date")
                 {
                 }
-                column(Item5__Qty__on_Purch__Order__Control1000000083;"Qty. on Purch. Order")
+                column(Item5__Qty__on_Purch__Order__Control1000000083; "Qty. on Purch. Order")
                 {
                 }
-                column(Item5__Stockvalue___Control1000000084;"Stockvalue.")
+                column(Item5__Stockvalue___Control1000000084; "Stockvalue.")
                 {
                 }
-                column(Item5_Inventory_Control1000000085;Inventory)
+                column(Item5_Inventory_Control1000000085; Inventory)
                 {
                 }
 
@@ -386,24 +383,24 @@ report 50108 "Zero Movement Report"
         Last_Sales_DateCaptionLbl: Label 'Last Sales Date';
         Last_Purchase_DateCaptionLbl: Label 'Last Purchase Date';
 
-    [Scope('Internal')]
-    procedure ZeroMvtYears(ItemRec: Record "27"): Integer
+
+    procedure ZeroMvtYears(ItemRec: Record Item): Integer
     begin
-        ItemRec.CALCFIELDS(ItemRec."Sales (Qty.)",ItemRec."Last Sales Date");
+        ItemRec.CALCFIELDS(ItemRec."Sales (Qty.)", ItemRec."Last Sales Date");
         IF (ItemRec."Last Sales Date" <> 0D) THEN
-          ZeroMvtSince := WORKDATE - ItemRec."Last Sales Date"
+            ZeroMvtSince := WORKDATE - ItemRec."Last Sales Date"
         ELSE
-         IF (ItemRec."Old DB Date" <> 0D) THEN
-         ZeroMvtSince := WORKDATE - ItemRec."Old DB Date"
-         ELSE
-           ZeroMvtSince := 999999;
+            IF (ItemRec."Old DB Date" <> 0D) THEN
+                ZeroMvtSince := WORKDATE - ItemRec."Old DB Date"
+            ELSE
+                ZeroMvtSince := 999999;
 
         IF (ZeroMvtSince = 999999) THEN
-          Dsls := '-'
+            Dsls := '-'
         ELSE
-          Dsls := FORMAT(ZeroMvtSince);
+            Dsls := FORMAT(ZeroMvtSince);
 
-        EXIT (ROUND(ZeroMvtSince/365,1,'<'));
+        EXIT(ROUND(ZeroMvtSince / 365, 1, '<'));
     end;
 }
 

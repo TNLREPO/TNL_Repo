@@ -1,86 +1,86 @@
 report 50500 "Part Invt. Valu. Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './PartInvtValuReport.rdlc';
+    RDLCLayout = 'Layout/PartInvtValuReport.rdl';
 
     dataset
     {
-        dataitem(DataItem100000000; Table27)
+        dataitem(DataItem100000000; Item)
         {
             RequestFilterFields = "No.", "Inventory Posting Group", "Location Filter", "Date Filter";
-            column(No_Item; Item."No.")
+            column(No_Item; "No.")
             {
             }
-            column(Description_Item; Item.Description)
+            column(Description_Item; Description)
             {
             }
-            column(Inventory_Item; Item.Inventory)
+            column(Inventory_Item; Inventory)
             {
             }
-            column(ItemCategoryCode_Item; Item."Item Category Code")
+            column(ItemCategoryCode_Item; "Item Category Code")
             {
             }
-            column(UnitCost_Item; Item."Unit Cost")
+            column(UnitCost_Item; "Unit Cost")
             {
             }
-            column(StockValuePostedtoGL_Item; Item."Stock Value Posted to G/L")
+            column(StockValuePostedtoGL_Item; "Stock Value Posted to G/L")
             {
             }
-            column(UnitPrice_Item; Item."Unit Price")
+            column(UnitPrice_Item; "Unit Price")
             {
             }
-            column(InventoryPostingGroup_Item; Item."Inventory Posting Group")
+            column(InventoryPostingGroup_Item; "Inventory Posting Group")
             {
             }
-            column(LastPurchaseDate_Item; Item."Last Purchase Date")
+            column(LastPurchaseDate_Item; "Last Purchase Date")
             {
             }
-            column(LastDateSold_Item; Item."Last Date Sold")
+            column(LastDateSold_Item; "Last Date Sold")
             {
             }
-            column(ModelNo_Item; Item."Model No.")
+            column(ModelNo_Item; "Model No.")
             {
             }
-            column(ModelName_Item; Item."Model Name")
+            column(ModelName_Item; "Model Name")
             {
             }
-            column(ShelfNo_Item; Item."Shelf No.")
+            column(ShelfNo_Item; "Shelf No.")
             {
             }
-            column(LocationFilter_Item; Item."Location Filter")
+            column(LocationFilter_Item; "Location Filter")
             {
             }
-            column(AbujaInventory_Item; Item."Abuja Inventory")
+            column(AbujaInventory_Item; "Abuja Inventory")
             {
             }
-            column(PortharcourtInventory_Item; Item."Portharcourt Inventory")
+            column(PortharcourtInventory_Item; "Portharcourt Inventory")
             {
             }
-            column(DojoInventory_Item; Item."Dojo Inventory")
+            column(DojoInventory_Item; "Dojo Inventory")
             {
             }
-            column(DojoOregunInventory_Item; Item."Dojo Oregun  Inventory")
+            column(DojoOregunInventory_Item; "Dojo Oregun  Inventory")
             {
             }
-            column(IsoloInventory_Item; Item."Isolo Inventory")
+            column(IsoloInventory_Item; "Isolo Inventory")
             {
             }
-            column(ProductCode_Item; Item."Product Code")
+            column(ProductCode_Item; "Product Code")
             {
             }
-            column(ItemNoCategory_Item; Item."Item No Category")
+            column(ItemNoCategory_Item; "Item No Category")
             {
             }
-            column(SubstitutesExist_Item; Item."Substitutes Exist")
+            column(SubstitutesExist_Item; "Substitutes Exist")
             {
             }
-            column(SubItem_Item; Item."Sub Item")
+            column(SubItem_Item; "Sub Item")
             {
             }
-            column(SubName_Item; Item."Sub Name")
+            column(SubName_Item; "Sub Name")
             {
             }
-            column(LastSalesDate_Item; Item."Last Sales Date")
+            column(LastSalesDate_Item; "Last Sales Date")
             {
             }
         }
@@ -103,6 +103,6 @@ report 50500 "Part Invt. Valu. Report"
     }
 
     var
-        ItemSubstitution: Record "5715";
+        ItemSubstitution: Record 5715;
 }
 

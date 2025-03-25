@@ -1,13 +1,13 @@
 report 50340 "Customer Credit Limit analysis"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './CustomerCreditLimitanalysis.rdlc';
+    RDLCLayout = 'Layout/CustomerCreditLimitanalysis.rdl';
 
     dataset
     {
-        dataitem(DataItem6836; Table18)
+        dataitem(Customer; Customer)
         {
-            DataItemTableView = SORTING (No.);
+            DataItemTableView = SORTING("No.");
             RequestFilterFields = "No.", "Credit Limit (LCY)";
             column(FORMAT_TODAY_0_4_; FORMAT(TODAY, 0, 4))
             {
@@ -15,9 +15,7 @@ report 50340 "Customer Credit Limit analysis"
             column(COMPANYNAME; COMPANYNAME)
             {
             }
-            column(CurrReport_PAGENO; CurrReport.PAGENO)
-            {
-            }
+
             column(USERID; USERID)
             {
             }

@@ -66,6 +66,7 @@ page 70192 "LPP Card"
                 {
                     group(Control02)
                     {
+                        ShowCaption = false;
                         Editable = HeadEdit;
                         field("Head of Department"; Rec."Head of Department")
                         {
@@ -79,6 +80,7 @@ page 70192 "LPP Card"
                     }
                     group(Control03)
                     {
+                        ShowCaption = false;
                         Editable = CompliancEdit;
                         field("Compliance check"; Rec."Compliance check")
                         {
@@ -92,6 +94,7 @@ page 70192 "LPP Card"
                     }
                     group(Control04)
                     {
+                        ShowCaption = false;
                         Editable = HODAuditEdit;
                         Visible = AuditVisible;
                         field("Head of Audit"; Rec."Head of Audit")
@@ -112,6 +115,7 @@ page 70192 "LPP Card"
                 Visible = HeadApprovalVisible;
                 group(Control06)
                 {
+                    ShowCaption = false;
                     Editable = HODEdit;
                     field("HOD's Part Procurement Appr."; Rec."HOD's Part Procurement Appr.")
                     {
@@ -129,6 +133,7 @@ page 70192 "LPP Card"
                 Visible = GMVisible;
                 group(Control07)
                 {
+                    ShowCaption = false;
                     Editable = GMEdit;
                     field("General Manager"; Rec."General Manager")
                     {
@@ -146,6 +151,7 @@ page 70192 "LPP Card"
                 Visible = MDVisible;
                 group(Control08)
                 {
+                    ShowCaption = false;
                     Editable = MDEdit;
                     field("Managing Director"; Rec."Managing Director")
                     {

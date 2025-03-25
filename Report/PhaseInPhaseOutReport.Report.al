@@ -2,12 +2,12 @@ report 50109 "Phase In-Phase Out Report"
 {
     // 12372-15110..13041-74040-02
     DefaultLayout = RDLC;
-    RDLCLayout = './PhaseInPhaseOutReport.rdlc';
+    RDLCLayout = 'Layout/PhaseInPhaseOutReport.rdl';
 
 
     dataset
     {
-        dataitem(DataItem5444; Table2000000026)
+        dataitem(DataItem5444; Integer)
         {
             MaxIteration = 1;
             column(FORMAT_TODAY_0_4_; FORMAT(TODAY, 0, 4))
@@ -16,9 +16,7 @@ report 50109 "Phase In-Phase Out Report"
             column(COMPANYNAME; COMPANYNAME)
             {
             }
-            column(CurrReport_PAGENO; CurrReport.PAGENO)
-            {
-            }
+
             column(USERID; USERID)
             {
             }
@@ -28,10 +26,7 @@ report 50109 "Phase In-Phase Out Report"
             column(PHASE_IN___PHASE_OUT_REPORTCaption; PHASE_IN___PHASE_OUT_REPORTCaptionLbl)
             {
             }
-            column(CurrReport_PAGENOCaption; CurrReport_PAGENOCaptionLbl)
-            {
-            }
-            column(Item5__No__Caption; Item5.FIELDCAPTION("No."))
+            column(Item5__No__Caption; Item5.FieldCaption("No."))
             {
             }
             column(Item5_DescriptionCaption; Item5.FIELDCAPTION(Description))
@@ -40,7 +35,7 @@ report 50109 "Phase In-Phase Out Report"
             column(Item5__Qty__on_Purch__Order_Caption; Item5.FIELDCAPTION("Qty. on Purch. Order"))
             {
             }
-            column(Item5__Stockvalue__Caption; Item5__Stockvalue__CaptionLbl)
+            column(Item5__Stockvalue__Caption; Item5.FieldCaption("Stockvalue."))
             {
             }
             column(DslsCaption; DslsCaptionLbl)
@@ -61,49 +56,49 @@ report 50109 "Phase In-Phase Out Report"
             column(Integer_Number; Number)
             {
             }
-            dataitem(Item5; Table27)
+            dataitem(Item5; Item)
             {
-                CalcFields = Qty. on Purch. Order, Inventory, Stockvalue.;
-                DataItemTableView = SORTING (Inventory Posting Group)
-                                    WHERE (Inventory Posting Group=CONST(N_PARTS));
-                RequestFilterFields = "No.","Inventory Posting Group";
-                column(Phase_Out_;'Phase Out')
+                CalcFields = "Qty. on Purch. Order", Inventory, "Stockvalue.";
+                DataItemTableView = SORTING("Inventory Posting Group")
+                                    WHERE("Inventory Posting Group" = CONST('N_PARTS'));
+                RequestFilterFields = "No.", "Inventory Posting Group";
+                column(Phase_Out_; 'Phase Out')
                 {
                 }
-                column(Item5__No__;"No.")
+                column(Item5__No__; "No.")
                 {
                 }
-                column(Item5_Description;Description)
+                column(Item5_Description; Description)
                 {
                 }
-                column(Item5__Qty__on_Purch__Order_;"Qty. on Purch. Order")
+                column(Item5__Qty__on_Purch__Order_; "Qty. on Purch. Order")
                 {
                 }
-                column(Item5__Stockvalue__;"Stockvalue.")
+                column(Item5__Stockvalue__; "Stockvalue.")
                 {
                 }
-                column(Dsls;Dsls)
+                column(Dsls; Dsls)
                 {
                 }
-                column(Item5_Inventory;Inventory)
+                column(Item5_Inventory; Inventory)
                 {
                 }
-                column(Item5__Last_Sales_Date_;"Last Sales Date")
+                column(Item5__Last_Sales_Date_; "Last Sales Date")
                 {
                 }
-                column(Item5__Last_Purchase_Date_;"Last Purchase Date")
+                column(Item5__Last_Purchase_Date_; "Last Purchase Date")
                 {
                 }
-                column(Item5__Old_DB_Date_;"Old DB Date")
+                column(Item5__Old_DB_Date_; "Old DB Date")
                 {
                 }
-                column(Item5__Qty__on_Purch__Order__Control1000000083;"Qty. on Purch. Order")
+                column(Item5__Qty__on_Purch__Order__Control1000000083; "Qty. on Purch. Order")
                 {
                 }
-                column(Item5__Stockvalue___Control1000000084;"Stockvalue.")
+                column(Item5__Stockvalue___Control1000000084; "Stockvalue.")
                 {
                 }
-                column(Item5_Inventory_Control1000000085;Inventory)
+                column(Item5_Inventory_Control1000000085; Inventory)
                 {
                 }
 
@@ -161,25 +156,25 @@ report 50109 "Phase In-Phase Out Report"
         Last_Sales_DateCaptionLbl: Label 'Last Sales Date';
         Last_Purchase_DateCaptionLbl: Label 'Last Purchase Date';
 
-    [Scope('Internal')]
-    procedure ZeroMvtYears(ItemRec: Record "27"): Integer
+
+    procedure ZeroMvtYears(ItemRec: Record 27): Integer
     begin
-        ItemRec.CALCFIELDS(ItemRec."Sales (Qty.)",ItemRec."Last Sales Date");
+        ItemRec.CALCFIELDS(ItemRec."Sales (Qty.)", ItemRec."Last Sales Date");
         IF (ItemRec."Last Sales Date" <> 0D) THEN
-          ZeroMvtSince := WORKDATE - ItemRec."Last Sales Date"
+            ZeroMvtSince := WORKDATE - ItemRec."Last Sales Date"
         ELSE
 
-         IF (ItemRec."Old DB Date" <> 0D) THEN
-         ZeroMvtSince := WORKDATE - ItemRec."Old DB Date"
-         ELSE
-          ZeroMvtSince := 999999;
+            IF (ItemRec."Old DB Date" <> 0D) THEN
+                ZeroMvtSince := WORKDATE - ItemRec."Old DB Date"
+            ELSE
+                ZeroMvtSince := 999999;
 
         IF (ZeroMvtSince = 999999) THEN
-          Dsls := '-'
+            Dsls := '-'
         ELSE
-          Dsls := FORMAT(ZeroMvtSince);
+            Dsls := FORMAT(ZeroMvtSince);
 
-        EXIT (ROUND(ZeroMvtSince/365,1,'<'));
+        EXIT(ROUND(ZeroMvtSince / 365, 1, '<'));
     end;
 }
 

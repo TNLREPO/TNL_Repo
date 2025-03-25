@@ -301,7 +301,7 @@ page 50009 Parts
                 RunObject = page "Not Reachable Customer";
                 ToolTip = 'View not reachable customers.';
             }
-            
+
 
 
         }
@@ -537,14 +537,14 @@ page 50009 Parts
                     ToolTip = 'View or edit detailed information for the products that you trade in. The item card can be of type Inventory or Service to specify if the item is a physical unit or a labor time unit. Here you also define if items in inventory or on incoming orders are automatically reserved for outbound documents and whether order tracking links are created between demand and supply to reflect planning actions.';
                 }
                 action(TCSCCustomers)
-            {
-                ApplicationArea = Basic, Suite;
-                Caption = 'TCSC Customers';
-                Image = "Report";
-                RunObject = page "Customer List";
-                RunPageView = WHERE("Location Code" = FILTER('120ISO'));
-                ToolTip = 'View TCSC customers.';
-            }
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'TCSC Customers';
+                    Image = "Report";
+                    RunObject = page "Customer List";
+                    RunPageView = WHERE("Location Code" = FILTER('120ISO'));
+                    ToolTip = 'View TCSC customers.';
+                }
 
 
                 action(SearchTrack)
@@ -647,7 +647,7 @@ page 50009 Parts
                     RunObject = Page JPM;
                     //ToolTip = 'Manage the different stock in locations.';
                 }
-                   action(JapanOrderUpdate)
+                action(JapanOrderUpdate)
                 {
                     ApplicationArea = Basic, Suite;
                     Caption = 'Japan Order Update';
@@ -1525,7 +1525,7 @@ page 50009 Parts
                     Image = "Report";
                     RunObject = Report "Stock Transfer";
                 }
-                  action(StockAnalysis)
+                action(StockAnalysis)
                 {
                     ApplicationArea = Basic, Suite;
                     Caption = 'TNL Stock Analysis';
@@ -1617,6 +1617,170 @@ page 50009 Parts
                     Image = "Report";
                     RunObject = Report "Sales Statistics By Price Grp";
                 }
+
+            }
+
+            group(OtherReports)
+            {
+                Caption = 'Other Reports';
+
+                action(BusOperationAnalysis)
+                {
+                    ApplicationArea = Suite;
+                    Caption = 'Business Analysis';
+                    Image = "Report";
+                    RunObject = Report "Bus. Operation Anal. Report";
+                }
+
+                action(BusOperationAnalysis2)
+                {
+                    ApplicationArea = Suite;
+                    Caption = 'Business Analysis2';
+                    Image = "Report";
+                    RunObject = Report "Bus. Operation Analysis Report";
+                }
+
+                action(CustCreditLimit)
+                {
+                    ApplicationArea = Suite;
+                    Caption = 'Customer Credit Limit Analysis';
+                    Image = "Report";
+                    RunObject = Report "Customer Credit Limit analysis";
+                }
+                action(FlashReport)
+                {
+                    ApplicationArea = Suite;
+                    Caption = 'Daily Flash Report';
+                    Image = "Report";
+                    RunObject = Report "Daily Flash Report";
+                }
+                action(DetailsOrder)
+                {
+                    ApplicationArea = Suite;
+                    Caption = 'Orders Received';
+                    Image = "Report";
+                    RunObject = Report "Details of Order Recieved";
+                }
+                action(InvValuationGrp)
+                {
+                    ApplicationArea = Suite;
+                    Caption = 'Inventory Valuation Group';
+                    Image = "Report";
+                    RunObject = Report "Inventory Valuation Group";
+                }
+                action(InvValuationPart)
+                {
+                    ApplicationArea = Suite;
+                    Caption = 'Inventory Valuation Part';
+                    Image = "Report";
+                    RunObject = Report "Inventory valuation PARTS";
+                }
+                action(IsoloPart)
+                {
+                    ApplicationArea = Suite;
+                    Caption = 'Isolo Parts';
+                    Image = "Report";
+                    RunObject = Report "Isolo Part  Report";
+                }
+                action(ItemMoveMonitor)
+                {
+                    ApplicationArea = Suite;
+                    Caption = 'Item Movement Monitor';
+                    Image = "Report";
+                    RunObject = Report "Item Movement Monitor Report";
+                }
+                action(MVOStock)
+                {
+                    ApplicationArea = Suite;
+                    Caption = 'MVO Stock';
+                    Image = "Report";
+                    RunObject = Report "MVO Stock";
+                }
+                action(MVOStockPerModel)
+                {
+                    ApplicationArea = Suite;
+                    Caption = 'MVO Stock/Model Code';
+                    Image = "Report";
+                    RunObject = Report "MVO Stock Per Model Code";
+                }
+                action(MVOStockPerModelNet)
+                {
+                    ApplicationArea = Suite;
+                    Caption = 'MVO Stock/Model Code Net2';
+                    Image = "Report";
+                    RunObject = Report "MVO Stock Per Model Code NET2";
+                }
+                action(PartInvValuation)
+                {
+                    ApplicationArea = Suite;
+                    Caption = 'Part Inventory Valuation';
+                    Image = "Report";
+                    RunObject = Report "Part Invt. Valu. Report";
+                }
+                action(PartSalesPurchHistory)
+                {
+                    ApplicationArea = Suite;
+                    Caption = 'Part Sales/Purchase History';
+                    Image = "Report";
+                    RunObject = Report "Part Sales Purchase Histor";
+                }
+                action(PartsByModelSales)
+                {
+                    ApplicationArea = Suite;
+                    Caption = 'Parts by Model Sales/Loss Sales';
+                    Image = "Report";
+                    RunObject = Report "Parts By Model Sales/Loss Sale";
+                }
+                action(PhaseIn)
+                {
+                    ApplicationArea = Suite;
+                    Caption = 'Phase In-Phase Out';
+                    Image = "Report";
+                    RunObject = Report "Phase In-Phase Out Report";
+                }
+                action(PhysInvList)
+                {
+                    ApplicationArea = Suite;
+                    Caption = 'Phys. Inv. List Difference';
+                    Image = "Report";
+                    RunObject = Report "Phys. Inv. List Difference";
+                }
+                action(PurchValuation)
+                {
+                    ApplicationArea = Suite;
+                    Caption = 'Purchase & Valuation Details';
+                    Image = "Report";
+                    RunObject = Report "Purchase & Valuation details";
+                }
+                action(RegisteredLine)
+                {
+                    ApplicationArea = Suite;
+                    Caption = 'Registered Line Item';
+                    Image = "Report";
+                    RunObject = Report "Registered Line Item List";
+                }
+                action(TNLSalesCont)
+                {
+                    ApplicationArea = Suite;
+                    Caption = 'Registered Line Item';
+                    Image = "Report";
+                    RunObject = Report "TNL Sales Cont.Part & Vehicle";
+                }
+                action(TransferList)
+                {
+                    ApplicationArea = Suite;
+                    Caption = 'Transfer List';
+                    Image = "Report";
+                    RunObject = Report "Transfer List";
+                }
+                action(ZeroMovement)
+                {
+                    ApplicationArea = Suite;
+                    Caption = 'Zero Movement';
+                    Image = "Report";
+                    RunObject = Report "Zero Movement Report";
+                }
+
 
 
 

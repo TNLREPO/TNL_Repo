@@ -1,14 +1,14 @@
 report 50082 "Registered Line Item List"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './RegisteredLineItemList.rdlc';
+    RDLCLayout = 'Layout/RegisteredLineItemList.rdl';
 
     dataset
     {
-        dataitem(DataItem8129; Table27)
+        dataitem(ItemData; Item)
         {
-            CalcFields = Net Change;
-            DataItemTableView = SORTING (No.);
+            CalcFields = "Net Change";
+            DataItemTableView = SORTING("No.");
             RequestFilterFields = "Inventory Posting Group", "Creation Date";
             RequestFilterHeading = 'Filter';
             column(FORMAT_TODAY_0_4_; FORMAT(TODAY, 0, 4))
@@ -17,9 +17,7 @@ report 50082 "Registered Line Item List"
             column(COMPANYNAME; COMPANYNAME)
             {
             }
-            column(CurrReport_PAGENO; CurrReport.PAGENO)
-            {
-            }
+
             column(USERID; USERID)
             {
             }
@@ -94,22 +92,22 @@ report 50082 "Registered Line Item List"
 
             trigger OnAfterGetRecord()
             begin
-                Item.CALCFIELDS(Item."Qty. on Purch. Order");
+                ItemData.CALCFIELDS(ItemData."Qty. on Purch. Order");
                 SN := 1;
-                IF Item.Inventory > 0 THEN
+                IF ItemData.Inventory > 0 THEN
                     SNQ := 1
                 ELSE
                     SNQ := 0;
-                IF (Item.Inventory = 0) AND (Item."Qty. on Purch. Order" = 0) THEN
+                IF (ItemData.Inventory = 0) AND (ItemData."Qty. on Purch. Order" = 0) THEN
                     SNH := 1
                 ELSE
                     SNH := 0;
-                IF (Item.Inventory = 0) AND (Item."Qty. on Purch. Order" > 0) THEN
+                IF (ItemData.Inventory = 0) AND (ItemData."Qty. on Purch. Order" > 0) THEN
                     SNO := 1
                 ELSE
                     SNO := 0;
 
-                IF Item."Qty. on Purch. Order" > 0 THEN
+                IF ItemData."Qty. on Purch. Order" > 0 THEN
                     SO := 1
                 ELSE
                     SO := 0;
@@ -117,11 +115,11 @@ report 50082 "Registered Line Item List"
 
             trigger OnPreDataItem()
             begin
-                CurrReport.CREATETOTALS(SN, SNQ, SO, SNH, SNO);
+                //CurrReport.CREATETOTALS(SN, SNQ, SO, SNH, SNO);
                 //SN := 0;
                 SNQ := 0;
 
-                Showfilter := Item.GETFILTERS;
+                Showfilter := ItemData.GETFILTERS;
             end;
         }
     }

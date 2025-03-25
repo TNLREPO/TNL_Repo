@@ -5,18 +5,15 @@ report 50306 "Inventory valuation PARTS"
 
     dataset
     {
-        dataitem(DataItem8894; Table5802)
+        dataitem(DataItem8894; "Value Entry")
         {
-            DataItemTableView = SORTING (Item No., Item Ledger Entry Type);
+            DataItemTableView = SORTING("Item No.", "Item Ledger Entry Type");
             RequestFilterFields = "Item No.", "Inventory Posting Group", "Posting Date", "Location Code";
             RequestFilterHeading = 'Inventory Valuation';
             column(FORMAT_TODAY_0_4_; FORMAT(TODAY, 0, 4))
             {
             }
             column(COMPANYNAME; COMPANYNAME)
-            {
-            }
-            column(CurrReport_PAGENO; CurrReport.PAGENO)
             {
             }
             column(USERID; USERID)
@@ -122,7 +119,7 @@ report 50306 "Inventory valuation PARTS"
         LastFieldNo: Integer;
         FooterPrinted: Boolean;
         TotalFor: Label 'Total for ';
-        ItemRec: Record "27";
+        ItemRec: Record 27;
         INVENTORY_VALUATION_REPORTCaptionLbl: Label 'INVENTORY VALUATION REPORT';
         CurrReport_PAGENOCaptionLbl: Label 'Page';
         Item_No_CaptionLbl: Label 'Item No.';

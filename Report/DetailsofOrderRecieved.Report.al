@@ -1,77 +1,77 @@
 report 50621 "Details of Order Recieved"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './DetailsofOrderRecieved.rdlc';
+    RDLCLayout = 'Layout/DetailsofOrderRecieved.rdl';
 
     dataset
     {
-        dataitem(DataItem1000000000; Table110)
+        dataitem(DataItem1000000000; "Sales Shipment Header")
         {
-            DataItemTableView = WHERE (Shortcut Dimension 1 Code=FILTER(05PARTS));
-            column(SelltoCustomerName_SalesShipmentHeader;"Sales Shipment Header"."Sell-to Customer Name")
+            DataItemTableView = WHERE("Shortcut Dimension 1 Code" = FILTER('05PARTS'));
+            column(SelltoCustomerName_SalesShipmentHeader; "Sell-to Customer Name")
             {
             }
-            column(OrderNo_SalesShipmentHeader;"Sales Shipment Header"."Order No.")
+            column(OrderNo_SalesShipmentHeader; "Order No.")
             {
             }
-            column(TrackerNo_SalesShipmentHeader;"Sales Shipment Header"."Tracker No.")
+            column(TrackerNo_SalesShipmentHeader; "Tracker No.")
             {
             }
-            column(OrderType_SalesShipmentHeader;"Sales Shipment Header"."Order Type")
+            column(OrderType_SalesShipmentHeader; "Order Type")
             {
             }
-            dataitem(DataItem1000000001;Table111)
+            dataitem(DataItem1000000001; "Sales Shipment Line")
             {
-                DataItemLink = Document No.=FIELD(No.);
-                column(No_SalesShipmentLine;"Sales Shipment Line"."No.")
+                DataItemLink = "Document No." = FIELD("No.");
+                column(No_SalesShipmentLine; "No.")
                 {
                 }
-                column(LocationCode_SalesShipmentLine;"Sales Shipment Line"."Location Code")
+                column(LocationCode_SalesShipmentLine; "Location Code")
                 {
                 }
-                column(Description_SalesShipmentLine;"Sales Shipment Line".Description)
+                column(Description_SalesShipmentLine; Description)
                 {
                 }
-                column(Quantity_SalesShipmentLine;"Sales Shipment Line".Quantity)
+                column(Quantity_SalesShipmentLine; Quantity)
                 {
                 }
-                column(UnitPrice_SalesShipmentLine;"Sales Shipment Line"."Unit Price")
+                column(UnitPrice_SalesShipmentLine; "Unit Price")
                 {
                 }
-                column(QuantityInvoiced_SalesShipmentLine;"Sales Shipment Line"."Quantity Invoiced")
+                column(QuantityInvoiced_SalesShipmentLine; "Quantity Invoiced")
                 {
                 }
-                column(QuantityDemanded_SalesShipmentLine;"Sales Shipment Line"."Quantity Demanded")
+                column(QuantityDemanded_SalesShipmentLine; "Quantity Demanded")
                 {
                 }
-                column(Startdate;Startdate)
+                column(Startdate; Startdate)
                 {
                 }
-                column(Enddate;Enddate)
+                column(Enddate; Enddate)
                 {
                 }
-                column(PostingDate_SalesShipmentLine;"Sales Shipment Line"."Posting Date")
+                column(PostingDate_SalesShipmentLine; "Posting Date")
                 {
                 }
-                column(OrderNo_SalesShipmentLine;"Sales Shipment Line"."Order No.")
+                column(OrderNo_SalesShipmentLine; "Order No.")
                 {
                 }
-                column(COMPANYNAME;COMPANYNAME)
+                column(COMPANYNAME; COMPANYNAME)
                 {
                 }
-                column(TNLinvoiceNo;TNLinvoiceNo)
+                column(TNLinvoiceNo; TNLinvoiceNo)
                 {
                 }
-                column(TNLinvoicedate;TNLinvoicedate)
+                column(TNLinvoicedate; TNLinvoicedate)
                 {
                 }
-                column(No_ofDays;No_ofDays)
+                column(No_ofDays; No_ofDays)
                 {
                 }
-                column(TNLOrderDate;TNLOrderDate)
+                column(TNLOrderDate; TNLOrderDate)
                 {
                 }
-                column(TnlOrderNo;TnlOrderNo)
+                column(TnlOrderNo; TnlOrderNo)
                 {
                 }
             }
@@ -79,43 +79,43 @@ report 50621 "Details of Order Recieved"
             trigger OnAfterGetRecord()
             begin
 
-                "Sales Shipment Header".SETCURRENTKEY("Posting Date");
-                "Sales Shipment Header".SETRANGE("Posting Date",Startdate,Enddate);
-                "Sales Shipment Line".SETRANGE("Posting Date",Startdate,Enddate);
+                SETCURRENTKEY("Posting Date");
+                SETRANGE("Posting Date", Startdate, Enddate);
+                SETRANGE("Posting Date", Startdate, Enddate);
                 TnlNo := 0;
                 No_ofDays := 0;
                 OrderNo := 0;
 
-                    SalesInvoiceHeader.SETCURRENTKEY("Order No.");
-                    SalesInvoiceHeader.SETRANGE("Posting Date",Startdate,Enddate);
-                    SalesInvoiceHeader.SETRANGE("Sell-to Customer No.","Sales Shipment Header"."Sell-to Customer No.");
+                SalesInvoiceHeader.SETCURRENTKEY("Order No.");
+                SalesInvoiceHeader.SETRANGE("Posting Date", Startdate, Enddate);
+                SalesInvoiceHeader.SETRANGE("Sell-to Customer No.", "Sell-to Customer No.");
 
-                SalesInvoiceHeader.SETRANGE("Order No.","Sales Shipment Header"."Order No.");
-                      IF SalesInvoiceHeader.FINDFIRST THEN BEGIN
-                        TNLinvoiceNo := SalesInvoiceHeader."No.";
-                        TNLinvoicedate := SalesInvoiceHeader."Posting Date";
-                        TNLOrderDate:= SalesInvoiceHeader."Document Date";
-                        TnlOrderNo:= SalesInvoiceHeader."Order No.";
-                        TnlNo := (DATE2DMY(TNLinvoicedate,1));
-                      END;
+                SalesInvoiceHeader.SETRANGE("Order No.", "Order No.");
+                IF SalesInvoiceHeader.FINDFIRST THEN BEGIN
+                    TNLinvoiceNo := SalesInvoiceHeader."No.";
+                    TNLinvoicedate := SalesInvoiceHeader."Posting Date";
+                    TNLOrderDate := SalesInvoiceHeader."Document Date";
+                    TnlOrderNo := SalesInvoiceHeader."Order No.";
+                    TnlNo := (DATE2DMY(TNLinvoicedate, 1));
+                END;
 
-                    SalesHeader.SETRANGE("Posting Date",Startdate,Enddate);
-                    SalesHeader.SETRANGE("Sell-to Customer No.","Sales Shipment Header"."Sell-to Customer No.");
-                    SalesHeader.SETRANGE("No.","Sales Shipment Header"."Order No.");
-                    IF SalesHeader.FINDFIRST THEN BEGIN
-                        Orderdate := SalesHeader."Order Date";
-                        OrderNo := (DATE2DMY(Orderdate,1))
-                      END;
-                        No_ofDays := TnlNo - OrderNo;
+                SalesHeader.SETRANGE("Posting Date", Startdate, Enddate);
+                SalesHeader.SETRANGE("Sell-to Customer No.", "Sell-to Customer No.");
+                SalesHeader.SETRANGE("No.", "Order No.");
+                IF SalesHeader.FINDFIRST THEN BEGIN
+                    Orderdate := SalesHeader."Order Date";
+                    OrderNo := (DATE2DMY(Orderdate, 1))
+                END;
+                No_ofDays := TnlNo - OrderNo;
 
 
                 // SalesShipmentLine.SETCURRENTKEY("Document No.","Line No.");
-                // SalesShipmentLine.SETRANGE("Document No.","Sales Shipment Header"."No.");
+                // SalesShipmentLine.SETRANGE("Document No.","No.");
                 // SalesShipmentLine.SETRANGE("Posting Date",Startdate,Enddate);
                 // SalesShipmentLine.SETRANGE("Line No.");
                 // IF SalesShipmentLine.FIND('-') THEN BEGIN
                 //  REPEAT
-                //    Custname := "Sales Shipment Header"."Sell-to Customer Name";
+                //    Custname := "Sell-to Customer Name";
                 //    Locationcode := SalesShipmentLine."Location Code";
                 //    Partno := SalesShipmentLine."No.";
                 //    Description := SalesShipmentLine.Description;
@@ -137,13 +137,15 @@ report 50621 "Details of Order Recieved"
         {
             area(content)
             {
-                field(Startdate;Startdate)
+                field(Startdate; Startdate)
                 {
                     Caption = 'Start Date';
+                    ApplicationArea = All;
                 }
-                field(Enddate;Enddate)
+                field(Enddate; Enddate)
                 {
                     Caption = 'End Date';
+                    ApplicationArea = All;
                 }
             }
         }
@@ -158,9 +160,9 @@ report 50621 "Details of Order Recieved"
     }
 
     var
-        SalesShipmentLine: Record "111";
-        SalesLine: Record "37";
-        CustLedgerEntry: Record "21";
+        SalesShipmentLine: Record 111;
+        SalesLine: Record 37;
+        CustLedgerEntry: Record 21;
         Startdate: Date;
         Enddate: Date;
         Custname: Text;
@@ -171,10 +173,10 @@ report 50621 "Details of Order Recieved"
         Quantitysupplied: Decimal;
         ValueDemanded: Decimal;
         ValueSupplied: Decimal;
-        SalesInvoiceHeader: Record "112";
+        SalesInvoiceHeader: Record 112;
         TNLinvoiceNo: Code[10];
         TNLinvoicedate: Date;
-        SalesHeader: Record "36";
+        SalesHeader: Record 36;
         No_ofDays: Integer;
         Orderdate: Date;
         TnlNo: Integer;

@@ -1,47 +1,47 @@
 report 50635 "Bus. Operation Anal. Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './BusOperationAnalReport.rdlc';
+    RDLCLayout = 'Layout/BusOperationAnalReport.rdl';
 
     dataset
     {
-        dataitem(DataItem1000000000; Table5993)
+        dataitem(DataItem1000000000; "Service Invoice Line")
         {
-            DataItemTableView = WHERE (Location Code=FILTER(150ISOLO|120ISO),
-                                      Local Buys=FILTER(No),
-                                      Invt. Post. Grp=FILTER(N_PARTS));
-            RequestFilterFields = "Posting Date","No.",Quantity,"Unit Cost (LCY)","Unit Price",Amount,"Model Name";
-            column(No_ServiceInvoiceLine;"Service Invoice Line"."No.")
+            DataItemTableView = WHERE("Location Code" = FILTER('150ISOLO' | '120ISO'),
+                                      "Local Buys" = FILTER(false),
+                                      "Invt. Post. Grp" = FILTER('N_PARTS'));
+            RequestFilterFields = "Posting Date", "No.", Quantity, "Unit Cost (LCY)", "Unit Price", Amount, "Model Name";
+            column(No_ServiceInvoiceLine; "No.")
             {
             }
-            column(Description_ServiceInvoiceLine;"Service Invoice Line".Description)
+            column(Description_ServiceInvoiceLine; Description)
             {
             }
-            column(Quantity_ServiceInvoiceLine;"Service Invoice Line".Quantity)
+            column(Quantity_ServiceInvoiceLine; Quantity)
             {
             }
-            column(UnitPrice_ServiceInvoiceLine;"Service Invoice Line"."Unit Price")
+            column(UnitPrice_ServiceInvoiceLine; "Unit Price")
             {
             }
-            column(UnitCostLCY_ServiceInvoiceLine;"Service Invoice Line"."Unit Cost (LCY)")
+            column(UnitCostLCY_ServiceInvoiceLine; "Unit Cost (LCY)")
             {
             }
-            column(Amount_ServiceInvoiceLine;"Service Invoice Line".Amount)
+            column(Amount_ServiceInvoiceLine; Amount)
             {
             }
-            column(ServiceItemSerialNo_ServiceInvoiceLine;"Service Invoice Line"."Service Item Serial No.")
+            column(ServiceItemSerialNo_ServiceInvoiceLine; "Service Item Serial No.")
             {
             }
-            column(PostingDate_ServiceInvoiceLine;"Service Invoice Line"."Posting Date")
+            column(PostingDate_ServiceInvoiceLine; "Posting Date")
             {
             }
-            column(ModelNo_ServiceInvoiceLine;"Service Invoice Line"."Model No.")
+            column(ModelNo_ServiceInvoiceLine; "Model No.")
             {
             }
-            column(ModelName_ServiceInvoiceLine;"Service Invoice Line"."Model Name")
+            column(ModelName_ServiceInvoiceLine; "Model Name")
             {
             }
-            column(VIN_ServiceInvoiceLine;"Service Invoice Line".VIN)
+            column(VIN_ServiceInvoiceLine; VIN)
             {
             }
         }

@@ -1,48 +1,48 @@
 report 50322 "Part Sales Purchase Histor"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './PartSalesPurchaseHistor.rdlc';
+    RDLCLayout = 'Layout/PartSalesPurchaseHistor.rdl';
 
     dataset
     {
-        dataitem(DataItem1000000000; Table32)
+        dataitem(DataItem1000000000; "Item Ledger Entry")
         {
-            DataItemTableView = WHERE (Inventory Posting Group=FILTER(N_PARTS|ACCESSORY));
-            RequestFilterFields = "Entry Type","Location Code","Posting Date","Variant Code";
-            column(ItemNo_ItemLedgerEntry;"Item Ledger Entry"."Item No.")
+            DataItemTableView = WHERE("Inventory Posting Group" = FILTER('N_PARTS | ACCESSORY'));
+            RequestFilterFields = "Entry Type", "Location Code", "Posting Date", "Variant Code";
+            column(ItemNo_ItemLedgerEntry; "Item No.")
             {
             }
-            column(PostingDate_ItemLedgerEntry;"Item Ledger Entry"."Posting Date")
+            column(PostingDate_ItemLedgerEntry; "Posting Date")
             {
             }
-            column(Description_ItemLedgerEntry;"Item Ledger Entry".Description)
+            column(Description_ItemLedgerEntry; Description)
             {
             }
-            column(Quantity_ItemLedgerEntry;"Item Ledger Entry".Quantity)
+            column(Quantity_ItemLedgerEntry; Quantity)
             {
             }
-            column(UnitofMeasureCode_ItemLedgerEntry;"Item Ledger Entry"."Unit of Measure Code")
+            column(UnitofMeasureCode_ItemLedgerEntry; "Unit of Measure Code")
             {
             }
-            column(ProductGroupCode_ItemLedgerEntry;"Item Ledger Entry"."Product Group Code")
+            column(ProductGroupCode_ItemLedgerEntry; "Prod. Gr.")
             {
             }
-            column(CostAmountActual_ItemLedgerEntry;"Item Ledger Entry"."Cost Amount (Actual)")
+            column(CostAmountActual_ItemLedgerEntry; "Cost Amount (Actual)")
             {
             }
-            column(PurchaseAmountActual_ItemLedgerEntry;"Item Ledger Entry"."Purchase Amount (Actual)")
+            column(PurchaseAmountActual_ItemLedgerEntry; "Purchase Amount (Actual)")
             {
             }
-            column(ItemCategoryCode_ItemLedgerEntry;"Item Ledger Entry"."Item Category Code")
+            column(ItemCategoryCode_ItemLedgerEntry; "Item Category Code")
             {
             }
-            column(Nonstock_ItemLedgerEntry;"Item Ledger Entry".Nonstock)
+            column(Nonstock_ItemLedgerEntry; Nonstock)
             {
             }
-            column(EntryType_ItemLedgerEntry;"Item Ledger Entry"."Entry Type")
+            column(EntryType_ItemLedgerEntry; "Entry Type")
             {
             }
-            column(SalesAmountActual_ItemLedgerEntry;"Item Ledger Entry"."Sales Amount (Actual)")
+            column(SalesAmountActual_ItemLedgerEntry; "Sales Amount (Actual)")
             {
             }
         }

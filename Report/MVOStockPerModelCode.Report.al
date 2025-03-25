@@ -1,23 +1,21 @@
 report 50026 "MVO Stock Per Model Code"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './MVOStockPerModelCode.rdlc';
+    RDLCLayout = 'Layout/MVOStockPerModelCode.rdl';
 
     dataset
     {
-        dataitem(DataItem5605; Table5700)
+        dataitem(DataItem5605; "Stockkeeping Unit")
         {
-            DataItemTableView = SORTING (Item No., Location Code, Variant Code);
-            RequestFilterFields = "Item No.", "Variant Code", "Engine Number", "Chassis Number", Purchaser, Customer, Field11, "Date Filter", "Global Dimension 1 Filter";
+            DataItemTableView = SORTING("Item No.", "Location Code", "Variant Code");
+            RequestFilterFields = "Item No.", "Variant Code", "Engine Number", "Chassis Number", Purchaser, Customer, "Date Filter", "Global Dimension 1 Filter";
             column(FORMAT_TODAY_0_4_; FORMAT(TODAY, 0, 4))
             {
             }
             column(COMPANYNAME; COMPANYNAME)
             {
             }
-            column(CurrReport_PAGENO; CurrReport.PAGENO)
-            {
-            }
+
             column(USERID; USERID)
             {
             }
@@ -111,14 +109,14 @@ report 50026 "MVO Stock Per Model Code"
 
             trigger OnAfterGetRecord()
             begin
-                ColourDesc := ColourRec.GetColour("Stockkeeping Unit"."Product Group Code", "Stockkeeping Unit".Colour);
+                ColourDesc := ColourRec.GetColour("Product Group Code", Colour);
             end;
 
             trigger OnPreDataItem()
             begin
                 LastFieldNo := FIELDNO("Item No.");
 
-                CurrReport.CREATETOTALS(UCost, TCost);
+                //CurrReport.CREATETOTALS(UCost, TCost);
             end;
         }
     }
@@ -144,9 +142,9 @@ report 50026 "MVO Stock Per Model Code"
         FooterPrinted: Boolean;
         TotalFor: Label 'Total for ';
         ColourDesc: Text[30];
-        ItemRec: Record "27";
+        ItemRec: Record 27;
         ShowZeroInventory: Boolean;
-        ColourRec: Record "50067";
+        ColourRec: Record 50067;
         UCost: Decimal;
         AvgCost: Decimal;
         TCost: Decimal;

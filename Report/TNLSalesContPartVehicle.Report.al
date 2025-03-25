@@ -1,14 +1,14 @@
 report 50325 "TNL Sales Cont.Part & Vehicle"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './TNLSalesContPartVehicle.rdlc';
+    RDLCLayout = 'Layout/TNLSalesContPartVehicle.rdl';
     Caption = 'TNL Sales Contribution-Part & Vehicle Accessories';
 
     dataset
     {
-        dataitem(DataItem5444; Table2000000026)
+        dataitem(DataItem5444; Integer)
         {
-            DataItemTableView = SORTING (Number);
+            DataItemTableView = SORTING(Number);
             MaxIteration = 1;
             column(FORMAT_TODAY_0_4_; FORMAT(TODAY, 0, 4))
             {
@@ -16,9 +16,7 @@ report 50325 "TNL Sales Cont.Part & Vehicle"
             column(COMPANYNAME; COMPANYNAME)
             {
             }
-            column(CurrReport_PAGENO; CurrReport.PAGENO)
-            {
-            }
+
             column(USERID; USERID)
             {
             }
@@ -37,7 +35,7 @@ report 50325 "TNL Sales Cont.Part & Vehicle"
             column(CurrReport_PAGENOCaption; CurrReport_PAGENOCaptionLbl)
             {
             }
-            column(Sales_Invoice_Header__No__Caption; "Sales Invoice Header".FIELDCAPTION("No."))
+            column(Sales_Invoice_Header__No__Caption; SalesInvHeaderData.FIELDCAPTION("No."))
             {
             }
             column(Customer_No_Caption; Customer_No_CaptionLbl)
@@ -58,7 +56,7 @@ report 50325 "TNL Sales Cont.Part & Vehicle"
             column(AmtCaption; AmtCaptionLbl)
             {
             }
-            column(Sales_Invoice_Header__Cost_Value_Caption; "Sales Invoice Header".FIELDCAPTION("Cost Value"))
+            column(Sales_Invoice_Header__Cost_Value_Caption; SalesInvHeaderData.FIELDCAPTION("Cost Value"))
             {
             }
             column(Customer_NameCaption; Customer_NameCaptionLbl)
@@ -73,76 +71,76 @@ report 50325 "TNL Sales Cont.Part & Vehicle"
             column(Line_Item_CountCaption; Line_Item_CountCaptionLbl)
             {
             }
-            column(Sales_Invoice_Header__Posting_Date_Caption; "Sales Invoice Header".FIELDCAPTION("Posting Date"))
+            column(Sales_Invoice_Header__Posting_Date_Caption; SalesInvHeaderData.FIELDCAPTION("Posting Date"))
             {
             }
             column(Integer_Number; Number)
             {
             }
-            dataitem(DataItem5581; Table112)
+            dataitem(SalesInvHeaderData; "Sales Invoice Header")
             {
-                CalcFields = Amount, Cost Value, Quantity, Line Item Count;
-                DataItemTableView = SORTING (Posting Date, No.)
-                                    WHERE (Source Code=FILTER(<>DELETED));
-                RequestFilterFields = "No.","Sell-to Customer No.","Shortcut Dimension 1 Code","Order Type","Gen. Bus. Posting Group","Customer Posting Group","Location Code","Shortcut Dimension 2 Code";
-                column(FILTERS_______GETFILTERS__;'FILTERS := ' +GETFILTERS())
+                CalcFields = Amount, "Cost Value", Quantity, "Line Item Count";
+                DataItemTableView = SORTING("Posting Date", "No.")
+                                    WHERE("Source Code" = FILTER('<>DELETED'));
+                RequestFilterFields = "No.", "Sell-to Customer No.", "Shortcut Dimension 1 Code", "Order Type", "Gen. Bus. Posting Group", "Customer Posting Group", "Location Code", "Shortcut Dimension 2 Code";
+                column(FILTERS_______GETFILTERS__; 'FILTERS := ' + GETFILTERS())
                 {
                 }
-                column(Quantity_SalesInvoiceHeader;"Sales Invoice Header".Quantity)
+                column(Quantity_SalesInvoiceHeader; SalesInvHeaderData.Quantity)
                 {
                 }
-                column(Sales_Invoice_Header__No__;"No.")
+                column(Sales_Invoice_Header__No__; "No.")
                 {
                 }
-                column(Sales_Invoice_Header__Sell_to_Customer_No__;"Sell-to Customer No.")
+                column(Sales_Invoice_Header__Sell_to_Customer_No__; "Sell-to Customer No.")
                 {
                 }
-                column(Amt;Amt)
+                column(Amt; Amt)
                 {
                 }
-                column(OrderType_SalesInvoiceHeader;"Sales Invoice Header"."Order Type")
+                column(OrderType_SalesInvoiceHeader; SalesInvHeaderData."Order Type")
                 {
                 }
-                column(Sales_Invoice_Header__Cost_Value_;"Cost Value")
+                column(Sales_Invoice_Header__Cost_Value_; "Cost Value")
                 {
                 }
-                column(Cont;Cont)
+                column(Cont; Cont)
                 {
                 }
-                column(ContPercent;ContPercent)
+                column(ContPercent; ContPercent)
                 {
                 }
-                column(Sales_Invoice_Header__Sell_to_Customer_Name_;"Sell-to Customer Name")
+                column(Sales_Invoice_Header__Sell_to_Customer_Name_; "Sell-to Customer Name")
                 {
                 }
-                column(Sales_Invoice_Header__Line_Item_Count_;"Line Item Count")
+                column(Sales_Invoice_Header__Line_Item_Count_; "Line Item Count")
                 {
-                    DecimalPlaces = 0:0;
+
                 }
-                column(Sales_Invoice_Header__Posting_Date_;"Posting Date")
-                {
-                }
-                column(TAmountInv;TAmountInv)
+                column(Sales_Invoice_Header__Posting_Date_; "Posting Date")
                 {
                 }
-                column(TCostInv;TCostInv)
+                column(TAmountInv; TAmountInv)
                 {
                 }
-                column(TContInv;TContInv)
+                column(TCostInv; TCostInv)
                 {
                 }
-                column(TContPctInv;TContPctInv)
+                column(TContInv; TContInv)
                 {
                 }
-                column(L1;L1)
+                column(TContPctInv; TContPctInv)
                 {
-                    DecimalPlaces = 0:0;
                 }
-                column(Total_For_____FORMAT_InvCount______Invoices_;'Total For ' + FORMAT(InvCount) + ' Invoices')
+                column(L1; L1)
                 {
-                    DecimalPlaces = 0:0;
+
                 }
-                column(Sales_InvoiceCaption;Sales_InvoiceCaptionLbl)
+                column(Total_For_____FORMAT_InvCount______Invoices_; 'Total For ' + FORMAT(InvCount) + ' Invoices')
+                {
+
+                }
+                column(Sales_InvoiceCaption; Sales_InvoiceCaptionLbl)
                 {
                 }
 
@@ -150,167 +148,170 @@ report 50325 "TNL Sales Cont.Part & Vehicle"
                 begin
                     IF NOT ShowInvoice THEN CurrReport.SKIP;
 
-                    IF ("Sales Invoice Header"."Currency Factor" <> 0) THEN
-                      Amt := "Sales Invoice Header".Amount/"Sales Invoice Header"."Currency Factor"
+                    IF (SalesInvHeaderData."Currency Factor" <> 0) THEN
+                        Amt := SalesInvHeaderData.Amount / SalesInvHeaderData."Currency Factor"
                     ELSE
-                      Amt := "Sales Invoice Header".Amount;
+                        Amt := SalesInvHeaderData.Amount;
 
-                    Cont := Amt - "Sales Invoice Header"."Cost Value";
+                    Cont := Amt - SalesInvHeaderData."Cost Value";
 
                     IF Amt <> 0 THEN
-                      ContPercent := (Cont/Amt)*100
+                        ContPercent := (Cont / Amt) * 100
                     ELSE
-                      Cont := 0;
+                        Cont := 0;
 
 
                     InvCount := InvCount + 1;
-                    L1 := L1 + "Sales Invoice Header"."Line Item Count";
+                    L1 := L1 + SalesInvHeaderData."Line Item Count";
                 end;
 
                 trigger OnPreDataItem()
                 begin
-                    CurrReport.CREATETOTALS(Cont);
+                    //CurrReport.CREATETOTALS(Cont);
 
                     CASE ItemType OF
-                     1: "Sales Invoice Header".SETRANGE("Sales Invoice Header"."Shortcut Dimension 1 Code",'05PARTS');
-                     2: "Sales Invoice Header".SETRANGE("Sales Invoice Header"."Shortcut Dimension 1 Code",'09MARKET');
-                     3: "Sales Invoice Header".SETRANGE("Sales Invoice Header"."Shortcut Dimension 1 Code",'06SERVICE');
+                        1:
+                            SalesInvHeaderData.SETRANGE(SalesInvHeaderData."Shortcut Dimension 1 Code", '05PARTS');
+                        2:
+                            SalesInvHeaderData.SETRANGE(SalesInvHeaderData."Shortcut Dimension 1 Code", '09MARKET');
+                        3:
+                            SalesInvHeaderData.SETRANGE(SalesInvHeaderData."Shortcut Dimension 1 Code", '06SERVICE');
                     END;
 
-                    "Sales Invoice Header".SETFILTER("Sales Invoice Header"."Posting Date",'%1..%2',StartDate,EndDate);
+                    SalesInvHeaderData.SETFILTER(SalesInvHeaderData."Posting Date", '%1..%2', StartDate, EndDate);
                     IF CustPGrp <> '' THEN
-                      "Sales Invoice Header".SETRANGE("Sales Invoice Header"."Customer Posting Group",CustPGrp);
+                        SalesInvHeaderData.SETRANGE(SalesInvHeaderData."Customer Posting Group", CustPGrp);
 
 
                     InvCount := 0;
-                    CrCount  := 0;
+                    CrCount := 0;
                 end;
             }
-            dataitem(DataItem8098;Table114)
+            dataitem(SalesCrMemoData; "Sales Cr.Memo Header")
             {
-                CalcFields = Lines Shortcut Dimension 1,Cost Value,Amount,Quantity,Line Item Count;
-                DataItemTableView = SORTING(Posting Date,No.)
-                                    WHERE(Source Code=FILTER(<>DELETED));
-                RequestFilterFields = "No.","Sell-to Customer No.","Shortcut Dimension 1 Code","Order Type","Gen. Bus. Posting Group","Customer Posting Group","Location Code","Shortcut Dimension 2 Code";
-                column(FILTERS_______GETFILTERS___Control1000000050;'FILTERS := ' +GETFILTERS())
+                CalcFields = "Lines Shortcut Dimension 1", "Cost Value", Amount, Quantity, "Line Item Count";
+                DataItemTableView = SORTING("Posting Date", "No.")
+                                    WHERE("Source Code" = FILTER('<>DELETED'));
+                RequestFilterFields = "No.", "Sell-to Customer No.", "Shortcut Dimension 1 Code", "Order Type", "Gen. Bus. Posting Group", "Customer Posting Group", "Location Code", "Shortcut Dimension 2 Code";
+                column(FILTERS_______GETFILTERS___Control1000000050; 'FILTERS := ' + GETFILTERS())
                 {
                 }
-                column(Sales_Cr_Memo_Header__No__;"No.")
+                column(Sales_Cr_Memo_Header__No__; "No.")
                 {
                 }
-                column(Sales_Cr_Memo_Header__Sell_to_Customer_No__;"Sell-to Customer No.")
+                column(Sales_Cr_Memo_Header__Sell_to_Customer_No__; "Sell-to Customer No.")
                 {
                 }
-                column(Quantity_SalesCrMemoHeader;"Sales Cr.Memo Header".Quantity)
+                column(Quantity_SalesCrMemoHeader; SalesCrMemoData.Quantity)
                 {
                 }
-                column(Amt2;Amt2)
+                column(Amt2; Amt2)
                 {
                 }
-                column(CostValue2;"Cost Value")
+                column(CostValue2; "Cost Value")
                 {
                 }
-                column(Cont2;Cont2)
+                column(Cont2; Cont2)
                 {
                 }
-                column(ContPercent2;ContPercent2)
+                column(ContPercent2; ContPercent2)
                 {
                 }
-                column(Sales_Cr_Memo_Header__Sell_to_Customer_Name_;"Sell-to Customer Name")
+                column(Sales_Cr_Memo_Header__Sell_to_Customer_Name_; "Sell-to Customer Name")
                 {
                 }
-                column(LineCount2;"Line Item Count")
+                column(LineCount2; "Line Item Count")
                 {
-                    DecimalPlaces = 0:0;
+
                 }
-                column(PostingDate2;"Posting Date")
-                {
-                }
-                column(TAmountCr;TAmountCr)
+                column(PostingDate2; "Posting Date")
                 {
                 }
-                column(TCostCr;TCostCr)
+                column(TAmountCr; TAmountCr)
                 {
                 }
-                column(TContCr;TContCr)
+                column(TCostCr; TCostCr)
                 {
                 }
-                column(TContPctCr;TContPctCr)
+                column(TContCr; TContCr)
                 {
                 }
-                column(L2;L2)
-                {
-                    DecimalPlaces = 0:0;
-                }
-                column(Total_For_____FORMAT_CrCount______Credit_Notes_;'Total For ' + FORMAT(CrCount) + ' Credit Notes')
-                {
-                    DecimalPlaces = 0:0;
-                }
-                column(TAmountInv_Control1000000028;TAmountInv)
+                column(TContPctCr; TContPctCr)
                 {
                 }
-                column(TCostInv_Control1000000029;TCostInv)
+                column(L2; L2)
+                {
+
+                }
+                column(Total_For_____FORMAT_CrCount______Credit_Notes_; 'Total For ' + FORMAT(CrCount) + ' Credit Notes')
+                {
+
+                }
+                column(TAmountInv_Control1000000028; TAmountInv)
                 {
                 }
-                column(TContInv_Control1000000034;TContInv)
+                column(TCostInv_Control1000000029; TCostInv)
                 {
                 }
-                column(TContPctInv_Control1000000035;TContPctInv)
+                column(TContInv_Control1000000034; TContInv)
                 {
                 }
-                column(TAmountCr_Control1000000046;TAmountCr)
+                column(TContPctInv_Control1000000035; TContPctInv)
                 {
                 }
-                column(Inv_Line_Item_Count;"Inv Line Item Count")
+                column(TAmountCr_Control1000000046; TAmountCr)
                 {
                 }
-                column(TCostCr_Control1000000047;TCostCr)
+                column(Inv_Line_Item_Count; "Inv Line Item Count")
                 {
                 }
-                column(TContCr_Control1000000048;TContCr)
+                column(TCostCr_Control1000000047; TCostCr)
                 {
                 }
-                column(TContPctCr_Control1000000049;TContPctCr)
+                column(TContCr_Control1000000048; TContCr)
                 {
                 }
-                column(AllAmount;AllAmount)
+                column(TContPctCr_Control1000000049; TContPctCr)
                 {
                 }
-                column(AllCost;AllCost)
+                column(AllAmount; AllAmount)
                 {
                 }
-                column(AllCont;AllCont)
+                column(AllCost; AllCost)
                 {
                 }
-                column(AllPct;AllPct)
+                column(AllCont; AllCont)
                 {
                 }
-                column(L1_Control1000000068;L1)
-                {
-                    DecimalPlaces = 0:0;
-                }
-                column(L2_Control1000000069;L2)
-                {
-                    DecimalPlaces = 0:0;
-                }
-                column(InvCount;InvCount)
-                {
-                    DecimalPlaces = 0:0;
-                }
-                column(CrCount;CrCount)
-                {
-                    DecimalPlaces = 0:0;
-                }
-                column(Credit_MemoCaption;Credit_MemoCaptionLbl)
+                column(AllPct; AllPct)
                 {
                 }
-                column(Total_Sales_InvoiceCaption;Total_Sales_InvoiceCaptionLbl)
+                column(L1_Control1000000068; L1)
+                {
+                    DecimalPlaces = 0 : 0;
+                }
+                column(L2_Control1000000069; L2)
+                {
+                    DecimalPlaces = 0 : 0;
+                }
+                column(InvCount; InvCount)
+                {
+
+                }
+                column(CrCount; CrCount)
+                {
+
+                }
+                column(Credit_MemoCaption; Credit_MemoCaptionLbl)
                 {
                 }
-                column(Total_Credit_MemoCaption;Total_Credit_MemoCaptionLbl)
+                column(Total_Sales_InvoiceCaption; Total_Sales_InvoiceCaptionLbl)
                 {
                 }
-                column(Overall_SalesCaption;Overall_SalesCaptionLbl)
+                column(Total_Credit_MemoCaption; Total_Credit_MemoCaptionLbl)
+                {
+                }
+                column(Overall_SalesCaption; Overall_SalesCaptionLbl)
                 {
                 }
 
@@ -318,358 +319,361 @@ report 50325 "TNL Sales Cont.Part & Vehicle"
                 begin
                     IF NOT ShowCreditMemo THEN CurrReport.SKIP;
 
-                    IF ("Sales Cr.Memo Header"."Currency Factor"<>0) THEN
-                      Amt2 := "Sales Cr.Memo Header".Amount/"Sales Cr.Memo Header"."Currency Factor"
+                    IF (SalesCrMemoData."Currency Factor" <> 0) THEN
+                        Amt2 := SalesCrMemoData.Amount / SalesCrMemoData."Currency Factor"
                     ELSE
-                      Amt2 := "Sales Cr.Memo Header".Amount;
+                        Amt2 := SalesCrMemoData.Amount;
 
-                    Cont2 := Amt2 - "Sales Cr.Memo Header"."Cost Value";
+                    Cont2 := Amt2 - SalesCrMemoData."Cost Value";
 
-                    IF Amt2<>0 THEN
-                      ContPercent2 := (Cont2/Amt2)*100
+                    IF Amt2 <> 0 THEN
+                        ContPercent2 := (Cont2 / Amt2) * 100
                     ELSE
-                      ContPercent2 := 0;
+                        ContPercent2 := 0;
 
-                    CrCount := CrCount +1;
-                    L2 := L2 + "Sales Cr.Memo Header"."Line Item Count";
+                    CrCount := CrCount + 1;
+                    L2 := L2 + SalesCrMemoData."Line Item Count";
                 end;
 
                 trigger OnPreDataItem()
                 begin
-                    CurrReport.CREATETOTALS(Cont);
+                    //CurrReport.CREATETOTALS(Cont);
                     Cont := 0;
                     Amount := 0;
-                    TContCr :=   0;
+                    TContCr := 0;
                     TAmountCr := 0;
 
                     CASE ItemType OF
-                     1:  "Sales Cr.Memo Header".SETRANGE("Sales Cr.Memo Header"."Shortcut Dimension 1 Code",'05PARTS');
-                     2:  "Sales Cr.Memo Header".SETRANGE("Sales Cr.Memo Header"."Shortcut Dimension 1 Code",'09MARKET');
-                     3:  "Sales Cr.Memo Header".SETRANGE("Sales Cr.Memo Header"."Shortcut Dimension 1 Code",'06SERVICE');
+                        1:
+                            SalesCrMemoData.SETRANGE(SalesCrMemoData."Shortcut Dimension 1 Code", '05PARTS');
+                        2:
+                            SalesCrMemoData.SETRANGE(SalesCrMemoData."Shortcut Dimension 1 Code", '09MARKET');
+                        3:
+                            SalesCrMemoData.SETRANGE(SalesCrMemoData."Shortcut Dimension 1 Code", '06SERVICE');
                     END;
 
 
-                    "Sales Cr.Memo Header".SETFILTER("Sales Cr.Memo Header"."Posting Date",'%1..%2',StartDate,EndDate);
-                    IF CustPGrp<>'' THEN
-                      "Sales Cr.Memo Header".SETRANGE("Sales Cr.Memo Header"."Customer Posting Group",CustPGrp);
+                    SalesCrMemoData.SETFILTER(SalesCrMemoData."Posting Date", '%1..%2', StartDate, EndDate);
+                    IF CustPGrp <> '' THEN
+                        SalesCrMemoData.SETRANGE(SalesCrMemoData."Customer Posting Group", CustPGrp);
                 end;
             }
-            dataitem(DataItem7209;Table32)
+            dataitem(ItemLedEntryData; "Item Ledger Entry")
             {
-                CalcFields = Cost Amount (Actual);
-                DataItemTableView = SORTING(Document No.,Document Type,Document Line No.)
-                                    WHERE(Source No.=FILTER(TDV*),
-                                          Inventory Posting Group=FILTER(N_PARTS|ACCESSORY),
-                                          Product Group Code=FILTER(ACCESORIES));
-                column(SourceNo_ItemLedgerEntry;"Item Ledger Entry"."Source No.")
+                CalcFields = "Cost Amount (Actual)";
+                DataItemTableView = SORTING("Document No.", "Document Type", "Document Line No.")
+                                    WHERE("Source No." = FILTER('TDV*'),
+                                          "Inventory Posting Group" = FILTER('N_PARTS|ACCESSORY'),
+                                          "Product Grp Code" = FILTER('ACCESORIES'));
+                column(SourceNo_ItemLedgerEntry; ItemLedEntryData."Source No.")
                 {
                 }
-                column(Item_Ledger_Entry__Cost_Amount__Actual__;"Cost Amount (Actual)")
+                column(Item_Ledger_Entry__Cost_Amount__Actual__; "Cost Amount (Actual)")
                 {
                 }
-                column(Quantity_ItemLedgerEntry;"Item Ledger Entry".Quantity)
+                column(Quantity_ItemLedgerEntry; ItemLedEntryData.Quantity)
                 {
                 }
-                column(Item_Ledger_Entry__Document_No__;"Document No.")
+                column(Item_Ledger_Entry__Document_No__; "Document No.")
                 {
                 }
-                column(Item_Ledger_Entry__Posting_Date_;"Posting Date")
+                column(Item_Ledger_Entry__Posting_Date_; "Posting Date")
                 {
                 }
-                column(FCount;FCount)
+                column(FCount; FCount)
                 {
-                    DecimalPlaces = 0:0;
+
                 }
-                column(InvCount_Control1000000097;InvCount)
+                column(InvCount_Control1000000097; InvCount)
                 {
-                    DecimalPlaces = 0:0;
+
                 }
-                column(CrCount_Control1000000098;CrCount)
+                column(CrCount_Control1000000098; CrCount)
                 {
-                    DecimalPlaces = 0:0;
+
                 }
-                column(WtCount_Control1000000128;WtCount)
+                column(WtCount_Control1000000128; WtCount)
                 {
-                    DecimalPlaces = 0:0;
+
                 }
-                column(L1_Control1000000129;L1)
+                column(L1_Control1000000129; L1)
                 {
-                    DecimalPlaces = 0:0;
+                    DecimalPlaces = 0 : 0;
                 }
-                column(L2_Control1000000130;L2)
+                column(L2_Control1000000130; L2)
                 {
-                    DecimalPlaces = 0:0;
+                    DecimalPlaces = 0 : 0;
                 }
-                column(L3_Control1000000131;L3)
+                column(L3_Control1000000131; L3)
                 {
-                    DecimalPlaces = 0:0;
+                    DecimalPlaces = 0 : 0;
                 }
-                column(TAmountInv_Control1000000135;TAmountInv)
-                {
-                }
-                column(TAmountCr_Control1000000136;TAmountCr)
+                column(TAmountInv_Control1000000135; TAmountInv)
                 {
                 }
-                column(AllAmount_Control1000000137;AllAmount)
+                column(TAmountCr_Control1000000136; TAmountCr)
                 {
                 }
-                column(TAmountWt_Control1000000138;TAmountWt)
+                column(AllAmount_Control1000000137; AllAmount)
                 {
                 }
-                column(TCostInv_Control1000000139;TCostInv)
+                column(TAmountWt_Control1000000138; TAmountWt)
                 {
                 }
-                column(TCostCr_Control1000000140;TCostCr)
+                column(TCostInv_Control1000000139; TCostInv)
                 {
                 }
-                column(AllCost_Control1000000141;AllCost)
+                column(TCostCr_Control1000000140; TCostCr)
                 {
                 }
-                column(TCostWt_Control1000000142;TCostWt)
+                column(AllCost_Control1000000141; AllCost)
                 {
                 }
-                column(TContInv_Control1000000143;TContInv)
+                column(TCostWt_Control1000000142; TCostWt)
                 {
                 }
-                column(TContCr_Control1000000144;TContCr)
+                column(TContInv_Control1000000143; TContInv)
                 {
                 }
-                column(AllCont_Control1000000145;AllCont)
+                column(TContCr_Control1000000144; TContCr)
                 {
                 }
-                column(TContPctInv_Control1000000146;TContPctInv)
+                column(AllCont_Control1000000145; AllCont)
                 {
                 }
-                column(TContPctCr_Control1000000147;TContPctCr)
+                column(TContPctInv_Control1000000146; TContPctInv)
                 {
                 }
-                column(AllPct_Control1000000148;AllPct)
+                column(TContPctCr_Control1000000147; TContPctCr)
                 {
                 }
-                column(TotalCostAmount;TotalCostAmount)
+                column(AllPct_Control1000000148; AllPct)
                 {
                 }
-                column(TotalCostAmount_Control1000000150;TotalCostAmount)
+                column(TotalCostAmount; TotalCostAmount)
                 {
                 }
-                column(FLTCount;FLTCount)
-                {
-                    DecimalPlaces = 0:0;
-                }
-                column(TNL_Fleet_Parts_ConsumptionCaption;TNL_Fleet_Parts_ConsumptionCaptionLbl)
+                column(TotalCostAmount_Control1000000150; TotalCostAmount)
                 {
                 }
-                column(Total_Sales_InvoiceCaption_Control1000000092;Total_Sales_InvoiceCaption_Control1000000092Lbl)
+                column(FLTCount; FLTCount)
+                {
+
+                }
+                column(TNL_Fleet_Parts_ConsumptionCaption; TNL_Fleet_Parts_ConsumptionCaptionLbl)
                 {
                 }
-                column(Total_Credit_MemoCaption_Control1000000094;Total_Credit_MemoCaption_Control1000000094Lbl)
+                column(Total_Sales_InvoiceCaption_Control1000000092; Total_Sales_InvoiceCaption_Control1000000092Lbl)
                 {
                 }
-                column(Total_Warranty_ClaimCaption_Control1000000096;Total_Warranty_ClaimCaption_Control1000000096Lbl)
+                column(Total_Credit_MemoCaption_Control1000000094; Total_Credit_MemoCaption_Control1000000094Lbl)
                 {
                 }
-                column(Overall_SalesCaption_Control1000000132;Overall_SalesCaption_Control1000000132Lbl)
+                column(Total_Warranty_ClaimCaption_Control1000000096; Total_Warranty_ClaimCaption_Control1000000096Lbl)
                 {
                 }
-                column(Total_TNL_FleetCaption;Total_TNL_FleetCaptionLbl)
+                column(Overall_SalesCaption_Control1000000132; Overall_SalesCaption_Control1000000132Lbl)
                 {
                 }
-                column(Item_Ledger_Entry_Entry_No_;"Entry No.")
+                column(Total_TNL_FleetCaption; Total_TNL_FleetCaptionLbl)
                 {
                 }
-                column(CustomerNo;CustomerNo)
+                column(Item_Ledger_Entry_Entry_No_; "Entry No.")
                 {
                 }
-                column(SalesAmountActual_ItemLedgerEntry;"Item Ledger Entry"."Sales Amount (Actual)")
+                column(CustomerNo; CustomerNo)
                 {
                 }
-                column(CustomerName;CustomerName)
+                column(SalesAmountActual_ItemLedgerEntry; ItemLedEntryData."Sales Amount (Actual)")
+                {
+                }
+                column(CustomerName; CustomerName)
                 {
                 }
 
                 trigger OnAfterGetRecord()
                 begin
-                    //"Item Ledger Entry".SETFILTER("Item Ledger Entry"."Document No.",'TCOF*');
+                    //ItemLedEntryData.SETFILTER(ItemLedEntryData."Document No.",'TCOF*');
                     Quantity := ABS(Quantity);
                     FLTCount := FLTCount + 1;
                     L4 := 0;
                     L4 := L4 + 1;
 
-                    CurrReport.CREATETOTALS(L4);
+                    //CurrReport.CREATETOTALS(L4);
                     FCount := L4;
-                    CurrReport.CREATETOTALS(FCount);
+                    //CurrReport.CREATETOTALS(FCount);
 
 
                     IF "Shipment Header".GET("Document No.") THEN BEGIN
                         CustomerNo := "Shipment Header"."Sell-to Customer No.";
-                        CustomerName:= "Shipment Header"."Ship-to Name";
+                        CustomerName := "Shipment Header"."Ship-to Name";
                     END;
                 end;
 
                 trigger OnPreDataItem()
                 begin
                     IF NOT ShowFleet THEN CurrReport.SKIP;
-                    SETFILTER("Posting Date",'%1..%2',StartDate,EndDate);
+                    SETFILTER("Posting Date", '%1..%2', StartDate, EndDate);
 
                     LastFieldNo := FIELDNO("Document No.");
                 end;
             }
-            dataitem("<Item Ledger Entry2>";Table32)
+            dataitem("<Item Ledger Entry2>"; "Item Ledger Entry")
             {
-                CalcFields = Cost Amount (Actual);
-                DataItemTableView = SORTING(Document No.,Document Type,Document Line No.)
-                                    WHERE(Source No.=FILTER(TDP*),
-                                          Inventory Posting Group=FILTER(N_PARTS|ACCESSORY),
-                                          Product Group Code=FILTER(ACCESORIES));
-                column(SourceNo_ItemLedgerEntry2;"Item Ledger Entry"."Source No.")
+                CalcFields = "Cost Amount (Actual)";
+                DataItemTableView = SORTING("Document No.", "Document Type", "Document Line No.")
+                                    WHERE("Source No." = FILTER('TDP*'),
+                                          "Inventory Posting Group" = FILTER('N_PARTS|ACCESSORY'),
+                                          "Product Grp Code" = FILTER('ACCESORIES'));
+                column(SourceNo_ItemLedgerEntry2; ItemLedEntryData."Source No.")
                 {
                 }
-                column(Item_Ledger_Entry__Cost_Amount__Actual__2;"Cost Amount (Actual)")
+                column(Item_Ledger_Entry__Cost_Amount__Actual__2; "Cost Amount (Actual)")
                 {
                 }
-                column(Item_Ledger_Entry__Document_No__2;"Document No.")
+                column(Item_Ledger_Entry__Document_No__2; "Document No.")
                 {
                 }
-                column(Quantity_ItemLedgerEntry2;"<Item Ledger Entry2>".Quantity)
+                column(Quantity_ItemLedgerEntry2; "<Item Ledger Entry2>".Quantity)
                 {
                 }
-                column(Item_Ledger_Entry__Posting_Date_2;"Posting Date")
+                column(Item_Ledger_Entry__Posting_Date_2; "Posting Date")
                 {
                 }
-                column(FCount2;FCount)
+                column(FCount2; FCount)
                 {
-                    DecimalPlaces = 0:0;
+                    DecimalPlaces = 0 : 0;
                 }
-                column(InvCount_Control10000000972;InvCount)
+                column(InvCount_Control10000000972; InvCount)
                 {
-                    DecimalPlaces = 0:0;
+
                 }
-                column(CrCount_Control10000000982;CrCount)
+                column(CrCount_Control10000000982; CrCount)
                 {
-                    DecimalPlaces = 0:0;
+
                 }
-                column(WtCount_Control10000001282;WtCount)
+                column(WtCount_Control10000001282; WtCount)
                 {
-                    DecimalPlaces = 0:0;
+
                 }
-                column(L1_Control10000001292;L1)
+                column(L1_Control10000001292; L1)
                 {
-                    DecimalPlaces = 0:0;
+                    DecimalPlaces = 0 : 0;
                 }
-                column(L2_Control10000001302;L2)
+                column(L2_Control10000001302; L2)
                 {
-                    DecimalPlaces = 0:0;
+                    DecimalPlaces = 0 : 0;
                 }
-                column(L3_Control10000001312;L3)
+                column(L3_Control10000001312; L3)
                 {
-                    DecimalPlaces = 0:0;
+                    DecimalPlaces = 0 : 0;
                 }
-                column(TAmountInv_Control10000001352;TAmountInv)
-                {
-                }
-                column(TAmountCr_Control10000001362;TAmountCr)
+                column(TAmountInv_Control10000001352; TAmountInv)
                 {
                 }
-                column(AllAmount_Control10000001372;AllAmount)
+                column(TAmountCr_Control10000001362; TAmountCr)
                 {
                 }
-                column(TAmountWt_Control10000001382;TAmountWt)
+                column(AllAmount_Control10000001372; AllAmount)
                 {
                 }
-                column(TCostInv_Control100000013922;TCostInv)
+                column(TAmountWt_Control10000001382; TAmountWt)
                 {
                 }
-                column(TCostCr_Control10000001402;TCostCr)
+                column(TCostInv_Control100000013922; TCostInv)
                 {
                 }
-                column(AllCost_Control10000001412;AllCost)
+                column(TCostCr_Control10000001402; TCostCr)
                 {
                 }
-                column(TCostWt_Control10000001422;TCostWt)
+                column(AllCost_Control10000001412; AllCost)
                 {
                 }
-                column(TContInv_Control10000001432;TContInv)
+                column(TCostWt_Control10000001422; TCostWt)
                 {
                 }
-                column(TContCr_Control10000001442;TContCr)
+                column(TContInv_Control10000001432; TContInv)
                 {
                 }
-                column(AllCont_Control10000001452;AllCont)
+                column(TContCr_Control10000001442; TContCr)
                 {
                 }
-                column(TContPctInv_Control10000001462;TContPctInv)
+                column(AllCont_Control10000001452; AllCont)
                 {
                 }
-                column(TContPctCr_Control10000001472;TContPctCr)
+                column(TContPctInv_Control10000001462; TContPctInv)
                 {
                 }
-                column(AllPct_Control10000001482;AllPct)
+                column(TContPctCr_Control10000001472; TContPctCr)
                 {
                 }
-                column(TotalCostAmount2;TotalCostAmount)
+                column(AllPct_Control10000001482; AllPct)
                 {
                 }
-                column(TotalCostAmount_Control10000001502;TotalCostAmount)
+                column(TotalCostAmount2; TotalCostAmount)
                 {
                 }
-                column(FLTCount2;FLTCount)
-                {
-                    DecimalPlaces = 0:0;
-                }
-                column(TNL_Fleet_Parts_ConsumptionCaption2;TNL_Fleet_Parts_ConsumptionCaptionLbl)
+                column(TotalCostAmount_Control10000001502; TotalCostAmount)
                 {
                 }
-                column(Total_Sales_InvoiceCaption_Control10000000922;Total_Sales_InvoiceCaption_Control1000000092Lbl)
+                column(FLTCount2; FLTCount)
+                {
+
+                }
+                column(TNL_Fleet_Parts_ConsumptionCaption2; TNL_Fleet_Parts_ConsumptionCaptionLbl)
                 {
                 }
-                column(Total_Credit_MemoCaption_Control10000000942;Total_Credit_MemoCaption_Control1000000094Lbl)
+                column(Total_Sales_InvoiceCaption_Control10000000922; Total_Sales_InvoiceCaption_Control1000000092Lbl)
                 {
                 }
-                column(Total_Warranty_ClaimCaption_Control10000000962;Total_Warranty_ClaimCaption_Control1000000096Lbl)
+                column(Total_Credit_MemoCaption_Control10000000942; Total_Credit_MemoCaption_Control1000000094Lbl)
                 {
                 }
-                column(Overall_SalesCaption_Control10000001322;Overall_SalesCaption_Control1000000132Lbl)
+                column(Total_Warranty_ClaimCaption_Control10000000962; Total_Warranty_ClaimCaption_Control1000000096Lbl)
                 {
                 }
-                column(Total_TNL_FleetCaption2;Total_TNL_FleetCaptionLbl)
+                column(Overall_SalesCaption_Control10000001322; Overall_SalesCaption_Control1000000132Lbl)
                 {
                 }
-                column(Item_Ledger_Entry_Entry_No_2;"Entry No.")
+                column(Total_TNL_FleetCaption2; Total_TNL_FleetCaptionLbl)
                 {
                 }
-                column(CustomerNo2;CustomerNo)
+                column(Item_Ledger_Entry_Entry_No_2; "Entry No.")
                 {
                 }
-                column(SalesAmountActual_ItemLedgerEntry2;"<Item Ledger Entry2>"."Sales Amount (Actual)")
+                column(CustomerNo2; CustomerNo)
                 {
                 }
-                column(CustomerName2;CustomerName)
+                column(SalesAmountActual_ItemLedgerEntry2; "<Item Ledger Entry2>"."Sales Amount (Actual)")
+                {
+                }
+                column(CustomerName2; CustomerName)
                 {
                 }
 
                 trigger OnAfterGetRecord()
                 begin
-                    //"Item Ledger Entry".SETFILTER("Item Ledger Entry"."Document No.",'TCOF*');
+                    //ItemLedEntryData.SETFILTER(ItemLedEntryData."Document No.",'TCOF*');
                     Quantity := ABS(Quantity);
                     FLTCount := FLTCount + 1;
                     L4 := 0;
                     L4 := L4 + 1;
 
-                    CurrReport.CREATETOTALS(L4);
+                    //CurrReport.CREATETOTALS(L4);
                     FCount := L4;
-                    CurrReport.CREATETOTALS(FCount);
+                    //CurrReport.CREATETOTALS(FCount);
 
 
                     IF "Shipment Header".GET("Document No.") THEN BEGIN
                         CustomerNo := "Shipment Header"."Sell-to Customer No.";
-                        CustomerName:= "Shipment Header"."Ship-to Name";
+                        CustomerName := "Shipment Header"."Ship-to Name";
                     END;
                 end;
 
                 trigger OnPreDataItem()
                 begin
                     IF NOT ShowFleet THEN CurrReport.SKIP;
-                    SETFILTER("Posting Date",'%1..%2',StartDate,EndDate);
+                    SETFILTER("Posting Date", '%1..%2', StartDate, EndDate);
 
                     LastFieldNo := FIELDNO("Document No.");
                 end;
@@ -684,33 +688,40 @@ report 50325 "TNL Sales Cont.Part & Vehicle"
         {
             area(content)
             {
-                field("Starting Date";StartDate)
+                field("Starting Date"; StartDate)
                 {
                     Caption = 'Starting Date';
+                    ApplicationArea = All;
                 }
-                field("Ending Date";EndDate)
+                field("Ending Date"; EndDate)
                 {
                     Caption = 'Ending Date';
+                    ApplicationArea = All;
                 }
-                field("Item Type";ItemType)
+                field("Item Type"; ItemType)
                 {
                     Caption = 'Item Type';
+                    ApplicationArea = All;
                 }
-                field("Customer Posting Group";CustPGrp)
+                field("Customer Posting Group"; CustPGrp)
                 {
                     Caption = 'Customer Posting Group';
+                    ApplicationArea = All;
                 }
-                field("Show Invoice";ShowInvoice)
+                field("Show Invoice"; ShowInvoice)
                 {
                     Caption = 'Show Invoice';
+                    ApplicationArea = All;
                 }
-                field("Show Credit_Memo";ShowCreditMemo)
+                field("Show Credit_Memo"; ShowCreditMemo)
                 {
                     Caption = 'Show Credit_Memo';
+                    ApplicationArea = All;
                 }
-                field("Show TNL Fleet";ShowFleet)
+                field("Show TNL Fleet"; ShowFleet)
                 {
                     Caption = 'Show Accessories';
+                    ApplicationArea = All;
                 }
             }
         }
@@ -798,7 +809,7 @@ report 50325 "TNL Sales Cont.Part & Vehicle"
         Total_TNL_FleetCaptionLbl: Label 'Total TNL Fleet';
         CustomerNo: Code[15];
         CustomerName: Text[50];
-        "Shipment Header": Record "110";
+        "Shipment Header": Record 110;
         VCount: Decimal;
         L5: Decimal;
         VLTCount: Integer;
