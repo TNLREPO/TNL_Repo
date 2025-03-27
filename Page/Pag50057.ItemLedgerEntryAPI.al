@@ -52,6 +52,21 @@ page 50057 "Item Ledger Entry API"
                 {
                     ToolTip = 'Specifies the value of the Location Code field.', Comment = '%';
                 }
+                field("Document Date"; Rec."Document Date")
+                {
+                }
+                field("Production Year"; Rec."Production Year")
+                {
+
+                }
+                field("Serial No."; Rec."Serial No.")
+                {
+
+                }
+                field("Engine No."; Rec."Engine No.")
+                {
+
+                }
 
             }
         }
