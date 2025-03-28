@@ -106,8 +106,8 @@ page 50147 "My payslip"
                     PayrollPayslipHeader.SETRANGE("Payroll Period", Rec."Payroll Period");
                     PayrollPayslipHeader.SETRANGE("Employee No", UserSetup."Employee No.");
                     IF PayrollPayslipHeader.FINDFIRST THEN
-                        //REPORT.RUNMODAL(50046, false, TRUE, PayrollPayslipHeader);
-                        REPORT.RUNMODAL(50045, false, TRUE, PayrollPayslipHeader);
+                        //REPORT.RUNMODAL(50045, false, TRUE, PayrollPayslipHeader);
+                        REPORT.RUNMODAL(50023, false, TRUE, PayrollPayslipHeader);
 
                 end;
             }
