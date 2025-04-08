@@ -130,6 +130,7 @@ page 50262 "VRI List"
                     Caption = 'Open VRI Form';
                     RunObject = Page 50261;
                     RunPageOnRec = true;
+                    Image = ListPage;
                 }
                 separator(Control1)
                 {
@@ -146,6 +147,7 @@ page 50262 "VRI List"
                 action("Move To Transfer")
                 {
                     Caption = 'Move To Transfer';
+                    Image = ListPage;
 
                     trigger OnAction()
                     begin

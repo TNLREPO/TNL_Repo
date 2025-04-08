@@ -15,7 +15,6 @@ page 50023 "Service"
             {
                 ApplicationArea = All;
             }
-
             part("User Tasks Activities"; "User Tasks Activities")
             {
                 ApplicationArea = Suite;
@@ -88,6 +87,13 @@ page 50023 "Service"
                 Caption = 'My Payslips';
                 RunObject = Page "My payslip";
                 ToolTip = '';
+            }
+            action(VRIList)
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Vehicle Receipt Inspection';
+                Image = "Order";
+                RunObject = Page "VRI List";
             }
             action(SalesOrders)
             {
