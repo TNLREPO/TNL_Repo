@@ -156,6 +156,10 @@ table 50110 "Fault Setup Line"
         field(19; "Model Description"; Text[30])
         {
         }
+        field(20; "Model No."; Code[30])
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     keys

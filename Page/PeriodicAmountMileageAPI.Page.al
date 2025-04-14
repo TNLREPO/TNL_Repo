@@ -1,7 +1,7 @@
 page 90054 "Periodic Amount/MileageAPI"
 {
     PageType = List;
-    SourceTable = "Fault Setup HeaderX";
+    SourceTable = "Fault Setup Header";
     ApplicationArea = All;
     layout
     {

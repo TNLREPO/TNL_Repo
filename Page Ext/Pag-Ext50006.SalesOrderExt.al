@@ -85,6 +85,7 @@ pageextension 50006 "Sales Order Ext" extends "Sales Order"
                 field("Customer Line Discount"; Rec."Customer Line discount")
                 {
                     ApplicationArea = All;
+                    
                 }
 
             }

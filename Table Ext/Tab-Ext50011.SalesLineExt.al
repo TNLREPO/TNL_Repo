@@ -140,8 +140,6 @@ tableextension 50011 "Sales Line Ext" extends "Sales Line"
         modify("Location Code")
         {
             trigger OnAfterValidate()
-            var
-                myInt: Integer;
 
             begin
 
@@ -164,8 +162,27 @@ tableextension 50011 "Sales Line Ext" extends "Sales Line"
             end;
 
         }
+        modify("Line Discount Amount")
+        {
+            trigger OnAfterValidate()
 
-        
+            begin
+                UserSetup.get(USERID);
+                IF NOT UserSetup."System Admin" THEN
+                    ERROR('You do not have permission for this action!');
+            end;
+        }
+        modify("Line Discount %")
+        {
+            trigger OnAfterValidate()
+
+            begin
+                UserSetup.get(USERID);
+                IF NOT UserSetup."System Admin" THEN
+                    ERROR('You do not have permission for this action!');
+            end;
+        }
+
     }
 
     keys

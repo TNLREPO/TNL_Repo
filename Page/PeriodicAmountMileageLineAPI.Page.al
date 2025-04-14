@@ -1,7 +1,7 @@
 page 90053 "PeriodicAmount/MileageLineAPI"
 {
     PageType = List;
-    SourceTable = "Fault Setup LineX";
+    SourceTable = "Fault Setup Line";
     ApplicationArea = All;
     layout
     {

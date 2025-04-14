@@ -1515,6 +1515,7 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
         }
         field(60108; "Customer Line discount"; Decimal)
         {
+            Editable = false;
         }
         field(60109; "Serial No"; Code[20])
         {

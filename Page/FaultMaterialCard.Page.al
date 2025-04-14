@@ -1,7 +1,7 @@
 page 80042 "Fault Material Card"
 {
     PageType = Card;
-    SourceTable = "Fault Setup HeaderX";
+    SourceTable = "Fault Setup Header";
     RefreshOnActivate = true;
     ApplicationArea = All;
     layout

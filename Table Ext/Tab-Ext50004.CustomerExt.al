@@ -334,6 +334,13 @@ tableextension 50004 "Customer Ext." extends Customer
         }
         field(50275; "Customer Line Discount"; Decimal)
         {
+            trigger OnValidate()
+            begin
+                UserSetup.get(USERID);
+                IF NOT UserSetup."System Admin" THEN
+                    ERROR('You do not have permission for this action!');
+
+            end;
         }
         field(50276; "Customer Type2"; Code[20])
         {
@@ -348,6 +355,14 @@ tableextension 50004 "Customer Ext." extends Customer
         field(50278; "Remove Credit Limit"; Boolean)
         {
             DataClassification = ToBeClassified;
+
+            trigger OnValidate()
+            begin
+                UserSetup.get(USERID);
+                IF NOT UserSetup."System Admin" THEN
+                    ERROR('You do not have permission for this action!');
+
+            end;
         }
         field(60000; "Customer Type"; Option)
         {
@@ -391,10 +406,10 @@ tableextension 50004 "Customer Ext." extends Customer
             DataClassification = ToBeClassified;
             TableRelation = Customer;
         }
-          field(60010; "Dealer Emails"; Text[250])
+        field(60010; "Dealer Emails"; Text[250])
         {
             DataClassification = ToBeClassified;
-            
+
         }
 
     }
