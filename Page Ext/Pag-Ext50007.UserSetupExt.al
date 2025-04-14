@@ -360,6 +360,10 @@ pageextension 50007 "User Setup Ext" extends "User Setup"
             {
                 ApplicationArea = All;
             }
+            field("Apply Discount"; Rec."Apply Discount")
+            {
+                ApplicationArea = All;
+            }
         }
     }
 }
