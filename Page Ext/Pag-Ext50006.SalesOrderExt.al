@@ -85,9 +85,9 @@ pageextension 50006 "Sales Order Ext" extends "Sales Order"
                 field("Customer Line Discount"; Rec."Customer Line discount")
                 {
                     ApplicationArea = All;
-                    
-                }
+                    Editable = EditableField;
 
+                }
             }
 
         }
@@ -253,8 +253,18 @@ pageextension 50006 "Sales Order Ext" extends "Sales Order"
         ItemRec2: Record Item;
         TotalWithAccessory: Decimal;
 
+        EditableField: Boolean;
+        UserSetup: Record "User Setup";
 
+    trigger OnAfterGetRecord()
 
+    Begin
+        UserSetup.get(UserId);
+        IF UserSetup."Unit Price Approval" then
+            EditableField := true
+        else
+            EditableField := false;
+    End;
 
 
 }

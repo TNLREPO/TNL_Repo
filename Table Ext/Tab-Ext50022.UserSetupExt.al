@@ -356,10 +356,7 @@ tableextension 50022 "User Setup Ext" extends "User Setup"
         {
             DataClassification = ToBeClassified;
         }
-        field(60001; "Apply Discount"; Boolean)
-        {
-            DataClassification = ToBeClassified;
-        }
+        
 
     }
 

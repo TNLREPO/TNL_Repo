@@ -167,9 +167,9 @@ tableextension 50011 "Sales Line Ext" extends "Sales Line"
             trigger OnAfterValidate()
 
             begin
-                UserSetup.get(USERID);
-                IF NOT UserSetup."System Admin" THEN
-                    ERROR('You do not have permission for this action!');
+               /*  UserSetup.get(USERID);
+                IF NOT UserSetup."Apply Discount" THEN
+                    ERROR('You do not have permission for this action!'); */
             end;
         }
         modify("Line Discount %")
@@ -177,9 +177,9 @@ tableextension 50011 "Sales Line Ext" extends "Sales Line"
             trigger OnAfterValidate()
 
             begin
-                UserSetup.get(USERID);
-                IF NOT UserSetup."System Admin" THEN
-                    ERROR('You do not have permission for this action!');
+                /* UserSetup.get(USERID);
+                IF NOT UserSetup."Apply Discount" THEN
+                    ERROR('You do not have permission for this action!'); */
             end;
         }
 

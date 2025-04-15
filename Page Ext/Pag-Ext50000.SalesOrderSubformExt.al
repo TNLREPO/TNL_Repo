@@ -5,8 +5,19 @@ pageextension 50000 "Sales Order Subform Ext" extends "Sales Order Subform"
         modify("Unit Price")
         {
             Editable = EditableField;
-
         }
+        modify("Line Discount %")
+        {
+            Editable = EditableField;
+        }
+        modify("Line Discount Amount")
+        {
+            Editable = EditableField;
+        }
+
+
+
+
         modify("Variant Code")
         {
             Visible = true;
@@ -40,7 +51,6 @@ pageextension 50000 "Sales Order Subform Ext" extends "Sales Order Subform"
                 Visible = true;
             }
         }
-
 
 
     }

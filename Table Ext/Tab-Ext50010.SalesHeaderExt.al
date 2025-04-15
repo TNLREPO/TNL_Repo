@@ -1518,7 +1518,7 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
             trigger OnValidate()
             begin
                 UserSetup.get(USERID);
-                IF NOT UserSetup."Apply Discount" THEN
+                IF NOT UserSetup."Unit Price Approval" THEN
                     ERROR('You do not have permission for this action!');
 
             end;
