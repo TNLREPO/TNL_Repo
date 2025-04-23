@@ -2,10 +2,11 @@ report 51396 "Warranty Transfer"
 {
     DefaultLayout = RDLC;
     RDLCLayout = 'Layout/WarrantyTransfer.rdl';
+    ProcessingOnly = true;
 
     dataset
     {
-        dataitem(DataItem7069; "G/L Entry")
+        dataitem(GLEntryData; "G/L Entry")
         {
             DataItemTableView = SORTING("Entry No.");
 
@@ -54,8 +55,8 @@ report 51396 "Warranty Transfer"
                     GenJnlLine2.DELETEALL;
 
 
-                SETFILTER("G/L Account No.", '%1', '264800');
-                SETFILTER("Posting Date", '%1..%2', StartDate, EndDate);
+                GLEntryData.SETFILTER("G/L Account No.", '%1', '264800');
+                GLEntryData.SETFILTER("Posting Date", '%1..%2', StartDate, EndDate);
 
                 LineNo := 10000;
                 Window.OPEN(

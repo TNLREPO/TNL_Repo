@@ -162,26 +162,31 @@ tableextension 50011 "Sales Line Ext" extends "Sales Line"
             end;
 
         }
-        modify("Line Discount Amount")
-        {
-            trigger OnAfterValidate()
 
-            begin
-               /*  UserSetup.get(USERID);
-                IF NOT UserSetup."Apply Discount" THEN
-                    ERROR('You do not have permission for this action!'); */
-            end;
-        }
         modify("Line Discount %")
         {
             trigger OnAfterValidate()
 
             begin
-                /* UserSetup.get(USERID);
-                IF NOT UserSetup."Apply Discount" THEN
-                    ERROR('You do not have permission for this action!'); */
+                if SalesHeader.get("Document Type"::Order, "Document No.") then
+                    if not SalesHeader."Online Order" then
+                        if SalesHeader."Customer Line discount" <> 0 then
+                            Error('You are not allowed to modify this field!');
             end;
         }
+
+        modify("Line Amount")
+        {
+            trigger OnAfterValidate()
+
+            begin
+                if SalesHeader.get("Document Type"::Order, "Document No.") then
+                    if not SalesHeader."Online Order" then
+                        if SalesHeader."Customer Line discount" <> 0 then
+                            Error('You are not allowed to modify this field!');
+            end;
+        }
+
 
     }
 
@@ -208,6 +213,7 @@ tableextension 50011 "Sales Line Ext" extends "Sales Line"
         Location: Record Location;
         //Color: Record "50067";
         //PurchInvLine: Record "123";
+        SalesHeader: Record "Sales Header";
         VRIError: Label 'You are picking from a VRI Location!';
         MonitorError: Label 'You are not allowed to sell from this Location. Please Contact your Superior for Authorization!';
 

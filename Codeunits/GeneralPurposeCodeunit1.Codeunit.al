@@ -1692,18 +1692,19 @@ codeunit 50004 "General Purpose Codeunit-1"
                 ItemLedgEntry.SETRANGE("Serial No.", SerialNo);
                 IF ItemLedgEntry.FINDFIRST THEN
                     ItemLedgEntry.CALCFIELDS("Cost Amount (Actual)");
+                    
                 SalesLine.SETCURRENTKEY("Document No.", "No.");
                 SalesLine.SETRANGE("Document No.", DocNo);
                 SalesLine.SETRANGE("No.", ItemNo);
                 IF SalesLine.FINDFIRST THEN BEGIN
                     REPEAT
                         UnitPrice := SalesLine."Unit Price";
+                        IF UnitPrice < Abs(ItemLedgEntry."Cost Amount (Actual)") THEN BEGIN
+                            MESSAGE('%1,%2,%3', ItemLedgEntry."Item No.", ItemLedgEntry."Serial No.", Abs(ItemLedgEntry."Cost Amount (Actual)"));
+                            ERROR('Selling Price is lower than the Cost Amount!')
+                        END
                     UNTIL SalesLine.NEXT = 0;
                 END;
-                IF UnitPrice < Abs(ItemLedgEntry."Cost Amount (Actual)") THEN BEGIN
-                    MESSAGE('%1,%2,%3', ItemLedgEntry."Item No.", ItemLedgEntry."Serial No.", Abs(ItemLedgEntry."Cost Amount (Actual)"));
-                    ERROR('Selling Price is lower than the Cost Amount!')
-                END
             UNTIL ReservEntry.NEXT = 0;
         END;
     end;
@@ -1730,19 +1731,20 @@ codeunit 50004 "General Purpose Codeunit-1"
                 ItemLedgEntry.SETRANGE("Serial No.", SerialNo);
                 IF ItemLedgEntry.FINDFIRST THEN
                     ItemLedgEntry.CALCFIELDS("Cost Amount (Actual)");
+
                 SalesLine.SETCURRENTKEY("Document No.", "No.");
                 SalesLine.SETRANGE("Document No.", DocNo);
                 SalesLine.SETRANGE("No.", ItemNo);
                 IF SalesLine.FINDFIRST THEN BEGIN
                     REPEAT
                         UnitPrice := SalesLine."Unit Price";
+                        Margin := ((UnitPrice - Abs(ItemLedgEntry."Cost Amount (Actual)")) / UnitPrice) * 100;
+                        IF Margin < 5 THEN BEGIN
+                            MESSAGE('%1,%2,%3', ItemLedgEntry."Item No.", ItemLedgEntry."Serial No.", ItemLedgEntry."Cost Amount (Actual)");
+                            ERROR('The margin is too low for the vehicle!')
+                        END
                     UNTIL SalesLine.NEXT = 0;
                 END;
-                Margin := ((UnitPrice - Abs(ItemLedgEntry."Cost Amount (Actual)")) / UnitPrice) * 100;
-                IF Margin < 5 THEN BEGIN
-                    MESSAGE('%1,%2,%3', ItemLedgEntry."Item No.", ItemLedgEntry."Serial No.", ItemLedgEntry."Cost Amount (Actual)");
-                    ERROR('The margin is too low for the vehicle!')
-                END
             UNTIL ReservEntry.NEXT = 0;
         END;
     end;
@@ -1828,7 +1830,7 @@ codeunit 50004 "General Purpose Codeunit-1"
         exit(CurrentDate);
     end;
 
-     procedure CalculateLeaveStartDateExcludingWeekendsAndHolidays(LeaveEndDate: Date; NumberOfLeaveDays: Integer): Date
+    procedure CalculateLeaveStartDateExcludingWeekendsAndHolidays(LeaveEndDate: Date; NumberOfLeaveDays: Integer): Date
     var
         RemainingDays: Integer;
         CurrentDate: Date;

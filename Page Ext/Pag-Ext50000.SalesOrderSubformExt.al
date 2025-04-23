@@ -6,16 +6,6 @@ pageextension 50000 "Sales Order Subform Ext" extends "Sales Order Subform"
         {
             Editable = EditableField;
         }
-        modify("Line Discount %")
-        {
-            Editable = EditableField;
-        }
-        modify("Line Discount Amount")
-        {
-            Editable = EditableField;
-        }
-
-
 
 
         modify("Variant Code")

@@ -1088,21 +1088,22 @@ table 70033 "Service AppointmentsX"
             COFRec.VMI := VMI;
             COFRec.VIS := VIS;
             COFRec.Stage := "Days Before Due Date";
+            COFRec."App. No." := "Appointment No.";
             UserSetup.GET(USERID);
             COFRec."Confirmation Staff Name" := UserSetup."User ID";
             COFRec.INSERT(TRUE);
 
-            "COF No." := COFRec."No.";
-            "COF Date" := TODAY;
-            MODIFY;
+            Rec."COF No." := COFRec."No.";
+            Rec."COF Date" := TODAY;
+            Rec.MODIFY;
 
-            MESSAGE('%1 has been created.', "COF No.");
+            MESSAGE('%1 has been created.', Rec."COF No.");
 
-            "AppSSC/SC".SETRANGE("Service Item Code", "Service Item");
-            "AppSSC/SC".SETRANGE("Fault Code", "Operation Code");
+            "AppSSC/SC".SETRANGE("Service Item Code", Rec."Service Item");
+            "AppSSC/SC".SETRANGE("Fault Code", Rec."Operation Code");
             "AppSSC/SC".SETFILTER("COF No.", '');
             IF "AppSSC/SC".FINDFIRST THEN
-                "AppSSC/SC".MODIFYALL("COF No.", "COF No.");
+                "AppSSC/SC".MODIFYALL("COF No.", Rec."COF No.");
         END;
     end;
 

@@ -1971,6 +1971,7 @@ table 70034 "Customer Order HeaderX"
         {
             DataClassification = ToBeClassified;
         }
+        
     }
 
     keys

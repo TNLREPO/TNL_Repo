@@ -64,6 +64,10 @@ page 90049 CustomerOrderPMGRAPI
                 {
 
                 }
+                field("App. No."; Rec."App. No.")
+                {
+
+                }
             }
         }
     }
