@@ -71,16 +71,6 @@ page 60005 "Accountant RC"
             {
                 ApplicationArea = Basic, Suite;
             }
-#if not CLEAN21
-            part(Control122; "Power BI Report Spinner Part")
-            {
-                ApplicationArea = Basic, Suite;
-                ObsoleteState = Pending;
-                ObsoleteReason = 'Replaced by PowerBIEmbeddedReportPart';
-                Visible = false;
-                ObsoleteTag = '21.0';
-            }
-#endif
             systempart(Control1901377608; MyNotes)
             {
                 ApplicationArea = Basic, Suite;
@@ -2289,38 +2279,7 @@ page 60005 "Accountant RC"
                 {
                     Caption = 'Excel Reports';
                     Image = Excel;
-                    action(ExcelTemplatesBalanceSheet)
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Balance Sheet';
-                        Image = "Report";
-                        RunObject = Codeunit "Run Template Balance Sheet";
-                        ToolTip = 'Open a spreadsheet that shows your company''s assets, liabilities, and equity.';
-                    }
-                    action(ExcelTemplateIncomeStmt)
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Income Statement';
-                        Image = "Report";
-                        RunObject = Codeunit "Run Template Income Stmt.";
-                        ToolTip = 'Open a spreadsheet that shows your company''s income and expenses.';
-                    }
-                    action(ExcelTemplateCashFlowStmt)
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Cash Flow Statement';
-                        Image = "Report";
-                        RunObject = Codeunit "Run Template CashFlow Stmt.";
-                        ToolTip = 'Open a spreadsheet that shows how changes in balance sheet accounts and income affect the company''s cash holdings.';
-                    }
-                    action(ExcelTemplateRetainedEarn)
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Retained Earnings Statement';
-                        Image = "Report";
-                        RunObject = Codeunit "Run Template Retained Earn.";
-                        ToolTip = 'Open a spreadsheet that shows your company''s changes in retained earnings based on net income from the other financial statements.';
-                    }
+                    
                     action(ExcelTemplateTrialBalance)
                     {
                         ApplicationArea = Basic, Suite;

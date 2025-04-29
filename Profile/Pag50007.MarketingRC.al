@@ -64,16 +64,7 @@ page 50007 "Marketing Role Center"
                 AccessByPermission = TableData "Report Inbox" = R;
                 ApplicationArea = Suite;
             }
-#if not CLEAN21
-            part(Control13; "Power BI Report Spinner Part")
-            {
-                ApplicationArea = Basic, Suite;
-                ObsoleteState = Pending;
-                ObsoleteReason = 'Replaced by PowerBIEmbeddedReportPart';
-                Visible = false;
-                ObsoleteTag = '21.0';
-            }
-#endif
+
             systempart(Control1901377608; MyNotes)
             {
                 ApplicationArea = Basic, Suite;
