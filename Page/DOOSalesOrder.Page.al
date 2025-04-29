@@ -1033,19 +1033,6 @@ page 70522 "DOO Sales Order"
                 SubPageLink = "No." = field("No."),
                               "Document Type" = field("Document Type");
             }
-#if not CLEAN25
-            part("Attached Documents"; "Document Attachment Factbox")
-            {
-                ObsoleteTag = '25.0';
-                ObsoleteState = Pending;
-                ObsoleteReason = 'The "Document Attachment FactBox" has been replaced by "Doc. Attachment List Factbox", which supports multiple files upload.';
-
-                Caption = 'Attachments';
-                SubPageLink = "Table ID" = const(Database::"Sales Header"),
-                              "No." = field("No."),
-                              "Document Type" = field("Document Type");
-            }
-#endif
             part("Attached Documents List"; "Doc. Attachment List Factbox")
             {
 
@@ -1157,27 +1144,7 @@ page 70522 "DOO Sales Order"
             {
                 Caption = 'O&rder';
                 Image = "Order";
-                action(Statistics)
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Statistics';
-                    Image = Statistics;
-                    ShortCutKey = 'F7';
-                    ToolTip = 'View statistical information, such as the value of posted entries, for the record.';
 
-                    trigger OnAction()
-                    var
-                        Handled: Boolean;
-                    begin
-                        Handled := false;
-                        OnBeforeStatisticsAction(Rec, Handled);
-                        if Handled then
-                            exit;
-
-                        Rec.OpenSalesOrderStatistics();
-                        CurrPage.SalesLines.Page.ForceTotalsCalculation();
-                    end;
-                }
                 action(Customer)
                 {
                     ApplicationArea = Basic, Suite;
@@ -2466,9 +2433,6 @@ page 70522 "DOO Sales Order"
                 Caption = 'Order', Comment = 'Generated from the PromotedActionCategories property index 7.';
 
                 actionref(Dimensions_Promoted; Dimensions)
-                {
-                }
-                actionref(Statistics_Promoted; Statistics)
                 {
                 }
                 actionref("Co&mments_Promoted"; "Co&mments")
