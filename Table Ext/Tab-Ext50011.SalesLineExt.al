@@ -168,10 +168,10 @@ tableextension 50011 "Sales Line Ext" extends "Sales Line"
             trigger OnAfterValidate()
 
             begin
-                if SalesHeader.get("Document Type"::Order, "Document No.") then
-                    if not SalesHeader."Online Order" then
-                        if SalesHeader."Customer Line discount" <> 0 then
-                            Error('You are not allowed to modify this field!');
+                if SalesHeader.get("Document Type"::Order, "Document No.") then begin
+                    if SalesHeader.Locked then
+                        Error('Please contact your system administrator!');
+                end
             end;
         }
 
@@ -180,10 +180,10 @@ tableextension 50011 "Sales Line Ext" extends "Sales Line"
             trigger OnAfterValidate()
 
             begin
-                if SalesHeader.get("Document Type"::Order, "Document No.") then
-                    if not SalesHeader."Online Order" then
-                        if SalesHeader."Customer Line discount" <> 0 then
-                            Error('You are not allowed to modify this field!');
+                if SalesHeader.get("Document Type"::Order, "Document No.") then begin
+                    if SalesHeader.Locked then
+                        Error('Please contact your system administrator!');
+                end
             end;
         }
 

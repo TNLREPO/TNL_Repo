@@ -1518,9 +1518,14 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
             trigger OnValidate()
             begin
                 UserSetup.get(USERID);
-                IF NOT UserSetup."Unit Price Approval" THEN
+                
+                if not UserSetup."Unit Price Approval" then
                     ERROR('You do not have permission for this action!');
 
+                if UserSetup."System Admin" then
+                    Locked := true
+                else
+                    Locked := false;
             end;
         }
         field(60109; "Serial No"; Code[20])
@@ -1980,6 +1985,10 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
             OptionMembers = " ",Satisfactory,"Non-Satisfactory";
         }
         field(60150; "Audit Confirmation Date"; DateTime)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(60151; Locked; Boolean)
         {
             DataClassification = ToBeClassified;
         }
