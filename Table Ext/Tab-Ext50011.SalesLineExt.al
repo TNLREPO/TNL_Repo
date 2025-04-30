@@ -174,6 +174,18 @@ tableextension 50011 "Sales Line Ext" extends "Sales Line"
                 end
             end;
         }
+        modify("Line Discount Amount")
+        {
+            trigger OnAfterValidate()
+
+            begin
+                if SalesHeader.get("Document Type"::Order, "Document No.") then begin
+                    if SalesHeader.Locked then
+                        Error('Please contact your system administrator!');
+                end
+            end;
+
+        }
 
         modify("Line Amount")
         {

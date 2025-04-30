@@ -1518,14 +1518,17 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
             trigger OnValidate()
             begin
                 UserSetup.get(USERID);
-                
+
                 if not UserSetup."Unit Price Approval" then
                     ERROR('You do not have permission for this action!');
 
-                if UserSetup."System Admin" then
-                    Locked := true
-                else
+                if UserSetup."System Admin" and ("Customer Line discount" <> 0) then begin
+                    Locked := true;
+                    modify();
+                end else begin
                     Locked := false;
+                    Modify();
+                end;
             end;
         }
         field(60109; "Serial No"; Code[20])

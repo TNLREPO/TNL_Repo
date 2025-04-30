@@ -88,6 +88,11 @@ pageextension 50006 "Sales Order Ext" extends "Sales Order"
                     Editable = EditableField;
 
                 }
+                field(Locked; Rec.Locked)
+                {
+                    ApplicationArea = All;
+                    Editable = false;
+                }
             }
 
         }
