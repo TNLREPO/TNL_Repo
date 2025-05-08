@@ -149,6 +149,14 @@ pageextension 50002 "Employee Card Ext" extends "Employee Card"
             {
                 ApplicationArea = All;
             }
+            field(Designation; Rec.Designation)
+            {
+                ApplicationArea = All;
+            }
+            field(Grade; Rec.Grade)
+            {
+                ApplicationArea = All;
+            }
         }
 
 
