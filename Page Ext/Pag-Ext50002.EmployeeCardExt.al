@@ -130,8 +130,6 @@ pageextension 50002 "Employee Card Ext" extends "Employee Card"
                     }
                 }
 
-
-
             }
         }
 
@@ -158,7 +156,6 @@ pageextension 50002 "Employee Card Ext" extends "Employee Card"
                 ApplicationArea = All;
             }
         }
-
 
     }
 }
