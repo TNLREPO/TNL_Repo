@@ -67,6 +67,7 @@ tableextension 50051 "Employee Ext" extends "Employee"
         }
         field(50027; Designation; Code[10])
         {
+            TableRelation = Designation.Code;
 
         }
         field(50028; "National ID Number"; Code[20])
