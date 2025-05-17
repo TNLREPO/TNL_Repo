@@ -68,6 +68,7 @@ table 70015 "Procument Cue"
                                                             "Balance Paymt." = CONST(false),
                                                             Closed = CONST(false),
                                                             "Document Type" = CONST(Opex),
+                                                            "Bal. Paymt. MD" = FILTER('' | "On-hold"),
                                                             Reject = CONST(false)));
             FieldClass = FlowField;
         }

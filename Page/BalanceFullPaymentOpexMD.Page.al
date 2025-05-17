@@ -12,8 +12,8 @@ page 70186 "Balance/Full Payment Opex-MD"
                             "Document Type" = CONST(Opex),
                             Reject = CONST(false),
                             "Bal. Paymt. Audit" = CONST(Approved),
-                            "Bal. Paymt. MD" = FILTER('<>Approved|Rejected'),
-                            "Voucher Raised" = CONST(false));
+                            "Bal. Paymt. MD" = FILTER('' | "On-hold"));
+    //"Voucher Raised" = CONST(false));
 
     layout
     {
