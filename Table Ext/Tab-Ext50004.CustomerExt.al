@@ -406,11 +406,12 @@ tableextension 50004 "Customer Ext." extends Customer
             DataClassification = ToBeClassified;
             TableRelation = Customer;
         }
-        field(60010; "Dealer Emails"; Text[250])
+        field(60010; "Dealer Emails"; Text[500])
         {
             DataClassification = ToBeClassified;
 
         }
+
 
     }
     keys

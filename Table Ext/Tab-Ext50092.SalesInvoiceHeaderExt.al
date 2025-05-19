@@ -292,7 +292,7 @@ tableextension 50092 "Sales Invoice Header Ext." extends "Sales Invoice Header"
 
     begin
         Customer.get(Rec."Bill-to Customer No.");
-        RecipientAll := Customer."E-Mail";
+        RecipientAll := Customer."Dealer Emails";
 
         SalesSetup.Get();
         CCEmails := SalesSetup."CC Emails".Split(';');
