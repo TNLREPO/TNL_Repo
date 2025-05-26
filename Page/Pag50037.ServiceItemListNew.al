@@ -21,6 +21,14 @@ page 51096 "Service Item List New"
                 {
                     ToolTip = 'Specifies the value of the Description field.';
                 }
+                field("Customer No."; Rec."Customer No.")
+                {
+                    ToolTip = 'Specifies the value of the Customer No. field.';
+                }
+                field(Namme; Rec.Name)
+                {
+                    ToolTip = 'Specifies the value of the Name field.';
+                }
                 field(Make; Rec.Make)
                 {
                     ToolTip = 'Specifies the value of the Make field.';

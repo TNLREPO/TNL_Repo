@@ -630,10 +630,18 @@ tableextension 50075 "Service Header" extends "Service Header"
     var
 
         COFRec: Record "Customer Order Table.";
+        ServiceLine: Record "Service Line";
     Begin
         TESTFIELD("Posting Date", TODAY);
         TESTFIELD("Salesperson Code");
         TESTFIELD("Location Code");
+
+        ServiceLine.SetCurrentKey("Document Type", "Document No.", Type);
+        ServiceLine.SetRange("Document Type", "Document Type");
+        ServiceLine.SetRange("Document No.", "No.");
+        ServiceLine.SetRange("Job Type", ServiceLine."Job Type"::" ");
+        IF ServiceLine.FindFirst THEN
+            ERROR('You need to update the customer request type on the service lines.');
 
     End;
 }

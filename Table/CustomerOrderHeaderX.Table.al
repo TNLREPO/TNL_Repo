@@ -593,9 +593,9 @@ table 70034 "Customer Order HeaderX"
         }
         field(102; Estimation; Decimal)
         {
-            /* CalcFormula = Sum("Customer Order LineX"."Amount Inc. VAT" WHERE("Document No." = FIELD("No."),
+            CalcFormula = Sum("Customer Order LineX"."Amount Inc. VAT" WHERE("Document No." = FIELD("No."),
                                                                               "Additional Jobs" = filter(false)));
-            FieldClass = FlowField; */
+            FieldClass = FlowField;
 
             trigger OnValidate()
             begin
@@ -1971,7 +1971,7 @@ table 70034 "Customer Order HeaderX"
         {
             DataClassification = ToBeClassified;
         }
-        
+
     }
 
     keys
@@ -2555,18 +2555,18 @@ table 70034 "Customer Order HeaderX"
 
     procedure CostChanged()
     begin
-        CustOrderLine.SETRANGE("Document No.", "No.");
+        CustOrderLine.SETRANGE("Document No.", Rec."No.");
         IF CustOrderLine.FINDFIRST THEN BEGIN
             CustOrderLine.CALCSUMS("Amount Inc. VAT");
-            "Cost Changed" := CustOrderLine."Amount Inc. VAT";
-            MODIFY;
+            Rec."Cost Changed" := CustOrderLine."Amount Inc. VAT";
+            Rec.MODIFY;
         END;
 
-        CustOrderLine2.SETRANGE("Document No.", "No.");
+        CustOrderLine2.SETRANGE("Document No.", Rec."No.");
         CustOrderLine2.SETRANGE("Additional Jobs", TRUE);
         IF NOT CustOrderLine2.FINDFIRST THEN BEGIN
-            "Cost Changed" := 0;
-            MODIFY;
+            Rec."Cost Changed" := 0;
+            Rec.MODIFY;
         END;
 
         MESSAGE(Text004);

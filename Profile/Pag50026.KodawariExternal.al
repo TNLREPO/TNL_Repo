@@ -613,6 +613,26 @@ page 50026 "Kodawari External"
                     RunObject = Page "Approval Leave List";
                     ToolTip = 'View leaves awaiting approval.';
                 }
+                action("ApprovedLeave")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Approved Leave';
+                    Image = CalculateCalendar;
+                    RunObject = Page "Approved Leave List";
+                    ToolTip = 'View approved leavesl.';
+                }
+
+                action("HODAdmin")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Approved Leave';
+                    Image = CalculateCalendar;
+                    RunObject = Page "HOD HR/ADMIN LIST";
+                    ToolTip = 'View leaves for HOD/Admin approval.';
+                }
+
+
+
 
             }
 

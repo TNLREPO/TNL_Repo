@@ -48,16 +48,16 @@ table 70040 "Service IndexX"
         {
             TableRelation = Customer."No.";
 
-            /* trigger OnValidate()
+            trigger OnValidate()
             begin
-                 IF CustRec.GET("Customer No.") THEN BEGIN
-                     "Customer Name" := CustRec.Name;
-                     "Contact Person"   := CustRec.Contact;
-                     "Contact Phone No.":= CustRec."Phone No.";
-                     "E-Mail" := CustRec."E-Mail";
+                IF CustRec.GET("Customer No.") THEN BEGIN
+                    "Customer Name" := CustRec.Name;
+                    "Contact Person" := CustRec.Contact;
+                    "Contact Phone No." := CustRec."Phone No.";
+                    "E-Mail" := CustRec."E-Mail";
 
-                   END;
-            end; */
+                END;
+            end;
         }
         field(5; "Customer Name"; Text[50])
         {

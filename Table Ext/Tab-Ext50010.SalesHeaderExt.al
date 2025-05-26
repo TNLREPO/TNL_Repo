@@ -2488,7 +2488,9 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                         //IF ("Customer Posting Group" <> 'STAFF') THEN BEGIN
                         CustRec.CALCFIELDS("Balance (LCY)");
                         IF (CustRec."Balance (LCY)" + SalesOrderAmount) > CustRec."Credit Limit (LCY)" THEN
-                            ERROR('Credit limit has been reach. So, you can not sell to this customer!');
+                            Message('Balance (LCY): %1, Order Amount: %2', CustRec."Balance (LCY)", SalesOrderAmount);
+
+                        ERROR('Credit limit has been reach. So, you can not sell to this customer!');
                     END;
                 END;
             end;
