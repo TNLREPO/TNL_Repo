@@ -354,6 +354,8 @@ page 60005 "Accountant RC"
 
             group(PayrollReports)
             {
+                Caption = 'Payroll Reports';
+
                 action("AmountED")
                 {
                     ApplicationArea = BasicEU;
@@ -393,6 +395,15 @@ page 60005 "Accountant RC"
                     RunObject = Report "Bank Total Net Report";
                     Image = "Report";
                     //ToolTip = 'View bank account balances.';
+                }
+                action("PayrollOthers")
+                {
+                    ApplicationArea = BasicEU;
+                    Caption = 'Monthly Payslip Others';
+                    RunObject = Report "Monthly Payslip Others";
+                    Image = "Report";
+                    ToolTip = 'View or print monthly payslips for other employees.';
+                   
                 }
 
             }
@@ -2279,7 +2290,7 @@ page 60005 "Accountant RC"
                 {
                     Caption = 'Excel Reports';
                     Image = Excel;
-                    
+
                     action(ExcelTemplateTrialBalance)
                     {
                         ApplicationArea = Basic, Suite;

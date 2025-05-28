@@ -271,6 +271,22 @@ codeunit 50000 MySubscribers
         Rec.CheckControls();
     end;
 
+    [EventSubscriber(ObjectType::Page, Page::"Service Lines", 'OnBeforeActionEvent', 'Post', false, false)]
+
+    procedure ValidateServLinePost(var Rec: Record "Service Line")
+
+    begin
+        Rec.ServLineCheckControls();
+    end;
+
+    [EventSubscriber(ObjectType::Page, Page::"Service Lines", 'OnBeforeActionEvent', 'Preview', false, false)]
+
+    procedure ValidateServLinePreview(var Rec: Record "Service Line")
+
+    begin
+        Rec.ServLineCheckControls();
+    end;
+
 
 }
 

@@ -245,4 +245,21 @@ tableextension 50077 "Service Line Ext" extends "Service Line"
         DurationInHrs: Decimal;
         PurchInvLine: Record "Purch. Inv. Line";
 
+    procedure ServLineCheckControls()
+    var
+
+        ServiceLine: Record "Service Line";
+    Begin
+        TESTFIELD("Posting Date", TODAY);
+        TESTFIELD("Location Code");
+
+        ServiceLine.SetCurrentKey("Document Type", "Document No.", Type);
+        ServiceLine.SetRange("Document Type", "Document Type");
+        ServiceLine.SetRange("Document No.", "Document No.");
+        ServiceLine.SetRange("Job Type", "Job Type"::" ");
+        IF ServiceLine.FindFirst THEN
+            ERROR('You need to update the customer request type on the service lines.');
+
+    End;
+
 }

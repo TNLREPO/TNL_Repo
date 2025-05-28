@@ -4,7 +4,7 @@ page 70528 "Sales Shipment Security"
     ApplicationArea = All;
     PageType = Document;
     Editable = true;
-    
+
     layout
     {
         area(content)
@@ -189,7 +189,7 @@ page 70528 "Sales Shipment Security"
             part("Custom Documents"; 70523)
             {
                 Caption = 'Custom Documents';
-                Editable = false;
+                Editable = true;
                 SubPageLink = "Sales Order" = FIELD("Order No.");
             }
             group("Doc Link")
@@ -197,7 +197,6 @@ page 70528 "Sales Shipment Security"
                 Caption = 'Document Link';
                 field("Acknowledged Doc Link"; Rec."Acknowledged Doc Link")
                 {
-
                     Editable = true;
                 }
             }

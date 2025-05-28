@@ -2386,7 +2386,6 @@ table 70034 "Customer Order HeaderX"
             TransferHeader.INIT;
             TransferHeader.INSERT(TRUE);
 
-
             TransferHeader."COF No." := "No.";
             TransferHeader.VALIDATE("Transfer-from Code", '120ISO');
             TransferHeader.VALIDATE("Transfer-to Code", CustOrderLine."Location Code");

@@ -1,6 +1,6 @@
 page 50040 "POS Receipt List"
 {
-    CardPageID = "Cash Receipt Card";
+    CardPageID = "POS Receipt Card";
     Editable = false;
     PageType = List;
     SourceTable = "Payment/Receipt.";

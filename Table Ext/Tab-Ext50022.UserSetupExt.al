@@ -356,7 +356,7 @@ tableextension 50022 "User Setup Ext" extends "User Setup"
         {
             DataClassification = ToBeClassified;
         }
-        
+       
 
     }
 

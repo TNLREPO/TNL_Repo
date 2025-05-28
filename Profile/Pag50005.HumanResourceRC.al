@@ -227,6 +227,12 @@ page 50005 "HR RC"
                     RunObject = Page "Acutal Leave List";
                     ToolTip = 'Plan your annual leave.';
                 }
+                 action(TrainingList)
+                {
+                    ApplicationArea = BasicHR;
+                    Caption = 'Training Courses';
+                    RunObject = page "Training Courses List";
+                }
 
 
                 group("Group1")
@@ -391,6 +397,8 @@ page 50005 "HR RC"
                     RunObject = Page Holidays;
                     ToolTip = 'Plan annual holidays.';
                 }
+               
+
 
             }
 

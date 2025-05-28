@@ -10,6 +10,7 @@ page 50101 "Sales Order List TCSC"
     SourceTable = "Sales Header Archive";
     SourceTableView = WHERE("Document Type" = CONST(Order), "Location Code" = CONST('120ISO'));
     UsageCategory = None;
+    Editable = false;
 
     layout
     {

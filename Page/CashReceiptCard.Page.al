@@ -238,6 +238,8 @@ page 70013 "Cash Receipt Card"
 
                 end;
             }
+
+          
         }
     }
 
@@ -319,6 +321,7 @@ page 70013 "Cash Receipt Card"
         GLEntry2: Record 17;
         ReportSingle: Report "Cash Receipt-Sing.";
         ReportMultiple: Report "Cash Receipt-Mult.";
+        PrintPOS: Report "TCSC POS Receipt";
         CallAPI: Codeunit 50005;
 
 

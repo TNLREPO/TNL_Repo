@@ -2483,14 +2483,14 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                     IF SalesLine.FINDFIRST THEN
                         SalesLine.CALCSUMS("Amount Including VAT");
                     SalesOrderAmount := SalesLine."Amount Including VAT";
+
                     CustRec.GET(Rec."Sell-to Customer No.");
                     IF (CustRec."Credit Limit (LCY)" <> 0) THEN BEGIN
                         //IF ("Customer Posting Group" <> 'STAFF') THEN BEGIN
                         CustRec.CALCFIELDS("Balance (LCY)");
                         IF (CustRec."Balance (LCY)" + SalesOrderAmount) > CustRec."Credit Limit (LCY)" THEN
-                            Message('Balance (LCY): %1, Order Amount: %2', CustRec."Balance (LCY)", SalesOrderAmount);
-
-                        ERROR('Credit limit has been reach. So, you can not sell to this customer!');
+                            ERROR('Credit limit has been reached. So, you can not sell to this customer!');
+                        Message('Balance (LCY): %1, Order Amount: %2', CustRec."Balance (LCY)", SalesOrderAmount);
                     END;
                 END;
             end;

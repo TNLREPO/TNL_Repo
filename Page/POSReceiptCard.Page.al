@@ -205,9 +205,9 @@ page 70513 "POS Receipt Card"
                     Rec.Postgl(Rec, FALSE);
                 end;
             }
-            action("Print Document")
+            action("Print POS")
             {
-                Caption = 'Print Document';
+                Caption = 'Print POS Receipt';
                 Image = Print;
                 Promoted = true;
                 PromotedCategory = Process;
@@ -215,13 +215,14 @@ page 70513 "POS Receipt Card"
 
                 trigger OnAction()
                 begin
-                    ReqRec.SETRANGE(ReqRec."Document Type", Rec."Document Type");
-                    ReqRec.SETRANGE(ReqRec."No.", Rec."No.");
-                    IF ReqRec.FINDFIRST THEN BEGIN
-                        IF ReqRec."Multiple Balance Account" OR ReqRec."Multiple Account" THEN
-                            REPORT.RUNMODAL(50001, TRUE, TRUE, ReqRec) ELSE
-                            REPORT.RUNMODAL(50617, TRUE, TRUE, ReqRec);
-                    END;
+
+                    Clear(PrintPOS);
+                    ReqRec.SetFilter("No.", Rec."No.");
+                    if ReqRec.FindFirst() then begin
+                        PrintPOS.SetTableView(ReqRec);
+                        PrintPOS.UseRequestPage();
+                        PrintPOS.RunModal();
+                    end;
                 end;
             }
         }
@@ -307,7 +308,8 @@ page 70513 "POS Receipt Card"
         Text19038076: Label 'Department Code';
         Text19077769: Label 'Branch Code';
         GLEntry2: Record 17;
-        //CallAPI: Codeunit 50005;
+        CallAPI: Codeunit 50005;
+        PrintPOS: Report "TCSC POS Receipt";
 
 
     procedure UpdatePosting()

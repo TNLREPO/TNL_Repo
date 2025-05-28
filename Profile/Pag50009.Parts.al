@@ -96,6 +96,14 @@ page 50009 Parts
                 RunObject = Page "My payslip";
                 ToolTip = '';
             }
+            action("Cash Receip&t")
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'POS Receipt';
+                Image = CashReceiptJournal;
+                RunObject = Page "POS Receipt List";
+                ToolTip = 'Post POS receipt entries to the general ledger.';
+            }
             action(SalesOrders)
             {
                 ApplicationArea = Basic, Suite;
@@ -104,6 +112,14 @@ page 50009 Parts
                 RunObject = Page "Sales Order List";
                 ToolTip = 'Record your agreements with customers to sell certain products on certain delivery and payment terms. Sales orders, unlike sales invoices, allow you to ship partially, deliver directly from your vendor to your customer, initiate warehouse handling, and print various customer-facing documents. Sales invoicing is integrated in the sales order process.';
             }
+            action("SalesOrders TCSC")
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Sales Orders (TCSC)';
+                RunObject = Page "Sales Order List TCSC";
+                ToolTip = 'Record your agreements with customers to sell certain products on certain delivery and payment terms. Sales orders, unlike sales invoices, allow you to ship partially, deliver directly from your vendor to your customer, initiate warehouse handling, and print various customer-facing documents. Sales invoicing is integrated in the sales order process.';
+            }
+
             action(SalesOrdersShptNotInv)
             {
                 ApplicationArea = Basic, Suite;
@@ -293,8 +309,6 @@ page 50009 Parts
                 ToolTip = 'View not reachable customers.';
             }
 
-
-
         }
         area(sections)
         {
@@ -321,8 +335,8 @@ page 50009 Parts
                 action("Sales Orders")
                 {
                     ApplicationArea = Basic, Suite;
-                    Caption = 'Sales Orders';
-                    RunObject = Page "Sales Order List";
+                    Caption = 'Sales Orders (TCSC)';
+                    RunObject = Page "Sales Order List TCSC";
                     ToolTip = 'Record your agreements with customers to sell certain products on certain delivery and payment terms. Sales orders, unlike sales invoices, allow you to ship partially, deliver directly from your vendor to your customer, initiate warehouse handling, and print various customer-facing documents. Sales invoicing is integrated in the sales order process.';
                 }
                 action("Sales Orders - Microsoft Dynamics 365 Sales")
@@ -421,6 +435,7 @@ page 50009 Parts
                     RunObject = Page "Finance Charge Memo List";
                     ToolTip = 'Send finance charge memos to customers with delayed payments, typically following a reminder process. Finance charges are calculated automatically and added to the overdue amounts on the customer''s account according to the specified finance charge terms and penalty/interest amounts.';
                 }
+
             }
 
             group("Local Parts Purchase")
@@ -536,7 +551,6 @@ page 50009 Parts
                     RunPageView = WHERE("Location Code" = FILTER('120ISO'));
                     ToolTip = 'View TCSC customers.';
                 }
-
 
                 action(SearchTrack)
                 {

@@ -81,6 +81,14 @@ page 50026 "Kodawari External"
                 RunObject = Page "My payslip";
                 ToolTip = '';
             }
+            action("Cash Receip&t")
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'POS Receipt';
+                Image = CashReceiptJournal;
+                RunObject = Page "POS Receipt List";
+                ToolTip = 'Post POS receipt entries to the general ledger.';
+            }
             action(MaintenanceReminder)
             {
                 ApplicationArea = All;
@@ -121,6 +129,7 @@ page 50026 "Kodawari External"
                 RunObject = Page "Transfer Orders";
                 ToolTip = 'Move inventory items between company locations. With transfer orders, you ship the outbound transfer from one location and receive the inbound transfer at the other location. This allows you to manage the involved warehouse activities and provides more certainty that inventory quantities are updated correctly.';
             }
+
         }
         area(sections)
         {
@@ -136,6 +145,13 @@ page 50026 "Kodawari External"
                     Caption = 'Sales Quotes';
                     RunObject = Page "Sales Quotes";
                     ToolTip = 'Make offers to customers to sell certain products on certain delivery and payment terms. While you negotiate with a customer, you can change and resend the sales quote as much as needed. When the customer accepts the offer, you convert the sales quote to a sales invoice or a sales order in which you process the sale.';
+                }
+                action("Sales Orders")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'TCSC Sales Orders';
+                    RunObject = Page "Sales Order List TCSC";
+                    ToolTip = 'Record your agreements with customers to sell certain products on certain delivery and payment terms. Sales orders, unlike sales invoices, allow you to ship partially, deliver directly from your vendor to your customer, initiate warehouse handling, and print various customer-facing documents. Sales invoicing is integrated in the sales order process.';
                 }
 
                 action("Posted Sales Invoices")
@@ -175,6 +191,7 @@ page 50026 "Kodawari External"
                     RunObject = Page "Service Costs";
                     ToolTip = 'Open the list to see the service costs.';
                 }
+
 
             }
 
@@ -625,7 +642,7 @@ page 50026 "Kodawari External"
                 action("HODAdmin")
                 {
                     ApplicationArea = Basic, Suite;
-                    Caption = 'Approved Leave';
+                    Caption = 'HOD HR/Admin';
                     Image = CalculateCalendar;
                     RunObject = Page "HOD HR/ADMIN LIST";
                     ToolTip = 'View leaves for HOD/Admin approval.';
