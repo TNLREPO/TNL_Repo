@@ -10,7 +10,7 @@ pageextension 50005 "Customer Card Ext" extends "Customer Card"
                 field("Customer Line Discount"; Rec."Customer Line Discount")
                 {
                     ApplicationArea = Basic, Suite;
-                    Editable = false;
+                    ToolTip = 'Specifies the line discount percentage that is applied to sales documents for this customer.';
                 }
                 field("Customer Type"; Rec."Customer Type")
                 {

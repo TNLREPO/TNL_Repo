@@ -24,7 +24,7 @@ table 50082 "Training Courses"
         }
         field(4; "Vendor Code"; Code[10])
         {
-            TableRelation = IF ("Training Group" = FILTER('Mixed|Outdoor')) Vendor."No." WHERE(Trainer = filter(true));
+            TableRelation = Vendor."No.";
 
             trigger OnValidate()
             begin
@@ -161,7 +161,6 @@ table 50082 "Training Courses"
                 "No Series" := xRec."No Series";
             "Course Code" := NoSeriesMgt.GetNextNo("No Series");
 
-            //NoSeriesMgt.InitSeries(HumanResSetup."Course Attendance No", xRec."No Series", 0D, "Course Code", "No Series");
         END;
 
         //"Course Start Date" := TODAY;
@@ -188,18 +187,15 @@ table 50082 "Training Courses"
 
     procedure AssistEdit(OldTrain: Record 50082): Boolean
     begin
-        /*  WITH TCourseRec DO BEGIN
-             TCourseRec := Rec;
-             HumanResSetup.GET;
-             HumanResSetup.TESTFIELD("Course Attendance No");
-             IF NoSeriesMgt.SelectSeries(HumanResSetup."Course Attendance No", OldTrain."No Series", "No Series") THEN BEGIN
-                 HumanResSetup.GET;
-                 HumanResSetup.TESTFIELD("Course Attendance No");
-                 NoSeriesMgt.SetSeries("Course Code");
-                 Rec := TCourseRec;
-                 EXIT(TRUE);
-             END;
-         END; */
+        TCourseRec := Rec;
+        HumanResSetup.GET;
+        HumanResSetup.TESTFIELD("Course Attendance No");
+        "No Series" := HumanResSetup."Course Attendance No";
+        if NoSeriesMgt.AreRelated("No Series", xRec."No Series") then
+            "No Series" := xRec."No Series";
+        "Course Code" := NoSeriesMgt.GetNextNo("No Series");
+        EXIT(TRUE);
+
     end;
 }
 

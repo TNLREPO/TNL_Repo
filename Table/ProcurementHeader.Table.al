@@ -751,9 +751,8 @@ table 70008 "Procurement Header"
 
                 TESTFIELD("Bal. Paymt. HOD", "Bal. Paymt. HOD"::Approved);
                 UserSetup4.GET(USERID);
-                IF (UserSetup4."User ID" <> 'ADEWUMI') THEN
-                    IF (UserSetup4."User ID" <> 'AGBESUA') THEN
-                        ERROR(Text039);
+                if NOT (UserSetup4."User ID" IN ['ADEWUMI', 'BRANO', 'JOSHUA']) THEN
+                    ERROR(Text039);
 
                 IF "Bal. Paymt. HOD" <> "Bal. Paymt. HOD"::Approved THEN
                     ERROR(Text046);
@@ -964,7 +963,7 @@ table 70008 "Procurement Header"
                 TESTFIELD("Head of Department", "Head of Department"::Approved);
 
                 UserSetup4.GET(USERID);
-                IF (UserSetup4."User ID" <> 'ADEWUMI') THEN
+                if NOT (UserSetup4."User ID" IN ['ADEWUMI', 'BRANO', 'JOSHUA']) THEN
                     ERROR(Text039);
 
                 IF "Head of Audit" = "Head of Audit"::Approved THEN BEGIN

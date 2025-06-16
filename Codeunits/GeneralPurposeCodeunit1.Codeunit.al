@@ -1658,55 +1658,62 @@ codeunit 50004 "General Purpose Codeunit-1"
 
     procedure CheckItemCost(var ItemNo: Code[20]; var NewSalesPrice: Decimal)
     begin
-        ItemLedgEntry.SETCURRENTKEY("Item No.", Positive, "Location Code", "Variant Code");
-        ItemLedgEntry.SETRANGE("Item No.", ItemNo);
-        ItemLedgEntry.SETRANGE(Positive, TRUE);
-        ItemLedgEntry.SETFILTER("Location Code", '<>%1', '');
-        ItemLedgEntry.SETRANGE("Remaining Quantity", 1);
-        ItemLedgEntry.SETRANGE("Variant Code", '');
-        IF ItemLedgEntry.FINDFIRST THEN BEGIN
-            REPEAT
-                ItemLedgEntryNo := ItemLedgEntry."Entry No.";
-                ValueEntry.SETCURRENTKEY("Item Ledger Entry No.", "Item No.");
-                ValueEntry.SETRANGE("Item Ledger Entry No.", ItemLedgEntry."Entry No.");
-                ValueEntry.SETRANGE("Item No.", ItemLedgEntry."Item No.");
-                IF ValueEntry.FINDFIRST THEN BEGIN
-                    ValueEntry.CALCSUMS("Cost Posted to G/L");
-                    IF NewSalesPrice < Abs(ValueEntry."Cost Posted to G/L") THEN
-                        ERROR('Selling Price is lower than the Cost Amount!');
-                END;
-            UNTIL ItemLedgEntry.NEXT = 0;
-        END;
+        UserSetup.GET(USERID);
+        if not UserSetup."Change Price Below Cost" then begin
+            ItemLedgEntry.SETCURRENTKEY("Item No.", Positive, "Location Code", "Variant Code");
+            ItemLedgEntry.SETRANGE("Item No.", ItemNo);
+            ItemLedgEntry.SETRANGE(Positive, TRUE);
+            ItemLedgEntry.SETFILTER("Location Code", '<>%1', '');
+            ItemLedgEntry.SETRANGE("Remaining Quantity", 1);
+            ItemLedgEntry.SETRANGE("Variant Code", '');
+            IF ItemLedgEntry.FINDFIRST THEN BEGIN
+                REPEAT
+                    ItemLedgEntryNo := ItemLedgEntry."Entry No.";
+                    ValueEntry.SETCURRENTKEY("Item Ledger Entry No.", "Item No.");
+                    ValueEntry.SETRANGE("Item Ledger Entry No.", ItemLedgEntry."Entry No.");
+                    ValueEntry.SETRANGE("Item No.", ItemLedgEntry."Item No.");
+                    IF ValueEntry.FINDFIRST THEN BEGIN
+                        ValueEntry.CALCSUMS("Cost Posted to G/L");
+                        IF NewSalesPrice < Abs(ValueEntry."Cost Posted to G/L") THEN
+                            ERROR('Selling Price is lower than the Cost Amount!');
+                    END;
+                UNTIL ItemLedgEntry.NEXT = 0;
+            END;
+        end;
     end;
 
 
     procedure CheckItemCostToPost(var DocNo: Code[10])
     begin
-        ReservEntry.SETCURRENTKEY("Source ID", "Item No.");
-        ReservEntry.SETRANGE("Source ID", DocNo);
-        IF ReservEntry.FINDFIRST THEN BEGIN
-            REPEAT
-                SerialNo := ReservEntry."Serial No.";
-                ItemNo := ReservEntry."Item No.";
-                ItemLedgEntry.SETCURRENTKEY("Serial No.");
-                ItemLedgEntry.SETRANGE("Serial No.", SerialNo);
-                IF ItemLedgEntry.FINDFIRST THEN
-                    ItemLedgEntry.CALCFIELDS("Cost Amount (Actual)");
-                    
-                SalesLine.SETCURRENTKEY("Document No.", "No.");
-                SalesLine.SETRANGE("Document No.", DocNo);
-                SalesLine.SETRANGE("No.", ItemNo);
-                IF SalesLine.FINDFIRST THEN BEGIN
-                    REPEAT
-                        UnitPrice := SalesLine."Unit Price";
-                        IF UnitPrice < Abs(ItemLedgEntry."Cost Amount (Actual)") THEN BEGIN
-                            MESSAGE('%1,%2,%3', ItemLedgEntry."Item No.", ItemLedgEntry."Serial No.", Abs(ItemLedgEntry."Cost Amount (Actual)"));
-                            ERROR('Selling Price is lower than the Cost Amount!')
-                        END
-                    UNTIL SalesLine.NEXT = 0;
-                END;
-            UNTIL ReservEntry.NEXT = 0;
-        END;
+
+        UserSetup.GET(USERID);
+        if not UserSetup."Change Price Below Cost" then begin
+            ReservEntry.SETCURRENTKEY("Source ID", "Item No.");
+            ReservEntry.SETRANGE("Source ID", DocNo);
+            IF ReservEntry.FINDFIRST THEN BEGIN
+                REPEAT
+                    SerialNo := ReservEntry."Serial No.";
+                    ItemNo := ReservEntry."Item No.";
+                    ItemLedgEntry.SETCURRENTKEY("Serial No.");
+                    ItemLedgEntry.SETRANGE("Serial No.", SerialNo);
+                    IF ItemLedgEntry.FINDFIRST THEN
+                        ItemLedgEntry.CALCFIELDS("Cost Amount (Actual)");
+
+                    SalesLine.SETCURRENTKEY("Document No.", "No.");
+                    SalesLine.SETRANGE("Document No.", DocNo);
+                    SalesLine.SETRANGE("No.", ItemNo);
+                    IF SalesLine.FINDFIRST THEN BEGIN
+                        REPEAT
+                            UnitPrice := SalesLine."Unit Price";
+                            IF UnitPrice < Abs(ItemLedgEntry."Cost Amount (Actual)") THEN BEGIN
+                                MESSAGE('%1,%2,%3', ItemLedgEntry."Item No.", ItemLedgEntry."Serial No.", Abs(ItemLedgEntry."Cost Amount (Actual)"));
+                                ERROR('Selling Price is lower than the Cost Amount!')
+                            END
+                        UNTIL SalesLine.NEXT = 0;
+                    END;
+                UNTIL ReservEntry.NEXT = 0;
+            END;
+        end;
     end;
 
 
@@ -1721,32 +1728,36 @@ codeunit 50004 "General Purpose Codeunit-1"
 
     procedure CheckMargin(var DocNo: Code[10])
     begin
-        ReservEntry.SETCURRENTKEY("Source ID", "Item No.");
-        ReservEntry.SETRANGE("Source ID", DocNo);
-        IF ReservEntry.FINDFIRST THEN BEGIN
-            REPEAT
-                SerialNo := ReservEntry."Serial No.";
-                ItemNo := ReservEntry."Item No.";
-                ItemLedgEntry.SETCURRENTKEY("Serial No.");
-                ItemLedgEntry.SETRANGE("Serial No.", SerialNo);
-                IF ItemLedgEntry.FINDFIRST THEN
-                    ItemLedgEntry.CALCFIELDS("Cost Amount (Actual)");
+        UserSetup.GET(USERID);
+        if not UserSetup."Change Price Below Cost" then begin
 
-                SalesLine.SETCURRENTKEY("Document No.", "No.");
-                SalesLine.SETRANGE("Document No.", DocNo);
-                SalesLine.SETRANGE("No.", ItemNo);
-                IF SalesLine.FINDFIRST THEN BEGIN
-                    REPEAT
-                        UnitPrice := SalesLine."Unit Price";
-                        Margin := ((UnitPrice - Abs(ItemLedgEntry."Cost Amount (Actual)")) / UnitPrice) * 100;
-                        IF Margin < 5 THEN BEGIN
-                            MESSAGE('%1,%2,%3', ItemLedgEntry."Item No.", ItemLedgEntry."Serial No.", ItemLedgEntry."Cost Amount (Actual)");
-                            ERROR('The margin is too low for the vehicle!')
-                        END
-                    UNTIL SalesLine.NEXT = 0;
-                END;
-            UNTIL ReservEntry.NEXT = 0;
-        END;
+            ReservEntry.SETCURRENTKEY("Source ID", "Item No.");
+            ReservEntry.SETRANGE("Source ID", DocNo);
+            IF ReservEntry.FINDFIRST THEN BEGIN
+                REPEAT
+                    SerialNo := ReservEntry."Serial No.";
+                    ItemNo := ReservEntry."Item No.";
+                    ItemLedgEntry.SETCURRENTKEY("Serial No.");
+                    ItemLedgEntry.SETRANGE("Serial No.", SerialNo);
+                    IF ItemLedgEntry.FINDFIRST THEN
+                        ItemLedgEntry.CALCFIELDS("Cost Amount (Actual)");
+
+                    SalesLine.SETCURRENTKEY("Document No.", "No.");
+                    SalesLine.SETRANGE("Document No.", DocNo);
+                    SalesLine.SETRANGE("No.", ItemNo);
+                    IF SalesLine.FINDFIRST THEN BEGIN
+                        REPEAT
+                            UnitPrice := SalesLine."Unit Price";
+                            Margin := ((UnitPrice - Abs(ItemLedgEntry."Cost Amount (Actual)")) / UnitPrice) * 100;
+                            IF Margin < 5 THEN BEGIN
+                                MESSAGE('%1,%2,%3', ItemLedgEntry."Item No.", ItemLedgEntry."Serial No.", ItemLedgEntry."Cost Amount (Actual)");
+                                ERROR('The margin is too low for the vehicle!')
+                            END
+                        UNTIL SalesLine.NEXT = 0;
+                    END;
+                UNTIL ReservEntry.NEXT = 0;
+            END;
+        end;
     end;
 
 

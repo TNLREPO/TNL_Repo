@@ -43,7 +43,7 @@ page 51052 "Employee Training"
 
                     trigger OnValidate()
                     begin
-                        IF VendRec.GET(Rec."Vendor Code") THEN "Total CostEnable" := TRUE;
+
                     end;
                 }
                 field("Vendor name"; Rec."Vendor name")
@@ -57,7 +57,7 @@ page 51052 "Employee Training"
                 }
                 field(Comment; Rec.Comment)
                 {
-                    Caption = 'HHR Comment';
+                    Caption = 'HR Comment';
                 }
                 field("Course Start Date"; Rec."Course Start Date")
                 {
@@ -78,7 +78,7 @@ page 51052 "Employee Training"
                     Enabled = "Total CostEnable";
                 }
             }
-            part("Training Lines"; 50069)
+            part(Lines; 50069)
             {
                 SubPageLink = "Training Course Code" = FIELD("Course Code");
                 SubPageView = SORTING("Training Group", "Training Course Code", "Course Line No.");
@@ -107,9 +107,11 @@ page 51052 "Employee Training"
         "Total CostEnable" := TRUE;
     end;
 
-    trigger OnNewRecord(BelowxRec: Boolean)
+    trigger OnModifyRecord(): Boolean
+
     begin
-        EnableControls
+        IF VendRec.GET(Rec."Vendor Code") THEN
+            "Total CostEnable" := TRUE;
     end;
 
     var

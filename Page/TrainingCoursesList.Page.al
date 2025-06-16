@@ -15,12 +15,13 @@ page 51068 "Training Courses List"
         {
             repeater(General)
             {
-                field("Course Type"; Rec."Course Type")
-                {
-                }
                 field("Course Code"; Rec."Course Code")
                 {
                 }
+                field("Course Type"; Rec."Course Type")
+                {
+                }
+
                 field("Course Name"; Rec."Course Name")
                 {
                 }

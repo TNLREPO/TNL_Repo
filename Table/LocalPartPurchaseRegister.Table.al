@@ -281,11 +281,8 @@ table 70018 "Local Part Purchase Register"
                     ERROR(Text032);
 
                 UserSetup4.GET(USERID);
-                IF (UserSetup4."User ID" <> 'ADEWUMI') THEN
-                    IF (UserSetup4."User ID" <> 'AGBESUA') THEN
-                        IF (UserSetup4."User ID" <> 'JOSHUA') THEN
-                            //IF (UserSetup4."User ID" <> 'BRANO') THEN
-                            ERROR(Text039);
+                if NOT (UserSetup4."User ID" IN ['ADEWUMI', 'BRANO', 'JOSHUA']) THEN
+                    ERROR(Text039);
 
                 IF ("Head of Audit" = "Head of Audit"::Approved) THEN
                     IF NOT CONFIRM('Are you sure you want to approve?', FALSE) THEN

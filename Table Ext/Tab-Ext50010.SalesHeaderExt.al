@@ -161,13 +161,15 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
 
                     CASE "1st Apprv. Status" OF
                         "1st Apprv. Status"::Approved:
-                            IF NOT CONFIRM('Are you sure you want to APPROVE this?', FALSE) THEN
+                            IF NOT CONFIRM('Are you sure you want to approve this?', FALSE) THEN
                                 "1st Apprv. Status" := SalesHeader."1st Apprv. Status"::" "
                             ELSE BEGIN
+                                TESTFIELD("2nd Approval to");
                                 IF UserSetup2.GET(USERID) THEN
                                     SenderEmail := UserSetup2."E-Mail";
-                                TESTFIELD("2nd Approval to");
+
                                 "1st Approval Time" := CURRENTDATETIME;
+
                                 UserSetup.GET("2nd Approval to");
                                 "Current pending Person" := "2nd Approval to";
                                 ToName := UserSetup."E-Mail";
@@ -179,31 +181,6 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                                 CreateEmailBody("No.", Initials, "Mail Body");
                                 SendEmail(ToName, Subject, EmailBody, CCName, SenderEmail);
 
-
-                                /*   WITH TempEmailItem DO BEGIN
-                                      "Send to" := ToName + ';' + 'akinmutimi@toyotanigeria.com;segun@toyotanigeria.com;samir@toyotanigeria.com;grace@toyotanigeria.com;chima@toyotanigeria.com;bayo@toyotanigeria.com';
-                                      "Send CC" := SenderEmail + ';' + 'james@toyotanigeria.com;aderonke@toyotanigeria.com;komolofe@toyotanigeria.com;olamide@toyotanigeria.com;gbenga@toyotanigeria.com;johnson@toyotanigeria.com';
-                                      "Send BCC" := '';
-                                      Subject := STRSUBSTNO(Text073, "No.");
-
-                                      CRLF := '';
-                                      CRLF[1] := 13;
-                                      CRLF[2] := 10;
-
-                                      BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                      BodyStream.WRITETEXT(Text071 + Initials + ',');
-                                      BodyStream.WRITETEXT(CRLF + CRLF);
-                                      BodyStream.WRITETEXT(STRSUBSTNO(Text073, "No.") + CRLF + CRLF +
-                                      CRLF + CRLF +
-                                      Text077 + CRLF);
-                                      BodyStream.WRITETEXT(SenderInitial);
-                                      BodyStream.WRITETEXT(CRLF + CRLF);
-                                      BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                      Body := BodyBlob.Blob;
-                                      Send(FALSE);
-                                  END; 
-                                  */
-
                             END;
 
                         "1st Apprv. Status"::Rejected:
@@ -212,7 +189,9 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                             ELSE BEGIN
                                 IF UserSetup2.GET(USERID) THEN
                                     SenderEmail := UserSetup2."E-Mail";
+
                                 "1st Approval Time" := CURRENTDATETIME;
+
                                 UserSetup.GET(Sender);
                                 ToName := UserSetup."E-Mail";
                                 Subject := STRSUBSTNO(Text075, "No.");
@@ -223,29 +202,6 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                                 CreateEmailBody("No.", Initials, "Mail Body");
                                 SendEmail(ToName, Subject, EmailBody, CCName, SenderEmail);
 
-                                /*    WITH TempEmailItem DO BEGIN
-                                       "Send to" := ToName;
-                                       "Send CC" := SenderEmail;
-                                       "Send BCC" := '';
-                                       Subject := STRSUBSTNO(Text075, "No.");
-
-                                       CRLF := '';
-                                       CRLF[1] := 13;
-                                       CRLF[2] := 10;
-
-                                       BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                       BodyStream.WRITETEXT(Text071 + Initials + ',');
-                                       BodyStream.WRITETEXT(CRLF + CRLF);
-                                       BodyStream.WRITETEXT(STRSUBSTNO(Text075, "No.") + CRLF + CRLF +
-                                       CRLF + CRLF +
-                                       Text077 + CRLF);
-                                       BodyStream.WRITETEXT(SenderInitial);
-                                       BodyStream.WRITETEXT(CRLF + CRLF);
-                                       BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                       Body := BodyBlob.Blob;
-                                       Send(FALSE);
-                                   END;
-                                    */
                             END;
 
                         "1st Apprv. Status"::"on Hold":
@@ -265,29 +221,6 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                                 CreateEmailBody("No.", Initials, "Mail Body");
                                 SendEmail(ToName, Subject, EmailBody, CCName, SenderEmail);
 
-                                /*   WITH TempEmailItem DO BEGIN
-                                      "Send to" := ToName;
-                                      "Send CC" := SenderEmail;
-                                      "Send BCC" := '';
-                                      Subject := STRSUBSTNO(Text076, "No.");
-
-                                      CRLF := '';
-                                      CRLF[1] := 13;
-                                      CRLF[2] := 10;
-
-                                      BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                      BodyStream.WRITETEXT(Text071 + Initials + ',');
-                                      BodyStream.WRITETEXT(CRLF + CRLF);
-                                      BodyStream.WRITETEXT(STRSUBSTNO(Text076, "No.") + CRLF + CRLF +
-                                      CRLF + CRLF +
-                                      Text077 + CRLF);
-                                      BodyStream.WRITETEXT(SenderInitial);
-                                      BodyStream.WRITETEXT(CRLF + CRLF);
-                                      BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                      Body := BodyBlob.Blob;
-                                      Send(FALSE);
-                                  END;
-                                   */
                             END;
                     END;
                 END;
@@ -296,6 +229,7 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                     TESTFIELD("Send for Approval", TRUE);
                     TESTFIELD("1st Approval to", USERID);
                     "1st Approval Time" := 0DT;
+
                     CASE "1st Apprv. Status" OF
                         "1st Apprv. Status"::Approved:
                             IF NOT CONFIRM('Are you sure you want to approve this?', FALSE) THEN
@@ -304,7 +238,9 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                                 TESTFIELD("2nd Approval to");
                                 IF UserSetup2.GET(USERID) THEN
                                     SenderEmail := UserSetup2."E-Mail";
+
                                 "1st Approval Time" := CURRENTDATETIME;
+
                                 UserSetup.GET("2nd Approval to");
                                 "Current pending Person" := "2nd Approval to";
                                 ToName := UserSetup."E-Mail";
@@ -317,29 +253,6 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                                 CreateEmailBody("No.", Initials, "Mail Body");
                                 SendEmail(ToName, Subject, EmailBody, CCName, SenderEmail);
 
-                                /*    WITH TempEmailItem DO BEGIN
-                                       "Send to" := ToName;
-                                       "Send CC" := SenderEmail + ';' + CCName;
-                                       "Send BCC" := '';
-                                       Subject := STRSUBSTNO(Text073, "No.");
-
-                                       CRLF := '';
-                                       CRLF[1] := 13;
-                                       CRLF[2] := 10;
-
-                                       BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                       BodyStream.WRITETEXT(Text071 + Initials + ',');
-                                       BodyStream.WRITETEXT(CRLF + CRLF);
-                                       BodyStream.WRITETEXT(STRSUBSTNO(Text073, "No.") + CRLF + CRLF +
-                                       CRLF + CRLF +
-                                       Text077 + CRLF);
-                                       BodyStream.WRITETEXT(SenderInitial);
-                                       BodyStream.WRITETEXT(CRLF + CRLF);
-                                       BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                       Body := BodyBlob.Blob;
-                                       Send(FALSE);
-                                   END;
-                                    */
                             END;
 
                         "1st Apprv. Status"::Rejected:
@@ -359,30 +272,6 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                                 CreateEmailBody("No.", Initials, "Mail Body");
                                 SendEmail(ToName, Subject, EmailBody, CCName, SenderEmail);
 
-                                /* WITH TempEmailItem DO BEGIN
-                                    "Send to" := ToName;
-                                    "Send CC" := SenderEmail + ';' + CCName;
-                                    "Send BCC" := '';
-                                    Subject := STRSUBSTNO(Text075, "No.");
-
-                                    CRLF := '';
-                                    CRLF[1] := 13;
-                                    CRLF[2] := 10;
-
-                                    BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                    BodyStream.WRITETEXT(Text071 + Initials + ',');
-                                    BodyStream.WRITETEXT(CRLF + CRLF);
-                                    BodyStream.WRITETEXT(STRSUBSTNO(Text075, "No.") + CRLF + CRLF +
-                                    CRLF + CRLF +
-                                    Text077 + CRLF);
-                                    BodyStream.WRITETEXT(SenderInitial);
-                                    BodyStream.WRITETEXT(CRLF + CRLF);
-                                    BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                    Body := BodyBlob.Blob;
-                                    Send(FALSE);
-                                END; 
-                                */
-
                             END;
 
                         "1st Apprv. Status"::"on Hold":
@@ -402,29 +291,6 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                                 CreateEmailBody("No.", Initials, "Mail Body");
                                 SendEmail(ToName, Subject, EmailBody, CCName, SenderEmail);
 
-                                /*  WITH TempEmailItem DO BEGIN
-                                     "Send to" := ToName;
-                                     "Send CC" := SenderEmail;
-                                     "Send BCC" := '';
-                                     Subject := STRSUBSTNO(Text076, "No.");
-
-                                     CRLF := '';
-                                     CRLF[1] := 13;
-                                     CRLF[2] := 10;
-
-                                     BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                     BodyStream.WRITETEXT(Text071 + Initials + ',');
-                                     BodyStream.WRITETEXT(CRLF + CRLF);
-                                     BodyStream.WRITETEXT(STRSUBSTNO(Text076, "No.") + CRLF + CRLF +
-                                     CRLF + CRLF +
-                                     Text077 + CRLF);
-                                     BodyStream.WRITETEXT(SenderInitial);
-                                     BodyStream.WRITETEXT(CRLF + CRLF);
-                                     BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                     Body := BodyBlob.Blob;
-                                     Send(FALSE);
-                                 END; 
-                                 */
 
                             END;
                     END;
