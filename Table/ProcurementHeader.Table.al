@@ -549,9 +549,10 @@ table 70008 "Procurement Header"
                     CreateEmailBody("Document Type", "No.", Text049, 'Team');
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-
-
                 END;
+
+                ServDeliveryOwner := USERID;
+
             end;
         }
         field(52; "Service Delivery2"; Option)
@@ -622,9 +623,10 @@ table 70008 "Procurement Header"
                     Subject := STRSUBSTNO(Text052, "Document Type", "No.");
                     CreateEmailBody("Document Type", "No.", Text053, Addressee);
                     SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
-
-
                 END;
+
+                ServDeliveryComp := USERID;
+
             end;
         }
         field(53; "Confirmed By1"; Text[50])
@@ -729,6 +731,9 @@ table 70008 "Procurement Header"
 
                     Reject := TRUE;
                 END;
+
+                BalPymtHOD := USERID;
+
             end;
         }
         field(59; "Bal. Paymt. by HOD"; Text[50])
@@ -855,6 +860,9 @@ table 70008 "Procurement Header"
 
                     Reject := TRUE;
                 END;
+
+                BalPymtAudit := USERID;
+
             end;
         }
         field(61; "Bal. Paymt. by Audit"; Text[50])
@@ -945,6 +953,9 @@ table 70008 "Procurement Header"
 
                     Reject := TRUE;
                 END;
+
+                HeadDept := USERID;
+
             end;
         }
         field(63; "Head of Audit"; Option)
@@ -1063,6 +1074,8 @@ table 70008 "Procurement Header"
 
                     Reject := TRUE;
                 END;
+
+                HeadAudit := USERID;
             end;
         }
         field(64; "General Manager"; Option)
