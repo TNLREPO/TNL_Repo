@@ -67,105 +67,126 @@ page 70205 "LPP Card2"
                 Caption = 'Lines';
                 SubPageLink = "Document No." = FIELD("LPP No.");
             }
+
             group(Authorization)
             {
-                grid(Control01)
+                Caption = 'Authorization';
+
+                group("Head of Department Authorization")
                 {
-                    group(Control02)
+                    Caption = '1. Head of Department';
+                    Editable = HeadEdit;
+
+                    field("Head of Department"; Rec."Head of Department")
                     {
-                        Editable = HeadEdit;
-                        ShowCaption = false;
-                        field("Head of Department"; Rec."Head of Department")
-                        {
-                        }
-                        field("Name HOD"; Rec."Name HOD")
-                        {
-                            Caption = 'Name';
-                            Editable = false;
-                        }
-                        field(TimeDate2; Rec.TimeDate2)
-                        {
-                            Caption = 'Time';
-                            Editable = false;
-                        }
+                        Caption = 'Action';
                     }
-                    group(Control03)
+                    field("Name HOD"; Rec."Name HOD")
                     {
-                        Editable = CompliancEdit;
-                        ShowCaption = false;
-                        field("Compliance check"; Rec."Compliance check")
-                        {
-                        }
-                        field("Confirmed By"; Rec."Confirmed By")
-                        {
-                            Editable = false;
-                        }
-                        field(TimeDate3; Rec.TimeDate3)
-                        {
-                            Editable = false;
-                            Caption = 'Time';
-                        }
+                        Caption = 'Name';
+                        Editable = false;
                     }
-                    group(Control04)
+                    field(TimeDate2; Rec.TimeDate2)
                     {
-                        Editable = HODAuditEdit;
-                        Visible = AuditVisible;
-                        ShowCaption = false;
-                        field("Head of Audit"; Rec."Head of Audit")
-                        {
-                        }
-                        field("Name Head of Audit"; Rec."Name Head of Audit")
-                        {
-                            Caption = 'Name';
-                        }
-                        field(TimeDate4; Rec.TimeDate4)
-                        {
-                            Caption = 'Time';
-                        }
+                        Caption = 'Time';
+                        Editable = false;
                     }
                 }
 
-            }
-            group("Procurement Approval HOD")
-            {
-                Visible = HeadApprovalVisible;
-                group(Control06)
+                group("Compliance Authorization")
                 {
+                    Caption = '2. Compliance Check';
+                    Editable = CompliancEdit;
+
+                    field("Compliance check"; Rec."Compliance check")
+                    {
+                        Caption = 'Action';
+                    }
+                    field("Confirmed By"; Rec."Confirmed By")
+                    {
+                        Caption = 'Name';
+                        Editable = false;
+                    }
+                    field(TimeDate3; Rec.TimeDate3)
+                    {
+                        Caption = 'Time';
+                        Editable = false;
+                    }
+                }
+
+                group("Audit Authorization")
+                {
+                    Caption = '3. Head of Audit';
+                    Editable = HODAuditEdit;
+                    //Visible = AuditVisible;
+
+                    field("Head of Audit"; Rec."Head of Audit")
+                    {
+                        Caption = 'Action';
+                    }
+                    field("Name Head of Audit"; Rec."Name Head of Audit")
+                    {
+                        Caption = 'Name';
+                        Editable = false;
+                    }
+                    field(TimeDate4; Rec.TimeDate4)
+                    {
+                        Caption = 'Time';
+                        Editable = false;
+                    }
+                }
+            }
+
+            group("Procurement Approval")
+            {
+                Caption = 'Procurement Approval';
+                group("Procurement Approval HOD")
+                {
+                    Visible = HeadApprovalVisible;
+                    Caption = 'Head of Parts';
                     Editable = HODEdit;
+
                     field("HOD's Part Procurement Appr."; Rec."HOD's Part Procurement Appr.")
                     {
+                        Caption = 'Action';
                     }
                     field("HOD's Part  Appr. Name"; Rec."HOD's Part  Appr. Name")
                     {
                         Caption = 'Name';
+                        Editable = false;
                     }
                     field(TimeDate5; Rec.TimeDate5)
                     {
                         Caption = 'Time';
+                        Editable = false;
                     }
                 }
-            }
-            group("Procurement Approval GM")
-            {
-                Visible = GMVisible;
-                group(Control07)
+                group("Procurement Approval GM")
                 {
+                    Visible = GMVisible;
+                    Caption = 'General Manager';
                     Editable = GMEdit;
+
                     field("General Manager"; Rec."General Manager")
                     {
+                        Caption = 'Action';
                     }
                     field("Name GM"; Rec."Name GM")
                     {
                         Caption = 'Name';
+                        Editable = false;
                     }
                     field(TimeDate6; Rec.TimeDate6)
                     {
                         Caption = 'Time';
+                        Editable = false;
                     }
                 }
+
             }
             group("Procurement Approval MD")
             {
+                Caption = 'Managing Director';
                 Visible = MDVisible;
                 group(Control08)
                 {
@@ -173,6 +194,7 @@ page 70205 "LPP Card2"
                     ShowCaption = false;
                     field("Managing Director"; rec."Managing Director")
                     {
+                        Caption = 'Action';
                     }
                     field("Name MD"; Rec."Name MD")
                     {

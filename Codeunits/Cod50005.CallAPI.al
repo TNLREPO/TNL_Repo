@@ -43,6 +43,7 @@ codeunit 50005 "Call API"
         HttpRequestMessage.Content := HttpContent;
         HttpRequestMessage.GetHeaders(HttpHeaders);
         HttpClient.Send(HttpRequestMessage, HttpResponseMessage);
+
         // Check response status
         if HttpResponseMessage.IsSuccessStatusCode() then begin
             Rec."Payment Successful" := true;

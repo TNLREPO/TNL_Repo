@@ -70,12 +70,15 @@ page 70192 "LPP Card"
                         Editable = HeadEdit;
                         field("Head of Department"; Rec."Head of Department")
                         {
+                            Caption = 'Head of Department';
                         }
                         field("Name HOD"; Rec."Name HOD")
                         {
+                            Caption = 'Name';
                         }
                         field(TimeDate2; Rec.TimeDate2)
                         {
+                            Caption = 'Time';
                         }
                     }
                     group(Control03)
@@ -84,27 +87,33 @@ page 70192 "LPP Card"
                         Editable = CompliancEdit;
                         field("Compliance check"; Rec."Compliance check")
                         {
+                            Caption = 'Compliance Check';
                         }
                         field("Confirmed By"; Rec."Confirmed By")
                         {
+                            Caption = 'Name';
                         }
                         field(TimeDate3; Rec.TimeDate3)
                         {
+                            Caption = 'Time';
                         }
                     }
                     group(Control04)
                     {
                         ShowCaption = false;
                         Editable = HODAuditEdit;
-                        Visible = AuditVisible;
+                        //Visible = AuditVisible;
                         field("Head of Audit"; Rec."Head of Audit")
                         {
+                            Caption = 'Head of Audit';
                         }
                         field("Name Head of Audit"; Rec."Name Head of Audit")
                         {
+                            Caption = 'Name';
                         }
                         field(TimeDate4; Rec.TimeDate4)
                         {
+                            Caption = 'Time';
                         }
                     }
 

@@ -1350,7 +1350,7 @@ table 70008 "Procurement Header"
                     ToAddresses := UserSetup."E-Mail";
                     Addressee := UserSetup.Initials;
 
-                    CcAddresses := GetCCBalancePayment.Split(';');
+                    CcAddresses := GetCCBalancePayment.Split(';'); //here
 
                     UserSetup2.GET("Send To");
                     BccAddresses := '';
@@ -1372,8 +1372,6 @@ table 70008 "Procurement Header"
                 END;
 
                 IF "Bal. Paymt. MD" = "Bal. Paymt. MD"::Rejected THEN BEGIN
-
-
 
                     UserSetup.GET("User ID");
                     Addressee := UserSetup.Initials;
