@@ -1279,7 +1279,8 @@ table 70008 "Procurement Header"
                     UserSetup2.GET("Send To");
                     PurchSetup.GET;
                     ToAddresses := UserSetup."E-Mail";
-                    CcAddresses := PurchSetup."Audit Dept. Approvers".Split(';');
+                    //CcAddresses := PurchSetup."Audit Dept. Approvers".Split(';');
+                    CcAddresses := GetCCProcureApproval.Split(';');
                     BccAddresses := '';
 
                     UserSetup4.GET(USERID);
@@ -1379,8 +1380,10 @@ table 70008 "Procurement Header"
                     UserSetup2.GET("Send To");
                     PurchSetup.GET;
                     ToAddresses := UserSetup."E-Mail";
-                    CcAddresses := PurchSetup."Audit Dept. Approvers".Split(';');
                     BccAddresses := '';
+
+                    //CcAddresses := PurchSetup."Audit Dept. Approvers".Split(';');
+                    CcAddresses := GetCCBalancePayment.Split(';'); //here
 
                     UserSetup4.GET(USERID);
                     SendersName := UserSetup4.Initials;

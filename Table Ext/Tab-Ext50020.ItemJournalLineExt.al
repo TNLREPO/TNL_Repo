@@ -128,8 +128,8 @@ tableextension 50020 "Item Journal Line Ext" extends "Item Journal Line"
         }
         field(50218; "Item shelf"; Code[20])
         {
-            //CalcFormula = Lookup(Item."Shelf No." WHERE (No.=FIELD(Item No.)));
-            //FieldClass = FlowField;
+            CalcFormula = Lookup(Item."Shelf No." WHERE ("No."=FIELD("Item No.")));
+            FieldClass = FlowField;
         }
         field(50219; "Year of Production"; Code[10])
         {

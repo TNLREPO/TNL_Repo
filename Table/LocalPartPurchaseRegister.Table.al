@@ -115,7 +115,7 @@ table 70018 "Local Part Purchase Register"
                         "Sent By" := UserSetup2."User ID";
                         SendersName := UserSetup2.Initials;
                         SenderAddress := UserSetup2."E-Mail";
-                        CcAddresses := '';
+                        //CcAddresses := '';
                         TimeDate1 := CURRENTDATETIME;
 
                         PurchSetup.GET;
@@ -182,7 +182,7 @@ table 70018 "Local Part Purchase Register"
                         Purpose := "Justification for purchase";
 
                         ToAddresses := 'aderonke@toyotanigeria.com';
-                        CcAddresses := 'brano@toyotanigeria.com';
+                        CcAddresses.Add('brano@toyotanigeria.com');
                         BccAddresses := 'grace@toyotanigeria.com';
 
                         UserSetup4.GET(USERID);
@@ -213,7 +213,7 @@ table 70018 "Local Part Purchase Register"
                         ToAddresses := UserSetup."E-Mail";
                         Addressee := UserSetup.Initials;
 
-                        CcAddresses := '';
+                        //CcAddresses := '';
                         BccAddresses := '';
 
                         UserSetup4.GET(USERID);
@@ -241,7 +241,7 @@ table 70018 "Local Part Purchase Register"
                         UserSetup.GET("Sent By");
                         ToAddresses := UserSetup."E-Mail";
                         Addressee := UserSetup.Initials;
-                        CcAddresses := '';
+                        //CcAddresses := '';
                         BccAddresses := '';
 
                         UserSetup4.GET(USERID);
@@ -258,6 +258,7 @@ table 70018 "Local Part Purchase Register"
                         Rejected1 := TRUE;
                     END;
 
+                "HeadofAudit UserID" := USERID;
             end;
 
         }
@@ -302,7 +303,7 @@ table 70018 "Local Part Purchase Register"
 
                         IF (VendAmt <= 100000) THEN BEGIN
                             ToAddresses := 'ravinder@toyotanigeria.com';
-                            CcAddresses := '';
+                            //CcAddresses := '';
                             Addressee := 'RS,';
                             HODVisible := TRUE;
                             "Procurement Approval" := TRUE;
@@ -327,6 +328,8 @@ table 70018 "Local Part Purchase Register"
                         SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
                     end;
+
+                "HeadofAudit UserID" := USERID;
 
             end;
         }
@@ -364,7 +367,7 @@ table 70018 "Local Part Purchase Register"
 
 
                             UserSetup2.GET("Send To");
-                            CcAddresses := UserSetup2."E-Mail";
+                            CcAddresses.Add(UserSetup2."E-Mail");
                             BccAddresses := '';
                             Subject := STRSUBSTNO(Text025, "LPP No.");
 
@@ -394,7 +397,7 @@ table 70018 "Local Part Purchase Register"
                             UserSetup.GET("Sent By");
                             ToAddresses := UserSetup."E-Mail";
                             Addressee := UserSetup.Initials;
-                            CcAddresses := '';
+                            CcAddresses := GetCCBalancePayment.Split(';'); //here
                             BccAddresses := '';
 
                             UserSetup4.GET(USERID);
@@ -422,7 +425,7 @@ table 70018 "Local Part Purchase Register"
                             UserSetup.GET("Sent By");
                             ToAddresses := UserSetup."E-Mail";
                             Addressee := UserSetup.Initials;
-                            CcAddresses := '';
+                            //CcAddresses := '';
                             BccAddresses := '';
 
                             UserSetup4.GET(USERID);
@@ -457,7 +460,7 @@ table 70018 "Local Part Purchase Register"
                             Addressee := UserSetup2.Initials;
                             ToAddresses := UserSetup2."E-Mail";
 
-                            CcAddresses := 'albert@toyotanigeria.com';
+                            CcAddresses.Add('albert@toyotanigeria.com');
                             BccAddresses := 'adewumi@toyotanigeria.com';
                             Subject := STRSUBSTNO(Text025, "LPP No.");
 
@@ -488,7 +491,7 @@ table 70018 "Local Part Purchase Register"
                             ToAddresses := UserSetup."E-Mail";
                             Addressee := UserSetup.Initials;
 
-                            CcAddresses := '';
+                            //CcAddresses := '';
                             BccAddresses := '';
 
                             UserSetup4.GET(USERID);
@@ -517,7 +520,7 @@ table 70018 "Local Part Purchase Register"
                             ToAddresses := UserSetup."E-Mail";
                             Addressee := UserSetup.Initials;
 
-                            CcAddresses := '';
+                            //CcAddresses := '';
                             BccAddresses := '';
 
                             UserSetup4.GET(USERID);
@@ -533,6 +536,7 @@ table 70018 "Local Part Purchase Register"
                             Rejected1 := TRUE;
                         END;
                 END;
+
             end;
         }
         field(36; "Name MD"; Text[50])
@@ -563,7 +567,7 @@ table 70018 "Local Part Purchase Register"
                             Purpose := "Justification for purchase";
                             UserSetup2.GET("Send To");
                             ToAddresses := UserSetup."E-Mail";
-                            CcAddresses := 'ravinder@toyotanigeria.com';
+                            CcAddresses.Add('ravinder@toyotanigeria.com');
                             BccAddresses := '';
                             Subject := STRSUBSTNO(Text029, "LPP No.");
                             UserSetup4.GET(USERID);
@@ -594,7 +598,7 @@ table 70018 "Local Part Purchase Register"
                             UserSetup.GET("Sent By");
                             ToAddresses := UserSetup."E-Mail";
                             Addressee := UserSetup.Initials;
-                            CcAddresses := '';
+                            //CcAddresses := '';
                             BccAddresses := '';
 
                             UserSetup4.GET(USERID);
@@ -622,7 +626,7 @@ table 70018 "Local Part Purchase Register"
                             UserSetup.GET("Sent By");
                             ToAddresses := UserSetup."E-Mail";
                             Addressee := UserSetup.Initials;
-                            CcAddresses := '';
+                            //CcAddresses := '';
                             BccAddresses := '';
 
                             UserSetup4.GET(USERID);
@@ -653,7 +657,7 @@ table 70018 "Local Part Purchase Register"
 
                             UserSetup2.GET("Send To");
                             ToAddresses := UserSetup2."E-Mail";
-                            CcAddresses := 'isuekebho@toyotanigeria.com';
+                            CcAddresses.Add('isuekebho@toyotanigeria.com');
 
                             UserSetup4.GET(USERID);
                             SendersName := UserSetup4.Initials;
@@ -682,7 +686,7 @@ table 70018 "Local Part Purchase Register"
                             UserSetup.GET("Sent By");
                             ToAddresses := UserSetup."E-Mail";
                             Addressee := UserSetup.Initials;
-                            CcAddresses := '';
+                            //CcAddresses := '';
                             BccAddresses := '';
 
                             UserSetup4.GET(USERID);
@@ -710,7 +714,7 @@ table 70018 "Local Part Purchase Register"
                             UserSetup.GET("Sent By");
                             ToAddresses := UserSetup."E-Mail";
                             Addressee := UserSetup.Initials;
-                            CcAddresses := '';
+                            //CcAddresses := '';
                             BccAddresses := '';
 
                             UserSetup4.GET(USERID);
@@ -758,7 +762,7 @@ table 70018 "Local Part Purchase Register"
                             UserSetup.GET("Sent By");
                             ToAddresses := UserSetup."E-Mail";
                             Addressee := UserSetup.Initials;
-                            CcAddresses := '';
+                            //CcAddresses := '';
                             BccAddresses := '';
 
                             UserSetup4.GET(USERID);
@@ -787,7 +791,7 @@ table 70018 "Local Part Purchase Register"
                             UserSetup.GET("Sent By");
                             ToAddresses := UserSetup."E-Mail";
                             Addressee := UserSetup.Initials;
-                            CcAddresses := '';
+                            //CcAddresses := '';
                             BccAddresses := '';
 
                             UserSetup4.GET(USERID);
@@ -815,7 +819,7 @@ table 70018 "Local Part Purchase Register"
                             UserSetup.GET("Sent By");
                             ToAddresses := UserSetup."E-Mail";
                             Addressee := UserSetup.Initials;
-                            CcAddresses := '';
+                            //CcAddresses := '';
                             BccAddresses := '';
 
                             UserSetup4.GET(USERID);
@@ -849,7 +853,7 @@ table 70018 "Local Part Purchase Register"
 
                             UserSetup.GET("Sent By");
                             ToAddresses := UserSetup."E-Mail";
-                            CcAddresses := '';
+                            //CcAddresses := '';
                             BccAddresses := '';
 
                             UserSetup4.GET(USERID);
@@ -879,7 +883,7 @@ table 70018 "Local Part Purchase Register"
                             UserSetup.GET("Sent By");
                             ToAddresses := UserSetup."E-Mail";
                             Addressee := UserSetup.Initials;
-                            CcAddresses := '';
+                            //CcAddresses := '';
                             BccAddresses := '';
 
                             UserSetup4.GET(USERID);
@@ -907,7 +911,7 @@ table 70018 "Local Part Purchase Register"
                             UserSetup.GET("Sent By");
                             ToAddresses := UserSetup."E-Mail";
                             Addressee := UserSetup.Initials;
-                            CcAddresses := '';
+                            //CcAddresses := '';
                             BccAddresses := '';
 
                             UserSetup4.GET(USERID);
@@ -923,6 +927,9 @@ table 70018 "Local Part Purchase Register"
                             Rejected1 := TRUE;
                         END;
                 END;
+
+                "HeadofDeptParts UserID" := USERID;
+
             end;
         }
         field(40; "HOD's Part  Appr. Name"; Text[30])
@@ -988,7 +995,7 @@ table 70018 "Local Part Purchase Register"
                             UserSetup.GET("Sent By");
                             ToAddresses := UserSetup."E-Mail";
                             Addressee := UserSetup.Initials;
-                            CcAddresses := '';
+                            //CcAddresses := '';
                             BccAddresses := '';
 
                             UserSetup4.GET(USERID);
@@ -1019,20 +1026,20 @@ table 70018 "Local Part Purchase Register"
 
                             IF "Total Purchase Value" <= 100000 THEN BEGIN
                                 ToAddresses := 'isuekebho@toyotanigeria.com';
-                                CcAddresses := 'uzonwanne@toyotanigeria.com';
+                                CcAddresses.add('uzonwanne@toyotanigeria.com');
                                 HODVisible := TRUE;
                                 "Procurement Approval" := TRUE;
                             END ELSE
                                 IF ("Total Purchase Value" > 100001) AND ("Total Purchase Value" < 500000) THEN BEGIN
                                     ToAddresses := 'bunmi@toyotanigeria.com';
-                                    CcAddresses := 'paa@toyotanigeria.com';
+                                    CcAddresses.Add('paa@toyotanigeria.com');
                                     Addressee := 'GM';
                                     GMVisible := TRUE;
                                     "GM Approval" := TRUE;
                                 END ELSE
                                     IF "Total Purchase Value" >= 500000 THEN BEGIN
                                         ToAddresses := 'dynamics@toyotanigeria.com';
-                                        CcAddresses := 'bunmi@toyotanigeria.com';
+                                        CcAddresses.Add('bunmi@toyotanigeria.com');
                                         Addressee := 'MD';
                                         MDVisible := TRUE;
                                         "MD Approval" := TRUE;
@@ -1066,7 +1073,7 @@ table 70018 "Local Part Purchase Register"
                             UserSetup.GET("Sent By");
                             ToAddresses := UserSetup."E-Mail";
                             Addressee := UserSetup.Initials;
-                            CcAddresses := '';
+                            //CcAddresses := '';
                             BccAddresses := '';
 
                             UserSetup4.GET(USERID);
@@ -1082,6 +1089,9 @@ table 70018 "Local Part Purchase Register"
                             Rejected1 := TRUE;
                         END;
                 END;
+
+                "Compliance UserID" := USERID;
+
             end;
         }
         field(42; "Confirmed By"; Text[30])
@@ -1206,6 +1216,26 @@ table 70018 "Local Part Purchase Register"
         field(73; "Suppliers Code"; Code[10])
         {
         }
+        field(74; "HeadofDept UserID"; Code[10]) //for field 31
+        {
+            Description = 'Head of Department User ID';
+            Editable = false;
+        }
+        field(75; "HeadofAudit UserID"; Code[10]) //for field 33
+        {
+            Description = 'Head of Audit User ID';
+            Editable = false;
+        }
+        field(76; "HeadofDeptParts UserID"; Code[10]) //for field 39
+        {
+            Description = 'Head of Department Parts User ID';
+            Editable = false;
+        }
+        field(77; "Compliance UserID"; Code[10]) //for field 41
+        {
+            Description = 'Compliance User ID';
+            Editable = false;
+        }
     }
 
     keys
@@ -1251,7 +1281,7 @@ table 70018 "Local Part Purchase Register"
         Employee: Record Employee;
         DimValue: Record "Dimension Value";
         ToAddresses: Text;
-        CcAddresses: Text[200];
+        CcAddresses: List of [Text];
         BccAddresses: Text[100];
         Subject: Text[150];
         Body: Text[500];
@@ -1320,6 +1350,7 @@ table 70018 "Local Part Purchase Register"
         SenderInitial: Text;
         LPPRec: Record "Local Part Purchase Register";
         EmailBody: Text[1024];
+        CopiedReceivers: Text;
 
     procedure CreateEmailBody(Name: Text; Addr: Text; Value: Decimal; Descr: Text; BodyMsg: Text; RecipientInitials: Text);
 
@@ -1344,7 +1375,7 @@ table 70018 "Local Part Purchase Register"
         EmailBody += UserSetup.Initials;
     end;
 
-    procedure SendEmail(ToRecipients: Text; Subject: Text; Body: Text; CCRecipients: Text; BCCRecipients: Text)
+    procedure SendEmail(ToRecipients: Text; Subject: Text; Body: Text; CCRecipients: list of [Text]; BCCRecipients: Text)
     var
 
         Email: Codeunit Email;
@@ -1353,11 +1384,41 @@ table 70018 "Local Part Purchase Register"
     begin
 
         EmailMessage.Create(ToRecipients, Subject, EmailBody, true);
-        EmailMessage.AddRecipient(Enum::"Email Recipient Type"::Cc, CCRecipients);
+       // EmailMessage.AddRecipient(Enum::"Email Recipient Type"::Cc, CCRecipients);
+
+        EmailMessage.SetRecipients(Enum::"Email Recipient Type"::Cc, CCRecipients);
         EmailMessage.AddRecipient(Enum::"Email Recipient Type"::Bcc, BCCRecipients);
         Email.OpenInEditorModally(EmailMessage, Enum::"Email Scenario"::Default)
 
     end;
+
+
+    procedure GetCCBalancePayment() CCEmails: Text
+
+    var
+        UserSetup: Record "User Setup";
+        RC2: Text;
+        RC3: Text;
+        RC4: Text;
+        RC5: Text;
+
+    Begin
+        IF UserSetup.GET("HeadofDept UserID") THEN
+            RC2 := UserSetup."E-Mail";
+
+        IF UserSetup.GET("HeadofAudit UserID") THEN
+            RC3 := UserSetup."E-Mail";
+
+        IF UserSetup.GET("HeadofDeptParts UserID") THEN
+            RC4 := UserSetup."E-Mail";
+
+        IF UserSetup.GET("Compliance UserID") THEN
+            RC5 := UserSetup."E-Mail";
+
+        CopiedReceivers := RC2 + ';' + RC3 + ';' + RC4 + ';' + RC5;
+
+        EXIT(CopiedReceivers);
+    End;
 
 
 }
