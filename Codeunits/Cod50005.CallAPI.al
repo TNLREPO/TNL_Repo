@@ -106,5 +106,52 @@ codeunit 50005 "Call API"
 
     End;
 
+procedure SendDealerNotification(var Rec: Record "Sales Header")
+    var
+        HttpClient: HttpClient;
+        HttpContent: HttpContent;
+        HttpResponseMessage: HttpResponseMessage;
+        HttpRequestMessage: HttpRequestMessage;
+        HttpHeaders: HttpHeaders;
+        JsonObject: JsonObject;
+        JsonArray: JsonArray;
+        JsonResponse: JsonObject;
+        PaymentPush: Record "Payment Push";
+        DeviceId: Text;
+        Amt: Text;
+        ToSend: Text;
+        Window: Dialog;
+
+    Begin
+
+        // Show "Please Wait" message
+        Window.Open('Please Wait...');
+        PaymentPush.Get();
+
+        //JsonObject.Add('Tracker No:', Rec.TrackerNo);
+        
+
+        JsonObject.WriteTo(ToSend);
+        HttpContent.WriteFrom(ToSend);
+
+        HttpHeaders.Clear();
+        HttpRequestMessage.Method := 'POST';
+        HttpRequestMessage.SetRequestUri(PaymentPush."Online Status Url");
+        HttpRequestMessage.Content := HttpContent;
+        HttpRequestMessage.GetHeaders(HttpHeaders);
+        HttpClient.Send(HttpRequestMessage, HttpResponseMessage);
+        // Check response status
+        if HttpResponseMessage.IsSuccessStatusCode() then begin
+
+            Message('Successful!');
+        end else begin
+            Error('Not successful!');
+        end;
+
+        Window.Close();
+
+    End;
+
+
     
 }

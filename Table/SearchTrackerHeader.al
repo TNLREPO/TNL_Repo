@@ -179,7 +179,7 @@ table 50154 "Search Tracker Header"
                 SalesLine.VALIDATE(SalesLine."Variant Code", SearchTrackerLine.Variant);
                 SalesLine."Quantity Demanded" := SearchTrackerLine."Quantity Demanded";
                 SalesLine.VALIDATE(SalesLine.Quantity, SearchTrackerLine."Quantity Supplied");
-                //SalesLine."Search Code" := SearchTrackerLine."Search Code";
+                SalesLine."Tracker No." := SearchTrackerLine."Document No.";
                 //SalesLine."Search Line" := SearchTrackerLine."Entry No";
                 SalesLine.INSERT(TRUE);
             until SearchTrackerLine.Next() = 0;

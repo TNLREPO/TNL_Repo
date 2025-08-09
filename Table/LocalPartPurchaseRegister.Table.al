@@ -258,7 +258,7 @@ table 70018 "Local Part Purchase Register"
                         Rejected1 := TRUE;
                     END;
 
-                "HeadofAudit UserID" := USERID;
+                "HeadofDept UserID" := USERID;
             end;
 
         }
@@ -284,6 +284,7 @@ table 70018 "Local Part Purchase Register"
                 UserSetup4.GET(USERID);
                 if NOT (UserSetup4."User ID" IN ['ADEWUMI', 'BRANO', 'JOSHUA']) THEN
                     ERROR(Text039);
+
 
                 IF ("Head of Audit" = "Head of Audit"::Approved) THEN
                     IF NOT CONFIRM('Are you sure you want to approve?', FALSE) THEN
@@ -325,9 +326,72 @@ table 70018 "Local Part Purchase Register"
 
                         Subject := STRSUBSTNO(Text001, "LPP No.");
                         CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text003, Addressee);
-                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
+                        SendEmail(ToAddresses, Subject, EmailBody, CCAddresses, '');
 
                     end;
+
+
+                IF ("Head of Audit" = "Head of Audit"::"On-hold") THEN
+                    IF NOT CONFIRM('Are you sure you want to place on-hold?', FALSE) THEN
+                        "Head of Audit" := LPPRec."Head of Audit"::" "
+                    ELSE BEGIN
+
+                        CALCFIELDS("Total Purchase Value");
+                        VendAmt := "Total Purchase Value";
+                        VendName := "Supplier's Name";
+                        VendAddr := "Supplier's Address";
+                        Purpose := "Justification for purchase";
+
+                        UserSetup.GET("Sent By");
+                        ToAddresses := UserSetup."E-Mail";
+                        Addressee := UserSetup.Initials;
+                        //CcAddresses := '';
+                        BccAddresses := '';
+                        UserSetup4.GET(USERID);
+                        SendersName := UserSetup4.Initials;
+                        "Name Head of Audit" := UserSetup4.Name;
+                        SenderAddress := UserSetup4."E-Mail";
+                        TimeDate4 := CURRENTDATETIME;
+
+                        "Send to" := ToAddresses;
+                        Subject := STRSUBSTNO(Text010, "LPP No.");
+                        CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text011, Addressee);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
+
+                    END;
+
+                IF ("Head of Audit" = "Head of Audit"::Rejected) THEN
+                    IF NOT CONFIRM('Are you sure you want to reject?', FALSE) THEN
+                        "Head of Audit" := LPPRec."Head of Audit"::" "
+                    ELSE BEGIN
+
+                        CALCFIELDS("Total Purchase Value");
+                        VendAmt := "Total Purchase Value";
+                        VendName := "Supplier's Name";
+                        VendAddr := "Supplier's Address";
+                        Purpose := "Justification for purchase";
+
+                        UserSetup.GET("Sent By");
+                        ToAddresses := UserSetup."E-Mail";
+                        Addressee := UserSetup.Initials;
+                        //CcAddresses := '';
+                        BccAddresses := '';
+                        UserSetup4.GET(USERID);
+                        SendersName := UserSetup4.Initials;
+                        "Name Head of Audit" := UserSetup4.Name;
+                        SenderAddress := UserSetup4."E-Mail";
+                        TimeDate4 := CURRENTDATETIME;
+
+                        "Send to" := ToAddresses;
+
+                        Subject := STRSUBSTNO(Text018, "LPP No.");
+                        CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text017, Addressee);
+                        SendEmail(ToAddresses, Subject, EmailBody, CCAddresses, '');
+
+                        Rejected1 := TRUE;
+
+                    END;
+
 
                 "HeadofAudit UserID" := USERID;
 
@@ -385,7 +449,7 @@ table 70018 "Local Part Purchase Register"
                         END;
 
                     IF "Managing Director" = "Managing Director"::"On-hold" THEN
-                        IF NOT CONFIRM('Are you sure you want to place ON HOLD', FALSE) THEN
+                        IF NOT CONFIRM('Are you sure you want to place on-hold?', FALSE) THEN
                             "Managing Director" := LPPRec."Managing Director"::" "
                         ELSE BEGIN
                             CALCFIELDS("Total Purchase Value");
@@ -425,7 +489,7 @@ table 70018 "Local Part Purchase Register"
                             UserSetup.GET("Sent By");
                             ToAddresses := UserSetup."E-Mail";
                             Addressee := UserSetup.Initials;
-                            //CcAddresses := '';
+                            CcAddresses := GetCCBalancePayment.Split(';'); //here
                             BccAddresses := '';
 
                             UserSetup4.GET(USERID);
@@ -491,7 +555,7 @@ table 70018 "Local Part Purchase Register"
                             ToAddresses := UserSetup."E-Mail";
                             Addressee := UserSetup.Initials;
 
-                            //CcAddresses := '';
+                            CcAddresses := GetCCBalancePayment.Split(';'); //here
                             BccAddresses := '';
 
                             UserSetup4.GET(USERID);
@@ -520,7 +584,7 @@ table 70018 "Local Part Purchase Register"
                             ToAddresses := UserSetup."E-Mail";
                             Addressee := UserSetup.Initials;
 
-                            //CcAddresses := '';
+                            CcAddresses := GetCCBalancePayment.Split(';'); //here
                             BccAddresses := '';
 
                             UserSetup4.GET(USERID);
@@ -1317,7 +1381,7 @@ table 70018 "Local Part Purchase Register"
         Text007: Label 'You cannot approvee this Transaction.Kindly contact your system Administrator';
         Text008: Label 'Mail sent successfully.';
         Text009: Label 'You are not an auditor. Please contact your system administrator.';
-        Text010: Label '%1  is on hold.';
+        Text010: Label '%1  is on-hold.';
         Text011: Label 'The above Document No. %1  has been placed on hold.';
         Text012: Label 'The Local  part  purchase  with Document No. %1 has been approved.';
         Text013: Label 'Mail sent successfully.';
@@ -1384,7 +1448,7 @@ table 70018 "Local Part Purchase Register"
     begin
 
         EmailMessage.Create(ToRecipients, Subject, EmailBody, true);
-       // EmailMessage.AddRecipient(Enum::"Email Recipient Type"::Cc, CCRecipients);
+        // EmailMessage.AddRecipient(Enum::"Email Recipient Type"::Cc, CCRecipients);
 
         EmailMessage.SetRecipients(Enum::"Email Recipient Type"::Cc, CCRecipients);
         EmailMessage.AddRecipient(Enum::"Email Recipient Type"::Bcc, BCCRecipients);

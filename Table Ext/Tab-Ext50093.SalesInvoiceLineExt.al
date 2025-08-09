@@ -93,5 +93,9 @@ tableextension 50093 "Sales Invoice Line Ext." extends "Sales Invoice Line"
             CalcFormula = Lookup(Item."Inventory Posting Group" WHERE("No." = FIELD("No.")));
             FieldClass = FlowField;
         }
+        field(60114; "Tracker No."; Code[50])
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 }

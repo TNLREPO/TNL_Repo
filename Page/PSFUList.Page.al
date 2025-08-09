@@ -1,14 +1,15 @@
 page 80048 "PSFU List"
 {
     ApplicationArea = All;
+    Caption = 'Post Service Follow Up';
     AutoSplitKey = true;
     CardPageID = "PSFU Card";
     DelayedInsert = true;
     Editable = false;
     PageType = List;
     SourceTable = "Service IndexX";
-    SourceTableView = WHERE(Done = FILTER(false),
-                            "Service Location" = FILTER('120ISO'));
+    SourceTableView = WHERE(Done = FILTER(false));
+    //"Service Location" = FILTER('120ISO'));
 
     layout
     {
@@ -20,6 +21,9 @@ page 80048 "PSFU List"
                 {
                 }
                 field("COF No."; Rec."COF No.")
+                {
+                }
+                field("Service Location"; Rec."Service Location")
                 {
                 }
                 field("Vehicle No."; Rec."Vehicle No.")

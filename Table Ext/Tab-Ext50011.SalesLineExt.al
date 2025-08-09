@@ -136,6 +136,10 @@ tableextension 50011 "Sales Line Ext" extends "Sales Line"
         {
             DataClassification = ToBeClassified;
         }
+        field(60114; "Tracker No."; Code[50])
+        {
+            DataClassification = ToBeClassified;
+        }
 
         modify("Location Code")
         {

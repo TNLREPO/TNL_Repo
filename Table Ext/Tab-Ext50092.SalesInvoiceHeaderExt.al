@@ -271,6 +271,27 @@ tableextension 50092 "Sales Invoice Header Ext." extends "Sales Invoice Header"
         {
             DataClassification = ToBeClassified;
         }
+        field(70002; "QR Code Data"; Blob)
+        {
+            Caption = 'QR Code Data';
+            DataClassification = CustomerContent;
+        }
+        field(70005; "QR Code Image"; Blob)
+        {
+            Caption = 'QR Code Image';
+            DataClassification = CustomerContent;
+            Subtype = Bitmap;
+        }
+        field(70003; "Sent Successfully"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(70004; "Sent Date"; DateTime)
+        {
+            DataClassification = ToBeClassified;
+        }
+
+
 
     }
 

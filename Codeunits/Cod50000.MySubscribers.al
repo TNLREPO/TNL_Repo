@@ -165,10 +165,19 @@ codeunit 50000 MySubscribers
     [EventSubscriber(ObjectType::Page, Page::"Sales Order", 'OnBeforeActionEvent', 'Post', false, false)]
 
     procedure ValidatePost(var Rec: Record "Sales Header")
-
     begin
         Rec.PostingControl();
     end;
+
+    [EventSubscriber(ObjectType::Page, Page::"Sales Order", 'OnAfterActionEvent', 'Post', false, false)]
+
+    procedure CallAPIAfterSalesOrderPost(var Rec: Record "Sales Header")
+    var
+        CallAPI: Codeunit "Call API";
+    begin
+       // CallAPI.SendDealerNotification();
+    end;
+
 
     [EventSubscriber(ObjectType::Page, Page::"Sales Order", 'OnBeforeActionEvent', 'PostAndNew', false, false)]
 
@@ -263,7 +272,7 @@ codeunit 50000 MySubscribers
         Rec.CheckControls();
     end;
 
-     [EventSubscriber(ObjectType::Page, Page::"Service Order", 'OnBeforeActionEvent', 'Preview', false, false)]
+    [EventSubscriber(ObjectType::Page, Page::"Service Order", 'OnBeforeActionEvent', 'Preview', false, false)]
 
     procedure ValidateServPreview(var Rec: Record "Service Header")
 

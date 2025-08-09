@@ -8,7 +8,7 @@ report 50387 EFCC2
         dataitem(DataItem7069; "G/L Entry")
         {
             DataItemTableView = SORTING("Document No.", "Posting Date")
-                                WHERE("Document No." = FILTER('TREP*|TPQ*|TRET*|TRQ*|JTRE*|JTP*|JTRE*|JTR*'),
+                                WHERE("Document No." = FILTER('TREP*|TPQ*|TRET*|TRQ*|JTRE*|JTP*|JTRE*|JTR*|TGLJ*'),
                                       "Source Type" = FILTER('Vendor|Customer'),
                                       "Source Code" = FILTER(''));
             RequestFilterFields = "Posting Date";
@@ -116,7 +116,7 @@ report 50387 EFCC2
 
             trigger OnAfterGetRecord()
             begin
-                IF ABS(Amount) < 150000 THEN
+                IF ABS(Amount) < 5000000 THEN
                     CurrReport.SKIP;
 
 

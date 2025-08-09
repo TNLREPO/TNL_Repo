@@ -1,6 +1,7 @@
 page 80008 "Service Index List-Treated"
 {
     ApplicationArea = All;
+    Caption = 'Post Service Follow Up - Treated';
     AutoSplitKey = true;
     CardPageID = "PSFU Card";
     DelayedInsert = true;
@@ -22,6 +23,9 @@ page 80008 "Service Index List-Treated"
                 {
                 }
                 field("COF No."; Rec."COF No.")
+                {
+                }
+                field("Service Location"; Rec."Service Location")
                 {
                 }
                 field("Vehicle No."; Rec."Vehicle No.")

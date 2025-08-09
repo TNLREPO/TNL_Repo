@@ -43,6 +43,10 @@ page 80051 "PSFU Card"
                 field("COF No."; Rec."COF No.")
                 {
                 }
+                field("Service Location"; Rec."Service Location")
+                {
+
+                }
                 field("Responsible Supervisor"; Rec."Responsible Supervisor")
                 {
                 }

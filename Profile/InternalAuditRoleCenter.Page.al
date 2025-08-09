@@ -11,6 +11,7 @@ page 70102 "Internal Audit Role Center"
             part(Control139; "Headline RC Business Manager")
             {
                 ApplicationArea = Basic, Suite;
+
             }
             part(AuditApprovals; "Audit Cue")
             {
@@ -1040,6 +1041,8 @@ page 70102 "Internal Audit Role Center"
                 RunObject = Page 50397;
             }
         }
+
     }
+
 }
 
