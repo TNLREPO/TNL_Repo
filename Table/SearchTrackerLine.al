@@ -228,6 +228,14 @@ table 50155 "Search Tracker Line"
         field(54; "Online Order"; Boolean)
         {
         }
+        field(55; "Request Date"; Date)
+        {
+            Editable = false;
+        }
+        field(56; "Request by"; Code[20])
+        {
+            
+        }
 
     }
     keys

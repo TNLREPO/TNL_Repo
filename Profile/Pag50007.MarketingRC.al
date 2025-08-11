@@ -10,6 +10,7 @@ page 50007 "Marketing Role Center"
             part(Control104; "Headline RC Order Processor")
             {
                 ApplicationArea = Basic, Suite;
+                Visible = false;
             }
             part(Control1901851508; "SO Processor Activities")
             {

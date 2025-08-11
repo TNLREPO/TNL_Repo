@@ -10,15 +10,17 @@ page 50009 Parts
             part(Control104; "Headline RC Order Processor")
             {
                 ApplicationArea = Basic, Suite;
+                Visible = false;
+                
             }
             part(Control1901851508; "SO Processor Activities")
             {
                 AccessByPermission = TableData "Sales Shipment Header" = R;
                 ApplicationArea = Basic, Suite;
             }
-            part("Intercompany Activities"; "Intercompany Activities")
+            part(PSFUActivities; "PSFU Activities")
             {
-                ApplicationArea = Intercompany;
+                ApplicationArea = Basic, Suite;
             }
             part("User Tasks Activities"; "User Tasks Activities")
             {
@@ -32,10 +34,7 @@ page 50009 Parts
             {
                 ApplicationArea = Suite;
             }
-            part(Control14; "Team Member Activities")
-            {
-                ApplicationArea = Suite;
-            }
+
             part(Control1907692008; "My Customers")
             {
                 ApplicationArea = Basic, Suite;

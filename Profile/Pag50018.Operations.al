@@ -7,7 +7,7 @@ page 50018 Operations
     {
         area(rolecenter)
         {
-            part(Control104; "Headline RC Order Processor")
+            part(Control104; "Headline RC Team Member")
             {
                 ApplicationArea = Basic, Suite;
             }

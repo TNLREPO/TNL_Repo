@@ -106,7 +106,7 @@ codeunit 50005 "Call API"
 
     End;
 
-procedure SendDealerNotification(var Rec: Record "Sales Header")
+    procedure SendDealerNotification(var TrackerNo: Code[30]; StageText: Text[20])
     var
         HttpClient: HttpClient;
         HttpContent: HttpContent;
@@ -128,8 +128,9 @@ procedure SendDealerNotification(var Rec: Record "Sales Header")
         Window.Open('Please Wait...');
         PaymentPush.Get();
 
-        //JsonObject.Add('Tracker No:', Rec.TrackerNo);
-        
+        JsonObject.Add('OrderNumber:', TrackerNo);
+        JsonObject.Add('Stage:', 'Parts');
+
 
         JsonObject.WriteTo(ToSend);
         HttpContent.WriteFrom(ToSend);
@@ -139,8 +140,11 @@ procedure SendDealerNotification(var Rec: Record "Sales Header")
         HttpRequestMessage.SetRequestUri(PaymentPush."Online Status Url");
         HttpRequestMessage.Content := HttpContent;
         HttpRequestMessage.GetHeaders(HttpHeaders);
-        HttpClient.Send(HttpRequestMessage, HttpResponseMessage);
-        // Check response status
+
+        if TrackerNo = '' then
+            exit else
+            HttpClient.Send(HttpRequestMessage, HttpResponseMessage);
+
         if HttpResponseMessage.IsSuccessStatusCode() then begin
 
             Message('Successful!');
@@ -153,5 +157,5 @@ procedure SendDealerNotification(var Rec: Record "Sales Header")
     End;
 
 
-    
+
 }

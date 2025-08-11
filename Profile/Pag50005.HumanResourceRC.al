@@ -7,15 +7,12 @@ page 50005 "HR RC"
     {
         area(rolecenter)
         {
-            part(Control76; "Headline RC Accountant")
+            part(Control76; "Headline RC Team Member")
             {
                 ApplicationArea = Basic, Suite;
             }
 
-            part("Intercompany Activities"; "Intercompany Activities")
-            {
-                ApplicationArea = Intercompany;
-            }
+           
             part("User Tasks Activities"; "User Tasks Activities")
             {
                 ApplicationArea = Suite;

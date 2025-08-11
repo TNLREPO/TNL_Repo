@@ -61,6 +61,28 @@ page 70205 "LPP Card2"
                 field("RFQ No."; Rec."RFQ No.")
                 {
                 }
+                field(Costing; Rec.Costing)
+                {
+                    Caption = 'Costing';
+                    ToolTip = 'Check this box if costing is required for this LPP.';
+                }
+            }
+            group("Job Details ")
+            {
+                Caption = 'Job Details';
+                Visible = Rec.Costing = true;
+                field("No."; Rec."No.")
+                {
+                }
+                field("Customer Approved Amount"; Rec."Customer Approved Amount")
+                {
+                }
+                field("Markup Amount"; Rec."Markup Amount")
+                {
+                }
+                field("Cost Amount"; Rec."Cost Amount")
+                {
+                }
             }
             part("LPP Subform"; "LPP Subform")
             {

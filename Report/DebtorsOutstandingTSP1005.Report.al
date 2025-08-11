@@ -40,7 +40,7 @@ report 50211 "Debtors Outstanding TSP1005"
             column(Description_CustLedgerEntry; Description)
             {
             }
-            column(CustomerName_CustLedgerEntry; "Customer Name")
+            column(CustomerName_CustLedgerEntry; CustName)
             {
             }
             column(CurrencyCode_CustLedgerEntry; "Currency Code")
@@ -71,6 +71,11 @@ report 50211 "Debtors Outstanding TSP1005"
             trigger OnAfterGetRecord()
             begin
                 CalDate := TODAY;
+                if Customer.Get("Customer No.") then begin
+                    CustName := Customer.Name;
+                end else begin
+                    CustName := '';
+                end;
             end;
         }
     }
@@ -93,5 +98,7 @@ report 50211 "Debtors Outstanding TSP1005"
 
     var
         CalDate: Date;
+        CustName: Text[200];
+        Customer: Record Customer;
 }
 

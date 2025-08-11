@@ -230,7 +230,7 @@ tableextension 50066 "Transfer Header Ext" extends "Transfer Header"
         //IF "Shipment Approval" = FALSE THEN
         //  ERROR('You cannot Ship this Order. It needs to be approved!');
 
-        /*  TransShipmtHead.SETCURRENTKEY("Transfer Order No.");
+        TransShipmtHead.SETCURRENTKEY("Transfer Order No.");
          TransShipmtHead.SETRANGE("Transfer Order No.", "No.");
          IF TransShipmtHead.FINDFIRST THEN BEGIN
              GLEntry.SETCURRENTKEY("Document No.");
@@ -238,7 +238,7 @@ tableextension 50066 "Transfer Header Ext" extends "Transfer Header"
              IF GLEntry.FINDFIRST THEN
                  IF GLEntry."User ID" = UserSetUp."User ID" THEN
                      ERROR('You cannot receive these Items because you shipped them!');
-         END; */
+        END;
 
         IF TransferHead.GET("No.") THEN
             IF TransferHead."Transfer-to Code" = 'CONSIGNMEN' THEN

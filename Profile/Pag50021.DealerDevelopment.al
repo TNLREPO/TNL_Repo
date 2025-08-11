@@ -10,6 +10,7 @@ page 50021 "Dealer Development"
             part(Control104; "Headline RC Order Processor")
             {
                 ApplicationArea = Basic, Suite;
+                Visible = false;
             }
             part(Control1901851508; "SO Processor Activities")
             {

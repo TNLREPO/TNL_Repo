@@ -2400,6 +2400,7 @@ table 70034 "Customer Order HeaderX"
             CustOrderLine.SETFILTER("Location Code", '<>%1', '');
             IF CustOrderLine.FINDFIRST THEN BEGIN
                 REPEAT
+                    CheckInventoryAvailability(CustOrderLine."No.", CustOrderLine."Location Code", CustOrderLine."Quantity Requested");
                     TransferLine.INIT;
                     TransferLine."Document No." := TransferHeader."No.";
                     TransferLine."Line No." := CustOrderLine."Line No.";
@@ -2444,6 +2445,7 @@ table 70034 "Customer Order HeaderX"
             CustOrderLine.SETFILTER("Sent to Parts", '%1', FALSE);
             IF CustOrderLine.FINDFIRST THEN BEGIN
                 REPEAT
+                    CheckInventoryAvailability(CustOrderLine."No.", CustOrderLine."Location Code", CustOrderLine."Quantity Requested");
                     TransferLine.INIT;
                     TransferLine."Document No." := TransferHeader."No.";
                     TransferLine."Line No." := CustOrderLine."Line No.";
@@ -2460,6 +2462,19 @@ table 70034 "Customer Order HeaderX"
             MESSAGE(Text001);
         END ELSE
             MESSAGE(Text002);
+    end;
+
+    procedure CheckInventoryAvailability(ItemNo: Code[20]; LocationCode: Code[10]; RequiredQty: Decimal)
+    var
+        Item: Record Item;
+    begin
+
+        Item.get(ItemNo);
+        Item.setfilter("Location Filter", LocationCode);
+        Item.CalcFields("Net Change");
+        if Item."Net Change" < RequiredQty then
+            error('Insufficient inventory for item %1 at location %2.', ItemNo, LocationCode);
+
     end;
 
     procedure CreateServiceInvoice()

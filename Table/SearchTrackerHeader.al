@@ -182,10 +182,16 @@ table 50154 "Search Tracker Header"
                 SalesLine."Tracker No." := SearchTrackerLine."Document No.";
                 //SalesLine."Search Line" := SearchTrackerLine."Entry No";
                 SalesLine.INSERT(TRUE);
+
+                SearchTrackerLine."Request Date" := "Request Date";
+                SearchTrackerLine."Request by" := "Request by";
+                SearchTrackerLine.Modify();
+
             until SearchTrackerLine.Next() = 0;
         end;
 
         "Document No." := SalesHeader."No.";
-    End;
+
+    end;
 
 }

@@ -8,7 +8,7 @@ page 70102 "Internal Audit Role Center"
         area(rolecenter)
         {
 
-            part(Control139; "Headline RC Business Manager")
+            part(Control139; "Headline RC Administrator")
             {
                 ApplicationArea = Basic, Suite;
 

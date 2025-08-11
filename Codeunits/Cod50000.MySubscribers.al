@@ -175,7 +175,7 @@ codeunit 50000 MySubscribers
     var
         CallAPI: Codeunit "Call API";
     begin
-       // CallAPI.SendDealerNotification();
+        CallAPI.SendDealerNotification(Rec."No.", 'Parts');
     end;
 
 

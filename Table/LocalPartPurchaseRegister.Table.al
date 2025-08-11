@@ -91,7 +91,9 @@ table 70018 "Local Part Purchase Register"
             NotBlank = true;
             TableRelation = IF ("Order Type" = FILTER(<> 'Isolo Store')) "Head of Department"."Head of Department" WHERE("Department Code" = FILTER('05PARTS'))
             ELSE
-            IF ("Order Type" = FILTER('Isolo Store')) "Head of Department"."Head of Department" WHERE("Head of Department" = FILTER('ISUEKEBHO'));
+            IF ("Order Type" = FILTER('Isolo Store')) "Head of Department"."Head of Department" WHERE("Department Code" = FILTER('06SERVICE'));
+
+
         }
         field(25; Send; Boolean)
         {
@@ -1299,6 +1301,23 @@ table 70018 "Local Part Purchase Register"
         {
             Description = 'Compliance User ID';
             Editable = false;
+        }
+        field(78; Costing; Boolean)
+        {
+
+        }
+        field(79; "No."; Code[12])
+        {
+            TableRelation = "Customer Order HeaderX"."No.";
+        }
+        field(80; "Customer Approved Amount"; Decimal)
+        {
+        }
+        field(81; "Markup Amount"; Decimal)
+        {
+        }
+        field(82; "Cost Amount"; Decimal)
+        {
         }
     }
 

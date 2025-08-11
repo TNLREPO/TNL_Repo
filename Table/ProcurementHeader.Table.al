@@ -1219,7 +1219,8 @@ table 70008 "Procurement Header"
                     PurchSetup.GET;
                     ToAddresses := UserSetup."E-Mail";
 
-                    CcAddresses.Add('adewumi@toyotanigeria.com');
+                    CCAddresses.Add('adewumi@toyotanigeria.com');
+                    CcAddresses.Add('brano@toyotanigeria.com');
                     BccAddresses := '';
 
                     UserSetup4.GET(USERID);
@@ -1279,7 +1280,6 @@ table 70008 "Procurement Header"
                     UserSetup2.GET("Send To");
                     PurchSetup.GET;
                     ToAddresses := UserSetup."E-Mail";
-                    //CcAddresses := PurchSetup."Audit Dept. Approvers".Split(';');
                     CcAddresses := GetCCProcureApproval.Split(';');
                     BccAddresses := '';
 
@@ -1957,7 +1957,7 @@ table 70008 "Procurement Header"
         Text005: Label 'This capital expenditure has been approved. Prepare an online LPO and send it to your Head of department for necessary approvals.';
         Text006: Label 'This transaction has been approved. Prepare an IOU and send it for necessary approvals.';
         Text007: Label '%1 %2 requires your approval for procurement.';
-        Text008: Label 'agbesua@toyotanigeria.com';
+        //Text008: Label 'agbesua@toyotanigeria.com';
         Text009: Label 'dynamics@toyotanigeria.com';
         Text010: Label '%1 %2 has been approved.';
         Text011: Label 'A request for payment has been made. Kindly approve.';
