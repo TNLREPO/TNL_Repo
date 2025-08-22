@@ -2202,6 +2202,10 @@ table 70034 "Customer Order HeaderX"
         ServiceIndex."Job Details" := "Job Details";
         ServiceIndex."Additional Job Details" := "Additional Job Details";
         ServiceIndex."Vehicle Release Date" := "Actual Delivery Date";
+        ServiceIndex."Delivery Date" := "Date Delivered";
+        ServiceIndex."Vehicle No." := "Vehicle Registration No.";
+        ServiceIndex.Model := "Model Name";
+        ServiceIndex."Delivery Time" := "Time Delivered";
         ServiceIndex.INSERT(TRUE);
         MESSAGE('The vehicle has been scheduled for post service follow-up!');
     end;
@@ -2445,7 +2449,7 @@ table 70034 "Customer Order HeaderX"
             CustOrderLine.SETFILTER("Sent to Parts", '%1', FALSE);
             IF CustOrderLine.FINDFIRST THEN BEGIN
                 REPEAT
-                    CheckInventoryAvailability(CustOrderLine."No.", CustOrderLine."Location Code", CustOrderLine."Quantity Requested");
+                    CheckInventoryAvailability(CustOrderLine."No.", "Service Location", CustOrderLine."Quantity Requested");
                     TransferLine.INIT;
                     TransferLine."Document No." := TransferHeader."No.";
                     TransferLine."Line No." := CustOrderLine."Line No.";

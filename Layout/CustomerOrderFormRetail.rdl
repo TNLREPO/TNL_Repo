@@ -22,42 +22,50 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Estimated   </Value>
+                    <Value>Estimated  </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!EstimatedJobTime.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!EstimatedCompletionTime_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
-                      <FontWeight>Normal</FontWeight>
+                      <FontWeight>Bold</FontWeight>
+                      <Format>t</Format>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">       </Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                      <FontWeight>Normal</FontWeight>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value EvaluationMode="Auto">Estimation</Value>
+                    <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">  </Value>
+                    <Value xml:space="preserve">                </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!Estimation_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>Estimation</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve">  </Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!Estimation_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -70,7 +78,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Job Time       </Value>
+                    <Value>Job Time       </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -82,7 +90,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto" />
+                    <Value />
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -94,7 +102,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Time                                 Cost </Value>
+                    <Value>Time                                         Cost </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -106,43 +114,43 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Changed   </Value>
+                    <Value>Changed   </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!TimeChanged_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!DeliveryChangedTime_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
-                      <FontWeight>Normal</FontWeight>
-                      <Format>hh:mm tt</Format>
+                      <FontWeight>Bold</FontWeight>
+                      <Format>t</Format>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">         </Value>
+                    <Value xml:space="preserve">                   </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Changed</Value>
+                    <Value>Changed</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">  </Value>
+                    <Value xml:space="preserve">  </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!CostChanged_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!CostChanged_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -189,7 +197,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Exp. Reception</Value>
+                    <Value>Exp. Reception</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -234,7 +242,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">TOYOTA CUSTOMER ORDER FORM</Value>
+                    <Value>TOYOTA CUSTOMER ORDER FORM</Value>
                     <Style>
                       <FontSize>18pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -280,7 +288,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!Maintenance2_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!Maintenance2_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <Format>hh:mm tt</Format>
@@ -322,7 +330,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Date                                      Time</Value>
+                    <Value>Date                                      Time</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -335,21 +343,21 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!ReceptionDate_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!ReceptionDate_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <Format>MM/dd/yy</Format>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">                                   </Value>
+                    <Value xml:space="preserve">                                   </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <Format>MM/dd/yy</Format>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!ReceptionTime_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!ReceptionTime_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <Format>hh:mm tt</Format>
@@ -398,20 +406,20 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Reception Type</Value>
+                    <Value>Reception Type</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto"> </Value>
+                    <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!ReceptionType_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!ReceptionType_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -456,20 +464,20 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Courtesy Vehicle</Value>
+                    <Value>Courtesy Vehicle</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto"> </Value>
+                    <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!CourtesyVehicle_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!CourtesyVehicle_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -514,7 +522,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto" />
+                    <Value />
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -525,7 +533,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Exp. Delivery</Value>
+                    <Value>Exp. Delivery</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -570,46 +578,46 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Date:</Value>
+                    <Value>Date:</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">  </Value>
+                    <Value xml:space="preserve">  </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!ExpectedDeliveryDate_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!ExpectedDeliveryDate_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <Format>MM/dd/yy</Format>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">       </Value>
+                    <Value xml:space="preserve">       </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto"> Time: </Value>
+                    <Value> Time: </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">  </Value>
+                    <Value xml:space="preserve">  </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!ExpectedDeliveryTime_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!ExpectedDeliveryTime_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <Format>hh:mm tt</Format>
@@ -655,13 +663,13 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Delivery Type: </Value>
+                    <Value>Delivery Type: </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!DeliveryType_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!DeliveryType_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -707,7 +715,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Customer Name / Address / Telephone No.</Value>
+                    <Value>Customer Name / Address / Telephone No.</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -752,14 +760,14 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Customer Name: </Value>
+                    <Value>Customer Name: </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!CustomerName2_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!CustomerName2_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -771,7 +779,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto" />
+                    <Value />
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -782,43 +790,32 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Address:</Value>
+                    <Value>Address:</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto"> </Value>
+                    <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!CustomerAddress_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!CustomerAddress_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto"> </Value>
+                    <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!Address2_CustomerOrderHeaderX.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value EvaluationMode="Auto" />
+                    <Value>=First(Fields!Address2_CustomerOrderHeaderX.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -829,20 +826,31 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Telephone No.:</Value>
+                    <Value />
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Telephone No.:</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">  </Value>
+                    <Value xml:space="preserve">  </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!CustomerTelephoneNo_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!CustomerTelephoneNo_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -887,7 +895,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Model Year</Value>
+                    <Value>Model Year</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -933,7 +941,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Model Name</Value>
+                    <Value>Model Name</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -979,7 +987,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Vehicle Registration No.</Value>
+                    <Value>Vehicle Registration No.</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -1025,7 +1033,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!ModelYear_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!ModelYear_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -1071,7 +1079,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!ModelName_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!ModelName_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -1117,7 +1125,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!VehicleRegistrationNo_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!VehicleRegistrationNo_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -1163,42 +1171,42 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Contact Info:      </Value>
+                    <Value>Contact Info:      </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto"> Home    </Value>
+                    <Value> Home    </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">           </Value>
+                    <Value xml:space="preserve">           </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto"> Business </Value>
+                    <Value> Business </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">                 </Value>
+                    <Value xml:space="preserve">                 </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Mobile</Value>
+                    <Value>Mobile</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -1210,7 +1218,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto" />
+                    <Value />
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -1221,37 +1229,26 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Telephone No.:</Value>
+                    <Value>Telephone No.:</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto"> </Value>
+                    <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!ContactTelephoneNo_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!ContactTelephoneNo_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">                             </Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value EvaluationMode="Auto" />
+                    <Value xml:space="preserve">                             </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -1262,32 +1259,43 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Available Time:</Value>
+                    <Value />
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Available Time:</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">  </Value>
+                    <Value xml:space="preserve">  </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!AvailableTimeFrom_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!AvailableTimeFrom_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">  </Value>
+                    <Value xml:space="preserve">  </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!AvailableTimeTo_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!AvailableTimeTo_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -1332,20 +1340,20 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Vehicle Driven by </Value>
+                    <Value>Vehicle Driven by </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto"> </Value>
+                    <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!VehicleDrivenBy_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!VehicleDrivenBy_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -1356,20 +1364,20 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Vehicle Driven By Type</Value>
+                    <Value>Vehicle Driven By Type</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">  </Value>
+                    <Value xml:space="preserve">  </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!VehicleDrivenByType_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!VehicleDrivenByType_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -1380,20 +1388,20 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Other</Value>
+                    <Value>Other</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">  </Value>
+                    <Value xml:space="preserve">  </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!IfOtherType_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!IfOtherType_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -1438,7 +1446,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Odometer Reading at Appointment</Value>
+                    <Value>Odometer Reading at Appointment</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -1450,7 +1458,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto" />
+                    <Value />
                     <Style>
                       <FontSize>4pt</FontSize>
                     </Style>
@@ -1461,13 +1469,13 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!OdometerReadingAtAppointmen_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!OdometerReadingAtAppointmen_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Km/Mile</Value>
+                    <Value>Km/Mile</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -1512,7 +1520,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!CustomersRequests_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!CustomersRequests_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -1554,7 +1562,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!Internal_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!Internal_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <Format>hh:mm tt</Format>
@@ -1596,7 +1604,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Maintenance</Value>
+                    <Value>Maintenance</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <Format>hh:mm tt</Format>
@@ -1638,7 +1646,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Internal</Value>
+                    <Value>Internal</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <Format>hh:mm tt</Format>
@@ -1680,14 +1688,14 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!Maintenance_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!Maintenance_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <Format>hh:mm tt</Format>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">km/mile</Value>
+                    <Value>km/mile</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <Format>hh:mm tt</Format>
@@ -1729,7 +1737,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!GeneralRepair_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!GeneralRepair_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <Format>hh:mm tt</Format>
@@ -1771,7 +1779,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!Warranty_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!Warranty_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <Format>hh:mm tt</Format>
@@ -1813,7 +1821,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">General Repair</Value>
+                    <Value>General Repair</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <Format>hh:mm tt</Format>
@@ -1855,7 +1863,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Warranty</Value>
+                    <Value>Warranty</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <Format>hh:mm tt</Format>
@@ -1897,7 +1905,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">DQ Entry</Value>
+                    <Value>DQ Entry</Value>
                     <Style>
                       <FontSize>7pt</FontSize>
                       <Format>hh:mm tt</Format>
@@ -1939,7 +1947,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Appointment</Value>
+                    <Value>Appointment</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -1951,14 +1959,14 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Date  </Value>
+                    <Value>Date  </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!AppointmentDate_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!AppointmentDate_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -1971,14 +1979,14 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Time   </Value>
+                    <Value>Time   </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!AppointmentTime_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!AppointmentTime_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -2025,7 +2033,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!CustomerWaiting_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!CustomerWaiting_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>6pt</FontSize>
                       <Format>hh:mm tt</Format>
@@ -2067,7 +2075,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Customer Waiting</Value>
+                    <Value>Customer Waiting</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <Format>hh:mm tt</Format>
@@ -2109,7 +2117,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!RepeatRepair_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!RepeatRepair_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>6pt</FontSize>
                       <Format>hh:mm tt</Format>
@@ -2151,7 +2159,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Repeat Repair</Value>
+                    <Value>Repeat Repair</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <Format>hh:mm tt</Format>
@@ -2193,7 +2201,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto" />
+                    <Value />
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -2204,13 +2212,13 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Customer Order Form No. </Value>
+                    <Value>Customer Order Form No. </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!CustomerOrderFormNo_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!CustomerOrderFormNo_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -2255,7 +2263,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!ServiceType_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!ServiceType_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>12pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -2269,7 +2277,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto" />
+                    <Value />
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -2315,13 +2323,13 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Date:  </Value>
+                    <Value>Date:  </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!CustomerOrderFormDate_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!CustomerOrderFormDate_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>7pt</FontSize>
                       <Format>MM/dd/yy</Format>
@@ -2367,33 +2375,33 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Confirmation     </Value>
+                    <Value>Confirmation     </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!ConfirmationDate_CustomerOrderTable.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                      <Format>MM/dd/yy</Format>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto"> </Value>
+                    <Value>=First(Fields!ConfirmationDate_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <Format>MM/dd/yy</Format>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto"> </Value>
+                    <Value xml:space="preserve"> </Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Format>MM/dd/yy</Format>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!ConfirmationTime_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!ConfirmationTime_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <Format>hh:mm tt</Format>
@@ -2439,7 +2447,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Customer's Requests</Value>
+                    <Value>Customer's Requests</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <Format>hh:mm tt</Format>
@@ -2606,33 +2614,33 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Parts Ordered  </Value>
+                    <Value>Parts Ordered  </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!PartsOrderedDate_CustomerOrderTable.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                      <Format>MM/dd/yy</Format>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto"> </Value>
+                    <Value>=First(Fields!PartsOrderedDate_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <Format>MM/dd/yy</Format>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto"> </Value>
+                    <Value xml:space="preserve"> </Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Format>MM/dd/yy</Format>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!PartsOrderedTime_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!PartsOrderedTime_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <Format>hh:mm tt</Format>
@@ -2678,33 +2686,33 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Parts Arrived    </Value>
+                    <Value>Parts Arrived    </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!PartsArrivedDate_CustomerOrderTable.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                      <Format>MM/dd/yy</Format>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto"> </Value>
+                    <Value>=First(Fields!PartsArrivedDate_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <Format>MM/dd/yy</Format>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto"> </Value>
+                    <Value xml:space="preserve"> </Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Format>MM/dd/yy</Format>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!PartsArrivedTime_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!PartsArrivedTime_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <Format>hh:mm tt</Format>
@@ -2750,19 +2758,19 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Staff Name</Value>
+                    <Value>Staff Name</Value>
                     <Style>
                       <FontSize>6pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">  </Value>
+                    <Value xml:space="preserve">  </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!ConfirmationStaffName_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!ConfirmationStaffName_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>7pt</FontSize>
                     </Style>
@@ -2807,19 +2815,19 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Staff Name</Value>
+                    <Value>Staff Name</Value>
                     <Style>
                       <FontSize>6pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">  </Value>
+                    <Value xml:space="preserve">  </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!PartsOrderedStaffName_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!PartsOrderedStaffName_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>7pt</FontSize>
                     </Style>
@@ -2864,19 +2872,19 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Staff Name </Value>
+                    <Value>Staff Name </Value>
                     <Style>
                       <FontSize>6pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">  </Value>
+                    <Value xml:space="preserve">  </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!PartsArrivedStaffName_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!PartsArrivedStaffName_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>7pt</FontSize>
                     </Style>
@@ -2946,13 +2954,13 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Customer No.:      </Value>
+                    <Value>Customer No.:      </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!CustomerNo_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!CustomerNo_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -2963,13 +2971,13 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Customer Name:  </Value>
+                    <Value>Customer Name:  </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!CustomerName_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!CustomerName_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -3014,25 +3022,25 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Address.:  </Value>
+                    <Value>Address.:  </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!Address_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!Address_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto"> </Value>
+                    <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!Address2_CustomerOrderHeaderX.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!Address2_CustomerOrderHeaderX.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -3077,7 +3085,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">                   </Value>
+                    <Value xml:space="preserve">                   </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -3088,7 +3096,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">                                                  </Value>
+                    <Value xml:space="preserve">                                                  </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -3133,33 +3141,33 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Model No. </Value>
+                    <Value>Model No. </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">           </Value>
+                    <Value xml:space="preserve">           </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Frame No./Vin.</Value>
+                    <Value>Frame No./Vin.</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">              </Value>
+                    <Value xml:space="preserve">              </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">(Engine No.) </Value>
+                    <Value>(Engine No.) </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -3171,31 +3179,31 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!ModelNo_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!ModelNo_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">    </Value>
+                    <Value xml:space="preserve">    </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!FrameNoVIN_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!FrameNoVIN_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">         </Value>
+                    <Value xml:space="preserve">         </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!EngineNo_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!EngineNo_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -3240,42 +3248,42 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Contact Info:      </Value>
+                    <Value>Contact Info:      </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto"> Home    </Value>
+                    <Value> Home    </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">           </Value>
+                    <Value xml:space="preserve">           </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto"> Business </Value>
+                    <Value> Business </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">                 </Value>
+                    <Value xml:space="preserve">                 </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Mobile</Value>
+                    <Value>Mobile</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -3287,7 +3295,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto" />
+                    <Value />
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -3298,44 +3306,44 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Telephone No.:</Value>
+                    <Value>Telephone No.:</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto"> </Value>
+                    <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!CustomerTelephoneNo_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!CustomerTelephoneNo_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">                 </Value>
+                    <Value xml:space="preserve">                 </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!Business_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!Business_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">                    </Value>
+                    <Value xml:space="preserve">                    </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!Mobile_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!Mobile_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -3346,7 +3354,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto" />
+                    <Value />
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -3358,26 +3366,26 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">E-mail:</Value>
+                    <Value>E-mail:</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">  </Value>
+                    <Value xml:space="preserve">  </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!Email_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!Email_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">  </Value>
+                    <Value xml:space="preserve">  </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -3422,47 +3430,47 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Current Service Due D</Value>
+                    <Value>Current Service Due D</Value>
                     <Style>
                       <FontSize>7pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">  </Value>
+                    <Value xml:space="preserve">  </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!CurrentServiceDueDate_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!CurrentServiceDueDate_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <Format>MM/dd/yy</Format>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">  </Value>
+                    <Value xml:space="preserve">  </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Customer Order Form No.  </Value>
+                    <Value>Customer Order Form No.  </Value>
                     <Style>
                       <FontSize>7pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!CurrentServiceKilometre_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!CurrentServiceKilometre_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto"> </Value>
+                    <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -3474,7 +3482,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto" />
+                    <Value />
                     <Style>
                       <FontSize>4pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -3486,39 +3494,39 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Job Type</Value>
+                    <Value>Job Type</Value>
                     <Style>
                       <FontSize>7pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">                </Value>
+                    <Value xml:space="preserve">                </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto"> Odometer Reading</Value>
+                    <Value> Odometer Reading</Value>
                     <Style>
                       <FontSize>7pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto"> </Value>
+                    <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!OdometerReading_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!OdometerReading_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">rpm                                  </Value>
+                    <Value>rpm                                  </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -3563,7 +3571,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Service History</Value>
+                    <Value>Service History</Value>
                     <Style>
                       <FontSize>7pt</FontSize>
                       <Format>hh:mm tt</Format>
@@ -3630,7 +3638,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto" />
+                                  <Value />
                                   <Style>
                                     <FontSize>7pt</FontSize>
                                   </Style>
@@ -3662,7 +3670,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">Job No.</Value>
+                                  <Value>Job No.</Value>
                                   <Style>
                                     <FontSize>7pt</FontSize>
                                     <Format>hh:mm tt</Format>
@@ -3692,7 +3700,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">Job. Description</Value>
+                                  <Value>Job. Description</Value>
                                   <Style>
                                     <FontSize>7pt</FontSize>
                                   </Style>
@@ -3724,7 +3732,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">Odometer</Value>
+                                  <Value>Odometer</Value>
                                   <Style>
                                     <FontSize>7pt</FontSize>
                                   </Style>
@@ -3756,7 +3764,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">Date</Value>
+                                  <Value>Date</Value>
                                   <Style>
                                     <FontSize>7pt</FontSize>
                                   </Style>
@@ -3793,7 +3801,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">1</Value>
+                                  <Value>1</Value>
                                   <Style>
                                     <FontSize>7pt</FontSize>
                                   </Style>
@@ -3825,7 +3833,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">=First(Fields!JobNo1_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                                  <Value>=First(Fields!JobNo1_CustomerOrderTable.Value, "DataSet_Result")</Value>
                                   <Style>
                                     <FontSize>7pt</FontSize>
                                   </Style>
@@ -3857,7 +3865,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">=First(Fields!JobDescription1_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                                  <Value>=First(Fields!JobDescription1_CustomerOrderTable.Value, "DataSet_Result")</Value>
                                   <Style>
                                     <FontSize>7pt</FontSize>
                                   </Style>
@@ -3889,7 +3897,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">=First(Fields!Odometer1_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                                  <Value>=First(Fields!Odometer1_CustomerOrderTable.Value, "DataSet_Result")</Value>
                                   <Style>
                                     <FontSize>7pt</FontSize>
                                   </Style>
@@ -3921,7 +3929,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">=First(Fields!Date1_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                                  <Value>=First(Fields!Date1_CustomerOrderTable.Value, "DataSet_Result")</Value>
                                   <Style>
                                     <FontSize>7pt</FontSize>
                                     <Format>MM/dd/yy</Format>
@@ -3959,7 +3967,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">2</Value>
+                                  <Value>2</Value>
                                   <Style>
                                     <FontSize>7pt</FontSize>
                                   </Style>
@@ -3991,7 +3999,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">=First(Fields!JobNo2_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                                  <Value>=First(Fields!JobNo2_CustomerOrderTable.Value, "DataSet_Result")</Value>
                                   <Style>
                                     <FontSize>7pt</FontSize>
                                   </Style>
@@ -4023,7 +4031,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">=First(Fields!JobDescription2_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                                  <Value>=First(Fields!JobDescription2_CustomerOrderTable.Value, "DataSet_Result")</Value>
                                   <Style>
                                     <FontSize>7pt</FontSize>
                                   </Style>
@@ -4055,7 +4063,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">=First(Fields!Odometer2_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                                  <Value>=First(Fields!Odometer2_CustomerOrderTable.Value, "DataSet_Result")</Value>
                                   <Style>
                                     <FontSize>7pt</FontSize>
                                   </Style>
@@ -4087,7 +4095,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">=First(Fields!Date2_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                                  <Value>=First(Fields!Date2_CustomerOrderTable.Value, "DataSet_Result")</Value>
                                   <Style>
                                     <FontSize>7pt</FontSize>
                                     <Format>MM/dd/yy</Format>
@@ -4125,7 +4133,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">3</Value>
+                                  <Value>3</Value>
                                   <Style>
                                     <FontSize>7pt</FontSize>
                                   </Style>
@@ -4157,7 +4165,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">=First(Fields!JobNo3_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                                  <Value>=First(Fields!JobNo3_CustomerOrderTable.Value, "DataSet_Result")</Value>
                                   <Style>
                                     <FontSize>7pt</FontSize>
                                   </Style>
@@ -4189,7 +4197,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">=First(Fields!JobDescription3_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                                  <Value>=First(Fields!JobDescription3_CustomerOrderTable.Value, "DataSet_Result")</Value>
                                   <Style>
                                     <FontSize>7pt</FontSize>
                                   </Style>
@@ -4221,7 +4229,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">=First(Fields!Odometer3_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                                  <Value>=First(Fields!Odometer3_CustomerOrderTable.Value, "DataSet_Result")</Value>
                                   <Style>
                                     <FontSize>7pt</FontSize>
                                   </Style>
@@ -4253,7 +4261,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">=First(Fields!Date3_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                                  <Value>=First(Fields!Date3_CustomerOrderTable.Value, "DataSet_Result")</Value>
                                   <Style>
                                     <FontSize>7pt</FontSize>
                                     <Format>MM/dd/yy</Format>
@@ -4331,14 +4339,14 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">SSC/SC Information     </Value>
+                    <Value>SSC/SC Information     </Value>
                     <Style>
                       <FontSize>7pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!SSCInfo.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!SSCInfo.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>7pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -4384,27 +4392,27 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Teams</Value>
+                    <Value>Teams</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">   </Value>
+                    <Value xml:space="preserve">   </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!Teams_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!Teams_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <Format>MM/dd/yy</Format>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto"> </Value>
+                    <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -4474,14 +4482,14 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Job Details</Value>
+                    <Value>Job Details</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto"> </Value>
+                    <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -4493,7 +4501,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!JobDetails_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!JobDetails_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -4540,7 +4548,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Appointment </Value>
+                    <Value>Appointment </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -4552,28 +4560,28 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Offering-2</Value>
+                    <Value>Offering-2</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">  </Value>
+                    <Value xml:space="preserve">  </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto"> </Value>
+                    <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!AppointmentOffering2Date_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!AppointmentOffering2Date_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -4618,7 +4626,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Appointment </Value>
+                    <Value>Appointment </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -4630,28 +4638,28 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Offering-1 </Value>
+                    <Value>Offering-1 </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto"> </Value>
+                    <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto"> </Value>
+                    <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!AppointmentOffering1Date_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!AppointmentOffering1Date_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -4696,7 +4704,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto" />
+                    <Value />
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -4708,21 +4716,21 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Time:</Value>
+                    <Value>Time:</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto"> </Value>
+                    <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!AppointmentOffering2Time_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!AppointmentOffering2Time_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -4767,7 +4775,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto" />
+                    <Value />
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -4779,21 +4787,21 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Time:</Value>
+                    <Value>Time:</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto"> </Value>
+                    <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!AppointmentOffering1Time_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!AppointmentOffering1Time_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -4838,7 +4846,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Staff Name</Value>
+                    <Value>Staff Name</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -4850,7 +4858,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!AppointmentStaffName_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!AppointmentStaffName_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -4924,7 +4932,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Confirmation</Value>
+                    <Value>Confirmation</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -4968,7 +4976,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!AdditionalJobConfirmation_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!AdditionalJobConfirmation_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>6pt</FontSize>
                       <Format>hh:mm tt</Format>
@@ -5010,7 +5018,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!Valuables_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!Valuables_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>6pt</FontSize>
                       <Format>hh:mm tt</Format>
@@ -5052,7 +5060,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!PresentEstimatewExplanation_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!PresentEstimatewExplanation_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>6pt</FontSize>
                       <Format>hh:mm tt</Format>
@@ -5094,7 +5102,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Car Wash</Value>
+                    <Value>Car Wash</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -5138,7 +5146,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Replace Parts Keep</Value>
+                    <Value>Replace Parts Keep</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -5182,7 +5190,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Present Estimate w/Explanation</Value>
+                    <Value>Present Estimate w/Explanation</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -5310,7 +5318,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!CarWash_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!CarWash_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -5354,7 +5362,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!ReplacePartsKeep_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!ReplacePartsKeep_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>6pt</FontSize>
                       <Format>hh:mm tt</Format>
@@ -5396,7 +5404,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Additional Job Confirmation</Value>
+                    <Value>Additional Job Confirmation</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -5440,7 +5448,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Valuables</Value>
+                    <Value>Valuables</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -5484,7 +5492,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Courtesy Items</Value>
+                    <Value>Courtesy Items</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -5496,7 +5504,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto" />
+                    <Value />
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -5542,7 +5550,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Seat Cover</Value>
+                    <Value>Seat Cover</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -5586,7 +5594,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Floor Mat</Value>
+                    <Value>Floor Mat</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -5630,7 +5638,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!FloorMat_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!FloorMat_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>6pt</FontSize>
                       <Format>hh:mm tt</Format>
@@ -5672,7 +5680,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!SeatCover_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!SeatCover_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>6pt</FontSize>
                       <Format>hh:mm tt</Format>
@@ -5714,7 +5722,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Confirmation</Value>
+                    <Value>Confirmation</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -5726,7 +5734,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto" />
+                    <Value />
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -5772,7 +5780,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Reception</Value>
+                    <Value>Reception</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -5784,21 +5792,21 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">    </Value>
+                    <Value xml:space="preserve">    </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Date    </Value>
+                    <Value>Date    </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!WalkAroundReceptionDate_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!WalkAroundReceptionDate_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -5806,7 +5814,7 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto"> </Value>
+                    <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -5818,14 +5826,14 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">    Time   </Value>
+                    <Value>    Time   </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!WalkAroundReceptionTime_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!WalkAroundReceptionTime_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -5872,7 +5880,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Staff Name</Value>
+                    <Value>Staff Name</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -5884,14 +5892,14 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">   </Value>
+                    <Value xml:space="preserve">   </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!ReceptionStaffName_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!ReceptionStaffName_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -5899,7 +5907,7 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto"> </Value>
+                    <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -5911,7 +5919,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">    </Value>
+                    <Value xml:space="preserve">    </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -5957,7 +5965,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Payment Method</Value>
+                    <Value>Payment Method</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -5969,26 +5977,14 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!PaymentMethod_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!PaymentMethod_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto"> </Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                      <FontWeight>Normal</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value EvaluationMode="Auto" />
+                    <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -6000,7 +5996,19 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Other Method</Value>
+                    <Value />
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Other Method</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -6012,7 +6020,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!IfOtherMethod_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!IfOtherMethod_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -6058,7 +6066,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Odometer Reading at Reception</Value>
+                    <Value>Odometer Reading at Reception</Value>
                     <Style>
                       <FontSize>7pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -6070,7 +6078,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">         </Value>
+                    <Value xml:space="preserve">         </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -6082,21 +6090,21 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto"> </Value>
+                    <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!OdometerReadingAtReception_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!OdometerReadingAtReception_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Km/mile</Value>
+                    <Value>Km/mile</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -6142,14 +6150,14 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Service Advisor:   </Value>
+                    <Value>Service Advisor:   </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!ServiceAdvisorsName_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!ServiceAdvisorsName_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -6157,7 +6165,7 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto"> </Value>
+                    <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -6203,14 +6211,14 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Fuel Level   </Value>
+                    <Value>Fuel Level   </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto">     </Value>
+                    <Value xml:space="preserve">     </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -6222,14 +6230,14 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto"> </Value>
+                    <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!FuelLevel_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!FuelLevel_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -6275,7 +6283,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">I have received an explanation of and agreed to the items listed above and accept this tems and conditions.</Value>
+                    <Value>I have received an explanation of and agreed to the items listed above and accept this tems and conditions.</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -6320,7 +6328,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto" />
+                    <Value />
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -6332,14 +6340,14 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Customer Signature   __________________</Value>
+                    <Value>Customer Signature   __________________</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto"> </Value>
+                    <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
@@ -6385,7 +6393,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Model Name</Value>
+                    <Value>Model Name</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -6397,7 +6405,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!ModelName_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!ModelName_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -6443,7 +6451,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Vehicle Reg. No.</Value>
+                    <Value>Vehicle Reg. No.</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -6455,13 +6463,13 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!VehicleRegistrationNo_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!VehicleRegistrationNo_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto"> </Value>
+                    <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -6508,7 +6516,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">Vehicle Reg. Date</Value>
+                    <Value>Vehicle Reg. Date</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -6520,14 +6528,14 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">=First(Fields!VehicleRegisteredDate_CustomerOrderTable.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!VehicleRegisteredDate_CustomerOrderTable.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <Format>d</Format>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve" EvaluationMode="Auto"> </Value>
+                    <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>

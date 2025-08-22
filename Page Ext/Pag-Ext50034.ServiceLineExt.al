@@ -13,6 +13,19 @@ pageextension 50034 "Service Line Ext" extends "Service Lines"
                 ApplicationArea = All;
             }
         }
+
+        addafter("Line Discount Amount")
+        {
+            field("VAT Bus. Posting Group"; Rec."VAT Bus. Posting Group")
+            {
+                ApplicationArea = All;
+            }
+            field("VAT Prod. Posting Group"; Rec."VAT Prod. Posting Group")
+            {
+                ApplicationArea = All;
+            }
+        }
+
     }
 
     actions

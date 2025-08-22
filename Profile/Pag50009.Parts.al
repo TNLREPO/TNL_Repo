@@ -11,7 +11,7 @@ page 50009 Parts
             {
                 ApplicationArea = Basic, Suite;
                 Visible = false;
-                
+
             }
             part(Control1901851508; "SO Processor Activities")
             {
@@ -1542,6 +1542,13 @@ page 50009 Parts
                     Caption = 'TSP1001 Sales Invoice';
                     Image = "Report";
                     RunObject = Report "TNL Sale_nvoice TSP1001";
+                }
+                action(TSP1002)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'TSP1002 Lost Sales';
+                    Image = "Report";
+                    RunObject = Report "TNL Sales  Lost TSP1002";
                 }
 
                 action(TSP1004)

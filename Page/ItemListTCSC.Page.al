@@ -11,16 +11,22 @@ page 70176 "Item List TCSC"
         {
             repeater(Group)
             {
-                field("Last Purchase Date"; Rec."Last Purchase Date")
-                {
-                }
-                field("Last Sales Date"; Rec."Last Sales Date")
-                {
-                }
                 field("No."; Rec."No.")
                 {
                 }
                 field(Description; Rec.Description)
+                {
+                }
+                field("Retail Price"; Rec."Retail Price")
+                {
+                }
+                field("Unit Cost"; Rec."Unit Cost")
+                {
+                }
+                field("Transfer Cost"; Rec."Transfer Cost")
+                {
+                }
+                field(Inventory; Rec.Inventory)
                 {
                 }
             }

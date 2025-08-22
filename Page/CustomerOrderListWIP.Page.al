@@ -43,6 +43,9 @@ page 80043 "Customer Order List WIP"
                 field("Vehicle Registration No."; Rec."Vehicle Registration No.")
                 {
                 }
+                field("Frame No./VIN"; Rec."Frame No./VIN")
+                {
+                }
                 field("Parts Ordered Date"; Rec."Parts Ordered Date")
                 {
                 }

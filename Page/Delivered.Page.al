@@ -53,6 +53,9 @@ page 80020 Delivered
                 field("Vehicle Registration No."; Rec."Vehicle Registration No.")
                 {
                 }
+                field("Frame No./VIN"; Rec."Frame No./VIN")
+                {
+                }
                 field("Model Name"; Rec."Model Name")
                 {
                 }

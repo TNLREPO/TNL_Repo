@@ -78,7 +78,7 @@ table 70040 "Service IndexX"
         {
             TableRelation = "Service Item"."No." WHERE("Customer No." = FIELD("Customer No."));
         }
-        field(11; Model; Code[20])
+        field(11; Model; Code[40])
         {
         }
         field(12; "Make of the Vehicle"; Text[30])

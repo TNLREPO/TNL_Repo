@@ -64,7 +64,7 @@ codeunit 50007 "e-InvoiceAPI"
             Rec."QR Code Data".CreateOutStream(OutStream, TextEncoding::UTF8);
             OutStream.WriteText(Token.AsValue().AsText());
 
-            GenerateQRCodeFromWebService(Token.AsValue().AsText(), Rec);
+            //GenerateQRCodeFromWebService(Token.AsValue().AsText(), Rec);
             
             Rec.Modify();
 

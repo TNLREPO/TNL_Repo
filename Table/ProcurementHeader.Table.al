@@ -146,7 +146,7 @@ table 70008 "Procurement Header"
         {
             TableRelation = "No. Series";
         }
-        field(31; "User ID"; Code[30])
+        field(31; "User ID"; Code[50])
         {
         }
         field(32; "Request Entry No."; Code[10])
@@ -232,7 +232,7 @@ table 70008 "Procurement Header"
 
             end;
         }
-        field(35; "Sent By"; Code[30])
+        field(35; "Sent By"; Code[50])
         {
         }
         field(36; Approved3; Boolean)
@@ -541,7 +541,7 @@ table 70008 "Procurement Header"
                     SenderAddress := UserSetup4."E-Mail";
                     TimeDate7 := CURRENTDATETIME;
 
-                    ToAddresses := 'brano@toyotanigeria.com' + ';' + 'olamide@toyotanigeria.com' + ';' + 'grace@toyotanigeria.com' + 'aderonke@toyotanigeria.com';
+                    ToAddresses := 'brano@toyotanigeria.com' + ';' + 'olamide@toyotanigeria.com' + ';' + 'grace@toyotanigeria.com' + ';' + 'aderonke@toyotanigeria.com';
                     // CcAddresses := +  ';' +PurchSetup."Audit Dept. Approvers";
                     BccAddresses := '';
 
@@ -1799,7 +1799,7 @@ table 70008 "Procurement Header"
         {
             DataClassification = ToBeClassified;
         }
-        field(136; InitiatorN; Code[30])
+        field(136; InitiatorN; Code[50])
         {
             DataClassification = ToBeClassified;
         }
@@ -1902,13 +1902,16 @@ table 70008 "Procurement Header"
         Date := TODAY;
         "Requester Name" := UserSetup.Name;
         "User ID" := UserSetup."User ID";
-        "Department Code" := UserSetup."Department Filter";
+        "Department Code" := UserSetup."Global Dimension 1 Filter";
 
-        IF DimValue.GET('DEPARTMENT', UserSetup."Department Filter") THEN
-            "Requester Department" := DimValue.Name;
+
+        DimValue.GET('DEPARTMENT', UserSetup."Global Dimension 1 Filter");
+        "Requester Department" := DimValue.Name;
 
         InitiatorN := UserSetup."User ID";
         "InitiatorN Email" := UserSetup."E-Mail";
+
+
     end;
 
     var

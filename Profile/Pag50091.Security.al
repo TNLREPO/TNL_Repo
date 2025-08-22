@@ -49,9 +49,10 @@ page 50091 Security
                 ApplicationArea = Basic, Suite;
                 Caption = 'Waybill';
                 Image = "Report";
-                RunObject = page "Posted Sales Shipments";
+                RunObject = page "Security Sales Order List";
                 ToolTip = 'View posted sales shipment.';
             }
+            
 
         }
 

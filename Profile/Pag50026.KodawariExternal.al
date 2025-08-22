@@ -11,6 +11,8 @@ page 50026 "Kodawari External"
             part(Control104; "Headline RC Order Processor")
             {
                 ApplicationArea = Basic, Suite;
+                Visible = false;
+                
             }
             part(Control1901851508; "Service Adviser Activities")
             {
@@ -108,19 +110,28 @@ page 50026 "Kodawari External"
             action(Items)
             {
                 ApplicationArea = Basic, Suite;
-                Caption = 'Items';
+                Caption = 'TCSC Items';
                 Image = Item;
-                RunObject = Page "Item List";
+                RunObject = Page "Item List TCSC";
                 ToolTip = 'View or edit detailed information for the products that you trade in. The item card can be of type Inventory or Service to specify if the item is a physical unit or a labor time unit. Here you also define if items in inventory or on incoming orders are automatically reserved for outbound documents and whether order tracking links are created between demand and supply to reflect planning actions.';
             }
-            action(Customers)
+            action(TCSCCustomers)
             {
                 ApplicationArea = Basic, Suite;
-                Caption = 'Customers';
-                Image = Customer;
-                RunObject = Page "Customer List";
-                ToolTip = 'View or edit detailed information for the customers that you trade with. From each customer card, you can open related information, such as sales statistics and ongoing orders, and you can define special prices and line discounts that you grant if certain conditions are met.';
+                Caption = 'TCSC Customer';
+                Image = "Report";
+                RunObject = page "Customer List";
+                RunPageView = WHERE("Location Code" = FILTER('120ISO'));
+                ToolTip = 'View TCSC customers.';
             }
+            /*    action(Customers)
+               {
+                   ApplicationArea = Basic, Suite;
+                   Caption = 'Customers';
+                   Image = Customer;
+                   RunObject = Page "Customer List";
+                   ToolTip = 'View or edit detailed information for the customers that you trade with. From each customer card, you can open related information, such as sales statistics and ongoing orders, and you can define special prices and line discounts that you grant if certain conditions are met.';
+               } */
 
             action("Transfer Orders")
             {
@@ -443,7 +454,7 @@ page 50026 "Kodawari External"
                 {
                     ApplicationArea = CostAccounting;
                     Caption = 'Advance Payment Approved';
-                    RunObject = Page "Advance Paymt Appr.";
+                    RunObject = Page "Advance Payment";
 
                 }
                 action("BalFullPaymtApproval")
@@ -739,15 +750,7 @@ page 50026 "Kodawari External"
                     RunObject = page "Not Reachable Customer";
                     ToolTip = 'View not reachable customers.';
                 }
-                action(TCSCCustomers)
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'TCSC Customer';
-                    Image = "Report";
-                    RunObject = page "Customer List";
-                    RunPageView = WHERE("Location Code" = FILTER('120ISO'));
-                    ToolTip = 'View TCSC customers.';
-                }
+
 
 
             }

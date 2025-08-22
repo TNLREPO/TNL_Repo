@@ -73,10 +73,10 @@ tableextension 50022 "User Setup Ext" extends "User Setup"
         field(50153; "Transactions 99"; Integer)
         {
         }
-        field(50154; "Department Filter"; Code[20])
+       /*  field(50154; "Department Filter"; Code[20])
         {
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(1));
-        }
+        } */
         field(50155; "Full Name"; Text[30])
         {
             Editable = false;

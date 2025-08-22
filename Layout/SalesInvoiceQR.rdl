@@ -15,23 +15,39 @@
     <ReportSection>
       <Body>
         <ReportItems>
-          <Image Name="Image1">
-            <Source>Database</Source>
-            <Value>=First(Fields!QRCodeImage.Value, "DataSet_Result")</Value>
-            <MIMEType>image/png</MIMEType>
-            <Sizing>FitProportional</Sizing>
-            <Top>0.5925in</Top>
-            <Left>1.60292in</Left>
-            <Height>1.46875in</Height>
-            <Width>1.98958in</Width>
+          <Textbox Name="Textbox1">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!QRCodeImage.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>IDAutomation2D</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>1.19667in</Top>
+            <Left>1.33208in</Left>
+            <Height>0.73958in</Height>
+            <Width>0.95833in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
             </Style>
-          </Image>
+          </Textbox>
         </ReportItems>
-        <Height>2.6875in</Height>
+        <Height>5.80208in</Height>
         <Style />
       </Body>
       <Width>6.5in</Width>
@@ -93,21 +109,6 @@ End Function
         </Field>
         <Field Name="QRCodeData">
           <DataField>QRCodeData</DataField>
-        </Field>
-        <Field Name="Description">
-          <DataField>Description</DataField>
-        </Field>
-        <Field Name="Quantity">
-          <DataField>Quantity</DataField>
-        </Field>
-        <Field Name="QuantityFormat">
-          <DataField>QuantityFormat</DataField>
-        </Field>
-        <Field Name="UnitPrice">
-          <DataField>UnitPrice</DataField>
-        </Field>
-        <Field Name="UnitPriceFormat">
-          <DataField>UnitPriceFormat</DataField>
         </Field>
       </Fields>
       <Query>
