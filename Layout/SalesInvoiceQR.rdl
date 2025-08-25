@@ -25,6 +25,7 @@
                     <Value>=First(Fields!QRCodeImage.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>IDAutomation2D</FontFamily>
+                      <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -32,10 +33,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>1.19667in</Top>
-            <Left>1.33208in</Left>
-            <Height>0.73958in</Height>
-            <Width>0.95833in</Width>
+            <Top>0.76959in</Top>
+            <Left>0.49875in</Left>
+            <Height>3in</Height>
+            <Width>3.94792in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -106,9 +107,6 @@ End Function
         </Field>
         <Field Name="QRCodeImage">
           <DataField>QRCodeImage</DataField>
-        </Field>
-        <Field Name="QRCodeData">
-          <DataField>QRCodeData</DataField>
         </Field>
       </Fields>
       <Query>

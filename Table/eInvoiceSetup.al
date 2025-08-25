@@ -17,9 +17,9 @@ table 50185 "e-Invoice Setup"
         {
             Caption = 'Certificate';
         }
-        field(4; IRN; Code[50])
+        field(4; "Service ID"; Code[50])
         {
-            Caption = 'IRN';
+            Caption = 'Service ID';
             DataClassification = SystemMetadata;
         }
         field(5; "Webservice Url"; text[250])

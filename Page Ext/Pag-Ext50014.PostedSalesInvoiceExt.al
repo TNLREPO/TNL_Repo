@@ -4,7 +4,7 @@ pageextension 50014 "Posted Sales Invoice Ext" extends "Posted Sales Invoice"
     {
         addafter("Posting Date")
         {
-            field("QR Code Data"; Rec."QR Code Data")
+           /*  field("QR Code Data"; Rec."QR Code Data")
             {
                 ApplicationArea = All;
                 Caption = 'QR Code Data';
@@ -17,7 +17,7 @@ pageextension 50014 "Posted Sales Invoice Ext" extends "Posted Sales Invoice"
                 Caption = 'QR Code Image';
                 ToolTip = 'QR Code image for e-Invoice';
                 Visible = true;
-            }
+            } */
         }
     }
 

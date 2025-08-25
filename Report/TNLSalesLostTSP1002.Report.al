@@ -1061,23 +1061,28 @@ report 50208 "TNL Sales  Lost TSP1002"
                     Caption = 'Options';
                     field(NoOfCopies; NoOfCopies)
                     {
+                        ApplicationArea = All;
                         Caption = 'No. of Copies';
                     }
                     field(ShowInternalInfo; ShowInternalInfo)
                     {
+                        ApplicationArea = All;
                         Caption = 'Show Internal Information';
                     }
                     field(LogInteraction; LogInteraction)
                     {
+                        ApplicationArea = All;
                         Caption = 'Log Interaction';
                         Enabled = LogInteractionEnable;
                     }
                     field(DisplayAsmInformation; DisplayAssemblyInformation)
                     {
+                        ApplicationArea = All;
                         Caption = 'Show Assembly Components';
                     }
                     field(DisplayAdditionalFeeNote; DisplayAdditionalFeeNote)
                     {
+                        ApplicationArea = All;
                         Caption = 'Show Additional Fee Note';
                     }
                 }
