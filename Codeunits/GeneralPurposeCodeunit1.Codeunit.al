@@ -142,7 +142,7 @@ codeunit 50004 "General Purpose Codeunit-1"
         /////////////////
 
         FOR LDay := LPlanRec."Actual Start Date" TO LPlanRec."Actual End Date" DO BEGIN
-            IF NOT (IsHoliday(LDay)) THEN BEGIN
+            if not ((IsHoliday(LDay)) or (IsWeekend(LDay))) then begin
                 LeaveRosterRec.INIT;
                 LeaveRosterRec."Employee No" := LPlanRec."Employee No.";
                 LeaveRosterRec."Entry no" := LNO;
@@ -160,7 +160,7 @@ codeunit 50004 "General Purpose Codeunit-1"
 
                 LeaveRosterRec.INSERT;
                 LNO := LNO + 1;
-            END;
+            end;
         END;
 
 
@@ -179,16 +179,16 @@ codeunit 50004 "General Purpose Codeunit-1"
         HolidayRec.RESET;
         HolidayRec.SETRANGE(Day, Dy);
         HolidayRec.SETRANGE(Month, Mth);
-
         IF HolidayRec.COUNT <> 0 THEN
             EXIT(TRUE)
-        ELSE BEGIN
+
+        /* ELSE BEGIN
             DateRec2.SETRANGE("Period Type", DateRec2."Period Type"::Date);
             DateRec2.SETRANGE("Period Start", CheckDate);
-            IF DateRec2.FindLast() THEN BEGIN
+            IF DateRec2.Find() THEN BEGIN
                 WkDay := DateRec2."Period Name";
                 HolidayRec.RESET;
-                HolidayRec.SETRANGE(HolidayRec."Day Of Week", WkDay);
+                HolidayRec.SETRANGE("Day Of Week", WkDay);
                 IF HolidayRec.COUNT <> 0 THEN
                     EXIT(TRUE)
                 ELSE
@@ -196,7 +196,20 @@ codeunit 50004 "General Purpose Codeunit-1"
             END
             ELSE
                 EXIT(FALSE);
-        END;
+        END; */
+
+    end;
+
+    procedure IsWeekend(DateValue: Date): Boolean
+    var
+        DayOfWeek: Integer;
+    begin
+        DayOfWeek := Date2DWY(DateValue, 1);
+
+        if (DayOfWeek = 6) or (DayOfWeek = 7) then
+            exit(true)
+        else
+            exit(false);
     end;
 
 

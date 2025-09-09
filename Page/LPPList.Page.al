@@ -34,6 +34,9 @@ page 70193 "LPP List"
                 field("TCOF No."; Rec."TCOF No.")
                 {
                 }
+                field("RFQ No."; Rec."RFQ No.")
+                {
+                }
             }
         }
     }

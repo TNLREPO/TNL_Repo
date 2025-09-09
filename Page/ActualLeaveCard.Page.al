@@ -3,7 +3,7 @@ page 70056 "Actual Leave Card"
     ApplicationArea = All;
     PageType = Card;
     SourceTable = "Leave Plan Lines Rev 2";
-    
+
 
     layout
     {
@@ -120,6 +120,16 @@ page 70056 "Actual Leave Card"
             }
             action("Re&verse Leave Entry")
             {
+            }
+            action(CheckHoliday)
+            {
+                trigger OnAction()
+                var
+                    GPC: Codeunit "General Purpose Codeunit-1";
+                begin
+
+                    GPC.IsHoliday(Rec."Actual Start Date");
+                end;
             }
         }
     }

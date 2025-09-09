@@ -7,7 +7,7 @@ page 50023 "Service"
     {
         area(rolecenter)
         {
-            part(Control104; "Headline RC Order Processor")
+            part(Control104; "Headline RC Serv. Dispatcher")
             {
                 ApplicationArea = Basic, Suite;
             }

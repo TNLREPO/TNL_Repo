@@ -8,11 +8,9 @@ page 50026 "Kodawari External"
     {
         area(rolecenter)
         {
-            part(Control104; "Headline RC Order Processor")
+            part(Control104; "Headline RC Serv. Dispatcher")
             {
                 ApplicationArea = Basic, Suite;
-                Visible = false;
-                
             }
             part(Control1901851508; "Service Adviser Activities")
             {

@@ -531,7 +531,7 @@ table 50075 "Leave Plan Lines Rev 2"
                         "Actual End Date" := GenPCode.CalculateLeaveEndDateExcludingWeekendsAndHolidays("Actual Start Date", "Actual Duration");
 
                 CheckTotalDuration(9);
-               
+
             end;
         }
         field(52; "Actual End Date"; Date)

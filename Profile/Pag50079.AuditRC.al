@@ -7,7 +7,7 @@ page 50079 AuditRC
     {
         area(rolecenter)
         {
-            part(Control76; "Headline RC Accountant")
+            part(Control76; "Headline RC Administrator")
             {
                 ApplicationArea = Basic, Suite;
             }

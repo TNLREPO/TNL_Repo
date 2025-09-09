@@ -22,7 +22,7 @@ page 60006 "Managing Director Role Center"
             {
                 ApplicationArea = All;
             }
-            
+
             part(Control55; "Help And Chart Wrapper")
             {
                 ApplicationArea = Basic, Suite;
@@ -273,8 +273,8 @@ page 60006 "Managing Director Role Center"
             {
                 Caption = 'Excel Reports';
                 Image = Excel;
-               
-              
+
+
                 action(ExcelTemplateTrialBalance)
                 {
                     ApplicationArea = Basic, Suite;
@@ -369,6 +369,12 @@ page 60006 "Managing Director Role Center"
                 Caption = 'Items';
                 RunObject = Page "Item List";
                 ToolTip = 'View or edit detailed information for the products that you trade in. The item card can be of type Inventory or Service to specify if the item is a physical unit or a labor time unit. Here you also define if items in inventory or on incoming orders are automatically reserved for outbound documents and whether order tracking links are created between demand and supply to reflect planning actions.';
+            }
+            action("Model List")
+            {
+                Caption = 'Models';
+                RunObject = Page 50037;
+                ApplicationArea = Basic, Suite;
             }
             action("Bank Accounts")
             {

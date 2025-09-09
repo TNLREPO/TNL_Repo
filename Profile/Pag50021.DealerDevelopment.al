@@ -7,7 +7,7 @@ page 50021 "Dealer Development"
     {
         area(rolecenter)
         {
-            part(Control104; "Headline RC Order Processor")
+            part(Control104; "Headline RC Relationship Mgt.")
             {
                 ApplicationArea = Basic, Suite;
                 Visible = false;

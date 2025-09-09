@@ -1,9 +1,9 @@
 codeunit 50000 MySubscribers
 {
     Permissions = tabledata "Sales Invoice Header" = rimd;
-    
+
     EventSubscriberInstance = StaticAutomatic;
-    
+
 
     [EventSubscriber(ObjectType::Table, 17, 'OnAfterCopyGLEntryFromGenJnlLine', '', false, false)]
 
@@ -303,7 +303,7 @@ codeunit 50000 MySubscribers
     procedure IRNOnAfterInsertInvoiceHeader(var SalesHeader: Record "Sales Header"; var SalesInvHeader: Record "Sales Invoice Header")
 
     begin
-        SalesInvHeader.IRN := SalesInvHeader."No." + '-' + '13D177B9' + '-' + Format(CurrentDateTime, 0, '<Year4><Month2><Day2><Hour2><Minute2><Second2>');
+        SalesInvHeader.IRN := SalesInvHeader."No." + '-' + '13D177B9' + '-' + Format(CurrentDateTime);
         SalesInvHeader.Modify();
     end;
 

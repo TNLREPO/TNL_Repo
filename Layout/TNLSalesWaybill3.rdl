@@ -2267,6 +2267,9 @@ tC6uFQMHDjRfOVEpbMtvWLQtQ2V9GUtVyN2MNJE8EYbNjbIG8s24Syw3IGA+3nzzbQke0sxG7qmTiSgs
         <Field Name="LocationCode_ItemLedgerEntry">
           <DataField>LocationCode_ItemLedgerEntry</DataField>
         </Field>
+        <Field Name="QRCodeImage">
+          <DataField>QRCodeImage</DataField>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>DataSource</DataSourceName>

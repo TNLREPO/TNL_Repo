@@ -2268,7 +2268,7 @@
             </Style>
           </Textbox>
           <Line Name="Line6">
-            <Top>19.68392cm</Top>
+            <Top>19.14147cm</Top>
             <Left>1.2155cm</Left>
             <Height>0cm</Height>
             <Width>5.88667cm</Width>
@@ -2299,7 +2299,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox42</rd:DefaultName>
-            <Top>20.49531cm</Top>
+            <Top>19.95286cm</Top>
             <Left>1.32509cm</Left>
             <Height>0.6cm</Height>
             <Width>5.77708cm</Width>
@@ -2334,8 +2334,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox42</rd:DefaultName>
-            <Top>20.53059cm</Top>
-            <Left>11.64835cm</Left>
+            <Top>20.05242cm</Top>
+            <Left>11.34255cm</Left>
             <Height>0.6cm</Height>
             <Width>4.7454cm</Width>
             <ZIndex>58</ZIndex>
@@ -2350,8 +2350,8 @@
             </Style>
           </Textbox>
           <Line Name="Line7">
-            <Top>19.61964cm</Top>
-            <Left>11.058cm</Left>
+            <Top>19.14147cm</Top>
+            <Left>10.7522cm</Left>
             <Height>0cm</Height>
             <Width>5.88667cm</Width>
             <ZIndex>59</ZIndex>
@@ -2381,7 +2381,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox42</rd:DefaultName>
-            <Top>19.89531cm</Top>
+            <Top>19.35286cm</Top>
             <Left>1.32509cm</Left>
             <Height>0.6cm</Height>
             <Width>5.77708cm</Width>
@@ -2416,8 +2416,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox42</rd:DefaultName>
-            <Top>19.89531cm</Top>
-            <Left>11.058cm</Left>
+            <Top>19.41714cm</Top>
+            <Left>10.7522cm</Left>
             <Height>0.6cm</Height>
             <Width>5.88667cm</Width>
             <ZIndex>61</ZIndex>
@@ -2435,7 +2435,7 @@
             <Source>Embedded</Source>
             <Value>Amaka</Value>
             <Sizing>FitProportional</Sizing>
-            <Top>18.04141cm</Top>
+            <Top>17.49896cm</Top>
             <Left>2.16799cm</Left>
             <Height>1.46612cm</Height>
             <Width>2.84938cm</Width>
@@ -2450,8 +2450,8 @@
             <Source>Embedded</Source>
             <Value>Charles</Value>
             <Sizing>FitProportional</Sizing>
-            <Top>18.04141cm</Top>
-            <Left>12.17821cm</Left>
+            <Top>17.56324cm</Top>
+            <Left>11.87241cm</Left>
             <Height>1.40184cm</Height>
             <Width>3.44737cm</Width>
             <ZIndex>63</ZIndex>
@@ -2462,7 +2462,7 @@
             </Style>
           </Image>
         </ReportItems>
-        <Height>21.46317cm</Height>
+        <Height>21.64838cm</Height>
         <Style />
       </Body>
       <Width>18.16016cm</Width>
@@ -2718,6 +2718,9 @@ TIKsT1OjzGely68Fn1FBZhu2GWTikFkecvJaaQqOUaU4O9qY+D4mV1BWwPyfHl2jUKOykmZcsssBL09T
         </Field>
         <Field Name="OLDesignation">
           <DataField>OLDesignation</DataField>
+        </Field>
+        <Field Name="QRCodeImage">
+          <DataField>QRCodeImage</DataField>
         </Field>
         <Field Name="EMail">
           <DataField>EMail</DataField>
