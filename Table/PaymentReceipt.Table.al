@@ -737,6 +737,7 @@ table 50103 "Payment/Receipt."
             ELSE IF ("Account Type" = CONST(Vendor), "Credit Amount" = FILTER(<> 0)) "Vendor Ledger Entry"."Entry No." WHERE("Vendor No." = FIELD("Account No."), Open = CONST(true), Positive = CONST(true))
             ELSE IF ("Account Type" = CONST(Customer), "Credit Amount" = FILTER(<> 0)) "Cust. Ledger Entry"."Entry No." WHERE("Customer No." = FIELD("Account No."), Positive = CONST(true), Open = CONST(true))
             ELSE IF ("Account Type" = CONST(Customer), "Debit Amount" = FILTER(<> 0)) "Cust. Ledger Entry"."Entry No." WHERE("Customer No." = FIELD("Account No."), Positive = CONST(false), Open = CONST(true));
+        
         }
         field(92; "Approved Doc. No."; Code[20])
         {
