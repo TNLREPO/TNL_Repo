@@ -1015,68 +1015,70 @@ table 70018 "Local Part Purchase Register"
                 TESTFIELD(Send, TRUE);
                 TESTFIELD("Head of Department", "Head of Department"::Approved);
 
-                IF "Order Type" <> "Order Type"::"Isolo Store" THEN BEGIN
-                    UserSetup4.GET(USERID);
-                    IF NOT UserSetup4."Audit Service Approval" THEN
-                        ERROR(Text033);
-                    IF "Compliance check" = "Compliance check"::Satisfactory THEN
-                        IF NOT CONFIRM('Are you sure you this is satisfactory?', FALSE) THEN
-                            "Compliance check" := LPPRec."Compliance check"::" "
-                        ELSE BEGIN
-                            CALCFIELDS("Total Purchase Value");
-                            VendAmt := "Total Purchase Value";
-                            VendName := "Supplier's Name";
-                            VendAddr := "Supplier's Address";
-                            Purpose := "Justification for purchase";
-                            ToAddresses := 'adewumi@toyotanigeria.com';
-                            Addressee := 'STA';
-                            //CcAddresses := 
-                            BccAddresses := '';
+                // IF "Order Type" <> "Order Type"::"Isolo Store" THEN BEGIN
+                UserSetup4.GET(USERID);
+                IF NOT UserSetup4."Audit Service Approval" THEN
+                    ERROR(Text033);
+                IF "Compliance check" = "Compliance check"::Satisfactory THEN
+                    IF NOT CONFIRM('Are you sure you this is satisfactory?', FALSE) THEN
+                        "Compliance check" := LPPRec."Compliance check"::" "
+                    ELSE BEGIN
+                        CALCFIELDS("Total Purchase Value");
+                        VendAmt := "Total Purchase Value";
+                        VendName := "Supplier's Name";
+                        VendAddr := "Supplier's Address";
+                        Purpose := "Justification for purchase";
+                        ToAddresses := 'adewumi@toyotanigeria.com';
+                        Addressee := 'STA';
+                        //CcAddresses := 
+                        BccAddresses := '';
 
-                            Subject := STRSUBSTNO(Text001, "LPP No.");
+                        Subject := STRSUBSTNO(Text001, "LPP No.");
 
-                            UserSetup4.GET(USERID);
-                            SendersName := UserSetup4.Initials;
-                            SenderAddress := UserSetup4."E-Mail";
-                            "Confirmed By" := UserSetup4.Name;
-                            TimeDate3 := CURRENTDATETIME;
+                        UserSetup4.GET(USERID);
+                        SendersName := UserSetup4.Initials;
+                        SenderAddress := UserSetup4."E-Mail";
+                        "Confirmed By" := UserSetup4.Name;
+                        TimeDate3 := CURRENTDATETIME;
 
-                            Subject := STRSUBSTNO(Text001, "LPP No.");
-                            CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text021, Addressee);
-                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
+                        Subject := STRSUBSTNO(Text001, "LPP No.");
+                        CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text021, Addressee);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                            Float := TRUE;
-                            HoDAuditApproval := TRUE;
-                        END;
+                        Float := TRUE;
+                        HoDAuditApproval := TRUE;
+                    END;
 
-                    IF "Compliance check" = "Compliance check"::"Not Satisfactory" THEN
-                        IF NOT CONFIRM('Are you sure you want to select not satisfactory?', FALSE) THEN
-                            "Compliance check" := LPPRec."Compliance check"::" "
-                        ELSE BEGIN
-                            CALCFIELDS("Total Purchase Value");
-                            VendAmt := "Total Purchase Value";
-                            VendName := "Supplier's Name";
-                            VendAddr := "Supplier's Address";
-                            Purpose := "Justification for purchase";
-                            UserSetup.GET("Sent By");
-                            ToAddresses := UserSetup."E-Mail";
-                            Addressee := UserSetup.Initials;
-                            //CcAddresses := '';
-                            BccAddresses := '';
+                IF "Compliance check" = "Compliance check"::"Not Satisfactory" THEN
+                    IF NOT CONFIRM('Are you sure you want to select not satisfactory?', FALSE) THEN
+                        "Compliance check" := LPPRec."Compliance check"::" "
+                    ELSE BEGIN
+                        CALCFIELDS("Total Purchase Value");
+                        VendAmt := "Total Purchase Value";
+                        VendName := "Supplier's Name";
+                        VendAddr := "Supplier's Address";
+                        Purpose := "Justification for purchase";
+                        UserSetup.GET("Sent By");
+                        ToAddresses := UserSetup."E-Mail";
+                        Addressee := UserSetup.Initials;
+                        //CcAddresses := '';
+                        BccAddresses := '';
 
-                            UserSetup4.GET(USERID);
-                            SendersName := UserSetup4.Initials;
-                            "Confirmed By" := UserSetup4.Name;
-                            SenderAddress := UserSetup4."E-Mail";
-                            TimeDate3 := CURRENTDATETIME;
+                        UserSetup4.GET(USERID);
+                        SendersName := UserSetup4.Initials;
+                        "Confirmed By" := UserSetup4.Name;
+                        SenderAddress := UserSetup4."E-Mail";
+                        TimeDate3 := CURRENTDATETIME;
 
-                            Subject := STRSUBSTNO(Text006, "LPP No.");
-                            CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text011, Addressee);
-                            SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
+                        Subject := STRSUBSTNO(Text006, "LPP No.");
+                        CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text011, Addressee);
+                        SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                            Rejected1 := TRUE;
-                        END;
-                END;
+                        Rejected1 := TRUE;
+                    END;
+                //END;
+
+                /*
 
                 IF "Order Type" = "Order Type"::"Isolo Store" THEN BEGIN
 
@@ -1155,6 +1157,8 @@ table 70018 "Local Part Purchase Register"
                             Rejected1 := TRUE;
                         END;
                 END;
+
+                */
 
                 "Compliance UserID" := USERID;
 
