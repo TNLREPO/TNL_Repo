@@ -2204,6 +2204,7 @@ table 70034 "Customer Order HeaderX"
         ServiceIndex."Vehicle Release Date" := "Actual Delivery Date";
         ServiceIndex."Delivery Date" := "Date Delivered";
         ServiceIndex."Vehicle No." := "Vehicle Registration No.";
+        ServiceIndex.Brand := "Brand";
         ServiceIndex.Model := "Model Name";
         ServiceIndex."Delivery Time" := "Time Delivered";
         ServiceIndex.INSERT(TRUE);
@@ -2404,7 +2405,7 @@ table 70034 "Customer Order HeaderX"
             CustOrderLine.SETFILTER("Location Code", '<>%1', '');
             IF CustOrderLine.FINDFIRST THEN BEGIN
                 REPEAT
-                    CheckInventoryAvailability(CustOrderLine."No.", CustOrderLine."Location Code", CustOrderLine."Quantity Requested");
+                    CheckInventoryAvailability(CustOrderLine."No.", "Service Location", CustOrderLine."Quantity Requested");
                     TransferLine.INIT;
                     TransferLine."Document No." := TransferHeader."No.";
                     TransferLine."Line No." := CustOrderLine."Line No.";

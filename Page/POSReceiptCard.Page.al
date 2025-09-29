@@ -163,7 +163,7 @@ page 70513 "POS Receipt Card"
 
                 trigger OnAction()
                 begin
-                    //CallAPI.POSIntegration(Rec);
+                    CallAPI.SendPaymentRequest(Rec);
                 end;
             }
             action("Test Report")

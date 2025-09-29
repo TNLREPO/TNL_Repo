@@ -1,5 +1,6 @@
 page 70194 "HOD Part Approval"
 {
+    Caption = 'HOD Approval';
     ApplicationArea = All;
     CardPageID = "LPP Card2";
     PageType = List;
@@ -28,6 +29,9 @@ page 70194 "HOD Part Approval"
                 {
                 }
                 field("Justification for purchase"; Rec."Justification for purchase")
+                {
+                }
+                field("RFQ No."; Rec."RFQ No.")
                 {
                 }
                 field("Total Purchase Value"; Rec."Total Purchase Value")

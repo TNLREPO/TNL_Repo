@@ -9,7 +9,7 @@ page 70196 "HOD Audit Approval LPP"
                             "Procurement Approval" = CONST(false),
                             "MD Approval" = CONST(false),
                             "GM Approval" = CONST(false),
-                            "Order Type" = FILTER('<>Isolo Store'),
+                            //"Order Type" = FILTER('<>Isolo Store'),
                             Rejected = CONST(false));
 
     layout

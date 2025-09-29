@@ -454,7 +454,7 @@ page 50009 Parts
                 }
                 action("HOD Part Approval")
                 {
-                    Caption = 'HOD Part Approval';
+                    Caption = 'HOD Approval';
                     RunObject = Page 70194;
                     ApplicationArea = Basic, Suite;
                 }
@@ -1445,6 +1445,14 @@ page 50009 Parts
                     Image = "Report";
                     RunObject = Report "Customer/Item Sales";
                     ToolTip = 'View a list of item sales for each customer during a selected time period. The report contains information on quantity, sales amount, profit, and possible discounts. It can be used, for example, to analyze a company''s customer groups.';
+                }
+                action(DetailsofOrder)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Details of Order';
+                    Image = "Report";
+                    RunObject = Report "Details of Order Recieved";
+                    ToolTip = 'View a list of order lines whose shipment date has been exceeded. The following information is shown for the individual orders for each item: number, customer name, customer''s telephone number, shipment date, order quantity and quantity on back order. The report also shows whether there are other items for the customer on back order.';
                 }
                 action(StockIssue)
                 {
