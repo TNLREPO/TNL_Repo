@@ -280,6 +280,13 @@ page 50009 Parts
                 Image = Invoice;
                 RunObject = Page "Service Invoices";
             }
+            action(PostedServiceInvoiceLines)
+            {
+                ApplicationArea = Location;
+                Caption = 'Posted Service Invoice Lines';
+                RunObject = Page "Posted Service Invoice Lines";
+                ToolTip = 'View posted service invoice lines.';
+            }
 
             action(Takata)
             {
