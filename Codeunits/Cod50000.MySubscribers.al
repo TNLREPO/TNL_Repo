@@ -314,7 +314,7 @@ codeunit 50000 MySubscribers
     begin
         ItemLedgerEntry.SetRange("Serial No.", ItemJournalLine."Serial No.");
         if ItemLedgerEntry.FindFirst() then
-            NewItemLedgEntry."Purchase Date" := ItemLedgerEntry."Purchase Date";
+            NewItemLedgEntry."Purchase Date" := ItemLedgerEntry."Posting Date";
     end;
 
 }

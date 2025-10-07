@@ -123,15 +123,13 @@ page 50026 "Kodawari External"
                 RunPageView = WHERE("Location Code" = FILTER('120ISO'));
                 ToolTip = 'View TCSC customers.';
             }
-            /*    action(Customers)
-               {
-                   ApplicationArea = Basic, Suite;
-                   Caption = 'Customers';
-                   Image = Customer;
-                   RunObject = Page "Customer List";
-                   ToolTip = 'View or edit detailed information for the customers that you trade with. From each customer card, you can open related information, such as sales statistics and ongoing orders, and you can define special prices and line discounts that you grant if certain conditions are met.';
-               } */
-
+            action(PostedServiceInvoiceLines)
+            {
+                ApplicationArea = Location;
+                Caption = 'Posted Service Invoice Lines';
+                RunObject = Page "Posted Service Invoice Lines";
+                ToolTip = 'View posted service invoice lines.';
+            }
             action("Transfer Orders")
             {
                 ApplicationArea = Location;

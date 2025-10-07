@@ -148,6 +148,7 @@ page 80001 "Service Adviser Activities"
                 }
                 field("Customer Complaint List"; Rec."Customer Complaint List")
                 {
+                    DrillDownPageId = "Service Complaint List";
                 }
             }
         }

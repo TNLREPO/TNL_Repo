@@ -58,5 +58,14 @@ tableextension 50043 "Entry Summary Ext" extends "Entry Summary"
         field(50019; "Fixed"; Boolean)
         {
         }
+
+        modify("Selected Quantity")
+        {
+            trigger OnAfterValidate()
+            begin
+                if "Problem Vehicle" then
+                    Error('This is a Problem Vehicle, cannot be sold!');
+            end;
+        }
     }
 }

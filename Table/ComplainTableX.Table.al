@@ -269,18 +269,14 @@ table 70039 "Complain TableX"
 
     procedure AssistEdit(OldComplain: Record "Complain TableX"): Boolean
     begin
-        /*    WITH CompRec DO BEGIN
-               CompRec := Rec;
-               ServMgtSetup.GET;
-               ServMgtSetup.TESTFIELD("Complain Nos");
-               IF NoSeriesMgt.SelectSeries(ServMgtSetup."Complain Nos", OldComplain."Complain Code", "No. Series") THEN BEGIN
-                   ServMgtSetup.GET;
-                   ServMgtSetup.TESTFIELD("Complain Nos");
-                   NoSeriesMgt.SetSeries("Complain Code");
-                   Rec := CompRec;
-                   EXIT(TRUE);
-               END;
-           END; */
+        CompRec := Rec;
+        ServMgtSetup.GET;
+        ServMgtSetup.TESTFIELD("Complain Nos");
+        IF NoSeriesMgt.LookupRelatedNoSeries(ServMgtSetup."Complain Nos", OldComplain."No. Series", CompRec."No. Series") THEN BEGIN
+            CompRec."Complain Code" := NoSeriesMgt.GetNextNo(CompRec."No. Series");
+            Rec := CompRec;
+            EXIT(TRUE);
+        END;
     end;
 }
 
