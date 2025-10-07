@@ -737,7 +737,7 @@ table 50103 "Payment/Receipt."
             ELSE IF ("Account Type" = CONST(Vendor), "Credit Amount" = FILTER(<> 0)) "Vendor Ledger Entry"."Entry No." WHERE("Vendor No." = FIELD("Account No."), Open = CONST(true), Positive = CONST(true))
             ELSE IF ("Account Type" = CONST(Customer), "Credit Amount" = FILTER(<> 0)) "Cust. Ledger Entry"."Entry No." WHERE("Customer No." = FIELD("Account No."), Positive = CONST(true), Open = CONST(true))
             ELSE IF ("Account Type" = CONST(Customer), "Debit Amount" = FILTER(<> 0)) "Cust. Ledger Entry"."Entry No." WHERE("Customer No." = FIELD("Account No."), Positive = CONST(false), Open = CONST(true));
-        
+
         }
         field(92; "Approved Doc. No."; Code[20])
         {
@@ -1130,6 +1130,9 @@ table 50103 "Payment/Receipt."
         GenJnlLine: Record 81;
         GenJournalLine: Record 81;
     begin
+        if "Transaction Description" = '' then
+            Error('You must enter a Transaction Description before you can post the document.');
+
         GlJour.LOCKTABLE;
         DelResidualJnl(reqrec."Document Type", reqrec."Cash/Cheque");
         ValidateMultipleAcc(reqrec);
@@ -1255,7 +1258,7 @@ table 50103 "Payment/Receipt."
             "GlJou 2"."Account Type" := reqrec."Balance Account Type";
             "GlJou 2".VALIDATE("GlJou 2"."Account No.", reqrec."Balance Account No.");
             "GlJou 2".Description := COPYSTR(reqrec."Transaction Description", 1, 50);
-            "GlJou 2".Validate("Dimension Set ID","Dimension Set ID");
+            "GlJou 2".Validate("Dimension Set ID", "Dimension Set ID");
 
             IF "GlJou 2"."Account Type" = "GlJou 2"."Account Type"::" " THEN BEGIN
                 "GlJou 2"."Gen. Prod. Posting Group" := '';
@@ -1264,9 +1267,9 @@ table 50103 "Payment/Receipt."
                 "GlJou 2"."VAT Prod. Posting Group" := '';
                 "GlJou 2"."Gen. Posting Type" := "GlJou 2"."Gen. Posting Type"::" ";
             END;
-           
-           "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 1 Code", reqrec."Balance Department Code");
-           "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 2 Code", reqrec."Balance Branch Code");
+
+            "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 1 Code", reqrec."Balance Department Code");
+            "GlJou 2".VALIDATE("GlJou 2"."Shortcut Dimension 2 Code", reqrec."Balance Branch Code");
 
             "GlJou 2"."Bal. Account Type" := "GlJou 2"."Bal. Account Type"::" ";
             "GlJou 2".VALIDATE("GlJou 2".Amount, -reqrec."Amount (LCY)");
@@ -1759,7 +1762,7 @@ table 50103 "Payment/Receipt."
             Modify;
     end;
 
-    
+
 
 }
 

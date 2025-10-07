@@ -3,7 +3,8 @@ page 50371 "Complain List"
     ApplicationArea = All;
     DeleteAllowed = false;
     ModifyAllowed = false;
-    PageType = Card;
+    PageType = List;
+    //CardPageId = 
     SourceTable = "Complain Table";
 
     layout
@@ -94,7 +95,7 @@ page 50371 "Complain List"
         }
     }
 
-    actions
+    /* actions
     {
         area(navigation)
         {
@@ -105,11 +106,11 @@ page 50371 "Complain List"
                 {
                     Caption = 'Card';
                     Image = EditLines;
-                    //RunObject = Page 50368;
+                    RunObject = Page "Complaint Card";
                     ShortCutKey = 'Shift+F7';
                 }
             }
         }
-    }
+    } */
 }
 

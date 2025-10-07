@@ -131,13 +131,27 @@ pageextension 50004 "Item Card Ext" extends "Item Card"
                     ApplicationArea = Basic, Suite;
                     ShowMandatory = true;
                 }
-
-                
-
+                field("Lekki Inventory"; Rec."Lekki Inventory")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("Dojo Inventory"; Rec."Dojo Inventory")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("Dojo Oregun  Inventory"; Rec."Dojo Oregun  Inventory")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("Abuja Inventory"; Rec."Abuja Inventory")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("PortHarcourt Inventory"; Rec."PortHarcourt Inventory")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
             }
-
         }
-
-
     }
 }

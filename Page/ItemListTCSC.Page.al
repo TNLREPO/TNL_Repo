@@ -3,8 +3,8 @@ page 70176 "Item List TCSC"
     PageType = List;
     SourceTable = "Item";
     ApplicationArea = All;
-    SourceTableView = SORTING("No.")
-    WHERE("Location Filter" = FILTER('120ISO'));
+    CardPageId = "Item Card";
+    SourceTableView = SORTING("No.") WHERE("Location Filter" = FILTER('120ISO'));
     layout
     {
         area(content)
@@ -32,8 +32,11 @@ page 70176 "Item List TCSC"
             }
         }
     }
-
-    actions
-    {
-    }
+    trigger OnOpenPage()
+    begin
+        Rec.SetRange("Location Filter", '120ISO');
+    end;
 }
+
+
+

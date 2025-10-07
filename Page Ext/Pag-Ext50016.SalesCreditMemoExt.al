@@ -21,7 +21,7 @@ pageextension 50016 "Sales Credit Memo Ext" extends "Sales Credit Memo"
                     trigger OnLookup(var Text: Text): Boolean
                     begin
                         IF Rec."Shortcut Dimension 1 Code" = '09MARKET' THEN BEGIN
-                            UserSetup.SETFILTER("User ID", '%1|%2|%3|%4', 'BRANO', 'OLAMIDE', 'GRACE', 'ARIKE');
+                            UserSetup.SETFILTER("User ID", '%1|%2|%3|%4|%5', 'BRANO', 'OLAMIDE', 'GRACE', 'ARIKE', 'ADERONKE');
                             IF PAGE.RUNMODAL(0, UserSetup) = ACTION::LookupOK THEN BEGIN
                                 Rec."1st Approval to" := UserSetup."User ID";
                                 Rec."1st Approver" := UserSetup.Name;

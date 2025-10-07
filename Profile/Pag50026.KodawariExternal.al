@@ -111,6 +111,7 @@ page 50026 "Kodawari External"
                 Caption = 'TCSC Items';
                 Image = Item;
                 RunObject = Page "Item List TCSC";
+                RunPageView = WHERE("Location Filter" = FILTER('120ISO'));
                 ToolTip = 'View or edit detailed information for the products that you trade in. The item card can be of type Inventory or Service to specify if the item is a physical unit or a labor time unit. Here you also define if items in inventory or on incoming orders are automatically reserved for outbound documents and whether order tracking links are created between demand and supply to reflect planning actions.';
             }
             action(TCSCCustomers)
@@ -138,7 +139,14 @@ page 50026 "Kodawari External"
                 RunObject = Page "Transfer Orders";
                 ToolTip = 'Move inventory items between company locations. With transfer orders, you ship the outbound transfer from one location and receive the inbound transfer at the other location. This allows you to manage the involved warehouse activities and provides more certainty that inventory quantities are updated correctly.';
             }
-
+            action(Complaints)
+            {
+                ApplicationArea = All;
+                Caption = 'Customer Complaints';
+                Image = "Report";
+                RunObject = Page "Complaint List";
+                ToolTip = 'View customer complaints.';
+            }
         }
         area(sections)
         {

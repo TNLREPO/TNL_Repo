@@ -1,7 +1,7 @@
 codeunit 50011 "Reservation Mgt."
 {
 
-    var
+    //var
 
     Var
         EngineNo: Code[20];

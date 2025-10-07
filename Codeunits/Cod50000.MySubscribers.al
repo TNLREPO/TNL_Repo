@@ -307,4 +307,14 @@ codeunit 50000 MySubscribers
         SalesInvHeader.Modify();
     end;
 
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Item Jnl.-Post Line", 'OnAfterInitItemLedgEntry', '', false, false)]
+    procedure UpdatePurchaseDateOnAfterInitItemLedgEntry(var NewItemLedgEntry: Record "Item Ledger Entry"; var ItemJournalLine: Record "Item Journal Line")
+    var
+        ItemLedgerEntry: Record "Item Ledger Entry";
+    begin
+        ItemLedgerEntry.SetRange("Serial No.", ItemJournalLine."Serial No.");
+        if ItemLedgerEntry.FindFirst() then
+            NewItemLedgEntry."Purchase Date" := ItemLedgerEntry."Purchase Date";
+    end;
+
 }

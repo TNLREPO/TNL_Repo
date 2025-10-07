@@ -438,6 +438,7 @@ tableextension 50004 "Customer Ext." extends Customer
         "User ID" := USERID;
         IF UserSetup.GET("User ID") THEN
             "Location Code" := UserSetup."Location Code";
+            
     end;
 
 
