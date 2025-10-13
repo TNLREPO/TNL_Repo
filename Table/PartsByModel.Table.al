@@ -43,12 +43,56 @@ table 50023 "Parts By Model"
             Editable = false;
             FieldClass = FlowField;
         }
+        field(10; "Division III In Operations"; Decimal)
+        {
+            CalcFormula = Sum("Sales Invoice Line".Quantity WHERE("No." = FIELD("Model Code")));
+            DecimalPlaces = 0 : 0;
+            Editable = false;
+            FieldClass = FlowField;
+        }
+
         field(6; "Q'ty On Hand"; Decimal)
         {
             CalcFormula = Sum("Item Ledger Entry".Quantity WHERE("Item No." = FIELD("Part No."), "Posting Date" = FIELD(UPPERLIMIT("Base Date"))));
             DecimalPlaces = 0 : 0;
             Editable = false;
             FieldClass = FlowField;
+        }
+        field(16; "X70 Plus"; Boolean)
+        {
+            // CalcFormula = Sum("Item Ledger Entry".Quantity WHERE("Item No." = FIELD("Part No."), "Posting Date" = FIELD(UPPERLIMIT("Base Date"))));
+            // CalcFormula = exist("Item Ledger Entry".Quantity WHERE("Item No." = FIELD("Part No."), "Posting Date" = FIELD(UPPERLIMIT("Base Date"))));
+            // DecimalPlaces = 0 : 0;
+            Editable = true;
+            //FieldClass = FlowField;
+        }
+        field(17; "X70 LIBERTY"; Boolean)
+        {
+
+        }
+        field(23; "X50"; Boolean)
+        {
+
+        }
+        field(18; "X70 HYBRID"; Boolean)
+        {
+
+        }
+        field(19; "X90 PLUS"; Boolean)
+        {
+
+        }
+        field(20; "X1 DASHING"; Boolean)
+        {
+
+        }
+        field(21; "T2 TRAVELER"; Boolean)
+        {
+
+        }
+        field(22; "T2 HYBRID"; Boolean)
+        {
+
         }
         field(7; "Q'ty On Purchase Order"; Decimal)
         {
@@ -67,8 +111,8 @@ table 50023 "Parts By Model"
         }
         field(12; "Part Category"; Option)
         {
-            OptionCaption = 'ENGINE/FUEL SYSTEM,POWER DRIVE/CHASIS,BODY PARTS,ELECTRICAL PARTS';
-            OptionMembers = "ENGINE/FUEL SYSTEM","POWER DRIVE/CHASIS","BODY PARTS","ELECTRICAL PARTS";
+            OptionCaption = ' ,ENGINE/FUEL SYSTEM,POWER DRIVE/CHASIS,BODY PARTS,ELECTRICAL PARTS,AC,SUSPENSION,BRAKE,BRAKE/ELECTRICAL,DRIVE/SUSPENSION,TRANSMISSION,FLUID';
+            OptionMembers = " ","ENGINE/FUEL SYSTEM","POWER DRIVE/CHASIS","BODY PARTS","ELECTRICAL PARTS","AC","SUSPENSION","BRAKE","BRAKE/ELECTRICAL","DRIVE/SUSPENSION","TRANSMISSION","FLUID";
         }
         field(13; "Base Date"; Date)
         {
@@ -154,6 +198,20 @@ table 50023 "Parts By Model"
     begin
         Qsales := 0;
         ItemRec.SETRANGE(ItemRec."Model No.", "Model Code");
+        IF ItemRec.FIND('-') THEN
+            REPEAT
+                ItemRec.CALCFIELDS(ItemRec."Sales (Qty.)");
+                Qsales := Qsales + ItemRec."Sales (Qty.)";
+            UNTIL ItemRec.NEXT = 0;
+        "Model Units In Operations" := Qsales;
+        EXIT(Qsales);
+    end;
+
+    procedure DivisionIII(): Decimal
+    begin
+        Qsales := 0;
+        ItemRec.SETRANGE(ItemRec."Model No.", "Model Code");
+        ItemRec.SetRange(ItemRec.Grade, 'Grade III');
         IF ItemRec.FIND('-') THEN
             REPEAT
                 ItemRec.CALCFIELDS(ItemRec."Sales (Qty.)");
