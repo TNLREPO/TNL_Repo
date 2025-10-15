@@ -1002,6 +1002,10 @@ tableextension 50008 "Item Ext" extends Item
                                                                    "Sales Code"=FILTER(TGMO)));
             FieldClass = FlowField; */
         }
+        field(70131; Grade; Code[10])
+        {
+            DataClassification = ToBeClassified;
+        }
         field(80000; "Picture Url"; Text[250])
         {
             DataClassification = ToBeClassified;

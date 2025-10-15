@@ -151,6 +151,10 @@ pageextension 50004 "Item Card Ext" extends "Item Card"
                 {
                     ApplicationArea = Basic, Suite;
                 }
+                field(Grade; Rec.Grade)
+                {
+                    ApplicationArea = Basic, Suite;
+                }
             }
         }
     }

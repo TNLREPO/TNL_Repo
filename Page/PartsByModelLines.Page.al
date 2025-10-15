@@ -40,6 +40,40 @@ page 50128 "Parts By Model Lines"
                     DecimalPlaces = 0 : 0;
                     Visible = AvsalesVisible;
                 }
+                field("X70 Plus"; Rec."X70 Plus")
+                {
+                    //DataClassification = ToBeClassified;
+                }
+                field("X70 LIBERTY"; Rec."X70 LIBERTY")
+                {
+
+                }
+                field("X70 HYBRID"; Rec."X70 HYBRID")
+                {
+
+                }
+                field("X90 PLUS"; Rec."X90 Plus")
+                {
+
+                }
+                field("X1 DASHING"; Rec."X1 DASHING")
+                {
+
+                }
+                field("T2 TRAVELER"; Rec."T2 TRAVELER")
+                {
+
+                }
+                field("T2 HYBRID"; Rec."T2 HYBRID")
+                {
+
+                }
+
+                field("X50"; Rec."X50")
+                {
+
+                }
+
                 field("Q'ty On Hand"; Rec."Q'ty On Hand")
                 {
                 }
