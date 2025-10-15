@@ -26,12 +26,16 @@ pageextension 60007 "Item List Ext" extends "Item List"
                 ApplicationArea = All;
                 Visible = false;
             }
+            field(Grade; Rec.Grade)
+            {
+                ApplicationArea = all;
+            }
         }
 
         addafter("Unit Price")
         {
-            
-            field("FOB (FIXED)";Rec."FOB (FIXED)")
+
+            field("FOB (FIXED)"; Rec."FOB (FIXED)")
             {
                 ApplicationArea = Basic, Suite;
             }
@@ -39,8 +43,8 @@ pageextension 60007 "Item List Ext" extends "Item List"
             {
                 ApplicationArea = Basic, Suite;
             }
-                      
-            
+
+
             field("Net Change"; Rec."Net Change")
             {
                 ApplicationArea = Basic, Suite;
