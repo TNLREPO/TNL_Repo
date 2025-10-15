@@ -72,6 +72,22 @@ pageextension 50014 "Posted Sales Invoice Ext" extends "Posted Sales Invoice"
                         REPORT.RUNMODAL(50052, TRUE, TRUE, SalesInvHeader);
                 end;
             }
+            action(Invoice2ndChannel)
+            {
+                ApplicationArea = All;
+                Caption = 'Invoice - 2nd Channel';
+                ToolTip = 'Print an invoice for transaction.';
+                Image = PrintChecklistReport;
+                PromotedCategory = Process;
+                Promoted = true;
+
+                trigger OnAction()
+                begin
+                    SalesInvHeader.SETRANGE(SalesInvHeader."No.", Rec."No.");
+                    IF Rec.FindFirst() THEN
+                        REPORT.RUNMODAL(50029, TRUE, TRUE, SalesInvHeader);
+                end;
+            }
 
         }
 
