@@ -84,10 +84,36 @@ page 50129 "Parts By Model Card"
                               "Base Date" = FIELD("Date Filter");
             }
         }
+        area(factboxes)
+        {
+            part(ItemPicture; "Item Picture")
+            {
+                ApplicationArea = All;
+                Caption = 'Picture';
+                SubPageLink = "Model No." = field("Model No.");
+            }
+            part(ItemPicture1; "Item Picture")
+            {
+                ApplicationArea = All;
+                Provider = Lines;
+                Caption = 'Picture2';
+                SubPageLink = "No." = field("Part No.");
+
+            }
+            part(PowerBIReport; "Power BI Embedded Report Part")
+            {
+                ApplicationArea = All;
+                Caption = 'Picture';
+                SubPageLink = Context = field("Model No.");
+            }
+
+
+        }
     }
 
     actions
     {
+
         area(processing)
         {
             action("Print List")
@@ -104,6 +130,7 @@ page 50129 "Parts By Model Card"
                 end;
             }
         }
+
     }
 
     trigger OnAfterGetRecord()

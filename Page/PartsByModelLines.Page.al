@@ -56,6 +56,10 @@ page 50128 "Parts By Model Lines"
                 {
 
                 }
+                field("X70 Elegance"; Rec."X70 Elegance")
+                {
+
+                }
                 field("X1 DASHING"; Rec."X1 DASHING")
                 {
 
@@ -90,6 +94,7 @@ page 50128 "Parts By Model Lines"
                 {
                 }
             }
+
         }
     }
 
