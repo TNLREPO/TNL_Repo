@@ -78,11 +78,15 @@ table 50023 "Parts By Model"
         {
 
         }
-        field(19; "X90 PLUS"; Boolean)
+        field(19; "X90 PLUS"; Code[10])
         {
 
         }
-        field(20; "X1 DASHING"; Boolean)
+        field(20; "X1 DASHING"; Code[10])
+        {
+
+        }
+        field(24; "X70 Elegance"; Code[10])
         {
 
         }
@@ -125,6 +129,10 @@ table 50023 "Parts By Model"
             DecimalPlaces = 0 : 0;
             Editable = false;
             FieldClass = FlowField;
+        }
+        field(25; Picture; MediaSet)
+        {
+            Caption = 'Picture';
         }
     }
 
