@@ -276,6 +276,7 @@ tableextension 50092 "Sales Invoice Header Ext." extends "Sales Invoice Header"
         {
             Caption = 'IRN';
         }
+        
 
 
     }

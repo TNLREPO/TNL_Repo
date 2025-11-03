@@ -301,9 +301,17 @@ codeunit 50000 MySubscribers
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Sales-Post", 'OnAfterInsertInvoiceHeader', '', false, false)]
     procedure IRNOnAfterInsertInvoiceHeader(var SalesHeader: Record "Sales Header"; var SalesInvHeader: Record "Sales Invoice Header")
+    var
+        Yr: Text;
+        Mth: Text;
+        Dy: Text;
 
     begin
-        SalesInvHeader.IRN := SalesInvHeader."No." + '-' + '13D177B9' + '-' + Format(CurrentDateTime);
+        Yr := Format(CurrentDateTime, 0, '<Year4>');
+        Mth := Format(CurrentDateTime, 0, '<Month,2>');
+        Dy := Format(CurrentDateTime, 0, '<Day,2>');
+
+        SalesInvHeader.IRN := SalesInvHeader."No." + '-' + 'B17E2F91' + '-' + Yr + Mth + Dy;
         SalesInvHeader.Modify();
     end;
 

@@ -135,6 +135,7 @@ report 50285 "TNL Sales Invoice3"
             column(QRCodeImage; QRCode)
             {
             }
+
             dataitem(CopyLoop; Integer)
             {
                 DataItemTableView = SORTING(Number);
@@ -1303,6 +1304,8 @@ report 50285 "TNL Sales Invoice3"
         OLDesignation: Text[50];
         QRCode: Text;
         BarcodeURL: Text;
+        TempBlob: Codeunit "Temp Blob";
+        Base64Convert: Codeunit "Base64 Convert";
 
 
 
@@ -1824,27 +1827,44 @@ report 50285 "TNL Sales Invoice3"
 
     procedure GenerateQRCode()
     var
-        BarcodeSymbology2D: Enum "Barcode Symbology 2D";
-        BarcodeFontProvider2D: Interface "Barcode Font Provider 2D";
-        BarcodeString: Text;
-        eInvoiceSetup: record "e-Invoice Setup";
-    begin
-        eInvoiceSetup.GET;
 
-        /*  BarcodeURL := 'https://api.tdmsportal.com/api/qr/generateqrcode?'
-         + 'IRN=INV001-345SFG-20241011.1731618237'
-         + '&PublicKey=LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUlJQklqQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FROEFNSUlCQ2dLQ0FRRUFyU0xpdDRtb1RMbFdjd1A4eEp6RQp3ZTdkRHExdC9kMi9zcXdQTlNVandablFPbklabVh4TXY4QUQxemMxdUErZ3VCc2tpUGdoSXd6ekxWYXJoNk1KCndEdVUxSC95V2FPZE1PTnZOQy9OWERybXB5cE5WUDZyQnV3LzVjSERMdEtoZlJ0YkdFa1JSVVF4MVAxUUJ6REsKVVRpaTRJOXJld29zcVQ4V1dBOE8zRVd5ZHJ5TEg1K3JpVmRUNVBPeU1jcU95YUR2bGRqWG9ZdnBSTHlkcmtDQQpkUWpMdkw0bG00TVNxS05WdGVJR0Y4ZWk4M3Juck5wR3hKTVVGYVMwekt5TzBJZlY0alBCK3ZXN3I1TXdzTjRvCkRnWVR2ME85Q050N3JoNlEvYi9XR3Ewakl3WHJ3c3JIQXE4TXNyUVlGV0JIOHpmejMwOHRWMTlRM1hPTnEyWEMKMHdJREFRQUIKLS0tLS1FTkQgUFVCTElDIEtFWS0tLS0tCg=='
-         + '&Certificate=bHMrdllYN1lPVzlnblpyT1A5U0FMdklJOUMyQi9SMThVbktiTnlGNGJyUT0=&format=image&size=50x50';
-  */
-        BarcodeURL := 'https://api.tdmsportal.com/api/qr/generateqrcode?'
+        Client: HttpClient;
+        Response: HttpResponseMessage;
+        URL: Text;
+        InS: InStream;
+        OutS: OutStream;
+
+
+    begin
+
+        URL := 'https://api.tdmsportal.com/api/qr/generateqrcodeV2?'
         + 'IRN=' + SalesInvHeader.IRN
-        + '&PublicKey=' + eInvoiceSetup.PubKey
-        + '&Certificate=' + eInvoiceSetup.Certificate
+        + '&supplier_key=tnl-787867676'
         + '&format=image&size=50x50';
 
-        BarcodeFontProvider2D := Enum::"Barcode Font Provider 2D"::IDAutomation2D;
-        BarcodeSymbology2D := Enum::"Barcode Symbology 2D"::"QR-Code";
-        QRCode := BarcodeFontProvider2D.EncodeFont(BarcodeURL, BarcodeSymbology2D);
+
+        if Client.get(URL, Response) then begin
+            if Response.IsSuccessStatusCode() then begin
+                Response.Content().ReadAs(InS);
+
+                // Store the image data in TempBlob
+                TempBlob.CreateOutStream(OutS);
+                CopyStream(OutS, InS);
+
+                // Convert to Base64 for text field usage
+                TempBlob.CreateInStream(InS);
+                QRCode := Base64Convert.ToBase64(InS);
+
+            end else begin
+                // Handle error case - you might want to log this
+                QRCode := '';
+            end;
+        end else begin
+            // Handle connection error
+            QRCode := '';
+        end;
+
+
     end;
 }
 
