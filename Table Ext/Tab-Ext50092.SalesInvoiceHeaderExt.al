@@ -271,7 +271,6 @@ tableextension 50092 "Sales Invoice Header Ext." extends "Sales Invoice Header"
         {
             DataClassification = ToBeClassified;
         }
-
         field(90000; "IRN"; Text[150])
         {
             Caption = 'IRN';

@@ -325,4 +325,11 @@ codeunit 50000 MySubscribers
             NewItemLedgEntry."Purchase Date" := ItemLedgerEntry."Posting Date";
     end;
 
+    [EventSubscriber(ObjectType::Page, Page::"Item Tracking Summary", 'OnAfterUpdateSelectedQuantity', '', false, false)]
+    local procedure OnAfterUpdateSelectedQuantity(var EntrySummary: Record "Entry Summary"; var SelectedQuantity: Decimal)
+    begin
+        //If EntrySummary."Problem Vehicle" then
+            //Error('The selected item is marked as a Problem Vehicle and cannot be processed further. Please contact support for assistance.');
+    end;
+
 }

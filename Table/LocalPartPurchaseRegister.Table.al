@@ -622,7 +622,15 @@ table 70018 "Local Part Purchase Register"
             OptionMembers = " ",Approved,"On-hold",Rejected;
 
             trigger OnValidate()
+
+            var
+                UserSetupCheck: Record "User Setup";
+
             begin
+                UserSetupCheck.GET(USERID);
+                if UserSetupCheck."User ID" <> 'BUNMI' then
+                    ERROR('You are not authorized to approve as General Manager.');
+
                 IF "Order Type" <> "Order Type"::"Isolo Store" THEN BEGIN
                     TESTFIELD("Head of Audit", "Head of Audit"::Approved);
                     IF "General Manager" = "General Manager"::Approved THEN
@@ -647,7 +655,6 @@ table 70018 "Local Part Purchase Register"
                             "Name GM" := UserSetup4.Name;
                             TimeDate6 := CURRENTDATETIME;
                             Addressee := UserSetup.Initials;
-
 
                             Subject := STRSUBSTNO(Text025, "LPP No.");
                             CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text024, Addressee);

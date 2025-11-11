@@ -97,5 +97,11 @@ tableextension 50093 "Sales Invoice Line Ext." extends "Sales Invoice Line"
         {
             DataClassification = ToBeClassified;
         }
+        field(90000; "IRN"; Text[150])
+        {
+            Caption = 'IRN';
+        }
+        
+
     }
 }

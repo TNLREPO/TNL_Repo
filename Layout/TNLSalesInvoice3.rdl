@@ -2466,11 +2466,14 @@
             <Value>=First(Fields!QRCodeImage.Value, "DataSet_Result")</Value>
             <MIMEType>image/png</MIMEType>
             <Sizing>FitProportional</Sizing>
-            <Top>21.79849cm</Top>
-            <Left>6.08224cm</Left>
+            <Top>20.97828cm</Top>
+            <Left>7.21061cm</Left>
             <Height>2.95521cm</Height>
             <Width>3.69951cm</Width>
             <ZIndex>64</ZIndex>
+            <Visibility>
+              <Hidden>true</Hidden>
+            </Visibility>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -2478,7 +2481,7 @@
             </Style>
           </Image>
         </ReportItems>
-        <Height>25.80234cm</Height>
+        <Height>24.45297cm</Height>
         <Style />
       </Body>
       <Width>18.16016cm</Width>
