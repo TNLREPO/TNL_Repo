@@ -306,7 +306,7 @@ report 50438 "TNL Picking List- Pre-Owned"
 
                 trigger OnPreDataItem()
                 begin
-                    NoLoops := 1 + ABS(NoCopies) + Customer."Invoice Copies";
+                   NoLoops := 1 + ABS(NoCopies);
                     IF NoLoops <= 0 THEN
                         NoLoops := 1;
                     CopyNo := 0;

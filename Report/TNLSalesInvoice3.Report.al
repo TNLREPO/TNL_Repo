@@ -926,7 +926,7 @@ report 50285 "TNL Sales Invoice3"
 
                 trigger OnPreDataItem()
                 begin
-                    NoOfLoops := ABS(NoOfCopies) + Cust."Invoice Copies" + 1;
+                    NoOfLoops := ABS(NoOfCopies) + 1;
                     IF NoOfLoops <= 0 THEN
                         NoOfLoops := 1;
                     CopyText := '';

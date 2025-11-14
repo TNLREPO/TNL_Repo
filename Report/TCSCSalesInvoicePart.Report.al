@@ -910,7 +910,7 @@ report 50052 "TCSC Sales Invoice-Part"
 
                 trigger OnPreDataItem()
                 begin
-                    NoOfLoops := ABS(NoOfCopies) + Cust."Invoice Copies" + 1;
+                     NoOfLoops := ABS(NoOfCopies) + 1;
                     IF NoOfLoops <= 0 THEN
                         NoOfLoops := 1;
                     CopyText := '';

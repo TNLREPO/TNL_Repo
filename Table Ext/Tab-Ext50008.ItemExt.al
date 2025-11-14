@@ -947,21 +947,24 @@ tableextension 50008 "Item Ext" extends Item
         }
         field(70122; BNPA; Decimal)
         {
-            /* CalcFormula = Lookup("Sales Price"."Unit Price" WHERE("Item No." = FIELD("No."),
-                                                                   "Sales Code" = FILTER('BNPA')));
-            FieldClass = FlowField; */
+            CalcFormula = Lookup("Price List Line"."Unit Price" WHERE("Asset Type" = CONST(Item),
+                                                                      "Asset No." = FIELD("No."),
+                                                                      "Source No." = FILTER('BNPA')));
+            FieldClass = FlowField; 
         }
         field(70123; BNPB; Decimal)
         {
-            /*  CalcFormula = Lookup("Sales Price"."Unit Price" WHERE("Item No."=FIELD("No."),
-                                                                    "Sales Code="FILTER('BNPB')));
-             FieldClass = FlowField; */
+            CalcFormula = Lookup("Price List Line"."Unit Price" WHERE("Asset Type" = CONST(Item),
+                                                                      "Asset No." = FIELD("No."),
+                                                                      "Source No." = FILTER('BNPB')));
+             FieldClass = FlowField; 
         }
         field(70124; BNPC; Decimal)
         {
-            /*  CalcFormula = Lookup("Sales Price"."Unit Price" WHERE ("Item No."=FIELD("No."),
-                                                                    Sales Code=FILTER(BNPC)));
-             FieldClass = FlowField; */
+            CalcFormula = Lookup("Price List Line"."Unit Price" WHERE("Asset Type" = CONST(Item),
+                                                                      "Asset No." = FIELD("No."),
+                                                                      "Source No." = FILTER('BNPC')));
+             FieldClass = FlowField;
         }
         field(70125; Allocated; Boolean)
         {

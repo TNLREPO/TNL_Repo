@@ -23,27 +23,12 @@ xmlport 50000 "Modify Item Ledger Entry"
                 {
 
                 }
-                /*  textelement(EngineNo)
-                 {
 
-                 } */
                 textelement(ExtColorCode)
                 {
 
                 }
-                /* textelement(SerialNo)
-                {
 
-                }
-                
-                textelement(KeyNo)
-                {
-
-                }
-                textelement(PurchDate)
-                {
-
-                } */
 
                 trigger OnAfterInsertRecord()
                 var
@@ -52,12 +37,8 @@ xmlport 50000 "Modify Item Ledger Entry"
                 begin
 
                     if ItemLedgEntry.get(EntryNo) then begin
-                        //ItemLedgEntry."Serial No." := SerialNo;
-                        //ItemLedgEntry."Engine No." := EngineNo;
-                        ItemLedgEntry."Exterior Colour Code" := ExtColorCode;
                         ItemLedgEntry."Exterior Colour Name" := ExtColorName;
-                        //ItemLedgEntry."Key No." := KeyNo;
-                        //Evaluate(ItemLedgEntry."Purchase Date", PurchDate);
+                        ItemLedgEntry."Exterior Colour Code" := ExtColorCode;
                         ItemLedgEntry.Modify();
                     end;
 

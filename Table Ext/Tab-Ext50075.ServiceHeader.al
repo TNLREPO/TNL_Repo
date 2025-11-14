@@ -212,11 +212,11 @@ tableextension 50075 "Service Header" extends "Service Header"
         {
             Editable = false;
         }
-        field(50258; Amount; Decimal)
+       /*  field(50258; Amount; Decimal)
         {
             CalcFormula = Sum("Service Line"."Amount Including VAT" WHERE("Document No." = FIELD("No.")));
             FieldClass = FlowField;
-        }
+        } */
         field(50259; Submitted; Boolean)
         {
         }
