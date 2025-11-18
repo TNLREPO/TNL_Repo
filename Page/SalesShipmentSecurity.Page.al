@@ -172,7 +172,6 @@ page 70528 "Sales Shipment Security"
                     Caption = 'Work Description';
                     field(GetWorkDescription; Rec.GetWorkDescription)
                     {
-
                         Editable = false;
                         Importance = Additional;
                         MultiLine = true;
@@ -195,9 +194,16 @@ page 70528 "Sales Shipment Security"
             group("Doc Link")
             {
                 Caption = 'Document Link';
-                field("Acknowledged Doc Link"; Rec."Acknowledged Doc Link")
+                Editable = true;
+
+                field("Acknowledged Doc Link"; AcknowledgedDocLink)
                 {
+                    ApplicationArea = All;
                     Editable = true;
+                    ShowMandatory = false;
+                    Caption = 'Acknowledged Doc Link';
+                    ToolTip = 'Specifies the document link for acknowledgment.';
+
                 }
             }
         }
@@ -222,8 +228,38 @@ page 70528 "Sales Shipment Security"
 
     }
 
+    trigger OnOpenPage()
+    begin
+        xSalesShipmentHeader := Rec;
+    end;
+
+    trigger OnAfterGetRecord()
+    begin
+        // Allow modification of the record
+        CurrPage.Editable := true;
+        // Initialize the variable with current field value
+        AcknowledgedDocLink := Rec."Acknowledged Doc Link";
+    end;
+
+    trigger OnQueryClosePage(CloseAction: Action): Boolean
+    begin
+        if CloseAction in [ACTION::OK, ACTION::LookupOK] then
+            if NewRecordChanged() then begin
+                // Set the field value in the record before calling the edit codeunit
+                Rec."Acknowledged Doc Link" := AcknowledgedDocLink;
+                CODEUNIT.Run(CODEUNIT::"Shipment Header - Edit", Rec);
+            end;
+    end;
+
     var
         DocPrint: Codeunit 229;
+        xSalesShipmentHeader: Record "Sales Shipment Header";
+        AcknowledgedDocLink: Text[250];
+
+    local procedure NewRecordChanged() IsChanged: Boolean
+    begin
+        IsChanged := (AcknowledgedDocLink <> xSalesShipmentHeader."Acknowledged Doc Link");
+    end;
 
 }
 
