@@ -2559,7 +2559,7 @@ page 70522 "DOO Sales Order"
     begin
         JobQueuesUsed := SalesSetup.JobQueueActive();
         SetExtDocNoMandatoryCondition();
-        IsPowerAutomatePrivacyNoticeApproved := PrivacyNotice.GetPrivacyNoticeApprovalState(FlowServiceManagement.GetPowerAutomatePrivacyNoticeId()) = "Privacy Notice Approval State"::Agreed;
+        //IsPowerAutomatePrivacyNoticeApproved := PrivacyNotice.GetPrivacyNoticeApprovalState(FlowServiceManagement.GetPowerAutomatePrivacyNoticeId()) = "Privacy Notice Approval State"::Agreed;
     end;
 
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
