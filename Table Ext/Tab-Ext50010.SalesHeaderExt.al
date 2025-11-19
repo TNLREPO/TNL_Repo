@@ -2266,10 +2266,6 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
             END;
 
 
-            // SaleShipHeader.SETRANGE(SaleShipHeader."Order No.","No.");
-            // IF SaleShipHeader.FINDFIRST THEN
-            // ERROR('This document Order No. has been Used Before!');
-
             IF (Rec."Shortcut Dimension 1 Code" = '05PARTS') THEN BEGIN
                 SalesLine.SETCURRENTKEY("Document Type", "Document No.", Type, "No.");
                 SalesLine.SETRANGE("Document Type", Rec."Document Type");
@@ -2390,9 +2386,12 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
 
 
             GPC.UseTodaysDate("Posting Date");
-            GPC.CheckItemCostToPost("No.");
-            GPC.CheckMargin("No.");
 
+            Cust.Get(Rec."Sell-to Customer No."); 
+            if not Cust.SkipCostCheck then begin
+                GPC.CheckItemCostToPost("No.");
+                GPC.CheckMargin("No.");
+            end;
         end;
     end;
 

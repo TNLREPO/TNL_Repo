@@ -30,6 +30,12 @@ pageextension 50005 "Customer Card Ext" extends "Customer Card"
                 {
                     ApplicationArea = All;
                 }
+                field(SkipCostCheck; Rec.SkipCostCheck)
+                {
+                    Caption = 'Skip Cost Check';
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies whether to skip cost check for sales orders and invoices for this customer.';
+                }
                 field("Dealer Emails"; Rec."Dealer Emails")
                 {
                     ApplicationArea = All;

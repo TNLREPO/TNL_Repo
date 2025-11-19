@@ -411,6 +411,22 @@ tableextension 50004 "Customer Ext." extends Customer
             DataClassification = ToBeClassified;
 
         }
+        field(60011; SkipCostCheck; Boolean)
+        {
+            DataClassification = ToBeClassified;
+            trigger OnValidate()
+            begin
+                UserSetup.get(USERID);
+                IF NOT UserSetup."System Admin" THEN
+                    ERROR('You do not have permission for this action!');
+                "SkipCostCheck Tracking" := USERID;
+
+            end;
+        }
+        field(60012; "SkipCostCheck Tracking"; Code[70])
+        {
+            DataClassification = ToBeClassified;
+        }
 
 
     }
@@ -438,7 +454,7 @@ tableextension 50004 "Customer Ext." extends Customer
         "User ID" := USERID;
         IF UserSetup.GET("User ID") THEN
             "Location Code" := UserSetup."Location Code";
-            
+
     end;
 
 
