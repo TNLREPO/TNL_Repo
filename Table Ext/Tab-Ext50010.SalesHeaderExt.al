@@ -1388,13 +1388,17 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                 if not UserSetup."Unit Price Approval" then
                     ERROR('You do not have permission for this action!');
 
-                if UserSetup."System Admin" and ("Customer Line discount" <> 0) then begin
-                    Locked := true;
-                    modify();
-                end else begin
-                    Locked := false;
-                    Modify();
-                end;
+                if not UserSetup."System Admin" then
+                    error('Only System Admin can approve Customer Line Discount!');
+
+                /*  if UserSetup."System Admin" and ("Customer Line discount" <> 0) then begin
+                     Locked := true;
+                     modify();
+                 end else begin
+                     Locked := false;
+                     Modify();
+                 end; */
+
             end;
         }
         field(60109; "Serial No"; Code[20])
@@ -2387,7 +2391,7 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
 
             GPC.UseTodaysDate("Posting Date");
 
-            Cust.Get(Rec."Sell-to Customer No."); 
+            Cust.Get(Rec."Sell-to Customer No.");
             if not Cust.SkipCostCheck then begin
                 GPC.CheckItemCostToPost("No.");
                 GPC.CheckMargin("No.");

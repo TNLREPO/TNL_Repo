@@ -177,5 +177,9 @@ tableextension 50094 "Sales Cr.Memo Header Ext" extends "Sales Cr.Memo Header"
         field(50263; Posting_Time; DateTime)
         {
         }
+        field(90000; "IRN"; Text[150])
+        {
+            Caption = 'IRN';
+        }
     }
 }

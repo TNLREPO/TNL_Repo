@@ -2,12 +2,12 @@ namespace AL_TNL.AL_TNL;
 
 using Microsoft.Sales.History;
 
-page 50124 "FIRS Sales Invoice"
+page 50146 "FIRS Sales Credit"
 {
     ApplicationArea = All;
-    Caption = 'FIRS Sales Invoice';
+    Caption = 'FIRS Sales Credit';
     PageType = List;
-    SourceTable = "Sales Invoice Line";
+    SourceTable = "Sales Cr.Memo Line";
     UsageCategory = Lists;
 
     layout

@@ -101,7 +101,30 @@ tableextension 50093 "Sales Invoice Line Ext." extends "Sales Invoice Line"
         {
             Caption = 'IRN';
         }
-        
+        field(90001; "TIN"; Text[150])
+        {
+            Caption = 'TIN';
+        }
+        field(90002; "Email"; Text[150])
+        {
+            Caption = 'Email';
+        }
+        field(90003; "Postal Address"; Text[250])
+        {
+            Caption = 'Postal Address';
+        }
+        field(90004; "Street Name"; Text[100])
+        {
+            Caption = 'Street Name';
+        }
+        field(90005; "City Name"; Text[50])
+        {
+            Caption = 'City Name';
+        }
+        field(90006; "Postal Zone"; Text[50])
+        {
+            Caption = 'Postal Zone';
+        }
 
     }
 }

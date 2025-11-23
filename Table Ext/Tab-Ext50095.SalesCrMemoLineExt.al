@@ -41,5 +41,34 @@ tableextension 50095 "Sales Cr.Memo Line Ext" extends "Sales Cr.Memo Line"
             CalcFormula = Lookup(Customer.Name WHERE("No." = FIELD("Sell-to Customer No.")));
             FieldClass = FlowField;
         }
+        field(90000; "IRN"; Text[150])
+        {
+            Caption = 'IRN';
+        }
+        field(90001; "TIN"; Text[150])
+        {
+            Caption = 'TIN';
+        }
+        field(90002; "Email"; Text[150])
+        {
+            Caption = 'Email';
+        }
+        field(90003; "Postal Address"; Text[250])
+        {
+            Caption = 'Postal Address';
+        }
+        field(90004; "Street Name"; Text[100])
+        {
+            Caption = 'Street Name';
+        }
+        field(90005; "City Name"; Text[50])
+        {
+            Caption = 'City Name';
+        }
+        field(90006; "Postal Zone"; Text[50])
+        {
+            Caption = 'Postal Zone';
+        }
+
     }
 }

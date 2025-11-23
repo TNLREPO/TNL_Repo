@@ -299,22 +299,6 @@ codeunit 50000 MySubscribers
         Rec.ServLineCheckControls();
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Sales-Post", 'OnAfterInsertInvoiceHeader', '', false, false)]
-    procedure IRNOnAfterInsertInvoiceHeader(var SalesHeader: Record "Sales Header"; var SalesInvHeader: Record "Sales Invoice Header")
-    var
-        Yr: Text;
-        Mth: Text;
-        Dy: Text;
-
-    begin
-        Yr := Format(CurrentDateTime, 0, '<Year4>');
-        Mth := Format(CurrentDateTime, 0, '<Month,2>');
-        Dy := Format(CurrentDateTime, 0, '<Day,2>');
-
-        SalesInvHeader.IRN := SalesInvHeader."No." + '-' + 'B17E2F91' + '-' + Yr + Mth + Dy;
-        SalesInvHeader.Modify();
-    end;
-
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Item Jnl.-Post Line", 'OnAfterInitItemLedgEntry', '', false, false)]
     procedure UpdatePurchaseDateOnAfterInitItemLedgEntry(var NewItemLedgEntry: Record "Item Ledger Entry"; var ItemJournalLine: Record "Item Journal Line")
     var
@@ -329,7 +313,88 @@ codeunit 50000 MySubscribers
     local procedure OnAfterUpdateSelectedQuantity(var EntrySummary: Record "Entry Summary"; var SelectedQuantity: Decimal)
     begin
         //If EntrySummary."Problem Vehicle" then
-            //Error('The selected item is marked as a Problem Vehicle and cannot be processed further. Please contact support for assistance.');
+        //Error('The selected item is marked as a Problem Vehicle and cannot be processed further. Please contact support for assistance.');
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Sales-Post", 'OnAfterInsertInvoiceHeader', '', false, false)]
+    procedure IRNOnAfterInsertInvoiceHeader(var SalesHeader: Record "Sales Header"; var SalesInvHeader: Record "Sales Invoice Header")
+    var
+        Yr: Text;
+        Mth: Text;
+        Dy: Text;
+        SalesInvLine: Record "Sales Invoice Line";
+
+
+    begin
+        Yr := Format(CurrentDateTime, 0, '<Year4>');
+        Mth := Format(CurrentDateTime, 0, '<Month,2>');
+        Dy := Format(CurrentDateTime, 0, '<Day,2>');
+
+        SalesInvHeader.IRN := SalesInvHeader."No." + '-' + 'B17E2F91' + '-' + Yr + Mth + Dy;
+        SalesInvHeader.Modify();
+
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Sales-Post", 'OnAfterInsertCrMemoHeader', '', false, false)]
+    procedure IRNOnAfterInsertCrMemoHeader(var SalesHeader: Record "Sales Header"; var SalesCrMemoHeader: Record "Sales Cr.Memo Header")
+    var
+        Yr: Text;
+        Mth: Text;
+        Dy: Text;
+
+
+    begin
+        Yr := Format(CurrentDateTime, 0, '<Year4>');
+        Mth := Format(CurrentDateTime, 0, '<Month,2>');
+        Dy := Format(CurrentDateTime, 0, '<Day,2>');
+
+        SalesCrMemoHeader.IRN := SalesCrMemoHeader."No." + '-' + 'B17E2F91' + '-' + Yr + Mth + Dy;
+        SalesCrMemoHeader.Modify();
+
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Sales-Post", 'OnAfterPostSalesLines', '', false, false)]
+    procedure OnAfterPostSalesLines(var SalesHeader: Record "Sales Header"; var SalesShipmentHeader: Record "Sales Shipment Header"; var SalesInvoiceHeader: Record "Sales Invoice Header"; var SalesCrMemoHeader: Record "Sales Cr.Memo Header"; var ReturnReceiptHeader: Record "Return Receipt Header"; WhseShip: Boolean; WhseReceive: Boolean; var SalesLinesProcessed: Boolean; CommitIsSuppressed: Boolean; EverythingInvoiced: Boolean; var TempSalesLineGlobal: Record "Sales Line" temporary)
+    var
+        Customer: Record Customer;
+        SalesInvLine: Record "Sales Invoice Line";
+
+    begin
+        Customer.Get(SalesHeader."Sell-to Customer No.");
+        SalesInvLine.SetRange("Document No.", SalesInvoiceHeader."No.");
+        if SalesInvLine.FindSet() then
+            repeat
+                SalesInvLine."IRN" := SalesInvoiceHeader.IRN;
+                SalesInvLine.TIN := Customer."VAT Registration No.";
+                SalesInvLine.Email := Customer."E-Mail";
+                SalesInvLine."Postal Address" := Customer."Address";
+                SalesInvLine."Street Name" := Customer."Address 2";
+                SalesInvLine."City Name" := Customer."City";
+                SalesInvLine."Postal Zone" := Customer."Post Code";
+                SalesInvLine.Modify();
+            until SalesInvLine.Next() = 0;
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Sales-Post", 'OnAfterPostSalesLines', '', false, false)]
+    procedure OnAfterPostSalesCrMemoLines(var SalesHeader: Record "Sales Header"; var SalesShipmentHeader: Record "Sales Shipment Header"; var SalesInvoiceHeader: Record "Sales Invoice Header"; var SalesCrMemoHeader: Record "Sales Cr.Memo Header"; var ReturnReceiptHeader: Record "Return Receipt Header"; WhseShip: Boolean; WhseReceive: Boolean; var SalesLinesProcessed: Boolean; CommitIsSuppressed: Boolean; EverythingInvoiced: Boolean; var TempSalesLineGlobal: Record "Sales Line" temporary)
+    var
+        Customer: Record Customer;
+        SalesCrMemoLine: Record "Sales Cr.Memo Line";
+
+    begin
+        Customer.Get(SalesHeader."Sell-to Customer No.");
+        SalesCrMemoLine.SetRange("Document No.", SalesCrMemoHeader."No.");
+        if SalesCrMemoLine.FindSet() then
+            repeat
+                SalesCrMemoLine."IRN" := SalesCrMemoHeader.IRN;
+                SalesCrMemoLine.TIN := Customer."VAT Registration No.";
+                SalesCrMemoLine.Email := Customer."E-Mail";
+                SalesCrMemoLine."Postal Address" := Customer."Address";
+                SalesCrMemoLine."Street Name" := Customer."Address 2";
+                SalesCrMemoLine."City Name" := Customer."City";
+                SalesCrMemoLine."Postal Zone" := Customer."Post Code";
+                SalesCrMemoLine.Modify();
+            until SalesCrMemoLine.Next() = 0;
     end;
 
 }
