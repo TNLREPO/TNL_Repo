@@ -188,9 +188,7 @@ table 50023 "Parts By Model"
     end;
 
 
-    fieldgroups
-    {
-    }
+    
 
     var
         ItemRec: Record Item;
