@@ -275,7 +275,15 @@ tableextension 50092 "Sales Invoice Header Ext." extends "Sales Invoice Header"
         {
             Caption = 'IRN';
         }
-        
+        field(90001; "Sent to FIRS"; Boolean)
+        {
+            Caption = 'Sent to FIRS';
+        }
+        field(90002; "Error Message"; Text[250])
+        {
+            Caption = 'Error Message';
+        }
+
 
 
     }
@@ -404,4 +412,28 @@ tableextension 50092 "Sales Invoice Header Ext." extends "Sales Invoice Header"
         Email.OpenInEditorModally(EmailMessage, Enum::"Email Scenario"::Default);
 
     end;
+
+    Procedure SendeInvoiceToFIRS()
+    var
+        Client: HttpClient;
+        Response: HttpResponseMessage;
+        URL: Text;
+        InS: InStream;
+        OutS: OutStream;
+
+    Begin
+
+        URL := 'https://testapi.tdmsportal.com/api/qr/invoicesignfromorder?supplier_key=tnl-787867676'
+                + '&order_number=' + Rec."No.";
+
+        if Client.get(URL, Response) then begin
+            if Response.IsSuccessStatusCode() then
+                Rec."Sent to FIRS" := true
+            else
+                Error('Invoice failed to send to FIRS');
+        End;
+
+    end;
+
+
 }

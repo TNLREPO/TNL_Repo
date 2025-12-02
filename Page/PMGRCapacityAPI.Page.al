@@ -3,6 +3,7 @@ page 81055 "PMGR Capacity API"
     PageType = List;
     SourceTable = "PM/GR Capacity";
     ApplicationArea = All;
+    UsageCategory = Lists;
 
     layout
     {

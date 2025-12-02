@@ -1864,7 +1864,13 @@ report 50285 "TNL Sales Invoice3"
             QRCode := '';
         end;
 
-
     end;
+
+
+    
+
+
+
+
 }
 

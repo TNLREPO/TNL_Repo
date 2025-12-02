@@ -95,9 +95,29 @@ pageextension 50014 "Posted Sales Invoice Ext" extends "Posted Sales Invoice"
                     Rec.SendToCustomer(NewSalesInvHeader);
                 end;
             }
+
+            action(SendInvoiceToFIRS)
+            {
+                ApplicationArea = All;
+                Caption = 'Send Invoice to FIRS';
+                ToolTip = 'Send Invoice to FIRS';
+                Image = SendAsPDF;
+                PromotedCategory = Process;
+                Promoted = true;
+
+                trigger OnAction()
+                var
+
+                begin
+                    Rec.SendeInvoiceToFIRS()
+                end;
+            }
+
+
         }
     }
 
     var
         SalesInvHeader: Record "Sales Invoice Header";
+
 }

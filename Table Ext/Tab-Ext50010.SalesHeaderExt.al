@@ -27,11 +27,11 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
         {
             OptionMembers = " ",Sea,Air,Land;
         }
-        field(50151; "First User ID"; Code[30])
+        field(50151; "First User ID"; Code[50])
         {
             TableRelation = "User Setup";
         }
-        field(50152; "Last User ID"; Code[30])
+        field(50152; "Last User ID"; Code[50])
         {
             TableRelation = "User Setup";
         }
@@ -87,10 +87,10 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                 END;
             end;
         }
-        field(50164; Sender; Code[30])
+        field(50164; Sender; Code[50])
         {
         }
-        field(50165; "Send to"; Code[30])
+        field(50165; "Send to"; Code[50])
         {
             TableRelation = "User Setup"."User ID";
         }
@@ -117,7 +117,7 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
         field(50169; "Mail Body"; Text[250])
         {
         }
-        field(50170; "Approved By"; Code[30])
+        field(50170; "Approved By"; Code[50])
         {
         }
         field(50171; "User Department"; Code[20])
@@ -131,7 +131,7 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                 ValidateShortcutDimCode(1, "Shortcut Dimension 1 Code");
             end;
         }
-        field(50173; "1st Approval to"; Code[30])
+        field(50173; "1st Approval to"; Code[50])
         {
             TableRelation = "User Setup"."User ID";
 
@@ -589,7 +589,7 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
         {
 
         }
-        field(50178; "2nd Approval to"; Code[30])
+        field(50178; "2nd Approval to"; Code[50])
         {
             TableRelation = "User Setup"."User ID";
 
@@ -1163,7 +1163,7 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
         field(50182; "2nd Approver's Comment"; Boolean)
         {
         }
-        field(50188; "Final Approval to"; Code[30])
+        field(50188; "Final Approval to"; Code[50])
         {
             TableRelation = "User Setup"."User ID";
 
@@ -1375,7 +1375,7 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
             FieldClass = FlowField;
             CalcFormula = Sum("Sales Line"."Amount Including VAT" WHERE("Document No." = FIELD("No.")));
         }
-        field(50268; "Vehicle Order No."; Code[30])
+        field(50268; "Vehicle Order No."; Code[50])
         {
 
         }
@@ -1468,11 +1468,11 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                 "Finance Approved Time" := CURRENTDATETIME;
             end;
         }
-        field(60112; "Finance Send to"; Code[30])
+        field(60112; "Finance Send to"; Code[50])
         {
             TableRelation = "User Setup"."User ID";
         }
-        field(60113; "Marketing Send To"; Code[30])
+        field(60113; "Marketing Send To"; Code[50])
         {
             TableRelation = "User Setup"."User ID";
 
@@ -1553,7 +1553,7 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
 
             end;
         }
-        field(60115; "Logistics Send to"; Code[30])
+        field(60115; "Logistics Send to"; Code[50])
         {
             TableRelation = "User Setup"."User ID";
         }
@@ -1626,19 +1626,19 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
         field(60118; "Logistics Approved Time"; DateTime)
         {
         }
-        field(60119; "Logistics Approved By"; Code[30])
+        field(60119; "Logistics Approved By"; Code[50])
         {
         }
-        field(60120; "Logistics Sender"; Code[30])
+        field(60120; "Logistics Sender"; Code[50])
         {
         }
         field(60122; "Logistic Sent Time"; DateTime)
         {
         }
-        field(60123; "Finance Approved By"; Text[30])
+        field(60123; "Finance Approved By"; Text[50])
         {
         }
-        field(60124; "Marketing Sender"; Text[30])
+        field(60124; "Marketing Sender"; Text[50])
         {
         }
         field(60125; "Marketing Sent Time"; DateTime)
@@ -1647,7 +1647,7 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
         field(60126; "Finance Approved Time"; DateTime)
         {
         }
-        field(60127; "Marketing Approved By"; Text[30])
+        field(60127; "Marketing Approved By"; Text[50])
         {
         }
         field(60128; "Marketing Approved Time"; DateTime)
@@ -1791,7 +1791,7 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                     "Security Confirmation by" := '';
             end;
         }
-        field(60143; "Security Confirmation by"; Code[30])
+        field(60143; "Security Confirmation by"; Code[50])
         {
             DataClassification = ToBeClassified;
         }
@@ -1799,7 +1799,7 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
         {
             DataClassification = ToBeClassified;
         }
-        field(60145; "Security No."; Code[30])
+        field(60145; "Security No."; Code[50])
         {
             DataClassification = ToBeClassified;
             TableRelation = Employee;
@@ -2220,6 +2220,22 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
         Rec.TESTFIELD("Shortcut Dimension 1 Code");
 
         UserSetup.get(UserId);
+
+
+        SalesLine.SETCURRENTKEY("Document Type", "Document No.", Type, "No.");
+        SalesLine.SETRANGE("Document Type", Rec."Document Type");
+        SalesLine.SETRANGE("Document No.", Rec."No.");
+        SalesLine.SETRANGE(Type, SalesLine.Type::Item);
+        IF SalesLine.FINDFIRST THEN BEGIN
+            REPEAT
+                if (SalesLine."Gen. Prod. Posting Group" = 'CAR') AND (SalesLine."Line Discount Amount" <> 0) THEN
+                    IF Rec.Approved = FALSE THEN
+                        ERROR('This transaction needs to be approved before posting!')
+            UNTIL SalesLine.NEXT = 0;
+        END;
+
+
+
         if UserSetup."Allow Access" then
             exit else begin
 
@@ -2257,12 +2273,6 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                 SalesLine.SETRANGE("Variant Code", 'SEA');
                 IF SalesLine.FINDFIRST THEN BEGIN
                     REPEAT
-
-                        //IF NOT ( "Customer Line discount" = SalesLine."Line Discount %") THEN
-                        //      ERROR('The line discount is not the same with the approved discount !')
-                        //      UNTIL SalesLine.NEXT = 0;
-                        //  END;
-                        // END;
                         IF (SalesLine."Line Discount %" > Rec."Customer Line discount") THEN
                             ERROR('The line discount is not the same with the approved discount !')
                     UNTIL SalesLine.NEXT = 0;
@@ -2293,18 +2303,7 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                     UNTIL SalesLine.NEXT = 0;
             END;
 
-            SalesLine.SETCURRENTKEY("Document Type", "Document No.", Type, "No.");
-            SalesLine.SETRANGE("Document Type", Rec."Document Type");
-            SalesLine.SETRANGE("Document No.", Rec."No.");
-            SalesLine.SETRANGE(Type, SalesLine.Type::Item);
-            IF SalesLine.FINDFIRST THEN BEGIN
-                REPEAT
-                    //IF (Rec."Shortcut Dimension 1 Code" = '09MARKET') AND (SalesLine."Line Discount Amount" <> 0) THEN
-                    if (SalesLine."Gen. Prod. Posting Group" = 'CAR') AND (SalesLine."Line Discount Amount" <> 0) THEN
-                        IF Rec.Approved = FALSE THEN
-                            ERROR('This transaction needs to be approved before posting!')
-                UNTIL SalesLine.NEXT = 0;
-            END;
+
 
             Rec.TESTFIELD("Shortcut Dimension 1 Code");
             Rec.TESTFIELD("Salesperson Code");
