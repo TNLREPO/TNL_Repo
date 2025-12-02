@@ -21,6 +21,27 @@ pageextension 60007 "Item List Ext" extends "Item List"
                 ApplicationArea = All;
                 Visible = false;
             }
+            field("BNPA"; Rec.BNPA)
+            {
+                ApplicationArea = All;
+                Visible = True;
+            }
+            field("BNPB"; Rec.BNPB)
+            {
+                ApplicationArea = All;
+                Visible = true;
+            }
+            field("BNPC"; Rec."BNPC")
+            {
+                ApplicationArea = All;
+                Visible = true;
+            }
+            field("ISOLO-PRIC"; Rec."ISOLO-PRIC")
+            {
+                ApplicationArea = All;
+                Visible = true;
+            }
+
             field("Last Date Sold"; Rec."Last Date Sold")
             {
                 ApplicationArea = All;

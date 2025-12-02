@@ -37,6 +37,18 @@ pageextension 50010 "Item Ledger Entries Ext" extends "Item Ledger Entries"
             {
                 ApplicationArea = All;
             }
+            field("Model No."; Rec."Model No.")
+            {
+                ApplicationArea = ALL;
+            }
+            field(Grade; Rec.Grade)
+            {
+                ApplicationArea = ALL;
+            }
+            field(Engime; Rec.Engine)
+            {
+                ApplicationArea = ALL;
+            }
         }
 
     }

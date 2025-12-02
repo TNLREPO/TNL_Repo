@@ -803,12 +803,6 @@ End Function
         <Field Name="Model__Model_Name_">
           <DataField>Model__Model_Name_</DataField>
         </Field>
-        <Field Name="unitinoperation">
-          <DataField>unitinoperation</DataField>
-        </Field>
-        <Field Name="unitinoperationFormat">
-          <DataField>unitinoperationFormat</DataField>
-        </Field>
         <Field Name="Model__Line_Items_">
           <DataField>Model__Line_Items_</DataField>
         </Field>
