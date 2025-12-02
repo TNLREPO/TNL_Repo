@@ -947,24 +947,21 @@ tableextension 50008 "Item Ext" extends Item
         }
         field(70122; BNPA; Decimal)
         {
-            CalcFormula = Lookup("Price List Line"."Unit Price" WHERE("Asset Type" = CONST(Item),
-                                                                      "Asset No." = FIELD("No."),
-                                                                      "Source No." = FILTER('BNPA')));
-            FieldClass = FlowField; 
+            CalcFormula = Lookup("Price List Line"."Unit Price" WHERE("Product No." = FIELD("No."),
+                                                                   "Assign-to No." = FILTER('BNPA')));
+            FieldClass = FlowField;
         }
         field(70123; BNPB; Decimal)
         {
-            CalcFormula = Lookup("Price List Line"."Unit Price" WHERE("Asset Type" = CONST(Item),
-                                                                      "Asset No." = FIELD("No."),
-                                                                      "Source No." = FILTER('BNPB')));
-             FieldClass = FlowField; 
+            CalcFormula = Lookup("Price List Line"."Unit Price" WHERE("Product No." = FIELD("No."),
+                                                                    "Assign-to No." = FILTER('BNPB')));
+            FieldClass = FlowField;
         }
         field(70124; BNPC; Decimal)
         {
-            CalcFormula = Lookup("Price List Line"."Unit Price" WHERE("Asset Type" = CONST(Item),
-                                                                      "Asset No." = FIELD("No."),
-                                                                      "Source No." = FILTER('BNPC')));
-             FieldClass = FlowField;
+            CalcFormula = Lookup("Price List Line"."Unit Price" WHERE("Product No." = FIELD("No."),
+                                                                    "Assign-to No." = FILTER('BNPC')));
+            FieldClass = FlowField;
         }
         field(70125; Allocated; Boolean)
         {
@@ -1009,7 +1006,19 @@ tableextension 50008 "Item Ext" extends Item
         {
             DataClassification = ToBeClassified;
         }
+
+        field(70132; "ISOLO-PRIC"; Decimal)
+        {
+
+            CalcFormula = Lookup("Price List Line"."Unit Price" WHERE("Product No." = FIELD("No."),
+                                                                   "Assign-to No." = FILTER('ISOLO-PRIC')));
+            FieldClass = FlowField;
+        }
         field(80000; "Picture Url"; Text[250])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(70133; Engine; Code[10])
         {
             DataClassification = ToBeClassified;
         }

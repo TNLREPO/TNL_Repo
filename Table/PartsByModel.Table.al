@@ -106,6 +106,16 @@ table 50023 "Parts By Model"
             Editable = false;
             FieldClass = FlowField;
         }
+        field(28; "Total Purchase"; Decimal)
+        {
+            CalcFormula = Sum("Item Ledger Entry".Quantity WHERE("Item No." = FIELD("Part No."), "Entry Type" = filter('Purchase')));
+
+            //     CalcFormula = Sum(item l."Outstanding Quantity" WHERE(Type = CONST(Item), "No." = FIELD("Part No."),
+            //     "Document Type" = FILTER('Order|Invoice'), "Order Date" = FIELD(UPPERLIMIT("Base Date"))));
+            DecimalPlaces = 0 : 0;
+            Editable = false;
+            FieldClass = FlowField;
+        }
         field(8; "Q'ty On Sales Order"; Decimal)
         {
             CalcFormula = Sum("Sales Line"."Outstanding Quantity" WHERE("Document Type" = FILTER('Order|Invoice'), Type = CONST(Item), "No." = FIELD("Part No."), "Shipment Date" = FIELD(UPPERLIMIT("Base Date"))));
@@ -134,6 +144,26 @@ table 50023 "Parts By Model"
         {
             Caption = 'Picture';
         }
+        field(26; Serial; Integer)
+        {
+            Caption = 'Serial';
+        }
+        field(27; "Q'ty Sold"; Decimal)
+        {
+            CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Item No." = FIELD("Part No."), "Entry Type" = CONST(Sale)));
+            DecimalPlaces = 0 : 0;
+            Editable = false;
+            FieldClass = FlowField;
+        }
+        field(29; "Sales Rate"; Decimal)
+        {
+
+            // CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Item No." = FIELD("Part No."), "Entry Type" = CONST(Sale)));
+            // DecimalPlaces = 0 : 0;
+            // Editable = false;
+            // FieldClass = FlowField;
+        }
+
     }
 
     keys
@@ -146,6 +176,17 @@ table 50023 "Parts By Model"
         {
         }
     }
+
+    trigger OnInsert()
+    begin
+        UpdateSalesRate();
+    end;
+
+    trigger OnModify()
+    begin
+        UpdateSalesRate();
+    end;
+
 
     fieldgroups
     {
@@ -228,5 +269,19 @@ table 50023 "Parts By Model"
         "Model Units In Operations" := Qsales;
         EXIT(Qsales);
     end;
+    
+local procedure UpdateSalesRate()
+    var
+        Rate: Decimal;
+    begin
+        if Rec."Total Purchase" = 0 then begin
+            Rec."Sales Rate" := 0; // Avoid division by zero
+            exit;
+        end;
+
+        Rate := (Rec."Q'ty Sold" / Rec."Total Purchase") * 100;
+        Rec."Sales Rate" := Round(Rate, 0.01, '='); // Round to 2 decimal places
+    end;
+
 }
 
