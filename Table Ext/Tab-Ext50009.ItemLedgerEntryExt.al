@@ -174,6 +174,21 @@ tableextension 50009 "Item Ledger Entry Ext" extends "Item Ledger Entry"
         {
 
         }
+        field(60125; "Model No."; Code[50])
+        {
+            CalcFormula = Lookup(Item."Model No." WHERE("No." = FIELD("Item No.")));
+            FieldClass = FlowField;
+        }
+        field(60126; Grade; Code[10])
+        {
+            CalcFormula = Lookup(Item.Grade WHERE("No." = FIELD("Item No.")));
+            FieldClass = FlowField;
+        }
+        field(60127; Engine; Code[10])
+        {
+            CalcFormula = Lookup(Item.Engine WHERE("No." = FIELD("Item No.")));
+            FieldClass = FlowField;
+        }
 
 
     }

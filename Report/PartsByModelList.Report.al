@@ -25,9 +25,9 @@ report 50161 "Parts By Model List"
             column(Model__Model_Name_; "Model Name")
             {
             }
-            column(unitinoperation; unitinoperation)
-            {
-            }
+            // column(unitinoperation; unitinoperation)
+            // {
+            // }
             column(Model__Line_Items_; "Line Items")
             {
             }

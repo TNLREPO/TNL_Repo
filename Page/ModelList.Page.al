@@ -22,11 +22,11 @@ page 50037 "Model List"
                 field("Model Description"; Rec."Model Description")
                 {
                 }
-                field(unitinoperation; Rec.unitinoperation)
-                {
-                    Caption = 'Units in Operation';
-                    DecimalPlaces = 0 : 0;
-                }
+                // field(unitinoperation; Rec.unitinoperation)
+                // {
+                //     Caption = 'Units in Operation';
+                //     DecimalPlaces = 0 : 0;
+                // }
                 field("Inventory Line Item"; Rec."Inventory Line Item")
                 {
                 }

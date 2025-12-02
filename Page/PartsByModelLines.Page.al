@@ -77,6 +77,32 @@ page 50128 "Parts By Model Lines"
                 {
 
                 }
+                field("Serial"; Rec."Serial")
+                {
+
+                }
+                field("Qty Sold"; Rec."Q'ty Sold")
+                {
+
+                    trigger OnValidate()
+                    begin
+                        UpdateSalesRate();
+                    end;
+
+                }
+                field("Sales Rate"; Rec."Sales Rate")
+                {
+                    Editable = false;
+                }
+                field("Total Purchase"; Rec."Total Purchase")
+                {
+
+                    trigger OnValidate()
+                    begin
+                        UpdateSalesRate();
+                    end;
+
+                }
 
                 field("Q'ty On Hand"; Rec."Q'ty On Hand")
                 {
@@ -117,5 +143,16 @@ page 50128 "Parts By Model Lines"
     var
         AvsalesVisible: Boolean;
         TotalSaleVisible: Boolean;
+
+    procedure UpdateSalesRate()
+    var
+        Rate: Decimal;
+    begin
+        if Rec."Total Purchase" = 0 then
+            Rec."Sales Rate" := 0
+        else
+            Rec."Sales Rate" := Round((Rec."Q'ty Sold" / Rec."Total Purchase") * 100, 0.01, '=');
+    end;
+
 }
 
