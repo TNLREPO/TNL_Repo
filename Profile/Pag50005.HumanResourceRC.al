@@ -629,7 +629,7 @@ page 50005 "HR RC"
                 {
                     ApplicationArea = CostAccounting;
                     Caption = 'Advance Payment Approved';
-                    RunObject = Page "Advance Paymt Appr.";
+                    RunObject = Page "Advance Payment";
 
                 }
                 action("BalFullPaymtApproval")

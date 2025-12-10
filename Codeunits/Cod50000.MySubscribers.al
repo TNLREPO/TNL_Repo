@@ -1,6 +1,7 @@
 codeunit 50000 MySubscribers
 {
-    Permissions = tabledata "Sales Invoice Header" = rimd;
+    Permissions = tabledata "Sales Invoice Header" = rimd, tabledata "Sales Cr.Memo Header" = rimd, tabledata "Sales Invoice Line" = rimd,
+        tabledata "Sales Shipment Header" = rimd, tabledata "Sales Cr.Memo Line" = rimd;
 
     EventSubscriberInstance = StaticAutomatic;
 
@@ -311,9 +312,10 @@ codeunit 50000 MySubscribers
 
     [EventSubscriber(ObjectType::Page, Page::"Item Tracking Summary", 'OnAfterUpdateSelectedQuantity', '', false, false)]
     local procedure OnAfterUpdateSelectedQuantity(var EntrySummary: Record "Entry Summary"; var SelectedQuantity: Decimal)
+    var
+      
     begin
-        //If EntrySummary."Problem Vehicle" then
-        //Error('The selected item is marked as a Problem Vehicle and cannot be processed further. Please contact support for assistance.');
+        
     end;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Sales-Post", 'OnAfterInsertInvoiceHeader', '', false, false)]

@@ -12,11 +12,14 @@ pageextension 50005 "Customer Card Ext" extends "Customer Card"
                     ApplicationArea = Basic, Suite;
                     ToolTip = 'Specifies the line discount percentage that is applied to sales documents for this customer.';
                 }
-                field("Customer Type"; Rec."Customer Type")
+                field("Customer Type2"; Rec."Customer Type2")
                 {
+                    Caption = 'Customer Type';
                     ApplicationArea = Basic, Suite;
-                    ShowMandatory = true;
+                    TableRelation = "Customer Type".Code;
+                    ToolTip = 'Specifies the type of customer.';
                 }
+
                 field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = Basic, Suite;
@@ -40,6 +43,11 @@ pageextension 50005 "Customer Card Ext" extends "Customer Card"
                 {
                     ApplicationArea = All;
                     MultiLine = true;
+                }
+                field("Customer Type"; Rec."Customer Type")
+                {
+                    ApplicationArea = Basic, Suite;
+                    ShowMandatory = true;
                 }
             }
 

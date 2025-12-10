@@ -1,7 +1,7 @@
 table 70047 "Customer Type"
 {
-    /* DrillDownPageID = 80053;
-    LookupPageID = 80053 */;
+    DrillDownPageID = 80053;
+    LookupPageID = 80053;
 
     fields
     {

@@ -68,4 +68,5 @@ tableextension 50043 "Entry Summary Ext" extends "Entry Summary"
             end;
         }
     }
+   
 }

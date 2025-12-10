@@ -71,6 +71,7 @@ pageextension 50013 "Item Tracking Summary Ext" extends "Item Tracking Summary"
         VRIRec2: Record "VRI Table";
         VRIRec3: Record "VRI Table";
         VRIRec4: Record "VRI Table";
+        PageJustOpened: Boolean;
 
     trigger OnAfterGetRecord()
     var
@@ -117,4 +118,34 @@ pageextension 50013 "Item Tracking Summary Ext" extends "Item Tracking Summary"
         IF VRIRec4.FINDFIRST THEN
             Rec."VRI Code" := VRIRec4."VRI Code";
     end;
+
+    trigger OnOpenPage()
+    var
+        EntrySummary: Record "Entry Summary";
+    begin
+        // Clear all auto-selected quantities
+        EntrySummary.Copy(Rec, true);
+        if EntrySummary.FindSet(true) then
+            repeat
+                EntrySummary."Selected Quantity" := 0;
+                EntrySummary.Modify();
+            until EntrySummary.Next() = 0;
+
+        CurrPage.Update(true);
+    end;
+
+    trigger OnAfterGetCurrRecord()
+    begin
+        // Force page update to recalculate totals after clearing selections
+        if PageJustOpened then begin
+            PageJustOpened := false;
+            CurrPage.Update(false);
+        end;
+    end;
+
+    trigger OnQueryClosePage(CloseAction: Action): Boolean
+    begin
+        PageJustOpened := true;
+    end;
+
 }

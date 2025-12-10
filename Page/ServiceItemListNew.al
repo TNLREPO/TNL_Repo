@@ -41,6 +41,14 @@ page 51096 "Service Item List New"
                 {
                     ToolTip = 'Specifies the value of the Chasis No. field.';
                 }
+                field("Customer Posting Group"; Rec."Customer Posting Group")
+                {
+                    ToolTip = 'Specifies the value of the Customer Posting Group field.';
+                }
+                field("Customer Email"; Rec."Customer Email")
+                {
+                    ToolTip = 'Specifies the value of the Customer Email field.';
+                }
             }
         }
     }

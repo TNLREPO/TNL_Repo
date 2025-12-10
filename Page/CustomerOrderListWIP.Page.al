@@ -90,6 +90,10 @@ page 80043 "Customer Order List WIP"
                 field("Service Location"; Rec."Service Location")
                 {
                 }
+                field("Job Details"; Rec."Job Details")
+                {
+
+                }
             }
         }
     }

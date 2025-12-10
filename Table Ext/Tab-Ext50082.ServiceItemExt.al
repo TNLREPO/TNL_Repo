@@ -18,7 +18,7 @@ tableextension 50082 "Service Item Ext" extends "Service Item"
                     VDS := COPYSTR("Chasis No.", 4, 6);
                     VIS := COPYSTR("Chasis No.", 10, 8);
                 END;
-                
+
                 "SSC/SC".SETRANGE("SSC/SC".VDS, VDS);
                 "SSC/SC".SETRANGE("SSC/SC".VMI, VMI);
                 "SSC/SC".SETFILTER("SSC/SC"."Range From", '<=%1', VIS);
@@ -168,6 +168,11 @@ tableextension 50082 "Service Item Ext" extends "Service Item"
         field(50047; NickName; Text[50])
         {
             DataClassification = ToBeClassified;
+        }
+        field(50048; "Customer Posting Group"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+
         }
 
 
