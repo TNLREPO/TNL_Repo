@@ -51,6 +51,10 @@ pageextension 60007 "Item List Ext" extends "Item List"
             {
                 ApplicationArea = all;
             }
+            field(Engine; Rec.Engine)
+            {
+                ApplicationArea = all;
+            }
         }
 
         addafter("Unit Price")

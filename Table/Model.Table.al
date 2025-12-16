@@ -149,18 +149,18 @@ table 50014 Model
         }
         field(35; "1.5TIX50"; Decimal)
         {
-            CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), Grade = CONST('Grade I'), Engine = CONST('1.5T')));
+            CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), Grade = CONST('Grade I'), Engine = CONST('Grade I 1.5T')));
             DecimalPlaces = 0 : 0;
             Editable = false;
             FieldClass = FlowField;
         }
-        // field(36; "1.5TIX70L"; Decimal)
-        // {
-        //     CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), Grade = CONST('Grade I'), Engime = CONST('1.5T')));
-        //     DecimalPlaces = 0 : 0;
-        //     Editable = false;
-        //     FieldClass = FlowField;
-        // }
+        field(36; "1.5TIX70L"; Decimal)
+        {
+            CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), Grade = CONST('Grade I'), Engine = CONST('Grade I 1.5T')));
+            DecimalPlaces = 0 : 0;
+            Editable = false;
+            FieldClass = FlowField;
+        }
         field(29; "Grade II"; Decimal)
         {
             CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), Grade = CONST('Grade II')));
@@ -170,21 +170,21 @@ table 50014 Model
         }
         field(37; "1.5TIIX70L"; Decimal)
         {
-            CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), Grade = CONST('Grade II'), Engine = CONST('1.5T')));
+            CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), Grade = CONST('Grade II'), Engine = CONST('Grade II 1.5T')));
             DecimalPlaces = 0 : 0;
             Editable = false;
             FieldClass = FlowField;
         }
-        // field(38; "1.5TIIX70PE"; Decimal)
-        // {
-        //     CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), Grade = CONST('Grade II'), Engime = CONST('1.5T')));
-        //     DecimalPlaces = 0 : 0;
-        //     Editable = false;
-        //     FieldClass = FlowField;
-        // }
+        field(38; "1.5TIIX70PE"; Decimal)
+        {
+            CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), Grade = CONST('Grade II'), Engine = CONST('Grade II 1.5T')));
+            DecimalPlaces = 0 : 0;
+            Editable = false;
+            FieldClass = FlowField;
+        }
         field(39; "1.6TIIX90P"; Decimal)
         {
-            CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), Grade = CONST('Grade II'), Engine = CONST('1.6T')));
+            CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), Grade = CONST('Grade II'), Engine = CONST('Grade II 1.6T')));
             DecimalPlaces = 0 : 0;
             Editable = false;
             FieldClass = FlowField;
@@ -198,21 +198,21 @@ table 50014 Model
         }
         field(40; "1.5TIIIX70L"; Decimal)
         {
-            CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), Grade = CONST('Grade III'), Engine = CONST('1.5T')));
+            CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), Grade = CONST('Grade III'), Engine = CONST('Grade III 1.5T')));
             DecimalPlaces = 0 : 0;
             Editable = false;
             FieldClass = FlowField;
         }
         field(41; "1.6TIIIX70PE"; Decimal)
         {
-            CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), Grade = CONST('Grade III'), Engine = CONST('1.6T')));
+            CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), Grade = CONST('Grade III'), Engine = CONST('Grade III 1.6T')));
             DecimalPlaces = 0 : 0;
             Editable = false;
             FieldClass = FlowField;
         }
         field(42; "2.0TIIIX90P"; Decimal)
         {
-            CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), Grade = CONST('Grade III'), Engine = CONST('2.0T')));
+            CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), Grade = CONST('Grade III'), Engine = CONST('Grade III 2.0T')));
             DecimalPlaces = 0 : 0;
             Editable = false;
             FieldClass = FlowField;
@@ -226,28 +226,28 @@ table 50014 Model
         }
         field(43; "1.5TIVX1D"; Decimal)
         {
-            CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), Grade = CONST('Grade IV'), Engine = CONST('1.5T')));
+            CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), Grade = CONST('Grade IV'), Engine = CONST('Grade IV 1.5T')));
             DecimalPlaces = 0 : 0;
             Editable = false;
             FieldClass = FlowField;
         }
         field(44; "1.6TIVX70PE"; Decimal)
         {
-            CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), Grade = CONST('Grade IV'), Engine = CONST('1.6T')));
+            CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), Grade = CONST('Grade IV'), Engine = CONST('Grade IV 1.6T')));
             DecimalPlaces = 0 : 0;
             Editable = false;
             FieldClass = FlowField;
         }
         // field(45; "1.6TIVX90P"; Decimal)
         // {
-        //     CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), Grade = CONST('Grade IV'), Engime = CONST('1.6T')));
+        //     CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), Grade = CONST('Grade IV'), EngiNe = CONST('Grade IV 1.6T')));
         //     DecimalPlaces = 0 : 0;
         //     Editable = false;
         //     FieldClass = FlowField;
         // }
         field(46; "2.0TIVX90P"; Decimal)
         {
-            CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), Grade = CONST('Grade IV'), Engine = CONST('2.0T')));
+            CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), Grade = CONST('Grade IV'), Engine = CONST('Grade IV 2.0T')));
             DecimalPlaces = 0 : 0;
             Editable = false;
             FieldClass = FlowField;
@@ -261,7 +261,7 @@ table 50014 Model
         }
         field(47; "1.6TVX1D"; Decimal)
         {
-            CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), Grade = CONST('Grade V'), Engine = CONST('1.6T')));
+            CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), Grade = CONST('Grade V'), Engine = CONST('Grade V 1.6T')));
             DecimalPlaces = 0 : 0;
             Editable = false;
             FieldClass = FlowField;
@@ -275,14 +275,14 @@ table 50014 Model
         }
         field(48; "2.0TPRT2"; Decimal)
         {
-            CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), Grade = CONST('PREMIUM'), Engine = CONST('2.0T')));
+            CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), Grade = CONST('PREMIUM'), Engine = CONST('PREMIUM 2.0T')));
             DecimalPlaces = 0 : 0;
             Editable = false;
             FieldClass = FlowField;
         }
         field(49; "1.5TPRX50"; Decimal)
         {
-            CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), Grade = CONST('PREMIUM'), Engine = CONST('1.5T')));
+            CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), Grade = CONST('PREMIUM'), Engine = CONST('PREMIUM 1.5T')));
             DecimalPlaces = 0 : 0;
             Editable = false;
             FieldClass = FlowField;
@@ -296,14 +296,14 @@ table 50014 Model
         }
         field(50; "2.0TLUXT2"; Decimal)
         {
-            CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), Grade = CONST('LUXURY'), Engine = CONST('2.0T')));
+            CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), Grade = CONST('LUXURY'), Engine = CONST('LUXURY 2.0T')));
             DecimalPlaces = 0 : 0;
             Editable = false;
             FieldClass = FlowField;
         }
         field(51; "1.5TLUX50"; Decimal)
         {
-            CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), Grade = CONST('LUXURY'), Engine = CONST('1.5T')));
+            CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), Grade = CONST('LUXURY'), Engine = CONST('LUXURY 1.5T')));
             DecimalPlaces = 0 : 0;
             Editable = false;
             FieldClass = FlowField;
@@ -312,6 +312,7 @@ table 50014 Model
         {
 
         }
+
     }
 
     keys
