@@ -155,6 +155,14 @@ table 50023 "Parts By Model"
             Editable = false;
             FieldClass = FlowField;
         }
+        field(30; Comment; Text[250])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(31; Remarks; Text[100])
+        {
+            DataClassification = ToBeClassified;
+        }
         field(29; "Sales Rate"; Decimal)
         {
 
@@ -177,18 +185,9 @@ table 50023 "Parts By Model"
         }
     }
 
-    trigger OnInsert()
-    begin
-        UpdateSalesRate();
-    end;
-
-    trigger OnModify()
-    begin
-        UpdateSalesRate();
-    end;
-
-
-    
+    fieldgroups
+    {
+    }
 
     var
         ItemRec: Record Item;
@@ -267,19 +266,5 @@ table 50023 "Parts By Model"
         "Model Units In Operations" := Qsales;
         EXIT(Qsales);
     end;
-    
-local procedure UpdateSalesRate()
-    var
-        Rate: Decimal;
-    begin
-        if Rec."Total Purchase" = 0 then begin
-            Rec."Sales Rate" := 0; // Avoid division by zero
-            exit;
-        end;
-
-        Rate := (Rec."Q'ty Sold" / Rec."Total Purchase") * 100;
-        Rec."Sales Rate" := Round(Rate, 0.01, '='); // Round to 2 decimal places
-    end;
-
 }
 

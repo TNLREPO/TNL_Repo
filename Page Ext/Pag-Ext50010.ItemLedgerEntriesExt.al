@@ -49,6 +49,10 @@ pageextension 50010 "Item Ledger Entries Ext" extends "Item Ledger Entries"
             {
                 ApplicationArea = ALL;
             }
+            field("Shelf No"; Rec."Shelf No")
+            {
+                ApplicationArea = ALL;
+            }
         }
 
     }
