@@ -49,6 +49,11 @@ page 51096 "Service Item List New"
                 {
                     ToolTip = 'Specifies the value of the Customer Email field.';
                 }
+                field("Phone No."; Rec."Phone No.")
+                {
+                    ToolTip = 'Specifies the value of the Phone No. field.';
+                }
+
             }
         }
     }
