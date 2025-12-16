@@ -19,22 +19,38 @@ page 50037 "Model List"
                 field("Model Name"; Rec."Model Name")
                 {
                 }
-                field("Model Description"; Rec."Model Description")
-                {
-                }
+                // field("Model Description"; Rec."Model Description")
+                // {
+                // }
                 // field(unitinoperation; Rec.unitinoperation)
                 // {
                 //     Caption = 'Units in Operation';
                 //     DecimalPlaces = 0 : 0;
                 // }
-                field("Inventory Line Item"; Rec."Inventory Line Item")
+                field("Total Qty Sold"; Rec."Total Qty Sold")
                 {
+
                 }
-                field("Other Specification"; Rec."Other Specification")
+                field("Line Items"; Rec."Line Items")
                 {
+
                 }
-                field("Prod Date"; Rec."Prod Date")
+                field("Line Items with Stock Q'ty"; Rec."Line Items with Stock Q'ty")
                 {
+
+                }
+                // field("Inventory Line Item"; Rec."Inventory Line Item")
+                // {
+                // }
+                // field("Other Specification"; Rec."Other Specification")
+                // {
+                // }
+                // field("Prod Date"; Rec."Prod Date")
+                // {
+                // }
+                field("Line No."; Rec."Line No.")
+                {
+
                 }
             }
         }

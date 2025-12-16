@@ -40,7 +40,7 @@ page 50128 "Parts By Model Lines"
                     DecimalPlaces = 0 : 0;
                     Visible = AvsalesVisible;
                 }
-                field("X70 Plus"; Rec."X70 Plus")
+                field("X70 Plus CRUISE"; Rec."X70 Plus")
                 {
                     //DataClassification = ToBeClassified;
                 }
@@ -48,7 +48,7 @@ page 50128 "Parts By Model Lines"
                 {
 
                 }
-                field("X70 HYBRID"; Rec."X70 HYBRID")
+                field("X70 PHEV"; Rec."X70 HYBRID")
                 {
 
                 }
@@ -60,7 +60,7 @@ page 50128 "Parts By Model Lines"
                 {
 
                 }
-                field("X1 DASHING"; Rec."X1 DASHING")
+                field("DASHING"; Rec."X1 DASHING")
                 {
 
                 }
@@ -68,7 +68,7 @@ page 50128 "Parts By Model Lines"
                 {
 
                 }
-                field("T2 HYBRID"; Rec."T2 HYBRID")
+                field("T2 PHEV"; Rec."T2 HYBRID")
                 {
 
                 }
@@ -83,25 +83,12 @@ page 50128 "Parts By Model Lines"
                 }
                 field("Qty Sold"; Rec."Q'ty Sold")
                 {
-
-                    trigger OnValidate()
-                    begin
-                        UpdateSalesRate();
-                    end;
-
                 }
                 field("Sales Rate"; Rec."Sales Rate")
                 {
-                    Editable = false;
                 }
                 field("Total Purchase"; Rec."Total Purchase")
                 {
-
-                    trigger OnValidate()
-                    begin
-                        UpdateSalesRate();
-                    end;
-
                 }
 
                 field("Q'ty On Hand"; Rec."Q'ty On Hand")
@@ -119,6 +106,15 @@ page 50128 "Parts By Model Lines"
                 field("Part Category"; Rec."Part Category")
                 {
                 }
+                field(Comment; Rec.Comment)
+                {
+
+                }
+                field(Remarks; Rec.Remarks)
+                {
+
+                }
+
             }
 
         }
@@ -143,16 +139,6 @@ page 50128 "Parts By Model Lines"
     var
         AvsalesVisible: Boolean;
         TotalSaleVisible: Boolean;
-
-    procedure UpdateSalesRate()
-    var
-        Rate: Decimal;
-    begin
-        if Rec."Total Purchase" = 0 then
-            Rec."Sales Rate" := 0
-        else
-            Rec."Sales Rate" := Round((Rec."Q'ty Sold" / Rec."Total Purchase") * 100, 0.01, '=');
-    end;
 
 }
 

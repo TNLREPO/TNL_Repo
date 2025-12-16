@@ -1018,7 +1018,7 @@ tableextension 50008 "Item Ext" extends Item
         {
             DataClassification = ToBeClassified;
         }
-        field(70133; Engine; Code[10])
+        field(70133; Engine; Code[20])
         {
             DataClassification = ToBeClassified;
         }

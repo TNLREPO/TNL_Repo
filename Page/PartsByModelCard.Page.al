@@ -74,22 +74,22 @@ page 50129 "Parts By Model Card"
                 //     Caption = 'PREMIUM in Operation';
                 //     DecimalPlaces = 0 : 0;
                 // }
-                field("Grade I"; Rec."Grade I")
-                {
-                    DecimalPlaces = 0 : 0;
-                    Visible = QtyVisibleI;
-                    trigger OnValidate()
+                // field("Grade I"; Rec."Grade I")
+                // {
+                //     DecimalPlaces = 0 : 0;
+                //     Visible = QtyVisibleI;
+                //     trigger OnValidate()
 
-                    begin
-                        QtyVisibleI := rec."Grade I" <> 0;
-                        CurrPage.UPDATE();
-                    end;
-                }
+                //     begin
+                //         QtyVisibleI := rec."Grade I" <> 0;
+                //         CurrPage.UPDATE();
+                //     end;
+                // }
                 group("")
                 {
                     field("1.5TIX50"; Rec."1.5TIX50")
                     {
-                        Caption = '1.5T';
+                        Caption = 'GRADE I 1.5T';
                         DecimalPlaces = 0 : 0;
                         Visible = ISTIX50;
                         trigger OnValidate()
@@ -112,21 +112,21 @@ page 50129 "Parts By Model Card"
                     //     end;
                     // }
                 }
-                field("Grade II"; Rec."Grade II")
-                {
-                    DecimalPlaces = 0 : 0;
-                    Visible = QtyVisibleII;
-                    trigger OnValidate()
+                // field("Grade II"; Rec."Grade II")
+                // {
+                //     DecimalPlaces = 0 : 0;
+                //     Visible = QtyVisibleII;
+                //     trigger OnValidate()
 
-                    begin
-                        QtyVisibleII := rec."Grade II" <> 0;
-                        CurrPage.UPDATE();
-                    end;
-                }
+                //     begin
+                //         QtyVisibleII := rec."Grade II" <> 0;
+                //         CurrPage.UPDATE();
+                //     end;
+                // }
                 field("1.5TIIX70L"; Rec."1.5TIIX70L")
                 {
 
-                    Caption = '1.5T';
+                    Caption = 'GRADE II 1.5T';
                     DecimalPlaces = 0 : 0;
                     Visible = I5TIIX70L;
                     trigger OnValidate()
@@ -150,7 +150,7 @@ page 50129 "Parts By Model Card"
                 // }
                 field("1.6TIIX90P"; Rec."1.6TIIX90P")
                 {
-                    Caption = '1.6T';
+                    Caption = 'GRADE II 1.6T';
                     DecimalPlaces = 0 : 0;
                     Visible = I6TIIX90P;
                     trigger OnValidate()
@@ -160,20 +160,20 @@ page 50129 "Parts By Model Card"
                         CurrPage.UPDATE();
                     end;
                 }
-                field("Grade III"; Rec."Grade III")
-                {
-                    DecimalPlaces = 0 : 0;
-                    Visible = QtyVisibleIII;
-                    trigger OnValidate()
+                // field("Grade III"; Rec."Grade III")
+                // {
+                //     DecimalPlaces = 0 : 0;
+                //     Visible = QtyVisibleIII;
+                //     trigger OnValidate()
 
-                    begin
-                        QtyVisibleIII := rec."Grade III" <> 0;
-                        CurrPage.UPDATE();
-                    end;
-                }
+                //     begin
+                //         QtyVisibleIII := rec."Grade III" <> 0;
+                //         CurrPage.UPDATE();
+                //     end;
+                // }
                 field("1.5TIIIX70L"; Rec."1.5TIIIX70L")
                 {
-                    Caption = '1.5T';
+                    Caption = 'GRADE III 1.5T';
                     DecimalPlaces = 0 : 0;
                     Visible = I5TIIIX70L;
                     trigger OnValidate()
@@ -185,7 +185,7 @@ page 50129 "Parts By Model Card"
                 }
                 field("1.6TIIIX70PE"; Rec."1.6TIIIX70PE")
                 {
-                    Caption = '1.6T';
+                    Caption = 'GRADE III 1.6T';
                     DecimalPlaces = 0 : 0;
                     Visible = I6TIIIX70PE;
                     trigger OnValidate()
@@ -197,7 +197,7 @@ page 50129 "Parts By Model Card"
                 }
                 field("2.0TIIIX90P"; Rec."2.0TIIIX90P")
                 {
-                    Caption = '2.0T';
+                    Caption = 'GRADE III 2.0T';
                     DecimalPlaces = 0 : 0;
                     Visible = IITIIIX90P;
                     trigger OnValidate()
@@ -207,20 +207,20 @@ page 50129 "Parts By Model Card"
                         CurrPage.UPDATE();
                     end;
                 }
-                field("Grade IV"; Rec."Grade IV")
-                {
-                    DecimalPlaces = 0 : 0;
-                    Visible = QtyVisibleIV;
-                    trigger OnValidate()
+                // field("Grade IV"; Rec."Grade IV")
+                // {
+                //     DecimalPlaces = 0 : 0;
+                //     Visible = QtyVisibleIV;
+                //     trigger OnValidate()
 
-                    begin
-                        QtyVisibleIV := rec."Grade IV" <> 0;
-                        CurrPage.UPDATE();
-                    end;
-                }
+                //     begin
+                //         QtyVisibleIV := rec."Grade IV" <> 0;
+                //         CurrPage.UPDATE();
+                //     end;
+                // }
                 field("1.5TIVX1D"; Rec."1.5TIVX1D")
                 {
-                    Caption = '1.5T';
+                    Caption = 'GRADE IV 1.5T';
                     DecimalPlaces = 0 : 0;
                     Visible = I5TIVX1D;
                     trigger OnValidate()
@@ -232,7 +232,7 @@ page 50129 "Parts By Model Card"
                 }
                 field("1.6TIVX70PE"; Rec."1.6TIVX70PE")
                 {
-                    Caption = '1.6T';
+                    Caption = 'GRADE IV 1.6T';
                     DecimalPlaces = 0 : 0;
                     Visible = I6TIVX70PE;
                     trigger OnValidate()
@@ -256,7 +256,7 @@ page 50129 "Parts By Model Card"
                 // }
                 field("2.0TIVX90P"; Rec."2.0TIVX90P")
                 {
-                    Caption = '2.0T';
+                    Caption = 'GRADE IV 2.0T';
                     DecimalPlaces = 0 : 0;
                     Visible = IITIVX90P;
                     trigger OnValidate()
@@ -266,20 +266,20 @@ page 50129 "Parts By Model Card"
                         CurrPage.UPDATE();
                     end;
                 }
-                field("Grade V"; Rec."Grade V")
-                {
-                    DecimalPlaces = 0 : 0;
-                    Visible = QtyVisibleV;
-                    trigger OnValidate()
+                // field("Grade V"; Rec."Grade V")
+                // {
+                //     DecimalPlaces = 0 : 0;
+                //     Visible = QtyVisibleV;
+                //     trigger OnValidate()
 
-                    begin
-                        QtyVisibleV := rec."Grade V" <> 0;
-                        CurrPage.UPDATE();
-                    end;
-                }
+                //     begin
+                //         QtyVisibleV := rec."Grade V" <> 0;
+                //         CurrPage.UPDATE();
+                //     end;
+                // }
                 field("1.6TVX1D"; Rec."1.6TVX1D")
                 {
-                    Caption = '1.6T';
+                    Caption = 'GRADE V 1.6T';
                     DecimalPlaces = 0 : 0;
                     Visible = I6TVX1D;
                     trigger OnValidate()
@@ -290,20 +290,20 @@ page 50129 "Parts By Model Card"
                     end;
                 }
 
-                field("PREMIUM QTY"; Rec."PREMIUM QTY")
-                {
-                    DecimalPlaces = 0 : 0;
-                    Visible = QtyVisiblePRE;
-                    trigger OnValidate()
+                // field("PREMIUM QTY"; Rec."PREMIUM QTY")
+                // {
+                //     DecimalPlaces = 0 : 0;
+                //     Visible = QtyVisiblePRE;
+                //     trigger OnValidate()
 
-                    begin
-                        QtyVisiblePRE := rec."PREMIUM QTY" <> 0;
-                        CurrPage.UPDATE();
-                    end;
-                }
+                //     begin
+                //         QtyVisiblePRE := rec."PREMIUM QTY" <> 0;
+                //         CurrPage.UPDATE();
+                //     end;
+                // }
                 field("2.0TPRT2"; Rec."2.0TPRT2")
                 {
-                    Caption = '2.0T';
+                    Caption = 'PREMIUM 2.0T';
                     DecimalPlaces = 0 : 0;
                     Visible = IITPRT2;
                     trigger OnValidate()
@@ -315,7 +315,7 @@ page 50129 "Parts By Model Card"
                 }
                 field("1.5TPRX50"; Rec."1.5TPRX50")
                 {
-                    Caption = '1.5T';
+                    Caption = 'PREMIUM 1.5T';
                     DecimalPlaces = 0 : 0;
                     Visible = I5TPRX50;
                     trigger OnValidate()
@@ -325,20 +325,20 @@ page 50129 "Parts By Model Card"
                         CurrPage.UPDATE();
                     end;
                 }
-                field("LUXURY QTY"; Rec."LUXURY QTY")
-                {
-                    DecimalPlaces = 0 : 0;
-                    Visible = QtyVisibleLUX;
-                    trigger OnValidate()
+                // field("LUXURY QTY"; Rec."LUXURY QTY")
+                // {
+                //     DecimalPlaces = 0 : 0;
+                //     Visible = QtyVisibleLUX;
+                //     trigger OnValidate()
 
-                    begin
-                        QtyVisibleLUX := rec."LUXURY QTY" <> 0;
-                        CurrPage.UPDATE();
-                    end;
-                }
+                //     begin
+                //         QtyVisibleLUX := rec."LUXURY QTY" <> 0;
+                //         CurrPage.UPDATE();
+                //     end;
+                // }
                 field("2.0TLUXT2"; Rec."2.0TLUXT2")
                 {
-                    Caption = '2.0T';
+                    Caption = 'LUXURY 2.0T';
                     DecimalPlaces = 0 : 0;
                     Visible = IITLUXT2;
                     trigger OnValidate()
@@ -350,7 +350,7 @@ page 50129 "Parts By Model Card"
                 }
                 field("1.5TLUX50"; Rec."1.5TLUX50")
                 {
-                    Caption = '1.5T';
+                    Caption = 'LUXURY 1.5T';
                     DecimalPlaces = 0 : 0;
                     Visible = I5TLUX50;
                     trigger OnValidate()
