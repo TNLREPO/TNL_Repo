@@ -19,7 +19,7 @@ table 50186 "Git Test"
         }
         field(4; "Created At"; DateTime)
         {
-            Caption = 'Created At';
+            
         }
     }
     keys
