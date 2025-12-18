@@ -9,6 +9,10 @@ table 50186 "Git Test"
         {
             Caption = 'No.';
         }
+        field(2; "Description"; Text[100])
+        {
+            Caption = 'Description';
+        }
     }
     keys
     {
