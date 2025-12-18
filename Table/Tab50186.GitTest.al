@@ -17,6 +17,10 @@ table 50186 "Git Test"
         {
             DataClassification = ToBeClassified;
         }
+        field(4; "Created At"; DateTime)
+        {
+            Caption = 'Created At';
+        }
     }
     keys
     {
