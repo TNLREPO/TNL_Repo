@@ -13,6 +13,10 @@ table 50186 "Git Test"
         {
             Caption = 'Description';
         }
+        field(3; type; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
     }
     keys
     {
