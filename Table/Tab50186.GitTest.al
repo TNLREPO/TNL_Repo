@@ -17,6 +17,10 @@ table 50186 "Git Test"
         {
             DataClassification = ToBeClassified;
         }
+        field(4; seee; code[10])
+        {
+            DataClassification = ToBeClassified;
+        }
     }
     keys
     {
