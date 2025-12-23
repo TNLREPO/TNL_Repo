@@ -183,6 +183,9 @@ table 50023 "Parts By Model"
         key(Key2; "Part Category")
         {
         }
+        key(Key3; Serial)
+        {
+        }
     }
 
     fieldgroups

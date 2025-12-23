@@ -3,7 +3,7 @@ page 50128 "Parts By Model Lines"
     DelayedInsert = true;
     PageType = ListPart;
     SourceTable = "Parts By Model";
-    SourceTableView = SORTING("Model Code", "Part No.");
+    SourceTableView = SORTING("Model Code", "Part No.", Serial);
     ApplicationArea = All;
     layout
     {
@@ -79,7 +79,7 @@ page 50128 "Parts By Model Lines"
                 }
                 field("Serial"; Rec."Serial")
                 {
-
+                    ApplicationArea = all;
                 }
                 field("Qty Sold"; Rec."Q'ty Sold")
                 {
@@ -134,7 +134,11 @@ page 50128 "Parts By Model Lines"
     begin
         AvsalesVisible := FALSE;
         TotalSaleVisible := FALSE;
+
+        Rec.SETCURRENTKEY(Serial);
+        Rec.SETASCENDING(serial, true); // false for descending
     end;
+
 
     var
         AvsalesVisible: Boolean;

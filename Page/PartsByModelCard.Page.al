@@ -377,6 +377,10 @@ page 50129 "Parts By Model Card"
             {
                 SubPageLink = "Model Code" = FIELD("Model No."),
                               "Base Date" = FIELD("Date Filter");
+
+                // Automatically sort by "Field X" ascending
+                SubPageView = SORTING(Serial) ORDER(Ascending);
+
             }
         }
         area(factboxes)
