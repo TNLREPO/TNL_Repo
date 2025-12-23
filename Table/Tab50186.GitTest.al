@@ -17,9 +17,9 @@ table 50186 "Git Test"
         {
             DataClassification = ToBeClassified;
         }
-        field(4; seee; code[10])
+        field(4; "Created At"; DateTime)
         {
-            DataClassification = ToBeClassified;
+
         }
     }
     keys
