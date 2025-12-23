@@ -75,7 +75,15 @@ page 50128 "Parts By Model Lines"
 
                 field("X50"; Rec."X50")
                 {
+                    Caption = 'X50';
 
+                    Visible = X50Visible;
+                    trigger OnValidate()
+
+                    begin
+                        X50Visible := rec.X50 <> false;
+                        CurrPage.UPDATE();
+                    end;
                 }
                 field("Serial"; Rec."Serial")
                 {
@@ -134,15 +142,37 @@ page 50128 "Parts By Model Lines"
     begin
         AvsalesVisible := FALSE;
         TotalSaleVisible := FALSE;
+        UpdateColumnVisibility();
 
         Rec.SETCURRENTKEY(Serial);
         Rec.SETASCENDING(serial, true); // false for descending
+    end;
+
+    trigger OnAfterGetCurrRecord()
+    begin
+        UpdateColumnVisibility();
     end;
 
 
     var
         AvsalesVisible: Boolean;
         TotalSaleVisible: Boolean;
+        X50Visible: Boolean;
+
+    Local procedure UpdateColumnVisibility()
+    var
+        Rec: Record "Parts By Model";
+    begin
+        // Start from the page’s current dataset
+        Rec.CopyFilters(Rec);
+
+        // For Text/Code fields: non-blank means <> ''
+        Rec.SetRange(X50, true);
+
+        // If at least one record has a value => show the column
+        X50Visible := Rec.FindFirst();
+    end;
+
 
 }
 
