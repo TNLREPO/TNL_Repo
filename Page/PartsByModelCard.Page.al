@@ -381,6 +381,7 @@ page 50129 "Parts By Model Card"
                 // Automatically sort by "Field X" ascending
                 SubPageView = SORTING(Serial) ORDER(Ascending);
 
+
             }
         }
         area(factboxes)

@@ -40,7 +40,7 @@ page 50128 "Parts By Model Lines"
                     DecimalPlaces = 0 : 0;
                     Visible = AvsalesVisible;
                 }
-                field("X70 Plus CRUISE"; Rec."X70 Plus")
+                field("X90 Plus CRUISE"; Rec."X90 Plus Cruise")
                 {
                     //DataClassification = ToBeClassified;
                 }
@@ -48,15 +48,15 @@ page 50128 "Parts By Model Lines"
                 {
 
                 }
-                field("X70 PHEV"; Rec."X70 HYBRID")
+                field("X70 PHEV"; Rec."X70 PHEV")
                 {
 
                 }
-                field("X90 PLUS"; Rec."X90 Plus")
+                field("X70 New Body"; Rec."X90 Plus Cruise")
                 {
 
                 }
-                field("X70 Elegance"; Rec."X70 Elegance")
+                field("X70 Elegance"; Rec."X70 Plus Elegance")
                 {
 
                 }
@@ -68,7 +68,7 @@ page 50128 "Parts By Model Lines"
                 {
 
                 }
-                field("T2 PHEV"; Rec."T2 HYBRID")
+                field("T2 PHEV"; Rec."T2 PHEV")
                 {
 
                 }
@@ -76,14 +76,9 @@ page 50128 "Parts By Model Lines"
                 field("X50"; Rec."X50")
                 {
                     Caption = 'X50';
-
+                    ApplicationArea = All;
                     Visible = X50Visible;
-                    trigger OnValidate()
 
-                    begin
-                        X50Visible := rec.X50 <> false;
-                        CurrPage.UPDATE();
-                    end;
                 }
                 field("Serial"; Rec."Serial")
                 {
@@ -142,15 +137,13 @@ page 50128 "Parts By Model Lines"
     begin
         AvsalesVisible := FALSE;
         TotalSaleVisible := FALSE;
-        UpdateColumnVisibility();
-
-        Rec.SETCURRENTKEY(Serial);
+        UpdateX50Viosibility();
         Rec.SETASCENDING(serial, true); // false for descending
     end;
 
     trigger OnAfterGetCurrRecord()
     begin
-        UpdateColumnVisibility();
+        UpdateX50Viosibility()
     end;
 
 
@@ -159,19 +152,16 @@ page 50128 "Parts By Model Lines"
         TotalSaleVisible: Boolean;
         X50Visible: Boolean;
 
-    Local procedure UpdateColumnVisibility()
+    local procedure UpdateX50Viosibility()
     var
-        Rec: Record "Parts By Model";
+        PartModel: Record "Parts By Model";
     begin
-        // Start from the page’s current dataset
-        Rec.CopyFilters(Rec);
-
-        // For Text/Code fields: non-blank means <> ''
-        Rec.SetRange(X50, true);
-
-        // If at least one record has a value => show the column
-        X50Visible := Rec.FindFirst();
+        PartModel.SetRecFilter();
+        PartModel.Copy(Rec);
+        PartModel.SetRange(X50, true);
+        X50Visible := PartModel.FindFirst();
     end;
+
 
 
 }
