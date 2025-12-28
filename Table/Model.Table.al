@@ -71,9 +71,10 @@ table 50014 Model
                 IF PartsBymodel.FIND('-') THEN
                     PartsBymodel.SETFILTER(PartsBymodel."Base Date", '%1', "Date Filter");
 
-                Rec.SetRange(rec."Model No.", "Model No.");
+                /* Rec.SetRange(rec."Model No.", "Model No.");
                 if Rec.Find('-') then
-                    Rec.SetFilter(Rec."Base Date", '%1', "Date Filter");
+                    Rec.SetFilter(Rec."Base Date", '%1', "Date Filter"); */
+
             end;
         }
         field(6; "Part Category Filter"; Option)
