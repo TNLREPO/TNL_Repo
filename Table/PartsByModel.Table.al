@@ -58,7 +58,7 @@ table 50023 "Parts By Model"
             Editable = false;
             FieldClass = FlowField;
         }
-        field(16; "X70 Plus"; Boolean)
+        field(16; "X70 PHEV"; Boolean)
         {
             // CalcFormula = Sum("Item Ledger Entry".Quantity WHERE("Item No." = FIELD("Part No."), "Posting Date" = FIELD(UPPERLIMIT("Base Date"))));
             // CalcFormula = exist("Item Ledger Entry".Quantity WHERE("Item No." = FIELD("Part No."), "Posting Date" = FIELD(UPPERLIMIT("Base Date"))));
@@ -74,11 +74,11 @@ table 50023 "Parts By Model"
         {
 
         }
-        field(18; "X70 HYBRID"; Boolean)
+        field(18; "X70 New Body"; Boolean)
         {
 
         }
-        field(19; "X90 PLUS"; Code[10])
+        field(19; "X90 Plus Cruise"; Code[10])
         {
 
         }
@@ -86,7 +86,7 @@ table 50023 "Parts By Model"
         {
 
         }
-        field(24; "X70 Elegance"; Code[10])
+        field(24; "X70 Plus Elegance"; Code[10])
         {
 
         }
@@ -94,7 +94,7 @@ table 50023 "Parts By Model"
         {
 
         }
-        field(22; "T2 HYBRID"; Boolean)
+        field(22; "T2 PHEV"; Boolean)
         {
 
         }
@@ -181,6 +181,9 @@ table 50023 "Parts By Model"
             Clustered = true;
         }
         key(Key2; "Part Category")
+        {
+        }
+        key(Key3; Serial)
         {
         }
     }

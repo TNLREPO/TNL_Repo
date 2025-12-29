@@ -70,6 +70,11 @@ table 50014 Model
                 PartsBymodel.SETRANGE(PartsBymodel."Model Code", "Model No.");
                 IF PartsBymodel.FIND('-') THEN
                     PartsBymodel.SETFILTER(PartsBymodel."Base Date", '%1', "Date Filter");
+
+                /* Rec.SetRange(rec."Model No.", "Model No.");
+                if Rec.Find('-') then
+                    Rec.SetFilter(Rec."Base Date", '%1', "Date Filter"); */
+
             end;
         }
         field(6; "Part Category Filter"; Option)
@@ -135,7 +140,7 @@ table 50014 Model
         }
         field(27; "Total Qty Sold"; Decimal)
         {
-            CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale)));
+            CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Model No." = FIELD("Model No."), "Entry Type" = CONST(Sale), "Posting Date" = FIELD(UPPERLIMIT("Base Date"))));
             DecimalPlaces = 0 : 0;
             Editable = false;
             FieldClass = FlowField;
@@ -311,6 +316,10 @@ table 50014 Model
         field(52; "Line No."; Integer)
         {
 
+        }
+        field(53; "Base Date"; Date)
+        {
+            FieldClass = FlowFilter;
         }
 
     }
