@@ -381,6 +381,7 @@ page 50129 "Parts By Model Card"
                 // Automatically sort by "Field X" ascending
                 SubPageView = SORTING(Serial) ORDER(Ascending);
 
+
             }
         }
         area(factboxes)
@@ -442,6 +443,8 @@ page 50129 "Parts By Model Card"
     var
 
     begin
+
+
         QtyVisible := Rec."Total Qty Sold" <> 0;
         QtyVisibleI := Rec."Grade I" <> 0;
         QtyVisibleII := Rec."Grade II" <> 0;
@@ -467,6 +470,7 @@ page 50129 "Parts By Model Card"
         I5TPRX50 := Rec."1.5TPRX50" <> 0;
         IITLUXT2 := Rec."2.0TLUXT2" <> 0;
         I5TLUX50 := Rec."1.5TLUX50" <> 0;
+
 
     end;
 
