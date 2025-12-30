@@ -1391,13 +1391,13 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                 if not UserSetup."System Admin" then
                     error('Only System Admin can approve Customer Line Discount!');
 
-                /*  if UserSetup."System Admin" and ("Customer Line discount" <> 0) then begin
+                if UserSetup."System Admin" and ("Customer Line discount" <> 0) then begin
                      Locked := true;
                      modify();
                  end else begin
                      Locked := false;
                      Modify();
-                 end; */
+                 end; 
 
             end;
         }
@@ -2233,7 +2233,6 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                         ERROR('This transaction needs to be approved before posting!')
             UNTIL SalesLine.NEXT = 0;
         END;
-
 
 
         if UserSetup."Allow Access" then
