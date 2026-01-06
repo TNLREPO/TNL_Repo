@@ -43,13 +43,6 @@ table 50023 "Parts By Model"
             Editable = false;
             FieldClass = FlowField;
         }
-        field(10; "Division III In Operations"; Decimal)
-        {
-            CalcFormula = Sum("Sales Invoice Line".Quantity WHERE("No." = FIELD("Model Code")));
-            DecimalPlaces = 0 : 0;
-            Editable = false;
-            FieldClass = FlowField;
-        }
 
         field(6; "Q'ty On Hand"; Decimal)
         {
@@ -108,7 +101,7 @@ table 50023 "Parts By Model"
         }
         field(28; "Total Purchase"; Decimal)
         {
-            CalcFormula = Sum("Item Ledger Entry".Quantity WHERE("Item No." = FIELD("Part No."), "Entry Type" = filter('Purchase')));
+            CalcFormula = Sum("Item Ledger Entry".Quantity WHERE("Item No." = FIELD("Part No."), "Entry Type" = filter('Purchase'), "Posting Date" = FIELD(UPPERLIMIT("Base Date"))));
 
             //     CalcFormula = Sum(item l."Outstanding Quantity" WHERE(Type = CONST(Item), "No." = FIELD("Part No."),
             //     "Document Type" = FILTER('Order|Invoice'), "Order Date" = FIELD(UPPERLIMIT("Base Date"))));
@@ -150,7 +143,7 @@ table 50023 "Parts By Model"
         }
         field(27; "Q'ty Sold"; Decimal)
         {
-            CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Item No." = FIELD("Part No."), "Entry Type" = CONST(Sale)));
+            CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Item No." = FIELD("Part No."), "Entry Type" = CONST(Sale), "Posting Date" = FIELD(UPPERLIMIT("Base Date"))));
             DecimalPlaces = 0 : 0;
             Editable = false;
             FieldClass = FlowField;
@@ -167,7 +160,7 @@ table 50023 "Parts By Model"
         {
 
             // CalcFormula = - Sum("Item Ledger Entry".Quantity WHERE("Item No." = FIELD("Part No."), "Entry Type" = CONST(Sale)));
-            // DecimalPlaces = 0 : 0;
+            DecimalPlaces = 0 : 0;
             // Editable = false;
             // FieldClass = FlowField;
         }
@@ -243,31 +236,5 @@ table 50023 "Parts By Model"
     end;
 
 
-    procedure unitinoperation(): Decimal
-    begin
-        Qsales := 0;
-        ItemRec.SETRANGE(ItemRec."Model No.", "Model Code");
-        IF ItemRec.FIND('-') THEN
-            REPEAT
-                ItemRec.CALCFIELDS(ItemRec."Sales (Qty.)");
-                Qsales := Qsales + ItemRec."Sales (Qty.)";
-            UNTIL ItemRec.NEXT = 0;
-        "Model Units In Operations" := Qsales;
-        EXIT(Qsales);
-    end;
-
-    procedure DivisionIII(): Decimal
-    begin
-        Qsales := 0;
-        ItemRec.SETRANGE(ItemRec."Model No.", "Model Code");
-        ItemRec.SetRange(ItemRec.Grade, 'Grade III');
-        IF ItemRec.FIND('-') THEN
-            REPEAT
-                ItemRec.CALCFIELDS(ItemRec."Sales (Qty.)");
-                Qsales := Qsales + ItemRec."Sales (Qty.)";
-            UNTIL ItemRec.NEXT = 0;
-        "Model Units In Operations" := Qsales;
-        EXIT(Qsales);
-    end;
 }
 
