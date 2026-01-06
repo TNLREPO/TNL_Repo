@@ -25,104 +25,35 @@ page 50129 "Parts By Model Card"
                 field("Line Items"; Rec."Line Items")
                 {
                 }
-                // field(unitinoperation; Rec.unitinoperation)
-                // {
-                //     Caption = 'Units in Operation';
-                //     DecimalPlaces = 0 : 0;
-                // }
                 field("Line Items with Stock Q'ty"; Rec."Line Items with Stock Q'ty")
                 {
                 }
-                // field(gradeI; Rec.gradeI)
-                // {
-                //     Caption = 'Grade I in Operation';
-                //     // Visible = Rec.<> 0;
-                //     DecimalPlaces = 0 : 0;
-                // }
-                // field(gradeII; Rec.gradeII)
-                // {
-                //     Caption = 'Grade II in Operation';
-                //     //Visible = Rec."Grade II in Operation" <> 0;
-                //     DecimalPlaces = 0 : 0;
-                // }
-                // field(gradeIII; Rec.gradeIII)
-                // {
-                //     Caption = 'Grade III in Operation';
-                //     //Visible = Rec."Grade III in Operation" <> 0;
-                //     DecimalPlaces = 0 : 0;
-                // }
-                // field(gradeIV; Rec.gradeIV)
-                // {
-                //     Caption = 'Grade IV in Operation';
-                //     //Visible = Rec."Grade IV in Operation" <> 0;
-                //     DecimalPlaces = 0 : 0;
-                // }
-                // field(gradeV; Rec.GradeV)
-                // {
-                //     Caption = 'Grade V in Operation';
-                //     //Visible = Rec."Grade V in Operation" <> 0;
-                //     DecimalPlaces = 0 : 0;
-                // }
-                // field(LUXURY; Rec.LUXURY)
-                // {
-                //     Caption = 'LUXURY in Operation';
-                //     //Visible = Rec."LUXURY in Operation" <> 0;
-                //     DecimalPlaces = 0 : 0;
-                // }
-                // field(PREMIUM; Rec."PREMIUM")
-                // {
-                //     Caption = 'PREMIUM in Operation';
-                //     DecimalPlaces = 0 : 0;
-                // }
-                // field("Grade I"; Rec."Grade I")
-                // {
-                //     DecimalPlaces = 0 : 0;
-                //     Visible = QtyVisibleI;
-                //     trigger OnValidate()
 
-                //     begin
-                //         QtyVisibleI := rec."Grade I" <> 0;
-                //         CurrPage.UPDATE();
-                //     end;
-                // }
-                group("")
+                /* field("1.5TIX50"; Rec."1.5TIX50")
                 {
-                    field("1.5TIX50"; Rec."1.5TIX50")
-                    {
-                        Caption = 'GRADE I 1.5T';
-                        DecimalPlaces = 0 : 0;
-                        Visible = ISTIX50;
-                        trigger OnValidate()
+                    Caption = 'GRADE I 1.5T';
+                    DecimalPlaces = 0 : 0;
+                    Visible = ISTIX50;
+                    trigger OnValidate()
 
-                        begin
-                            ISTIX50 := rec."1.5TIX50" <> 0;
-                            CurrPage.UPDATE();
-                        end;
-                    }
-                    // field("1.5TIX70L"; Rec."1.5TIX70L")
-                    // {
+                    begin
+                        ISTIX50 := rec."1.5TIX50" <> 0;
+                        CurrPage.UPDATE();
+                    end;
+                } */
+                field("1.5TIX70L"; Rec."1.5TIX70L")
+                {
+                    Caption = 'GRADE I 1.5T';
+                    DecimalPlaces = 0 : 0;
+                    Visible = I5TIX70L;
+                    trigger OnValidate()
 
-                    //     DecimalPlaces = 0 : 0;
-                    //     Visible = I5TIX70L;
-                    //     trigger OnValidate()
-
-                    //     begin
-                    //         I5TIX70L := rec."1.5TIX70L" <> 0;
-                    //         CurrPage.UPDATE();
-                    //     end;
-                    // }
+                    begin
+                        I5TIX70L := rec."1.5TIX70L" <> 0;
+                        CurrPage.UPDATE();
+                    end;
                 }
-                // field("Grade II"; Rec."Grade II")
-                // {
-                //     DecimalPlaces = 0 : 0;
-                //     Visible = QtyVisibleII;
-                //     trigger OnValidate()
 
-                //     begin
-                //         QtyVisibleII := rec."Grade II" <> 0;
-                //         CurrPage.UPDATE();
-                //     end;
-                // }
                 field("1.5TIIX70L"; Rec."1.5TIIX70L")
                 {
 
@@ -136,18 +67,7 @@ page 50129 "Parts By Model Card"
                         CurrPage.UPDATE();
                     end;
                 }
-                // field("1.5TIIX70PE"; Rec."1.5TIIX70PE")
-                // {
-                //     Caption = '1.5T';
-                //     DecimalPlaces = 0 : 0;
-                //     Visible = I5TIIX70PE;
-                //     trigger OnValidate()
 
-                //     begin
-                //         I5TIIX70PE := rec."1.5TIIX70PE" <> 0;
-                //         CurrPage.UPDATE();
-                //     end;
-                // }
                 field("1.6TIIX90P"; Rec."1.6TIIX90P")
                 {
                     Caption = 'GRADE II 1.6T';
@@ -160,17 +80,7 @@ page 50129 "Parts By Model Card"
                         CurrPage.UPDATE();
                     end;
                 }
-                // field("Grade III"; Rec."Grade III")
-                // {
-                //     DecimalPlaces = 0 : 0;
-                //     Visible = QtyVisibleIII;
-                //     trigger OnValidate()
 
-                //     begin
-                //         QtyVisibleIII := rec."Grade III" <> 0;
-                //         CurrPage.UPDATE();
-                //     end;
-                // }
                 field("1.5TIIIX70L"; Rec."1.5TIIIX70L")
                 {
                     Caption = 'GRADE III 1.5T';
@@ -183,6 +93,7 @@ page 50129 "Parts By Model Card"
                         CurrPage.UPDATE();
                     end;
                 }
+
                 field("1.6TIIIX70PE"; Rec."1.6TIIIX70PE")
                 {
                     Caption = 'GRADE III 1.6T';
@@ -207,17 +118,7 @@ page 50129 "Parts By Model Card"
                         CurrPage.UPDATE();
                     end;
                 }
-                // field("Grade IV"; Rec."Grade IV")
-                // {
-                //     DecimalPlaces = 0 : 0;
-                //     Visible = QtyVisibleIV;
-                //     trigger OnValidate()
 
-                //     begin
-                //         QtyVisibleIV := rec."Grade IV" <> 0;
-                //         CurrPage.UPDATE();
-                //     end;
-                // }
                 field("1.5TIVX1D"; Rec."1.5TIVX1D")
                 {
                     Caption = 'GRADE IV 1.5T';
@@ -242,18 +143,7 @@ page 50129 "Parts By Model Card"
                         CurrPage.UPDATE();
                     end;
                 }
-                // field("1.6TIVX90P"; Rec."1.6TIVX90P")
-                // {
 
-                //     DecimalPlaces = 0 : 0;
-                //     Visible = I6TIVX90P;
-                //     trigger OnValidate()
-
-                //     begin
-                //         I6TIVX90P := rec."1.6TIVX90P" <> 0;
-                //         CurrPage.UPDATE();
-                //     end;
-                // }
                 field("2.0TIVX90P"; Rec."2.0TIVX90P")
                 {
                     Caption = 'GRADE IV 2.0T';
@@ -266,17 +156,7 @@ page 50129 "Parts By Model Card"
                         CurrPage.UPDATE();
                     end;
                 }
-                // field("Grade V"; Rec."Grade V")
-                // {
-                //     DecimalPlaces = 0 : 0;
-                //     Visible = QtyVisibleV;
-                //     trigger OnValidate()
 
-                //     begin
-                //         QtyVisibleV := rec."Grade V" <> 0;
-                //         CurrPage.UPDATE();
-                //     end;
-                // }
                 field("1.6TVX1D"; Rec."1.6TVX1D")
                 {
                     Caption = 'GRADE V 1.6T';
@@ -290,17 +170,7 @@ page 50129 "Parts By Model Card"
                     end;
                 }
 
-                // field("PREMIUM QTY"; Rec."PREMIUM QTY")
-                // {
-                //     DecimalPlaces = 0 : 0;
-                //     Visible = QtyVisiblePRE;
-                //     trigger OnValidate()
 
-                //     begin
-                //         QtyVisiblePRE := rec."PREMIUM QTY" <> 0;
-                //         CurrPage.UPDATE();
-                //     end;
-                // }
                 field("2.0TPRT2"; Rec."2.0TPRT2")
                 {
                     Caption = 'PREMIUM 2.0T';
@@ -325,17 +195,7 @@ page 50129 "Parts By Model Card"
                         CurrPage.UPDATE();
                     end;
                 }
-                // field("LUXURY QTY"; Rec."LUXURY QTY")
-                // {
-                //     DecimalPlaces = 0 : 0;
-                //     Visible = QtyVisibleLUX;
-                //     trigger OnValidate()
 
-                //     begin
-                //         QtyVisibleLUX := rec."LUXURY QTY" <> 0;
-                //         CurrPage.UPDATE();
-                //     end;
-                // }
                 field("2.0TLUXT2"; Rec."2.0TLUXT2")
                 {
                     Caption = 'LUXURY 2.0T';
@@ -372,6 +232,10 @@ page 50129 "Parts By Model Card"
                         CurrPage.UPDATE();
                     end;
                 }
+                field("Date Filter2"; Rec."Date Filter2")
+                {
+
+                }
             }
             part(Lines; "Parts By Model Lines")
             {
@@ -380,7 +244,6 @@ page 50129 "Parts By Model Card"
 
                 // Automatically sort by "Field X" ascending
                 SubPageView = SORTING(Serial) ORDER(Ascending);
-
 
             }
         }
@@ -453,17 +316,15 @@ page 50129 "Parts By Model Card"
         QtyVisibleV := Rec."Grade V" <> 0;
         QtyVisiblePRE := Rec."PREMIUM QTY" <> 0;
         QtyVisibleLUX := Rec."LUXURY QTY" <> 0;
-        ISTIX50 := Rec."1.5TIX50" <> 0;
-        //I5TIX70L := Rec."1.5TIX70L" <> 0;
+        //ISTIX50 := Rec."1.5TIX50" <> 0;
         I5TIIX70L := Rec."1.5TIIX70L" <> 0;
-        //I5TIIX70PE := Rec."1.5TIIX70PE" <> 0;
+        I5TIX70L := Rec."1.5TIX70L" <> 0;
         I6TIIX90P := Rec."1.6TIIX90P" <> 0;
         I5TIIIX70L := Rec."1.5TIIIX70L" <> 0;
         I6TIIIX70PE := Rec."1.6TIIIX70PE" <> 0;
         IITIIIX90P := Rec."2.0TIIIX90P" <> 0;
         I5TIVX1D := Rec."1.5TIVX1D" <> 0;
         I6TIVX70PE := Rec."1.6TIVX70PE" <> 0;
-        //I6TIVX90P := Rec."1.6TIVX90P" <> 0;
         IITIVX90P := Rec."2.0TIVX90P" <> 0;
         I6TVX1D := Rec."1.6TVX1D" <> 0;
         IITPRT2 := Rec."2.0TPRT2" <> 0;
