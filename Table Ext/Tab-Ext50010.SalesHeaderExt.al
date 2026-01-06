@@ -1379,7 +1379,7 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
         {
 
         }
-        field(60108; "Customer Line discount"; Decimal)
+        field(60108; "Customer Line Discount"; Decimal)
         {
             trigger OnValidate()
             begin
@@ -1391,13 +1391,13 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
                 if not UserSetup."System Admin" then
                     error('Only System Admin can approve Customer Line Discount!');
 
-                if UserSetup."System Admin" and ("Customer Line discount" <> 0) then begin
-                     Locked := true;
-                     modify();
-                 end else begin
-                     Locked := false;
-                     Modify();
-                 end; 
+                if UserSetup."System Admin" and ("Customer Line Discount" <> 0) then begin
+                    Locked := true;
+                    modify();
+                end else begin
+                    Locked := false;
+                    Modify();
+                end;
 
             end;
         }
@@ -2221,19 +2221,16 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
 
         UserSetup.get(UserId);
 
-
         SalesLine.SETCURRENTKEY("Document Type", "Document No.", Type, "No.");
         SalesLine.SETRANGE("Document Type", Rec."Document Type");
         SalesLine.SETRANGE("Document No.", Rec."No.");
         SalesLine.SETRANGE(Type, SalesLine.Type::Item);
         IF SalesLine.FINDFIRST THEN BEGIN
             REPEAT
-                if (SalesLine."Gen. Prod. Posting Group" = 'CAR') AND (SalesLine."Line Discount Amount" <> 0) THEN
-                    IF Rec.Approved = FALSE THEN
-                        ERROR('This transaction needs to be approved before posting!')
+                IF (SalesLine."Line Discount %" > Rec."Customer Line Discount") THEN
+                    ERROR('The line discount is not the same with the approved discount !')
             UNTIL SalesLine.NEXT = 0;
         END;
-
 
         if UserSetup."Allow Access" then
             exit else begin
