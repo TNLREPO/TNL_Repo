@@ -26,6 +26,16 @@ pageextension 60007 "Item List Ext" extends "Item List"
                 ApplicationArea = All;
                 Visible = True;
             }
+            field("DealerA"; Rec.DealerA)
+            {
+                ApplicationArea = All;
+                Visible = true;
+            }
+            field("DealerB"; Rec.DealerB)
+            {
+                ApplicationArea = All;
+                Visible = true;
+            }
             field("BNPB"; Rec.BNPB)
             {
                 ApplicationArea = All;
