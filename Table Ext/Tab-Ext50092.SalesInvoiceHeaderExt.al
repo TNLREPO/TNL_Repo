@@ -32,6 +32,10 @@ tableextension 50092 "Sales Invoice Header Ext." extends "Sales Invoice Header"
         field(50157; "Del.P.O.Box"; Text[30])
         {
         }
+        field(50167; "Sent Time"; DateTime)
+        {
+            
+        }
         field(50171; "User Department"; Code[20])
         {
             CaptionClass = '1,2,1';
