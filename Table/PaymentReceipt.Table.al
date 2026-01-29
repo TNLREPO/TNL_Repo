@@ -835,6 +835,11 @@ table 50103 "Payment/Receipt."
 
     trigger OnDelete()
     begin
+        
+        UserSetup.GET(USERID);
+        IF NOT UserSetup."System Admin" THEN
+            ERROR('You can not delete this entry. Contact your System Administrator!');
+        
         IF ("Multiple Balance Account") OR ("Multiple Account") THEN BEGIN
             ReqReptLine.SETRANGE(ReqReptLine.Type, "Document Type");
             ReqReptLine.SETRANGE(ReqReptLine."Cash/Cheque", "Cash/Cheque");
@@ -842,7 +847,7 @@ table 50103 "Payment/Receipt."
             IF ReqReptLine.findfirst() THEN
                 ReqReptLine.DELETEALL;
         END;
-        //ERROR('It is not Possible to delete');
+       
 
     end;
 

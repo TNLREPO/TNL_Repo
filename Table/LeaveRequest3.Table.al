@@ -1682,7 +1682,9 @@ table 70009 "Leave Request3"
 
     trigger OnDelete()
     begin
-        //ERROR('You can not delete this entry. Contact your System Administrator!');
+        UserSetup.GET(USERID);
+        IF NOT UserSetup."System Admin" THEN
+            ERROR('You can not delete this entry. Contact your System Administrator!');
     end;
 
     trigger OnInsert()

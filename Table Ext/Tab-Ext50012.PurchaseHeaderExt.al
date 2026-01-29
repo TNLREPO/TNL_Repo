@@ -131,7 +131,7 @@ tableextension 50012 "Purchase Header Ext" extends "Purchase Header"
         {
             AutoFormatExpression = "Currency Code";
             AutoFormatType = 1;
-            
+
         }
         field(50201; "Order Type"; Option)
         {
@@ -223,6 +223,14 @@ tableextension 50012 "Purchase Header Ext" extends "Purchase Header"
         "Assigned User ID" := usersetup."User ID";
     end;
 
+    trigger OnDelete()
+    Begin
+        UserSetup.GET(USERID);
+        IF NOT UserSetup."System Admin" THEN
+            ERROR('You can not delete this entry. Contact your System Administrator!');
+
+    End;
+
     var
         usersetup: Record "User Setup";
 
@@ -284,5 +292,9 @@ tableextension 50012 "Purchase Header Ext" extends "Purchase Header"
             UNTIL ResevRec.NEXT = 0;
         MESSAGE('VRI Codes have been generated!');
     end;
+
+
+
+
 
 }

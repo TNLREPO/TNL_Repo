@@ -1856,10 +1856,15 @@ table 70008 "Procurement Header"
 
     trigger OnDelete()
     begin
+
+        UserSetup.GET(USERID);
+        IF NOT UserSetup."System Admin" THEN
+            ERROR('You can not delete this entry. Contact your System Administrator!');
+
         CapexOpexLine.SETRANGE("Document Type", "Document Type");
         CapexOpexLine.SETRANGE("Document No.", "No.");
         CapexOpexLine.DELETEALL;
-        //ERROR('You can not delete this entry. Contact your System Administrator!')
+
     end;
 
     trigger OnInsert()

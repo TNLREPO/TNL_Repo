@@ -714,11 +714,6 @@ table 50105 "IOU Register"
     {
     }
 
-    trigger OnDelete()
-    begin
-
-        ERROR('Kindly contact your system administrator!');
-    end;
 
     trigger OnInsert()
     begin
@@ -748,6 +743,16 @@ table 50105 "IOU Register"
         "Entry Date" := WORKDATE;
         "Payment Date" := TODAY;
     end;
+
+    trigger OnDelete()
+    Begin
+
+        UserSetup.GET(USERID);
+        IF NOT UserSetup."System Admin" THEN
+            ERROR('You can not delete this entry. Contact your System Administrator!');
+
+    End;
+
 
     trigger OnRename()
     begin
