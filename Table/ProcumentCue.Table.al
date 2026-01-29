@@ -277,7 +277,8 @@ table 70015 "Procument Cue"
                                                                       Rejected = CONST(false),
                                                                       "Compliance check" = CONST(Satisfactory),
                                                                       "Head of Audit" = CONST(Approved),
-                                                                      "Total Purchase Value" = FILTER(> 499999)));
+                                                                      "Total Purchase Value" = FILTER(> 499999),
+                                                                      "Order Type" = FILTER(<> "Isolo Store")));
             FieldClass = FlowField;
         }
         field(29; "Local Part Purch. Isolo"; Integer)
