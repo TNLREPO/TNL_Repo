@@ -1728,6 +1728,7 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
 
     Begin
 
+        Rec.TESTFIELD("Salesperson Code");
         Rec.TESTFIELD("Shortcut Dimension 1 Code");
 
         UserSetup.get(UserId);
@@ -1809,8 +1810,6 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
 
                     UNTIL SalesLine.NEXT = 0;
             END;
-
-
 
             Rec.TESTFIELD("Shortcut Dimension 1 Code");
             Rec.TESTFIELD("Salesperson Code");
