@@ -345,6 +345,7 @@ tableextension 50004 "Customer Ext." extends Customer
         field(50276; "Customer Type2"; Code[20])
         {
             DataClassification = ToBeClassified;
+            Editable = true;
             TableRelation = "Customer Type".Code;
         }
 

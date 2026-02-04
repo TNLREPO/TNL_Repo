@@ -16,6 +16,14 @@ pageextension 60037 "Customer List Ext" extends "Customer List"
             {
                 ApplicationArea = All;
             }
+            field("E-Mail"; Rec."E-Mail")
+            {
+                ApplicationArea = All;
+            }
+            field("Customer Type2"; Rec."Customer Type2")
+            {
+                ApplicationArea = All;
+            }
         }
     }
 }
