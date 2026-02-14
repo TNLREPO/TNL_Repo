@@ -429,6 +429,12 @@ tableextension 50004 "Customer Ext." extends Customer
         {
             DataClassification = ToBeClassified;
         }
+        field(60013; "Customer Created Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+            Editable = false;
+        }
+
 
 
     }
@@ -456,6 +462,8 @@ tableextension 50004 "Customer Ext." extends Customer
         "User ID" := USERID;
         IF UserSetup.GET("User ID") THEN
             "Location Code" := UserSetup."Location Code";
+
+        "Customer Created Date" := TODAY;
 
     end;
 
