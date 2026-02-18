@@ -53,38 +53,51 @@ table 50094 "Item Price Group"
         field(8; "Index No"; Integer)
         {
         }
-        field(9; "Group Items"; Code[20])
+        /* field(9; "Group Items"; Code[20])
         {
-            
-            CalcFormula = Lookup (Item."No." WHERE ("Item Price Group"=FIELD("Item Price Grp Code")));
+
+            CalcFormula = Lookup(Item."No." WHERE("Item Price Group" = FIELD("Item Price Grp Code")));
+            Editable = false;
+            FieldClass = FlowField;
+        } */
+        field(10; "Group Count"; Integer)
+        {
+            CalcFormula = Count(Item WHERE("Inventory Posting Group" = FILTER('N_PARTS'),
+                                            "Item Price Group" = FIELD("Item Price Grp Code")));
             Editable = false;
             FieldClass = FlowField;
         }
-        field(10;"Group Count";Integer)
+        field(11; "Exchange Rate"; Decimal)
         {
-            CalcFormula = Count(Item WHERE ("Inventory Posting Group"=FILTER('N_PARTS'),
-                                            "Item Price Group"=FIELD("Item Price Grp Code")));
-            Editable = false;
-            FieldClass = FlowField;
+            DecimalPlaces = 0 : 5;
+
+        }
+        field(12; "Landing Cost %"; Decimal)
+        {
+            DecimalPlaces = 0 : 5;
+        }
+        field(13; "Price Adjustment %"; Decimal)
+        {
+            DecimalPlaces = 0 : 5;
         }
     }
 
     keys
     {
-        key(Key1;"Item Price Grp Code")
+        key(Key1; "Item Price Grp Code")
         {
             Clustered = true;
         }
-        key(Key2;"MarkUp Profit % After Discount")
+        key(Key2; "MarkUp Profit % After Discount")
         {
         }
-        key(Key3;"Maximum Discount %")
+        key(Key3; "Maximum Discount %")
         {
         }
-        key(Key4;"Maximum Discount %","MarkUp Profit % After Discount")
+        key(Key4; "Maximum Discount %", "MarkUp Profit % After Discount")
         {
         }
-        key(Key5;"Index No")
+        key(Key5; "Index No")
         {
         }
     }
@@ -93,31 +106,96 @@ table 50094 "Item Price Group"
     {
     }
 
-    
+
     procedure GetProfitBeforeDiscount(): Decimal
     begin
 
-        EXIT(100*("Min Profit % After Discount"+"Maximum Discount %")/(100-"Maximum Discount %"));
+        EXIT(100 * ("Min Profit % After Discount" + "Maximum Discount %") / (100 - "Maximum Discount %"));
     end;
 
-    
+
     procedure ProfitOnCostToMarkup("Input%": Decimal): Decimal
     begin
 
-        IF "Input%"=-100 THEN
-          EXIT(0)
+        IF "Input%" = -100 THEN
+            EXIT(0)
         ELSE
-          EXIT("Input%"*100/(100+"Input%"));
+            EXIT("Input%" * 100 / (100 + "Input%"));
     end;
 
-    
+
     procedure ProfitMarkupToOnCost("Input%": Decimal): Decimal
     begin
 
-        IF "Input%"=100 THEN
-          EXIT(0)
+        IF "Input%" = 100 THEN
+            EXIT(0)
         ELSE
-          EXIT((100*"Input%")/(100-"Input%"));
+            EXIT((100 * "Input%") / (100 - "Input%"));
     end;
+
+
+
+
+
+
+    procedure UpdateSellingPrice()
+    Var
+        Item: Record Item;
+        ItemPriceGrp: Record "Item Price Group";
+        AmountPlusDirectCost: Decimal;
+        ProgressDialog: Dialog;
+        TotalCount: Integer;
+        CurrentCount: Integer;
+        ProgressPercent: Integer;
+
+    begin
+        Item.Reset();
+        TotalCount := Item.Count;
+
+        if TotalCount = 0 then
+            exit;
+
+        CurrentCount := 0;
+        ProgressDialog.Open('Updating Selling Prices...\\' +
+            'Item No.: #1##########\\' +
+            'Progress: #2######### of #3######### (@4@@@@@@@@@)');
+
+        if Item.FindSet() then
+            repeat
+                CurrentCount += 1;
+                ProgressPercent := Round(CurrentCount / TotalCount * 10000, 1);
+                ProgressDialog.Update(1, Item."No.");
+                ProgressDialog.Update(2, CurrentCount);
+                ProgressDialog.Update(3, TotalCount);
+                ProgressDialog.Update(4, ProgressPercent);
+
+                if ItemPriceGrp.Get(Item."Item Price Group") then begin
+                    AmountPlusDirectCost := Round(((GetLastUnitCostFromPurchInvoice(Item."No.") * ItemPriceGrp."Exchange Rate") * (1 + (ItemPriceGrp."Landing Cost %" / 100))), 0.01);
+                    Item."Unit Price" := Round((AmountPlusDirectCost * (1 + (ItemPriceGrp."Price Adjustment %" / 100))), 0.01);
+                    Item.Modify();
+                end;
+            until Item.Next() = 0;
+
+        ProgressDialog.Close();
+    end;
+
+    procedure GetLastUnitCostFromPurchInvoice(ItemNo: Code[20]): Decimal
+    var
+        PurchInvLine: Record "Purch. Inv. Line";
+        PurchInvHeader: Record "Purch. Inv. Header";
+    begin
+        PurchInvLine.Reset();
+        PurchInvLine.SetCurrentKey("Document No.");
+        PurchInvLine.SetRange(Type, PurchInvLine.Type::Item);
+        PurchInvLine.SetRange("No.", ItemNo);
+        if PurchInvLine.FindLast() then
+            repeat
+                if PurchInvHeader.Get(PurchInvLine."Document No.") then
+                    if PurchInvHeader."Currency Code" <> '' then
+                        exit(PurchInvLine."Direct Unit Cost");
+            until PurchInvLine.Next(-1) = 0;
+        exit(0);
+    end;
+
 }
 

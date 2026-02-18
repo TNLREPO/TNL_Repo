@@ -1,8 +1,10 @@
 page 50150 "Item Price Group"
 {
-    PageType = Card;
+    PageType = List;
     SourceTable = "Item Price Group";
     ApplicationArea = All;
+    UsageCategory = Lists;
+
     layout
     {
         area(content)
@@ -14,6 +16,18 @@ page 50150 "Item Price Group"
                 }
                 field(Description; Rec.Description)
                 {
+                }
+                field("Exchange Rate"; Rec."Exchange Rate")
+                {
+                    DecimalPlaces = 0 : 5;
+                }
+                field("Landing Cost %"; Rec."Landing Cost %")
+                {
+                    DecimalPlaces = 0 : 5;
+                }
+                field("Price Adjustment %"; Rec."Price Adjustment %")
+                {
+                    DecimalPlaces = 0 : 5;
                 }
                 field("Maximum Discount %"; Rec."Maximum Discount %")
                 {
@@ -41,10 +55,6 @@ page 50150 "Item Price Group"
                     Style = Standard;
                     StyleExpr = TRUE;
                 }
-                field("Group Items"; Rec."Group Items")
-                {
-                    MultiLine = true;
-                }
                 field("Group Count"; Rec."Group Count")
                 {
                 }
@@ -56,6 +66,37 @@ page 50150 "Item Price Group"
     {
         area(processing)
         {
+            action(ViewGroupItems)
+            {
+                Caption = 'View Group Items';
+                Promoted = true;
+                PromotedCategory = Process;
+                Image = ItemGroup;
+                ToolTip = 'Open the item list filtered to show items in this price group';
+
+                trigger OnAction()
+                var
+                    Item: Record Item;
+                begin
+                    Item.SetRange("Item Price Group", Rec."Item Price Grp Code");
+                    Page.Run(Page::"Item List", Item);
+                end;
+            }
+
+            action(UpdateSellingPrice)
+            {
+                Caption = 'Update Item Selling Price';
+                Promoted = true;
+                PromotedCategory = Process;
+                Image = UpdateUnitCost;
+
+                trigger OnAction()
+                begin
+                    Rec.UpdateSellingPrice();
+                end;
+            }
+
+
             action("Update Item Profit %")
             {
                 Caption = 'Update Item Profit %';

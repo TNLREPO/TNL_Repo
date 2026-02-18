@@ -12,91 +12,91 @@ page 60008 "Daily New Customer"
         {
             repeater(General)
             {
-                field("No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = All;
                 }
-                field("Name")
+                field("Name"; Rec.Name)
                 {
                     ApplicationArea = All;
                 }
-                field("Location Code")
+                field("Location Code"; Rec."Location Code")
                 {
                     ApplicationArea = All;
                 }
-                field("Customer Created Date")
+                field("Customer Created Date"; Rec."Customer Created Date")
                 {
                     ApplicationArea = All;
                 }
-                field("Phone No.")
+                field("Phone No."; Rec."Phone No.")
                 {
                     ApplicationArea = All;
                 }
-                field("E-Mail")
+                field("E-Mail"; Rec."E-Mail")
                 {
                     ApplicationArea = All;
                 }
-                field("Mobile Phone No.")
+                field("Mobile Phone No."; Rec."Mobile Phone No.")
                 {
                     ApplicationArea = All;
                 }
-                field("Customer Type2")
+                field("Customer Type2"; Rec."Customer Type2")
                 {
                     ApplicationArea = All;
                 }
-                field("Address")
+                field("Address"; Rec.Address)
                 {
                     ApplicationArea = All;
                 }
-                field("Customer Phone No.")
+                field("Customer Phone No."; Rec."Customer Phone No.")
                 {
                     ApplicationArea = All;
                 }
-                field("Customer Email")
+                field("Customer Email"; Rec."Customer Email")
                 {
                     ApplicationArea = All;
                 }
-                field("Contact")
+                field("Contact"; Rec.Contact)
                 {
                     ApplicationArea = All;
                 }
-                field("Contact Designation")
+                field("Contact Designation"; Rec."Contact Designation")
                 {
                     ApplicationArea = All;
                 }
-                field("Assigned User Name")
+                field("Assigned User Name"; Rec."Assigned User Name")
                 {
                     ApplicationArea = All;
                 }
-                field("Assigned User No.")
+                field("Assigned User No."; Rec."Assigned User No.")
                 {
                     ApplicationArea = All;
                 }
-                field("Assigned User Email")
+                field("Assigned User Email"; Rec."Assigned User Email")
                 {
                     ApplicationArea = All;
                 }
-                field("Gen. Bus. Posting Group")
+                field("Gen. Bus. Posting Group"; Rec."Gen. Bus. Posting Group")
                 {
                     ApplicationArea = All;
                 }
-                field("VAT Bus. Posting Group")
+                field("VAT Bus. Posting Group"; Rec."VAT Bus. Posting Group")
                 {
                     ApplicationArea = All;
                 }
-                field("Customer Posting Group")
+                field("Customer Posting Group"; Rec."Customer Posting Group")
                 {
                     ApplicationArea = All;
                 }
-                field("Username")
+                field("Username"; Rec.Username)
                 {
                     ApplicationArea = All;
                 }
-                field("Password")
+                field("Password"; Rec.Password)
                 {
                     ApplicationArea = All;
                 }
-                field(CustomerType)
+                field("Customer Type"; Rec."Customer Type")
                 {
                     ApplicationArea = All;
                 }

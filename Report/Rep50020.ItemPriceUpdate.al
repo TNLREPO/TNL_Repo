@@ -28,7 +28,7 @@ report 51020 "Item Price Update"
 
             begin
 
-                /*
+
                 SalesSetup.GET;
                 IF (SalesSetup."Spare Parts Fixed Cost Markup%" = 0) OR (SalesSetup."Spare Parts Fixed Cost Markup%" < 1) THEN
                     ERROR('Markup Percentage for Spare Part is incorrect or not setup. Contact your System Administrator');
@@ -176,7 +176,7 @@ report 51020 "Item Price Update"
 
                         END;
                 END;
-*/
+
 
 
                 Validate("Price/Profit Calculation");
