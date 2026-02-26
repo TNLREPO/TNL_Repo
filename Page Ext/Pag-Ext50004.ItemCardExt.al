@@ -162,4 +162,28 @@ pageextension 50004 "Item Card Ext" extends "Item Card"
             }
         }
     }
+
+    actions
+    {
+        addafter(History)
+        {
+            action(UpdateSellingPrice)
+            {
+                ApplicationArea = All;
+                Caption = 'Update Selling Price';
+                Image = UpdateUnitCost;
+                ToolTip = 'Updates the Unit Price for this item based on the Item Price Group settings.';
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+
+                trigger OnAction()
+                var
+                    ItemPriceGrp: Record "Item Price Group";
+                begin
+                    ItemPriceGrp.UpdateSellingPriceForItem(Rec."No.");
+                end;
+            }
+        }
+    }
 }

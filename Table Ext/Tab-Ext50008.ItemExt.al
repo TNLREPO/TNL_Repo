@@ -700,7 +700,7 @@ tableextension 50008 "Item Ext" extends Item
         field(70002; "Item Price Group"; Code[10])
         {
             Description = 'ok';
-            TableRelation = IF ("Inventory Posting Group" = filter('N_PARTS')) "Item Price Group"."Item Price Grp Code";
+            TableRelation = "Item Price Group"."Item Price Grp Code";
 
             trigger OnValidate()
             begin

@@ -179,6 +179,29 @@ table 50094 "Item Price Group"
         ProgressDialog.Close();
     end;
 
+    procedure UpdateSellingPriceForItem(ItemNo: Code[20])
+    var
+        Item: Record Item;
+        ItemPriceGrp: Record "Item Price Group";
+        AmountPlusDirectCost: Decimal;
+    begin
+        if not Item.Get(ItemNo) then
+            exit;
+
+        if Item."Item Price Group" = '' then begin
+            Message('Item %1 does not have an Item Price Group assigned.', ItemNo);
+            exit;
+        end;
+
+        if ItemPriceGrp.Get(Item."Item Price Group") then begin
+            AmountPlusDirectCost := Round(((GetLastUnitCostFromPurchInvoice(Item."No.") * ItemPriceGrp."Exchange Rate") * (1 + (ItemPriceGrp."Landing Cost %" / 100))), 0.01);
+            Item."Unit Price" := Round((AmountPlusDirectCost * (1 + (ItemPriceGrp."Price Adjustment %" / 100))), 0.01);
+            Item.Modify();
+            Message('Unit Price updated to %1 for Item %2', Item."Unit Price", ItemNo);
+        end else
+            Message('Item Price Group %1 not found.', Item."Item Price Group");
+    end;
+
     procedure GetLastUnitCostFromPurchInvoice(ItemNo: Code[20]): Decimal
     var
         PurchInvLine: Record "Purch. Inv. Line";
