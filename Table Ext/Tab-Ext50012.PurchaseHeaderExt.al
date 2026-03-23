@@ -213,6 +213,11 @@ tableextension 50012 "Purchase Header Ext" extends "Purchase Header"
         field(50216; "MY ID"; Code[20])
         {
         }
+        field(50217; "UrlText"; Text[1000])
+        {
+        }
+
+
     }
 
     trigger OnInsert()
@@ -221,6 +226,8 @@ tableextension 50012 "Purchase Header Ext" extends "Purchase Header"
     begin
         UserSetup.GET(USERID);
         "Assigned User ID" := usersetup."User ID";
+
+        UrlText := GetUrl(ClientType::Web, CompanyName, ObjectType::Page, 50, Rec);
     end;
 
     trigger OnDelete()

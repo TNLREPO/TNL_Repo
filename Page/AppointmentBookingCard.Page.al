@@ -71,9 +71,6 @@ page 80004 "Appointment Booking Card"
                     {
                     }
                 }
-            }
-            group("Service Details")
-            {
                 group("3. Service Details")
                 {
                     field("Operation Code"; Rec."Operation Code")
@@ -106,6 +103,17 @@ page 80004 "Appointment Booking Card"
                     field("Agreed Time"; Rec."Agreed Time")
                     {
                     }
+                    field("Pickup Date"; Rec."Pickup Date")
+                    {
+                    }
+                    field("Pickup Time"; Rec."Pickup Time")
+                    {
+                    }
+                    field("Other Requests"; Rec."Other Requests")
+                    {
+                        MultiLine = true;
+                    }
+
                     field("Call Type"; Rec."Call Type")
                     {
                         ShowMandatory = true;
@@ -121,6 +129,11 @@ page 80004 "Appointment Booking Card"
                         MultiLine = true;
                     }
                 }
+
+            }
+            group("Processing")
+            {
+
                 group("4. Customer's Requests")
                 {
                     field(Appointment; Rec.Appointment)
@@ -252,6 +265,7 @@ page 80004 "Appointment Booking Card"
                     field("Ending Hour"; Rec."Ending Hour")
                     {
                     }
+
                 }
             }
             group("Misc.")

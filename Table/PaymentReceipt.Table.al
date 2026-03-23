@@ -835,11 +835,11 @@ table 50103 "Payment/Receipt."
 
     trigger OnDelete()
     begin
-        
+
         UserSetup.GET(USERID);
         IF NOT UserSetup."System Admin" THEN
             ERROR('You can not delete this entry. Contact your System Administrator!');
-        
+
         IF ("Multiple Balance Account") OR ("Multiple Account") THEN BEGIN
             ReqReptLine.SETRANGE(ReqReptLine.Type, "Document Type");
             ReqReptLine.SETRANGE(ReqReptLine."Cash/Cheque", "Cash/Cheque");
@@ -847,7 +847,7 @@ table 50103 "Payment/Receipt."
             IF ReqReptLine.findfirst() THEN
                 ReqReptLine.DELETEALL;
         END;
-       
+
 
     end;
 
@@ -1456,6 +1456,77 @@ table 50103 "Payment/Receipt."
     begin
         NavigateForm.SetDoc("Posting Date", "No.");
         NavigateForm.RUN;
+    end;
+
+    procedure SendPostingNotification()
+    var
+        UserSetupRec: Record "User Setup";
+        EmailMessage: Codeunit "Email Message";
+        Email: Codeunit Email;
+        Subject: Text[250];
+        Body: Text;
+        DocumentTypeText: Text[50];
+        CashChequeText: Text[20];
+        RecipientEmail: Text[100];
+        RecipientName: Text[100];
+        CustomEmails: Record "Custom Emails";
+    begin
+        CustomEmails.get();
+        RecipientEmail := CustomEmails."BNP Email";
+
+        IF RecipientEmail = '' THEN
+            EXIT;
+
+        // Determine document type text
+        CASE "Document Type" OF
+            "Document Type"::Receipt:
+                DocumentTypeText := 'Receipt';
+            "Document Type"::Requisition:
+                DocumentTypeText := 'Requisition';
+            "Document Type"::Journal:
+                DocumentTypeText := 'Journal Voucher';
+            "Document Type"::"e-Pay":
+                DocumentTypeText := 'e-Payment';
+            "Document Type"::"e-Receipt":
+                DocumentTypeText := 'e-Receipt';
+        END;
+
+        // Determine cash/cheque text
+        IF "Cash/Cheque" = "Cash/Cheque"::Cash THEN
+            CashChequeText := 'Cash'
+        ELSE
+            CashChequeText := 'Cheque';
+
+        // Construct email subject
+        Subject := STRSUBSTNO('Transaction Posted: %1 %2 - %3', CashChequeText, DocumentTypeText, "No.");
+
+        // Construct email body
+        Body := STRSUBSTNO('Dear team,');
+        Body += STRSUBSTNO('This is to notify you that the following transaction has been successfully posted:<br/><br/>');
+        Body += STRSUBSTNO('<b>Document Type:</b> %1 %2<br/>', CashChequeText, DocumentTypeText);
+        Body += STRSUBSTNO('<b>Document No.:</b> %1<br/>', "No.");
+        Body += STRSUBSTNO('<b>Customer/Account No.:</b> %1<br/>', "Account No.");
+        Body += STRSUBSTNO('<b>Customer/Account Name:</b> %1<br/>', "Account Description");
+        Body += STRSUBSTNO('<b>Posting Date:</b> %1<br/>', FORMAT("Posting Date"));
+        Body += STRSUBSTNO('<b>Document Date:</b> %1<br/>', FORMAT("Document Date"));
+        Body += STRSUBSTNO('<b>Amount (LCY):</b> %1<br/>', FORMAT("Amount (LCY)"));
+
+        IF "Transaction Description" <> '' THEN
+            Body += STRSUBSTNO('<b>Description:</b> %1<br/>', "Transaction Description");
+
+        IF "External Document No." <> '' THEN
+            Body += STRSUBSTNO('<b>External Document No.:</b> %1<br/>', "External Document No.");
+
+        IF "Cheque No." <> '' THEN
+            Body += STRSUBSTNO('<b>Cheque No.:</b> %1<br/>', "Cheque No.");
+
+        Body += '<br/>This is an automated notification. Please do not reply to this message.<br/><br/>';
+        Body += 'Regards,<br/>';
+        Body += 'System Administrator';
+
+        // Send email
+        EmailMessage.Create(RecipientEmail, Subject, Body, TRUE);
+        Email.Send(EmailMessage, Enum::"Email Scenario"::Default);
     end;
 
     procedure DelResidualJnl(DocType: Option Receipt,Requisition,Journal,"e-Pay","e-Receipt"; ReqType: Option Cash,Cheque)

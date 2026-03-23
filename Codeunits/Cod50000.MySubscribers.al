@@ -313,9 +313,9 @@ codeunit 50000 MySubscribers
     [EventSubscriber(ObjectType::Page, Page::"Item Tracking Summary", 'OnAfterUpdateSelectedQuantity', '', false, false)]
     local procedure OnAfterUpdateSelectedQuantity(var EntrySummary: Record "Entry Summary"; var SelectedQuantity: Decimal)
     var
-      
+
     begin
-        
+
     end;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Sales-Post", 'OnAfterInsertInvoiceHeader', '', false, false)]
@@ -398,5 +398,63 @@ codeunit 50000 MySubscribers
                 SalesCrMemoLine.Modify();
             until SalesCrMemoLine.Next() = 0;
     end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Sales-Quote to Order", 'OnAfterInsertSalesOrderHeader', '', false, false)]
+    procedure SendEmailAfterQuoteToOrder(var SalesOrderHeader: Record "Sales Header"; SalesQuoteHeader: Record "Sales Header")
+    var
+        Customer: Record Customer;
+        UserSetup: Record "User Setup";
+        Email: Codeunit Email;
+        EmailMessage: Codeunit "Email Message";
+        EmailSubject: Text;
+        EmailBody: Text;
+        RecipientEmail: Text;
+        CustomEmail: Record "Custom Emails";
+
+    begin
+        // Get the customer information
+        if Customer.Get(SalesOrderHeader."Sell-to Customer No.") then begin
+
+            CustomEmail.Get();
+            RecipientEmail := CustomEmail."Finance/Accounts";
+
+            // Build email subject
+            EmailSubject := StrSubstNo('Sales Quote %1 Converted to Order %2', SalesQuoteHeader."No.", SalesOrderHeader."No.");
+
+            // Build email body with HTML formatting
+            EmailBody := 'Dear Team,';
+            EmailBody += '<br><br>';
+            EmailBody += StrSubstNo('The Sales Quote <b>%1</b> for customer <b>%2</b> has been successfully converted to Sales Order <b>%3</b>.',
+                SalesQuoteHeader."No.",
+                Customer.Name,
+                SalesOrderHeader."No.");
+            EmailBody += '<br><br>';
+            EmailBody += '<b>Order Details:</b>';
+            EmailBody += '<br>';
+            EmailBody += StrSubstNo('Customer: %1', Customer.Name);
+            EmailBody += '<br>';
+            EmailBody += StrSubstNo('Order Date: %1', SalesOrderHeader."Order Date");
+            EmailBody += '<br>';
+            EmailBody += StrSubstNo('Order Amount: %1', SalesOrderHeader.Amount);
+            EmailBody += '<br><br>';
+            EmailBody += 'Please proceed with the necessary order processing.';
+            EmailBody += '<br><br>';
+            EmailBody += 'Regards,';
+            EmailBody += '<br>';
+            EmailBody += 'Sales System';
+
+            // Send the email
+            if RecipientEmail <> '' then begin
+                EmailMessage.Create(RecipientEmail, EmailSubject, EmailBody, true);
+                Email.OpenInEditorModally(EmailMessage, Enum::"Email Scenario"::Default);
+            end else begin
+                Message('Email recipient not found. Please configure email in User Setup for user %1', UserId);
+            end;
+        end;
+    end;
+
+
+
+
 
 }

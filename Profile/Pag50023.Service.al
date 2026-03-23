@@ -787,7 +787,7 @@ page 50023 "Service"
                 action("Service Item")
                 {
                     Caption = 'Service Item';
-                    RunObject = Page "Service Item List New";
+                    RunObject = Page "Service Item List";
                     ApplicationArea = CostAccounting;
                 }
                 action("Service Mgt. Setup")

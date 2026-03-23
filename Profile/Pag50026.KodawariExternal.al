@@ -100,9 +100,9 @@ page 50026 "Kodawari External"
             action(ServiceItem)
             {
                 ApplicationArea = All;
-                Caption = 'Service Items New';
+                Caption = 'Service Items';
                 Image = Item;
-                RunObject = Page "Service Item List New";
+                RunObject = Page "Service Item List";
                 ToolTip = 'View or edit detailed information for the service items.';
             }
             action(Items)

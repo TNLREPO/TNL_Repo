@@ -27,6 +27,21 @@ pageextension 50018 "Purchase Order Ext" extends "Purchase Order"
     {
         addafter(MoveNegativeLines)
         {
+            action(NotifyUser)
+            {
+                ApplicationArea = All;
+                Caption = 'Notify User';
+                Image = Email;
+                ToolTip = 'This function sends an email notification to the user.';
+
+                trigger OnAction()
+                var
+                    NotifierCU: Codeunit "Notifier";
+                begin
+                    NotifierCU.NotifyUserForReviewWithLink('Purchase Order', Rec."No.", Rec."Posting Description", Rec.UrlText);
+                end;
+            }
+
             action(ImportBOL)
             {
                 ApplicationArea = All;

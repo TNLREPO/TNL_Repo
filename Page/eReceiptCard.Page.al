@@ -194,6 +194,20 @@ page 70108 "e-Receipt Card"
                     Rec.Postgl(Rec, FALSE);
                 end;
             }
+            action(NotifyBNP)
+            {
+                Caption = 'Notify BNP';
+                Image = Email;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+
+                trigger OnAction()
+                begin
+                    Rec.SendPostingNotification();
+                    MESSAGE('BNP has been notified of the posting of this transaction.');
+                end;
+            }
             action("Print Document")
             {
                 Caption = 'Print Document';
@@ -293,24 +307,16 @@ page 70108 "e-Receipt Card"
         GLEntry: Record 17;
         UserRec: Record 91;
         GPC: Codeunit 50004;
-        
-
         "FA Posting TypeVisible": Boolean;
-        
         "Maintenance CodeVisible": Boolean;
-        
         "Print DocumentVisible": Boolean;
-        
         debalVisible: Boolean;
-        
         MultilineVisible: Boolean;
-        
         NavigateVisible: Boolean;
         Text19038076: Label 'Department Code';
         Text19077769: Label 'Branch Code';
         GLentry2: Record 17;
 
-   
     procedure UpdatePosting()
     begin
         IF NOT Rec.Posted THEN BEGIN
