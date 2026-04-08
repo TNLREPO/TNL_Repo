@@ -3,7 +3,7 @@ page 80079 "Fault Material Subform"
     Caption = 'Lines';
     MultipleNewLines = true;
     PageType = ListPart;
-    SourceTable = "Fault Setup LineX";
+    SourceTable = "Fault Setup Line";
     ApplicationArea = All;
 
     layout

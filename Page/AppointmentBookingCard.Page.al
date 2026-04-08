@@ -277,6 +277,54 @@ page 80004 "Appointment Booking Card"
                 field("Booking Time"; Rec."Booking Time")
                 {
                 }
+                field(Picture1; Rec.Picture1)
+                {
+                    Editable = false;
+                    Style = StrongAccent;
+                    StyleExpr = Rec.Picture1 <> '';
+
+                    trigger OnDrillDown()
+                    begin
+                        if Rec.Picture1 <> '' then
+                            Hyperlink(Rec.Picture1);
+                    end;
+                }
+                field(Picture2; Rec.Picture2)
+                {
+                    Editable = false;
+                    Style = StrongAccent;
+                    StyleExpr = Rec.Picture2 <> '';
+
+                    trigger OnDrillDown()
+                    begin
+                        if Rec.Picture2 <> '' then
+                            Hyperlink(Rec.Picture2);
+                    end;
+                }
+                field(Picture3; Rec.Picture3)
+                {
+                    Editable = false;
+                    Style = StrongAccent;
+                    StyleExpr = Rec.Picture3 <> '';
+
+                    trigger OnDrillDown()
+                    begin
+                        if Rec.Picture3 <> '' then
+                            Hyperlink(Rec.Picture3);
+                    end;
+                }
+                field(Picture4; Rec.Picture4)
+                {
+                    Editable = false;
+                    Style = StrongAccent;
+                    StyleExpr = Rec.Picture4 <> '';
+
+                    trigger OnDrillDown()
+                    begin
+                        if Rec.Picture4 <> '' then
+                            Hyperlink(Rec.Picture4);
+                    end;
+                }
                 field("User ID"; Rec."User ID")
                 {
                 }

@@ -368,8 +368,8 @@ tableextension 50004 "Customer Ext." extends Customer
         }
         field(60000; "Customer Type"; Option)
         {
-            OptionMembers = Private,Corporate,Government;
-            OptionCaption = 'Private,Corporate,Government';
+            OptionMembers = Individual,Corporate,Government;
+            OptionCaption = 'Individual,Corporate,Government';
         }
         field(60001; "Assigned User Name"; Text[50])
         {

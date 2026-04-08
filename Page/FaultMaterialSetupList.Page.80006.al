@@ -1,10 +1,11 @@
 page 80006 "Fault Material Setup List"
 {
+    PageType = List;
     CardPageID = "Fault Material Card";
     Editable = false;
-    PageType = List;
     SourceTable = "Fault Setup Header";
     ApplicationArea = All;
+    UsageCategory = Lists;
 
     layout
     {

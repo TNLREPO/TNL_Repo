@@ -2,6 +2,20 @@ pageextension 50014 "Posted Sales Invoice Ext" extends "Posted Sales Invoice"
 {
     layout
     {
+        addafter("Dispute Status")
+        {
+            field(IRN; Rec.IRN)
+            {
+                ApplicationArea = All;
+                ToolTip = 'Specifies the Invoice Reference Number (IRN).';
+
+            }
+            field("Sent to NRS"; Rec."Sent to NRS")
+            {
+                ApplicationArea = All;
+                ToolTip = 'Indicates whether the invoice has been sent to NRS.';
+            }
+        }
 
     }
 
@@ -96,20 +110,21 @@ pageextension 50014 "Posted Sales Invoice Ext" extends "Posted Sales Invoice"
                 end;
             }
 
-            action(SendInvoiceToFIRS)
+            action(SendInvoiceToNRS)
             {
                 ApplicationArea = All;
-                Caption = 'Send Invoice to FIRS';
-                ToolTip = 'Send Invoice to FIRS';
+                Caption = 'Send Invoice to NRS';
+                ToolTip = 'Send Invoice to NRS';
                 Image = SendAsPDF;
                 PromotedCategory = Process;
                 Promoted = true;
 
                 trigger OnAction()
                 var
-
+                    ConfirmMsg: Label 'Do you want to send this invoice to NRS?';
                 begin
-                    Rec.SendeInvoiceToFIRS()
+                    if Confirm(ConfirmMsg, false) then
+                        Rec.SendeInvoiceToFIRS()
                 end;
             }
 

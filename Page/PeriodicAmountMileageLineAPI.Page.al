@@ -3,6 +3,8 @@ page 90053 "PeriodicAmount/MileageLineAPI"
     PageType = List;
     SourceTable = "Fault Setup Line";
     ApplicationArea = All;
+    UsageCategory = Lists;
+
     layout
     {
         area(content)
@@ -42,6 +44,10 @@ page 90053 "PeriodicAmount/MileageLineAPI"
                 field("Model No."; Rec."Model No.")
                 {
                 }
+                field("Model Description"; Rec."Model Description")
+                {
+                }
+
             }
         }
     }

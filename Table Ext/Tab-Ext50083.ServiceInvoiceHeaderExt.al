@@ -188,6 +188,19 @@ tableextension 50083 "Service Invoice Header Ext" extends "Service Invoice Heade
             FieldClass = FlowField;
             CalcFormula = Sum("Service Invoice Line".Amount WHERE("Document No." = FIELD("No."), "Job Type" = CONST(" ")));
         }
+        field(90000; "IRN"; Text[150])
+        {
+            Caption = 'IRN';
+        }
+        field(90001; "Sent to FIRS"; Boolean)
+        {
+            Caption = 'Sent to FIRS';
+        }
+        field(90002; "Error Message"; Text[250])
+        {
+            Caption = 'Error Message';
+        }
+
 
 
 

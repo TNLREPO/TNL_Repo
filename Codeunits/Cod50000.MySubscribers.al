@@ -1,7 +1,8 @@
 codeunit 50000 MySubscribers
 {
     Permissions = tabledata "Sales Invoice Header" = rimd, tabledata "Sales Cr.Memo Header" = rimd, tabledata "Sales Invoice Line" = rimd,
-        tabledata "Sales Shipment Header" = rimd, tabledata "Sales Cr.Memo Line" = rimd;
+        tabledata "Sales Shipment Header" = rimd, tabledata "Sales Cr.Memo Line" = rimd, tabledata "Service Invoice Header" = rimd,
+        tabledata "Service Cr.Memo Header" = rimd, tabledata "Service Invoice Line" = rimd, tabledata "Service Cr.Memo Line" = rimd;
 
     EventSubscriberInstance = StaticAutomatic;
 
@@ -324,8 +325,6 @@ codeunit 50000 MySubscribers
         Yr: Text;
         Mth: Text;
         Dy: Text;
-        SalesInvLine: Record "Sales Invoice Line";
-
 
     begin
         Yr := Format(CurrentDateTime, 0, '<Year4>');
@@ -343,7 +342,6 @@ codeunit 50000 MySubscribers
         Yr: Text;
         Mth: Text;
         Dy: Text;
-
 
     begin
         Yr := Format(CurrentDateTime, 0, '<Year4>');
@@ -399,6 +397,82 @@ codeunit 50000 MySubscribers
             until SalesCrMemoLine.Next() = 0;
     end;
 
+    [EventSubscriber(ObjectType::Table, Database::"Service Invoice Header", 'OnAfterInsertEvent', '', false, false)]
+    procedure IRNOnAfterInsertServiceInvoiceHeader(var Rec: Record "Service Invoice Header"; RunTrigger: Boolean)
+    var
+        Yr: Text;
+        Mth: Text;
+        Dy: Text;
+
+    begin
+        Yr := Format(CurrentDateTime, 0, '<Year4>');
+        Mth := Format(CurrentDateTime, 0, '<Month,2>');
+        Dy := Format(CurrentDateTime, 0, '<Day,2>');
+
+        Rec.IRN := Rec."No." + '-' + 'B17E2F91' + '-' + Yr + Mth + Dy;
+        Rec.Modify();
+
+    end;
+
+    [EventSubscriber(ObjectType::Table, Database::"Service Cr.Memo Header", 'OnAfterInsertEvent', '', false, false)]
+    procedure IRNOnAfterInsertServiceCrMemoHeader(var Rec: Record "Service Cr.Memo Header"; RunTrigger: Boolean)
+    var
+        Yr: Text;
+        Mth: Text;
+        Dy: Text;
+
+    begin
+        Yr := Format(CurrentDateTime, 0, '<Year4>');
+        Mth := Format(CurrentDateTime, 0, '<Month,2>');
+        Dy := Format(CurrentDateTime, 0, '<Day,2>');
+
+        Rec.IRN := Rec."No." + '-' + 'B17E2F91' + '-' + Yr + Mth + Dy;
+        Rec.Modify();
+
+    end;
+
+    [EventSubscriber(ObjectType::Table, Database::"Service Invoice Line", 'OnAfterInsertEvent', '', false, false)]
+    procedure OnAfterInsertServiceInvoiceLine(var Rec: Record "Service Invoice Line"; RunTrigger: Boolean)
+    var
+        Customer: Record Customer;
+        ServiceInvHeader: Record "Service Invoice Header";
+
+    begin
+        if ServiceInvHeader.Get(Rec."Document No.") then begin
+            if Customer.Get(Rec."Bill-to Customer No.") then begin
+                Rec."IRN" := ServiceInvHeader.IRN;
+                Rec.TIN := Customer."VAT Registration No.";
+                Rec.Email := Customer."E-Mail";
+                Rec."Postal Address" := Customer."Address";
+                Rec."Street Name" := Customer."Address 2";
+                Rec."City Name" := Customer."City";
+                Rec."Postal Zone" := Customer."Post Code";
+                Rec.Modify();
+            end;
+        end;
+    end;
+
+    [EventSubscriber(ObjectType::Table, Database::"Service Cr.Memo Line", 'OnAfterInsertEvent', '', false, false)]
+    procedure OnAfterInsertServiceCrMemoLine(var Rec: Record "Service Cr.Memo Line"; RunTrigger: Boolean)
+    var
+        Customer: Record Customer;
+        ServiceCrMemoHeader: Record "Service Cr.Memo Header";
+
+    begin
+        if ServiceCrMemoHeader.Get(Rec."Document No.") then begin
+            if Customer.Get(Rec."Bill-to Customer No.") then begin
+                Rec."IRN" := ServiceCrMemoHeader.IRN;
+                Rec.TIN := Customer."VAT Registration No.";
+                Rec.Email := Customer."E-Mail";
+                Rec."Postal Address" := Customer."Address";
+                Rec."Street Name" := Customer."Address 2";
+                Rec."City Name" := Customer."City";
+                Rec."Postal Zone" := Customer."Post Code";
+                Rec.Modify();
+            end;
+        end;
+    end;
+
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Sales-Quote to Order", 'OnAfterInsertSalesOrderHeader', '', false, false)]
     procedure SendEmailAfterQuoteToOrder(var SalesOrderHeader: Record "Sales Header"; SalesQuoteHeader: Record "Sales Header")
     var
@@ -450,11 +524,6 @@ codeunit 50000 MySubscribers
             end else begin
                 Message('Email recipient not found. Please configure email in User Setup for user %1', UserId);
             end;
-        end;
+        end
     end;
-
-
-
-
-
 }

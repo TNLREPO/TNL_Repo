@@ -94,19 +94,20 @@ table 70033 "Service AppointmentsX"
         }
         field(2; "Operation Code"; Code[20])
         {
-            TableRelation = "Fault Setup Header"."Operation Code" WHERE("Model No." = FIELD("Model Code"));
+            //TableRelation = "Fault Setup Header"."Operation Code" WHERE("Model No." = FIELD("Model Code"));
+            TableRelation = "Fault Setup Header"."Operation Code";
 
             trigger OnValidate()
             begin
                 ServiceItem.SETCURRENTKEY("No.");
                 ServiceItem.GET("Service Item");
-                FaultRec.SETCURRENTKEY("Operation Code", "Model No.");
-                FaultRec.GET("Operation Code", ServiceItem."Model No.");
-                Description := FaultRec.Description;
-                "Expected Service Duration" := FaultRec."Duration In Hours";
-                "Service Slot" := FaultRec."Duration In Hours" * 2;
-                "Service Due Kilometer" := FaultRec."Service KM";
-                //VALIDATE("Chasis No.",ServiceItem."Chasis No.");
+                if FaultRec.GET("Operation Code", ServiceItem."Model No.") then begin
+                    Description := FaultRec.Description;
+                    "Expected Service Duration" := FaultRec."Duration In Hours";
+                    "Service Slot" := FaultRec."Duration In Hours" * 2;
+                    "Service Due Kilometer" := FaultRec."Service KM";
+                    //VALIDATE("Chasis No.",ServiceItem."Chasis No.");
+                end;
             end;
         }
         field(3; Description; Text[50])
@@ -874,19 +875,19 @@ table 70033 "Service AppointmentsX"
         {
             DataClassification = ToBeClassified;
         }
-        field(50015; Picture1; Text[150])
+        field(50015; Picture1; Text[500])
         {
             DataClassification = ToBeClassified;
         }
-        field(50016; Picture2; Text[150])
+        field(50016; Picture2; Text[500])
         {
             DataClassification = ToBeClassified;
         }
-        field(50017; Picture3; Text[150])
+        field(50017; Picture3; Text[500])
         {
             DataClassification = ToBeClassified;
         }
-        field(50018; Picture4; Text[150])
+        field(50018; Picture4; Text[500])
         {
             DataClassification = ToBeClassified;
         }
