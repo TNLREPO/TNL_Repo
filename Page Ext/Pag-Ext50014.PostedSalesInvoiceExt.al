@@ -128,6 +128,23 @@ pageextension 50014 "Posted Sales Invoice Ext" extends "Posted Sales Invoice"
                 end;
             }
 
+            action(UpdateAllLinesFromCustomer)
+            {
+                ApplicationArea = All;
+                Caption = 'Update All Lines from Customer';
+                ToolTip = 'Update all invoice lines with customer information (TIN, Email, Address, etc.)';
+                Image = UpdateDescription;
+                PromotedCategory = Process;
+                Promoted = true;
+
+                trigger OnAction()
+                var
+                    UpdateCust: Codeunit "Update Invoice Line Customer";
+                begin
+                    UpdateCust.UpdateSalesInvoiceLinesByDocument(Rec."No.");
+                end;
+            }
+
 
         }
     }
