@@ -245,7 +245,7 @@ page 50084 "DOO Sales List"
                 Image = "Report";
                 //The property 'PromotedCategory' can only be set if the property 'Promoted' is set to 'true'
                 //PromotedCategory = "Report";
-                RunObject = Report "Sales Reservation Avail.";
+               // RunObject = Report "Sales Reservation Avail.";
                 ToolTip = 'View, print, or save an overview of availability of items for shipment on sales documents, filtered on shipment status.';
             }
         }

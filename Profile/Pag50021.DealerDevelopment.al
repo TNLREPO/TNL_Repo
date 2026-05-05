@@ -759,7 +759,7 @@ page 50021 "Dealer Development"
                         ApplicationArea = Basic, Suite;
                         Caption = 'Customer - &Top 10 List';
                         Image = "Report";
-                        RunObject = Report "Customer - Top 10 List";
+                        //RunObject = Report "Customer - Top 10 List";
                         ToolTip = 'View which customers purchase the most or owe the most in a selected period. Only customers that have either purchases during the period or a balance at the end of the period will be included.';
                     }
                     action("Customer/&Item Sales")

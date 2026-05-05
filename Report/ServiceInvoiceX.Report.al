@@ -745,7 +745,7 @@ report 50616 "Service - InvoiceX"
                     TotalExclVATText := STRSUBSTNO(Text006, "Currency Code");
                 END;
 #pragma warning disable AL0432
-                FormatAddr.ServiceInvBillTo(CustAddr, ServiceInvHeaderData);
+               // FormatAddr.ServiceInvBillTo(CustAddr, ServiceInvHeaderData);
 #pragma warning restore AL0432
                 Cust.GET("Bill-to Customer No.");
 

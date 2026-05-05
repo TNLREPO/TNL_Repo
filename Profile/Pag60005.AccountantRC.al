@@ -90,7 +90,7 @@ page 60005 "Accountant RC"
                     ApplicationArea = Basic, Suite;
                     Caption = '&G/L Trial Balance';
                     Image = "Report";
-                    RunObject = Report "Trial Balance";
+                   // RunObject = Report "Trial Balance";
                     ToolTip = 'View, print, or send a report that shows the balances for the general ledger accounts, including the debits and credits. You can use this report to ensure accurate accounting practices.';
                 }
                 action("&Bank Detail Trial Balance")
@@ -122,7 +122,7 @@ page 60005 "Accountant RC"
                     ApplicationArea = Basic, Suite;
                     Caption = 'Trial Bala&nce/Budget';
                     Image = "Report";
-                    RunObject = Report "Trial Balance/Budget";
+                    //RunObject = Report "Trial Balance/Budget";
                     ToolTip = 'View a trial balance in comparison to a budget. You can choose to see a trial balance for selected dimensions. You can use the report at the close of an accounting period or fiscal year.';
                 }
                 action("Trial Balance by &Period")
@@ -186,7 +186,7 @@ page 60005 "Accountant RC"
                     ApplicationArea = Basic, Suite;
                     Caption = 'Aged Accounts &Receivable';
                     Image = "Report";
-                    RunObject = Report "Aged Accounts Receivable";
+                    //RunObject = Report "Aged Accounts Receivable";
                     ToolTip = 'View an overview of when your receivables from customers are due or overdue (divided into four periods). You must specify the date you want aging calculated from and the length of the period that each column will contain data for.';
                 }
                 action("Aged Accounts Pa&yable")
@@ -194,7 +194,7 @@ page 60005 "Accountant RC"
                     ApplicationArea = Basic, Suite;
                     Caption = 'Aged Accounts Pa&yable';
                     Image = "Report";
-                    RunObject = Report "Aged Accounts Payable";
+                    //RunObject = Report "Aged Accounts Payable";
                     ToolTip = 'View an overview of when your payables to vendors are due or overdue (divided into four periods). You must specify the date you want aging calculated from and the length of the period that each column will contain data for.';
                 }
                 action("Reconcile Cus&t. and Vend. Accs")
@@ -297,7 +297,7 @@ page 60005 "Accountant RC"
                     ApplicationArea = BasicEU;
                     Caption = 'G/L Trial balance';
                     Image = "Report";
-                    RunObject = Report "Trial Balance";
+                    //RunObject = Report "Trial Balance";
                     ToolTip = 'View trial balance.';
                 }
 
@@ -306,7 +306,7 @@ page 60005 "Accountant RC"
                     ApplicationArea = BasicEU;
                     Caption = 'Bank Detail Trial Balance';
                     Image = "Report";
-                    RunObject = Report "Bank Acc. - Detail Trial Bal.";
+                    //RunObject = Report "Bank Acc. - Detail Trial Bal.";
                     ToolTip = 'View bank detail trial balance.';
                 }
 

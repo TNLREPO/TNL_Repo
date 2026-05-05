@@ -32,7 +32,7 @@ page 90019 "XMD Role Center"
                 ApplicationArea = Basic, Suite;
                 Caption = '&Trial Balance/Budget';
                 Image = "Report";
-                RunObject = Report 9;
+                //RunObject = Report 9;
                 ToolTip = 'View a trial balance in comparison to a budget. You can choose to see a trial balance for selected dimensions. You can use the report at the close of an accounting period or fiscal year.';
             }
             action("&Closing Trial Balancex")
@@ -65,7 +65,7 @@ page 90019 "XMD Role Center"
                 ApplicationArea = Basic, Suite;
                 Caption = 'Customer - T&op 10 List';
                 Image = "Report";
-                RunObject = Report "Customer - Top 10 List";
+                //RunObject = Report "Customer - Top 10 List";
                 ToolTip = 'View which customers purchase the most or owe the most in a selected period. Only customers that have either purchases during the period or a balance at the end of the period will be included.';
             }
             action("Customer - S&ales List")
@@ -73,7 +73,7 @@ page 90019 "XMD Role Center"
                 ApplicationArea = Basic, Suite;
                 Caption = 'Customer - S&ales List';
                 Image = "Report";
-                RunObject = Report 119;
+                //RunObject = Report 119;
                 ToolTip = 'View customer sales for a period, for example, to report sales activity to customs and tax authorities. You can choose to include only customers with total sales that exceed a minimum amount. You can also specify whether you want the report to show address details for each customer.';
             }
             action("Sales &Statistics")
@@ -81,7 +81,7 @@ page 90019 "XMD Role Center"
                 ApplicationArea = Suite;
                 Caption = 'Sales &Statistics';
                 Image = "Report";
-                RunObject = Report "Sales Statistics";
+                //RunObject = Report "Sales Statistics";
                 ToolTip = 'View customers'' total costs, sales, and profits over time, for example, to analyze earnings trends. The report shows amounts for original and adjusted costs, sales, profits, invoice discounts, payment discounts, and profit percentage in three adjustable periods.';
             }
 
@@ -106,7 +106,7 @@ page 90019 "XMD Role Center"
                 ApplicationArea = Basic, Suite;
                 Caption = '&G/L Trial Balance';
                 Image = "Report";
-                RunObject = Report 6;
+               // RunObject = Report 6;
                 ToolTip = 'View, print, or send a report that shows the balances for the general ledger accounts, including the debits and credits. You can use this report to ensure accurate accounting practices.';
             }
             action("&Bank Detail Trial Balance")
@@ -138,7 +138,7 @@ page 90019 "XMD Role Center"
                 ApplicationArea = Basic, Suite;
                 Caption = 'Trial Bala&nce/Budget';
                 Image = "Report";
-                RunObject = Report 9;
+                //RunObject = Report 9;
                 ToolTip = 'View a trial balance in comparison to a budget. You can choose to see a trial balance for selected dimensions. You can use the report at the close of an accounting period or fiscal year.';
             }
             action("Trial Balance by &Period")
@@ -188,7 +188,7 @@ page 90019 "XMD Role Center"
                 ApplicationArea = Basic, Suite;
                 Caption = 'Aged Accounts &Receivable';
                 Image = "Report";
-                RunObject = Report 120;
+                //RunObject = Report 120;
                 ToolTip = 'View an overview of when your receivables from customers are due or overdue (divided into four periods). You must specify the date you want aging calculated from and the length of the period that each column will contain data for.';
             }
             action("Aged Accounts Pa&yable")
@@ -196,7 +196,7 @@ page 90019 "XMD Role Center"
                 ApplicationArea = Basic, Suite;
                 Caption = 'Aged Accounts Pa&yable';
                 Image = "Report";
-                RunObject = Report 322;
+                //RunObject = Report 322;
                 ToolTip = 'View an overview of when your payables to vendors are due or overdue (divided into four periods). You must specify the date you want aging calculated from and the length of the period that each column will contain data for.';
             }
             action("Reconcile Cus&t. and Vend. Accs")

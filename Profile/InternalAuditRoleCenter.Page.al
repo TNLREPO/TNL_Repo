@@ -48,7 +48,7 @@ page 70102 "Internal Audit Role Center"
             {
                 Caption = '&Trial Balance/Budget';
                 Image = "Report";
-                RunObject = Report 9;
+                //RunObject = Report 9;
             }
             action("&Closing Trial Balance")
             {
@@ -98,19 +98,19 @@ page 70102 "Internal Audit Role Center"
             {
                 Caption = 'Customer - T&op 10 List';
                 Image = "Report";
-                RunObject = Report "Customer - Top 10 List";
+                //RunObject = Report "Customer - Top 10 List";
             }
             action("Customer - S&ales List")
             {
                 Caption = 'Customer - S&ales List';
                 Image = "Report";
-                RunObject = Report "Customer - Sales List";
+                //RunObject = Report "Customer - Sales List";
             }
             action("Sales &Statistics")
             {
                 Caption = 'Sales &Statistics';
                 Image = "Report";
-                RunObject = Report "Sales Statistics";
+                //RunObject = Report "Sales Statistics";
             }
             action("Pool Car")
             {

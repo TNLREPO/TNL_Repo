@@ -756,7 +756,7 @@ page 70091 "Labour and Operation Card"
                 begin
                     CurrPage.UPDATE(TRUE);
 #pragma warning disable AL0432
-                    DocPrint.PrintServiceHeader(Rec);
+                    //DocPrint.PrintServiceHeader(Rec);
 #pragma warning restore AL0432
                 end;
             }

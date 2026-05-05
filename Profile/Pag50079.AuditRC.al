@@ -91,7 +91,7 @@ page 50079 AuditRC
                     ApplicationArea = Basic, Suite;
                     Caption = '&G/L Trial Balance';
                     Image = "Report";
-                    RunObject = Report "Trial Balance";
+                   // RunObject = Report "Trial Balance";
                     ToolTip = 'View, print, or send a report that shows the balances for the general ledger accounts, including the debits and credits. You can use this report to ensure accurate accounting practices.';
                 }
                 action("&Bank Detail Trial Balance")
@@ -123,7 +123,7 @@ page 50079 AuditRC
                     ApplicationArea = Basic, Suite;
                     Caption = 'Trial Bala&nce/Budget';
                     Image = "Report";
-                    RunObject = Report "Trial Balance/Budget";
+                    //RunObject = Report "Trial Balance/Budget";
                     ToolTip = 'View a trial balance in comparison to a budget. You can choose to see a trial balance for selected dimensions. You can use the report at the close of an accounting period or fiscal year.';
                 }
                 action("Trial Balance by &Period")
@@ -298,7 +298,7 @@ page 50079 AuditRC
                     ApplicationArea = BasicEU;
                     Caption = 'G/L Trial balance';
                     Image = "Report";
-                    RunObject = Report "Trial Balance";
+                    //RunObject = Report "Trial Balance";
                     ToolTip = 'View trial balance.';
                 }
 
