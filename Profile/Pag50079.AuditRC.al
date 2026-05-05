@@ -187,7 +187,7 @@ page 50079 AuditRC
                     ApplicationArea = Basic, Suite;
                     Caption = 'Aged Accounts &Receivable';
                     Image = "Report";
-                    RunObject = Report "Aged Accounts Receivable";
+                    //RunObject = Report A
                     ToolTip = 'View an overview of when your receivables from customers are due or overdue (divided into four periods). You must specify the date you want aging calculated from and the length of the period that each column will contain data for.';
                 }
                 action("Aged Accounts Pa&yable")
@@ -195,7 +195,7 @@ page 50079 AuditRC
                     ApplicationArea = Basic, Suite;
                     Caption = 'Aged Accounts Pa&yable';
                     Image = "Report";
-                    RunObject = Report "Aged Accounts Payable";
+                    //RunObject = Report "Aged Accounts Payable (Excel)";
                     ToolTip = 'View an overview of when your payables to vendors are due or overdue (divided into four periods). You must specify the date you want aging calculated from and the length of the period that each column will contain data for.';
                 }
                 action("Reconcile Cus&t. and Vend. Accs")
@@ -2111,43 +2111,7 @@ page 50079 AuditRC
                         ToolTip = 'View a report that shows your company''s changes in retained earnings for a specified period by reconciling the beginning and ending retained earnings for the period, using information such as net income from the other financial statements.';
                     }
                 }
-                group("Excel Reports")
-                {
-                    Caption = 'Excel Reports';
-                    Image = Excel;
-                                    
                 
-                    action(ExcelTemplateTrialBalance)
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Trial Balance';
-                        Image = "Report";
-#pragma warning disable AL0432
-                        RunObject = Codeunit "Run Template Trial Balance";
-#pragma warning restore AL0432
-                        ToolTip = 'Open a spreadsheet that shows a summary trial balance by account.';
-                    }
-                    action(ExcelTemplateAgedAccPay)
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Aged Accounts Payable';
-                        Image = "Report";
-#pragma warning disable AL0432
-                        RunObject = Codeunit "Run Template Aged Acc. Pay.";
-#pragma warning restore AL0432
-                        ToolTip = 'Open a spreadsheet that shows a list of aged remaining balances for each vendor by period.';
-                    }
-                    action(ExcelTemplateAgedAccRec)
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Aged Accounts Receivable';
-                        Image = "Report";
-#pragma warning disable AL0432
-                        RunObject = Codeunit "Run Template Aged Acc. Rec.";
-#pragma warning restore AL0432
-                        ToolTip = 'Open a spreadsheet that shows when customer payments are due or overdue by period.';
-                    }
-                }
                 action("Run Consolidation")
                 {
                     ApplicationArea = Suite;

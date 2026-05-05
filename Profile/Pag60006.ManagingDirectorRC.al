@@ -269,43 +269,7 @@ page 60006 "Managing Director Role Center"
         }
         area(reporting)
         {
-            group("Excel Reports")
-            {
-                Caption = 'Excel Reports';
-                Image = Excel;
-
-
-                action(ExcelTemplateTrialBalance)
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Trial Balance';
-                    Image = "Report";
-#pragma warning disable AL0432
-                    RunObject = Codeunit "Run Template Trial Balance";
-#pragma warning restore AL0432
-                    ToolTip = 'Open a spreadsheet that shows a summary trial balance by account.';
-                }
-                action(ExcelTemplateAgedAccPay)
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Aged Accounts Payable';
-                    Image = "Report";
-#pragma warning disable AL0432
-                    RunObject = Codeunit "Run Template Aged Acc. Pay.";
-#pragma warning restore AL0432
-                    ToolTip = 'Open a spreadsheet that shows a list of aged remaining balances for each vendor by period.';
-                }
-                action(ExcelTemplateAgedAccRec)
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Aged Accounts Receivable';
-                    Image = "Report";
-#pragma warning disable AL0432
-                    RunObject = Codeunit "Run Template Aged Acc. Rec.";
-#pragma warning restore AL0432
-                    ToolTip = 'Open a spreadsheet that shows when customer payments are due or overdue by period.';
-                }
-            }
+            
         }
         area(embedding)
         {
