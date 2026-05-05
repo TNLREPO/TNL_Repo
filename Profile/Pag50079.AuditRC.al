@@ -91,7 +91,7 @@ page 50079 AuditRC
                     ApplicationArea = Basic, Suite;
                     Caption = '&G/L Trial Balance';
                     Image = "Report";
-                   // RunObject = Report "Trial Balance";
+                    RunObject = Report "EXR Trial Balance Excel";
                     ToolTip = 'View, print, or send a report that shows the balances for the general ledger accounts, including the debits and credits. You can use this report to ensure accurate accounting practices.';
                 }
                 action("&Bank Detail Trial Balance")
