@@ -73,6 +73,10 @@ tableextension 50037 "Sales & Receivables Setup Ext" extends "Sales & Receivable
         {
             DataClassification = ToBeClassified;
         }
+        field(50020; "SP Fixed Exch. Rate ZAR"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
 
 
     }

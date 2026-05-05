@@ -109,7 +109,9 @@ table 50122 "Customer Order Line"
 
             trigger OnValidate()
             begin
-                VALIDATE(Amount, "Unit Price" * Quantity);
+                Amount := "Unit Price" * Quantity;
+                IF Discount <> 0 THEN
+                    Amount := Amount - (Amount * Discount / 100);
                 "Vat Amount" := Amount * 0.05;
                 "Amount Inc. VAT" := Amount + "Vat Amount";
 
@@ -123,6 +125,8 @@ table 50122 "Customer Order Line"
                         BEGIN
                             IF Quantity > "Available Quantity" THEN BEGIN
                                 Amount := Quantity * "Unit Price";
+                                IF Discount <> 0 THEN
+                                    Amount := Amount - (Amount * Discount / 100);
                                 "Cost Amount" := Quantity * "Unit Cost";
                                 Difference := "Available Quantity" - Quantity;
                                 "Stock Status" := "Stock Status"::Insufficient;
@@ -132,6 +136,8 @@ table 50122 "Customer Order Line"
                             ELSE
                                 IF Quantity < "Available Quantity" THEN BEGIN
                                     Amount := Quantity * "Unit Price";
+                                    IF Discount <> 0 THEN
+                                        Amount := Amount - (Amount * Discount / 100);
                                     "Cost Amount" := Quantity * "Unit Cost";
                                     Difference := "Available Quantity" - Quantity;
                                     "Stock Status" := "Stock Status"::Available;
@@ -141,6 +147,8 @@ table 50122 "Customer Order Line"
                                 ELSE
                                     IF ("Available Quantity" <= 0) AND ("Line Type" = "Line Type"::Item) THEN BEGIN
                                         Amount := Quantity * "Unit Price";
+                                        IF Discount <> 0 THEN
+                                            Amount := Amount - (Amount * Discount / 100);
                                         "Cost Amount" := Quantity * "Unit Cost";
                                         "Vat Amount" := Amount * 0.05;
                                         "Amount Inc. VAT" := Amount + "Vat Amount";
@@ -437,6 +445,10 @@ table 50122 "Customer Order Line"
         }
         field(50016; Discount; Decimal)
         {
+            trigger OnValidate()
+            begin
+                VALIDATE(Quantity);
+            end;
         }
         field(50017; "Sent to Parts"; Boolean)
         {
@@ -450,7 +462,9 @@ table 50122 "Customer Order Line"
             trigger OnValidate()
             begin
 
-                VALIDATE(Amount, "Unit Price" * "Quantity Requested");
+                Amount := "Unit Price" * "Quantity Requested";
+                IF Discount <> 0 THEN
+                    Amount := Amount - (Amount * Discount / 100);
                 "Vat Amount" := Amount * 0.075;
                 "Amount Inc. VAT" := Amount + "Vat Amount";
 
@@ -464,6 +478,8 @@ table 50122 "Customer Order Line"
                         BEGIN
                             IF "Quantity Requested" > "Available Quantity" THEN BEGIN
                                 Amount := "Quantity Requested" * "Unit Price";
+                                IF Discount <> 0 THEN
+                                    Amount := Amount - (Amount * Discount / 100);
                                 "Cost Amount" := "Quantity Requested" * "Unit Cost";
                                 Difference := "Available Quantity" - "Quantity Requested";
                                 "Stock Status" := "Stock Status"::Insufficient;
@@ -473,6 +489,8 @@ table 50122 "Customer Order Line"
                             ELSE
                                 IF "Quantity Requested" < "Available Quantity" THEN BEGIN
                                     Amount := "Quantity Requested" * "Unit Price";
+                                    IF Discount <> 0 THEN
+                                        Amount := Amount - (Amount * Discount / 100);
                                     "Cost Amount" := "Quantity Requested" * "Unit Cost";
                                     Difference := "Available Quantity" - "Quantity Requested";
                                     "Stock Status" := "Stock Status"::Available;
@@ -482,6 +500,8 @@ table 50122 "Customer Order Line"
                                 ELSE
                                     IF ("Available Quantity" <= 0) AND ("Line Type" = "Line Type"::Item) THEN BEGIN
                                         Amount := "Quantity Requested" * "Unit Price";
+                                        IF Discount <> 0 THEN
+                                            Amount := Amount - (Amount * Discount / 100);
                                         "Cost Amount" := "Quantity Requested" * "Unit Cost";
                                         "Vat Amount" := Amount * 0.075;
                                         "Amount Inc. VAT" := Amount + "Vat Amount";

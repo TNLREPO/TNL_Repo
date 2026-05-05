@@ -42,6 +42,9 @@ report 51020 "Item Price Update"
 
                 if (SalesSetup."SP Fixed Exch. Rate CNY" = 0) or (SalesSetup."SP Fixed Exch. Rate CNY" < 1) then
                     ERROR('The fixed Exchange Rate for Spare Part pricing is incorrect or not setup. Contact your System Administrator');
+
+                if (SalesSetup."SP Fixed Exch. Rate ZAR" = 0) or (SalesSetup."SP Fixed Exch. Rate ZAR" < 1) then
+                    ERROR('The fixed Exchange Rate for Spare Part pricing is incorrect or not setup. Contact your System Administrator');
             end;
 
             trigger OnAfterGetRecord()
@@ -56,7 +59,8 @@ report 51020 "Item Price Update"
                         // Calculate based on currency
                         if (PurchInvHeader."Currency Code" = 'USD') or
                            (PurchInvHeader."Currency Code" = 'JPY') or
-                           (PurchInvHeader."Currency Code" = 'CNY') then begin
+                           (PurchInvHeader."Currency Code" = 'CNY') or
+                           (PurchInvHeader."Currency Code" = 'ZAR') then begin
                             case PurchInvHeader."Currency Code" of
                                 'USD':
                                     FixedExchRate := SalesSetup."SP Fixed Exch. Rate USD";
@@ -64,6 +68,8 @@ report 51020 "Item Price Update"
                                     FixedExchRate := SalesSetup."SP Fixed Exch. Rate JPY";
                                 'CNY':
                                     FixedExchRate := SalesSetup."SP Fixed Exch. Rate CNY";
+                                'ZAR':
+                                    FixedExchRate := SalesSetup."SP Fixed Exch. Rate ZAR";
                             end;
                             "Fixed Cost" := (1 + SalesSetup."Spare Parts Fixed Cost Markup%" / 100) * FixedExchRate * PurchInvLine."Direct Unit Cost";
                             "FOB (FIXED)" := FixedExchRate * PurchInvLine."Direct Unit Cost";

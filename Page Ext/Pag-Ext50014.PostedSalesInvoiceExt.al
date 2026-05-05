@@ -123,6 +123,8 @@ pageextension 50014 "Posted Sales Invoice Ext" extends "Posted Sales Invoice"
                 var
                     ConfirmMsg: Label 'Do you want to send this invoice to NRS?';
                 begin
+                    if Rec."Sent to NRS" then
+                        Error('This invoice has already been sent to NRS.');
                     if Confirm(ConfirmMsg, false) then
                         Rec.SendeInvoiceToFIRS()
                 end;

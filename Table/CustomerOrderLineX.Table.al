@@ -135,12 +135,20 @@ table 70036 "Customer Order LineX"
             trigger OnValidate()
             begin
                 Amount := "Unit Price" * "Quantity Requested";
-                "Line Amount" := "Unit Price" * "Quantity Requested";
 
-                IF VATPostingSetup.GET("VAT Category"::VAT, "VAT Category"::VAT) THEN BEGIN
-                    "VAT Amount" := Amount * VATPostingSetup."VAT %" / 100;
-                    "Amount Inc. VAT" := Amount + "VAT Amount";
-                END;
+                IF "Discount %" = 0 THEN
+                    "Line Discount Amount" := 0
+                ELSE
+                    "Line Discount Amount" := ("Discount %" / 100) * Amount;
+
+                "Line Amount" := Amount - "Line Discount Amount";
+
+                IF "VAT Category" = "VAT Category"::VAT THEN
+                    "VAT Amount" := "Line Amount" * 0.075
+                ELSE
+                    "VAT Amount" := 0.0;
+
+                "Amount Inc. VAT" := "Line Amount" + "VAT Amount";
             end;
         }
         field(12; Amount; Decimal)

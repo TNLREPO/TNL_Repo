@@ -1,7 +1,10 @@
 report 50221 "Lost Sales On Search Tracker"
 {
+    Caption = 'Lost Sales On Search Tracker';
     DefaultLayout = RDLC;
     RDLCLayout = 'Layout/LostSalesOnSearchTracker.rdl';
+    UsageCategory = Lists;
+    ApplicationArea = All;
 
     dataset
     {

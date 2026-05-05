@@ -82,6 +82,12 @@ pageextension 60013 "Sales & Receivables Setup Ext" extends "Sales & Receivables
                     ApplicationArea = All;
                     ToolTip = 'Specifies the fixed exchange rate for CNY.';
                 }
+                field("SP Fixed Exch. Rate ZAR"; Rec."SP Fixed Exch. Rate ZAR")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the fixed exchange rate for ZAR.';
+                }
+                
                 field("Appointment Nos."; Rec."Appointment Nos.")
                 {
                     ApplicationArea = All;
