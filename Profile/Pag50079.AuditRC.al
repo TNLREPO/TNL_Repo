@@ -2111,7 +2111,7 @@ page 50079 AuditRC
                         ToolTip = 'View a report that shows your company''s changes in retained earnings for a specified period by reconciling the beginning and ending retained earnings for the period, using information such as net income from the other financial statements.';
                     }
                 }
-                
+
                 action("Run Consolidation")
                 {
                     ApplicationArea = Suite;
