@@ -187,7 +187,7 @@ page 50079 AuditRC
                     ApplicationArea = Basic, Suite;
                     Caption = 'Aged Accounts &Receivable';
                     Image = "Report";
-                    //RunObject = Report A
+                    RunObject = Report "EXR Aged Accounts Rec Excel";
                     ToolTip = 'View an overview of when your receivables from customers are due or overdue (divided into four periods). You must specify the date you want aging calculated from and the length of the period that each column will contain data for.';
                 }
                 action("Aged Accounts Pa&yable")
@@ -195,7 +195,7 @@ page 50079 AuditRC
                     ApplicationArea = Basic, Suite;
                     Caption = 'Aged Accounts Pa&yable';
                     Image = "Report";
-                    //RunObject = Report "Aged Accounts Payable (Excel)";
+                    RunObject = Report "EXR Aged Acc Payable Excel";
                     ToolTip = 'View an overview of when your payables to vendors are due or overdue (divided into four periods). You must specify the date you want aging calculated from and the length of the period that each column will contain data for.';
                 }
                 action("Reconcile Cus&t. and Vend. Accs")
@@ -203,7 +203,7 @@ page 50079 AuditRC
                     ApplicationArea = Basic, Suite;
                     Caption = 'Reconcile Cus&t. and Vend. Accs';
                     Image = "Report";
-                    RunObject = Report "Reconcile Cust. and Vend. Accs";
+                    // RunObject = Report "EXR Reconcile Cust. and Vend. Accs";
                     ToolTip = 'View if a certain general ledger account reconciles the balance on a certain date for the corresponding posting group. The report shows the accounts that are included in the reconciliation with the general ledger balance and the customer or the vendor ledger balance for each account and shows any differences between the general ledger balance and the customer or vendor ledger balance.';
                 }
             }
