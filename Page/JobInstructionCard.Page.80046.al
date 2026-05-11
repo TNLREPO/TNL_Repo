@@ -449,7 +449,7 @@ page 80046 "Job Instruction Card"
         END;
 
         ReqWrkShtName.SETRANGE(ReqWrkShtName."Worksheet Template Name", 'REQ.');
-        ReqWrkShtName.SETRANGE(ReqWrkShtName."No. Of Lines", 0);
+        //ReqWrkShtName.SETRANGE(ReqWrkShtName."No. Of Lines", 0);
         IF ReqWrkShtName.FINDSET THEN
             REPEAT
                 ReqWrkShtName."COF No." := '';
@@ -461,7 +461,7 @@ page 80046 "Job Instruction Card"
 
         Rec.TESTFIELD("Request Batch Name", '');
         ReqWrkShtName.SETRANGE(ReqWrkShtName."Worksheet Template Name", 'REQ.');
-        ReqWrkShtName.SETRANGE(ReqWrkShtName."No. Of Lines", 0);
+        //ReqWrkShtName.SETRANGE(ReqWrkShtName."No. Of Lines", 0);
         IF NOT ReqWrkShtName.FINDFIRST THEN
             ERROR('You can not create a new Purchase Requisitions unless the Parts Post All Outstanding Requisitions!')
         ELSE BEGIN
@@ -525,7 +525,7 @@ page 80046 "Job Instruction Card"
         //FOR TRANSFER OF UNAVAILABLE PARTS TO THE PURCHASE REQUISITION SHEET
 
         ReqWrkShtName.SETRANGE(ReqWrkShtName."Worksheet Template Name", 'REQ.');
-        ReqWrkShtName.SETRANGE(ReqWrkShtName."No. Of Lines", 0);
+        //ReqWrkShtName.SETRANGE(ReqWrkShtName."No. Of Lines", 0);
         IF ReqWrkShtName.FINDSET THEN
             REPEAT
                 ReqWrkShtName."COF No." := '';
@@ -538,7 +538,7 @@ page 80046 "Job Instruction Card"
 
         Rec.TESTFIELD("Est. Req. Batch Name", '');
         ReqWrkShtName.SETRANGE(ReqWrkShtName."Worksheet Template Name", 'REQ.');
-        ReqWrkShtName.SETRANGE(ReqWrkShtName."No. Of Lines", 0);
+        //ReqWrkShtName.SETRANGE(ReqWrkShtName."No. Of Lines", 0);
         IF NOT ReqWrkShtName.FINDFIRST THEN
             ERROR('You can not create a new Purchase Requisitions unless the Parts Post All Outstanding Requisitions!')
         ELSE BEGIN

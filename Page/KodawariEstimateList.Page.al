@@ -366,7 +366,7 @@ page 50210 "Kodawari Estimate List"
         END;
 
         ReqWrkShtName.SETRANGE(ReqWrkShtName."Worksheet Template Name", 'REQ.');
-        ReqWrkShtName.SETRANGE(ReqWrkShtName."No. Of Lines", 0);
+        //ReqWrkShtName.SETRANGE(ReqWrkShtName."No. Of Lines", 0);
         IF ReqWrkShtName.FINDSET THEN
             REPEAT
                 ReqWrkShtName."COF No." := '';
@@ -378,7 +378,7 @@ page 50210 "Kodawari Estimate List"
 
         Rec.TESTFIELD("Request Batch Name", '');
         ReqWrkShtName.SETRANGE(ReqWrkShtName."Worksheet Template Name", 'REQ.');
-        ReqWrkShtName.SETRANGE(ReqWrkShtName."No. Of Lines", 0);
+        //ReqWrkShtName.SETRANGE(ReqWrkShtName."No. Of Lines", 0);
         IF NOT ReqWrkShtName.FINDFIRST THEN
             ERROR('You can not create a new Purchase Requisitions unless the Parts Post All Outstanding Requisitions!')
         ELSE BEGIN
@@ -441,7 +441,7 @@ page 50210 "Kodawari Estimate List"
         //FOR TRANSFER OF UNAVAILABLE PARTS TO THE PURCHASE REQUISITION SHEET
 
         ReqWrkShtName.SETRANGE(ReqWrkShtName."Worksheet Template Name", 'REQ.');
-        ReqWrkShtName.SETRANGE(ReqWrkShtName."No. Of Lines", 0);
+        //ReqWrkShtName.SETRANGE(ReqWrkShtName."No. Of Lines", 0);
         IF ReqWrkShtName.FINDSET THEN
             REPEAT
                 ReqWrkShtName."COF No." := '';
@@ -454,7 +454,7 @@ page 50210 "Kodawari Estimate List"
 
         Rec.TESTFIELD("Est. Req. Batch Name", '');
         ReqWrkShtName.SETRANGE(ReqWrkShtName."Worksheet Template Name", 'REQ.');
-        ReqWrkShtName.SETRANGE(ReqWrkShtName."No. Of Lines", 0);
+        //ReqWrkShtName.SETRANGE(ReqWrkShtName."No. Of Lines", 0);
         IF NOT ReqWrkShtName.FINDFIRST THEN
             ERROR('You can not create a new Purchase Requisitions unless the Parts Post All Outstanding Requisitions!')
         ELSE BEGIN

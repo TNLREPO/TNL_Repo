@@ -32,9 +32,9 @@ page 50347 "Pending Purchase Requests"
                 field(Description; Rec.Description)
                 {
                 }
-                field("No. Of Lines"; Rec."No. Of Lines")
-                {
-                }
+                // field("No. Of Lines"; Rec."No. Of Lines")
+                // {
+                // }
             }
         }
     }

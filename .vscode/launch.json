@@ -1,6 +1,7 @@
 {
     "version": "0.2.0",
     "configurations": [
+
         {
             "name": "Microsoft cloud sandbox",
             "request": "launch",
@@ -22,7 +23,7 @@
             "request": "launch",
             "type": "al",
             "environmentType": "Sandbox",
-            "environmentName": "sandbox",
+            "environmentName": "Sandbox",
             "tenant": "cd191dbb-44ca-46e1-bae6-af115003d55f"
         },
         {
@@ -30,7 +31,7 @@
             "request": "snapshotInitialize",
             "type": "al",
             "environmentType": "Sandbox",
-            "environmentName": "sandbox",
+            "environmentName": "Sandbox",
             "sessionId": 289136,
             "breakOnNext": "WebClient",
             "executionContext": "DebugAndProfile",
