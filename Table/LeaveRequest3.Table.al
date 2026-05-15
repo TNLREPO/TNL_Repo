@@ -436,9 +436,10 @@ table 70009 "Leave Request3"
                                 UserSetup2.GET(USERID);
                                 SenderName := UserSetup2.Initials;
                                 SenderAddress := UserSetup2."E-Mail";
+                                CCAddresses := 'henry@toyotanigeria.com';
 
                                 CreateEmailBody(Addressee, "Request No.", "Employee No.", "Leave Category", "Actual Start Date", "Actual End Date", "Actual Duration");
-                                SendEmail(ToAddresses, subject, EmailBody, '', BccAddresses);
+                                SendEmail(ToAddresses, subject, EmailBody, CCAddresses, BccAddresses);
 
                             END;
                         END;
@@ -1725,6 +1726,7 @@ table 70009 "Leave Request3"
         ToName: Text[200];
         ToAddresses: Text[200];
         CCName: Text[200];
+        CCAddresses: Text[200];
         BccAddresses: Text[100];
         Attachment: Text[200];
         Opendialog: Boolean;
