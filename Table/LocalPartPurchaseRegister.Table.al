@@ -89,10 +89,7 @@ table 70018 "Local Part Purchase Register"
         field(24; "Send To"; Code[30])
         {
             NotBlank = true;
-            TableRelation = IF ("Order Type" = FILTER(<> 'Isolo Store')) "Head of Department"."Head of Department" WHERE("Department Code" = FILTER('05PARTS'))
-            ELSE
-            IF ("Order Type" = FILTER('Isolo Store')) "Head of Department"."Head of Department" WHERE("Department Code" = FILTER('06SERVICE'));
-
+            TableRelation = IF ("Order Type" = FILTER(<> ' ')) "Head of Department"."Head of Department" WHERE("Department Code" = FILTER('05PARTS'));
 
         }
         field(25; Send; Boolean)
@@ -121,19 +118,15 @@ table 70018 "Local Part Purchase Register"
                         TimeDate1 := CURRENTDATETIME;
 
                         PurchSetup.GET;
-                        IF "Order Type" = "Order Type"::"Dojo Store Order" THEN BEGIN
+                        IF "Order Type" <> "Order Type"::" " THEN BEGIN
                             ToAddresses := 'ravinder@toyotanigeria.com';
                             Initials := 'RS/AO'
-                        END ELSE
-                            IF "Order Type" = "Order Type"::"Isolo Store" THEN BEGIN
-                                ToAddresses := 'isuekebho@toyotanigeria.com';
-                                Initials := 'SE/GI'
-                            END ELSE BEGIN
-                                UserSetup4.GET("Send To");
-                                Initials := UserSetup4.Initials;
-                                ToAddresses := UserSetup4."E-Mail";
-                                BccAddresses := '';
-                            END;
+                        END ELSE BEGIN
+                            UserSetup4.GET("Send To");
+                            Initials := UserSetup4.Initials;
+                            ToAddresses := UserSetup4."E-Mail";
+                            BccAddresses := '';
+                        END;
 
                         Subject := STRSUBSTNO(Text026, "LPP No.");
                         CreateEmailBody(VendName, VendAddr, VendAmt, Purpose, Text027, Addressee);
@@ -916,7 +909,7 @@ table 70018 "Local Part Purchase Register"
 
 
                 IF "Order Type" = "Order Type"::"Isolo Store" THEN BEGIN
-                    TESTFIELD("Send To", 'ISUEKEBHO');
+                    TESTFIELD("Send To", 'RAVINDER');
                     TESTFIELD("Compliance check", "Compliance check"::Satisfactory);
 
                     IF "HOD's Part Procurement Appr." = "HOD's Part Procurement Appr."::Approved THEN

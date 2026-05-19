@@ -11,7 +11,8 @@ page 70199 "MD Procurement Approval"
                             Rejected = CONST(false),
                             "Compliance check" = CONST(Satisfactory),
                             "Head of Audit" = CONST(Approved),
-                            "Total Purchase Value" = FILTER(> 499999));
+                            "Total Purchase Value" = FILTER(> 499999),
+                            "Order Type" = FILTER(<> 'Isolo Store'));
 
     layout
     {

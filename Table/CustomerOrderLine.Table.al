@@ -42,20 +42,22 @@ table 50122 "Customer Order Line"
                                     VALIDATE("Unit Price", ItemRec."Unit Cost") ELSE
 
                                     IF CustOrderRec."Estimate Factor" <> 0 THEN
-                                        VALIDATE("Unit Price", (ItemRec."Unit Price" * CustOrderRec."Estimate Factor"))
+                                        VALIDATE("Unit Price", (GetSalesPriceGroupPrice() * CustOrderRec."Estimate Factor"))
                                     ELSE
-                                        VALIDATE("Unit Price", ItemRec."Unit Price");
+                                        VALIDATE("Unit Price", GetSalesPriceGroupPrice());
                                 VALIDATE("Unit Cost", ItemRec."Unit Cost");
 
 
                                 IF ItemUnitMeasure.GET("No.", "Unit of Measure") THEN
                                     IF CustOrderRec."Estimate Factor" <> 0 THEN
-                                        VALIDATE("Unit Price", (ItemRec."Unit Price" * CustOrderRec."Estimate Factor" *
+                                        VALIDATE("Unit Price", (GetSalesPriceGroupPrice() * CustOrderRec."Estimate Factor" *
                                         ItemUnitMeasure."Qty. per Unit of Measure"))
                                     ELSE BEGIN
-                                        VALIDATE("Unit Price", ItemRec."Unit Price" * ItemUnitMeasure."Qty. per Unit of Measure");
+                                        VALIDATE("Unit Price", GetSalesPriceGroupPrice() * ItemUnitMeasure."Qty. per Unit of Measure");
                                         VALIDATE("Unit Cost", ItemRec."Unit Cost" * ItemUnitMeasure."Qty. per Unit of Measure");
                                     END;
+                                IF GetSalesPriceGroupPrice() <> 0 THEN
+                                    VALIDATE("Unit Price", GetSalesPriceGroupPrice());
                             END;
                         "Line Type"::Labour:
                             IF Servrec.GET("No.") THEN BEGIN
@@ -535,6 +537,19 @@ table 50122 "Customer Order Line"
             BlankZero = true;
             DecimalPlaces = 0 : 5;
         }
+        field(50022; "Sales Price Group"; Code[10])
+        {
+            Caption = 'Sales Price Group';
+            DataClassification = ToBeClassified;
+            TableRelation = "Customer Price Group".Code;
+
+            trigger OnValidate()
+            begin
+                IF "Line Type" = "Line Type"::Item THEN
+                    IF GetSalesPriceGroupPrice() <> 0 THEN
+                        VALIDATE("Unit Price", GetSalesPriceGroupPrice());
+            end;
+        }
     }
 
     keys
@@ -599,5 +614,23 @@ table 50122 "Customer Order Line"
         PurchInvLine: Record "Purchase Line";
         subrec: Record "Sublet Service";
         ItemUnitMeasure: Record "Item Unit of Measure";
+
+    local procedure GetSalesPriceGroupPrice(): Decimal
+    var
+        SalesPrice: Record "Sales Price";
+    begin
+        IF ("No." = '') OR ("Sales Price Group" = '') THEN
+            EXIT(0);
+        SalesPrice.SETRANGE("Sales Type", SalesPrice."Sales Type"::"Customer Price Group");
+        SalesPrice.SETRANGE("Sales Code", "Sales Price Group");
+        SalesPrice.SETRANGE("Item No.", "No.");
+        IF "Unit of Measure" <> '' THEN
+            SalesPrice.SETRANGE("Unit of Measure Code", "Unit of Measure");
+        SalesPrice.SETFILTER("Starting Date", '%1|<=%2', 0D, TODAY);
+        SalesPrice.SETFILTER("Ending Date", '%1|>=%2', 0D, TODAY);
+        IF SalesPrice.FINDFIRST() THEN
+            EXIT(SalesPrice."Unit Price");
+        EXIT(0);
+    end;
 }
 
