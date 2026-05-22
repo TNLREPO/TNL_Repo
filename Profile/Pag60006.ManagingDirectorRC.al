@@ -269,7 +269,7 @@ page 60006 "Managing Director Role Center"
         }
         area(reporting)
         {
-            
+
         }
         area(embedding)
         {
@@ -279,6 +279,12 @@ page 60006 "Managing Director Role Center"
                 ApplicationArea = All;
                 Caption = 'Financial Reports';
                 RunObject = page "Financial Reports";
+            }
+            action(JMSReport)
+            {
+                ApplicationArea = All;
+                Caption = 'JMS Analysis Reports';
+                RunObject = report "Analysis Report2";
             }
             action(Budgets)
             {
@@ -457,6 +463,14 @@ page 60006 "Managing Director Role Center"
                     Caption = 'Fixed Assets';
                     RunObject = Page "Fixed Asset List";
                     ToolTip = 'Manage periodic depreciation of your machinery or machines, keep track of your maintenance costs, manage insurance policies related to fixed assets, and monitor fixed asset statistics.';
+                }
+                action(ActionName)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'JMS Reporting';
+                    RunObject = report "Analysis Report2";
+                    ToolTip = 'Get insight into the financial data stored in your chart of accounts. Financial reports analyze figures in G/L accounts, and compare general ledger entries with general ledger budget entries. For example, you can view the general ledger entries as percentages of the budget entries. Financial reports provide the data for core financial statements and views, such as the Cash Flow chart.';
+
                 }
                 action("Account Schedules")
                 {
