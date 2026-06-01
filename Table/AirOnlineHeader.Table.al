@@ -1119,6 +1119,7 @@ table 70022 "Air Online Header"
         IF "No." = '' THEN BEGIN
             PurchSetup.GET;
             PurchSetup.TESTFIELD("FM Nos.");
+            "No." := NoSeriesMgt.GetNextNo(PurchSetup."FM Nos.");
             //NoSeriesMgt.InitSeries(PurchSetup."FM Nos.", xRec."No. Series", 0D, "No.", "No. Series");
         END;
 
