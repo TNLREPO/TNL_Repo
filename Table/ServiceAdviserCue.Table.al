@@ -180,6 +180,13 @@ table 50129 "Service Adviser Cue"
             CalcFormula = Count("Complain TableX" WHERE(Resolved = filter(false)));
             FieldClass = FlowField;
         }
+        field(37; "Customers with Username"; Integer)
+        {
+            Caption = 'Online Customers';
+            CalcFormula = Count(Customer WHERE(Username = filter(<> '')));
+            Editable = false;
+            FieldClass = FlowField;
+        }
     }
 
     keys

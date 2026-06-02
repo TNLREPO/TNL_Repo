@@ -151,6 +151,14 @@ page 80001 "Service Adviser Activities"
                     DrillDownPageId = "Service Complaint List";
                 }
             }
+            cuegroup(Customer)
+            {
+                Caption = 'Online Customers';
+                field("Customers with Username"; Rec."Customers with Username")
+                {
+                    DrillDownPageID = "Online Customer List";
+                }
+            }
         }
     }
 

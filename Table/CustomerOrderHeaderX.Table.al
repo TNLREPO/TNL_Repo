@@ -95,7 +95,7 @@ table 70034 "Customer Order HeaderX"
         field(14; "Confirmation Time"; Time)
         {
         }
-        field(15; "Confirmation Staff Name"; Text[30])
+        field(15; "Confirmation Staff Name"; Text[50])
         {
         }
         field(16; "Parts Ordered Date"; Date)
@@ -1947,7 +1947,7 @@ table 70034 "Customer Order HeaderX"
             OptionCaption = ' ,Gray,TNL Sold';
             OptionMembers = " ",Gray,"TNL Sold";
         }
-        field(50019; "User ID"; Text[30])
+        field(50019; "User ID"; Text[50])
         {
             Editable = false;
             TableRelation = "User Setup";
