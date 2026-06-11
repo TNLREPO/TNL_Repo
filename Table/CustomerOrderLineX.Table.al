@@ -84,6 +84,7 @@ table 70036 "Customer Order LineX"
                 CustOrderLine."Additional Jobs" := CustOrderRec."Additional Job Confirmation";
 
                 "VAT Category" := "VAT Category"::VAT;
+
             end;
         }
         field(3; Description; Text[50])
@@ -609,26 +610,27 @@ table 70036 "Customer Order LineX"
     begin
         IF CustOrderRec.GET("Document No.") THEN BEGIN
 
-            /* SalesPrice.SETRANGE("Item No.", "No.");
-            SalesPrice.SETRANGE("Sales Code", 'ISOLO-PRIC');
-            SalesPrice.SETFILTER("Ending Date", '%1', 0D);
-            //SalesPrice.SETFILTER("Variant Code",'%1|%2',"Variant Code",'');
-            //SalesPrice.SETFILTER("Ending Date",'%1|>=%2',0D,CustOrderRec."Parts Ordered Date");
-            //SalesPrice.SETFILTER("Unit of Measure Code",'%1|%2',"Unit of Measure",'');
-            //SalesPrice.SETRANGE("Starting Date",0D,CustOrderRec."Parts Ordered Date");
+            SalesPrice.SETRANGE("Product No.", "No.");
+            SalesPrice.SETRANGE("Source Type", SalesPrice."Source Type"::"Customer Price Group");
+            SalesPrice.SETRANGE("Source No.", 'ISOLO-PRIC');
+            SalesPrice.SETFILTER("Starting Date", '<=%1|%2', CustOrderRec."Parts Ordered Date", 0D);
+            SalesPrice.SETFILTER("Ending Date", '>=%1|%2', CustOrderRec."Parts Ordered Date", 0D);
             IF SalesPrice.FINDLAST THEN BEGIN
-                VALIDATE("Unit Price", SalesPrice."Unit Price");
-                UnitPrice := SalesPrice."Unit Price"
-            END; */
+                UnitPrice := SalesPrice."Unit Price";
+                "Unit Price" := UnitPrice;
+            END;
 
-            IF ItemRec.GET("No.") THEN
+            IF ItemRec.GET("No.") THEN BEGIN
                 Description := ItemRec.Description;
-            "Bin/Shelf No." := ItemRec."Shelf No.";
-            ItemRec.CALCFIELDS(ItemRec."Net Change");
-            "Quantity Available" := ItemRec."Net Change";
-            "Unit of Measure" := ItemRec."Sales Unit of Measure";
-            VALIDATE("Unit Cost", ItemRec."Unit Cost");
+                "Bin/Shelf No." := ItemRec."Shelf No.";
+                ItemRec.CALCFIELDS(ItemRec."Net Change");
+                "Quantity Available" := ItemRec."Net Change";
+                "Unit of Measure" := ItemRec."Sales Unit of Measure";
+                "Unit Cost" := ItemRec."Unit Cost";
+            END;
         END;
     end;
+
+
 }
 

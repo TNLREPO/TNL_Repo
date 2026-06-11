@@ -27,7 +27,7 @@ report 51020 "Item Price Update"
             begin
                 // Load setup records once for performance
                 SalesSetup.GET;
-                InvtSetup.GET;
+                //InvtSetup.GET;
                 GLSetup.Get();
 
                 // Validate setup before processing
@@ -83,11 +83,8 @@ report 51020 "Item Price Update"
                 // Update prices from fixed price tables if no purchase invoice found
                 if not PurchInvLine.FINDFIRST then begin
                     if FixedPrice.GET("No.") then begin
-                        "Fixed Cost" := (1.35) * InvtSetup."Exchange Rate" * FixedPrice."Unit Cost";
-                        "FOB (FIXED)" := InvtSetup."Exchange Rate" * FixedPrice."Unit Cost";
-                    end else if FixedPrice2.GET("No.") then begin
-                        "Fixed Cost" := (1.35) * InvtSetup."Exchange Rate" * FixedPrice2."Unit Cost";
-                        "FOB (FIXED)" := InvtSetup."Exchange Rate" * FixedPrice2."Unit Cost";
+                        "Fixed Cost" := (1.35) * SalesSetup."SP Fixed Exch. Rate USD" * FixedPrice."Unit Cost";
+                        "FOB (FIXED)" := SalesSetup."SP Fixed Exch. Rate USD" * FixedPrice."Unit Cost";
                     end;
                 end;
 
@@ -163,12 +160,12 @@ report 51020 "Item Price Update"
 
     var
         SalesSetup: Record "Sales & Receivables Setup";
-        InvtSetup: Record "Inventory Setup";
+        //InvtSetup: Record "Inventory Setup";
         PurchInvHeader: Record "Purch. Inv. Header";
         FixedExchRate: Decimal;
         PurchInvLine: Record "Purch. Inv. Line";
         FixedPrice: Record "Fixed Price2";
-        FixedPrice2: Record "Fixed Price3";
+        //FixedPrice2: Record "Fixed Price3";
         GLSetup: Record "General Ledger Setup";
         PriceGrp: Record "Item Price Group";
 }

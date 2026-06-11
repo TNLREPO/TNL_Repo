@@ -103,4 +103,11 @@ page 60008 "Daily New Customer"
             }
         }
     }
+    trigger OnFindRecord(Which: Text): Boolean
+    begin
+        Rec.FilterGroup(2);
+        Rec.SetRange("Customer Created Date", Today);
+        Rec.FilterGroup(0);
+        exit(Rec.Find(Which));
+    end;
 }

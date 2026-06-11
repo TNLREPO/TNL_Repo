@@ -1095,8 +1095,7 @@ table 70008 "Procurement Header"
                 // TESTFIELD("Head of Audit", "Head of Audit"::Approved); restore
 
                 UserSetup4.GET(USERID);
-
-                IF UserSetup4."User ID" <> 'BUNMI' THEN
+                IF not UserSetup4."GM/MD" THEN
                     ERROR(Text039);
 
                 IF "General Manager" = "General Manager"::Approved THEN BEGIN
@@ -1318,8 +1317,6 @@ table 70008 "Procurement Header"
                 IF "Bal. Paymt. Audit" <> "Bal. Paymt. Audit"::Approved THEN
                     ERROR(Text054);
                 UserSetup4.GET(USERID);
-                //IF UserSetup4."User ID" <> 'KUNLE_ADE-OJO' THEN
-                //IF UserSetup4."User ID" <> 'BUNMI' THEN
                 if not UserSetup4."GM/MD" then
                     ERROR(Text039);
 
@@ -1434,8 +1431,7 @@ table 70008 "Procurement Header"
                         SenderEmail := UserSetup2."E-Mail";
 
                     UserSetup4.GET(USERID);
-                    IF UserSetup4."User ID" <> 'BUNMI' THEN
-                        //IF UserSetup4."User ID" <> 'PAA' THEN
+                    IF not UserSetup4."GM/MD" THEN
                         ERROR(Text039);
                     SendersName := UserSetup4.Initials;
                     "Bal. Paymt. by GM" := UserSetup4.Name;

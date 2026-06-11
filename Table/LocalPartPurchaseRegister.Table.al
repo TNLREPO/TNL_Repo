@@ -298,13 +298,17 @@ table 70018 "Local Part Purchase Register"
                         TimeDate4 := CURRENTDATETIME;
 
                         IF (VendAmt <= 100000) THEN BEGIN
-                            IF "Order Type" <> "Order Type"::"Isolo Store" THEN begin
+
+                            /* IF "Order Type" <> "Order Type"::"Isolo Store" THEN begin
                                 ToAddresses := 'ravinder@toyotanigeria.com';
                                 Addressee := 'RS,';
                             end else begin
                                 ToAddresses := 'sylvester@toyotanigeria.com';
                                 Addressee := 'SE,';
-                            end;
+                            end; */
+
+                            ToAddresses := 'ravinder@toyotanigeria.com';
+                            Addressee := 'RS,';
 
                             HODVisible := TRUE;
                             "Procurement Approval" := TRUE;
