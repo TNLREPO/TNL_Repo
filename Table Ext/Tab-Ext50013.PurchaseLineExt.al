@@ -62,7 +62,9 @@ tableextension 50013 "Purchase Line Ext" extends "Purchase Line"
 
             begin
                 IF Colorrec.GET("Color Group", Colour) THEN
-                    "Colour Description" := Colorrec.Description;
+                    "Colour Description" := Colorrec.Description
+                else
+                    "Colour Description" := '';
             end;
         }
         field(50007; "Shelf/Bin"; Code[20])
@@ -226,11 +228,32 @@ tableextension 50013 "Purchase Line Ext" extends "Purchase Line"
         field(60103; "Inventory Posting"; Code[10])
         {
         }
+        field(60104; "Interior Colour Code"; Code[30])
+        {
+            TableRelation = "Interior Colour Codes"."Interior Colour Code" WHERE("Product Group Code" = field("Color Group"));
+
+            trigger OnValidate()
+
+            var
+
+            begin
+                IF InteriorColourRec.GET("Color Group", "Interior Colour Code") THEN
+                    "Interior Colour Name" := InteriorColourRec."Interior Colour Name"
+                ELSE
+                    "Interior Colour Name" := '';
+            end;
+        }
+        field(60105; "Interior Colour Name"; Text[50])
+        {
+            editable = false;
+
+        }
     }
 
     var
         Item: Record Item;
         Colorrec: Record 50067;
+        InteriorColourRec: Record 50188;
         COFRec: Record 50119;
         PurchComment: Record 43;
         PurchHeader: Record "Purchase Header";

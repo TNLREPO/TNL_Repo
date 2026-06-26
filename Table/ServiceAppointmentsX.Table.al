@@ -7,6 +7,7 @@ table 70033 "Service AppointmentsX"
         field(1; "Service Item"; Code[20])
         {
             TableRelation = "Service Item"."No.";
+            ValidateTableRelation = false;  // for CRM
 
             trigger OnValidate()
             begin
@@ -96,6 +97,7 @@ table 70033 "Service AppointmentsX"
         {
             //TableRelation = "Fault Setup Header"."Operation Code" WHERE("Model No." = FIELD("Model Code"));
             TableRelation = "Fault Setup Header"."Operation Code";
+            ValidateTableRelation = false;  // for CRM
 
             trigger OnValidate()
             begin

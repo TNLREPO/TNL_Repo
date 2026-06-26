@@ -1,12 +1,12 @@
 codeunit 50011 "Reservation Mgt."
 {
 
-    //var
-
     Var
         EngineNo: Code[20];
         ExtColorCode: Code[30];
         ExtColorName: Text[30];
+        InteriorColorCode: Code[30];
+        InteriorColorName: Text[50];
         KeyNo: Code[20];
         ModifyRun: Boolean;
 
@@ -18,6 +18,8 @@ codeunit 50011 "Reservation Mgt."
         EngineNo := NewTrackingSpecification."Engine No.";
         ExtColorCode := NewTrackingSpecification."Exterior Colour Code";
         ExtColorName := NewTrackingSpecification."Exterior Colour Name";
+        InteriorColorCode := NewTrackingSpecification."Interior Colour Code";
+        InteriorColorName := NewTrackingSpecification."Interior Colour Name";
         KeyNo := NewTrackingSpecification."Key No.";
     End;
 
@@ -28,6 +30,8 @@ codeunit 50011 "Reservation Mgt."
         ReservationEntry."Engine No." := EngineNo;
         ReservationEntry."Exterior Colour Code" := ExtColorCode;
         ReservationEntry."Exterior Colour Name" := ExtColorName;
+        ReservationEntry."Interior Colour Code" := InteriorColorCode;
+        ReservationEntry."Interior Colour Name" := InteriorColorName;
         ReservationEntry."Key No." := KeyNo;
     End;
 
@@ -37,6 +41,8 @@ codeunit 50011 "Reservation Mgt."
         InsertReservEntry."Engine No." := NewTrackingSpecification."Engine No.";
         InsertReservEntry."Exterior Colour Code" := NewTrackingSpecification."Exterior Colour Code";
         InsertReservEntry."Exterior Colour Name" := NewTrackingSpecification."Exterior Colour Name";
+        InsertReservEntry."Interior Colour Code" := NewTrackingSpecification."Interior Colour Code";
+        InsertReservEntry."Interior Colour Name" := NewTrackingSpecification."Interior Colour Name";
         InsertReservEntry."Key No." := NewTrackingSpecification."Key No.";
     End;
 
@@ -47,6 +53,8 @@ codeunit 50011 "Reservation Mgt."
             SourceTrackingSpec."Engine No." := DestTrkgSpec."Engine No.";
             SourceTrackingSpec."Exterior Colour Code" := DestTrkgSpec."Exterior Colour Code";
             SourceTrackingSpec."Exterior Colour Name" := DestTrkgSpec."Exterior Colour Name";
+            SourceTrackingSpec."Interior Colour Code" := DestTrkgSpec."Interior Colour Code";
+            SourceTrackingSpec."Interior Colour Name" := DestTrkgSpec."Interior Colour Name";
             SourceTrackingSpec."Key No." := DestTrkgSpec."Key No.";
 
         end else begin
@@ -54,6 +62,8 @@ codeunit 50011 "Reservation Mgt."
             DestTrkgSpec."Engine No." := SourceTrackingSpec."Engine No.";
             DestTrkgSpec."Exterior Colour Code" := SourceTrackingSpec."Exterior Colour Code";
             DestTrkgSpec."Exterior Colour Name" := SourceTrackingSpec."Exterior Colour Name";
+            DestTrkgSpec."Interior Colour Code" := SourceTrackingSpec."Interior Colour Code";
+            DestTrkgSpec."Interior Colour Name" := SourceTrackingSpec."Interior Colour Name";
             DestTrkgSpec."Key No." := SourceTrackingSpec."Key No.";
         end;
     End;
@@ -65,6 +75,8 @@ codeunit 50011 "Reservation Mgt."
         TrackingSpecification."Engine No." := TempTrackingSpecification."Engine No.";
         TrackingSpecification."Exterior Colour Code" := TempTrackingSpecification."Exterior Colour Code";
         TrackingSpecification."Exterior Colour Name" := TempTrackingSpecification."Exterior Colour Name";
+        TrackingSpecification."Interior Colour Code" := TempTrackingSpecification."Interior Colour Code";
+        TrackingSpecification."Interior Colour Name" := TempTrackingSpecification."Interior Colour Name";
         TrackingSpecification."Key No." := TempTrackingSpecification."Key No.";
     End;
 
@@ -79,15 +91,11 @@ codeunit 50011 "Reservation Mgt."
             (ReservEntry1."Engine No." = ReservEntry2."Engine No.") and
             (ReservEntry1."Exterior Colour Code" = ReservEntry2."Exterior Colour Code") and
             (ReservEntry1."Exterior Colour Name" = ReservEntry2."Exterior Colour Name") and
+            (ReservEntry1."Interior Colour Code" = ReservEntry2."Interior Colour Code") and
+            (ReservEntry1."Interior Colour Name" = ReservEntry2."Interior Colour Name") and
             (ReservEntry1."Key No." = ReservEntry2."Key No.")
     End;
 
-    // [EventSubscriber(ObjectType::Page, Page::"Item Tracking Lines", 'OnRegisterChangeOnBeforeAddItemTrackingToTempRecSet', '', false, false)]
-    // local procedure OnRegisterChangeOnBeforeAddItemTrackingToTempRecSet(var OldTrackingSpecification: Record "Tracking Specification"; var NewTrackingSpecification: Record "Tracking Specification")
-    // Begin
-    //     OldTrackingSpecification."Engine No." := NewTrackingSpecification."Engine No.";
-    //     OldTrackingSpecification."Exterior Colour Code" := NewTrackingSpecification."Exterior Colour Code";
-    // End;
 
     [EventSubscriber(ObjectType::Page, Page::"Item Tracking Lines", 'OnAfterMoveFields', '', false, false)]
     local procedure OnAfterMoveFields(var TrkgSpec: Record "Tracking Specification"; var ReservEntry: Record "Reservation Entry")
@@ -95,6 +103,8 @@ codeunit 50011 "Reservation Mgt."
         ReservEntry."Engine No." := TrkgSpec."Engine No.";
         ReservEntry."Exterior Colour Code" := TrkgSpec."Exterior Colour Code";
         ReservEntry."Exterior Colour Name" := TrkgSpec."Exterior Colour Name";
+        ReservEntry."Interior Colour Code" := TrkgSpec."Interior Colour Code";
+        ReservEntry."Interior Colour Name" := TrkgSpec."Interior Colour Name";
         ReservEntry."Key No." := TrkgSpec."Key No.";
     End;
 
@@ -105,6 +115,8 @@ codeunit 50011 "Reservation Mgt."
         TempItemJournalLine."Engine No." := TempTrackingSpecification."Engine No.";
         TempItemJournalLine."Exterior Colour Code" := TempTrackingSpecification."Exterior Colour Code";
         TempItemJournalLine."Exterior Colour Name" := TempTrackingSpecification."Exterior Colour Name";
+        TempItemJournalLine."Interior Colour Code" := TempTrackingSpecification."Interior Colour Code";
+        TempItemJournalLine."Interior Colour Name" := TempTrackingSpecification."Interior Colour Name";
         TempItemJournalLine."Key No." := TempTrackingSpecification."Key No.";
     End;
 
@@ -114,6 +126,8 @@ codeunit 50011 "Reservation Mgt."
         NewItemLedgEntry."Engine No." := ItemJournalLine."Engine No.";
         NewItemLedgEntry."Exterior Colour Code" := ItemJournalLine."Exterior Colour Code";
         NewItemLedgEntry."Exterior Colour Name" := ItemJournalLine."Exterior Colour Name";
+        NewItemLedgEntry."Interior Colour Code" := ItemJournalLine."Interior Colour Code";
+        NewItemLedgEntry."Interior Colour Name" := ItemJournalLine."Interior Colour Name";
         NewItemLedgEntry."Key No." := ItemJournalLine."Key No.";
     End;
 
@@ -127,12 +141,12 @@ codeunit 50011 "Reservation Mgt."
         ItemLedgerEntry2.Reset();
         ItemLedgerEntry2.SetRange("Serial No.", Rec."Serial No.");
         If ItemLedgerEntry2.FindFirst() then begin
-
             Rec."Engine No." := ItemLedgerEntry2."Engine No.";
             Rec."Exterior Colour Code" := ItemLedgerEntry2."Exterior Colour Code";
             Rec."Exterior Colour Name" := ItemLedgerEntry2."Exterior Colour Name";
+            Rec."Interior Colour Code" := ItemLedgerEntry2."Interior Colour Code";
+            Rec."Interior Colour Name" := ItemLedgerEntry2."Interior Colour Name";
             Rec."Key No." := ItemLedgerEntry2."Key No.";
-
         end;
     End;
 
@@ -145,17 +159,17 @@ codeunit 50011 "Reservation Mgt."
         ItemLedgerEntry2.Reset();
         ItemLedgerEntry2.SetRange("Serial No.", Rec."Serial No.");
         If ItemLedgerEntry2.FindFirst() then begin
-
             Rec."Engine No." := ItemLedgerEntry2."Engine No.";
             Rec."Exterior Colour Code" := ItemLedgerEntry2."Exterior Colour Code";
             Rec."Exterior Colour Name" := ItemLedgerEntry2."Exterior Colour Name";
+            Rec."Interior Colour Code" := ItemLedgerEntry2."Interior Colour Code";
+            Rec."Interior Colour Name" := ItemLedgerEntry2."Interior Colour Name";
             Rec."Key No." := ItemLedgerEntry2."Key No.";
             Rec.Modify();
-
         end;
     end;
 
-      [EventSubscriber(ObjectType::Table, Database::"Tracking Specification", 'OnAfterInsertEvent', '', false, false)]
+    [EventSubscriber(ObjectType::Table, Database::"Tracking Specification", 'OnAfterInsertEvent', '', false, false)]
     local procedure TrackingSpecificationOnAfterInsertEvent(var Rec: Record "Tracking Specification")
     var
         ItemLedgerEntry: Record "Item Ledger Entry";
@@ -164,10 +178,11 @@ codeunit 50011 "Reservation Mgt."
         ItemLedgerEntry2.Reset();
         ItemLedgerEntry2.SetRange("Serial No.", Rec."Serial No.");
         If ItemLedgerEntry2.FindFirst() then begin
-
             Rec."Engine No." := ItemLedgerEntry2."Engine No.";
             Rec."Exterior Colour Code" := ItemLedgerEntry2."Exterior Colour Code";
             Rec."Exterior Colour Name" := ItemLedgerEntry2."Exterior Colour Name";
+            Rec."Interior Colour Code" := ItemLedgerEntry2."Interior Colour Code";
+            Rec."Interior Colour Name" := ItemLedgerEntry2."Interior Colour Name";
             Rec."Key No." := ItemLedgerEntry2."Key No.";
             Rec.Modify();
 

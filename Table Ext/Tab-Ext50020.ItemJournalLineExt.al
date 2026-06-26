@@ -113,6 +113,14 @@ tableextension 50020 "Item Journal Line Ext" extends "Item Journal Line"
         field(50213; "Exterior Colour Name"; Code[30])
         {
         }
+        field(50220; "Interior Colour Code"; Code[30])
+        {
+            Editable = false;
+        }
+        field(50221; "Interior Colour Name"; Text[50])
+        {
+            Editable = false;
+        }
         field(50214; "Key No."; Text[20])
         {
         }
@@ -128,7 +136,7 @@ tableextension 50020 "Item Journal Line Ext" extends "Item Journal Line"
         }
         field(50218; "Item shelf"; Code[20])
         {
-            CalcFormula = Lookup(Item."Shelf No." WHERE ("No."=FIELD("Item No.")));
+            CalcFormula = Lookup(Item."Shelf No." WHERE("No." = FIELD("Item No.")));
             FieldClass = FlowField;
         }
         field(50219; "Year of Production"; Code[10])
@@ -141,15 +149,7 @@ tableextension 50020 "Item Journal Line Ext" extends "Item Journal Line"
         }
         field(60006; "Duplicate Count"; Integer)
         {
-            /*
-            CalcFormula = Count("Item Journal Line" WHERE (Journal Template Name=FIELD(Journal Template Name),
-                                                           Journal Batch Name=FIELD(Journal Batch Name),
-                                                           Item No.=FIELD(Item No.),
-                                                           Location Code=FIELD(Location Code),
-                                                           Variant Code=FIELD(Variant Code)));
-            Editable = false;
-            FieldClass = FlowField;
-            */
+            
         }
         field(60100; "Original Purch Customer No."; Code[20])
         {
@@ -162,8 +162,8 @@ tableextension 50020 "Item Journal Line Ext" extends "Item Journal Line"
         {
         }
     }
-var
-ItemRec: Record Item;
+    var
+        ItemRec: Record Item;
 
 }
 

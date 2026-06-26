@@ -89,6 +89,7 @@ tableextension 50009 "Item Ledger Entry Ext" extends "Item Ledger Entry"
         field(60104; "Exterior Colour Code"; Code[30])
         {
         }
+       
         field(60105; "Key No."; Text[30])
         {
         }
@@ -188,6 +189,12 @@ tableextension 50009 "Item Ledger Entry Ext" extends "Item Ledger Entry"
         {
             CalcFormula = Lookup(Item.Engine WHERE("No." = FIELD("Item No.")));
             FieldClass = FlowField;
+        }
+         field(60128; "Interior Colour Code"; Code[30])
+        {
+        }
+        field(60129; "Interior Colour Name"; Text[50])
+        {
         }
 
 

@@ -135,7 +135,7 @@ tableextension 50026 "Purch. Cr. Memo Line Ext" extends "Purch. Cr. Memo Line"
         }
         field(60007; "Color Group"; Code[20])
         {
-            
+
         }
         field(60008; "Item Length"; Decimal)
         {
@@ -154,6 +154,15 @@ tableextension 50026 "Purch. Cr. Memo Line Ext" extends "Purch. Cr. Memo Line"
         }
         field(60013; "JPM Value"; Decimal)
         {
+        }
+        field(60104; "Interior Colour Code"; Code[30])
+        {
+
+        }
+        field(60105; "Interior Colour Name"; Text[50])
+        {
+
+
         }
     }
 }

@@ -20,6 +20,16 @@ pageextension 50010 "Item Ledger Entries Ext" extends "Item Ledger Entries"
                 ApplicationArea = All;
 
             }
+            field("Interior Colour Code"; Rec."Interior Colour Code")
+            {
+                ApplicationArea = All;
+
+            }
+            field("Interior Colour Name"; Rec."Interior Colour Name")
+            {
+                ApplicationArea = All;
+
+            }
             field("Key No."; Rec."Key No.")
             {
                 ApplicationArea = All;

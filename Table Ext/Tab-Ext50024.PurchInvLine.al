@@ -131,5 +131,14 @@ tableextension 50024 "Purch. Inv. Line" extends "Purch. Inv. Line"
             Editable = false;
             TableRelation = Customer."No.";
         }
+        field(60104; "Interior Colour Code"; Code[30])
+        {
+            
+        }
+        field(60105; "Interior Colour Name"; Text[50])
+        {
+          
+
+        }
     }
 }
