@@ -32,6 +32,9 @@ page 80037 "Open Appointments"
                 field("Agreed Date"; Rec."Agreed Date")
                 {
                 }
+                field("Agreed Time"; Rec."Agreed Time")
+                {
+                }
                 field("Appointment Status"; Rec."Appointment Status")
                 {
                 }

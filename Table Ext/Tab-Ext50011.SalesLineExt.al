@@ -140,6 +140,11 @@ tableextension 50011 "Sales Line Ext" extends "Sales Line"
         {
             DataClassification = ToBeClassified;
         }
+        field(60115; "Cancellation Reason"; Option)
+        {
+            OptionCaption = ' ,Invoice Cancellation,Purchase Reversal,Price Difference,Order Duplication,Defective Supply,Technical Issues, Delayed ETA, Others';
+            OptionMembers = " ",InvoiceCancellation,PurchaseReversal,PriceDifference,OrderDuplication,DefectiveSupply,TechnicalIssues,DelayedETA,Others;
+        }
 
         modify("Location Code")
         {

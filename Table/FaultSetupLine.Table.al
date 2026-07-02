@@ -5,7 +5,7 @@ table 50110 "Fault Setup Line"
     {
         field(1; "Operation code"; Code[20])
         {
-            //TableRelation = "Fault Setup Header"."Operation Code";
+
         }
         field(2; "Line No."; Integer)
         {
@@ -23,7 +23,7 @@ table 50110 "Fault Setup Line"
         }
         field(4; "No."; Code[20])
         {
-            TableRelation = IF (Type = CONST(" ")) "Standard Text"
+            /* TableRelation = IF (Type = CONST(" ")) "Standard Text"
             ELSE
             IF (Type = CONST(Item), "Service Item Model" = FILTER(<> '')) Item."No." WHERE("Model No." = FIELD("Service Item Model"))
             ELSE
@@ -36,11 +36,7 @@ table 50110 "Fault Setup Line"
             trigger OnValidate()
             begin
                 CASE Type OF
-                    /*0 :
-                      BEGIN
-                        StdTxt.GET("No.");
-                        Description := StdTxt.Description;
-                      END;*/
+                    
                     Type::Item:
                         BEGIN
                             item.GET("No.");
@@ -71,7 +67,7 @@ table 50110 "Fault Setup Line"
                         END;
                 END;
 
-            end;
+            end; */
         }
         field(5; Description; Text[50])
         {
@@ -110,7 +106,7 @@ table 50110 "Fault Setup Line"
         }
         field(11; "Unit of Measure Code"; Code[20])
         {
-            TableRelation = "Item Unit of Measure" WHERE("Item No." = FIELD("No."));
+            //TableRelation = "Item Unit of Measure" WHERE("Item No." = FIELD("No."));
         }
         field(12; "Posting Group"; Code[20])
         {
@@ -164,7 +160,7 @@ table 50110 "Fault Setup Line"
 
     keys
     {
-        key(Key1; "Operation code", "Line No.")
+        key(Key1; "Operation code", "Model No.", "Line No.")
         {
             Clustered = true;
             SumIndexFields = "VAT Amount", "VAT%";

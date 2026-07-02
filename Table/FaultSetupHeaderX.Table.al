@@ -8,14 +8,6 @@ table 70031 "Fault Setup HeaderX"
         field(1; "Operation Code"; Code[20])
         {
 
-            trigger OnValidate()
-            begin
-                /* IF "Operation Code" <> xRec."Operation Code" THEN BEGIN
-                    SerSetup.GET;
-                    NoSeriesMgt.TestManual(SerSetup."Fault Code No.s");
-                    "No. Series" := '';
-                END; */
-            end;
         }
         field(2; Description; Text[50])
         {
@@ -67,17 +59,17 @@ table 70031 "Fault Setup HeaderX"
         }
         field(17; Estimate; Decimal)
         {
-            CalcFormula = Sum("Fault Setup Line"."Total Price" WHERE("Operation code" = FIELD("Operation Code")));
+            CalcFormula = Sum("Fault Setup Line"."Total Price" WHERE("Operation code" = FIELD("Operation Code"), "Model No." = FIELD("Model No.")));
             FieldClass = FlowField;
         }
         field(18; VAT; Decimal)
         {
-            CalcFormula = Sum("Fault Setup Line"."VAT Amount" WHERE("Operation code" = FIELD("Operation Code")));
+            CalcFormula = Sum("Fault Setup Line"."VAT Amount" WHERE("Operation code" = FIELD("Operation Code"), "Model No." = FIELD("Model No.")));
             FieldClass = FlowField;
         }
         field(19; "Estimate Incl. VAT"; Decimal)
         {
-            CalcFormula = Sum("Fault Setup Line"."Price Incl VAT" WHERE("Operation code" = FIELD("Operation Code")));
+            CalcFormula = Sum("Fault Setup Line"."Price Incl VAT" WHERE("Operation code" = FIELD("Operation Code"), "Model No." = FIELD("Model No.")));
             FieldClass = FlowField;
         }
     }

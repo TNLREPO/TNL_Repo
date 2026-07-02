@@ -23,6 +23,7 @@ table 70032 "Fault Setup LineX"
         }
         field(4; "No."; Code[20])
         {
+            /*
             TableRelation = IF (Type = CONST(" ")) "Standard Text"
             ELSE
             IF (Type = CONST(Item),
@@ -37,11 +38,7 @@ table 70032 "Fault Setup LineX"
             trigger OnValidate()
             begin
                 CASE Type OF
-                    /*0 :
-                      BEGIN
-                        StdTxt.GET("No.");
-                        Description := StdTxt.Description;
-                      END;*/
+                   
                     Type::Item:
                         BEGIN
                             item.GET("No.");
@@ -73,6 +70,7 @@ table 70032 "Fault Setup LineX"
                 END;
 
             end;
+            */
         }
         field(5; Description; Text[50])
         {
@@ -111,7 +109,7 @@ table 70032 "Fault Setup LineX"
         }
         field(11; "Unit of Measure Code"; Code[20])
         {
-            TableRelation = "Item Unit of Measure" WHERE("Item No." = FIELD("No."));
+            //TableRelation = "Item Unit of Measure" WHERE("Item No." = FIELD("No."));
         }
         field(12; "Posting Group"; Code[20])
         {
@@ -167,7 +165,7 @@ table 70032 "Fault Setup LineX"
 
     keys
     {
-        key(Key1; "Operation code", "Line No.")
+        key(Key1; "Operation code", "Model No.", "Line No.")
         {
             Clustered = true;
             SumIndexFields = "VAT Amount", "VAT%";

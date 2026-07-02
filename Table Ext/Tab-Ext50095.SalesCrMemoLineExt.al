@@ -41,6 +41,12 @@ tableextension 50095 "Sales Cr.Memo Line Ext" extends "Sales Cr.Memo Line"
             CalcFormula = Lookup(Customer.Name WHERE("No." = FIELD("Sell-to Customer No.")));
             FieldClass = FlowField;
         }
+        field(60115; "Cancellation Reason"; Option)
+        {
+            OptionCaption = ' ,Invoice Cancellation,Purchase Reversal,Price Difference,Order Duplication,Defective Supply,Technical Issues, Delayed ETA, Others';
+            OptionMembers = " ",InvoiceCancellation,PurchaseReversal,PriceDifference,OrderDuplication,DefectiveSupply,TechnicalIssues,DelayedETA,Others;
+        }
+
         field(90000; "IRN"; Text[150])
         {
             Caption = 'IRN';

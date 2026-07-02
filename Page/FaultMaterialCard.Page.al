@@ -13,9 +13,6 @@ page 80042 "Fault Material Card"
                 field("Operation Code"; Rec."Operation Code")
                 {
                 }
-                field(Description; Rec.Description)
-                {
-                }
                 field("Model No."; Rec."Model No.")
                 {
                 }
@@ -58,7 +55,7 @@ page 80042 "Fault Material Card"
             }
             part(Lines; "Fault Material Subform")
             {
-                SubPageLink = "Operation code" = field("Operation Code");
+                SubPageLink = "Operation code" = field("Operation Code"), "Model No." = field("Model No.");
             }
         }
     }

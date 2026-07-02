@@ -67,17 +67,17 @@ table 50109 "Fault Setup Header"
         }
         field(17; Estimate; Decimal)
         {
-            CalcFormula = Sum("Fault Setup Line"."Total Price" WHERE("Operation code" = FIELD("Operation Code")));
+            CalcFormula = Sum("Fault Setup Line"."Total Price" WHERE("Operation code" = FIELD("Operation Code"), "Model No." = FIELD("Model No.")));
             FieldClass = FlowField;
         }
         field(18; VAT; Decimal)
         {
-            CalcFormula = Sum("Fault Setup Line"."VAT Amount" WHERE("Operation code" = FIELD("Operation Code")));
+            CalcFormula = Sum("Fault Setup Line"."VAT Amount" WHERE("Operation code" = FIELD("Operation Code"), "Model No." = FIELD("Model No.")));
             FieldClass = FlowField;
         }
         field(19; "Estimate Incl. VAT"; Decimal)
         {
-            CalcFormula = Sum("Fault Setup Line"."Price Incl VAT" WHERE("Operation code" = FIELD("Operation Code")));
+            CalcFormula = Sum("Fault Setup Line"."Price Incl VAT" WHERE("Operation code" = FIELD("Operation Code"), "Model No." = FIELD("Model No.")));
             FieldClass = FlowField;
         }
     }

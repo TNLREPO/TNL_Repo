@@ -12,12 +12,13 @@ table 70033 "Service AppointmentsX"
             trigger OnValidate()
             begin
 
-                ServiceItem.GET("Service Item");
-                "Engine No." := ServiceItem."Engine No.";
-                VIN := ServiceItem."Chasis No.";
-                "Model Code" := ServiceItem."Model No.";
-                "Model Year" := ServiceItem."Model Year";
-                "Model Name" := ServiceItem.Description;
+                if ServiceItem.GET("Service Item") then begin
+                    "Engine No." := ServiceItem."Engine No.";
+                    VIN := ServiceItem."Chasis No.";
+                    "Model Code" := ServiceItem."Model No.";
+                    "Model Year" := ServiceItem."Model Year";
+                    "Model Name" := ServiceItem.Description;
+                end;
 
                 VALIDATE("Customer No.", ServiceItem."Customer No.");
 
@@ -97,18 +98,19 @@ table 70033 "Service AppointmentsX"
         {
             //TableRelation = "Fault Setup Header"."Operation Code" WHERE("Model No." = FIELD("Model Code"));
             TableRelation = "Fault Setup Header"."Operation Code";
-            ValidateTableRelation = false;  // for CRM
+            ValidateTableRelation = false;
 
             trigger OnValidate()
             begin
                 ServiceItem.SETCURRENTKEY("No.");
-                ServiceItem.GET("Service Item");
-                if FaultRec.GET("Operation Code", ServiceItem."Model No.") then begin
-                    Description := FaultRec.Description;
-                    "Expected Service Duration" := FaultRec."Duration In Hours";
-                    "Service Slot" := FaultRec."Duration In Hours" * 2;
-                    "Service Due Kilometer" := FaultRec."Service KM";
-                    //VALIDATE("Chasis No.",ServiceItem."Chasis No.");
+                if ServiceItem.GET("Service Item") then begin
+                    if FaultRec.GET("Operation Code", ServiceItem."Model No.") then begin
+                        Description := FaultRec.Description;
+                        "Expected Service Duration" := FaultRec."Duration In Hours";
+                        "Service Slot" := FaultRec."Duration In Hours" * 2;
+                        "Service Due Kilometer" := FaultRec."Service KM";
+                        //VALIDATE("Chasis No.",ServiceItem."Chasis No.");
+                    end;
                 end;
             end;
         }
