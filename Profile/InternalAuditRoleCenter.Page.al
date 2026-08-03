@@ -799,9 +799,17 @@ page 70102 "Internal Audit Role Center"
                 }
                 action(ChangeColour)
                 {
-                    Caption = 'Change Colour';
+                    Caption = 'Import Colour Changes';
+                    Image = Import;
                     RunObject = xmlport "Modify Item Ledger Entry";
                 }
+                action(ExportColour)
+                {
+                    Caption = 'Export Colour Data (Excel)';
+                    Image = Export;
+                    RunObject = report "Export ILE Colour Excel";
+                }
+
 
                 action(SkipOpexQuote)
                 {

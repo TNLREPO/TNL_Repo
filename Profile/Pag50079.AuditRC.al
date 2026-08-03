@@ -1650,11 +1650,17 @@ page 50079 AuditRC
 
                 action(ModifyILE)
                 {
-                    Caption = 'Modify ILE';
+                    Caption = 'Import ILE Colour Changes';
                     Image = Workflow;
                     RunObject = xmlport "Modify Item Ledger Entry";
                     ApplicationArea = All;
-
+                }
+                action(ExportModifyILE)
+                {
+                    Caption = 'Export ILE Colour Data (Excel)';
+                    Image = Export;
+                    RunObject = report "Export ILE Colour Excel";
+                    ApplicationArea = All;
                 }
 
             }

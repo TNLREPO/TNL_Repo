@@ -526,4 +526,61 @@ codeunit 50000 MySubscribers
             end;
         end
     end;
+
+    [EventSubscriber(ObjectType::Page, Page::"Purchase Order", 'OnBeforeActionEvent', 'Approve', false, false)]
+    procedure OnBeforeApproveAction(var Rec: Record "Purchase Header")
+    begin
+        // Add logic before the Approve action is executed
+    end;
+
+    [EventSubscriber(ObjectType::Page, Page::"Purchase Order", 'OnAfterActionEvent', 'Approve', false, false)]
+    procedure OnAfterApproveAction(var Rec: Record "Purchase Header")
+    var
+        UserSetup: Record "User Setup";
+    begin
+        UserSetup.Get(USERID);
+        if UserSetup."CC Emails" <> '' then begin
+            SendApprovalNotification('Purchase Order', Rec."No.", Rec."Posting Description", Rec.UrlText, UserSetup."CC Emails");
+        end;
+    end;
+
+    [EventSubscriber(ObjectType::Page, Page::"Purchase Order", 'OnAfterActionEvent', 'Post', false, false)]
+
+    procedure OnAfterPostAction(var Rec: Record "Purchase Header")
+    var
+        UserSetup: Record "User Setup";
+    begin
+        UserSetup.Get(USERID);
+        if UserSetup."CC Emails" <> '' then begin
+            SendApprovalNotification('Purchase Order', Rec."No.", Rec."Posting Description", Rec.UrlText, UserSetup."CC Emails");
+        end;
+    end;
+
+        procedure SendApprovalNotification(DocumentType: Text; DocumentNo: Code[20]; PostingDescription: Text; UrlText: Text; CCEmails: Text)
+    var
+        NotifierCU: Codeunit "Notifier";
+        EmailList: List of [Text];
+        EmailArray: array[100] of Text;
+        EmailCount: Integer;
+        i: Integer;
+    begin
+        // Convert CCEmails string to List of Text
+        if CCEmails <> '' then begin
+            EmailCount := StrLen(CCEmails) - StrLen(DelChr(CCEmails, '=', ';')) + 1;
+            if EmailCount = 0 then
+                EmailCount := 1;
+
+            for i := 1 to EmailCount do begin
+                if i < EmailCount then
+                    EmailList.Add(DelStr(CCEmails, StrPos(CCEmails, ';')))
+                else
+                    EmailList.Add(CCEmails);
+            end;
+        end;
+
+        NotifierCU.NotifyUsersFromUserSetupCC(DocumentType, DocumentNo, PostingDescription, UrlText, EmailList);
+    end;
+
+
+
 }

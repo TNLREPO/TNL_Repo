@@ -360,8 +360,10 @@ pageextension 50007 "User Setup Ext" extends "User Setup"
             {
                 ApplicationArea = All;
             }
-           
-            
+            field("CC Emails"; Rec."CC Emails")
+            {
+                ApplicationArea = All;
+            }
         }
     }
 }

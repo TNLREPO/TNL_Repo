@@ -202,4 +202,47 @@ codeunit 50015 Notifier
         if NotificationCount > 0 then
             Message('Notification sent to %1 user(s).', NotificationCount);
     end;
+
+    procedure NotifyUsersFromUserSetupCC(DocumentType: Text[50]; DocumentNo: Code[20]; DocumentDescription: Text[250]; DocuLink: Text[1000]; CCUserEmails: List of [Text])
+
+    var
+        UserSetup: Record "User Setup";
+        EmailMessage: Codeunit "Email Message";
+        Email: Codeunit Email;
+        Subject: Text[250];
+        Body: Text;
+        RecipientEmail: Text[100];
+        RecipientName: Text[100];
+        SenderUserSetup: Record "User Setup";
+        SenderName: Text[100];
+    begin
+        // Get sender details
+        if SenderUserSetup.Get(UserId) then
+            SenderName := SenderUserSetup.Name
+        else
+            SenderName := UserId;
+
+        // Construct email subject
+        Subject := StrSubstNo('Document Approved: %1 - %2', DocumentType, DocumentNo);
+
+        // Construct email body
+        Body := StrSubstNo('Dear sir/ma,<br/><br/>', '');
+        Body += StrSubstNo('A document has been submitted and is awaiting your review.<br/><br/>');
+        Body += StrSubstNo('<b>Document Type:</b> %1<br/>', DocumentType);
+        Body += StrSubstNo('<b>Document No.:</b> %1<br/>', DocumentNo);
+
+        if DocumentDescription <> '' then
+            Body += StrSubstNo('<b>Description:</b> %1<br/>', DocumentDescription);
+
+        Body += StrSubstNo('<b>Approved By:</b> %1<br/>', SenderName);
+        Body += StrSubstNo('<b>Date:</b> %1<br/>', Format(Today));
+
+        // Send email to each CC recipient
+        foreach RecipientEmail in CCUserEmails do begin
+            EmailMessage.Create(RecipientEmail, Subject, Body, true);
+            Email.Send(EmailMessage, Enum::"Email Scenario"::Default);
+        end;
+
+    end;
+
 }
