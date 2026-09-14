@@ -913,7 +913,7 @@ table 70018 "Local Part Purchase Register"
 
 
                 IF "Order Type" = "Order Type"::"Isolo Store" THEN BEGIN
-                    TESTFIELD("Send To", 'RAVINDER');
+                    //TESTFIELD("Send To", 'RAVINDER');
                     TESTFIELD("Compliance check", "Compliance check"::Satisfactory);
 
                     IF "HOD's Part Procurement Appr." = "HOD's Part Procurement Appr."::Approved THEN

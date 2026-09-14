@@ -380,9 +380,17 @@ codeunit 50000 MySubscribers
     var
         Customer: Record Customer;
         SalesCrMemoLine: Record "Sales Cr.Memo Line";
+        OrigSalesInvHeader: Record "Sales Invoice Header";
+        OrigSalesInvLine: Record "Sales Invoice Line";
+        IsReversal: Boolean;
 
     begin
         Customer.Get(SalesHeader."Sell-to Customer No.");
+
+        // credit memo reverses a posted invoice line by line via Applies-to Doc.
+        IsReversal := (SalesHeader."Applies-to Doc. Type" = SalesHeader."Applies-to Doc. Type"::Invoice) and
+            (SalesHeader."Applies-to Doc. No." <> '') and OrigSalesInvHeader.Get(SalesHeader."Applies-to Doc. No.");
+
         SalesCrMemoLine.SetRange("Document No.", SalesCrMemoHeader."No.");
         if SalesCrMemoLine.FindSet() then
             repeat
@@ -393,6 +401,17 @@ codeunit 50000 MySubscribers
                 SalesCrMemoLine."Street Name" := Customer."Address 2";
                 SalesCrMemoLine."City Name" := Customer."City";
                 SalesCrMemoLine."Postal Zone" := Customer."Post Code";
+
+                if IsReversal then begin
+                    OrigSalesInvLine.SetRange("Document No.", OrigSalesInvHeader."No.");
+                    OrigSalesInvLine.SetRange("Line No.", SalesCrMemoLine."Line No.");
+                    if OrigSalesInvLine.FindFirst() then begin
+                        SalesCrMemoLine."Original Document No." := OrigSalesInvLine."Document No.";
+                        SalesCrMemoLine."Original IRN" := OrigSalesInvLine."IRN";
+                        SalesCrMemoLine."Original Posting Date" := OrigSalesInvHeader."Posting Date";
+                    end;
+                end;
+
                 SalesCrMemoLine.Modify();
             until SalesCrMemoLine.Next() = 0;
     end;
@@ -468,8 +487,30 @@ codeunit 50000 MySubscribers
                 Rec."Street Name" := Customer."Address 2";
                 Rec."City Name" := Customer."City";
                 Rec."Postal Zone" := Customer."Post Code";
+                Rec."Sell-to Customer Name" := Customer.Name;
                 Rec.Modify();
             end;
+        end;
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Service-Post", 'OnDeleteHeaderOnBeforeServiceCrMemoLineInsert', '', false, false)]
+    procedure OnDeleteHeaderOnBeforeServiceCrMemoLineInsert(var ServiceHeader: Record "Service Header"; var ServiceCrMemoHeader: Record "Service Cr.Memo Header"; var ServiceCrMemoLine: Record "Service Cr.Memo Line")
+    var
+        OrigServiceInvHeader: Record "Service Invoice Header";
+        OrigServiceInvLine: Record "Service Invoice Line";
+    begin
+        // credit memo reverses a posted invoice line by line via Applies-to Doc.
+        if (ServiceHeader."Applies-to Doc. Type" <> ServiceHeader."Applies-to Doc. Type"::Invoice) or
+            (ServiceHeader."Applies-to Doc. No." = '') or not OrigServiceInvHeader.Get(ServiceHeader."Applies-to Doc. No.")
+        then
+            exit;
+
+        OrigServiceInvLine.SetRange("Document No.", OrigServiceInvHeader."No.");
+        OrigServiceInvLine.SetRange("Line No.", ServiceCrMemoLine."Line No.");
+        if OrigServiceInvLine.FindFirst() then begin
+            ServiceCrMemoLine."Original Document No." := OrigServiceInvLine."Document No.";
+            ServiceCrMemoLine."Original IRN" := OrigServiceInvLine."IRN";
+            ServiceCrMemoLine."Original Posting Date" := OrigServiceInvHeader."Posting Date";
         end;
     end;
 
@@ -556,7 +597,7 @@ codeunit 50000 MySubscribers
         end;
     end;
 
-        procedure SendApprovalNotification(DocumentType: Text; DocumentNo: Code[20]; PostingDescription: Text; UrlText: Text; CCEmails: Text)
+    procedure SendApprovalNotification(DocumentType: Text; DocumentNo: Code[20]; PostingDescription: Text; UrlText: Text; CCEmails: Text)
     var
         NotifierCU: Codeunit "Notifier";
         EmailList: List of [Text];

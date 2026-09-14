@@ -23,7 +23,7 @@ table 70032 "Fault Setup LineX"
         }
         field(4; "No."; Code[20])
         {
-            /*
+
             TableRelation = IF (Type = CONST(" ")) "Standard Text"
             ELSE
             IF (Type = CONST(Item),
@@ -38,7 +38,7 @@ table 70032 "Fault Setup LineX"
             trigger OnValidate()
             begin
                 CASE Type OF
-                   
+
                     Type::Item:
                         BEGIN
                             item.GET("No.");
@@ -70,7 +70,7 @@ table 70032 "Fault Setup LineX"
                 END;
 
             end;
-            */
+
         }
         field(5; Description; Text[50])
         {
@@ -123,8 +123,6 @@ table 70032 "Fault Setup LineX"
         }
         field(15; "VAT%"; Decimal)
         {
-            InitValue = 5;
-
             trigger OnValidate()
             begin
                 "VAT Amount" := ("VAT%" / 100) * "Total Price";
@@ -182,7 +180,7 @@ table 70032 "Fault Setup LineX"
 
     trigger OnInsert()
     begin
-        "VAT%" := 5;
+        SetVATPercentage();
     end;
 
     var
@@ -202,5 +200,19 @@ table 70032 "Fault Setup LineX"
          ELSE
          "Line No." := 10000; */
     end;
+
+    local procedure SetVATPercentage()
+    var
+        VATPostingSetup: Record "VAT Posting Setup";
+    begin
+        VATPostingSetup.SetFilter("VAT %", '>0');
+        if not VATPostingSetup.FindFirst() then
+            Error(MissingVATSetupErr);
+
+        Validate("VAT%", VATPostingSetup."VAT %");
+    end;
+
+    var
+        MissingVATSetupErr: Label 'A VAT Posting Setup with a VAT percentage greater than zero must be configured.';
 }
 

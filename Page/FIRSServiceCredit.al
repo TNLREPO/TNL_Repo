@@ -1,15 +1,15 @@
 namespace AL_TNL.AL_TNL;
 
-using Microsoft.Sales.History;
+using Microsoft.Service.History;
 
-page 50146 "FIRS Sales Credit"
+page 50199 "FIRS Service Credit"
 {
     ApplicationArea = All;
-    Caption = 'FIRS Sales Credit';
+    Caption = 'FIRS Service Credit';
     PageType = List;
-    SourceTable = "Sales Cr.Memo Line";
+    SourceTable = "Service Cr.Memo Line";
     UsageCategory = Lists;
-
+    
     layout
     {
         area(Content)
@@ -105,6 +105,7 @@ page 50146 "FIRS Sales Credit"
                 {
                     ToolTip = 'Specifies the Original Posting Date.';
                 }
+
             }
         }
     }

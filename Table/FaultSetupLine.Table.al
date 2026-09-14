@@ -23,7 +23,7 @@ table 50110 "Fault Setup Line"
         }
         field(4; "No."; Code[20])
         {
-            /* TableRelation = IF (Type = CONST(" ")) "Standard Text"
+            TableRelation = IF (Type = CONST(" ")) "Standard Text"
             ELSE
             IF (Type = CONST(Item), "Service Item Model" = FILTER(<> '')) Item."No." WHERE("Model No." = FIELD("Service Item Model"))
             ELSE
@@ -41,7 +41,8 @@ table 50110 "Fault Setup Line"
                         BEGIN
                             item.GET("No.");
                             Description := item.Description;
-                            "Unit Price" := item."Unit Price";
+                            item.CalcFields("ISOLO-PRIC");
+                            "Unit Price" := item."ISOLO-PRIC";
                             "VAT Amount" := ("VAT%" / 100) * "Total Price";
                             "Price Incl VAT" := "Total Price" + "VAT Amount";
                             "Unit of Measure Code" := item."Base Unit of Measure";
@@ -67,7 +68,7 @@ table 50110 "Fault Setup Line"
                         END;
                 END;
 
-            end; */
+            end;
         }
         field(5; Description; Text[50])
         {
@@ -120,8 +121,6 @@ table 50110 "Fault Setup Line"
         }
         field(15; "VAT%"; Decimal)
         {
-            InitValue = 5;
-
             trigger OnValidate()
             begin
                 "VAT Amount" := ("VAT%" / 100) * "Total Price";
@@ -177,7 +176,7 @@ table 50110 "Fault Setup Line"
 
     trigger OnInsert()
     begin
-        "VAT%" := 5;
+        SetVATPercentage();
     end;
 
     var
@@ -188,13 +187,27 @@ table 50110 "Fault Setup Line"
         faultheader: Record "Resource";
         faultLine: Record "Fault Setup Line";
 
-    procedure Newline()
+    /* procedure Newline()
     begin
         faultLine.SETRANGE(faultLine."Operation code", "Operation code");
         IF faultLine.FIND('+') THEN
             "Line No." := faultLine."Line No." + 10000
         ELSE
             "Line No." := 10000;
+    end; */
+
+    local procedure SetVATPercentage()
+    var
+        VATPostingSetup: Record "VAT Posting Setup";
+    begin
+        VATPostingSetup.SetFilter("VAT %", '>0');
+        if not VATPostingSetup.FindFirst() then
+            Error(MissingVATSetupErr);
+
+        Validate("VAT%", VATPostingSetup."VAT %");
     end;
+
+    var
+        MissingVATSetupErr: Label 'A VAT Posting Setup with a VAT percentage greater than zero must be configured.';
 }
 

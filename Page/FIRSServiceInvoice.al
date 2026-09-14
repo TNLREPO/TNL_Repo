@@ -1,13 +1,13 @@
 namespace AL_TNL.AL_TNL;
 
-using Microsoft.Sales.History;
+using Microsoft.Service.History;
 
-page 50146 "FIRS Sales Credit"
+page 50198 "FIRS Service Invoice"
 {
     ApplicationArea = All;
-    Caption = 'FIRS Sales Credit';
+    Caption = 'FIRS Service Invoice';
     PageType = List;
-    SourceTable = "Sales Cr.Memo Line";
+    SourceTable = "Service Invoice Line";
     UsageCategory = Lists;
 
     layout
@@ -60,12 +60,12 @@ page 50146 "FIRS Sales Credit"
                 field("Tax Category"; Rec."Tax Category")
                 {
                     ToolTip = 'Specifies the tax category for the line.';
-                }
+                } 
                 field("VAT %"; Rec."VAT %")
                 {
                     ToolTip = 'Specifies the VAT %.';
                 }
-                field("Sell-to Customer Name"; Rec."Sell-to Customer Name")
+                field("Sell-to Customer Name"; Rec."Customer Name")
                 {
                     ToolTip = 'Specifies the name of the customer to whom the invoice is sold.';
                 }
@@ -92,18 +92,6 @@ page 50146 "FIRS Sales Credit"
                 field("Postal Zone"; Rec."Postal Zone")
                 {
                     ToolTip = 'Specifies the Postal Zone.';
-                }
-                field("Original IRN"; Rec."Original IRN")
-                {
-                    ToolTip = 'Specifies the Original IRN.';
-                }
-                field("Original Document No."; Rec."Original Document No.")
-                {
-                    ToolTip = 'Specifies the Original Document No.';
-                }
-                field("Original Posting Date"; Rec."Original Posting Date")
-                {
-                    ToolTip = 'Specifies the Original Posting Date.';
                 }
             }
         }

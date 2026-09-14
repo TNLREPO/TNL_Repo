@@ -1,4 +1,6 @@
+#pragma warning disable AL0914
 table 50160 "VRI Table Delivery Check List"
+#pragma warning restore AL0914
 {
     DataCaptionFields = "VRI Code", "VRI Location", "Model Name";
     PasteIsValid = true;
@@ -99,45 +101,7 @@ table 50160 "VRI Table Delivery Check List"
         field(18; "Send VRI Request"; Boolean)
         {
 
-            /*   trigger OnValidate()
-              begin
-                  TESTFIELD("Send For Approval",TRUE);
-                  UserSetup.GET(USERID);
-                  SenderEmail := UserSetup."E-Mail";
-                  "VRI Approval Name" := USERID;
-                  "VRI Request Date&Time" := CURRENTDATETIME;
-                  "Problem Statement from VRI":="Problem Statement";
-                  Servicesetup.GET;
-                  ToName  := 'faith@toyotanigeria.com';
-                  CCName := '';
-                  Bcc:= '';
-                  Subject := STRSUBSTNO(Text001,"VRI Code");
-                  Body:=  STRSUBSTNO( Text002,"VRI Code","Problem Statement");
-                  SenderInitial := UserSetup2.Initials;
-
-                    WITH TempEmailItem DO BEGIN
-                      "Send to" := ToName;
-                      "Send CC" := SenderEmail;
-                      "Send BCC" := '';
-                      Subject := STRSUBSTNO(Text001,"VRI Code");
-
-                      CRLF := '';
-                      CRLF[1] := 13;
-                      CRLF[2] := 10;
-
-                      BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                      BodyStream.WRITETEXT(Text016 + 'Sir,');
-                      BodyStream.WRITETEXT(CRLF + CRLF);
-                      BodyStream.WRITETEXT(STRSUBSTNO(Text002,"VRI Code","Problem Statement") + CRLF + CRLF +
-                      CRLF + CRLF +
-                      Text017 + CRLF);
-                      BodyStream.WRITETEXT(SenderInitial);
-                      BodyStream.WRITETEXT(CRLF + CRLF);
-                      BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                      Body := BodyBlob.Blob;
-                      Send(FALSE);
-                    END;
-              end; */
+            
         }
         field(19; "Op./Log.  Approval"; Boolean)
         {

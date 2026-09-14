@@ -1,4 +1,6 @@
+#pragma warning disable AL0914
 table 70034 "Customer Order HeaderX"
+#pragma warning restore AL0914
 {
 
     DrillDownPageID = 80043;
@@ -263,77 +265,7 @@ table 70034 "Customer Order HeaderX"
                 END;
 
 
-                /*
-                "SSC/SC".SETRANGE("SSC/SC".VDS,VDS);
-                "SSC/SC".SETRANGE("SSC/SC".VMI,VMI);
-                "SSC/SC".SETFILTER("SSC/SC"."Range From",'<=%1',VIS);
-                "SSC/SC".SETFILTER("SSC/SC"."Range To",'>=%1',VIS);
-                "SSC/SC".SETFILTER("SSC/SC"."SSC/SC Date From",'<=%1',TODAY);
-                "SSC/SC".SETFILTER("SSC/SC"."SSC/SC Date To",'>=%1',TODAY);
-                "SSC/SC".SETRANGE("SSC/SC"."SCSC Status","SSC/SC"."SCSC Status"::Active);
-                "SSC/SC".SETRANGE("SSC/SC".Applied,FALSE);
-                IF "SSC/SC".FINDFIRST THEN
-                  REPEAT
-                    "AppSSC/SC2".SETRANGE("AppSSC/SC2"."SSC/SC Code","SSC/SC"."SSC/SC Code");
-                    "AppSSC/SC2".SETRANGE("AppSSC/SC2"."Line No.","SSC/SC"."Line No.");
-                    "AppSSC/SC2".SETRANGE("AppSSC/SC2"."Service Item Code","Vehicle Registration No.");
-                    "AppSSC/SC2".SETRANGE("AppSSC/SC2"."Fault Code","Job Type");
-                    IF "AppSSC/SC2".FINDLAST THEN BEGIN
-                    "AppSSC/SC3".SETRANGE(VDS,"AppSSC/SC2".VDS);
-                    "AppSSC/SC3".SETRANGE(VIS,"AppSSC/SC2".VIS);
-                    "AppSSC/SC3".SETRANGE("Fault Code","AppSSC/SC2"."Fault Code");
-                    IF "AppSSC/SC3".FINDFIRST THEN
-                    REPEAT
-                      "SSC/SCInfo" := "SSC/SCInfo" + "AppSSC/SC3"."SSC/SC Code"+','+' ';
-                      "SSC/SCInfo2" := "SSC/SCInfo2" + "AppSSC/SC3"."SSC/SC Description"+','+' ';
-                    UNTIL "AppSSC/SC2".NEXT = 0;
-                    "SSC/SC Information" := "SSC/SCInfo";
-                    IF "SSC/SCInfo2" <> '' THEN
-                      MESSAGE('SSC INFO IS %1',"SSC/SCInfo2");
-                      EXIT
-                      END
-                    ELSE
-                    "AppSSC/SC".INIT;
-                    "AppSSC/SC"."SSC/SC Code" := "SSC/SC"."SSC/SC Code";
-                    "AppSSC/SC"."Line No." := "SSC/SC"."Line No.";
-                    "AppSSC/SC"."Service Item Code" := "Vehicle Registration No.";
-                    "AppSSC/SC"."Fault Code" := "Job Type";
-                    "AppSSC/SC"."SSC/SC Date From" := "SSC/SC"."SSC/SC Date From";
-                    "AppSSC/SC"."SSC/SC Date To" := "SSC/SC"."SSC/SC Date To";
-                    "AppSSC/SC"."Issue Date" := "SSC/SC"."Issue Date";
-                    "AppSSC/SC"."SCSC Status" := "SSC/SC"."SCSC Status";
-                    "AppSSC/SC"."SSC/SC Description" := "SSC/SC"."SSC/SC Description";
-                    "AppSSC/SC".Applied := "SSC/SC".Applied;
-                    "AppSSC/SC"."Model No." := "SSC/SC"."Model No.";
-                    "AppSSC/SC"."C/I No" := "SSC/SC"."C/I No";
-                    "AppSSC/SC".VDS := "SSC/SC".VDS;
-                    "AppSSC/SC".VIS := "SSC/SC".VIS;
-                    "AppSSC/SC".VMI := VMI;
-                    "AppSSC/SC"."Range From" := "SSC/SC"."Range From";
-                    "AppSSC/SC"."Range To" := "SSC/SC"."Range To";
-                    "AppSSC/SC".INSERT;
                 
-                    //Introduced 13-12-2011
-                    CustOrderLine.SETRANGE("Customer Order Form No.","Customer Order Form No.");
-                    IF NOT CustOrderLine.FINDLAST THEN
-                      SSCLineNo := 10000
-                    ELSE
-                      SSCLineNo := CustOrderLine."Line No." + 10000;
-                    CustOrderLine.INIT;
-                    CustOrderLine."Customer Order Form No." := "Customer Order Form No.";
-                    CustOrderLine."Line No." := SSCLineNo;
-                    CustOrderLine."Customer Class" := CustOrderLine."Customer Class"::Warranty;
-                    CustOrderLine."Model Description" := '';
-                    CustOrderLine."Model No." := "SSC/SC"."Model No.";
-                    CustOrderLine.Type := CustOrderLine.Type::"Sundry Spares";
-                    CustOrderLine.VALIDATE(CustOrderLine."No.",'SSC/SC');
-                    CustOrderLine.Description := COPYSTR("SSC/SC"."SSC/SC Description",1,MAXSTRLEN(CustOrderLine.Description));
-                    CustOrderLine.VALIDATE(CustOrderLine.Quantity,1);
-                    CustOrderLine.INSERT;
-                  UNTIL "SSC/SC".NEXT = 0;
-                END;
-                */
-
             end;
         }
         field(25; "Contact Telephone No."; Text[15])

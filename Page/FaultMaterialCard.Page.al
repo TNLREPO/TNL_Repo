@@ -13,6 +13,9 @@ page 80042 "Fault Material Card"
                 field("Operation Code"; Rec."Operation Code")
                 {
                 }
+                field(Description; Rec.Description)
+                {
+                }
                 field("Model No."; Rec."Model No.")
                 {
                 }

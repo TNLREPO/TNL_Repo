@@ -79,7 +79,7 @@ page 50237 "Fault Material Setup Line"
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
         //SetUpNewLine;
-        Rec.Newline;
+        //Rec.Newline;
     end;
 
     var

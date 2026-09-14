@@ -192,9 +192,9 @@ tableextension 50083 "Service Invoice Header Ext" extends "Service Invoice Heade
         {
             Caption = 'IRN';
         }
-        field(90001; "Sent to FIRS"; Boolean)
+        field(90001; "Sent to NRS"; Boolean)
         {
-            Caption = 'Sent to FIRS';
+            Caption = 'Sent to NRS';
         }
         field(90002; "Error Message"; Text[250])
         {
@@ -214,4 +214,12 @@ tableextension 50083 "Service Invoice Header Ext" extends "Service Invoice Heade
         {
         }
     }
+
+    Procedure SendeInvoiceToFIRS()
+    var
+        eInvoiceNRSMgt: Codeunit "eInvoice NRS Mgt.";
+    begin
+        eInvoiceNRSMgt.SendServiceInvoiceToNRS(Rec);
+    end;
+
 }

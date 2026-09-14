@@ -97,5 +97,25 @@ tableextension 50086 "Service Cr.Memo Line Ext" extends "Service Cr.Memo Line"
         {
             Caption = 'Postal Zone';
         }
+        field(90008; "Original Document No."; Code[20])
+        {
+
+        }
+        field(90009; "Original IRN"; Text[150])
+        {
+
+        }
+        field(90010; "Original Posting Date"; Date)
+        {
+
+        }
+        field(90011; "Sell-to Customer Name"; text[150])
+        {
+
+        }
+        field(90012; "Tax Category"; Code[10])
+        {
+
+        }
     }
 }

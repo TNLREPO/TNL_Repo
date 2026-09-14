@@ -79,6 +79,12 @@ tableextension 50084 "Service Invoice Line Ext" extends "Service Invoice Line"
         {
             Caption = 'Postal Zone';
         }
+        field(90007; "Tax Category"; Code[10])
+        {
+            Caption = 'Tax Category';
+        }
+       
+
     }
 
 }

@@ -75,6 +75,17 @@ tableextension 50095 "Sales Cr.Memo Line Ext" extends "Sales Cr.Memo Line"
         {
             Caption = 'Postal Zone';
         }
+        field(90008; "Original Document No."; Code[20])
+        {
 
+        }
+        field(90009; "Original IRN"; Text[150])
+        {
+
+        }
+        field(90010; "Original Posting Date"; Date)
+        {
+
+        }
     }
 }

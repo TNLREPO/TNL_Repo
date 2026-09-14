@@ -16,6 +16,9 @@ page 80006 "Fault Material Setup List"
                 field("Operation Code"; Rec."Operation Code")
                 {
                 }
+                field(Description; Rec.Description)
+                {
+                }
                 field("Model No."; Rec."Model No.")
                 {
                 }

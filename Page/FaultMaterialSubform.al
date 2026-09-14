@@ -79,7 +79,7 @@ page 80079 "Fault Material Subform"
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
         //SetUpNewLine;
-        Rec.Newline;
+        //Rec.Newline;
     end;
 
     var

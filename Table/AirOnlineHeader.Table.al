@@ -1,4 +1,4 @@
-table 70022 "Air Online Header"
+﻿table 70022 "Air Online Header"
 {
 
     fields
@@ -7,7 +7,7 @@ table 70022 "Air Online Header"
         {
             Editable = false;
         }
-        field(2; "Requester Code"; Code[30])
+        field(2; "Requester Code"; Code[50])
         {
             Editable = false;
             TableRelation = Customer;
@@ -84,7 +84,7 @@ table 70022 "Air Online Header"
         {
             TableRelation = "No. Series";
         }
-        field(23; "User ID"; Code[30])
+        field(23; "User ID"; Code[50])
         {
         }
         field(24; "Send To"; Code[30])
@@ -123,35 +123,12 @@ table 70022 "Air Online Header"
                         CreateEmailBody("No.", Text003, Addressee);
                         SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                        /*  WITH TempEmailItem DO BEGIN
-                             "Send to" := ToAddresses;
-                             "Send CC" := SenderAddress + ';' + CcAddresses;
-                             "Send BCC" := '';
-                             Subject := STRSUBSTNO(Text003, "No.");
-
-                             CRLF := '';
-                             CRLF[1] := 13;
-                             CRLF[2] := 10;
-
-                             //BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                             BodyStream.WRITETEXT(Text002 + 'RS,');
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT(STRSUBSTNO(Text003, "No.") + CRLF + CRLF +
-                             Text004 + FORMAT("Supplier Name") + CRLF +
-                             Text005 + FORMAT("Supplier Address") + CRLF +
-                             Text006 + FORMAT(VendAmt) + CRLF);
-                             BodyStream.WRITETEXT(SenderInitial);
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                             //Body := BodyBlob.Blob;
-                             //Send(FALSE);
-                         END; */
 
                         HoDPartApproval := TRUE;
                     END;
             end;
         }
-        field(26; "Sent By"; Code[30])
+        field(26; "Sent By"; Code[50])
         {
         }
         field(27; Approved3; Boolean)
@@ -204,30 +181,6 @@ table 70022 "Air Online Header"
                         SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
 
-                        /* WITH TempEmailItem DO BEGIN
-                            "Send to" := ToAddresses;
-                            "Send CC" := SenderAddress + ';' + CcAddresses;
-                            "Send BCC" := '';
-                            Subject := STRSUBSTNO(Text001, "No.");
-
-                            CRLF := '';
-                            CRLF[1] := 13;
-                            CRLF[2] := 10;
-
-                            BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                            BodyStream.WRITETEXT(Text002 + 'BBO' + ',');
-                            BodyStream.WRITETEXT(CRLF + CRLF);
-                            BodyStream.WRITETEXT(STRSUBSTNO(Text003, "No.") + CRLF + CRLF +
-                            Text004 + FORMAT("Supplier Name") + CRLF + CRLF +
-                            Text005 + FORMAT("Supplier Address") + CRLF + CRLF +
-                            Text006 + FORMAT(VendAmt) + CRLF + CRLF +
-                            Text007 + CRLF);
-                            BodyStream.WRITETEXT(SendersName);
-                            BodyStream.WRITETEXT(CRLF + CRLF);
-                            BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                            Body := BodyBlob.Blob;
-                            Send(FALSE);
-                        END; */
 
                         ComplianceCheck := TRUE;
                     END;
@@ -258,30 +211,6 @@ table 70022 "Air Online Header"
                         SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
 
-                        /*    WITH TempEmailItem DO BEGIN
-                               "Send to" := ToAddresses;
-                               "Send CC" := SenderAddress;
-                               "Send BCC" := '';
-                               Subject := STRSUBSTNO(Text009, "No.");
-
-                               CRLF := '';
-                               CRLF[1] := 13;
-                               CRLF[2] := 10;
-
-                               BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                               BodyStream.WRITETEXT(Text002 + Addressee + ',');
-                               BodyStream.WRITETEXT(CRLF + CRLF);
-                               BodyStream.WRITETEXT(STRSUBSTNO(Text009, "No.") + CRLF + CRLF +
-                               Text004 + FORMAT("Supplier Name") + CRLF + CRLF +
-                               Text005 + FORMAT("Supplier Address") + CRLF + CRLF +
-                               Text006 + FORMAT(VendAmt) + CRLF + CRLF +
-                               Text007 + CRLF);
-                               BodyStream.WRITETEXT(SendersName);
-                               BodyStream.WRITETEXT(CRLF + CRLF);
-                               BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                               Body := BodyBlob.Blob;
-                               Send(FALSE);
-                           END; */
 
                     END;
 
@@ -309,30 +238,6 @@ table 70022 "Air Online Header"
                         CreateEmailBody("No.", Text011, Addressee);
                         SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                        /* WITH TempEmailItem DO BEGIN
-                            "Send to" := ToAddresses;
-                            "Send CC" := SenderAddress;
-                            "Send BCC" := '';
-                            Subject := STRSUBSTNO(Text011, "No.");
-
-                            CRLF := '';
-                            CRLF[1] := 13;
-                            CRLF[2] := 10;
-
-                            BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                            BodyStream.WRITETEXT(Text002 + Addressee + ',');
-                            BodyStream.WRITETEXT(CRLF + CRLF);
-                            BodyStream.WRITETEXT(STRSUBSTNO(Text011, "No.") + CRLF + CRLF +
-                            Text004 + FORMAT("Supplier Name") + CRLF + CRLF +
-                            Text005 + FORMAT("Supplier Address") + CRLF + CRLF +
-                            Text006 + FORMAT(VendAmt) + CRLF + CRLF +
-                            Text007 + CRLF);
-                            BodyStream.WRITETEXT(SendersName);
-                            BodyStream.WRITETEXT(CRLF + CRLF);
-                            BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                            Body := BodyBlob.Blob;
-                            Send(FALSE);
-                        END; */
 
                         Rejected1 := TRUE;
                     END;
@@ -387,30 +292,6 @@ table 70022 "Air Online Header"
                         CreateEmailBody("No.", Text003, Addressee);
                         SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                        /*  WITH TempEmailItem DO BEGIN
-                             "Send to" := ToAddresses;
-                             "Send CC" := SenderAddress;
-                             "Send BCC" := '';
-                             Subject := STRSUBSTNO(Text001, "No.");
-
-                             CRLF := '';
-                             CRLF[1] := 13;
-                             CRLF[2] := 10;
-
-                             BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                             BodyStream.WRITETEXT(Text002 + Addressee + ',');
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT(STRSUBSTNO(Text003, "No.") + CRLF + CRLF +
-                             Text004 + FORMAT("Supplier Name") + CRLF + CRLF +
-                             Text005 + FORMAT("Supplier Address") + CRLF + CRLF +
-                             Text006 + FORMAT(VendAmt) + CRLF + CRLF +
-                             Text007 + CRLF);
-                             BodyStream.WRITETEXT(SendersName);
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                             Body := BodyBlob.Blob;
-                             Send(FALSE);
-                         END; */
 
                     END;
 
@@ -439,30 +320,6 @@ table 70022 "Air Online Header"
                         CreateEmailBody("No.", Text009, Addressee);
                         SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                        /* WITH TempEmailItem DO BEGIN
-                            "Send to" := ToAddresses;
-                            "Send CC" := SenderAddress;
-                            "Send BCC" := '';
-                            Subject := STRSUBSTNO(Text009, "No.");
-
-                            CRLF := '';
-                            CRLF[1] := 13;
-                            CRLF[2] := 10;
-
-                            BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                            BodyStream.WRITETEXT(Text002 + Addressee + ',');
-                            BodyStream.WRITETEXT(CRLF + CRLF);
-                            BodyStream.WRITETEXT(STRSUBSTNO(Text009, "No.") + CRLF + CRLF +
-                            Text004 + FORMAT("Supplier Name") + CRLF + CRLF +
-                            Text005 + FORMAT("Supplier Address") + CRLF + CRLF +
-                            Text006 + FORMAT(VendAmt) + CRLF + CRLF +
-                            Text007 + CRLF);
-                            BodyStream.WRITETEXT(SendersName);
-                            BodyStream.WRITETEXT(CRLF + CRLF);
-                            BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                            Body := BodyBlob.Blob;
-                            Send(FALSE);
-                        END; */
 
                     END;
 
@@ -491,30 +348,6 @@ table 70022 "Air Online Header"
                         CreateEmailBody("No.", Text015, Addressee);
                         SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                        /* WITH TempEmailItem DO BEGIN
-                            "Send to" := ToAddresses;
-                            "Send CC" := SenderAddress;
-                            "Send BCC" := '';
-                            Subject := STRSUBSTNO(Text011, "No.");
-
-                            CRLF := '';
-                            CRLF[1] := 13;
-                            CRLF[2] := 10;
-
-                            BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                            BodyStream.WRITETEXT(Text002 + Addressee + ',');
-                            BodyStream.WRITETEXT(CRLF + CRLF);
-                            BodyStream.WRITETEXT(STRSUBSTNO(Text011, "No.") + CRLF + CRLF +
-                            Text004 + FORMAT("Supplier Name") + CRLF + CRLF +
-                            Text005 + FORMAT("Supplier Address") + CRLF + CRLF +
-                            Text006 + FORMAT(VendAmt) + CRLF + CRLF +
-                            Text007 + CRLF);
-                            BodyStream.WRITETEXT(SendersName);
-                            BodyStream.WRITETEXT(CRLF + CRLF);
-                            BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                            Body := BodyBlob.Blob;
-                            Send(FALSE);
-                        END; */
 
                         Rejected1 := TRUE;
                     END;
@@ -560,30 +393,6 @@ table 70022 "Air Online Header"
                         CreateEmailBody("No.", Text010, Addressee);
                         SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                        /* WITH TempEmailItem DO BEGIN
-                            "Send to" := ToAddresses;
-                            "Send CC" := SenderAddress;
-                            "Send BCC" := '';
-                            Subject := STRSUBSTNO(Text010, "No.");
-
-                            CRLF := '';
-                            CRLF[1] := 13;
-                            CRLF[2] := 10;
-
-                            BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                            BodyStream.WRITETEXT(Text002 + Addressee + ',');
-                            BodyStream.WRITETEXT(CRLF + CRLF);
-                            BodyStream.WRITETEXT(STRSUBSTNO(Text010, "No.") + CRLF + CRLF +
-                            Text004 + FORMAT("Supplier Name") + CRLF + CRLF +
-                            Text005 + FORMAT("Supplier Address") + CRLF + CRLF +
-                            Text006 + FORMAT(VendAmt) + CRLF + CRLF +
-                            Text007 + CRLF);
-                            BodyStream.WRITETEXT(SendersName);
-                            BodyStream.WRITETEXT(CRLF + CRLF);
-                            BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                            Body := BodyBlob.Blob;
-                            Send(FALSE);
-                        END; */
 
                         "Genarate FM" := TRUE;
                     END;
@@ -614,31 +423,6 @@ table 70022 "Air Online Header"
                         CreateEmailBody("No.", Text009, Addressee);
                         SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                        /*  WITH TempEmailItem DO BEGIN
-                             "Send to" := ToAddresses;
-                             "Send CC" := SenderAddress;
-                             "Send BCC" := '';
-                             Subject := STRSUBSTNO(Text009, "No.");
-
-                             CRLF := '';
-                             CRLF[1] := 13;
-                             CRLF[2] := 10;
-
-                             BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                             BodyStream.WRITETEXT(Text002 + Addressee + ',');
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT(STRSUBSTNO(Text009, "No.") + CRLF + CRLF +
-                             Text004 + FORMAT("Supplier Name") + CRLF + CRLF +
-                             Text005 + FORMAT("Supplier Address") + CRLF + CRLF +
-                             Text006 + FORMAT(VendAmt) + CRLF + CRLF +
-                             Text007 + CRLF);
-                             BodyStream.WRITETEXT(SendersName);
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                             Body := BodyBlob.Blob;
-                             Send(FALSE);
-                         END; */
-
                     END;
 
                 IF "Managing Director" = "Managing Director"::Rejected THEN
@@ -665,30 +449,6 @@ table 70022 "Air Online Header"
                         CreateEmailBody("No.", Text011, Addressee);
                         SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                        /*  WITH TempEmailItem DO BEGIN
-                             "Send to" := ToAddresses;
-                             "Send CC" := SenderAddress;
-                             "Send BCC" := '';
-                             Subject := STRSUBSTNO(Text011, "No.");
-
-                             CRLF := '';
-                             CRLF[1] := 13;
-                             CRLF[2] := 10;
-
-                             BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                             BodyStream.WRITETEXT(Text002 + Addressee + ',');
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT(STRSUBSTNO(Text011, "No.") + CRLF + CRLF +
-                             Text004 + FORMAT("Supplier Name") + CRLF + CRLF +
-                             Text005 + FORMAT("Supplier Address") + CRLF + CRLF +
-                             Text006 + FORMAT(VendAmt) + CRLF + CRLF +
-                             Text007 + CRLF);
-                             BodyStream.WRITETEXT(SendersName);
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                             Body := BodyBlob.Blob;
-                             Send(FALSE);
-                         END; */
 
                         Rejected1 := TRUE;
                     END;
@@ -733,31 +493,6 @@ table 70022 "Air Online Header"
                         CreateEmailBody("No.", Text010, Addressee);
                         SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                        /* WITH TempEmailItem DO BEGIN
-                            "Send to" := ToAddresses;
-                            "Send CC" := SenderAddress;
-                            "Send BCC" := '';
-                            Subject := STRSUBSTNO(Text010, "No.");
-
-                            CRLF := '';
-                            CRLF[1] := 13;
-                            CRLF[2] := 10;
-
-                            BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                            BodyStream.WRITETEXT(Text002 + Addressee + ',');
-                            BodyStream.WRITETEXT(CRLF + CRLF);
-                            BodyStream.WRITETEXT(STRSUBSTNO(Text010, "No.") + CRLF + CRLF +
-                            Text004 + FORMAT("Supplier Name") + CRLF + CRLF +
-                            Text005 + FORMAT("Supplier Address") + CRLF + CRLF +
-                            Text006 + FORMAT(VendAmt) + CRLF + CRLF +
-                            Text007 + CRLF);
-                            BodyStream.WRITETEXT(SendersName);
-                            BodyStream.WRITETEXT(CRLF + CRLF);
-                            BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                            Body := BodyBlob.Blob;
-                            Send(FALSE);
-                        END; */
-
                         "Genarate FM" := TRUE;
                     END;
 
@@ -784,31 +519,6 @@ table 70022 "Air Online Header"
                         Subject := STRSUBSTNO(Text014, "No.");
                         CreateEmailBody("No.", Text009, Addressee);
                         SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
-
-                        /* WITH TempEmailItem DO BEGIN
-                            "Send to" := ToAddresses;
-                            "Send CC" := SenderAddress;
-                            "Send BCC" := '';
-                            Subject := STRSUBSTNO(Text009, "No.");
-
-                            CRLF := '';
-                            CRLF[1] := 13;
-                            CRLF[2] := 10;
-
-                            BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                            BodyStream.WRITETEXT(Text002 + Addressee + ',');
-                            BodyStream.WRITETEXT(CRLF + CRLF);
-                            BodyStream.WRITETEXT(STRSUBSTNO(Text009, "No.") + CRLF + CRLF +
-                            Text004 + FORMAT("Supplier Name") + CRLF + CRLF +
-                            Text005 + FORMAT("Supplier Address") + CRLF + CRLF +
-                            Text006 + FORMAT(VendAmt) + CRLF + CRLF +
-                            Text007 + CRLF);
-                            BodyStream.WRITETEXT(SendersName);
-                            BodyStream.WRITETEXT(CRLF + CRLF);
-                            BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                            Body := BodyBlob.Blob;
-                            Send(FALSE);
-                        END; */
 
                     END;
 
@@ -837,30 +547,6 @@ table 70022 "Air Online Header"
                         CreateEmailBody("No.", Text011, Addressee);
                         SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                        /*  WITH TempEmailItem DO BEGIN
-                             "Send to" := ToAddresses;
-                             "Send CC" := SenderAddress;
-                             "Send BCC" := '';
-                             Subject := STRSUBSTNO(Text011, "No.");
-
-                             CRLF := '';
-                             CRLF[1] := 13;
-                             CRLF[2] := 10;
-
-                             BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                             BodyStream.WRITETEXT(Text002 + Addressee + ',');
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT(STRSUBSTNO(Text011, "No.") + CRLF + CRLF +
-                             Text004 + FORMAT("Supplier Name") + CRLF + CRLF +
-                             Text005 + FORMAT("Supplier Address") + CRLF + CRLF +
-                             Text006 + FORMAT(VendAmt) + CRLF + CRLF +
-                             Text007 + CRLF);
-                             BodyStream.WRITETEXT(SendersName);
-                             BodyStream.WRITETEXT(CRLF + CRLF);
-                             BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                             Body := BodyBlob.Blob;
-                             Send(FALSE);
-                         END; */
 
                         Rejected1 := TRUE;
                     END;
@@ -911,31 +597,6 @@ table 70022 "Air Online Header"
                         CreateEmailBody("No.", Text013, Addressee);
                         SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
 
-                        /*   WITH TempEmailItem DO BEGIN
-                              "Send to" := ToAddresses;
-                              "Send CC" := SenderAddress + ';' + CcAddresses;
-                              "Send BCC" := '';
-                              Subject := STRSUBSTNO(Text001, "No.");
-
-                              CRLF := '';
-                              CRLF[1] := 13;
-                              CRLF[2] := 10;
-
-                              BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                              BodyStream.WRITETEXT(Text002 + 'STA' + ',');
-                              BodyStream.WRITETEXT(CRLF + CRLF);
-                              BodyStream.WRITETEXT(STRSUBSTNO(Text013, "No.") + CRLF + CRLF +
-                              Text004 + FORMAT("Supplier Name") + CRLF + CRLF +
-                              Text005 + FORMAT("Supplier Address") + CRLF + CRLF +
-                              Text006 + FORMAT(VendAmt) + CRLF + CRLF +
-                              Text007 + CRLF);
-                              BodyStream.WRITETEXT(SendersName);
-                              BodyStream.WRITETEXT(CRLF + CRLF);
-                              BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                              Body := BodyBlob.Blob;
-                              Send(FALSE);
-                          END; */
-
                         HoDAuditApproval := TRUE;
                     END;
 
@@ -963,31 +624,6 @@ table 70022 "Air Online Header"
                         Subject := STRSUBSTNO(Text014, "No.");
                         CreateEmailBody("No.", Text009, Addressee);
                         SendEmail(ToAddresses, Subject, EmailBody, CcAddresses, '');
-
-                        /*     WITH TempEmailItem DO BEGIN
-                                "Send to" := ToAddresses;
-                                "Send CC" := SenderAddress;
-                                "Send BCC" := '';
-                                Subject := STRSUBSTNO(Text001, "No.");
-
-                                CRLF := '';
-                                CRLF[1] := 13;
-                                CRLF[2] := 10;
-
-                                BodyBlob.Blob.CREATEOUTSTREAM(BodyStream);
-                                BodyStream.WRITETEXT(Text002 + Addressee);
-                                BodyStream.WRITETEXT(CRLF + CRLF);
-                                BodyStream.WRITETEXT(STRSUBSTNO(Text009, "No.") + CRLF + CRLF +
-                                Text004 + FORMAT("Supplier Name") + CRLF + CRLF +
-                                Text005 + FORMAT("Supplier Address") + CRLF + CRLF +
-                                Text006 + FORMAT(VendAmt) + CRLF + CRLF +
-                                Text007 + CRLF);
-                                BodyStream.WRITETEXT(SendersName);
-                                BodyStream.WRITETEXT(CRLF + CRLF);
-                                BodyStream.WRITETEXT('This is a system generated mail. Please do not reply to this email ID.');
-                                Body := BodyBlob.Blob;
-                                Send(FALSE);
-                            END; */
 
                     END;
             end;
@@ -1090,10 +726,11 @@ table 70022 "Air Online Header"
             begin
                 IF Vendor.GET("Suppliers No.") THEN BEGIN
                     "Supplier's Name" := Vendor.Name;
-                    "Supplier's Address" := Vendor.Address
-                END ELSE
+                    "Supplier's Address" := Vendor.Address;
+                END ELSE BEGIN
                     "Supplier's Name" := '';
-                "Supplier's Address" := '';
+                    "Supplier's Address" := '';
+                END;
             end;
         }
         field(67; "Purchase Order Issued"; Boolean)
@@ -1201,12 +838,9 @@ table 70022 "Air Online Header"
         VendAmt := "Total Invoice Value";
         "Supplier Name" := "Supplier's Name";
         "Supplier Address" := "Supplier's Address";
+        VendName := "Supplier's Name";
+        VendAddr := "Supplier's Address";
 
-        /* UserSetup2.GET(USERID);
-        "Sent By" := UserSetup2."User ID";
-        SendersName := UserSetup2.Initials;
-        SenderAddress := UserSetup2."E-Mail";
-        TimeDate1 := CURRENTDATETIME; */
 
         EmailBody := Format(StrSubstNo(Text002, SendersName));
         EmailBody += '<br><br>';
