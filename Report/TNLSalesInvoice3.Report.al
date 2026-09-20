@@ -1833,13 +1833,22 @@ report 50285 "TNL Sales Invoice3"
         URL: Text;
         InS: InStream;
         OutS: OutStream;
+        NRSSetup: Record "NRS Setup";
 
 
     begin
 
-        URL := 'https://api.tdmsportal.com/api/qr/generateqrcodeV2?'
+        NRSSetup.Get();
+
+
+       /*  URL := 'https://api.tdmsportal.com/api/qr/generateqrcodeV2?'
         + 'IRN=' + SalesInvHeader.IRN
         + '&supplier_key=tnl-787867676'
+        + '&format=image&size=50x50'; */
+
+        URL := 'https://api.tdmsportal.com/api/qr/generateqrcodeV2?'
+        + 'IRN=' + SalesInvHeader.IRN
+        + '&supplier_key=' + NRSSetup."Supplier Key"
         + '&format=image&size=50x50';
 
 

@@ -8,8 +8,12 @@ codeunit 50020 "eInvoice NRS Mgt."
         Response: HttpResponseMessage;
         URL: Text;
     begin
-        URL := 'https://testapi.tdmsportal.com/api/qr/invoicesignfromorder?supplier_key=tnl-787867676'
-                + '&order_number=' + SalesInvoiceHeader."No.";
+        //URL := 'https://testapi.tdmsportal.com/api/qr/invoicesignfromorder?supplier_key=tnl-787867676'
+        //        + '&order_number=' + SalesInvoiceHeader."No.";
+
+
+        NRSSetup.Get();
+        URL := NRSSetup."Sales Invoice Url" + '&order_number=' + SalesInvoiceHeader."No.";
 
         if Client.get(URL, Response) then begin
             if Response.IsSuccessStatusCode() then begin
@@ -30,8 +34,13 @@ codeunit 50020 "eInvoice NRS Mgt."
         Response: HttpResponseMessage;
         URL: Text;
     begin
-        URL :=  'https://testapi.tdmsportal.com/api/qr/invoicesignfromorder?supplier_key=tnl-787867676&type=service'
-                + '&order_number=' + ServiceInvoiceHeader."No.";
+
+        // URL := 'https://testapi.tdmsportal.com/api/qr/invoicesignfromorder?supplier_key=tnl-787867676&type=service'
+        //  + '&order_number=' + ServiceInvoiceHeader."No.";
+
+
+        NRSSetup.Get();
+        URL := NRSSetup."Service Invoice Url" + '&order_number=' + ServiceInvoiceHeader."No.";
 
         if Client.get(URL, Response) then begin
             if Response.IsSuccessStatusCode() then begin
@@ -46,5 +55,7 @@ codeunit 50020 "eInvoice NRS Mgt."
         end;
     end;
 
-   
+    var
+        NRSSetup: Record "NRS Setup";
+
 }
