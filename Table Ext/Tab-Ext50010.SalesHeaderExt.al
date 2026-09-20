@@ -1376,7 +1376,7 @@ tableextension 50010 "Sales Header Ext" extends "Sales Header"
         {
             DataClassification = ToBeClassified;
         }
-
+        
     }
 
     var

@@ -181,5 +181,6 @@ tableextension 50094 "Sales Cr.Memo Header Ext" extends "Sales Cr.Memo Header"
         {
             Caption = 'IRN';
         }
+        
     }
 }
