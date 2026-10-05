@@ -8,6 +8,9 @@ codeunit 50020 "eInvoice NRS Mgt."
         Response: HttpResponseMessage;
         URL: Text;
     begin
+        
+        NRSSetup.Get();
+        
         //URL := 'https://testapi.tdmsportal.com/api/qr/invoicesignfromorder?supplier_key=tnl-787867676'
         //        + '&order_number=' + SalesInvoiceHeader."No.";
 
