@@ -41,7 +41,7 @@ table 50103 "Payment/Receipt."
         {
             TableRelation = IF ("Account Type" = const("G/L Account")) "G/L Account"."No." WHERE(Blocked = FILTER(false), "Account Type" = filter(Posting))
             ELSE
-            IF ("Account Type" = const(Customer)) Customer."No." WHERE(Blocked = FILTER(<> 'All'), "Customer Posting Group" = FILTER(<> 'STAFF'))
+            IF ("Account Type" = const(Customer)) Customer."No." WHERE(Blocked = FILTER(<> 'All'))
             ELSE
             IF ("Cash/Cheque" = const(Cheque), "Account Type" = filter("Bank Account")) "Bank Account"."No." WHERE(Blocked = filter(false))
             ELSE
