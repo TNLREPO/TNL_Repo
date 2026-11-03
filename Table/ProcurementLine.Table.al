@@ -266,6 +266,8 @@ table 70001 "Procurement Line"
         //CapexOpexReq.GET("Document Type","Document No.");
         //IF CapexOpexReq.Send= TRUE THEN
         //ERROR('You can not edit this document');
+        if xRec.Preferred then
+            Error('This vendor has been marked as preferred and cannot be edited');
     end;
 
     var

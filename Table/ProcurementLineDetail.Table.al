@@ -64,5 +64,14 @@ table 70007 "Procurement Line Detail"
     fieldgroups
     {
     }
+    trigger OnModify()
+    var
+        CapexOpexline: Record "Procurement Line";
+    begin
+        if CapexOpexline.Get("Document Type", "Document No.", "Capex Line No.") then
+            if CapexOpexline.Preferred then
+                Error('Procurement Line Detail cannot be modified because this vendor is marked preferred.');
+    end;
+
 }
 
