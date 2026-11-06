@@ -48,8 +48,8 @@ table 70049 "Vehicle Online Order"
                     "FAD Confirmation DateTime" := CURRENTDATETIME;
                     COMMIT;
 
-                    ReceiverEmail := 'marketingsales@toyotanigeria.com';
-                    ReceiverEmail := DesignatedApprovers."Payment Notifications";
+                    ReceiverEmail := 'mktsales@toyotanigeria.com';
+                    //ReceiverEmail := DesignatedApprovers."Payment Notifications";
                     BccAddresses := '';
 
                     Subject := STRSUBSTNO(PmtText, "Order No.");
